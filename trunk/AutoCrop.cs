@@ -281,7 +281,7 @@ namespace BluRip
                         mod8ok = false;
                     }
 
-                    // overcrop % 8
+                    // undercrop % 8
                     if (settings.cropMode == 0)
                     {
                         if (mod8ok)
@@ -313,7 +313,7 @@ namespace BluRip
                             border = false;
                         }
                     }
-                    // overcrop % 16
+                    // undercrop % 16
                     else if (settings.cropMode == 1)
                     {
                         if (cropBottom % 2 != 0) cropBottom--;
@@ -336,7 +336,7 @@ namespace BluRip
                         resize = false;
                         border = false;
                     }
-                    // undercrop % 8
+                    // overcrop % 8
                     else if (settings.cropMode == 2)
                     {
                         if (mod8ok)
@@ -368,7 +368,7 @@ namespace BluRip
                             border = false;
                         }
                     }
-                    // undercrop % 16
+                    // overcrop % 16
                     else if (settings.cropMode == 3)
                     {
                         if (cropBottom % 2 != 0) cropBottom++;
