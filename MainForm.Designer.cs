@@ -74,6 +74,8 @@
             this.checkBoxDefaultSubtitleTrack = new System.Windows.Forms.CheckBox();
             this.checkBoxDefaultAudioTrack = new System.Windows.Forms.CheckBox();
             this.groupBoxAutoCrop = new System.Windows.Forms.GroupBox();
+            this.labelCropMode = new System.Windows.Forms.Label();
+            this.comboBoxCropMode = new System.Windows.Forms.ComboBox();
             this.labelBlackValue = new System.Windows.Forms.Label();
             this.labelNrFrames = new System.Windows.Forms.Label();
             this.numericUpDownBlackValue = new System.Windows.Forms.NumericUpDown();
@@ -137,14 +139,27 @@
             this.labelSoftwareDesc = new System.Windows.Forms.Label();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
-            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxLogMain = new System.Windows.Forms.RichTextBox();
             this.progressBarMain = new System.Windows.Forms.ProgressBar();
             this.buttonAbort = new System.Windows.Forms.Button();
             this.labelLog = new System.Windows.Forms.Label();
             this.notifyIconMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.buttonMinimize = new System.Windows.Forms.Button();
-            this.comboBoxCropMode = new System.Windows.Forms.ComboBox();
-            this.labelCropMode = new System.Windows.Forms.Label();
+            this.tabControlLog = new System.Windows.Forms.TabControl();
+            this.tabPageMainLog = new System.Windows.Forms.TabPage();
+            this.tabPageDemuxLog = new System.Windows.Forms.TabPage();
+            this.tabPageCropLog = new System.Windows.Forms.TabPage();
+            this.tabPageSubtitleLog = new System.Windows.Forms.TabPage();
+            this.tabPageEncodeLog = new System.Windows.Forms.TabPage();
+            this.tabPageMuxLog = new System.Windows.Forms.TabPage();
+            this.richTextBoxLogDemux = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxLogCrop = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxLogSubtitle = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStripDeleteLog = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -162,6 +177,14 @@
             this.groupBoxGeneralAviSynthSettings.SuspendLayout();
             this.tabPageSoftware.SuspendLayout();
             this.tabPageAbout.SuspendLayout();
+            this.tabControlLog.SuspendLayout();
+            this.tabPageMainLog.SuspendLayout();
+            this.tabPageDemuxLog.SuspendLayout();
+            this.tabPageCropLog.SuspendLayout();
+            this.tabPageSubtitleLog.SuspendLayout();
+            this.tabPageEncodeLog.SuspendLayout();
+            this.tabPageMuxLog.SuspendLayout();
+            this.contextMenuStripDeleteLog.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -644,6 +667,34 @@
             this.groupBoxAutoCrop.TabIndex = 5;
             this.groupBoxAutoCrop.TabStop = false;
             this.groupBoxAutoCrop.Text = "AutoCrop settings";
+            // 
+            // labelCropMode
+            // 
+            this.labelCropMode.AutoSize = true;
+            this.labelCropMode.Location = new System.Drawing.Point(6, 95);
+            this.labelCropMode.Name = "labelCropMode";
+            this.labelCropMode.Size = new System.Drawing.Size(98, 13);
+            this.labelCropMode.TabIndex = 8;
+            this.labelCropMode.Text = "Crop/Resize mode:";
+            // 
+            // comboBoxCropMode
+            // 
+            this.comboBoxCropMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCropMode.FormattingEnabled = true;
+            this.comboBoxCropMode.Items.AddRange(new object[] {
+            "Undercrop - Height mod 8",
+            "Undercrop - Height mod 16",
+            "Overcrop - Height mod 8",
+            "Overcrop - Height mod 16",
+            "Resize - Height mod 8",
+            "Resize - Height mod 16",
+            "AddBorder - Height mod 8",
+            "AddBorder - Height mod 16"});
+            this.comboBoxCropMode.Location = new System.Drawing.Point(6, 112);
+            this.comboBoxCropMode.Name = "comboBoxCropMode";
+            this.comboBoxCropMode.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxCropMode.TabIndex = 7;
+            this.comboBoxCropMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxCropMode_SelectedIndexChanged);
             // 
             // labelBlackValue
             // 
@@ -1323,15 +1374,16 @@
             this.richTextBoxAbout.TabIndex = 0;
             this.richTextBoxAbout.Text = resources.GetString("richTextBoxAbout.Text");
             // 
-            // richTextBoxLog
+            // richTextBoxLogMain
             // 
-            this.richTextBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.richTextBoxLogMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxLog.Location = new System.Drawing.Point(12, 430);
-            this.richTextBoxLog.Name = "richTextBoxLog";
-            this.richTextBoxLog.Size = new System.Drawing.Size(1157, 346);
-            this.richTextBoxLog.TabIndex = 1;
-            this.richTextBoxLog.Text = "";
+            this.richTextBoxLogMain.ContextMenuStrip = this.contextMenuStripDeleteLog;
+            this.richTextBoxLogMain.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogMain.Name = "richTextBoxLogMain";
+            this.richTextBoxLogMain.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogMain.TabIndex = 1;
+            this.richTextBoxLogMain.Text = "";
             // 
             // progressBarMain
             // 
@@ -1382,33 +1434,162 @@
             this.buttonMinimize.UseVisualStyleBackColor = true;
             this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
             // 
-            // comboBoxCropMode
+            // tabControlLog
             // 
-            this.comboBoxCropMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCropMode.FormattingEnabled = true;
-            this.comboBoxCropMode.Items.AddRange(new object[] {
-            "Overcrop - Height mod 8",
-            "Overcrop - Height mod 16",
-            "Undercrop - Height mod 8",
-            "Undercrop - Height mod 16",
-            "Resize - Height mod 8",
-            "Resize - Height mod 16",
-            "AddBorder - Height mod 8",
-            "AddBorder - Height mod 16"});
-            this.comboBoxCropMode.Location = new System.Drawing.Point(6, 112);
-            this.comboBoxCropMode.Name = "comboBoxCropMode";
-            this.comboBoxCropMode.Size = new System.Drawing.Size(182, 21);
-            this.comboBoxCropMode.TabIndex = 7;
-            this.comboBoxCropMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxCropMode_SelectedIndexChanged);
+            this.tabControlLog.Controls.Add(this.tabPageMainLog);
+            this.tabControlLog.Controls.Add(this.tabPageDemuxLog);
+            this.tabControlLog.Controls.Add(this.tabPageCropLog);
+            this.tabControlLog.Controls.Add(this.tabPageSubtitleLog);
+            this.tabControlLog.Controls.Add(this.tabPageEncodeLog);
+            this.tabControlLog.Controls.Add(this.tabPageMuxLog);
+            this.tabControlLog.Location = new System.Drawing.Point(12, 430);
+            this.tabControlLog.Name = "tabControlLog";
+            this.tabControlLog.SelectedIndex = 0;
+            this.tabControlLog.Size = new System.Drawing.Size(1153, 346);
+            this.tabControlLog.TabIndex = 7;
             // 
-            // labelCropMode
+            // tabPageMainLog
             // 
-            this.labelCropMode.AutoSize = true;
-            this.labelCropMode.Location = new System.Drawing.Point(6, 95);
-            this.labelCropMode.Name = "labelCropMode";
-            this.labelCropMode.Size = new System.Drawing.Size(98, 13);
-            this.labelCropMode.TabIndex = 8;
-            this.labelCropMode.Text = "Crop/Resize mode:";
+            this.tabPageMainLog.Controls.Add(this.richTextBoxLogMain);
+            this.tabPageMainLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMainLog.Name = "tabPageMainLog";
+            this.tabPageMainLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMainLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageMainLog.TabIndex = 0;
+            this.tabPageMainLog.Text = "Complete log";
+            this.tabPageMainLog.UseVisualStyleBackColor = true;
+            // 
+            // tabPageDemuxLog
+            // 
+            this.tabPageDemuxLog.Controls.Add(this.richTextBoxLogDemux);
+            this.tabPageDemuxLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDemuxLog.Name = "tabPageDemuxLog";
+            this.tabPageDemuxLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDemuxLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageDemuxLog.TabIndex = 1;
+            this.tabPageDemuxLog.Text = "Demux log";
+            this.tabPageDemuxLog.UseVisualStyleBackColor = true;
+            // 
+            // tabPageCropLog
+            // 
+            this.tabPageCropLog.Controls.Add(this.richTextBoxLogCrop);
+            this.tabPageCropLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCropLog.Name = "tabPageCropLog";
+            this.tabPageCropLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCropLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageCropLog.TabIndex = 2;
+            this.tabPageCropLog.Text = "Autocrop log";
+            this.tabPageCropLog.UseVisualStyleBackColor = true;
+            // 
+            // tabPageSubtitleLog
+            // 
+            this.tabPageSubtitleLog.Controls.Add(this.richTextBoxLogSubtitle);
+            this.tabPageSubtitleLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSubtitleLog.Name = "tabPageSubtitleLog";
+            this.tabPageSubtitleLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSubtitleLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageSubtitleLog.TabIndex = 3;
+            this.tabPageSubtitleLog.Text = "Subtitle log";
+            this.tabPageSubtitleLog.UseVisualStyleBackColor = true;
+            // 
+            // tabPageEncodeLog
+            // 
+            this.tabPageEncodeLog.Controls.Add(this.richTextBoxLogEncode);
+            this.tabPageEncodeLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageEncodeLog.Name = "tabPageEncodeLog";
+            this.tabPageEncodeLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEncodeLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageEncodeLog.TabIndex = 4;
+            this.tabPageEncodeLog.Text = "Encode log";
+            this.tabPageEncodeLog.UseVisualStyleBackColor = true;
+            // 
+            // tabPageMuxLog
+            // 
+            this.tabPageMuxLog.Controls.Add(this.richTextBoxLogMux);
+            this.tabPageMuxLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMuxLog.Name = "tabPageMuxLog";
+            this.tabPageMuxLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMuxLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageMuxLog.TabIndex = 5;
+            this.tabPageMuxLog.Text = "Mux log";
+            this.tabPageMuxLog.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxLogDemux
+            // 
+            this.richTextBoxLogDemux.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxLogDemux.ContextMenuStrip = this.contextMenuStripDeleteLog;
+            this.richTextBoxLogDemux.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogDemux.Name = "richTextBoxLogDemux";
+            this.richTextBoxLogDemux.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogDemux.TabIndex = 2;
+            this.richTextBoxLogDemux.Text = "";
+            // 
+            // richTextBoxLogCrop
+            // 
+            this.richTextBoxLogCrop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxLogCrop.ContextMenuStrip = this.contextMenuStripDeleteLog;
+            this.richTextBoxLogCrop.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogCrop.Name = "richTextBoxLogCrop";
+            this.richTextBoxLogCrop.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogCrop.TabIndex = 2;
+            this.richTextBoxLogCrop.Text = "";
+            // 
+            // richTextBoxLogSubtitle
+            // 
+            this.richTextBoxLogSubtitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxLogSubtitle.ContextMenuStrip = this.contextMenuStripDeleteLog;
+            this.richTextBoxLogSubtitle.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogSubtitle.Name = "richTextBoxLogSubtitle";
+            this.richTextBoxLogSubtitle.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogSubtitle.TabIndex = 2;
+            this.richTextBoxLogSubtitle.Text = "";
+            // 
+            // richTextBoxLogEncode
+            // 
+            this.richTextBoxLogEncode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxLogEncode.ContextMenuStrip = this.contextMenuStripDeleteLog;
+            this.richTextBoxLogEncode.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogEncode.Name = "richTextBoxLogEncode";
+            this.richTextBoxLogEncode.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogEncode.TabIndex = 2;
+            this.richTextBoxLogEncode.Text = "";
+            // 
+            // richTextBoxLogMux
+            // 
+            this.richTextBoxLogMux.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxLogMux.ContextMenuStrip = this.contextMenuStripDeleteLog;
+            this.richTextBoxLogMux.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogMux.Name = "richTextBoxLogMux";
+            this.richTextBoxLogMux.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogMux.TabIndex = 2;
+            this.richTextBoxLogMux.Text = "";
+            // 
+            // contextMenuStripDeleteLog
+            // 
+            this.contextMenuStripDeleteLog.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearLogToolStripMenuItem,
+            this.clearAllLogsToolStripMenuItem});
+            this.contextMenuStripDeleteLog.Name = "contextMenuStripDeleteLog";
+            this.contextMenuStripDeleteLog.Size = new System.Drawing.Size(153, 70);
+            // 
+            // clearLogToolStripMenuItem
+            // 
+            this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearLogToolStripMenuItem.Text = "Clear log";
+            this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
+            // 
+            // clearAllLogsToolStripMenuItem
+            // 
+            this.clearAllLogsToolStripMenuItem.Name = "clearAllLogsToolStripMenuItem";
+            this.clearAllLogsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearAllLogsToolStripMenuItem.Text = "Clear all logs";
+            this.clearAllLogsToolStripMenuItem.Click += new System.EventHandler(this.clearAllLogsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1416,11 +1597,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1181, 788);
+            this.Controls.Add(this.tabControlLog);
             this.Controls.Add(this.buttonMinimize);
             this.Controls.Add(this.labelLog);
             this.Controls.Add(this.buttonAbort);
             this.Controls.Add(this.progressBarMain);
-            this.Controls.Add(this.richTextBoxLog);
             this.Controls.Add(this.tabControlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1459,6 +1640,14 @@
             this.tabPageSoftware.ResumeLayout(false);
             this.tabPageSoftware.PerformLayout();
             this.tabPageAbout.ResumeLayout(false);
+            this.tabControlLog.ResumeLayout(false);
+            this.tabPageMainLog.ResumeLayout(false);
+            this.tabPageDemuxLog.ResumeLayout(false);
+            this.tabPageCropLog.ResumeLayout(false);
+            this.tabPageSubtitleLog.ResumeLayout(false);
+            this.tabPageEncodeLog.ResumeLayout(false);
+            this.tabPageMuxLog.ResumeLayout(false);
+            this.contextMenuStripDeleteLog.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1476,7 +1665,7 @@
         private System.Windows.Forms.Label labelEac3toPath;
         private System.Windows.Forms.TextBox textBoxEac3toPath;
         private System.Windows.Forms.Button buttonEac3toPath;
-        private System.Windows.Forms.RichTextBox richTextBoxLog;
+        private System.Windows.Forms.RichTextBox richTextBoxLogMain;
         private System.Windows.Forms.Label labelStreams;
         private System.Windows.Forms.ListBox listBoxStreams;
         private System.Windows.Forms.Label labelTitle;
@@ -1581,6 +1770,21 @@
         private System.Windows.Forms.LinkLabel linkLabelAnyDvd;
         private System.Windows.Forms.ComboBox comboBoxCropMode;
         private System.Windows.Forms.Label labelCropMode;
+        private System.Windows.Forms.TabControl tabControlLog;
+        private System.Windows.Forms.TabPage tabPageMainLog;
+        private System.Windows.Forms.TabPage tabPageDemuxLog;
+        private System.Windows.Forms.TabPage tabPageCropLog;
+        private System.Windows.Forms.TabPage tabPageSubtitleLog;
+        private System.Windows.Forms.TabPage tabPageEncodeLog;
+        private System.Windows.Forms.TabPage tabPageMuxLog;
+        private System.Windows.Forms.RichTextBox richTextBoxLogDemux;
+        private System.Windows.Forms.RichTextBox richTextBoxLogCrop;
+        private System.Windows.Forms.RichTextBox richTextBoxLogSubtitle;
+        private System.Windows.Forms.RichTextBox richTextBoxLogEncode;
+        private System.Windows.Forms.RichTextBox richTextBoxLogMux;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDeleteLog;
+        private System.Windows.Forms.ToolStripMenuItem clearLogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearAllLogsToolStripMenuItem;
     }
 }
 

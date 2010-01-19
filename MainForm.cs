@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        private string title = "BluRip 1080p v0.3.6 © _hawk_/PPX";
+        private string title = "BluRip 1080p v0.3.7 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -66,21 +66,136 @@ namespace BluRip
 
         public delegate void MsgHandler(string msg);
 
-        private void Message(string msg)
+        private void MessageMain(string msg)
         {
             try
             {
-                if (richTextBoxLog.Disposing) return;
-                if (richTextBoxLog.IsDisposed) return;
-                if (this.richTextBoxLog.InvokeRequired)
+                if (richTextBoxLogMain.Disposing) return;
+                if (richTextBoxLogMain.IsDisposed) return;
+                if (this.richTextBoxLogMain.InvokeRequired)
                 {
-                    MsgHandler mh = new MsgHandler(Message);
+                    MsgHandler mh = new MsgHandler(MessageMain);
                     this.Invoke(mh, new object[] { msg });
                 }
                 else
                 {
-                    richTextBoxLog.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\n");
-                    richTextBoxLog.ScrollToCaret();
+                    richTextBoxLogMain.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\n");
+                    richTextBoxLogMain.ScrollToCaret();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void MessageDemux(string msg)
+        {
+            try
+            {
+                if (richTextBoxLogDemux.Disposing) return;
+                if (richTextBoxLogDemux.IsDisposed) return;
+                if (this.richTextBoxLogDemux.InvokeRequired)
+                {
+                    MsgHandler mh = new MsgHandler(MessageDemux);
+                    this.Invoke(mh, new object[] { msg });
+                }
+                else
+                {
+                    richTextBoxLogDemux.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\n");
+                    richTextBoxLogDemux.ScrollToCaret();
+                    MessageMain(msg);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void MessageCrop(string msg)
+        {
+            try
+            {
+                if (richTextBoxLogCrop.Disposing) return;
+                if (richTextBoxLogCrop.IsDisposed) return;
+                if (this.richTextBoxLogCrop.InvokeRequired)
+                {
+                    MsgHandler mh = new MsgHandler(MessageCrop);
+                    this.Invoke(mh, new object[] { msg });
+                }
+                else
+                {
+                    richTextBoxLogCrop.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\n");
+                    richTextBoxLogCrop.ScrollToCaret();
+                    MessageMain(msg);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void MessageSubtitle(string msg)
+        {
+            try
+            {
+                if (richTextBoxLogSubtitle.Disposing) return;
+                if (richTextBoxLogSubtitle.IsDisposed) return;
+                if (this.richTextBoxLogSubtitle.InvokeRequired)
+                {
+                    MsgHandler mh = new MsgHandler(MessageSubtitle);
+                    this.Invoke(mh, new object[] { msg });
+                }
+                else
+                {
+                    richTextBoxLogSubtitle.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\n");
+                    richTextBoxLogSubtitle.ScrollToCaret();
+                    MessageMain(msg);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void MessageEncode(string msg)
+        {
+            try
+            {
+                if (richTextBoxLogEncode.Disposing) return;
+                if (richTextBoxLogEncode.IsDisposed) return;
+                if (this.richTextBoxLogEncode.InvokeRequired)
+                {
+                    MsgHandler mh = new MsgHandler(MessageEncode);
+                    this.Invoke(mh, new object[] { msg });
+                }
+                else
+                {
+                    richTextBoxLogEncode.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\n");
+                    richTextBoxLogEncode.ScrollToCaret();
+                    MessageMain(msg);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void MessageMux(string msg)
+        {
+            try
+            {
+                if (richTextBoxLogMux.Disposing) return;
+                if (richTextBoxLogMux.IsDisposed) return;
+                if (this.richTextBoxLogMux.InvokeRequired)
+                {
+                    MsgHandler mh = new MsgHandler(MessageMux);
+                    this.Invoke(mh, new object[] { msg });
+                }
+                else
+                {
+                    richTextBoxLogMux.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\n");
+                    richTextBoxLogMux.ScrollToCaret();
+                    MessageMain(msg);
                 }
             }
             catch (Exception)
@@ -105,14 +220,89 @@ namespace BluRip
         }
 
         static StringBuilder sb = new StringBuilder();
-        void OutputDataReceived(object sender, DataReceivedEventArgs e)
+        void OutputDataReceivedMain(object sender, DataReceivedEventArgs e)
         {
             try
             {
                 if (!string.IsNullOrEmpty(e.Data))
                 {
                     sb.Append(e.Data + "\r\n");
-                    Message(e.Data.Replace("\b","").Trim());
+                    MessageMain(e.Data.Replace("\b","").Trim());
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        void OutputDataReceivedDemux(object sender, DataReceivedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    sb.Append(e.Data + "\r\n");
+                    MessageDemux(e.Data.Replace("\b", "").Trim());
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        void OutputDataReceivedCrop(object sender, DataReceivedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    sb.Append(e.Data + "\r\n");
+                    MessageCrop(e.Data.Replace("\b", "").Trim());
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        void OutputDataReceivedSubtitle(object sender, DataReceivedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    sb.Append(e.Data + "\r\n");
+                    MessageSubtitle(e.Data.Replace("\b", "").Trim());
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        void OutputDataReceivedEncode(object sender, DataReceivedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    sb.Append(e.Data + "\r\n");
+                    MessageEncode(e.Data.Replace("\b", "").Trim());
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        void OutputDataReceivedMux(object sender, DataReceivedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    sb.Append(e.Data + "\r\n");
+                    MessageMux(e.Data.Replace("\b", "").Trim());
                 }
             }
             catch (Exception)
@@ -127,7 +317,7 @@ namespace BluRip
                 if (!string.IsNullOrEmpty(e.Data))
                 {
                     sb.Append(e.Data + "\r\n");
-                    Message(e.Data.Replace("\b", "").Trim());
+                    MessageMain(e.Data.Replace("\b", "").Trim());
                 }
             }
             catch (Exception)
@@ -139,26 +329,26 @@ namespace BluRip
         {
             try
             {
-                Message("");
-                Message("Getting title info...");
-                Message("");
+                MessageDemux("");
+                MessageDemux("Getting title info...");
+                MessageDemux("");
                 sb.Remove(0, sb.Length);
                 pc2 = new Process();
                 pc2.StartInfo.FileName = settings.eac3toPath;
                 pc2.StartInfo.Arguments = "\"" + path + "\" " + streamNumber + ")";
                 
-                pc2.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
-                pc2.ErrorDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                pc2.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedDemux);
+                pc2.ErrorDataReceived += new DataReceivedEventHandler(OutputDataReceivedDemux);
                 pc2.StartInfo.UseShellExecute = false;
                 pc2.StartInfo.CreateNoWindow = true;
                 pc2.StartInfo.RedirectStandardError = true;
                 pc2.StartInfo.RedirectStandardOutput = true;
 
-                Message("Command: " + pc2.StartInfo.FileName + pc2.StartInfo.Arguments);
+                MessageDemux("Command: " + pc2.StartInfo.FileName + pc2.StartInfo.Arguments);
 
                 if (!pc2.Start())
                 {
-                    Message("Error starting eac3to.exe");
+                    MessageDemux("Error starting eac3to.exe");
                     return;
                 }
 
@@ -178,7 +368,7 @@ namespace BluRip
 
                 if (res.Trim() == "")
                 {
-                    Message("Failed to get stream infos");
+                    MessageDemux("Failed to get stream infos");
                     return;
                 }
 
@@ -276,8 +466,9 @@ namespace BluRip
 
                 result.Add(ti);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageDemux("Exception: " + ex.Message);
             }
         }
 
@@ -287,25 +478,25 @@ namespace BluRip
             {
                 sb.Remove(0, sb.Length);
                 result.Clear();
-                Message("Getting playlist info...");
-                Message("");
+                MessageDemux("Getting playlist info...");
+                MessageDemux("");
                 pc = new Process();
                 pc.StartInfo.FileName = settings.eac3toPath;
                 pc.StartInfo.Arguments = "\"" + path + "\"";
                 
-                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
-                pc.ErrorDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedDemux);
+                pc.ErrorDataReceived += new DataReceivedEventHandler(OutputDataReceivedDemux);
 
                 pc.StartInfo.UseShellExecute = false;
                 pc.StartInfo.CreateNoWindow = true;
                 pc.StartInfo.RedirectStandardError = true;
                 pc.StartInfo.RedirectStandardOutput = true;
 
-                Message("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                MessageDemux("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
 
                 if (!pc.Start())
                 {
-                    Message("Error starting eac3to.exe");
+                    MessageDemux("Error starting eac3to.exe");
                     return false;
                 }
 
@@ -314,8 +505,8 @@ namespace BluRip
                 pc.WaitForExit();
                 pc.Close();
 
-                Message("");
-                Message("Done.");
+                MessageDemux("");
+                MessageDemux("Done.");
 
                 string res = sb.ToString();
                 
@@ -337,9 +528,9 @@ namespace BluRip
                 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Message("Error parsing reply");
+                MessageDemux("Exception: " + ex.Message);
                 return false;
             }
         }
@@ -363,8 +554,7 @@ namespace BluRip
 
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
-
-                richTextBoxLog.Clear();
+                                
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.Items.Clear();
 
@@ -392,7 +582,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageDemux("Exception: " + ex.Message);
                 if (titleInfoThread != null) titleInfoThread = null;                
             }
             finally
@@ -891,8 +1081,8 @@ namespace BluRip
             {
                 demuxThreadStatus = false;
                 sb.Remove(0, sb.Length);                
-                Message("Starting to demux...");
-                Message("");
+                MessageDemux("Starting to demux...");
+                MessageDemux("");
                 pc = new Process();
                 pc.StartInfo.FileName = settings.eac3toPath;
                 pc.StartInfo.Arguments = "\"" + settings.lastBluRayPath + "\" ";
@@ -934,8 +1124,8 @@ namespace BluRip
                         }
                     }
                 }
-                Message("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                MessageDemux("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedMain);
                 //pc.ErrorDataReceived += new DataReceivedEventHandler(ErrorDataReceived);
 
                 pc.StartInfo.UseShellExecute = false;
@@ -945,7 +1135,7 @@ namespace BluRip
 
                 if (!pc.Start())
                 {
-                    Message("Error starting eac3to.exe");
+                    MessageDemux("Error starting eac3to.exe");
                     return;
                 }
 
@@ -967,8 +1157,8 @@ namespace BluRip
                 }
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + prefix + "_streamInfo.xml");
                 UpdateDemuxedStreams();
-                Message("");
-                Message("Done.");
+                MessageDemux("");
+                MessageDemux("Done.");
 
                 // sort streamlist
                 TitleInfo tmpList = new TitleInfo();
@@ -1046,7 +1236,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageDemux("Exception: " + ex.Message);
             }
         }
 
@@ -1092,25 +1282,26 @@ namespace BluRip
                     {                        
                         fps = mi.Video[0].FrameRate;
                     }
+                    MessageCrop(mi.InfoComplete);
                 }
                 catch (Exception ex )
                 {
-                    Message("Error getting MediaInfo: " + ex.Message);
+                    MessageCrop("Error getting MediaInfo: " + ex.Message);
                     return;
                 }
 
                 sb.Remove(0, sb.Length);
                 if (!settings.encodeDirectshow || !settings.cropDirectshow)
                 {
-                    Message("Starting to index...");
-                    Message("");
+                    MessageCrop("Starting to index...");
+                    MessageCrop("");
 
                     pc = new Process();
                     pc.StartInfo.FileName = settings.ffmsindexPath;
                     pc.StartInfo.Arguments = "\"" + filename + "\"";
 
-                    Message("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-                    pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                    MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                    pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
 
                     pc.StartInfo.UseShellExecute = false;
                     pc.StartInfo.CreateNoWindow = true;
@@ -1119,7 +1310,7 @@ namespace BluRip
 
                     if (!pc.Start())
                     {
-                        Message("Error starting ffmsindex.exe");
+                        MessageCrop("Error starting ffmsindex.exe");
                         return;
                     }
 
@@ -1127,7 +1318,7 @@ namespace BluRip
 
                     pc.WaitForExit();
                     pc.Close();
-                    Message("Indexing done!");
+                    MessageCrop("Indexing done!");
                 }
                 if (settings.cropDirectshow)
                 {
@@ -1142,22 +1333,22 @@ namespace BluRip
                 AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
                 if (ac.error)
                 {
-                    Message("Exception: " + ac.errorStr);
+                    MessageCrop("Exception: " + ac.errorStr);
                     return;
                 }
                 ac.NrFrames = settings.nrFrames;
                 ac.BlackValue = settings.blackValue;
                 ac.ShowDialog();
-                Message("Crop top: " + ac.cropTop.ToString());
-                Message("Crop bottom: " + ac.cropBottom.ToString());
+                MessageCrop("Crop top: " + ac.cropTop.ToString());
+                MessageCrop("Crop bottom: " + ac.cropBottom.ToString());
                 if (ac.resize)
                 {
-                    Message("Resize to: " + ac.resizeX.ToString() + " x " + ac.resizeY.ToString());
+                    MessageCrop("Resize to: " + ac.resizeX.ToString() + " x " + ac.resizeY.ToString());
                 }
                 if (ac.border)
                 {
-                    Message("Border top: " + ac.borderTop.ToString());
-                    Message("Border bottom: " + ac.borderBottom.ToString());
+                    MessageCrop("Border top: " + ac.borderTop.ToString());
+                    MessageCrop("Border bottom: " + ac.borderBottom.ToString());
                 }
 
                 string encode = "";
@@ -1207,7 +1398,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageCrop("Exception: " + ex.Message);
             }
         }
 
@@ -1255,8 +1446,6 @@ namespace BluRip
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
 
-                richTextBoxLog.Clear();
-
                 demuxThread = new Thread(DemuxThread);
                 demuxThread.Start();
 
@@ -1270,7 +1459,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageDemux("Exception: " + ex.Message);
                 return false;
             }
             finally
@@ -1293,7 +1482,6 @@ namespace BluRip
                     return false;
                 }
 
-                richTextBoxLog.Clear();
 
                 indexThread = new Thread(IndexThread);
                 indexThread.Start();
@@ -1308,7 +1496,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageCrop("Exception: " + ex.Message);
                 return false;
             }
             finally
@@ -1434,7 +1622,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageMain("Exception: " + ex.Message);
             }
             finally
             {
@@ -1693,7 +1881,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageDemux("Exception: " + ex.Message);
             }
             finally
             {
@@ -1715,7 +1903,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageCrop("Exception: " + ex.Message);
             }
             finally
             {
@@ -1737,7 +1925,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageEncode("Exception: " + ex.Message);
             }
             finally
             {
@@ -1754,8 +1942,6 @@ namespace BluRip
                 this.Text = title + " [Encoding...]";
                 notifyIconMain.Text = this.Text;
 
-                richTextBoxLog.Clear();
-
                 encodeThread = new Thread(EncodeThread);
                 encodeThread.Start();
 
@@ -1769,7 +1955,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageEncode("Exception: " + ex.Message);
                 return false;
             }
             finally
@@ -1823,15 +2009,15 @@ namespace BluRip
                 }
 
                 sb.Remove(0, sb.Length);
-                Message("Starting to encode...");
-                Message("");
+                MessageEncode("Starting to encode...");
+                MessageEncode("");
 
                 pc = new Process();
                 pc.StartInfo.FileName = settings.x264Path;
                 pc.StartInfo.Arguments = settings.encodingSettings[index].settings + " \"" + filename + "\" -o \"" + settings.workingDir +
                     "\\" + settings.filePrefix + "_video.mkv\"";
 
-                Message("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                MessageEncode("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                 
                 pc.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 pc.StartInfo.UseShellExecute = true;
@@ -1839,7 +2025,7 @@ namespace BluRip
                                                 
                 if (!pc.Start())
                 {
-                    Message("Error starting x264.exe");
+                    MessageEncode("Error starting x264.exe");
                     return;
                 }
 
@@ -1854,17 +2040,19 @@ namespace BluRip
                     if (s > 0 && e > 0 && e > s)
                     {
                         string fps = "";
+                        string kbs = "";
                         string eta = "";
                         string substr = tmp.Substring(s + 1, e - s - 2);
                         
                         string[] tmpStr = tmp.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                        if (tmpStr.Length > 2)
+                        if (tmpStr.Length > 3)
                         {
                             fps = "- " + tmpStr[1];
-                            eta = " - " + tmpStr[2];
+                            kbs = " - " + tmpStr[2];
+                            eta = " - " + tmpStr[3];
                         }
 
-                        this.Text = title + " [Encoding (" + substr + "% " + fps + eta + ")...]";
+                        this.Text = title + " [Encoding (" + substr + "% " + fps + kbs + eta + ")...]";
                         notifyIconMain.Text = title + " " + substr + "%"; ;
                     }
                     Thread.Sleep(1000);
@@ -1873,7 +2061,7 @@ namespace BluRip
 
                 pc.WaitForExit();
                 pc.Close();
-                Message("Encoding done!");
+                MessageEncode("Encoding done!");
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Video)
@@ -1890,7 +2078,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageEncode("Exception: " + ex.Message);
             }
         }
 
@@ -1906,7 +2094,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageSubtitle("Exception: " + ex.Message);
             }
             finally
             {
@@ -1954,17 +2142,17 @@ namespace BluRip
                             "_complete.idx";
 
                         sb.Remove(0, sb.Length);
-                        Message("Starting to process subtitle...");
-                        Message("");
+                        MessageSubtitle("Starting to process subtitle...");
+                        MessageSubtitle("");
 
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar " + settings.sup2subPath + " " +
                             si.filename + " " + output + " /fps:" + fps;
 
-                        Message("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                        MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                         
-                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedSubtitle);
 
                         pc.StartInfo.UseShellExecute = false;
                         pc.StartInfo.CreateNoWindow = true;
@@ -1973,7 +2161,7 @@ namespace BluRip
 
                         if (!pc.Start())
                         {
-                            Message("Error starting java.exe");
+                            MessageSubtitle("Error starting java.exe");
                             return;
                         }
 
@@ -1981,7 +2169,7 @@ namespace BluRip
 
                         pc.WaitForExit();
                         pc.Close();
-                        Message("Processing done!");
+                        MessageSubtitle("Processing done!");
 
                         if (File.Exists(output))
                         {
@@ -2000,17 +2188,17 @@ namespace BluRip
                             "_onlyforced.idx";
 
                         sb.Remove(0, sb.Length);
-                        Message("Starting to process subtitle...");
-                        Message("");
+                        MessageSubtitle("Starting to process subtitle...");
+                        MessageSubtitle("");
 
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar " + settings.sup2subPath + " " +
                             si.filename + " " + output + " /forced+ /fps:" + fps;
 
-                        Message("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                        MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
 
-                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedSubtitle);
 
                         pc.StartInfo.UseShellExecute = false;
                         pc.StartInfo.CreateNoWindow = true;
@@ -2019,7 +2207,7 @@ namespace BluRip
 
                         if (!pc.Start())
                         {
-                            Message("Error starting java.exe");
+                            MessageSubtitle("Error starting java.exe");
                             return;
                         }
 
@@ -2027,7 +2215,7 @@ namespace BluRip
 
                         pc.WaitForExit();
                         pc.Close();
-                        Message("Processing done!");
+                        MessageSubtitle("Processing done!");
 
                         if (File.Exists(output))
                         {
@@ -2062,7 +2250,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageSubtitle("Exception: " + ex.Message);
             }
         }
 
@@ -2078,8 +2266,7 @@ namespace BluRip
 
                 this.Text = title + " [Processing subtitles...]";
                 notifyIconMain.Text = this.Text;
-                richTextBoxLog.Clear();
-
+                
                 subtitleThread = new Thread(SubtitleThread);
                 subtitleThread.Start();
 
@@ -2093,7 +2280,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageSubtitle("Exception: " + ex.Message);
                 return false;
             }
             finally
@@ -2456,8 +2643,8 @@ namespace BluRip
                 }
 
                 sb.Remove(0, sb.Length);
-                Message("Starting to mux...");
-                Message("");
+                MessageMux("Starting to mux...");
+                MessageMux("");
 
                 pc = new Process();
                 pc.StartInfo.FileName = settings.mkvmergePath;
@@ -2545,9 +2732,9 @@ namespace BluRip
                     }
                 }
 
-                Message("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                MessageMux("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                 
-                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceived);
+                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedMux);
 
                 pc.StartInfo.UseShellExecute = false;
                 pc.StartInfo.CreateNoWindow = true;
@@ -2556,7 +2743,7 @@ namespace BluRip
 
                 if (!pc.Start())
                 {
-                    Message("Error starting mkvmerge.exe");
+                    MessageMux("Error starting mkvmerge.exe");
                     return;
                 }
 
@@ -2564,9 +2751,9 @@ namespace BluRip
 
                 pc.WaitForExit();
                 pc.Close();
-                Message("Muxing done!");
+                MessageMux("Muxing done!");
 
-                Message("Trying to copy subtitles...");
+                MessageMux("Trying to copy subtitles...");
                 try
                 {
                     if (!Directory.Exists(settings.targetFolder + "\\Subs"))
@@ -2576,9 +2763,9 @@ namespace BluRip
                 }
                 catch (Exception ex)
                 {
-                    Message("Exception: " + ex.Message);
+                    MessageMain("Exception: " + ex.Message);
                 }
-
+                int sub = 1;
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Subtitle)
@@ -2591,26 +2778,26 @@ namespace BluRip
                                 string target = settings.targetFolder + "\\Subs\\" + settings.targetFilename;
                                 if (sfi.normalIdx != "")
                                 {
-                                    File.Copy(sfi.normalIdx, target + "_" + si.number.ToString("d2") + "_" + si.language.ToLower() + ".idx");
-                                    File.Copy(sfi.normalSub, target + "_" + si.number.ToString("d2") + "_" + si.language.ToLower() + ".sub");
+                                    File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx");
+                                    File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub");
                                 }
                                 else if (sfi.forcedIdx != "")
                                 {
-                                    File.Copy(sfi.forcedIdx, target + "_" + si.number.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx");
-                                    File.Copy(sfi.forcedSub, target + "_" + si.number.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub");
+                                    File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx");
+                                    File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub");
                                 }
                             }
                             catch (Exception ex)
                             {
-                                Message("Exception: " + ex.Message);
+                                MessageMain("Exception: " + ex.Message);
                             }
                         }
                     }
                 }
-                Message("Done.");
+                MessageMain("Done.");
                 if (settings.deleteAfterEncode)
                 {
-                    Message("Deleting source files...");
+                    MessageMain("Deleting source files...");
                     foreach (StreamInfo si in demuxedStreamList.streams)
                     {
                         try
@@ -2632,7 +2819,7 @@ namespace BluRip
                         }
                         catch (Exception ex)
                         {
-                            Message("Exception: " + ex.Message);
+                            MessageMain("Exception: " + ex.Message);
                         }
                     }
                     try
@@ -2642,15 +2829,15 @@ namespace BluRip
                     }
                     catch (Exception ex)
                     {
-                        Message("Exception: " + ex.Message);
+                        MessageMain("Exception: " + ex.Message);
                     }
-                    Message("Done.");
+                    MessageMain("Done.");
                 }
                 muxThreadStatus = true;
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageMain("Exception: " + ex.Message);
             }
         }
 
@@ -2660,8 +2847,6 @@ namespace BluRip
             {
                 this.Text = title + " [Muxing...]";
                 notifyIconMain.Text = this.Text;
-
-                richTextBoxLog.Clear();
 
                 muxThread = new Thread(MuxThread);
                 muxThread.Start();
@@ -2676,7 +2861,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageMain("Exception: " + ex.Message);
                 return false;
             }
             finally
@@ -2698,7 +2883,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                Message("Exception: " + ex.Message);
+                MessageMain("Exception: " + ex.Message);
             }
             finally
             {
@@ -2879,6 +3064,56 @@ namespace BluRip
                 {
                     settings.cropMode = comboBoxCropMode.SelectedIndex;
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void clearLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tabControlLog.SelectedTab == tabPageMainLog)
+                {
+                    richTextBoxLogMain.Clear();
+                }
+                else if (tabControlLog.SelectedTab == tabPageDemuxLog)
+                {
+                    richTextBoxLogDemux.Clear();
+                }
+                if (tabControlLog.SelectedTab == tabPageCropLog)
+                {
+                    richTextBoxLogCrop.Clear();
+                }
+                if (tabControlLog.SelectedTab == tabPageSubtitleLog)
+                {
+                    richTextBoxLogSubtitle.Clear();
+                }
+                if (tabControlLog.SelectedTab == tabPageEncodeLog)
+                {
+                    richTextBoxLogEncode.Clear();
+                }
+                if (tabControlLog.SelectedTab == tabPageMuxLog)
+                {
+                    richTextBoxLogMux.Clear();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void clearAllLogsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBoxLogMain.Clear();
+                richTextBoxLogDemux.Clear();
+                richTextBoxLogCrop.Clear();
+                richTextBoxLogSubtitle.Clear();
+                richTextBoxLogEncode.Clear();
+                richTextBoxLogMux.Clear();
             }
             catch (Exception)
             {
