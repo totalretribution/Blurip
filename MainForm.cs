@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Text.RegularExpressions;
 using System.IO;
-using MediaInfoWrapper;
+using MediaInfoLib;
 
 namespace BluRip
 {
@@ -1276,16 +1276,30 @@ namespace BluRip
                 string fps = "";
 
                 try
-                {                    
-                    MediaInfo mi = new MediaInfo(filename);
-                    if (mi.VideoCount > 0)
-                    {                        
-                        fps = mi.Video[0].FrameRate;
-                    }                    
+                {
+                    MediaInfoLib.MediaInfo mi2 = new MediaInfoLib.MediaInfo();
+                    mi2.Open(filename);
+                    mi2.Option("Complete", "1");
+                    string[] tmpstr = mi2.Inform().Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string s in tmpstr)
+                    {
+                        MessageCrop(s.Trim());
+                    }
+                    if (mi2.Count_Get(StreamKind.Video) > 0)
+                    {
+                        fps = mi2.Get(StreamKind.Video, 0, "FrameRate");
+                    }
+                    mi2.Close();                    
                 }
                 catch (Exception ex )
                 {
                     MessageCrop("Error getting MediaInfo: " + ex.Message);
+                    return;
+                }
+
+                if (fps == "")
+                {
+                    MessageCrop("Error getting framerate");
                     return;
                 }
 
@@ -1338,6 +1352,7 @@ namespace BluRip
                 ac.NrFrames = settings.nrFrames;
                 ac.BlackValue = settings.blackValue;
                 ac.ShowDialog();
+                MessageCrop("");
                 MessageCrop("Crop top: " + ac.cropTop.ToString());
                 MessageCrop("Crop bottom: " + ac.cropBottom.ToString());
                 if (ac.resize)
@@ -1364,11 +1379,19 @@ namespace BluRip
                     encode += "Crop(0," + ac.cropTop.ToString() + ",-0,-" + ac.cropBottom.ToString() + ")\r\n";
                     if (ac.resize)
                     {
-                        encode += "LanczosResize(" + ac.resizeX.ToString() + "," + ac.resizeY.ToString() + ")\r\n";
+                        encode += "LanczosResize(" + ac.resizeX.ToString() + "," + ac.resizeY.ToString() + ")\r\n";                        
+                    }
+                    else
+                    {
+                        MessageCrop("Did not add resize command");
                     }
                     if (ac.border)
                     {
-                        encode += "AddBorders(0," + ac.borderTop + ",0," + ac.borderBottom + ")\r\n";
+                        encode += "AddBorders(0," + ac.borderTop + ",0," + ac.borderBottom + ")\r\n";                        
+                    }
+                    else
+                    {
+                        MessageCrop("Did not add AddBorders command");
                     }
                 }
                 string[] tmp = settings.commandsAfterResize.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -1377,6 +1400,15 @@ namespace BluRip
                     encode += s.Trim() + "\r\n";
                 }
                 File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_encode.avs", encode);
+
+                MessageCrop("");
+                MessageCrop("Encode avs:");
+                string[] tmpstr2 = encode.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string s in tmpstr2)
+                {
+                    MessageCrop(s);
+                }
+
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Video)
