@@ -1125,7 +1125,7 @@ namespace BluRip
                     }
                 }
                 MessageDemux("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedMain);
+                pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedDemux);
                 //pc.ErrorDataReceived += new DataReceivedEventHandler(ErrorDataReceived);
 
                 pc.StartInfo.UseShellExecute = false;
@@ -1281,8 +1281,7 @@ namespace BluRip
                     if (mi.VideoCount > 0)
                     {                        
                         fps = mi.Video[0].FrameRate;
-                    }
-                    MessageCrop(mi.InfoComplete);
+                    }                    
                 }
                 catch (Exception ex )
                 {
