@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        private string title = "BluRip 1080p v0.3.7 © _hawk_/PPX";
+        private string title = "BluRip 1080p v0.3.8 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -684,6 +684,8 @@ namespace BluRip
                 checkBoxDefaultSubtitleTrack.Checked = settings.defaultSubtitle;
                 checkBoxDeleteAfterEncode.Checked = settings.deleteAfterEncode;
 
+                checkBoxUseCore.Checked = settings.dtsHdCore;
+
                 richTextBoxCommandsAfterResize.Clear();
                 string[] tmp = settings.commandsAfterResize.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string s in tmp)
@@ -1109,6 +1111,10 @@ namespace BluRip
                             else if (dtsAudioTypes.Contains(si.typeDesc))
                             {
                                 pc.StartInfo.Arguments += "audio_dts_" + si.language + ".dts\" ";
+                                if (si.addInfo.Contains("core") && settings.dtsHdCore)
+                                {
+                                    pc.StartInfo.Arguments += "-core ";
+                                }
                                 si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dts_" + si.language + ".dts";
                             }
                         }
@@ -1996,6 +2002,57 @@ namespace BluRip
             }
         }
 
+        private class OutputReader
+        {
+
+            private StreamReader sr = null;
+            private string text = "";
+            public string Text { get { return text; } }
+            private MsgHandler Message = null;
+            private string lastMsg = "";
+
+            public OutputReader(StreamReader sr, MsgHandler Message)
+            {
+                try
+                {
+                    this.sr = sr;
+                    this.Message = Message;
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            public void Start()
+            {
+                try
+                {
+                    while ((text = sr.ReadLine()) != null)
+                    {
+                        int s = text.IndexOf('[');
+                        int e = text.IndexOf(']');
+                        if (s == 0 && e > 0)
+                        {
+                            string substr = text.Substring(s + 1, e - s - 2);
+                            if (substr != lastMsg)
+                            {
+                                Message(text);
+                                lastMsg = substr;
+                            }
+                        }
+                        else
+                        {
+                            Message(text);
+                        }
+                    }
+                    text = sr.ReadToEnd();
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
         private bool encodeThreadStatus = false;
         private void EncodeThread()
         {
@@ -2050,10 +2107,12 @@ namespace BluRip
 
                 MessageEncode("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                 
-                pc.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                pc.StartInfo.UseShellExecute = true;
+                pc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                pc.StartInfo.UseShellExecute = false;
                 pc.StartInfo.CreateNoWindow = true;
-                                                
+                pc.StartInfo.RedirectStandardOutput = true;
+                pc.StartInfo.RedirectStandardError = true;
+
                 if (!pc.Start())
                 {
                     MessageEncode("Error starting x264.exe");
@@ -2061,9 +2120,24 @@ namespace BluRip
                 }
 
                 pc.PriorityClass = settings.x264Priority;
+                
+                OutputReader or = new OutputReader(pc.StandardOutput, MessageEncode);
+                Thread orThread = new Thread(or.Start);
 
+                OutputReader or2 = new OutputReader(pc.StandardError, MessageEncode);
+                Thread or2Thread = new Thread(or2.Start);
+
+                orThread.Start();
+                or2Thread.Start();
+
+                orThread.Join();
+                or2Thread.Join();
+
+                pc.WaitForExit();
+
+                /*
                 while (!pc.HasExited)
-                {
+                {   
                     pc.Refresh();
                     string tmp = pc.MainWindowTitle;
                     int s = tmp.IndexOf('[');
@@ -2088,9 +2162,12 @@ namespace BluRip
                     }
                     Thread.Sleep(1000);
                 }
-                
+                */
 
-                pc.WaitForExit();
+                MessageEncode(or.Text);
+                MessageEncode(or2.Text);
+
+                //pc.WaitForExit();
                 pc.Close();
                 MessageEncode("Encoding done!");
                 foreach (StreamInfo si in demuxedStreamList.streams)
@@ -3145,6 +3222,17 @@ namespace BluRip
                 richTextBoxLogSubtitle.Clear();
                 richTextBoxLogEncode.Clear();
                 richTextBoxLogMux.Clear();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUseCore_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.dtsHdCore = checkBoxUseCore.Checked;
             }
             catch (Exception)
             {

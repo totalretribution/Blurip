@@ -84,6 +84,7 @@ namespace BluRip
             this.defaultSubtitleForced = orig.defaultSubtitleForced;
             this.commandsAfterResize = orig.commandsAfterResize;
             this.lastProfile = orig.lastProfile;
+            this.dtsHdCore = orig.dtsHdCore;
 
             foreach (LanguagInfo li in orig.preferedLanguages)
             {
@@ -200,5 +201,6 @@ namespace BluRip
         public string commandsAfterResize = "";
         public int lastProfile = 0;
         public bool deleteAfterEncode = false;
+        public bool dtsHdCore = true;
     }
 }

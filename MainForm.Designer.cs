@@ -140,6 +140,9 @@
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             this.richTextBoxLogMain = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStripDeleteLog = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBarMain = new System.Windows.Forms.ProgressBar();
             this.buttonAbort = new System.Windows.Forms.Button();
             this.labelLog = new System.Windows.Forms.Label();
@@ -148,18 +151,16 @@
             this.tabControlLog = new System.Windows.Forms.TabControl();
             this.tabPageMainLog = new System.Windows.Forms.TabPage();
             this.tabPageDemuxLog = new System.Windows.Forms.TabPage();
-            this.tabPageCropLog = new System.Windows.Forms.TabPage();
-            this.tabPageSubtitleLog = new System.Windows.Forms.TabPage();
-            this.tabPageEncodeLog = new System.Windows.Forms.TabPage();
-            this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogDemux = new System.Windows.Forms.RichTextBox();
+            this.tabPageCropLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogCrop = new System.Windows.Forms.RichTextBox();
+            this.tabPageSubtitleLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogSubtitle = new System.Windows.Forms.RichTextBox();
+            this.tabPageEncodeLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
+            this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.contextMenuStripDeleteLog = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearAllLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -177,6 +178,7 @@
             this.groupBoxGeneralAviSynthSettings.SuspendLayout();
             this.tabPageSoftware.SuspendLayout();
             this.tabPageAbout.SuspendLayout();
+            this.contextMenuStripDeleteLog.SuspendLayout();
             this.tabControlLog.SuspendLayout();
             this.tabPageMainLog.SuspendLayout();
             this.tabPageDemuxLog.SuspendLayout();
@@ -184,7 +186,6 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
-            this.contextMenuStripDeleteLog.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -661,7 +662,7 @@
             this.groupBoxAutoCrop.Controls.Add(this.labelNrFrames);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownBlackValue);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownNrFrames);
-            this.groupBoxAutoCrop.Location = new System.Drawing.Point(873, 6);
+            this.groupBoxAutoCrop.Location = new System.Drawing.Point(930, 6);
             this.groupBoxAutoCrop.Name = "groupBoxAutoCrop";
             this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 146);
             this.groupBoxAutoCrop.TabIndex = 5;
@@ -948,6 +949,7 @@
             // 
             // groupBoxAutoSelect
             // 
+            this.groupBoxAutoSelect.Controls.Add(this.checkBoxUseCore);
             this.groupBoxAutoSelect.Controls.Add(this.buttonLangDown);
             this.groupBoxAutoSelect.Controls.Add(this.buttonLangUp);
             this.groupBoxAutoSelect.Controls.Add(this.buttonDeleteLanguage);
@@ -960,14 +962,14 @@
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxAutoSelect);
             this.groupBoxAutoSelect.Location = new System.Drawing.Point(412, 6);
             this.groupBoxAutoSelect.Name = "groupBoxAutoSelect";
-            this.groupBoxAutoSelect.Size = new System.Drawing.Size(455, 182);
+            this.groupBoxAutoSelect.Size = new System.Drawing.Size(512, 182);
             this.groupBoxAutoSelect.TabIndex = 3;
             this.groupBoxAutoSelect.TabStop = false;
             this.groupBoxAutoSelect.Text = "Autoselect streams";
             // 
             // buttonLangDown
             // 
-            this.buttonLangDown.Location = new System.Drawing.Point(374, 67);
+            this.buttonLangDown.Location = new System.Drawing.Point(431, 65);
             this.buttonLangDown.Name = "buttonLangDown";
             this.buttonLangDown.Size = new System.Drawing.Size(75, 23);
             this.buttonLangDown.TabIndex = 9;
@@ -977,7 +979,7 @@
             // 
             // buttonLangUp
             // 
-            this.buttonLangUp.Location = new System.Drawing.Point(374, 38);
+            this.buttonLangUp.Location = new System.Drawing.Point(431, 36);
             this.buttonLangUp.Name = "buttonLangUp";
             this.buttonLangUp.Size = new System.Drawing.Size(75, 23);
             this.buttonLangUp.TabIndex = 8;
@@ -987,7 +989,7 @@
             // 
             // buttonDeleteLanguage
             // 
-            this.buttonDeleteLanguage.Location = new System.Drawing.Point(210, 139);
+            this.buttonDeleteLanguage.Location = new System.Drawing.Point(267, 137);
             this.buttonDeleteLanguage.Name = "buttonDeleteLanguage";
             this.buttonDeleteLanguage.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteLanguage.TabIndex = 7;
@@ -997,7 +999,7 @@
             // 
             // buttonAddLanguage
             // 
-            this.buttonAddLanguage.Location = new System.Drawing.Point(129, 139);
+            this.buttonAddLanguage.Location = new System.Drawing.Point(186, 137);
             this.buttonAddLanguage.Name = "buttonAddLanguage";
             this.buttonAddLanguage.Size = new System.Drawing.Size(75, 23);
             this.buttonAddLanguage.TabIndex = 6;
@@ -1019,7 +1021,7 @@
             // listBoxPreferedLanguages
             // 
             this.listBoxPreferedLanguages.FormattingEnabled = true;
-            this.listBoxPreferedLanguages.Location = new System.Drawing.Point(129, 38);
+            this.listBoxPreferedLanguages.Location = new System.Drawing.Point(186, 36);
             this.listBoxPreferedLanguages.Name = "listBoxPreferedLanguages";
             this.listBoxPreferedLanguages.Size = new System.Drawing.Size(239, 95);
             this.listBoxPreferedLanguages.TabIndex = 4;
@@ -1028,7 +1030,7 @@
             // labelPreferedLanguage
             // 
             this.labelPreferedLanguage.AutoSize = true;
-            this.labelPreferedLanguage.Location = new System.Drawing.Point(126, 16);
+            this.labelPreferedLanguage.Location = new System.Drawing.Point(183, 14);
             this.labelPreferedLanguage.Name = "labelPreferedLanguage";
             this.labelPreferedLanguage.Size = new System.Drawing.Size(220, 13);
             this.labelPreferedLanguage.TabIndex = 3;
@@ -1385,6 +1387,28 @@
             this.richTextBoxLogMain.TabIndex = 1;
             this.richTextBoxLogMain.Text = "";
             // 
+            // contextMenuStripDeleteLog
+            // 
+            this.contextMenuStripDeleteLog.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearLogToolStripMenuItem,
+            this.clearAllLogsToolStripMenuItem});
+            this.contextMenuStripDeleteLog.Name = "contextMenuStripDeleteLog";
+            this.contextMenuStripDeleteLog.Size = new System.Drawing.Size(142, 48);
+            // 
+            // clearLogToolStripMenuItem
+            // 
+            this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.clearLogToolStripMenuItem.Text = "Clear log";
+            this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
+            // 
+            // clearAllLogsToolStripMenuItem
+            // 
+            this.clearAllLogsToolStripMenuItem.Name = "clearAllLogsToolStripMenuItem";
+            this.clearAllLogsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.clearAllLogsToolStripMenuItem.Text = "Clear all logs";
+            this.clearAllLogsToolStripMenuItem.Click += new System.EventHandler(this.clearAllLogsToolStripMenuItem_Click);
+            // 
             // progressBarMain
             // 
             this.progressBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -1470,50 +1494,6 @@
             this.tabPageDemuxLog.Text = "Demux log";
             this.tabPageDemuxLog.UseVisualStyleBackColor = true;
             // 
-            // tabPageCropLog
-            // 
-            this.tabPageCropLog.Controls.Add(this.richTextBoxLogCrop);
-            this.tabPageCropLog.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCropLog.Name = "tabPageCropLog";
-            this.tabPageCropLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCropLog.Size = new System.Drawing.Size(1145, 320);
-            this.tabPageCropLog.TabIndex = 2;
-            this.tabPageCropLog.Text = "Autocrop log";
-            this.tabPageCropLog.UseVisualStyleBackColor = true;
-            // 
-            // tabPageSubtitleLog
-            // 
-            this.tabPageSubtitleLog.Controls.Add(this.richTextBoxLogSubtitle);
-            this.tabPageSubtitleLog.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSubtitleLog.Name = "tabPageSubtitleLog";
-            this.tabPageSubtitleLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSubtitleLog.Size = new System.Drawing.Size(1145, 320);
-            this.tabPageSubtitleLog.TabIndex = 3;
-            this.tabPageSubtitleLog.Text = "Subtitle log";
-            this.tabPageSubtitleLog.UseVisualStyleBackColor = true;
-            // 
-            // tabPageEncodeLog
-            // 
-            this.tabPageEncodeLog.Controls.Add(this.richTextBoxLogEncode);
-            this.tabPageEncodeLog.Location = new System.Drawing.Point(4, 22);
-            this.tabPageEncodeLog.Name = "tabPageEncodeLog";
-            this.tabPageEncodeLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEncodeLog.Size = new System.Drawing.Size(1145, 320);
-            this.tabPageEncodeLog.TabIndex = 4;
-            this.tabPageEncodeLog.Text = "Encode log";
-            this.tabPageEncodeLog.UseVisualStyleBackColor = true;
-            // 
-            // tabPageMuxLog
-            // 
-            this.tabPageMuxLog.Controls.Add(this.richTextBoxLogMux);
-            this.tabPageMuxLog.Location = new System.Drawing.Point(4, 22);
-            this.tabPageMuxLog.Name = "tabPageMuxLog";
-            this.tabPageMuxLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMuxLog.Size = new System.Drawing.Size(1145, 320);
-            this.tabPageMuxLog.TabIndex = 5;
-            this.tabPageMuxLog.Text = "Mux log";
-            this.tabPageMuxLog.UseVisualStyleBackColor = true;
-            // 
             // richTextBoxLogDemux
             // 
             this.richTextBoxLogDemux.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -1524,6 +1504,17 @@
             this.richTextBoxLogDemux.Size = new System.Drawing.Size(1133, 308);
             this.richTextBoxLogDemux.TabIndex = 2;
             this.richTextBoxLogDemux.Text = "";
+            // 
+            // tabPageCropLog
+            // 
+            this.tabPageCropLog.Controls.Add(this.richTextBoxLogCrop);
+            this.tabPageCropLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCropLog.Name = "tabPageCropLog";
+            this.tabPageCropLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCropLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageCropLog.TabIndex = 2;
+            this.tabPageCropLog.Text = "Autocrop log";
+            this.tabPageCropLog.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogCrop
             // 
@@ -1536,6 +1527,17 @@
             this.richTextBoxLogCrop.TabIndex = 2;
             this.richTextBoxLogCrop.Text = "";
             // 
+            // tabPageSubtitleLog
+            // 
+            this.tabPageSubtitleLog.Controls.Add(this.richTextBoxLogSubtitle);
+            this.tabPageSubtitleLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSubtitleLog.Name = "tabPageSubtitleLog";
+            this.tabPageSubtitleLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSubtitleLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageSubtitleLog.TabIndex = 3;
+            this.tabPageSubtitleLog.Text = "Subtitle log";
+            this.tabPageSubtitleLog.UseVisualStyleBackColor = true;
+            // 
             // richTextBoxLogSubtitle
             // 
             this.richTextBoxLogSubtitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -1546,6 +1548,17 @@
             this.richTextBoxLogSubtitle.Size = new System.Drawing.Size(1133, 308);
             this.richTextBoxLogSubtitle.TabIndex = 2;
             this.richTextBoxLogSubtitle.Text = "";
+            // 
+            // tabPageEncodeLog
+            // 
+            this.tabPageEncodeLog.Controls.Add(this.richTextBoxLogEncode);
+            this.tabPageEncodeLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageEncodeLog.Name = "tabPageEncodeLog";
+            this.tabPageEncodeLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEncodeLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageEncodeLog.TabIndex = 4;
+            this.tabPageEncodeLog.Text = "Encode log";
+            this.tabPageEncodeLog.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogEncode
             // 
@@ -1558,6 +1571,17 @@
             this.richTextBoxLogEncode.TabIndex = 2;
             this.richTextBoxLogEncode.Text = "";
             // 
+            // tabPageMuxLog
+            // 
+            this.tabPageMuxLog.Controls.Add(this.richTextBoxLogMux);
+            this.tabPageMuxLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMuxLog.Name = "tabPageMuxLog";
+            this.tabPageMuxLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMuxLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageMuxLog.TabIndex = 5;
+            this.tabPageMuxLog.Text = "Mux log";
+            this.tabPageMuxLog.UseVisualStyleBackColor = true;
+            // 
             // richTextBoxLogMux
             // 
             this.richTextBoxLogMux.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -1569,27 +1593,16 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // contextMenuStripDeleteLog
+            // checkBoxUseCore
             // 
-            this.contextMenuStripDeleteLog.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearLogToolStripMenuItem,
-            this.clearAllLogsToolStripMenuItem});
-            this.contextMenuStripDeleteLog.Name = "contextMenuStripDeleteLog";
-            this.contextMenuStripDeleteLog.Size = new System.Drawing.Size(153, 70);
-            // 
-            // clearLogToolStripMenuItem
-            // 
-            this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
-            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.clearLogToolStripMenuItem.Text = "Clear log";
-            this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
-            // 
-            // clearAllLogsToolStripMenuItem
-            // 
-            this.clearAllLogsToolStripMenuItem.Name = "clearAllLogsToolStripMenuItem";
-            this.clearAllLogsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.clearAllLogsToolStripMenuItem.Text = "Clear all logs";
-            this.clearAllLogsToolStripMenuItem.Click += new System.EventHandler(this.clearAllLogsToolStripMenuItem_Click);
+            this.checkBoxUseCore.AutoSize = true;
+            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 111);
+            this.checkBoxUseCore.Name = "checkBoxUseCore";
+            this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
+            this.checkBoxUseCore.TabIndex = 10;
+            this.checkBoxUseCore.Text = "Use \'-core\' for DTS-HD tracks";
+            this.checkBoxUseCore.UseVisualStyleBackColor = true;
+            this.checkBoxUseCore.CheckedChanged += new System.EventHandler(this.checkBoxUseCore_CheckedChanged);
             // 
             // MainForm
             // 
@@ -1640,6 +1653,7 @@
             this.tabPageSoftware.ResumeLayout(false);
             this.tabPageSoftware.PerformLayout();
             this.tabPageAbout.ResumeLayout(false);
+            this.contextMenuStripDeleteLog.ResumeLayout(false);
             this.tabControlLog.ResumeLayout(false);
             this.tabPageMainLog.ResumeLayout(false);
             this.tabPageDemuxLog.ResumeLayout(false);
@@ -1647,7 +1661,6 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
-            this.contextMenuStripDeleteLog.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1785,6 +1798,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDeleteLog;
         private System.Windows.Forms.ToolStripMenuItem clearLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearAllLogsToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxUseCore;
     }
 }
 
