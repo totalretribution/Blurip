@@ -2236,18 +2236,31 @@ namespace BluRip
                     MessageBox.Show("Framerate not set - do index + autocrop first", "Error");
                     return;
                 }
+
+                int subtitleCount = 0;
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Subtitle)
                     {
+                        subtitleCount++;
+                    }
+                }
+
+                int subtitle = 0;
+                foreach (StreamInfo si in demuxedStreamList.streams)
+                {
+                    if (si.streamType == StreamType.Subtitle)
+                    {
+                        subtitle++;
+                        this.Text = title + " [Processing subtitles (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
                         si.extraFileInfo = new SubtitleFileInfo();
                         SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
 
-                        string output = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_complete.sub";
+                        string output = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_complete.sub\"";
 
-                        string outputIdx = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_complete.idx";
+                        string outputIdx = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_complete.idx\"";
 
                         sb.Remove(0, sb.Length);
                         MessageSubtitle("Starting to process subtitle...");
@@ -2255,8 +2268,8 @@ namespace BluRip
 
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
-                        pc.StartInfo.Arguments = "-jar " + settings.sup2subPath + " " +
-                            si.filename + " " + output + " /fps:" + fps;
+                        pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
+                            si.filename + "\" " + output + " /fps:" + fps;
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                         
@@ -2289,11 +2302,11 @@ namespace BluRip
                         }
                         ////////////////////////////////////////////////////////
 
-                        output = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_onlyforced.sub";
+                        output = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_onlyforced.sub\"";
 
-                        outputIdx = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_onlyforced.idx";
+                        outputIdx = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_onlyforced.idx\"";
 
                         sb.Remove(0, sb.Length);
                         MessageSubtitle("Starting to process subtitle...");
@@ -2301,8 +2314,8 @@ namespace BluRip
 
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
-                        pc.StartInfo.Arguments = "-jar " + settings.sup2subPath + " " +
-                            si.filename + " " + output + " /forced+ /fps:" + fps;
+                        pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
+                            si.filename + "\" " + output + " /forced+ /fps:" + fps;
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
 
@@ -2756,18 +2769,18 @@ namespace BluRip
 
                 pc = new Process();
                 pc.StartInfo.FileName = settings.mkvmergePath;
-                pc.StartInfo.Arguments = "--title \"" + settings.movieTitle + "\" -o " + settings.targetFolder + "\\" + settings.targetFilename + ".mkv ";
+                pc.StartInfo.Arguments = "--title \"" + settings.movieTitle + "\" -o \"" + settings.targetFolder + "\\" + settings.targetFilename + ".mkv\" ";
 
                 // video + chapter
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Chapter)
                     {
-                        pc.StartInfo.Arguments += "--chapters " + si.filename + " ";
+                        pc.StartInfo.Arguments += "--chapters \"" + si.filename + "\" ";
                     }
                     else if (si.streamType == StreamType.Video)
                     {
-                        pc.StartInfo.Arguments += ((VideoFileInfo)si.extraFileInfo).encodedFile + " ";
+                        pc.StartInfo.Arguments += "\"" + ((VideoFileInfo)si.extraFileInfo).encodedFile + "\" ";
                     }                    
                 }
                 // audio
@@ -2790,7 +2803,7 @@ namespace BluRip
                                 defaultSet = true;
                             }
                         }
-                        pc.StartInfo.Arguments += si.filename + " ";
+                        pc.StartInfo.Arguments += "\"" + si.filename + "\" ";
                     }
                 }
                 // subtitle
@@ -2831,11 +2844,11 @@ namespace BluRip
                         }
                         if (sfi.normalIdx != "")
                         {
-                            pc.StartInfo.Arguments += sfi.normalIdx + " ";
+                            pc.StartInfo.Arguments += "\"" + sfi.normalIdx + "\" ";
                         }
                         else if (sfi.forcedIdx != "")
                         {
-                            pc.StartInfo.Arguments += sfi.forcedIdx + " ";
+                            pc.StartInfo.Arguments += "\"" + sfi.forcedIdx + "\" ";
                         }
                     }
                 }
