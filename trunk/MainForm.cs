@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        private string title = "BluRip 1080p v0.3.8 © _hawk_/PPX";
+        private string title = "BluRip 1080p v0.3.9 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -557,6 +557,7 @@ namespace BluRip
                                 
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.Items.Clear();
+                m2tsList.Clear();
 
                 titleInfoThread = new Thread(TitleInfoThread);
                 titleInfoThread.Start();
@@ -685,6 +686,7 @@ namespace BluRip
                 checkBoxDeleteAfterEncode.Checked = settings.deleteAfterEncode;
 
                 checkBoxUseCore.Checked = settings.dtsHdCore;
+                checkBoxMuxSubtitle.Checked = settings.muxSubtitles;
 
                 richTextBoxCommandsAfterResize.Clear();
                 string[] tmp = settings.commandsAfterResize.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -1087,7 +1089,26 @@ namespace BluRip
                 MessageDemux("");
                 pc = new Process();
                 pc.StartInfo.FileName = settings.eac3toPath;
-                pc.StartInfo.Arguments = "\"" + settings.lastBluRayPath + "\" ";
+                if (m2tsList.Count == 0)
+                {
+                    pc.StartInfo.Arguments = "\"" + settings.lastBluRayPath + "\" ";
+                }
+                else
+                {
+                    string tmpstr = "";
+                    foreach (string s in m2tsList)
+                    {
+                        tmpstr += "\"" + s + "\"+";
+                    }
+                    if (tmpstr.Length > 0)
+                    {
+                        if (tmpstr[tmpstr.Length - 1] == '+')
+                        {
+                            tmpstr = tmpstr.Substring(0, tmpstr.Length - 1);
+                        }
+                    }
+                    pc.StartInfo.Arguments = tmpstr + " ";
+                }
 
                 string prefix = textBoxFilePrefix.Text;
 
@@ -2806,49 +2827,52 @@ namespace BluRip
                         pc.StartInfo.Arguments += "\"" + si.filename + "\" ";
                     }
                 }
-                // subtitle
-                defaultSet = false;
-                foreach (StreamInfo si in demuxedStreamList.streams)
+                if (settings.muxSubtitles)
                 {
-                    if (si.streamType == StreamType.Subtitle)
+                    // subtitle
+                    defaultSet = false;
+                    foreach (StreamInfo si in demuxedStreamList.streams)
                     {
-                        SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                        if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
+                        if (si.streamType == StreamType.Subtitle)
                         {
-                            if (!defaultSet)
+                            SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
+                            if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
                             {
-                                if (settings.defaultSubtitle)
+                                if (!defaultSet)
                                 {
-                                    if (!settings.defaultSubtitleForced)
+                                    if (settings.defaultSubtitle)
                                     {
-                                        pc.StartInfo.Arguments += "--default-track 0 ";
-                                        defaultSet = true;
-                                    }
-                                    else
-                                    {
-                                        if (hasForcedSub(si.language))
+                                        if (!settings.defaultSubtitleForced)
                                         {
-                                            if (sfi.forcedIdx != "")
+                                            pc.StartInfo.Arguments += "--default-track 0 ";
+                                            defaultSet = true;
+                                        }
+                                        else
+                                        {
+                                            if (hasForcedSub(si.language))
                                             {
-                                                pc.StartInfo.Arguments += "--default-track 0 ";
-                                                defaultSet = true;
+                                                if (sfi.forcedIdx != "")
+                                                {
+                                                    pc.StartInfo.Arguments += "--default-track 0 ";
+                                                    defaultSet = true;
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                        if (!settings.defaultSubtitle)
-                        {
-                            pc.StartInfo.Arguments += "--default-track 0:0 ";
-                        }
-                        if (sfi.normalIdx != "")
-                        {
-                            pc.StartInfo.Arguments += "\"" + sfi.normalIdx + "\" ";
-                        }
-                        else if (sfi.forcedIdx != "")
-                        {
-                            pc.StartInfo.Arguments += "\"" + sfi.forcedIdx + "\" ";
+                            if (!settings.defaultSubtitle)
+                            {
+                                pc.StartInfo.Arguments += "--default-track 0:0 ";
+                            }
+                            if (sfi.normalIdx != "")
+                            {
+                                pc.StartInfo.Arguments += "\"" + sfi.normalIdx + "\" ";
+                            }
+                            else if (sfi.forcedIdx != "")
+                            {
+                                pc.StartInfo.Arguments += "\"" + sfi.forcedIdx + "\" ";
+                            }
                         }
                     }
                 }
@@ -3246,6 +3270,259 @@ namespace BluRip
             try
             {
                 settings.dtsHdCore = checkBoxUseCore.Checked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private List<string> m2tsList = new List<string>();
+
+        private void buttonOpenM2ts_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FileListForm flf = new FileListForm();
+                if (flf.ShowDialog() == DialogResult.OK)
+                {
+                    comboBoxTitle.Items.Clear();
+                    listBoxStreams.Items.Clear();
+
+                    titleList.Clear();
+                    m2tsList.Clear();
+                    foreach (string s in flf.fileList)
+                    {
+                        m2tsList.Add(s);
+                    }
+                    DoM2tsInfo();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void M2tsInfoThread()
+        {
+            try
+            {
+                GetM2tsInfo(titleList);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void DoM2tsInfo()
+        {
+            try
+            {
+                this.Text = title + " [Getting m2ts stream info...]";
+
+                progressBarMain.Visible = true;
+                buttonAbort.Visible = true;
+
+                comboBoxTitle.Items.Clear();
+                listBoxStreams.Items.Clear();
+
+                titleInfoThread = new Thread(M2tsInfoThread);
+                titleInfoThread.Start();
+
+                while (titleInfoThread.IsAlive)
+                {
+                    Application.DoEvents();
+                    Thread.Sleep(5);
+                }
+                titleInfoThread = null;
+
+                foreach (TitleInfo ti in titleList)
+                {
+                    comboBoxTitle.Items.Add(ti.desc);
+                }
+                if (titleList.Count > 0)
+                {
+                    comboBoxTitle.SelectedIndex = 0;
+                }
+
+                demuxedStreamList = new TitleInfo();
+                UpdateDemuxedStreams();
+            }
+            catch (Exception ex)
+            {
+                MessageDemux("Exception: " + ex.Message);
+                if (titleInfoThread != null) titleInfoThread = null;
+            }
+            finally
+            {
+                progressBarMain.Visible = false;
+                buttonAbort.Visible = false;
+                this.Text = title;
+            }
+        }
+
+        private void GetM2tsInfo(List<TitleInfo> result)
+        {
+            try
+            {                
+                sb.Remove(0, sb.Length);
+                pc2 = new Process();
+                pc2.StartInfo.FileName = settings.eac3toPath;
+                string tmpstr = "";
+                foreach (string s in m2tsList)
+                {
+                    tmpstr += "\"" + s + "\"+";
+                }
+                if (tmpstr.Length > 0)
+                {
+                    if (tmpstr[tmpstr.Length - 1] == '+')
+                    {
+                        tmpstr = tmpstr.Substring(0, tmpstr.Length - 1);
+                    }
+                }
+                pc2.StartInfo.Arguments = tmpstr;
+
+                pc2.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedDemux);
+                pc2.ErrorDataReceived += new DataReceivedEventHandler(OutputDataReceivedDemux);
+                pc2.StartInfo.UseShellExecute = false;
+                pc2.StartInfo.CreateNoWindow = true;
+                pc2.StartInfo.RedirectStandardError = true;
+                pc2.StartInfo.RedirectStandardOutput = true;
+
+                MessageDemux("Command: " + pc2.StartInfo.FileName + pc2.StartInfo.Arguments);
+
+                if (!pc2.Start())
+                {
+                    MessageDemux("Error starting eac3to.exe");
+                    return;
+                }
+
+                string res = "";
+                pc2.BeginOutputReadLine();
+                pc2.BeginErrorReadLine();
+                pc2.WaitForExit();
+                pc2.Close();
+                res = sb.ToString();
+                res = res.Replace("\b", "");
+
+                string[] tmp = res.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    tmp[i] = tmp[i].Trim();
+                }
+
+                if (res.Trim() == "")
+                {
+                    MessageDemux("Failed to get stream infos");
+                    return;
+                }
+
+                TitleInfo ti = new TitleInfo();
+
+                if (tmp[0][0] == '-')
+                {
+                    int length = 0;
+                    for (int i = 0; i < tmp[0].Length; i++)
+                    {
+                        if (tmp[0][i] == '-')
+                        {
+                            length++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    tmp[0] = tmp[0].Substring(length, tmp[0].Length - length);
+                    tmp[0] = tmp[0].Trim();
+                    ti.desc = tmp[0];
+                }
+
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    if (Regex.IsMatch(tmp[i], "^[0-9].*:"))
+                    {
+                        StreamInfo sr = new StreamInfo();
+                        sr.desc = tmp[i];
+                        if (i < tmp.Length - 1)
+                        {
+                            if (!Regex.IsMatch(tmp[i + 1], "^[0-9].*:"))
+                            {
+                                sr.addInfo = tmp[i + 1];
+
+                            }
+                        }
+
+                        int pos = tmp[i].IndexOf(':');
+                        string substr = tmp[i].Substring(0, pos);
+                        sr.number = Convert.ToInt32(substr);
+
+                        substr = tmp[i].Substring(pos + 1).Trim();
+                        string[] tmpInfo = substr.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (tmpInfo.Length > 0)
+                        {
+                            sr.typeDesc = tmpInfo[0];
+                            if (tmpInfo[0] == "Chapters")
+                            {
+                                sr.streamType = StreamType.Chapter;
+                            }
+                            else if (videoTypes.Contains(tmpInfo[0]))
+                            {
+                                sr.streamType = StreamType.Video;
+                            }
+                            else if (ac3AudioTypes.Contains(tmpInfo[0]))
+                            {
+                                sr.streamType = StreamType.Audio;
+                                if (tmpInfo.Length > 1)
+                                {
+                                    sr.language = tmpInfo[1].Trim();
+                                }
+                            }
+                            else if (dtsAudioTypes.Contains(tmpInfo[0]))
+                            {
+                                sr.streamType = StreamType.Audio;
+                                if (tmpInfo.Length > 1)
+                                {
+                                    sr.language = tmpInfo[1].Trim();
+                                }
+                            }
+                            else if (tmpInfo[0] == "Subtitle (PGS)")
+                            {
+                                sr.streamType = StreamType.Subtitle;
+                                if (tmpInfo.Length > 1)
+                                {
+                                    sr.language = tmpInfo[1].Trim();
+                                }
+                            }
+                            else
+                            {
+                                sr.streamType = StreamType.Unknown;
+                            }
+                        }
+                        else
+                        {
+                            sr.typeDesc = "Unknown";
+                            sr.streamType = StreamType.Unknown;
+                        }
+
+                        ti.streams.Add(sr);
+                    }
+                }
+
+                MessageDemux("Done.");
+
+                result.Add(ti);
+            }
+            catch (Exception ex)
+            {
+                MessageDemux("Exception: " + ex.Message);
+            }
+        }
+
+        private void checkBoxMuxSubtitle_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.muxSubtitles = checkBoxMuxSubtitle.Checked;
             }
             catch (Exception)
             {
