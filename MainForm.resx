@@ -120,7 +120,7 @@
   <data name="richTextBoxAbout.Text" xml:space="preserve">
     <value>This software uses:
 
-Parts (MediaInfoWrapper &amp; AviSynthWrapper) from meGui
+Parts (AviSynthWrapper) from meGui
 (http://sourceforge.net/projects/megui/)
 
 MediaInfo DLL
@@ -128,7 +128,11 @@ MediaInfo DLL
 
 If you like it, let me know
 
-For support and feature requests visit #yatb @ efnet</value>
+Updates:
+http://code.google.com/p/blurip/
+
+Forum:
+http://forum.gleitz.info/showthread.php?t=41747</value>
   </data>
   <metadata name="contextMenuStripDeleteLog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>150, 17</value>

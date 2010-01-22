@@ -101,6 +101,7 @@
             this.labelEac3toPath = new System.Windows.Forms.Label();
             this.buttonEac3toPath = new System.Windows.Forms.Button();
             this.groupBoxAutoSelect = new System.Windows.Forms.GroupBox();
+            this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
             this.buttonLangDown = new System.Windows.Forms.Button();
             this.buttonLangUp = new System.Windows.Forms.Button();
             this.buttonDeleteLanguage = new System.Windows.Forms.Button();
@@ -160,7 +161,9 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
+            this.buttonOpenM2ts = new System.Windows.Forms.Button();
+            this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -186,6 +189,7 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
+            this.groupBoxGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -207,6 +211,7 @@
             // 
             // tabPageStreamSelect
             // 
+            this.tabPageStreamSelect.Controls.Add(this.buttonOpenM2ts);
             this.tabPageStreamSelect.Controls.Add(this.labelStreams);
             this.tabPageStreamSelect.Controls.Add(this.listBoxStreams);
             this.tabPageStreamSelect.Controls.Add(this.labelTitle);
@@ -281,9 +286,9 @@
             this.labelPath.AutoSize = true;
             this.labelPath.Location = new System.Drawing.Point(6, 3);
             this.labelPath.Name = "labelPath";
-            this.labelPath.Size = new System.Drawing.Size(81, 13);
+            this.labelPath.Size = new System.Drawing.Size(138, 13);
             this.labelPath.TabIndex = 2;
-            this.labelPath.Text = "Path to BluRay:";
+            this.labelPath.Text = "Path to BluRay drive/folder:";
             // 
             // textBoxPath
             // 
@@ -597,6 +602,7 @@
             // 
             // tabPageSettings
             // 
+            this.tabPageSettings.Controls.Add(this.groupBoxGeneral);
             this.tabPageSettings.Controls.Add(this.groupBoxDefaultTrack);
             this.tabPageSettings.Controls.Add(this.groupBoxAutoCrop);
             this.tabPageSettings.Controls.Add(this.groupBoxExternalTools);
@@ -662,7 +668,7 @@
             this.groupBoxAutoCrop.Controls.Add(this.labelNrFrames);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownBlackValue);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownNrFrames);
-            this.groupBoxAutoCrop.Location = new System.Drawing.Point(930, 6);
+            this.groupBoxAutoCrop.Location = new System.Drawing.Point(879, 6);
             this.groupBoxAutoCrop.Name = "groupBoxAutoCrop";
             this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 146);
             this.groupBoxAutoCrop.TabIndex = 5;
@@ -949,7 +955,6 @@
             // 
             // groupBoxAutoSelect
             // 
-            this.groupBoxAutoSelect.Controls.Add(this.checkBoxUseCore);
             this.groupBoxAutoSelect.Controls.Add(this.buttonLangDown);
             this.groupBoxAutoSelect.Controls.Add(this.buttonLangUp);
             this.groupBoxAutoSelect.Controls.Add(this.buttonDeleteLanguage);
@@ -962,14 +967,25 @@
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxAutoSelect);
             this.groupBoxAutoSelect.Location = new System.Drawing.Point(412, 6);
             this.groupBoxAutoSelect.Name = "groupBoxAutoSelect";
-            this.groupBoxAutoSelect.Size = new System.Drawing.Size(512, 182);
+            this.groupBoxAutoSelect.Size = new System.Drawing.Size(461, 182);
             this.groupBoxAutoSelect.TabIndex = 3;
             this.groupBoxAutoSelect.TabStop = false;
             this.groupBoxAutoSelect.Text = "Autoselect streams";
             // 
+            // checkBoxUseCore
+            // 
+            this.checkBoxUseCore.AutoSize = true;
+            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxUseCore.Name = "checkBoxUseCore";
+            this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
+            this.checkBoxUseCore.TabIndex = 10;
+            this.checkBoxUseCore.Text = "Use \'-core\' for DTS-HD tracks";
+            this.checkBoxUseCore.UseVisualStyleBackColor = true;
+            this.checkBoxUseCore.CheckedChanged += new System.EventHandler(this.checkBoxUseCore_CheckedChanged);
+            // 
             // buttonLangDown
             // 
-            this.buttonLangDown.Location = new System.Drawing.Point(431, 65);
+            this.buttonLangDown.Location = new System.Drawing.Point(376, 67);
             this.buttonLangDown.Name = "buttonLangDown";
             this.buttonLangDown.Size = new System.Drawing.Size(75, 23);
             this.buttonLangDown.TabIndex = 9;
@@ -979,7 +995,7 @@
             // 
             // buttonLangUp
             // 
-            this.buttonLangUp.Location = new System.Drawing.Point(431, 36);
+            this.buttonLangUp.Location = new System.Drawing.Point(376, 38);
             this.buttonLangUp.Name = "buttonLangUp";
             this.buttonLangUp.Size = new System.Drawing.Size(75, 23);
             this.buttonLangUp.TabIndex = 8;
@@ -989,7 +1005,7 @@
             // 
             // buttonDeleteLanguage
             // 
-            this.buttonDeleteLanguage.Location = new System.Drawing.Point(267, 137);
+            this.buttonDeleteLanguage.Location = new System.Drawing.Point(212, 139);
             this.buttonDeleteLanguage.Name = "buttonDeleteLanguage";
             this.buttonDeleteLanguage.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteLanguage.TabIndex = 7;
@@ -999,7 +1015,7 @@
             // 
             // buttonAddLanguage
             // 
-            this.buttonAddLanguage.Location = new System.Drawing.Point(186, 137);
+            this.buttonAddLanguage.Location = new System.Drawing.Point(131, 139);
             this.buttonAddLanguage.Name = "buttonAddLanguage";
             this.buttonAddLanguage.Size = new System.Drawing.Size(75, 23);
             this.buttonAddLanguage.TabIndex = 6;
@@ -1021,7 +1037,7 @@
             // listBoxPreferedLanguages
             // 
             this.listBoxPreferedLanguages.FormattingEnabled = true;
-            this.listBoxPreferedLanguages.Location = new System.Drawing.Point(186, 36);
+            this.listBoxPreferedLanguages.Location = new System.Drawing.Point(131, 38);
             this.listBoxPreferedLanguages.Name = "listBoxPreferedLanguages";
             this.listBoxPreferedLanguages.Size = new System.Drawing.Size(239, 95);
             this.listBoxPreferedLanguages.TabIndex = 4;
@@ -1030,7 +1046,7 @@
             // labelPreferedLanguage
             // 
             this.labelPreferedLanguage.AutoSize = true;
-            this.labelPreferedLanguage.Location = new System.Drawing.Point(183, 14);
+            this.labelPreferedLanguage.Location = new System.Drawing.Point(128, 16);
             this.labelPreferedLanguage.Name = "labelPreferedLanguage";
             this.labelPreferedLanguage.Size = new System.Drawing.Size(220, 13);
             this.labelPreferedLanguage.TabIndex = 3;
@@ -1109,9 +1125,9 @@
             this.labelCommandAfterResize.AutoSize = true;
             this.labelCommandAfterResize.Location = new System.Drawing.Point(6, 16);
             this.labelCommandAfterResize.Name = "labelCommandAfterResize";
-            this.labelCommandAfterResize.Size = new System.Drawing.Size(157, 13);
+            this.labelCommandAfterResize.Size = new System.Drawing.Size(183, 13);
             this.labelCommandAfterResize.TabIndex = 0;
-            this.labelCommandAfterResize.Text = "AviSynth commands after resize";
+            this.labelCommandAfterResize.Text = "AviSynth commands after crop/resize";
             // 
             // labelX264Priority
             // 
@@ -1593,16 +1609,37 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // checkBoxUseCore
+            // buttonOpenM2ts
             // 
-            this.checkBoxUseCore.AutoSize = true;
-            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 111);
-            this.checkBoxUseCore.Name = "checkBoxUseCore";
-            this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
-            this.checkBoxUseCore.TabIndex = 10;
-            this.checkBoxUseCore.Text = "Use \'-core\' for DTS-HD tracks";
-            this.checkBoxUseCore.UseVisualStyleBackColor = true;
-            this.checkBoxUseCore.CheckedChanged += new System.EventHandler(this.checkBoxUseCore_CheckedChanged);
+            this.buttonOpenM2ts.Location = new System.Drawing.Point(128, 45);
+            this.buttonOpenM2ts.Name = "buttonOpenM2ts";
+            this.buttonOpenM2ts.Size = new System.Drawing.Size(116, 23);
+            this.buttonOpenM2ts.TabIndex = 8;
+            this.buttonOpenM2ts.Text = "Open *.m2ts file(s)";
+            this.buttonOpenM2ts.UseVisualStyleBackColor = true;
+            this.buttonOpenM2ts.Click += new System.EventHandler(this.buttonOpenM2ts_Click);
+            // 
+            // groupBoxGeneral
+            // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxUseCore);
+            this.groupBoxGeneral.Location = new System.Drawing.Point(786, 194);
+            this.groupBoxGeneral.Name = "groupBoxGeneral";
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 91);
+            this.groupBoxGeneral.TabIndex = 7;
+            this.groupBoxGeneral.TabStop = false;
+            this.groupBoxGeneral.Text = "General options";
+            // 
+            // checkBoxMuxSubtitle
+            // 
+            this.checkBoxMuxSubtitle.AutoSize = true;
+            this.checkBoxMuxSubtitle.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxMuxSubtitle.Name = "checkBoxMuxSubtitle";
+            this.checkBoxMuxSubtitle.Size = new System.Drawing.Size(130, 17);
+            this.checkBoxMuxSubtitle.TabIndex = 11;
+            this.checkBoxMuxSubtitle.Text = "Mux subtitles into mkv";
+            this.checkBoxMuxSubtitle.UseVisualStyleBackColor = true;
+            this.checkBoxMuxSubtitle.CheckedChanged += new System.EventHandler(this.checkBoxMuxSubtitle_CheckedChanged);
             // 
             // MainForm
             // 
@@ -1661,6 +1698,8 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
+            this.groupBoxGeneral.ResumeLayout(false);
+            this.groupBoxGeneral.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1799,6 +1838,9 @@
         private System.Windows.Forms.ToolStripMenuItem clearLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearAllLogsToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxUseCore;
+        private System.Windows.Forms.Button buttonOpenM2ts;
+        private System.Windows.Forms.GroupBox groupBoxGeneral;
+        private System.Windows.Forms.CheckBox checkBoxMuxSubtitle;
     }
 }
 
