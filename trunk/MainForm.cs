@@ -2277,11 +2277,11 @@ namespace BluRip
                         si.extraFileInfo = new SubtitleFileInfo();
                         SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
 
-                        string output = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_complete.sub\"";
+                        string output = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_complete.sub";
 
-                        string outputIdx = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_complete.idx\"";
+                        string outputIdx = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_complete.idx";
 
                         sb.Remove(0, sb.Length);
                         MessageSubtitle("Starting to process subtitle...");
@@ -2290,7 +2290,7 @@ namespace BluRip
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" " + output + " /fps:" + fps;
+                            si.filename + "\" \"" + output + "\" /fps:" + fps;
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                         
@@ -2323,11 +2323,11 @@ namespace BluRip
                         }
                         ////////////////////////////////////////////////////////
 
-                        output = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_onlyforced.sub\"";
+                        output = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_onlyforced.sub";
 
-                        outputIdx = "\"" + settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_onlyforced.idx\"";
+                        outputIdx = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
+                            "_onlyforced.idx";
 
                         sb.Remove(0, sb.Length);
                         MessageSubtitle("Starting to process subtitle...");
@@ -2336,7 +2336,7 @@ namespace BluRip
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" " + output + " /forced+ /fps:" + fps;
+                            si.filename + "\" \"" + output + "\" /forced+ /fps:" + fps;
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
 
@@ -2382,8 +2382,9 @@ namespace BluRip
                                 }
                             }
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            MessageSubtitle("Exception: " + ex.Message);
                         }
                     }
                 }
@@ -2934,15 +2935,16 @@ namespace BluRip
                             }
                             catch (Exception ex)
                             {
-                                MessageMain("Exception: " + ex.Message);
+                                MessageMux("Exception: " + ex.Message);
                             }
+                            sub++;
                         }
                     }
                 }
-                MessageMain("Done.");
+                MessageMux("Done.");
                 if (settings.deleteAfterEncode)
                 {
-                    MessageMain("Deleting source files...");
+                    MessageMux("Deleting source files...");
                     foreach (StreamInfo si in demuxedStreamList.streams)
                     {
                         try
@@ -2964,7 +2966,7 @@ namespace BluRip
                         }
                         catch (Exception ex)
                         {
-                            MessageMain("Exception: " + ex.Message);
+                            MessageMux("Exception: " + ex.Message);
                         }
                     }
                     try
@@ -2974,15 +2976,15 @@ namespace BluRip
                     }
                     catch (Exception ex)
                     {
-                        MessageMain("Exception: " + ex.Message);
+                        MessageMux("Exception: " + ex.Message);
                     }
-                    MessageMain("Done.");
+                    MessageMux("Done.");
                 }
                 muxThreadStatus = true;
             }
             catch (Exception ex)
             {
-                MessageMain("Exception: " + ex.Message);
+                MessageMux("Exception: " + ex.Message);
             }
         }
 
