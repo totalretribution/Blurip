@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        private string title = "BluRip 1080p v0.3.9 © _hawk_/PPX";
+        private string title = "BluRip 1080p v0.4.0 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -2118,8 +2118,17 @@ namespace BluRip
                 }
 
                 sb.Remove(0, sb.Length);
-                MessageEncode("Starting to encode...");
-                MessageEncode("");
+
+                if (!settings.encodingSettings[index].pass2)
+                {
+                    MessageEncode("Starting to encode...");
+                    MessageEncode("");
+                }
+                else
+                {
+                    MessageEncode("Starting to encode 1. pass...");
+                    MessageEncode("");
+                }
 
                 pc = new Process();
                 pc.StartInfo.FileName = settings.x264Path;
@@ -2155,42 +2164,61 @@ namespace BluRip
                 or2Thread.Join();
 
                 pc.WaitForExit();
-
-                /*
-                while (!pc.HasExited)
-                {   
-                    pc.Refresh();
-                    string tmp = pc.MainWindowTitle;
-                    int s = tmp.IndexOf('[');
-                    int e = tmp.IndexOf(']');
-                    if (s > 0 && e > 0 && e > s)
-                    {
-                        string fps = "";
-                        string kbs = "";
-                        string eta = "";
-                        string substr = tmp.Substring(s + 1, e - s - 2);
-                        
-                        string[] tmpStr = tmp.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                        if (tmpStr.Length > 3)
-                        {
-                            fps = "- " + tmpStr[1];
-                            kbs = " - " + tmpStr[2];
-                            eta = " - " + tmpStr[3];
-                        }
-
-                        this.Text = title + " [Encoding (" + substr + "% " + fps + kbs + eta + ")...]";
-                        notifyIconMain.Text = title + " " + substr + "%"; ;
-                    }
-                    Thread.Sleep(1000);
-                }
-                */
-
+                                
                 MessageEncode(or.Text);
                 MessageEncode(or2.Text);
-
-                //pc.WaitForExit();
+                                
                 pc.Close();
                 MessageEncode("Encoding done!");
+                
+                if (settings.encodingSettings[index].pass2)
+                {
+                    MessageEncode("Starting to encode 2. pass...");
+                    MessageEncode("");
+
+                    pc = new Process();
+                    pc.StartInfo.FileName = settings.x264Path;
+                    pc.StartInfo.Arguments = settings.encodingSettings[index].settings2 + " \"" + filename + "\" -o \"" + settings.workingDir +
+                        "\\" + settings.filePrefix + "_video.mkv\"";
+
+                    MessageEncode("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+
+                    pc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    pc.StartInfo.UseShellExecute = false;
+                    pc.StartInfo.CreateNoWindow = true;
+                    pc.StartInfo.RedirectStandardOutput = true;
+                    pc.StartInfo.RedirectStandardError = true;
+
+                    if (!pc.Start())
+                    {
+                        MessageEncode("Error starting x264.exe");
+                        return;
+                    }
+
+                    pc.PriorityClass = settings.x264Priority;
+
+                    or = new OutputReader(pc.StandardOutput, MessageEncode);
+                    orThread = new Thread(or.Start);
+
+                    or2 = new OutputReader(pc.StandardError, MessageEncode);
+                    or2Thread = new Thread(or2.Start);
+
+                    orThread.Start();
+                    or2Thread.Start();
+
+                    orThread.Join();
+                    or2Thread.Join();
+
+                    pc.WaitForExit();
+
+                    MessageEncode(or.Text);
+                    MessageEncode(or2.Text);
+
+                    pc.Close();
+
+                    MessageEncode("Encoding done!");
+                }
+
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Video)

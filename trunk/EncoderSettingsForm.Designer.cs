@@ -30,64 +30,96 @@
         {
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelDesc = new System.Windows.Forms.Label();
             this.textBoxDesc = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelSettings = new System.Windows.Forms.Label();
             this.textBoxSettings = new System.Windows.Forms.TextBox();
+            this.checkBox2pass = new System.Windows.Forms.CheckBox();
+            this.textBoxSettings2 = new System.Windows.Forms.TextBox();
+            this.labelSettings2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonOk
             // 
+            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(12, 90);
+            this.buttonOk.Location = new System.Drawing.Point(12, 154);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 0;
+            this.buttonOk.TabIndex = 5;
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(93, 90);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 154);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // labelDesc
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Description";
+            this.labelDesc.AutoSize = true;
+            this.labelDesc.Location = new System.Drawing.Point(12, 9);
+            this.labelDesc.Name = "labelDesc";
+            this.labelDesc.Size = new System.Drawing.Size(60, 13);
+            this.labelDesc.TabIndex = 2;
+            this.labelDesc.Text = "Description";
             // 
             // textBoxDesc
             // 
             this.textBoxDesc.Location = new System.Drawing.Point(12, 25);
             this.textBoxDesc.Name = "textBoxDesc";
             this.textBoxDesc.Size = new System.Drawing.Size(298, 20);
-            this.textBoxDesc.TabIndex = 3;
+            this.textBoxDesc.TabIndex = 1;
             // 
-            // label2
+            // labelSettings
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Parameter";
+            this.labelSettings.AutoSize = true;
+            this.labelSettings.Location = new System.Drawing.Point(12, 48);
+            this.labelSettings.Name = "labelSettings";
+            this.labelSettings.Size = new System.Drawing.Size(55, 13);
+            this.labelSettings.TabIndex = 4;
+            this.labelSettings.Text = "Parameter";
             // 
             // textBoxSettings
             // 
             this.textBoxSettings.Location = new System.Drawing.Point(12, 64);
             this.textBoxSettings.Name = "textBoxSettings";
             this.textBoxSettings.Size = new System.Drawing.Size(298, 20);
-            this.textBoxSettings.TabIndex = 5;
+            this.textBoxSettings.TabIndex = 2;
+            // 
+            // checkBox2pass
+            // 
+            this.checkBox2pass.AutoSize = true;
+            this.checkBox2pass.Location = new System.Drawing.Point(12, 129);
+            this.checkBox2pass.Name = "checkBox2pass";
+            this.checkBox2pass.Size = new System.Drawing.Size(88, 17);
+            this.checkBox2pass.TabIndex = 4;
+            this.checkBox2pass.Text = "2 pass profile";
+            this.checkBox2pass.UseVisualStyleBackColor = true;
+            this.checkBox2pass.CheckedChanged += new System.EventHandler(this.checkBox2pass_CheckedChanged);
+            // 
+            // textBoxSettings2
+            // 
+            this.textBoxSettings2.Location = new System.Drawing.Point(12, 103);
+            this.textBoxSettings2.Name = "textBoxSettings2";
+            this.textBoxSettings2.Size = new System.Drawing.Size(298, 20);
+            this.textBoxSettings2.TabIndex = 3;
+            // 
+            // labelSettings2
+            // 
+            this.labelSettings2.AutoSize = true;
+            this.labelSettings2.Location = new System.Drawing.Point(12, 87);
+            this.labelSettings2.Name = "labelSettings2";
+            this.labelSettings2.Size = new System.Drawing.Size(124, 13);
+            this.labelSettings2.TabIndex = 7;
+            this.labelSettings2.Text = "Parameter (second pass)";
             // 
             // EncoderSettingsForm
             // 
@@ -95,17 +127,20 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(322, 123);
+            this.ClientSize = new System.Drawing.Size(322, 187);
+            this.Controls.Add(this.textBoxSettings2);
+            this.Controls.Add(this.labelSettings2);
+            this.Controls.Add(this.checkBox2pass);
             this.Controls.Add(this.textBoxSettings);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelSettings);
             this.Controls.Add(this.textBoxDesc);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelDesc);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "EncoderSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "x264 profile";
+            this.Text = "Edit x264 profile";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,9 +150,12 @@
 
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelDesc;
         private System.Windows.Forms.TextBox textBoxDesc;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelSettings;
         private System.Windows.Forms.TextBox textBoxSettings;
+        private System.Windows.Forms.CheckBox checkBox2pass;
+        private System.Windows.Forms.TextBox textBoxSettings2;
+        private System.Windows.Forms.Label labelSettings2;
     }
 }
