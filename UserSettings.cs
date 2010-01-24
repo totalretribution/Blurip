@@ -38,6 +38,8 @@ namespace BluRip
         {
             this.desc = orig.desc;
             this.settings = orig.settings;
+            this.settings2 = orig.settings2;
+            this.pass2 = orig.pass2;
         }
 
         public EncodingSettings(string desc, string parameter)
@@ -46,8 +48,18 @@ namespace BluRip
             this.settings = parameter;
         }
 
+        public EncodingSettings(string desc, string parameter, string parameter2, bool pass2)
+        {
+            this.desc = desc;
+            this.settings = parameter;
+            this.settings2 = parameter2;
+            this.pass2 = pass2;
+        }
+
         public string desc = "";
         public string settings = "";
+        public bool pass2 = false;
+        public string settings2 = "";
     }
 
     public class UserSettings

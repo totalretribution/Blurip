@@ -26,6 +26,9 @@ namespace BluRip
                 this.es = new EncodingSettings(es);
                 textBoxDesc.Text = this.es.desc;
                 textBoxSettings.Text = this.es.settings;
+                textBoxSettings2.Text = this.es.settings2;
+                checkBox2pass.Checked = this.es.pass2;
+                checkBox2pass_CheckedChanged(null, null);
             }
             catch (Exception)
             {
@@ -38,6 +41,30 @@ namespace BluRip
             {
                 es.desc = textBoxDesc.Text;
                 es.settings = textBoxSettings.Text;
+                es.pass2 = checkBox2pass.Checked;
+                es.settings2 = textBoxSettings2.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBox2pass_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkBox2pass.Checked)
+                {
+                    labelSettings2.Visible = true;
+                    textBoxSettings2.Visible = true;
+                    labelSettings.Text = "Parameter (first pass)";
+                }
+                else
+                {
+                    labelSettings2.Visible = false;
+                    textBoxSettings2.Visible = false;
+                    labelSettings.Text = "Parameter";
+                }
             }
             catch (Exception)
             {
