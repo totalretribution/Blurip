@@ -42,6 +42,8 @@
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.buttonPath = new System.Windows.Forms.Button();
             this.tabPageProcess = new System.Windows.Forms.TabPage();
+            this.labelAvisynthProfile = new System.Windows.Forms.Label();
+            this.comboBoxAvisynthProfile = new System.Windows.Forms.ComboBox();
             this.buttonStreamDown = new System.Windows.Forms.Button();
             this.buttonStreamUp = new System.Windows.Forms.Button();
             this.buttonDoMux = new System.Windows.Forms.Button();
@@ -71,6 +73,7 @@
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
             this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
             this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
             this.groupBoxDefaultTrack = new System.Windows.Forms.GroupBox();
@@ -116,6 +119,11 @@
             this.checkBoxSelectChapters = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoSelect = new System.Windows.Forms.CheckBox();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
+            this.groupBoxAviSynthProfiles = new System.Windows.Forms.GroupBox();
+            this.labelAvisynthProfiles = new System.Windows.Forms.Label();
+            this.buttonDelAvisynth = new System.Windows.Forms.Button();
+            this.listBoxAviSynthProfiles = new System.Windows.Forms.ListBox();
+            this.buttonAddAvisynth = new System.Windows.Forms.Button();
             this.labelX264Priority = new System.Windows.Forms.Label();
             this.comboBoxX264Priority = new System.Windows.Forms.ComboBox();
             this.groupBoxX264Profiles = new System.Windows.Forms.GroupBox();
@@ -127,6 +135,7 @@
             this.checkBoxEncodeDirectshow = new System.Windows.Forms.CheckBox();
             this.checkBoxCropDirectshow = new System.Windows.Forms.CheckBox();
             this.tabPageSoftware = new System.Windows.Forms.TabPage();
+            this.labelUsefullTools = new System.Windows.Forms.Label();
             this.linkLabelAnyDvd = new System.Windows.Forms.LinkLabel();
             this.linkLabelFilterTweaker = new System.Windows.Forms.LinkLabel();
             this.linkLabelMkvtoolnix = new System.Windows.Forms.LinkLabel();
@@ -161,15 +170,7 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.labelUsefullTools = new System.Windows.Forms.Label();
-            this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
-            this.groupBoxAviSynthProfiles = new System.Windows.Forms.GroupBox();
-            this.labelAvisynthProfiles = new System.Windows.Forms.Label();
-            this.buttonDelAvisynth = new System.Windows.Forms.Button();
-            this.listBoxAviSynthProfiles = new System.Windows.Forms.ListBox();
-            this.buttonAddAvisynth = new System.Windows.Forms.Button();
-            this.labelAvisynthProfile = new System.Windows.Forms.Label();
-            this.comboBoxAvisynthProfile = new System.Windows.Forms.ComboBox();
+            this.checkBoxResize720p = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -183,6 +184,7 @@
             this.groupBoxExternalTools.SuspendLayout();
             this.groupBoxAutoSelect.SuspendLayout();
             this.tabPageEncodingSettings.SuspendLayout();
+            this.groupBoxAviSynthProfiles.SuspendLayout();
             this.groupBoxX264Profiles.SuspendLayout();
             this.groupBoxGeneralAviSynthSettings.SuspendLayout();
             this.tabPageSoftware.SuspendLayout();
@@ -195,7 +197,6 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
-            this.groupBoxAviSynthProfiles.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -350,6 +351,24 @@
             this.tabPageProcess.TabIndex = 3;
             this.tabPageProcess.Text = "Process";
             this.tabPageProcess.UseVisualStyleBackColor = true;
+            // 
+            // labelAvisynthProfile
+            // 
+            this.labelAvisynthProfile.AutoSize = true;
+            this.labelAvisynthProfile.Location = new System.Drawing.Point(6, 264);
+            this.labelAvisynthProfile.Name = "labelAvisynthProfile";
+            this.labelAvisynthProfile.Size = new System.Drawing.Size(78, 13);
+            this.labelAvisynthProfile.TabIndex = 35;
+            this.labelAvisynthProfile.Text = "Avisynth profile";
+            // 
+            // comboBoxAvisynthProfile
+            // 
+            this.comboBoxAvisynthProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAvisynthProfile.FormattingEnabled = true;
+            this.comboBoxAvisynthProfile.Location = new System.Drawing.Point(9, 280);
+            this.comboBoxAvisynthProfile.Name = "comboBoxAvisynthProfile";
+            this.comboBoxAvisynthProfile.Size = new System.Drawing.Size(344, 21);
+            this.comboBoxAvisynthProfile.TabIndex = 34;
             // 
             // buttonStreamDown
             // 
@@ -635,15 +654,27 @@
             // 
             // groupBoxGeneral
             // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxResize720p);
             this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
             this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
             this.groupBoxGeneral.Controls.Add(this.checkBoxUseCore);
             this.groupBoxGeneral.Location = new System.Drawing.Point(786, 194);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 91);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 113);
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
+            // 
+            // checkBoxUntouchedVideo
+            // 
+            this.checkBoxUntouchedVideo.AutoSize = true;
+            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxUntouchedVideo.Name = "checkBoxUntouchedVideo";
+            this.checkBoxUntouchedVideo.Size = new System.Drawing.Size(168, 17);
+            this.checkBoxUntouchedVideo.TabIndex = 12;
+            this.checkBoxUntouchedVideo.Text = "Untouched video (no encode)";
+            this.checkBoxUntouchedVideo.UseVisualStyleBackColor = true;
+            this.checkBoxUntouchedVideo.CheckedChanged += new System.EventHandler(this.checkBoxUntouchedVideo_CheckedChanged);
             // 
             // checkBoxMuxSubtitle
             // 
@@ -1141,6 +1172,57 @@
             this.tabPageEncodingSettings.Text = "Encoding settings";
             this.tabPageEncodingSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBoxAviSynthProfiles
+            // 
+            this.groupBoxAviSynthProfiles.Controls.Add(this.labelAvisynthProfiles);
+            this.groupBoxAviSynthProfiles.Controls.Add(this.buttonDelAvisynth);
+            this.groupBoxAviSynthProfiles.Controls.Add(this.listBoxAviSynthProfiles);
+            this.groupBoxAviSynthProfiles.Controls.Add(this.buttonAddAvisynth);
+            this.groupBoxAviSynthProfiles.Location = new System.Drawing.Point(703, 6);
+            this.groupBoxAviSynthProfiles.Name = "groupBoxAviSynthProfiles";
+            this.groupBoxAviSynthProfiles.Size = new System.Drawing.Size(351, 245);
+            this.groupBoxAviSynthProfiles.TabIndex = 15;
+            this.groupBoxAviSynthProfiles.TabStop = false;
+            this.groupBoxAviSynthProfiles.Text = "Custom commands";
+            // 
+            // labelAvisynthProfiles
+            // 
+            this.labelAvisynthProfiles.AutoSize = true;
+            this.labelAvisynthProfiles.Location = new System.Drawing.Point(6, 16);
+            this.labelAvisynthProfiles.Name = "labelAvisynthProfiles";
+            this.labelAvisynthProfiles.Size = new System.Drawing.Size(85, 13);
+            this.labelAvisynthProfiles.TabIndex = 7;
+            this.labelAvisynthProfiles.Text = "AviSynth profiles";
+            // 
+            // buttonDelAvisynth
+            // 
+            this.buttonDelAvisynth.Location = new System.Drawing.Point(90, 216);
+            this.buttonDelAvisynth.Name = "buttonDelAvisynth";
+            this.buttonDelAvisynth.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelAvisynth.TabIndex = 10;
+            this.buttonDelAvisynth.Text = "Delete";
+            this.buttonDelAvisynth.UseVisualStyleBackColor = true;
+            this.buttonDelAvisynth.Click += new System.EventHandler(this.buttonDelAvisynth_Click);
+            // 
+            // listBoxAviSynthProfiles
+            // 
+            this.listBoxAviSynthProfiles.FormattingEnabled = true;
+            this.listBoxAviSynthProfiles.Location = new System.Drawing.Point(9, 32);
+            this.listBoxAviSynthProfiles.Name = "listBoxAviSynthProfiles";
+            this.listBoxAviSynthProfiles.Size = new System.Drawing.Size(331, 173);
+            this.listBoxAviSynthProfiles.TabIndex = 8;
+            this.listBoxAviSynthProfiles.DoubleClick += new System.EventHandler(this.listBoxAviSynthProfiles_DoubleClick);
+            // 
+            // buttonAddAvisynth
+            // 
+            this.buttonAddAvisynth.Location = new System.Drawing.Point(9, 216);
+            this.buttonAddAvisynth.Name = "buttonAddAvisynth";
+            this.buttonAddAvisynth.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddAvisynth.TabIndex = 9;
+            this.buttonAddAvisynth.Text = "Add";
+            this.buttonAddAvisynth.UseVisualStyleBackColor = true;
+            this.buttonAddAvisynth.Click += new System.EventHandler(this.buttonAddAvisynth_Click);
+            // 
             // labelX264Priority
             // 
             this.labelX264Priority.AutoSize = true;
@@ -1265,6 +1347,15 @@
             this.tabPageSoftware.TabIndex = 5;
             this.tabPageSoftware.Text = "Needed tools";
             this.tabPageSoftware.UseVisualStyleBackColor = true;
+            // 
+            // labelUsefullTools
+            // 
+            this.labelUsefullTools.AutoSize = true;
+            this.labelUsefullTools.Location = new System.Drawing.Point(320, 3);
+            this.labelUsefullTools.Name = "labelUsefullTools";
+            this.labelUsefullTools.Size = new System.Drawing.Size(168, 13);
+            this.labelUsefullTools.TabIndex = 11;
+            this.labelUsefullTools.Text = "The following tools may be usefull:";
             // 
             // linkLabelAnyDvd
             // 
@@ -1622,94 +1713,16 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // labelUsefullTools
+            // checkBoxResize720p
             // 
-            this.labelUsefullTools.AutoSize = true;
-            this.labelUsefullTools.Location = new System.Drawing.Point(320, 3);
-            this.labelUsefullTools.Name = "labelUsefullTools";
-            this.labelUsefullTools.Size = new System.Drawing.Size(168, 13);
-            this.labelUsefullTools.TabIndex = 11;
-            this.labelUsefullTools.Text = "The following tools may be usefull:";
-            // 
-            // checkBoxUntouchedVideo
-            // 
-            this.checkBoxUntouchedVideo.AutoSize = true;
-            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 65);
-            this.checkBoxUntouchedVideo.Name = "checkBoxUntouchedVideo";
-            this.checkBoxUntouchedVideo.Size = new System.Drawing.Size(168, 17);
-            this.checkBoxUntouchedVideo.TabIndex = 12;
-            this.checkBoxUntouchedVideo.Text = "Untouched video (no encode)";
-            this.checkBoxUntouchedVideo.UseVisualStyleBackColor = true;
-            this.checkBoxUntouchedVideo.CheckedChanged += new System.EventHandler(this.checkBoxUntouchedVideo_CheckedChanged);
-            // 
-            // groupBoxAviSynthProfiles
-            // 
-            this.groupBoxAviSynthProfiles.Controls.Add(this.labelAvisynthProfiles);
-            this.groupBoxAviSynthProfiles.Controls.Add(this.buttonDelAvisynth);
-            this.groupBoxAviSynthProfiles.Controls.Add(this.listBoxAviSynthProfiles);
-            this.groupBoxAviSynthProfiles.Controls.Add(this.buttonAddAvisynth);
-            this.groupBoxAviSynthProfiles.Location = new System.Drawing.Point(703, 6);
-            this.groupBoxAviSynthProfiles.Name = "groupBoxAviSynthProfiles";
-            this.groupBoxAviSynthProfiles.Size = new System.Drawing.Size(351, 245);
-            this.groupBoxAviSynthProfiles.TabIndex = 15;
-            this.groupBoxAviSynthProfiles.TabStop = false;
-            this.groupBoxAviSynthProfiles.Text = "Custom commands";
-            // 
-            // labelAvisynthProfiles
-            // 
-            this.labelAvisynthProfiles.AutoSize = true;
-            this.labelAvisynthProfiles.Location = new System.Drawing.Point(6, 16);
-            this.labelAvisynthProfiles.Name = "labelAvisynthProfiles";
-            this.labelAvisynthProfiles.Size = new System.Drawing.Size(85, 13);
-            this.labelAvisynthProfiles.TabIndex = 7;
-            this.labelAvisynthProfiles.Text = "AviSynth profiles";
-            // 
-            // buttonDelAvisynth
-            // 
-            this.buttonDelAvisynth.Location = new System.Drawing.Point(90, 216);
-            this.buttonDelAvisynth.Name = "buttonDelAvisynth";
-            this.buttonDelAvisynth.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelAvisynth.TabIndex = 10;
-            this.buttonDelAvisynth.Text = "Delete";
-            this.buttonDelAvisynth.UseVisualStyleBackColor = true;
-            this.buttonDelAvisynth.Click += new System.EventHandler(this.buttonDelAvisynth_Click);
-            // 
-            // listBoxAviSynthProfiles
-            // 
-            this.listBoxAviSynthProfiles.FormattingEnabled = true;
-            this.listBoxAviSynthProfiles.Location = new System.Drawing.Point(9, 32);
-            this.listBoxAviSynthProfiles.Name = "listBoxAviSynthProfiles";
-            this.listBoxAviSynthProfiles.Size = new System.Drawing.Size(331, 173);
-            this.listBoxAviSynthProfiles.TabIndex = 8;
-            this.listBoxAviSynthProfiles.DoubleClick += new System.EventHandler(this.listBoxAviSynthProfiles_DoubleClick);
-            // 
-            // buttonAddAvisynth
-            // 
-            this.buttonAddAvisynth.Location = new System.Drawing.Point(9, 216);
-            this.buttonAddAvisynth.Name = "buttonAddAvisynth";
-            this.buttonAddAvisynth.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddAvisynth.TabIndex = 9;
-            this.buttonAddAvisynth.Text = "Add";
-            this.buttonAddAvisynth.UseVisualStyleBackColor = true;
-            this.buttonAddAvisynth.Click += new System.EventHandler(this.buttonAddAvisynth_Click);
-            // 
-            // labelAvisynthProfile
-            // 
-            this.labelAvisynthProfile.AutoSize = true;
-            this.labelAvisynthProfile.Location = new System.Drawing.Point(6, 264);
-            this.labelAvisynthProfile.Name = "labelAvisynthProfile";
-            this.labelAvisynthProfile.Size = new System.Drawing.Size(78, 13);
-            this.labelAvisynthProfile.TabIndex = 35;
-            this.labelAvisynthProfile.Text = "Avisynth profile";
-            // 
-            // comboBoxAvisynthProfile
-            // 
-            this.comboBoxAvisynthProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAvisynthProfile.FormattingEnabled = true;
-            this.comboBoxAvisynthProfile.Location = new System.Drawing.Point(9, 280);
-            this.comboBoxAvisynthProfile.Name = "comboBoxAvisynthProfile";
-            this.comboBoxAvisynthProfile.Size = new System.Drawing.Size(344, 21);
-            this.comboBoxAvisynthProfile.TabIndex = 34;
+            this.checkBoxResize720p.AutoSize = true;
+            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxResize720p.Name = "checkBoxResize720p";
+            this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxResize720p.TabIndex = 13;
+            this.checkBoxResize720p.Text = "Resize to 720p";
+            this.checkBoxResize720p.UseVisualStyleBackColor = true;
+            this.checkBoxResize720p.CheckedChanged += new System.EventHandler(this.checkBoxResize720p_CheckedChanged);
             // 
             // MainForm
             // 
@@ -1753,6 +1766,8 @@
             this.groupBoxAutoSelect.PerformLayout();
             this.tabPageEncodingSettings.ResumeLayout(false);
             this.tabPageEncodingSettings.PerformLayout();
+            this.groupBoxAviSynthProfiles.ResumeLayout(false);
+            this.groupBoxAviSynthProfiles.PerformLayout();
             this.groupBoxX264Profiles.ResumeLayout(false);
             this.groupBoxX264Profiles.PerformLayout();
             this.groupBoxGeneralAviSynthSettings.ResumeLayout(false);
@@ -1768,8 +1783,6 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
-            this.groupBoxAviSynthProfiles.ResumeLayout(false);
-            this.groupBoxAviSynthProfiles.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1917,6 +1930,7 @@
         private System.Windows.Forms.Button buttonAddAvisynth;
         private System.Windows.Forms.Label labelAvisynthProfile;
         private System.Windows.Forms.ComboBox comboBoxAvisynthProfile;
+        private System.Windows.Forms.CheckBox checkBoxResize720p;
     }
 }
 

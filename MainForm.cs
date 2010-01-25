@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        private string title = "BluRip 1080p v0.4.0 © _hawk_/PPX";
+        private string title = "BluRip 1080p v0.4.1 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -709,6 +709,9 @@ namespace BluRip
                 checkBoxUseCore.Checked = settings.dtsHdCore;
                 checkBoxMuxSubtitle.Checked = settings.muxSubtitles;
                 checkBoxUntouchedVideo.Checked = settings.untouchedVideo;
+                checkBoxResize720p.Checked = settings.resize720p;
+
+                checkBoxUntouchedVideo_CheckedChanged(null, null);
 
                 UpdateLanguage();
                 UpdateEncodingSettings();
@@ -1409,15 +1412,15 @@ namespace BluRip
                     MessageCrop("");
                     MessageCrop("Crop top: " + ac.cropTop.ToString());
                     MessageCrop("Crop bottom: " + ac.cropBottom.ToString());
-                    if (ac.resize)
-                    {
-                        MessageCrop("Resize to: " + ac.resizeX.ToString() + " x " + ac.resizeY.ToString());
-                    }
                     if (ac.border)
                     {
                         MessageCrop("Border top: " + ac.borderTop.ToString());
                         MessageCrop("Border bottom: " + ac.borderBottom.ToString());
                     }
+                    if (ac.resize)
+                    {
+                        MessageCrop("Resize to: " + ac.resizeX.ToString() + " x " + ac.resizeY.ToString());
+                    }                    
 
                     string encode = "";
                     if (settings.encodeDirectshow)
@@ -1431,14 +1434,6 @@ namespace BluRip
                     if (ac.cropTop != 0 || ac.cropBottom != 0)
                     {
                         encode += "Crop(0," + ac.cropTop.ToString() + ",-0,-" + ac.cropBottom.ToString() + ")\r\n";
-                        if (ac.resize)
-                        {
-                            encode += "LanczosResize(" + ac.resizeX.ToString() + "," + ac.resizeY.ToString() + ")\r\n";
-                        }
-                        else
-                        {
-                            MessageCrop("Did not add resize command");
-                        }
                         if (ac.border)
                         {
                             encode += "AddBorders(0," + ac.borderTop + ",0," + ac.borderBottom + ")\r\n";
@@ -1447,6 +1442,14 @@ namespace BluRip
                         {
                             MessageCrop("Did not add AddBorders command");
                         }
+                        if (ac.resize)
+                        {
+                            encode += "LanczosResize(" + ac.resizeX.ToString() + "," + ac.resizeY.ToString() + ")\r\n";
+                        }
+                        else
+                        {
+                            MessageCrop("Did not add resize command");
+                        }                        
                     }
                     int index = comboBoxAvisynthProfile.SelectedIndex;
                     if (index > -1 && index < settings.avisynthSettings.Count)
@@ -1462,6 +1465,7 @@ namespace BluRip
 
                     MessageCrop("");
                     MessageCrop("Encode avs:");
+                    MessageCrop("");
                     string[] tmpstr2 = encode.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string s in tmpstr2)
                     {
@@ -2354,7 +2358,16 @@ namespace BluRip
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" \"" + output + "\" /fps:" + fps + " /res:keep";
+                            si.filename + "\" \"" + output + "\" /fps:" + fps;
+
+                        if (!settings.resize720p)
+                        {
+                            pc.StartInfo.Arguments += " /res:keep";
+                        }
+                        else
+                        {
+                            pc.StartInfo.Arguments += " /res:720";
+                        }
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                         
@@ -2400,7 +2413,16 @@ namespace BluRip
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" \"" + output + "\" /forced+ /fps:" + fps + " /res:keep";
+                            si.filename + "\" \"" + output + "\" /forced+ /fps:" + fps;
+
+                        if (!settings.resize720p)
+                        {
+                            pc.StartInfo.Arguments += " /res:keep";
+                        }
+                        else
+                        {
+                            pc.StartInfo.Arguments += " /res:720";
+                        }
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
 
@@ -2988,13 +3010,13 @@ namespace BluRip
                                 string target = settings.targetFolder + "\\Subs\\" + settings.targetFilename;
                                 if (sfi.normalIdx != "")
                                 {
-                                    File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx");
-                                    File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub");
+                                    File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx", true);
+                                    File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub", true);
                                 }
                                 else if (sfi.forcedIdx != "")
                                 {
-                                    File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx");
-                                    File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub");
+                                    File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx", true);
+                                    File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub", true);
                                 }
                             }
                             catch (Exception ex)
@@ -3589,6 +3611,15 @@ namespace BluRip
             try
             {
                 settings.untouchedVideo = checkBoxUntouchedVideo.Checked;
+                if (settings.untouchedVideo)
+                {
+                    checkBoxResize720p.Checked = false;
+                    checkBoxResize720p.Enabled = false;
+                }
+                else
+                {
+                    checkBoxResize720p.Enabled = true;
+                }
             }
             catch (Exception)
             {
@@ -3638,6 +3669,17 @@ namespace BluRip
                         UpdateAvisynthSettings();
                     }
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxResize720p_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.resize720p = checkBoxResize720p.Checked;
             }
             catch (Exception)
             {

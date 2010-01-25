@@ -265,38 +265,65 @@ namespace BluRip
                 }
 
                 bool mod8ok = false;
-                
-                // no resize, over/undercrop etc needed - should be default case
-                if (cropTop % 2 == 0 && cropBottom % 2 == 0 &&
-                    (asc.VideoHeight - cropBottom - cropTop) % 16 == 0)
-                {
-                    resize = false;
-                    border = false;
-                }
-                else
-                {
-                    if (cropTop % 2 == 0 && cropBottom % 2 == 0 &&
-                    (asc.VideoHeight - cropBottom - cropTop) % 8 == 0)
-                    {
-                        mod8ok = false;
-                    }
 
-                    // undercrop % 8
-                    if (settings.cropMode == 0)
+                // 1080p mode
+                if (!settings.resize720p)
+                {
+                    // no resize, over/undercrop etc needed - should be default case
+                    if (cropTop % 2 == 0 && cropBottom % 2 == 0 &&
+                        (asc.VideoHeight - cropBottom - cropTop) % 16 == 0)
                     {
-                        if (mod8ok)
+                        resize = false;
+                        border = false;
+                    }
+                    else
+                    {
+                        if (cropTop % 2 == 0 && cropBottom % 2 == 0 &&
+                        (asc.VideoHeight - cropBottom - cropTop) % 8 == 0)
                         {
-                            // nothing to be done
-                            resize = false;
-                            border = false;
+                            mod8ok = false;
                         }
-                        else
+
+                        // undercrop % 8
+                        if (settings.cropMode == 0)
+                        {
+                            if (mod8ok)
+                            {
+                                // nothing to be done
+                                resize = false;
+                                border = false;
+                            }
+                            else
+                            {
+                                if (cropBottom % 2 != 0) cropBottom--;
+                                if (cropTop % 2 != 0) cropTop--;
+                                int tmp = 0;
+                                if (cropBottom > cropTop) tmp = 1;
+                                while ((asc.VideoHeight - cropBottom - cropTop) % 8 != 0)
+                                {
+                                    if (tmp == 0)
+                                    {
+                                        cropTop -= 2;
+                                        tmp++;
+                                    }
+                                    else
+                                    {
+                                        cropBottom -= 2;
+                                        tmp = 0;
+                                    }
+                                }
+                                resize = false;
+                                border = false;
+                            }
+                        }
+                        // undercrop % 16
+                        else if (settings.cropMode == 1)
                         {
                             if (cropBottom % 2 != 0) cropBottom--;
                             if (cropTop % 2 != 0) cropTop--;
                             int tmp = 0;
                             if (cropBottom > cropTop) tmp = 1;
-                            while ((asc.VideoHeight - cropBottom - cropTop) % 8 != 0)
+                            while ((asc.VideoHeight - cropBottom - cropTop) % 16 != 0)
                             {
                                 if (tmp == 0)
                                 {
@@ -312,46 +339,46 @@ namespace BluRip
                             resize = false;
                             border = false;
                         }
-                    }
-                    // undercrop % 16
-                    else if (settings.cropMode == 1)
-                    {
-                        if (cropBottom % 2 != 0) cropBottom--;
-                        if (cropTop % 2 != 0) cropTop--;
-                        int tmp = 0;
-                        if (cropBottom > cropTop) tmp = 1;
-                        while ((asc.VideoHeight - cropBottom - cropTop) % 16 != 0)
+                        // overcrop % 8
+                        else if (settings.cropMode == 2)
                         {
-                            if (tmp == 0)
+                            if (mod8ok)
                             {
-                                cropTop -= 2;
-                                tmp++;
+                                // nothing to be done
+                                resize = false;
+                                border = false;
                             }
                             else
                             {
-                                cropBottom -= 2;
-                                tmp = 0;
+                                if (cropBottom % 2 != 0) cropBottom++;
+                                if (cropTop % 2 != 0) cropTop++;
+                                int tmp = 0;
+                                if (cropBottom > cropTop) tmp = 1;
+                                while ((asc.VideoHeight - cropBottom - cropTop) % 8 != 0)
+                                {
+                                    if (tmp == 0)
+                                    {
+                                        cropTop += 2;
+                                        tmp++;
+                                    }
+                                    else
+                                    {
+                                        cropBottom += 2;
+                                        tmp = 0;
+                                    }
+                                }
+                                resize = false;
+                                border = false;
                             }
                         }
-                        resize = false;
-                        border = false;
-                    }
-                    // overcrop % 8
-                    else if (settings.cropMode == 2)
-                    {
-                        if (mod8ok)
-                        {
-                            // nothing to be done
-                            resize = false;
-                            border = false;
-                        }
-                        else
+                        // overcrop % 16
+                        else if (settings.cropMode == 3)
                         {
                             if (cropBottom % 2 != 0) cropBottom++;
                             if (cropTop % 2 != 0) cropTop++;
                             int tmp = 0;
                             if (cropBottom > cropTop) tmp = 1;
-                            while ((asc.VideoHeight - cropBottom - cropTop) % 8 != 0)
+                            while ((asc.VideoHeight - cropBottom - cropTop) % 16 != 0)
                             {
                                 if (tmp == 0)
                                 {
@@ -367,91 +394,94 @@ namespace BluRip
                             resize = false;
                             border = false;
                         }
-                    }
-                    // overcrop % 16
-                    else if (settings.cropMode == 3)
-                    {
-                        if (cropBottom % 2 != 0) cropBottom++;
-                        if (cropTop % 2 != 0) cropTop++;
-                        int tmp = 0;
-                        if (cropBottom > cropTop) tmp = 1;
-                        while ((asc.VideoHeight - cropBottom - cropTop) % 16 != 0)
+                        // resize % 8
+                        else if (settings.cropMode == 4)
                         {
-                            if (tmp == 0)
+                            if (mod8ok)
                             {
-                                cropTop += 2;
-                                tmp++;
+                                // nothing to be done
+                                resize = false;
+                                border = false;
                             }
                             else
                             {
-                                cropBottom += 2;
-                                tmp = 0;
+                                if (cropBottom % 2 != 0) cropBottom--;
+                                if (cropTop % 2 != 0) cropTop--;
+                                resizeY = asc.VideoHeight - cropBottom - cropTop;
+                                if (resizeY % 8 != 0)
+                                {
+                                    int tmp = resizeY % 8;
+                                    if (tmp <= 4)
+                                    {
+                                        resizeY -= tmp;
+                                    }
+                                    else
+                                    {
+                                        resizeY += (8 - tmp);
+                                    }
+                                    resize = true;
+                                    border = false;
+                                }
                             }
                         }
-                        resize = false;
-                        border = false;
-                    }
-                    // resize % 8
-                    else if (settings.cropMode == 4)
-                    {
-                        if (mod8ok)
-                        {
-                            // nothing to be done
-                            resize = false;
-                            border = false;
-                        }
-                        else
+                        // resize % 16
+                        else if (settings.cropMode == 5)
                         {
                             if (cropBottom % 2 != 0) cropBottom--;
                             if (cropTop % 2 != 0) cropTop--;
                             resizeY = asc.VideoHeight - cropBottom - cropTop;
-                            if (resizeY % 8 != 0)
+                            if (resizeY % 16 != 0)
                             {
-                                int tmp = resizeY % 8;
-                                if (tmp <= 4)
+                                int tmp = resizeY % 16;
+                                if (tmp <= 8)
                                 {
                                     resizeY -= tmp;
                                 }
                                 else
                                 {
-                                    resizeY += (8 - tmp);
+                                    resizeY += (16 - tmp);
                                 }
                                 resize = true;
                                 border = false;
                             }
                         }
-                    }
-                    // resize % 16
-                    else if (settings.cropMode == 5)
-                    {
-                        if (cropBottom % 2 != 0) cropBottom--;
-                        if (cropTop % 2 != 0) cropTop--;
-                        resizeY = asc.VideoHeight - cropBottom - cropTop;
-                        if (resizeY % 16 != 0)
+                        // addborder % 8
+                        else if (settings.cropMode == 6)
                         {
-                            int tmp = resizeY % 16;
-                            if (tmp <= 8)
+                            if (mod8ok)
                             {
-                                resizeY -= tmp;
+                                // nothing to be done
+                                resize = false;
+                                border = false;
                             }
                             else
                             {
-                                resizeY += (16 - tmp);
+                                border = false;
+                                borderTop = 0;
+                                borderBottom = 0;
+                                if (cropBottom % 2 != 0) cropBottom--;
+                                if (cropTop % 2 != 0) cropTop--;
+                                int tmp = 0;
+                                if (cropBottom > cropTop) tmp = 1;
+                                while ((asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) % 8 != 0)
+                                {
+                                    if (tmp == 0)
+                                    {
+                                        borderTop += 2;
+                                        tmp++;
+                                    }
+                                    else
+                                    {
+                                        borderBottom += 2;
+                                        tmp = 0;
+                                    }
+                                    border = true;
+                                }
+                                resize = false;
                             }
-                            resize = true;
-                            border = false;
                         }
-                    }
-                    // addborder % 8
-                    else if (settings.cropMode == 6)
-                    {
-                        if (mod8ok)
-                        {
-                            // nothing to be done
-                            resize = false;
-                            border = false;
-                        }
-                        else
+                        // addborder % 16
+                        else if (settings.cropMode == 7)
                         {
                             border = false;
                             borderTop = 0;
@@ -460,7 +490,7 @@ namespace BluRip
                             if (cropTop % 2 != 0) cropTop--;
                             int tmp = 0;
                             if (cropBottom > cropTop) tmp = 1;
-                            while ((asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) % 8 != 0)
+                            while ((asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) % 16 != 0)
                             {
                                 if (tmp == 0)
                                 {
@@ -477,35 +507,270 @@ namespace BluRip
                             resize = false;
                         }
                     }
-                    // addborder % 16
-                    else if (settings.cropMode == 7)
+                    resizeX = asc.VideoWidth;
+                }
+                else
+                {
+                    if ((asc.VideoWidth / 3 * 2) % 16 == 0 && ((asc.VideoHeight - cropBottom - cropTop) / 3 * 2) % 16 == 0 &&
+                        cropBottom % 2 == 0 && cropTop % 2 == 0)
                     {
+                        resizeX = asc.VideoWidth / 3 * 2;
+                        resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                        resize = true;
                         border = false;
-                        borderTop = 0;
-                        borderBottom = 0;
-                        if (cropBottom % 2 != 0) cropBottom--;
-                        if (cropTop % 2 != 0) cropTop--;
-                        int tmp = 0;
-                        if (cropBottom > cropTop) tmp = 1;
-                        while ((asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) % 16 != 0)
+                    }
+                    else
+                    {
+                        if (cropTop % 2 == 0 && cropBottom % 2 == 0 &&
+                        (asc.VideoHeight - cropBottom - cropTop) /3 * 2 % 8 == 0)
                         {
-                            if (tmp == 0)
+                            mod8ok = false;
+                        }
+
+                        // undercrop % 8
+                        if (settings.cropMode == 0)
+                        {
+                            if (mod8ok)
                             {
-                                borderTop += 2;
-                                tmp++;
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                                resize = true;
+                                border = false;
                             }
                             else
                             {
-                                borderBottom += 2;
-                                tmp = 0;
+                                if (cropBottom % 2 != 0) cropBottom--;
+                                if (cropTop % 2 != 0) cropTop--;
+                                int tmp = 0;
+                                if (cropBottom > cropTop) tmp = 1;
+                                while ((asc.VideoHeight - cropBottom - cropTop) /3 * 2 % 8 != 0)
+                                {
+                                    if (tmp == 0)
+                                    {
+                                        cropTop -= 2;
+                                        tmp++;
+                                    }
+                                    else
+                                    {
+                                        cropBottom -= 2;
+                                        tmp = 0;
+                                    }
+                                }
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                                resize = true;
+                                border = false;
                             }
-                            border = true;
                         }
-                        resize = false;
+                        // undercrop % 16
+                        else if (settings.cropMode == 1)
+                        {
+                            if (cropBottom % 2 != 0) cropBottom--;
+                            if (cropTop % 2 != 0) cropTop--;
+                            int tmp = 0;
+                            if (cropBottom > cropTop) tmp = 1;
+                            while ((asc.VideoHeight - cropBottom - cropTop) / 3 * 2 % 16 != 0)
+                            {
+                                if (tmp == 0)
+                                {
+                                    cropTop -= 2;
+                                    tmp++;
+                                }
+                                else
+                                {
+                                    cropBottom -= 2;
+                                    tmp = 0;
+                                }
+                            }
+                            resizeX = asc.VideoWidth / 3 * 2;
+                            resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                            resize = true;
+                            border = false;
+                        }
+                        // overcrop % 8
+                        else if (settings.cropMode == 2)
+                        {
+                            if (mod8ok)
+                            {
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                                resize = true;
+                                border = false;
+                            }
+                            else
+                            {
+                                if (cropBottom % 2 != 0) cropBottom++;
+                                if (cropTop % 2 != 0) cropTop++;
+                                int tmp = 0;
+                                if (cropBottom > cropTop) tmp = 1;
+                                while ((asc.VideoHeight - cropBottom - cropTop) / 3 * 2 % 8 != 0)
+                                {
+                                    if (tmp == 0)
+                                    {
+                                        cropTop += 2;
+                                        tmp++;
+                                    }
+                                    else
+                                    {
+                                        cropBottom += 2;
+                                        tmp = 0;
+                                    }
+                                }
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                                resize = true;
+                                border = false;
+                            }
+                        }
+                        // overcrop % 16
+                        else if (settings.cropMode == 3)
+                        {
+                            if (cropBottom % 2 != 0) cropBottom++;
+                            if (cropTop % 2 != 0) cropTop++;
+                            int tmp = 0;
+                            if (cropBottom > cropTop) tmp = 1;
+                            while ((asc.VideoHeight - cropBottom - cropTop) / 3 * 2 % 16 != 0)
+                            {
+                                if (tmp == 0)
+                                {
+                                    cropTop += 2;
+                                    tmp++;
+                                }
+                                else
+                                {
+                                    cropBottom += 2;
+                                    tmp = 0;
+                                }
+                            }
+                            resizeX = asc.VideoWidth / 3 * 2;
+                            resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                            resize = true;
+                            border = false;
+                        }
+                        // resize % 8
+                        else if (settings.cropMode == 4)
+                        {
+                            if (mod8ok)
+                            {
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                                resize = true;
+                                border = false;
+                            }
+                            else
+                            {
+                                if (cropBottom % 2 != 0) cropBottom--;
+                                if (cropTop % 2 != 0) cropTop--;
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                                if (resizeY % 8 != 0)
+                                {
+                                    int tmp = resizeY % 8;
+                                    if (tmp <= 4)
+                                    {
+                                        resizeY -= tmp;
+                                    }
+                                    else
+                                    {
+                                        resizeY += (8 - tmp);
+                                    }
+                                    resize = true;
+                                    border = false;
+                                }
+                            }
+                        }
+                        // resize % 16
+                        else if (settings.cropMode == 5)
+                        {
+                            if (cropBottom % 2 != 0) cropBottom--;
+                            if (cropTop % 2 != 0) cropTop--;
+                            resizeX = asc.VideoWidth / 3 * 2;
+                            resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                            if (resizeY % 16 != 0)
+                            {
+                                int tmp = resizeY % 16;
+                                if (tmp <= 8)
+                                {
+                                    resizeY -= tmp;
+                                }
+                                else
+                                {
+                                    resizeY += (16 - tmp);
+                                }
+                                resize = true;
+                                border = false;
+                            }
+                        }
+                        // addborders % 8
+                        else if (settings.cropMode == 6)
+                        {
+                            if (mod8ok)
+                            {
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop) / 3 * 2;
+                                resize = true;
+                                border = false;
+                            }
+                            else
+                            {
+                                border = false;
+                                resize = true;
+                                borderTop = 0;
+                                borderBottom = 0;
+                                if (cropBottom % 2 != 0) cropBottom--;
+                                if (cropTop % 2 != 0) cropTop--;
+                                int tmp = 0;
+                                if (cropBottom > cropTop) tmp = 1;
+                                while ((asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) / 3 * 2 % 8 != 0)
+                                {
+                                    if (tmp == 0)
+                                    {
+                                        borderTop += 2;
+                                        tmp++;
+                                    }
+                                    else
+                                    {
+                                        borderBottom += 2;
+                                        tmp = 0;
+                                    }
+                                    border = true;
+                                }
+                                resizeX = asc.VideoWidth / 3 * 2;
+                                resizeY = (asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) / 3 * 2;
+                            }
+                        }
+                        // addborders % 16
+                        else if (settings.cropMode == 7)
+                        {
+                            border = false;
+                            resize = true;
+                            borderTop = 0;
+                            borderBottom = 0;
+                            if (cropBottom % 2 != 0) cropBottom--;
+                            if (cropTop % 2 != 0) cropTop--;
+                            int tmp = 0;
+                            if (cropBottom > cropTop) tmp = 1;
+                            while ((asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) / 3 * 2 % 16 != 0)
+                            {
+                                if (tmp == 0)
+                                {
+                                    borderTop += 2;
+                                    tmp++;
+                                }
+                                else
+                                {
+                                    borderBottom += 2;
+                                    tmp = 0;
+                                }
+                                border = true;
+                            }
+                            resizeX = asc.VideoWidth / 3 * 2;
+                            resizeY = (asc.VideoHeight - cropBottom - cropTop + borderTop + borderBottom) / 3 * 2;
+                        }
                     }
                 }
                 
-                resizeX = asc.VideoWidth;
+                
                 this.Close();
             }
             catch (Exception)
