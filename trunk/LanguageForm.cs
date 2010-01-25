@@ -11,19 +11,19 @@ namespace BluRip
 {
     public partial class LanguageForm : Form
     {
-        public LanguagInfo li = null;
+        public LanguageInfo li = null;
 
         public LanguageForm()
         {
             InitializeComponent();
         }
 
-        public LanguageForm(LanguagInfo li)
+        public LanguageForm(LanguageInfo li)
         {
             InitializeComponent();
             try
             {
-                this.li = new LanguagInfo(li);
+                this.li = new LanguageInfo(li);
                 textBoxLanguage.Text = this.li.language;
                 textBoxLanguageShort.Text = this.li.languageShort;
                 textBoxTranslation.Text = this.li.translation;

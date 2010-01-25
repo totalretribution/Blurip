@@ -97,12 +97,27 @@ namespace BluRip
     {
         public ExtraFileInfo() { }
 
-        public string filename = "";
+        public ExtraFileInfo(ExtraFileInfo orig)
+        {
+        }
     }
 
     public class VideoFileInfo : ExtraFileInfo
     {
         public VideoFileInfo() { }
+
+        public VideoFileInfo(ExtraFileInfo orig)
+        {
+            try
+            {
+                this.encodeAvs = ((VideoFileInfo)orig).encodeAvs;
+                this.encodedFile = ((VideoFileInfo)orig).encodedFile;
+                this.fps = ((VideoFileInfo)orig).fps;
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         public string encodeAvs = "";
         public string fps = "";
@@ -112,6 +127,20 @@ namespace BluRip
     public class SubtitleFileInfo : ExtraFileInfo
     {
         public SubtitleFileInfo() { }
+
+        public SubtitleFileInfo(ExtraFileInfo orig)
+        {
+            try
+            {
+                this.forcedIdx = ((SubtitleFileInfo)orig).forcedIdx;
+                this.forcedSub = ((SubtitleFileInfo)orig).forcedSub;
+                this.normalIdx = ((SubtitleFileInfo)orig).normalIdx;
+                this.normalSub = ((SubtitleFileInfo)orig).normalSub;
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         public string normalSub = "";
         public string normalIdx = "";
@@ -126,32 +155,32 @@ namespace BluRip
 
         public StreamInfo(StreamInfo orig)
         {
-            this.addInfo = orig.addInfo;
-            this.desc = orig.desc;
-            this.filename = orig.filename;
-            this.language = orig.language;
-            this.number = orig.number;
-            this.selected = orig.selected;
-            this.streamType = orig.streamType;
-            this.typeDesc = orig.typeDesc;
+            try
+            {
+                this.addInfo = orig.addInfo;
+                this.desc = orig.desc;
+                this.filename = orig.filename;
+                this.language = orig.language;
+                this.number = orig.number;
+                this.selected = orig.selected;
+                this.streamType = orig.streamType;
+                this.typeDesc = orig.typeDesc;
+                Type extraFileInfoType = orig.extraFileInfo.GetType();
+                this.extraFileInfo = (ExtraFileInfo)Activator.CreateInstance(extraFileInfoType, orig.extraFileInfo);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public int number = 0;
-
         public string typeDesc = "";
-
         public string desc = "";
-
         public string addInfo = "";
-
         public string language = "";
-
         public StreamType streamType = StreamType.Unknown;
-
         public bool selected = false;
-
-        public string filename = "";
-        
+        public string filename = "";        
         public ExtraFileInfo extraFileInfo = new ExtraFileInfo();
     }
 }

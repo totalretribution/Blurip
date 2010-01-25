@@ -7,18 +7,18 @@ using System.Text;
 namespace BluRip
 {
 
-    public class LanguagInfo
+    public class LanguageInfo
     {
-        public LanguagInfo() { }
+        public LanguageInfo() { }
 
-        public LanguagInfo(string language, string translation, string languageShort)
+        public LanguageInfo(string language, string translation, string languageShort)
         {
             this.language = language;
             this.translation = translation;
             this.languageShort = languageShort;
         }
 
-        public LanguagInfo(LanguagInfo orig)
+        public LanguageInfo(LanguageInfo orig)
         {
             this.language = orig.language;
             this.translation = orig.translation;
@@ -62,6 +62,27 @@ namespace BluRip
         public string settings2 = "";
     }
 
+    public class AvisynthSettings
+    {
+        public AvisynthSettings() { }
+
+        public AvisynthSettings(string desc, string commands)
+        {
+            this.desc = desc;
+            this.commands = commands;
+        }
+
+        public AvisynthSettings(AvisynthSettings orig)
+        {
+            this.desc = orig.desc;
+            this.commands = orig.commands;
+        }
+
+        public string desc = "";
+
+        public string commands = "";
+    }
+
     public class UserSettings
     {
         public UserSettings() { }
@@ -94,19 +115,25 @@ namespace BluRip
             this.defaultAudio = orig.defaultAudio;
             this.defaultSubtitle = orig.defaultSubtitle;
             this.defaultSubtitleForced = orig.defaultSubtitleForced;
-            this.commandsAfterResize = orig.commandsAfterResize;
             this.lastProfile = orig.lastProfile;
             this.dtsHdCore = orig.dtsHdCore;
             this.muxSubtitles = orig.muxSubtitles;
+            this.untouchedVideo = orig.untouchedVideo;
+            this.lastAvisynthProfile = orig.lastAvisynthProfile;
 
-            foreach (LanguagInfo li in orig.preferedLanguages)
+            foreach (LanguageInfo li in orig.preferedLanguages)
             {
-                this.preferedLanguages.Add(li);
+                this.preferedLanguages.Add(new LanguageInfo(li));
             }
 
             foreach (EncodingSettings es in orig.encodingSettings)
             {
-                this.encodingSettings.Add(es);
+                this.encodingSettings.Add(new EncodingSettings(es));
+            }
+
+            foreach(AvisynthSettings avs in orig.avisynthSettings)
+            {
+                this.avisynthSettings.Add(new AvisynthSettings(avs));
             }
         }
              
@@ -159,8 +186,8 @@ namespace BluRip
 
                 if (settings.preferedLanguages.Count == 0)
                 {
-                    settings.preferedLanguages.Add(new LanguagInfo("German", "Deutsch", "de"));
-                    settings.preferedLanguages.Add(new LanguagInfo("English","Englisch","en"));
+                    settings.preferedLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
+                    settings.preferedLanguages.Add(new LanguageInfo("English","Englisch","en"));
                 }
 
                 if(settings.encodingSettings.Count == 0)
@@ -170,6 +197,12 @@ namespace BluRip
 
                     settings.encodingSettings.Add(new EncodingSettings("Slow - film - crf 18.0 - level 4.1", "--preset slow --tune film --crf 18.0 --level 4.1"));
                     settings.encodingSettings.Add(new EncodingSettings("Slow - animation - crf 18.0 - level 4.1", "--preset slow --tune animation --crf 18.0 --level 4.1"));
+                }
+
+                if (settings.avisynthSettings.Count == 0)
+                {
+                    settings.avisynthSettings.Add(new AvisynthSettings("Empty", ""));
+                    settings.avisynthSettings.Add(new AvisynthSettings("Undot", "# undot - remove minimal noise\r\nUndot()\r\n"));
                 }
 
                 return true;
@@ -190,7 +223,7 @@ namespace BluRip
         public bool includeChapter = true;
         public bool includeSubtitle = true;
         public bool preferDTS = true;        
-        public List<LanguagInfo> preferedLanguages = new List<LanguagInfo>();
+        public List<LanguageInfo> preferedLanguages = new List<LanguageInfo>();
         public string workingDir = "";
         public string ffmsindexPath = "";
         public string x264Path = "";
@@ -211,10 +244,12 @@ namespace BluRip
         public bool defaultAudio = true;
         public bool defaultSubtitle = true;
         public bool defaultSubtitleForced = true;
-        public string commandsAfterResize = "";
         public int lastProfile = 0;
         public bool deleteAfterEncode = false;
         public bool dtsHdCore = true;
         public bool muxSubtitles = true;
+        public bool untouchedVideo = false;
+        public List<AvisynthSettings> avisynthSettings = new List<AvisynthSettings>();
+        public int lastAvisynthProfile = 0;
     }
 }
