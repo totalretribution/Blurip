@@ -120,6 +120,7 @@ namespace BluRip
             this.muxSubtitles = orig.muxSubtitles;
             this.untouchedVideo = orig.untouchedVideo;
             this.lastAvisynthProfile = orig.lastAvisynthProfile;
+            this.resize720p = orig.resize720p;
 
             foreach (LanguageInfo li in orig.preferedLanguages)
             {
@@ -251,5 +252,6 @@ namespace BluRip
         public bool untouchedVideo = false;
         public List<AvisynthSettings> avisynthSettings = new List<AvisynthSettings>();
         public int lastAvisynthProfile = 0;
+        public bool resize720p = false;
     }
 }
