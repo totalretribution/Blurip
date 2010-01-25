@@ -616,7 +616,7 @@ namespace BluRip
             try
             {
                 listBoxPreferedLanguages.Items.Clear();
-                foreach (LanguagInfo li in settings.preferedLanguages)
+                foreach (LanguageInfo li in settings.preferedLanguages)
                 {
                     listBoxPreferedLanguages.Items.Add(li.language + " (" + li.translation + " - " + li.languageShort + ")");
                 }
@@ -640,6 +640,27 @@ namespace BluRip
                 if (settings.lastProfile > -1 && settings.lastProfile < settings.encodingSettings.Count)
                 {
                     comboBoxEncodeProfile.SelectedIndex = settings.lastProfile;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateAvisynthSettings()
+        {
+            try
+            {
+                listBoxAviSynthProfiles.Items.Clear();
+                comboBoxAvisynthProfile.Items.Clear();
+                foreach (AvisynthSettings avs in settings.avisynthSettings)
+                {
+                    listBoxAviSynthProfiles.Items.Add(avs.desc);
+                    comboBoxAvisynthProfile.Items.Add(avs.desc);
+                }
+                if (settings.lastAvisynthProfile > -1 && settings.lastAvisynthProfile < settings.avisynthSettings.Count)
+                {
+                    comboBoxAvisynthProfile.SelectedIndex = settings.lastAvisynthProfile;
                 }
             }
             catch (Exception)
@@ -687,16 +708,11 @@ namespace BluRip
 
                 checkBoxUseCore.Checked = settings.dtsHdCore;
                 checkBoxMuxSubtitle.Checked = settings.muxSubtitles;
-
-                richTextBoxCommandsAfterResize.Clear();
-                string[] tmp = settings.commandsAfterResize.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string s in tmp)
-                {
-                    richTextBoxCommandsAfterResize.Text += s.Trim() + "\r\n";
-                }
+                checkBoxUntouchedVideo.Checked = settings.untouchedVideo;
 
                 UpdateLanguage();
                 UpdateEncodingSettings();
+                UpdateAvisynthSettings();
             }
             catch (Exception)
             {
@@ -783,7 +799,7 @@ namespace BluRip
 
         private bool HasLanguage(string s)
         {
-            foreach (LanguagInfo li in settings.preferedLanguages)
+            foreach (LanguageInfo li in settings.preferedLanguages)
             {
                 if (li.language == s) return true;
             }
@@ -1204,11 +1220,19 @@ namespace BluRip
                 {
                     if (si.streamType == StreamType.Video)
                     {
+                        if (settings.untouchedVideo)
+                        {
+                            if (si.extraFileInfo.GetType() != typeof(VideoFileInfo))
+                            {
+                                si.extraFileInfo = new VideoFileInfo();
+                            }
+                            ((VideoFileInfo)si.extraFileInfo).encodedFile = si.filename;
+                        }
                         tmpList.streams.Add(new StreamInfo(si));
                     }
                 }
                 // audio
-                foreach (LanguagInfo li in settings.preferedLanguages)
+                foreach (LanguageInfo li in settings.preferedLanguages)
                 {
                     foreach (StreamInfo si in demuxedStreamList.streams)
                     {
@@ -1232,7 +1256,7 @@ namespace BluRip
                     }
                 }
                 // subtitle
-                foreach (LanguagInfo li in settings.preferedLanguages)
+                foreach (LanguageInfo li in settings.preferedLanguages)
                 {
                     foreach (StreamInfo si in demuxedStreamList.streams)
                     {
@@ -1331,111 +1355,119 @@ namespace BluRip
                 }
 
                 sb.Remove(0, sb.Length);
-                if (!settings.encodeDirectshow || !settings.cropDirectshow)
+                if (!settings.untouchedVideo)
                 {
-                    MessageCrop("Starting to index...");
-                    MessageCrop("");
-
-                    pc = new Process();
-                    pc.StartInfo.FileName = settings.ffmsindexPath;
-                    pc.StartInfo.Arguments = "\"" + filename + "\"";
-
-                    MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-                    pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
-
-                    pc.StartInfo.UseShellExecute = false;
-                    pc.StartInfo.CreateNoWindow = true;
-                    pc.StartInfo.RedirectStandardError = true;
-                    pc.StartInfo.RedirectStandardOutput = true;
-
-                    if (!pc.Start())
+                    if (!settings.encodeDirectshow || !settings.cropDirectshow)
                     {
-                        MessageCrop("Error starting ffmsindex.exe");
-                        return;
+                        MessageCrop("Starting to index...");
+                        MessageCrop("");
+
+                        pc = new Process();
+                        pc.StartInfo.FileName = settings.ffmsindexPath;
+                        pc.StartInfo.Arguments = "\"" + filename + "\"";
+
+                        MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
+
+                        pc.StartInfo.UseShellExecute = false;
+                        pc.StartInfo.CreateNoWindow = true;
+                        pc.StartInfo.RedirectStandardError = true;
+                        pc.StartInfo.RedirectStandardOutput = true;
+
+                        if (!pc.Start())
+                        {
+                            MessageCrop("Error starting ffmsindex.exe");
+                            return;
+                        }
+
+                        pc.BeginOutputReadLine();
+
+                        pc.WaitForExit();
+                        pc.Close();
+                        MessageCrop("Indexing done!");
                     }
 
-                    pc.BeginOutputReadLine();
-
-                    pc.WaitForExit();
-                    pc.Close();
-                    MessageCrop("Indexing done!");
-                }
-                if (settings.cropDirectshow)
-                {
-                    File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
-                        "DirectShowSource(\"" + filename + "\")");
-                }
-                else
-                {
-                    File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
-                        "FFVideoSource(\"" + filename + "\")");
-                }
-                AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
-                if (ac.error)
-                {
-                    MessageCrop("Exception: " + ac.errorStr);
-                    return;
-                }
-                ac.NrFrames = settings.nrFrames;
-                ac.BlackValue = settings.blackValue;
-                ac.ShowDialog();
-                MessageCrop("");
-                MessageCrop("Crop top: " + ac.cropTop.ToString());
-                MessageCrop("Crop bottom: " + ac.cropBottom.ToString());
-                if (ac.resize)
-                {
-                    MessageCrop("Resize to: " + ac.resizeX.ToString() + " x " + ac.resizeY.ToString());
-                }
-                if (ac.border)
-                {
-                    MessageCrop("Border top: " + ac.borderTop.ToString());
-                    MessageCrop("Border bottom: " + ac.borderBottom.ToString());
-                }
-
-                string encode = "";
-                if (settings.encodeDirectshow)
-                {
-                    encode = "DirectShowSource(\"" + filename + "\")\r\n";
-                }
-                else
-                {
-                    encode = "FFVideoSource(\"" + filename + "\")\r\n";
-                }
-                if (ac.cropTop != 0 || ac.cropBottom != 0)
-                {
-                    encode += "Crop(0," + ac.cropTop.ToString() + ",-0,-" + ac.cropBottom.ToString() + ")\r\n";
-                    if (ac.resize)
+                    if (settings.cropDirectshow)
                     {
-                        encode += "LanczosResize(" + ac.resizeX.ToString() + "," + ac.resizeY.ToString() + ")\r\n";                        
+                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
+                            "DirectShowSource(\"" + filename + "\")");
                     }
                     else
                     {
-                        MessageCrop("Did not add resize command");
+                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
+                            "FFVideoSource(\"" + filename + "\")");
+                    }
+                    AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
+                    if (ac.error)
+                    {
+                        MessageCrop("Exception: " + ac.errorStr);
+                        return;
+                    }
+                    ac.NrFrames = settings.nrFrames;
+                    ac.BlackValue = settings.blackValue;
+                    ac.ShowDialog();
+                    MessageCrop("");
+                    MessageCrop("Crop top: " + ac.cropTop.ToString());
+                    MessageCrop("Crop bottom: " + ac.cropBottom.ToString());
+                    if (ac.resize)
+                    {
+                        MessageCrop("Resize to: " + ac.resizeX.ToString() + " x " + ac.resizeY.ToString());
                     }
                     if (ac.border)
                     {
-                        encode += "AddBorders(0," + ac.borderTop + ",0," + ac.borderBottom + ")\r\n";                        
+                        MessageCrop("Border top: " + ac.borderTop.ToString());
+                        MessageCrop("Border bottom: " + ac.borderBottom.ToString());
+                    }
+
+                    string encode = "";
+                    if (settings.encodeDirectshow)
+                    {
+                        encode = "DirectShowSource(\"" + filename + "\")\r\n";
                     }
                     else
                     {
-                        MessageCrop("Did not add AddBorders command");
+                        encode = "FFVideoSource(\"" + filename + "\")\r\n";
+                    }
+                    if (ac.cropTop != 0 || ac.cropBottom != 0)
+                    {
+                        encode += "Crop(0," + ac.cropTop.ToString() + ",-0,-" + ac.cropBottom.ToString() + ")\r\n";
+                        if (ac.resize)
+                        {
+                            encode += "LanczosResize(" + ac.resizeX.ToString() + "," + ac.resizeY.ToString() + ")\r\n";
+                        }
+                        else
+                        {
+                            MessageCrop("Did not add resize command");
+                        }
+                        if (ac.border)
+                        {
+                            encode += "AddBorders(0," + ac.borderTop + ",0," + ac.borderBottom + ")\r\n";
+                        }
+                        else
+                        {
+                            MessageCrop("Did not add AddBorders command");
+                        }
+                    }
+                    int index = comboBoxAvisynthProfile.SelectedIndex;
+                    if (index > -1 && index < settings.avisynthSettings.Count)
+                    {
+                        string[] tmp = settings.avisynthSettings[index].commands.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string s in tmp)
+                        {
+                            encode += s.Trim() + "\r\n";
+                        }
+                    }
+
+                    File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_encode.avs", encode);
+
+                    MessageCrop("");
+                    MessageCrop("Encode avs:");
+                    string[] tmpstr2 = encode.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string s in tmpstr2)
+                    {
+                        MessageCrop(s);
                     }
                 }
-                string[] tmp = settings.commandsAfterResize.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string s in tmp)
-                {
-                    encode += s.Trim() + "\r\n";
-                }
-                File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_encode.avs", encode);
-
-                MessageCrop("");
-                MessageCrop("Encode avs:");
-                string[] tmpstr2 = encode.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string s in tmpstr2)
-                {
-                    MessageCrop(s);
-                }
-
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Video)
@@ -1444,10 +1476,11 @@ namespace BluRip
                         {
                             si.extraFileInfo = new VideoFileInfo();
                         }
-
-                        ((VideoFileInfo)si.extraFileInfo).encodeAvs = settings.workingDir + "\\" + settings.filePrefix + "_encode.avs";
+                        if (!settings.untouchedVideo)
+                        {
+                            ((VideoFileInfo)si.extraFileInfo).encodeAvs = settings.workingDir + "\\" + settings.filePrefix + "_encode.avs";
+                        }
                         ((VideoFileInfo)si.extraFileInfo).fps = fps;
-                        ((VideoFileInfo)si.extraFileInfo).filename = "";
                     }
                 }
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
@@ -1632,7 +1665,7 @@ namespace BluRip
                     {
                         if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                         {
-                            if (((VideoFileInfo)si.extraFileInfo).filename != "") return true;
+                            if (((VideoFileInfo)si.extraFileInfo).encodedFile != "") return true;
                         }
                         else return false;
                     }
@@ -1658,7 +1691,10 @@ namespace BluRip
                     if (!DoDemux()) return;
                     if (!DoIndex()) return;
                     if (!DoSubtitle()) return;
-                    if (!DoEncode()) return;
+                    if (!settings.untouchedVideo)
+                    {
+                        if (!DoEncode()) return;
+                    }
                     if (!DoMux()) return;
                 }
                 else
@@ -1824,7 +1860,7 @@ namespace BluRip
         {
             try
             {
-                LanguagInfo li = new LanguagInfo();
+                LanguageInfo li = new LanguageInfo();
                 li.language = "Language";
                 li.languageShort = "la";
                 li.translation = "Language";
@@ -1846,7 +1882,7 @@ namespace BluRip
                     LanguageForm lf = new LanguageForm(settings.preferedLanguages[index]);
                     if (lf.ShowDialog() == DialogResult.OK)
                     {
-                        settings.preferedLanguages[index] = new LanguagInfo(lf.li);
+                        settings.preferedLanguages[index] = new LanguageInfo(lf.li);
                         UpdateLanguage();
                     }
                 }
@@ -2009,7 +2045,7 @@ namespace BluRip
                     Thread.Sleep(5);
                 }
                 encodeThread = null;
-                return true;
+                return encodeThreadStatus;
             }
             catch (Exception ex)
             {
@@ -2318,7 +2354,7 @@ namespace BluRip
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" \"" + output + "\" /fps:" + fps;
+                            si.filename + "\" \"" + output + "\" /fps:" + fps + " /res:keep";
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                         
@@ -2364,7 +2400,7 @@ namespace BluRip
                         pc = new Process();
                         pc.StartInfo.FileName = settings.javaPath;
                         pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" \"" + output + "\" /forced+ /fps:" + fps;
+                            si.filename + "\" \"" + output + "\" /forced+ /fps:" + fps + " /res:keep";
 
                         MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
 
@@ -2668,7 +2704,7 @@ namespace BluRip
         {
             try
             {
-                foreach (LanguagInfo li in settings.preferedLanguages)
+                foreach (LanguageInfo li in settings.preferedLanguages)
                 {
                     if (li.language == language) return li.languageShort;
                 }
@@ -3032,7 +3068,7 @@ namespace BluRip
                     Thread.Sleep(5);
                 }
                 muxThread = null;
-                return true;
+                return muxThreadStatus;
             }
             catch (Exception ex)
             {
@@ -3115,7 +3151,7 @@ namespace BluRip
                 int index = listBoxPreferedLanguages.SelectedIndex;
                 if (index > 0)
                 {
-                    LanguagInfo li = settings.preferedLanguages[index];
+                    LanguageInfo li = settings.preferedLanguages[index];
                     settings.preferedLanguages.RemoveAt(index);
                     settings.preferedLanguages.Insert(index - 1, li);
                     UpdateLanguage();
@@ -3134,7 +3170,7 @@ namespace BluRip
                 int index = listBoxPreferedLanguages.SelectedIndex;
                 if (index < settings.preferedLanguages.Count - 1)
                 {
-                    LanguagInfo li = settings.preferedLanguages[index];
+                    LanguageInfo li = settings.preferedLanguages[index];
                     settings.preferedLanguages.RemoveAt(index);
                     settings.preferedLanguages.Insert(index + 1, li);
                     UpdateLanguage();
@@ -3181,17 +3217,6 @@ namespace BluRip
             try
             {
                 settings.defaultSubtitleForced = checkBoxDefaultSubtitleForced.Checked;
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.commandsAfterResize = richTextBoxCommandsAfterResize.Text;
             }
             catch (Exception)
             {
@@ -3553,6 +3578,66 @@ namespace BluRip
             try
             {
                 settings.muxSubtitles = checkBoxMuxSubtitle.Checked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUntouchedVideo_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.untouchedVideo = checkBoxUntouchedVideo.Checked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonAddAvisynth_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AvisynthSettings avs = new AvisynthSettings("Empty", "");
+                settings.avisynthSettings.Add(avs);
+                UpdateAvisynthSettings();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDelAvisynth_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int index = listBoxAviSynthProfiles.SelectedIndex;
+                if (index > -1)
+                {
+                    settings.avisynthSettings.RemoveAt(index);
+                    UpdateAvisynthSettings();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void listBoxAviSynthProfiles_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                int index = listBoxAviSynthProfiles.SelectedIndex;
+                if (index > -1)
+                {
+                    AvisynthSettingsForm avsf = new AvisynthSettingsForm(settings.avisynthSettings[index]);
+                    if (avsf.ShowDialog() == DialogResult.OK)
+                    {
+                        settings.avisynthSettings[index] = new AvisynthSettings(avsf.avs);
+                        UpdateAvisynthSettings();
+                    }
+                }
             }
             catch (Exception)
             {

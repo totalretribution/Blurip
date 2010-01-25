@@ -62,6 +62,12 @@
     <Compile Include="AutoCrop.Designer.cs">
       <DependentUpon>AutoCrop.cs</DependentUpon>
     </Compile>
+    <Compile Include="AvisynthSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AvisynthSettingsForm.Designer.cs">
+      <DependentUpon>AvisynthSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AvisynthWrapper.cs" />
     <Compile Include="EncoderSettingsForm.cs">
       <SubType>Form</SubType>
@@ -92,6 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AutoCrop.resx">
       <DependentUpon>AutoCrop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AvisynthSettingsForm.resx">
+      <DependentUpon>AvisynthSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EncoderSettingsForm.resx">
       <DependentUpon>EncoderSettingsForm.cs</DependentUpon>

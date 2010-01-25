@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStreamSelect = new System.Windows.Forms.TabPage();
+            this.buttonOpenM2ts = new System.Windows.Forms.Button();
             this.labelStreams = new System.Windows.Forms.Label();
             this.listBoxStreams = new System.Windows.Forms.ListBox();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -69,6 +70,9 @@
             this.buttonWorkingDir = new System.Windows.Forms.Button();
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
+            this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
+            this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
             this.groupBoxDefaultTrack = new System.Windows.Forms.GroupBox();
             this.checkBoxDefaultSubtitleForced = new System.Windows.Forms.CheckBox();
             this.checkBoxDefaultSubtitleTrack = new System.Windows.Forms.CheckBox();
@@ -101,7 +105,6 @@
             this.labelEac3toPath = new System.Windows.Forms.Label();
             this.buttonEac3toPath = new System.Windows.Forms.Button();
             this.groupBoxAutoSelect = new System.Windows.Forms.GroupBox();
-            this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
             this.buttonLangDown = new System.Windows.Forms.Button();
             this.buttonLangUp = new System.Windows.Forms.Button();
             this.buttonDeleteLanguage = new System.Windows.Forms.Button();
@@ -113,9 +116,6 @@
             this.checkBoxSelectChapters = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoSelect = new System.Windows.Forms.CheckBox();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
-            this.groupBoxAvisynthCommand = new System.Windows.Forms.GroupBox();
-            this.richTextBoxCommandsAfterResize = new System.Windows.Forms.RichTextBox();
-            this.labelCommandAfterResize = new System.Windows.Forms.Label();
             this.labelX264Priority = new System.Windows.Forms.Label();
             this.comboBoxX264Priority = new System.Windows.Forms.ComboBox();
             this.groupBoxX264Profiles = new System.Windows.Forms.GroupBox();
@@ -161,14 +161,21 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.buttonOpenM2ts = new System.Windows.Forms.Button();
-            this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
-            this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
+            this.labelUsefullTools = new System.Windows.Forms.Label();
+            this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
+            this.groupBoxAviSynthProfiles = new System.Windows.Forms.GroupBox();
+            this.labelAvisynthProfiles = new System.Windows.Forms.Label();
+            this.buttonDelAvisynth = new System.Windows.Forms.Button();
+            this.listBoxAviSynthProfiles = new System.Windows.Forms.ListBox();
+            this.buttonAddAvisynth = new System.Windows.Forms.Button();
+            this.labelAvisynthProfile = new System.Windows.Forms.Label();
+            this.comboBoxAvisynthProfile = new System.Windows.Forms.ComboBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.tabPageSettings.SuspendLayout();
+            this.groupBoxGeneral.SuspendLayout();
             this.groupBoxDefaultTrack.SuspendLayout();
             this.groupBoxAutoCrop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlackValue)).BeginInit();
@@ -176,7 +183,6 @@
             this.groupBoxExternalTools.SuspendLayout();
             this.groupBoxAutoSelect.SuspendLayout();
             this.tabPageEncodingSettings.SuspendLayout();
-            this.groupBoxAvisynthCommand.SuspendLayout();
             this.groupBoxX264Profiles.SuspendLayout();
             this.groupBoxGeneralAviSynthSettings.SuspendLayout();
             this.tabPageSoftware.SuspendLayout();
@@ -189,7 +195,7 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
-            this.groupBoxGeneral.SuspendLayout();
+            this.groupBoxAviSynthProfiles.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -227,6 +233,16 @@
             this.tabPageStreamSelect.TabIndex = 0;
             this.tabPageStreamSelect.Text = "Stream selection";
             this.tabPageStreamSelect.UseVisualStyleBackColor = true;
+            // 
+            // buttonOpenM2ts
+            // 
+            this.buttonOpenM2ts.Location = new System.Drawing.Point(128, 45);
+            this.buttonOpenM2ts.Name = "buttonOpenM2ts";
+            this.buttonOpenM2ts.Size = new System.Drawing.Size(116, 23);
+            this.buttonOpenM2ts.TabIndex = 8;
+            this.buttonOpenM2ts.Text = "Open *.m2ts file(s)";
+            this.buttonOpenM2ts.UseVisualStyleBackColor = true;
+            this.buttonOpenM2ts.Click += new System.EventHandler(this.buttonOpenM2ts_Click);
             // 
             // labelStreams
             // 
@@ -310,6 +326,8 @@
             // 
             // tabPageProcess
             // 
+            this.tabPageProcess.Controls.Add(this.labelAvisynthProfile);
+            this.tabPageProcess.Controls.Add(this.comboBoxAvisynthProfile);
             this.tabPageProcess.Controls.Add(this.buttonStreamDown);
             this.tabPageProcess.Controls.Add(this.buttonStreamUp);
             this.tabPageProcess.Controls.Add(this.buttonDoMux);
@@ -614,6 +632,40 @@
             this.tabPageSettings.TabIndex = 1;
             this.tabPageSettings.Text = "Settings";
             this.tabPageSettings.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxGeneral
+            // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxUseCore);
+            this.groupBoxGeneral.Location = new System.Drawing.Point(786, 194);
+            this.groupBoxGeneral.Name = "groupBoxGeneral";
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 91);
+            this.groupBoxGeneral.TabIndex = 7;
+            this.groupBoxGeneral.TabStop = false;
+            this.groupBoxGeneral.Text = "General options";
+            // 
+            // checkBoxMuxSubtitle
+            // 
+            this.checkBoxMuxSubtitle.AutoSize = true;
+            this.checkBoxMuxSubtitle.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxMuxSubtitle.Name = "checkBoxMuxSubtitle";
+            this.checkBoxMuxSubtitle.Size = new System.Drawing.Size(130, 17);
+            this.checkBoxMuxSubtitle.TabIndex = 11;
+            this.checkBoxMuxSubtitle.Text = "Mux subtitles into mkv";
+            this.checkBoxMuxSubtitle.UseVisualStyleBackColor = true;
+            this.checkBoxMuxSubtitle.CheckedChanged += new System.EventHandler(this.checkBoxMuxSubtitle_CheckedChanged);
+            // 
+            // checkBoxUseCore
+            // 
+            this.checkBoxUseCore.AutoSize = true;
+            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxUseCore.Name = "checkBoxUseCore";
+            this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
+            this.checkBoxUseCore.TabIndex = 10;
+            this.checkBoxUseCore.Text = "Use \'-core\' for DTS-HD tracks";
+            this.checkBoxUseCore.UseVisualStyleBackColor = true;
+            this.checkBoxUseCore.CheckedChanged += new System.EventHandler(this.checkBoxUseCore_CheckedChanged);
             // 
             // groupBoxDefaultTrack
             // 
@@ -972,17 +1024,6 @@
             this.groupBoxAutoSelect.TabStop = false;
             this.groupBoxAutoSelect.Text = "Autoselect streams";
             // 
-            // checkBoxUseCore
-            // 
-            this.checkBoxUseCore.AutoSize = true;
-            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxUseCore.Name = "checkBoxUseCore";
-            this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
-            this.checkBoxUseCore.TabIndex = 10;
-            this.checkBoxUseCore.Text = "Use \'-core\' for DTS-HD tracks";
-            this.checkBoxUseCore.UseVisualStyleBackColor = true;
-            this.checkBoxUseCore.CheckedChanged += new System.EventHandler(this.checkBoxUseCore_CheckedChanged);
-            // 
             // buttonLangDown
             // 
             this.buttonLangDown.Location = new System.Drawing.Point(376, 67);
@@ -1087,7 +1128,7 @@
             // 
             // tabPageEncodingSettings
             // 
-            this.tabPageEncodingSettings.Controls.Add(this.groupBoxAvisynthCommand);
+            this.tabPageEncodingSettings.Controls.Add(this.groupBoxAviSynthProfiles);
             this.tabPageEncodingSettings.Controls.Add(this.labelX264Priority);
             this.tabPageEncodingSettings.Controls.Add(this.comboBoxX264Priority);
             this.tabPageEncodingSettings.Controls.Add(this.groupBoxX264Profiles);
@@ -1100,39 +1141,10 @@
             this.tabPageEncodingSettings.Text = "Encoding settings";
             this.tabPageEncodingSettings.UseVisualStyleBackColor = true;
             // 
-            // groupBoxAvisynthCommand
-            // 
-            this.groupBoxAvisynthCommand.Controls.Add(this.richTextBoxCommandsAfterResize);
-            this.groupBoxAvisynthCommand.Controls.Add(this.labelCommandAfterResize);
-            this.groupBoxAvisynthCommand.Location = new System.Drawing.Point(6, 79);
-            this.groupBoxAvisynthCommand.Name = "groupBoxAvisynthCommand";
-            this.groupBoxAvisynthCommand.Size = new System.Drawing.Size(334, 132);
-            this.groupBoxAvisynthCommand.TabIndex = 14;
-            this.groupBoxAvisynthCommand.TabStop = false;
-            this.groupBoxAvisynthCommand.Text = "AviSynth commands";
-            // 
-            // richTextBoxCommandsAfterResize
-            // 
-            this.richTextBoxCommandsAfterResize.Location = new System.Drawing.Point(6, 32);
-            this.richTextBoxCommandsAfterResize.Name = "richTextBoxCommandsAfterResize";
-            this.richTextBoxCommandsAfterResize.Size = new System.Drawing.Size(322, 94);
-            this.richTextBoxCommandsAfterResize.TabIndex = 1;
-            this.richTextBoxCommandsAfterResize.Text = "";
-            this.richTextBoxCommandsAfterResize.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
-            // labelCommandAfterResize
-            // 
-            this.labelCommandAfterResize.AutoSize = true;
-            this.labelCommandAfterResize.Location = new System.Drawing.Point(6, 16);
-            this.labelCommandAfterResize.Name = "labelCommandAfterResize";
-            this.labelCommandAfterResize.Size = new System.Drawing.Size(183, 13);
-            this.labelCommandAfterResize.TabIndex = 0;
-            this.labelCommandAfterResize.Text = "AviSynth commands after crop/resize";
-            // 
             // labelX264Priority
             // 
             this.labelX264Priority.AutoSize = true;
-            this.labelX264Priority.Location = new System.Drawing.Point(9, 214);
+            this.labelX264Priority.Location = new System.Drawing.Point(6, 76);
             this.labelX264Priority.Name = "labelX264Priority";
             this.labelX264Priority.Size = new System.Drawing.Size(103, 13);
             this.labelX264Priority.TabIndex = 13;
@@ -1142,7 +1154,7 @@
             // 
             this.comboBoxX264Priority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxX264Priority.FormattingEnabled = true;
-            this.comboBoxX264Priority.Location = new System.Drawing.Point(9, 230);
+            this.comboBoxX264Priority.Location = new System.Drawing.Point(6, 92);
             this.comboBoxX264Priority.Name = "comboBoxX264Priority";
             this.comboBoxX264Priority.Size = new System.Drawing.Size(334, 21);
             this.comboBoxX264Priority.TabIndex = 12;
@@ -1234,6 +1246,7 @@
             // 
             // tabPageSoftware
             // 
+            this.tabPageSoftware.Controls.Add(this.labelUsefullTools);
             this.tabPageSoftware.Controls.Add(this.linkLabelAnyDvd);
             this.tabPageSoftware.Controls.Add(this.linkLabelFilterTweaker);
             this.tabPageSoftware.Controls.Add(this.linkLabelMkvtoolnix);
@@ -1256,7 +1269,7 @@
             // linkLabelAnyDvd
             // 
             this.linkLabelAnyDvd.AutoSize = true;
-            this.linkLabelAnyDvd.Location = new System.Drawing.Point(6, 133);
+            this.linkLabelAnyDvd.Location = new System.Drawing.Point(320, 29);
             this.linkLabelAnyDvd.Name = "linkLabelAnyDvd";
             this.linkLabelAnyDvd.Size = new System.Drawing.Size(64, 13);
             this.linkLabelAnyDvd.TabIndex = 10;
@@ -1267,7 +1280,7 @@
             // linkLabelFilterTweaker
             // 
             this.linkLabelFilterTweaker.AutoSize = true;
-            this.linkLabelFilterTweaker.Location = new System.Drawing.Point(6, 120);
+            this.linkLabelFilterTweaker.Location = new System.Drawing.Point(320, 16);
             this.linkLabelFilterTweaker.Name = "linkLabelFilterTweaker";
             this.linkLabelFilterTweaker.Size = new System.Drawing.Size(191, 13);
             this.linkLabelFilterTweaker.TabIndex = 9;
@@ -1388,7 +1401,7 @@
             this.richTextBoxAbout.Location = new System.Drawing.Point(6, 6);
             this.richTextBoxAbout.Name = "richTextBoxAbout";
             this.richTextBoxAbout.ReadOnly = true;
-            this.richTextBoxAbout.Size = new System.Drawing.Size(386, 222);
+            this.richTextBoxAbout.Size = new System.Drawing.Size(386, 243);
             this.richTextBoxAbout.TabIndex = 0;
             this.richTextBoxAbout.Text = resources.GetString("richTextBoxAbout.Text");
             // 
@@ -1609,37 +1622,94 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // buttonOpenM2ts
+            // labelUsefullTools
             // 
-            this.buttonOpenM2ts.Location = new System.Drawing.Point(128, 45);
-            this.buttonOpenM2ts.Name = "buttonOpenM2ts";
-            this.buttonOpenM2ts.Size = new System.Drawing.Size(116, 23);
-            this.buttonOpenM2ts.TabIndex = 8;
-            this.buttonOpenM2ts.Text = "Open *.m2ts file(s)";
-            this.buttonOpenM2ts.UseVisualStyleBackColor = true;
-            this.buttonOpenM2ts.Click += new System.EventHandler(this.buttonOpenM2ts_Click);
+            this.labelUsefullTools.AutoSize = true;
+            this.labelUsefullTools.Location = new System.Drawing.Point(320, 3);
+            this.labelUsefullTools.Name = "labelUsefullTools";
+            this.labelUsefullTools.Size = new System.Drawing.Size(168, 13);
+            this.labelUsefullTools.TabIndex = 11;
+            this.labelUsefullTools.Text = "The following tools may be usefull:";
             // 
-            // groupBoxGeneral
+            // checkBoxUntouchedVideo
             // 
-            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxUseCore);
-            this.groupBoxGeneral.Location = new System.Drawing.Point(786, 194);
-            this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 91);
-            this.groupBoxGeneral.TabIndex = 7;
-            this.groupBoxGeneral.TabStop = false;
-            this.groupBoxGeneral.Text = "General options";
+            this.checkBoxUntouchedVideo.AutoSize = true;
+            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxUntouchedVideo.Name = "checkBoxUntouchedVideo";
+            this.checkBoxUntouchedVideo.Size = new System.Drawing.Size(168, 17);
+            this.checkBoxUntouchedVideo.TabIndex = 12;
+            this.checkBoxUntouchedVideo.Text = "Untouched video (no encode)";
+            this.checkBoxUntouchedVideo.UseVisualStyleBackColor = true;
+            this.checkBoxUntouchedVideo.CheckedChanged += new System.EventHandler(this.checkBoxUntouchedVideo_CheckedChanged);
             // 
-            // checkBoxMuxSubtitle
+            // groupBoxAviSynthProfiles
             // 
-            this.checkBoxMuxSubtitle.AutoSize = true;
-            this.checkBoxMuxSubtitle.Location = new System.Drawing.Point(6, 42);
-            this.checkBoxMuxSubtitle.Name = "checkBoxMuxSubtitle";
-            this.checkBoxMuxSubtitle.Size = new System.Drawing.Size(130, 17);
-            this.checkBoxMuxSubtitle.TabIndex = 11;
-            this.checkBoxMuxSubtitle.Text = "Mux subtitles into mkv";
-            this.checkBoxMuxSubtitle.UseVisualStyleBackColor = true;
-            this.checkBoxMuxSubtitle.CheckedChanged += new System.EventHandler(this.checkBoxMuxSubtitle_CheckedChanged);
+            this.groupBoxAviSynthProfiles.Controls.Add(this.labelAvisynthProfiles);
+            this.groupBoxAviSynthProfiles.Controls.Add(this.buttonDelAvisynth);
+            this.groupBoxAviSynthProfiles.Controls.Add(this.listBoxAviSynthProfiles);
+            this.groupBoxAviSynthProfiles.Controls.Add(this.buttonAddAvisynth);
+            this.groupBoxAviSynthProfiles.Location = new System.Drawing.Point(703, 6);
+            this.groupBoxAviSynthProfiles.Name = "groupBoxAviSynthProfiles";
+            this.groupBoxAviSynthProfiles.Size = new System.Drawing.Size(351, 245);
+            this.groupBoxAviSynthProfiles.TabIndex = 15;
+            this.groupBoxAviSynthProfiles.TabStop = false;
+            this.groupBoxAviSynthProfiles.Text = "Custom commands";
+            // 
+            // labelAvisynthProfiles
+            // 
+            this.labelAvisynthProfiles.AutoSize = true;
+            this.labelAvisynthProfiles.Location = new System.Drawing.Point(6, 16);
+            this.labelAvisynthProfiles.Name = "labelAvisynthProfiles";
+            this.labelAvisynthProfiles.Size = new System.Drawing.Size(85, 13);
+            this.labelAvisynthProfiles.TabIndex = 7;
+            this.labelAvisynthProfiles.Text = "AviSynth profiles";
+            // 
+            // buttonDelAvisynth
+            // 
+            this.buttonDelAvisynth.Location = new System.Drawing.Point(90, 216);
+            this.buttonDelAvisynth.Name = "buttonDelAvisynth";
+            this.buttonDelAvisynth.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelAvisynth.TabIndex = 10;
+            this.buttonDelAvisynth.Text = "Delete";
+            this.buttonDelAvisynth.UseVisualStyleBackColor = true;
+            this.buttonDelAvisynth.Click += new System.EventHandler(this.buttonDelAvisynth_Click);
+            // 
+            // listBoxAviSynthProfiles
+            // 
+            this.listBoxAviSynthProfiles.FormattingEnabled = true;
+            this.listBoxAviSynthProfiles.Location = new System.Drawing.Point(9, 32);
+            this.listBoxAviSynthProfiles.Name = "listBoxAviSynthProfiles";
+            this.listBoxAviSynthProfiles.Size = new System.Drawing.Size(331, 173);
+            this.listBoxAviSynthProfiles.TabIndex = 8;
+            this.listBoxAviSynthProfiles.DoubleClick += new System.EventHandler(this.listBoxAviSynthProfiles_DoubleClick);
+            // 
+            // buttonAddAvisynth
+            // 
+            this.buttonAddAvisynth.Location = new System.Drawing.Point(9, 216);
+            this.buttonAddAvisynth.Name = "buttonAddAvisynth";
+            this.buttonAddAvisynth.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddAvisynth.TabIndex = 9;
+            this.buttonAddAvisynth.Text = "Add";
+            this.buttonAddAvisynth.UseVisualStyleBackColor = true;
+            this.buttonAddAvisynth.Click += new System.EventHandler(this.buttonAddAvisynth_Click);
+            // 
+            // labelAvisynthProfile
+            // 
+            this.labelAvisynthProfile.AutoSize = true;
+            this.labelAvisynthProfile.Location = new System.Drawing.Point(6, 264);
+            this.labelAvisynthProfile.Name = "labelAvisynthProfile";
+            this.labelAvisynthProfile.Size = new System.Drawing.Size(78, 13);
+            this.labelAvisynthProfile.TabIndex = 35;
+            this.labelAvisynthProfile.Text = "Avisynth profile";
+            // 
+            // comboBoxAvisynthProfile
+            // 
+            this.comboBoxAvisynthProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAvisynthProfile.FormattingEnabled = true;
+            this.comboBoxAvisynthProfile.Location = new System.Drawing.Point(9, 280);
+            this.comboBoxAvisynthProfile.Name = "comboBoxAvisynthProfile";
+            this.comboBoxAvisynthProfile.Size = new System.Drawing.Size(344, 21);
+            this.comboBoxAvisynthProfile.TabIndex = 34;
             // 
             // MainForm
             // 
@@ -1669,6 +1739,8 @@
             this.groupBoxPath.ResumeLayout(false);
             this.groupBoxPath.PerformLayout();
             this.tabPageSettings.ResumeLayout(false);
+            this.groupBoxGeneral.ResumeLayout(false);
+            this.groupBoxGeneral.PerformLayout();
             this.groupBoxDefaultTrack.ResumeLayout(false);
             this.groupBoxDefaultTrack.PerformLayout();
             this.groupBoxAutoCrop.ResumeLayout(false);
@@ -1681,8 +1753,6 @@
             this.groupBoxAutoSelect.PerformLayout();
             this.tabPageEncodingSettings.ResumeLayout(false);
             this.tabPageEncodingSettings.PerformLayout();
-            this.groupBoxAvisynthCommand.ResumeLayout(false);
-            this.groupBoxAvisynthCommand.PerformLayout();
             this.groupBoxX264Profiles.ResumeLayout(false);
             this.groupBoxX264Profiles.PerformLayout();
             this.groupBoxGeneralAviSynthSettings.ResumeLayout(false);
@@ -1698,8 +1768,8 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
-            this.groupBoxGeneral.ResumeLayout(false);
-            this.groupBoxGeneral.PerformLayout();
+            this.groupBoxAviSynthProfiles.ResumeLayout(false);
+            this.groupBoxAviSynthProfiles.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1815,9 +1885,6 @@
         private System.Windows.Forms.CheckBox checkBoxDefaultSubtitleForced;
         private System.Windows.Forms.CheckBox checkBoxDefaultSubtitleTrack;
         private System.Windows.Forms.CheckBox checkBoxDefaultAudioTrack;
-        private System.Windows.Forms.GroupBox groupBoxAvisynthCommand;
-        private System.Windows.Forms.RichTextBox richTextBoxCommandsAfterResize;
-        private System.Windows.Forms.Label labelCommandAfterResize;
         private System.Windows.Forms.CheckBox checkBoxDeleteAfterEncode;
         private System.Windows.Forms.LinkLabel linkLabelAnyDvd;
         private System.Windows.Forms.ComboBox comboBoxCropMode;
@@ -1841,6 +1908,15 @@
         private System.Windows.Forms.Button buttonOpenM2ts;
         private System.Windows.Forms.GroupBox groupBoxGeneral;
         private System.Windows.Forms.CheckBox checkBoxMuxSubtitle;
+        private System.Windows.Forms.CheckBox checkBoxUntouchedVideo;
+        private System.Windows.Forms.Label labelUsefullTools;
+        private System.Windows.Forms.GroupBox groupBoxAviSynthProfiles;
+        private System.Windows.Forms.Label labelAvisynthProfiles;
+        private System.Windows.Forms.Button buttonDelAvisynth;
+        private System.Windows.Forms.ListBox listBoxAviSynthProfiles;
+        private System.Windows.Forms.Button buttonAddAvisynth;
+        private System.Windows.Forms.Label labelAvisynthProfile;
+        private System.Windows.Forms.ComboBox comboBoxAvisynthProfile;
     }
 }
 
