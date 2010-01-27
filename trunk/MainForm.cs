@@ -550,6 +550,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkEac3to()) return;
                 this.Text = title + " [Getting stream info...]";
 
                 progressBarMain.Visible = true;
@@ -1686,6 +1687,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkComplete()) return;
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
                 tabControlMain.Enabled = false;
@@ -1971,6 +1973,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkEac3to()) return;
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
                 tabControlMain.Enabled = false;
@@ -1993,6 +1996,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkFfmsindex()) return;
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
                 tabControlMain.Enabled = false;
@@ -2015,6 +2019,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkEac3to()) return;
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
                 tabControlMain.Enabled = false;
@@ -2283,6 +2288,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkBdsup2sub()) return;
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
                 tabControlMain.Enabled = false;
@@ -2362,7 +2368,7 @@ namespace BluRip
 
                         if (!settings.resize720p)
                         {
-                            pc.StartInfo.Arguments += " /res:keep";
+                            pc.StartInfo.Arguments += " /res:1080";
                         }
                         else
                         {
@@ -2417,7 +2423,7 @@ namespace BluRip
 
                         if (!settings.resize720p)
                         {
-                            pc.StartInfo.Arguments += " /res:keep";
+                            pc.StartInfo.Arguments += " /res:1080";
                         }
                         else
                         {
@@ -2667,6 +2673,7 @@ namespace BluRip
             try
             {
                 this.Show();
+                notifyIconMain.Visible = false;
             }
             catch (Exception)
             {
@@ -3108,6 +3115,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkMkvmerge()) return;
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
                 tabControlMain.Enabled = false;
@@ -3359,6 +3367,7 @@ namespace BluRip
         {
             try
             {
+                if (!checkEac3to()) return;
                 FileListForm flf = new FileListForm();
                 if (flf.ShowDialog() == DialogResult.OK)
                 {
@@ -3683,6 +3692,133 @@ namespace BluRip
             }
             catch (Exception)
             {
+            }
+        }
+
+        private bool checkEac3to()
+        {
+            try
+            {
+                if (!File.Exists(settings.eac3toPath))
+                {
+                    MessageBox.Show("eac3to path not set", "Error");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool checkFfmsindex()
+        {
+            try
+            {
+                if (!settings.cropDirectshow || !settings.encodeDirectshow)
+                {
+                    if (!File.Exists(settings.ffmsindexPath))
+                    {
+                        MessageBox.Show("ffmsindex path not set", "Error");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool checkBdsup2sub()
+        {
+            try
+            {
+                if (!File.Exists(settings.javaPath))
+                {
+                    MessageBox.Show("java path not set", "Error");
+                    return false;
+                }
+                if (!File.Exists(settings.sup2subPath))
+                {
+                    MessageBox.Show("java path not set", "Error");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool checkX264()
+        {
+            try
+            {
+                if (!File.Exists(settings.x264Path))
+                {
+                    MessageBox.Show("x264 path not set", "Error");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool checkMkvmerge()
+        {
+            try
+            {
+                if (!File.Exists(settings.mkvmergePath))
+                {
+                    MessageBox.Show("mkvmerge path not set", "Error");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool checkComplete()
+        {
+            try
+            {
+                if (!checkEac3to()) return false;
+                int sup = 0;
+                if (comboBoxTitle.SelectedIndex > -1)
+                {
+                    foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                    {
+                        if (si.streamType == StreamType.Subtitle)
+                        {
+                            sup++;
+                        }
+                    }
+                }
+                if (!checkFfmsindex()) return false;
+                if (sup > 0)
+                {
+                    if (!checkBdsup2sub()) return false;
+                }
+                if (!settings.untouchedVideo)
+                {
+                    if (!checkX264()) return false;
+                }
+                if (!checkMkvmerge()) return false;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }
