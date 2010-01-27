@@ -73,6 +73,7 @@
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxResize720p = new System.Windows.Forms.CheckBox();
             this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
             this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
             this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
@@ -170,7 +171,9 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.checkBoxResize720p = new System.Windows.Forms.CheckBox();
+            this.tabPageProfiles = new System.Windows.Forms.TabPage();
+            this.tabPageTools = new System.Windows.Forms.TabPage();
+            this.tabPageStreams = new System.Windows.Forms.TabPage();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -197,23 +200,26 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
+            this.tabPageProfiles.SuspendLayout();
+            this.tabPageTools.SuspendLayout();
+            this.tabPageStreams.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
             // 
-            this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlMain.Controls.Add(this.tabPageStreamSelect);
             this.tabControlMain.Controls.Add(this.tabPageProcess);
             this.tabControlMain.Controls.Add(this.tabPageSettings);
             this.tabControlMain.Controls.Add(this.tabPageEncodingSettings);
+            this.tabControlMain.Controls.Add(this.tabPageProfiles);
+            this.tabControlMain.Controls.Add(this.tabPageTools);
+            this.tabControlMain.Controls.Add(this.tabPageStreams);
             this.tabControlMain.Controls.Add(this.tabPageSoftware);
             this.tabControlMain.Controls.Add(this.tabPageAbout);
             this.tabControlMain.Location = new System.Drawing.Point(12, 12);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(1157, 370);
+            this.tabControlMain.Size = new System.Drawing.Size(770, 311);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPageStreamSelect
@@ -230,7 +236,7 @@
             this.tabPageStreamSelect.Location = new System.Drawing.Point(4, 22);
             this.tabPageStreamSelect.Name = "tabPageStreamSelect";
             this.tabPageStreamSelect.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStreamSelect.Size = new System.Drawing.Size(1149, 344);
+            this.tabPageStreamSelect.Size = new System.Drawing.Size(762, 285);
             this.tabPageStreamSelect.TabIndex = 0;
             this.tabPageStreamSelect.Text = "Stream selection";
             this.tabPageStreamSelect.UseVisualStyleBackColor = true;
@@ -265,7 +271,7 @@
             this.listBoxStreams.Location = new System.Drawing.Point(6, 130);
             this.listBoxStreams.Name = "listBoxStreams";
             this.listBoxStreams.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxStreams.Size = new System.Drawing.Size(1137, 200);
+            this.listBoxStreams.Size = new System.Drawing.Size(750, 144);
             this.listBoxStreams.TabIndex = 6;
             this.listBoxStreams.SelectedIndexChanged += new System.EventHandler(this.listBoxStreams_SelectedIndexChanged);
             // 
@@ -284,7 +290,7 @@
             this.comboBoxTitle.FormattingEnabled = true;
             this.comboBoxTitle.Location = new System.Drawing.Point(3, 90);
             this.comboBoxTitle.Name = "comboBoxTitle";
-            this.comboBoxTitle.Size = new System.Drawing.Size(839, 21);
+            this.comboBoxTitle.Size = new System.Drawing.Size(525, 21);
             this.comboBoxTitle.TabIndex = 4;
             this.comboBoxTitle.SelectedIndexChanged += new System.EventHandler(this.comboBoxTitle_SelectedIndexChanged);
             // 
@@ -327,14 +333,10 @@
             // 
             // tabPageProcess
             // 
-            this.tabPageProcess.Controls.Add(this.labelAvisynthProfile);
-            this.tabPageProcess.Controls.Add(this.comboBoxAvisynthProfile);
             this.tabPageProcess.Controls.Add(this.buttonStreamDown);
             this.tabPageProcess.Controls.Add(this.buttonStreamUp);
             this.tabPageProcess.Controls.Add(this.buttonDoMux);
             this.tabPageProcess.Controls.Add(this.buttonDoSubtitle);
-            this.tabPageProcess.Controls.Add(this.labelEncodeProfile);
-            this.tabPageProcess.Controls.Add(this.comboBoxEncodeProfile);
             this.tabPageProcess.Controls.Add(this.buttonDoEncode);
             this.tabPageProcess.Controls.Add(this.buttonDoDemux);
             this.tabPageProcess.Controls.Add(this.buttonDoIndex);
@@ -347,7 +349,7 @@
             this.tabPageProcess.Location = new System.Drawing.Point(4, 22);
             this.tabPageProcess.Name = "tabPageProcess";
             this.tabPageProcess.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProcess.Size = new System.Drawing.Size(1149, 344);
+            this.tabPageProcess.Size = new System.Drawing.Size(762, 285);
             this.tabPageProcess.TabIndex = 3;
             this.tabPageProcess.Text = "Process";
             this.tabPageProcess.UseVisualStyleBackColor = true;
@@ -355,7 +357,7 @@
             // labelAvisynthProfile
             // 
             this.labelAvisynthProfile.AutoSize = true;
-            this.labelAvisynthProfile.Location = new System.Drawing.Point(6, 264);
+            this.labelAvisynthProfile.Location = new System.Drawing.Point(6, 156);
             this.labelAvisynthProfile.Name = "labelAvisynthProfile";
             this.labelAvisynthProfile.Size = new System.Drawing.Size(78, 13);
             this.labelAvisynthProfile.TabIndex = 35;
@@ -365,16 +367,16 @@
             // 
             this.comboBoxAvisynthProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAvisynthProfile.FormattingEnabled = true;
-            this.comboBoxAvisynthProfile.Location = new System.Drawing.Point(9, 280);
+            this.comboBoxAvisynthProfile.Location = new System.Drawing.Point(9, 172);
             this.comboBoxAvisynthProfile.Name = "comboBoxAvisynthProfile";
-            this.comboBoxAvisynthProfile.Size = new System.Drawing.Size(344, 21);
+            this.comboBoxAvisynthProfile.Size = new System.Drawing.Size(331, 21);
             this.comboBoxAvisynthProfile.TabIndex = 34;
             // 
             // buttonStreamDown
             // 
-            this.buttonStreamDown.Location = new System.Drawing.Point(991, 51);
+            this.buttonStreamDown.Location = new System.Drawing.Point(684, 51);
             this.buttonStreamDown.Name = "buttonStreamDown";
-            this.buttonStreamDown.Size = new System.Drawing.Size(75, 23);
+            this.buttonStreamDown.Size = new System.Drawing.Size(72, 23);
             this.buttonStreamDown.TabIndex = 33;
             this.buttonStreamDown.Text = "Move down";
             this.buttonStreamDown.UseVisualStyleBackColor = true;
@@ -382,9 +384,9 @@
             // 
             // buttonStreamUp
             // 
-            this.buttonStreamUp.Location = new System.Drawing.Point(991, 22);
+            this.buttonStreamUp.Location = new System.Drawing.Point(684, 22);
             this.buttonStreamUp.Name = "buttonStreamUp";
-            this.buttonStreamUp.Size = new System.Drawing.Size(75, 23);
+            this.buttonStreamUp.Size = new System.Drawing.Size(72, 23);
             this.buttonStreamUp.TabIndex = 32;
             this.buttonStreamUp.Text = "Move up";
             this.buttonStreamUp.UseVisualStyleBackColor = true;
@@ -392,7 +394,7 @@
             // 
             // buttonDoMux
             // 
-            this.buttonDoMux.Location = new System.Drawing.Point(630, 315);
+            this.buttonDoMux.Location = new System.Drawing.Point(630, 256);
             this.buttonDoMux.Name = "buttonDoMux";
             this.buttonDoMux.Size = new System.Drawing.Size(75, 23);
             this.buttonDoMux.TabIndex = 31;
@@ -402,8 +404,7 @@
             // 
             // buttonDoSubtitle
             // 
-            this.buttonDoSubtitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDoSubtitle.Location = new System.Drawing.Point(385, 315);
+            this.buttonDoSubtitle.Location = new System.Drawing.Point(385, 256);
             this.buttonDoSubtitle.Name = "buttonDoSubtitle";
             this.buttonDoSubtitle.Size = new System.Drawing.Size(138, 23);
             this.buttonDoSubtitle.TabIndex = 30;
@@ -414,7 +415,7 @@
             // labelEncodeProfile
             // 
             this.labelEncodeProfile.AutoSize = true;
-            this.labelEncodeProfile.Location = new System.Drawing.Point(6, 224);
+            this.labelEncodeProfile.Location = new System.Drawing.Point(6, 116);
             this.labelEncodeProfile.Name = "labelEncodeProfile";
             this.labelEncodeProfile.Size = new System.Drawing.Size(83, 13);
             this.labelEncodeProfile.TabIndex = 26;
@@ -424,16 +425,15 @@
             // 
             this.comboBoxEncodeProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncodeProfile.FormattingEnabled = true;
-            this.comboBoxEncodeProfile.Location = new System.Drawing.Point(9, 240);
+            this.comboBoxEncodeProfile.Location = new System.Drawing.Point(9, 132);
             this.comboBoxEncodeProfile.Name = "comboBoxEncodeProfile";
-            this.comboBoxEncodeProfile.Size = new System.Drawing.Size(344, 21);
+            this.comboBoxEncodeProfile.Size = new System.Drawing.Size(331, 21);
             this.comboBoxEncodeProfile.TabIndex = 25;
             this.comboBoxEncodeProfile.SelectedIndexChanged += new System.EventHandler(this.comboBoxEncodeProfile_SelectedIndexChanged);
             // 
             // buttonDoEncode
             // 
-            this.buttonDoEncode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDoEncode.Location = new System.Drawing.Point(529, 315);
+            this.buttonDoEncode.Location = new System.Drawing.Point(529, 256);
             this.buttonDoEncode.Name = "buttonDoEncode";
             this.buttonDoEncode.Size = new System.Drawing.Size(95, 23);
             this.buttonDoEncode.TabIndex = 24;
@@ -443,8 +443,7 @@
             // 
             // buttonDoDemux
             // 
-            this.buttonDoDemux.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDoDemux.Location = new System.Drawing.Point(157, 315);
+            this.buttonDoDemux.Location = new System.Drawing.Point(157, 256);
             this.buttonDoDemux.Name = "buttonDoDemux";
             this.buttonDoDemux.Size = new System.Drawing.Size(75, 23);
             this.buttonDoDemux.TabIndex = 23;
@@ -454,8 +453,7 @@
             // 
             // buttonDoIndex
             // 
-            this.buttonDoIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDoIndex.Location = new System.Drawing.Point(238, 315);
+            this.buttonDoIndex.Location = new System.Drawing.Point(238, 256);
             this.buttonDoIndex.Name = "buttonDoIndex";
             this.buttonDoIndex.Size = new System.Drawing.Size(141, 23);
             this.buttonDoIndex.TabIndex = 22;
@@ -465,9 +463,9 @@
             // 
             // buttonClearStreamInfoList
             // 
-            this.buttonClearStreamInfoList.Location = new System.Drawing.Point(557, 238);
+            this.buttonClearStreamInfoList.Location = new System.Drawing.Point(526, 201);
             this.buttonClearStreamInfoList.Name = "buttonClearStreamInfoList";
-            this.buttonClearStreamInfoList.Size = new System.Drawing.Size(192, 23);
+            this.buttonClearStreamInfoList.Size = new System.Drawing.Size(152, 23);
             this.buttonClearStreamInfoList.TabIndex = 19;
             this.buttonClearStreamInfoList.Text = "Clear demuxed streams list";
             this.buttonClearStreamInfoList.UseVisualStyleBackColor = true;
@@ -475,9 +473,9 @@
             // 
             // buttonLoadStreamInfo
             // 
-            this.buttonLoadStreamInfo.Location = new System.Drawing.Point(359, 238);
+            this.buttonLoadStreamInfo.Location = new System.Drawing.Point(359, 201);
             this.buttonLoadStreamInfo.Name = "buttonLoadStreamInfo";
-            this.buttonLoadStreamInfo.Size = new System.Drawing.Size(192, 23);
+            this.buttonLoadStreamInfo.Size = new System.Drawing.Size(164, 23);
             this.buttonLoadStreamInfo.TabIndex = 18;
             this.buttonLoadStreamInfo.Text = "Load existing streamInfo.xml";
             this.buttonLoadStreamInfo.UseVisualStyleBackColor = true;
@@ -497,7 +495,7 @@
             this.listBoxDemuxedStreams.FormattingEnabled = true;
             this.listBoxDemuxedStreams.Location = new System.Drawing.Point(359, 22);
             this.listBoxDemuxedStreams.Name = "listBoxDemuxedStreams";
-            this.listBoxDemuxedStreams.Size = new System.Drawing.Size(626, 212);
+            this.listBoxDemuxedStreams.Size = new System.Drawing.Size(319, 173);
             this.listBoxDemuxedStreams.TabIndex = 16;
             // 
             // groupBoxPath
@@ -628,8 +626,7 @@
             // 
             // buttonStartConvert
             // 
-            this.buttonStartConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStartConvert.Location = new System.Drawing.Point(6, 315);
+            this.buttonStartConvert.Location = new System.Drawing.Point(6, 256);
             this.buttonStartConvert.Name = "buttonStartConvert";
             this.buttonStartConvert.Size = new System.Drawing.Size(75, 23);
             this.buttonStartConvert.TabIndex = 14;
@@ -640,30 +637,39 @@
             // tabPageSettings
             // 
             this.tabPageSettings.Controls.Add(this.groupBoxGeneral);
-            this.tabPageSettings.Controls.Add(this.groupBoxDefaultTrack);
             this.tabPageSettings.Controls.Add(this.groupBoxAutoCrop);
-            this.tabPageSettings.Controls.Add(this.groupBoxExternalTools);
-            this.tabPageSettings.Controls.Add(this.groupBoxAutoSelect);
             this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageSettings.Name = "tabPageSettings";
             this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSettings.Size = new System.Drawing.Size(1149, 344);
+            this.tabPageSettings.Size = new System.Drawing.Size(762, 285);
             this.tabPageSettings.TabIndex = 1;
-            this.tabPageSettings.Text = "Settings";
+            this.tabPageSettings.Text = "General settings";
             this.tabPageSettings.UseVisualStyleBackColor = true;
             // 
             // groupBoxGeneral
             // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteAfterEncode);
             this.groupBoxGeneral.Controls.Add(this.checkBoxResize720p);
             this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
             this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
             this.groupBoxGeneral.Controls.Add(this.checkBoxUseCore);
-            this.groupBoxGeneral.Location = new System.Drawing.Point(786, 194);
+            this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 113);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 146);
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
+            // 
+            // checkBoxResize720p
+            // 
+            this.checkBoxResize720p.AutoSize = true;
+            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxResize720p.Name = "checkBoxResize720p";
+            this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxResize720p.TabIndex = 13;
+            this.checkBoxResize720p.Text = "Resize to 720p";
+            this.checkBoxResize720p.UseVisualStyleBackColor = true;
+            this.checkBoxResize720p.CheckedChanged += new System.EventHandler(this.checkBoxResize720p_CheckedChanged);
             // 
             // checkBoxUntouchedVideo
             // 
@@ -703,9 +709,9 @@
             this.groupBoxDefaultTrack.Controls.Add(this.checkBoxDefaultSubtitleForced);
             this.groupBoxDefaultTrack.Controls.Add(this.checkBoxDefaultSubtitleTrack);
             this.groupBoxDefaultTrack.Controls.Add(this.checkBoxDefaultAudioTrack);
-            this.groupBoxDefaultTrack.Location = new System.Drawing.Point(412, 194);
+            this.groupBoxDefaultTrack.Location = new System.Drawing.Point(6, 182);
             this.groupBoxDefaultTrack.Name = "groupBoxDefaultTrack";
-            this.groupBoxDefaultTrack.Size = new System.Drawing.Size(368, 91);
+            this.groupBoxDefaultTrack.Size = new System.Drawing.Size(461, 91);
             this.groupBoxDefaultTrack.TabIndex = 6;
             this.groupBoxDefaultTrack.TabStop = false;
             this.groupBoxDefaultTrack.Text = "Default tracks";
@@ -751,7 +757,7 @@
             this.groupBoxAutoCrop.Controls.Add(this.labelNrFrames);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownBlackValue);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownNrFrames);
-            this.groupBoxAutoCrop.Location = new System.Drawing.Point(879, 6);
+            this.groupBoxAutoCrop.Location = new System.Drawing.Point(212, 6);
             this.groupBoxAutoCrop.Name = "groupBoxAutoCrop";
             this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 146);
             this.groupBoxAutoCrop.TabIndex = 5;
@@ -837,7 +843,6 @@
             // 
             // groupBoxExternalTools
             // 
-            this.groupBoxExternalTools.Controls.Add(this.checkBoxDeleteAfterEncode);
             this.groupBoxExternalTools.Controls.Add(this.buttonMkvmergePath);
             this.groupBoxExternalTools.Controls.Add(this.textBoxMkvmergePath);
             this.groupBoxExternalTools.Controls.Add(this.labelMkvmergePath);
@@ -858,7 +863,7 @@
             this.groupBoxExternalTools.Controls.Add(this.buttonEac3toPath);
             this.groupBoxExternalTools.Location = new System.Drawing.Point(6, 6);
             this.groupBoxExternalTools.Name = "groupBoxExternalTools";
-            this.groupBoxExternalTools.Size = new System.Drawing.Size(400, 279);
+            this.groupBoxExternalTools.Size = new System.Drawing.Size(400, 258);
             this.groupBoxExternalTools.TabIndex = 4;
             this.groupBoxExternalTools.TabStop = false;
             this.groupBoxExternalTools.Text = "External tools";
@@ -866,7 +871,7 @@
             // checkBoxDeleteAfterEncode
             // 
             this.checkBoxDeleteAfterEncode.AutoSize = true;
-            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 256);
+            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 111);
             this.checkBoxDeleteAfterEncode.Name = "checkBoxDeleteAfterEncode";
             this.checkBoxDeleteAfterEncode.Size = new System.Drawing.Size(159, 17);
             this.checkBoxDeleteAfterEncode.TabIndex = 18;
@@ -1048,9 +1053,9 @@
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxPreferDts);
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxSelectChapters);
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxAutoSelect);
-            this.groupBoxAutoSelect.Location = new System.Drawing.Point(412, 6);
+            this.groupBoxAutoSelect.Location = new System.Drawing.Point(6, 6);
             this.groupBoxAutoSelect.Name = "groupBoxAutoSelect";
-            this.groupBoxAutoSelect.Size = new System.Drawing.Size(461, 182);
+            this.groupBoxAutoSelect.Size = new System.Drawing.Size(461, 170);
             this.groupBoxAutoSelect.TabIndex = 3;
             this.groupBoxAutoSelect.TabStop = false;
             this.groupBoxAutoSelect.Text = "Autoselect streams";
@@ -1159,15 +1164,17 @@
             // 
             // tabPageEncodingSettings
             // 
-            this.tabPageEncodingSettings.Controls.Add(this.groupBoxAviSynthProfiles);
+            this.tabPageEncodingSettings.Controls.Add(this.labelAvisynthProfile);
             this.tabPageEncodingSettings.Controls.Add(this.labelX264Priority);
             this.tabPageEncodingSettings.Controls.Add(this.comboBoxX264Priority);
-            this.tabPageEncodingSettings.Controls.Add(this.groupBoxX264Profiles);
             this.tabPageEncodingSettings.Controls.Add(this.groupBoxGeneralAviSynthSettings);
+            this.tabPageEncodingSettings.Controls.Add(this.comboBoxAvisynthProfile);
+            this.tabPageEncodingSettings.Controls.Add(this.labelEncodeProfile);
+            this.tabPageEncodingSettings.Controls.Add(this.comboBoxEncodeProfile);
             this.tabPageEncodingSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageEncodingSettings.Name = "tabPageEncodingSettings";
             this.tabPageEncodingSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEncodingSettings.Size = new System.Drawing.Size(1149, 344);
+            this.tabPageEncodingSettings.Size = new System.Drawing.Size(762, 285);
             this.tabPageEncodingSettings.TabIndex = 4;
             this.tabPageEncodingSettings.Text = "Encoding settings";
             this.tabPageEncodingSettings.UseVisualStyleBackColor = true;
@@ -1178,9 +1185,9 @@
             this.groupBoxAviSynthProfiles.Controls.Add(this.buttonDelAvisynth);
             this.groupBoxAviSynthProfiles.Controls.Add(this.listBoxAviSynthProfiles);
             this.groupBoxAviSynthProfiles.Controls.Add(this.buttonAddAvisynth);
-            this.groupBoxAviSynthProfiles.Location = new System.Drawing.Point(703, 6);
+            this.groupBoxAviSynthProfiles.Location = new System.Drawing.Point(279, 6);
             this.groupBoxAviSynthProfiles.Name = "groupBoxAviSynthProfiles";
-            this.groupBoxAviSynthProfiles.Size = new System.Drawing.Size(351, 245);
+            this.groupBoxAviSynthProfiles.Size = new System.Drawing.Size(267, 245);
             this.groupBoxAviSynthProfiles.TabIndex = 15;
             this.groupBoxAviSynthProfiles.TabStop = false;
             this.groupBoxAviSynthProfiles.Text = "Custom commands";
@@ -1209,7 +1216,7 @@
             this.listBoxAviSynthProfiles.FormattingEnabled = true;
             this.listBoxAviSynthProfiles.Location = new System.Drawing.Point(9, 32);
             this.listBoxAviSynthProfiles.Name = "listBoxAviSynthProfiles";
-            this.listBoxAviSynthProfiles.Size = new System.Drawing.Size(331, 173);
+            this.listBoxAviSynthProfiles.Size = new System.Drawing.Size(247, 173);
             this.listBoxAviSynthProfiles.TabIndex = 8;
             this.listBoxAviSynthProfiles.DoubleClick += new System.EventHandler(this.listBoxAviSynthProfiles_DoubleClick);
             // 
@@ -1236,9 +1243,9 @@
             // 
             this.comboBoxX264Priority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxX264Priority.FormattingEnabled = true;
-            this.comboBoxX264Priority.Location = new System.Drawing.Point(6, 92);
+            this.comboBoxX264Priority.Location = new System.Drawing.Point(9, 92);
             this.comboBoxX264Priority.Name = "comboBoxX264Priority";
-            this.comboBoxX264Priority.Size = new System.Drawing.Size(334, 21);
+            this.comboBoxX264Priority.Size = new System.Drawing.Size(331, 21);
             this.comboBoxX264Priority.TabIndex = 12;
             this.comboBoxX264Priority.SelectedIndexChanged += new System.EventHandler(this.comboBoxX264Priority_SelectedIndexChanged);
             // 
@@ -1248,9 +1255,9 @@
             this.groupBoxX264Profiles.Controls.Add(this.buttonDelX264);
             this.groupBoxX264Profiles.Controls.Add(this.listBoxX264Profiles);
             this.groupBoxX264Profiles.Controls.Add(this.buttonAddX264);
-            this.groupBoxX264Profiles.Location = new System.Drawing.Point(346, 6);
+            this.groupBoxX264Profiles.Location = new System.Drawing.Point(6, 6);
             this.groupBoxX264Profiles.Name = "groupBoxX264Profiles";
-            this.groupBoxX264Profiles.Size = new System.Drawing.Size(351, 245);
+            this.groupBoxX264Profiles.Size = new System.Drawing.Size(267, 245);
             this.groupBoxX264Profiles.TabIndex = 11;
             this.groupBoxX264Profiles.TabStop = false;
             this.groupBoxX264Profiles.Text = "Encoding profiles";
@@ -1279,7 +1286,7 @@
             this.listBoxX264Profiles.FormattingEnabled = true;
             this.listBoxX264Profiles.Location = new System.Drawing.Point(9, 32);
             this.listBoxX264Profiles.Name = "listBoxX264Profiles";
-            this.listBoxX264Profiles.Size = new System.Drawing.Size(331, 173);
+            this.listBoxX264Profiles.Size = new System.Drawing.Size(247, 173);
             this.listBoxX264Profiles.TabIndex = 8;
             this.listBoxX264Profiles.DoubleClick += new System.EventHandler(this.listBoxX264Profiles_DoubleClick);
             // 
@@ -1343,7 +1350,7 @@
             this.tabPageSoftware.Location = new System.Drawing.Point(4, 22);
             this.tabPageSoftware.Name = "tabPageSoftware";
             this.tabPageSoftware.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSoftware.Size = new System.Drawing.Size(1149, 344);
+            this.tabPageSoftware.Size = new System.Drawing.Size(762, 285);
             this.tabPageSoftware.TabIndex = 5;
             this.tabPageSoftware.Text = "Needed tools";
             this.tabPageSoftware.UseVisualStyleBackColor = true;
@@ -1482,7 +1489,7 @@
             this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
             this.tabPageAbout.Name = "tabPageAbout";
             this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAbout.Size = new System.Drawing.Size(1149, 344);
+            this.tabPageAbout.Size = new System.Drawing.Size(762, 285);
             this.tabPageAbout.TabIndex = 6;
             this.tabPageAbout.Text = "About";
             this.tabPageAbout.UseVisualStyleBackColor = true;
@@ -1498,12 +1505,11 @@
             // 
             // richTextBoxLogMain
             // 
-            this.richTextBoxLogMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxLogMain.ContextMenuStrip = this.contextMenuStripDeleteLog;
-            this.richTextBoxLogMain.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLogMain.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogMain.Name = "richTextBoxLogMain";
-            this.richTextBoxLogMain.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogMain.Size = new System.Drawing.Size(756, 157);
             this.richTextBoxLogMain.TabIndex = 1;
             this.richTextBoxLogMain.Text = "";
             // 
@@ -1531,19 +1537,16 @@
             // 
             // progressBarMain
             // 
-            this.progressBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBarMain.Location = new System.Drawing.Point(12, 388);
+            this.progressBarMain.Location = new System.Drawing.Point(12, 329);
             this.progressBarMain.Name = "progressBarMain";
-            this.progressBarMain.Size = new System.Drawing.Size(1006, 23);
+            this.progressBarMain.Size = new System.Drawing.Size(623, 23);
             this.progressBarMain.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBarMain.TabIndex = 3;
             this.progressBarMain.Visible = false;
             // 
             // buttonAbort
             // 
-            this.buttonAbort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAbort.Location = new System.Drawing.Point(1024, 388);
+            this.buttonAbort.Location = new System.Drawing.Point(641, 329);
             this.buttonAbort.Name = "buttonAbort";
             this.buttonAbort.Size = new System.Drawing.Size(75, 23);
             this.buttonAbort.TabIndex = 4;
@@ -1554,9 +1557,8 @@
             // 
             // labelLog
             // 
-            this.labelLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelLog.AutoSize = true;
-            this.labelLog.Location = new System.Drawing.Point(12, 414);
+            this.labelLog.Location = new System.Drawing.Point(12, 355);
             this.labelLog.Name = "labelLog";
             this.labelLog.Size = new System.Drawing.Size(28, 13);
             this.labelLog.TabIndex = 5;
@@ -1570,7 +1572,7 @@
             // 
             // buttonMinimize
             // 
-            this.buttonMinimize.Location = new System.Drawing.Point(1105, 388);
+            this.buttonMinimize.Location = new System.Drawing.Point(722, 329);
             this.buttonMinimize.Name = "buttonMinimize";
             this.buttonMinimize.Size = new System.Drawing.Size(60, 23);
             this.buttonMinimize.TabIndex = 6;
@@ -1586,10 +1588,10 @@
             this.tabControlLog.Controls.Add(this.tabPageSubtitleLog);
             this.tabControlLog.Controls.Add(this.tabPageEncodeLog);
             this.tabControlLog.Controls.Add(this.tabPageMuxLog);
-            this.tabControlLog.Location = new System.Drawing.Point(12, 430);
+            this.tabControlLog.Location = new System.Drawing.Point(12, 371);
             this.tabControlLog.Name = "tabControlLog";
             this.tabControlLog.SelectedIndex = 0;
-            this.tabControlLog.Size = new System.Drawing.Size(1153, 346);
+            this.tabControlLog.Size = new System.Drawing.Size(770, 189);
             this.tabControlLog.TabIndex = 7;
             // 
             // tabPageMainLog
@@ -1598,7 +1600,7 @@
             this.tabPageMainLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageMainLog.Name = "tabPageMainLog";
             this.tabPageMainLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMainLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageMainLog.Size = new System.Drawing.Size(762, 163);
             this.tabPageMainLog.TabIndex = 0;
             this.tabPageMainLog.Text = "Complete log";
             this.tabPageMainLog.UseVisualStyleBackColor = true;
@@ -1609,19 +1611,18 @@
             this.tabPageDemuxLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageDemuxLog.Name = "tabPageDemuxLog";
             this.tabPageDemuxLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDemuxLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageDemuxLog.Size = new System.Drawing.Size(429, 202);
             this.tabPageDemuxLog.TabIndex = 1;
             this.tabPageDemuxLog.Text = "Demux log";
             this.tabPageDemuxLog.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogDemux
             // 
-            this.richTextBoxLogDemux.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxLogDemux.ContextMenuStrip = this.contextMenuStripDeleteLog;
-            this.richTextBoxLogDemux.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogDemux.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLogDemux.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogDemux.Name = "richTextBoxLogDemux";
-            this.richTextBoxLogDemux.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogDemux.Size = new System.Drawing.Size(423, 196);
             this.richTextBoxLogDemux.TabIndex = 2;
             this.richTextBoxLogDemux.Text = "";
             // 
@@ -1631,19 +1632,18 @@
             this.tabPageCropLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageCropLog.Name = "tabPageCropLog";
             this.tabPageCropLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCropLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageCropLog.Size = new System.Drawing.Size(429, 202);
             this.tabPageCropLog.TabIndex = 2;
             this.tabPageCropLog.Text = "Autocrop log";
             this.tabPageCropLog.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogCrop
             // 
-            this.richTextBoxLogCrop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxLogCrop.ContextMenuStrip = this.contextMenuStripDeleteLog;
-            this.richTextBoxLogCrop.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogCrop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLogCrop.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogCrop.Name = "richTextBoxLogCrop";
-            this.richTextBoxLogCrop.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogCrop.Size = new System.Drawing.Size(423, 196);
             this.richTextBoxLogCrop.TabIndex = 2;
             this.richTextBoxLogCrop.Text = "";
             // 
@@ -1653,19 +1653,18 @@
             this.tabPageSubtitleLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageSubtitleLog.Name = "tabPageSubtitleLog";
             this.tabPageSubtitleLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSubtitleLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageSubtitleLog.Size = new System.Drawing.Size(429, 202);
             this.tabPageSubtitleLog.TabIndex = 3;
             this.tabPageSubtitleLog.Text = "Subtitle log";
             this.tabPageSubtitleLog.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogSubtitle
             // 
-            this.richTextBoxLogSubtitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxLogSubtitle.ContextMenuStrip = this.contextMenuStripDeleteLog;
-            this.richTextBoxLogSubtitle.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogSubtitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLogSubtitle.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogSubtitle.Name = "richTextBoxLogSubtitle";
-            this.richTextBoxLogSubtitle.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogSubtitle.Size = new System.Drawing.Size(423, 196);
             this.richTextBoxLogSubtitle.TabIndex = 2;
             this.richTextBoxLogSubtitle.Text = "";
             // 
@@ -1675,19 +1674,18 @@
             this.tabPageEncodeLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageEncodeLog.Name = "tabPageEncodeLog";
             this.tabPageEncodeLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEncodeLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageEncodeLog.Size = new System.Drawing.Size(429, 202);
             this.tabPageEncodeLog.TabIndex = 4;
             this.tabPageEncodeLog.Text = "Encode log";
             this.tabPageEncodeLog.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogEncode
             // 
-            this.richTextBoxLogEncode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxLogEncode.ContextMenuStrip = this.contextMenuStripDeleteLog;
-            this.richTextBoxLogEncode.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogEncode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLogEncode.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogEncode.Name = "richTextBoxLogEncode";
-            this.richTextBoxLogEncode.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogEncode.Size = new System.Drawing.Size(423, 196);
             this.richTextBoxLogEncode.TabIndex = 2;
             this.richTextBoxLogEncode.Text = "";
             // 
@@ -1697,45 +1695,68 @@
             this.tabPageMuxLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageMuxLog.Name = "tabPageMuxLog";
             this.tabPageMuxLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMuxLog.Size = new System.Drawing.Size(1145, 320);
+            this.tabPageMuxLog.Size = new System.Drawing.Size(762, 104);
             this.tabPageMuxLog.TabIndex = 5;
             this.tabPageMuxLog.Text = "Mux log";
             this.tabPageMuxLog.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogMux
             // 
-            this.richTextBoxLogMux.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxLogMux.ContextMenuStrip = this.contextMenuStripDeleteLog;
-            this.richTextBoxLogMux.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxLogMux.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLogMux.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogMux.Name = "richTextBoxLogMux";
-            this.richTextBoxLogMux.Size = new System.Drawing.Size(1133, 308);
+            this.richTextBoxLogMux.Size = new System.Drawing.Size(756, 98);
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // checkBoxResize720p
+            // tabPageProfiles
             // 
-            this.checkBoxResize720p.AutoSize = true;
-            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 88);
-            this.checkBoxResize720p.Name = "checkBoxResize720p";
-            this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxResize720p.TabIndex = 13;
-            this.checkBoxResize720p.Text = "Resize to 720p";
-            this.checkBoxResize720p.UseVisualStyleBackColor = true;
-            this.checkBoxResize720p.CheckedChanged += new System.EventHandler(this.checkBoxResize720p_CheckedChanged);
+            this.tabPageProfiles.Controls.Add(this.groupBoxAviSynthProfiles);
+            this.tabPageProfiles.Controls.Add(this.groupBoxX264Profiles);
+            this.tabPageProfiles.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProfiles.Name = "tabPageProfiles";
+            this.tabPageProfiles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProfiles.Size = new System.Drawing.Size(762, 285);
+            this.tabPageProfiles.TabIndex = 7;
+            this.tabPageProfiles.Text = "Profiles";
+            this.tabPageProfiles.UseVisualStyleBackColor = true;
+            // 
+            // tabPageTools
+            // 
+            this.tabPageTools.Controls.Add(this.groupBoxExternalTools);
+            this.tabPageTools.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTools.Name = "tabPageTools";
+            this.tabPageTools.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTools.Size = new System.Drawing.Size(762, 285);
+            this.tabPageTools.TabIndex = 8;
+            this.tabPageTools.Text = "File paths";
+            this.tabPageTools.UseVisualStyleBackColor = true;
+            // 
+            // tabPageStreams
+            // 
+            this.tabPageStreams.Controls.Add(this.groupBoxAutoSelect);
+            this.tabPageStreams.Controls.Add(this.groupBoxDefaultTrack);
+            this.tabPageStreams.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStreams.Name = "tabPageStreams";
+            this.tabPageStreams.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStreams.Size = new System.Drawing.Size(762, 285);
+            this.tabPageStreams.TabIndex = 9;
+            this.tabPageStreams.Text = "Stream settings";
+            this.tabPageStreams.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1181, 788);
+            this.ClientSize = new System.Drawing.Size(794, 572);
             this.Controls.Add(this.tabControlLog);
-            this.Controls.Add(this.buttonMinimize);
-            this.Controls.Add(this.labelLog);
-            this.Controls.Add(this.buttonAbort);
-            this.Controls.Add(this.progressBarMain);
             this.Controls.Add(this.tabControlMain);
+            this.Controls.Add(this.labelLog);
+            this.Controls.Add(this.progressBarMain);
+            this.Controls.Add(this.buttonAbort);
+            this.Controls.Add(this.buttonMinimize);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1783,6 +1804,9 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
+            this.tabPageProfiles.ResumeLayout(false);
+            this.tabPageTools.ResumeLayout(false);
+            this.tabPageStreams.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1931,6 +1955,9 @@
         private System.Windows.Forms.Label labelAvisynthProfile;
         private System.Windows.Forms.ComboBox comboBoxAvisynthProfile;
         private System.Windows.Forms.CheckBox checkBoxResize720p;
+        private System.Windows.Forms.TabPage tabPageProfiles;
+        private System.Windows.Forms.TabPage tabPageTools;
+        private System.Windows.Forms.TabPage tabPageStreams;
     }
 }
 
