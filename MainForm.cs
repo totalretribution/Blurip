@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        private string title = "BluRip 1080p v0.4.1 © _hawk_/PPX";
+        private string title = "BluRip 1080p v0.4.2 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -715,6 +715,15 @@ namespace BluRip
 
                 checkBoxUntouchedVideo_CheckedChanged(null, null);
 
+                checkBoxDownmixAc3.Checked = settings.downmixAc3;
+                checkBoxDownmixDts.Checked = settings.downmixDTS;
+
+                if (settings.downmixAc3Index > -1 && settings.downmixAc3Index < comboBoxDownmixAc3.Items.Count) comboBoxDownmixAc3.SelectedIndex = settings.downmixAc3Index;
+                if (settings.downmixDTSIndex > -1 && settings.downmixDTSIndex < comboBoxDownmixDts.Items.Count) comboBoxDownmixDts.SelectedIndex = settings.downmixDTSIndex;
+
+                checkBoxDownmixAc3_CheckedChanged(null, null);
+                checkBoxDownmixDts_CheckedChanged(null, null);
+
                 UpdateLanguage();
                 UpdateEncodingSettings();
                 UpdateAvisynthSettings();
@@ -1148,6 +1157,10 @@ namespace BluRip
                             if (ac3AudioTypes.Contains(si.typeDesc))
                             {
                                 pc.StartInfo.Arguments += "audio_ac3_" + si.language + ".ac3\" ";
+                                if (settings.downmixAc3)
+                                {
+                                    pc.StartInfo.Arguments += "-" + comboBoxDownmixAc3.Text + " ";
+                                }
                                 si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + si.language + ".ac3";
                             }
                             else if (dtsAudioTypes.Contains(si.typeDesc))
@@ -1156,6 +1169,10 @@ namespace BluRip
                                 if (si.addInfo.Contains("core") && settings.dtsHdCore)
                                 {
                                     pc.StartInfo.Arguments += "-core ";
+                                }
+                                if (settings.downmixDTS)
+                                {
+                                    pc.StartInfo.Arguments += "-" + comboBoxDownmixDts.Text + " ";
                                 }
                                 si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dts_" + si.language + ".dts";
                             }
@@ -2536,6 +2553,7 @@ namespace BluRip
         private string mkvtoolnixLink = "http://www.bunkus.org/videotools/mkvtoolnix/downloads.html";
         private string filterTweakerLink = "http://www.codecguide.com/windows7_preferred_filter_tweaker.htm";
         private string anydvdLink = "http://www.slysoft.com/de/anydvdhd.html";
+        private string surcodeLink = "http://www.surcode.com/";
 
         private void linkLabelAviSynth_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -3820,6 +3838,77 @@ namespace BluRip
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        private void checkBoxDownmixDts_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.downmixDTS = checkBoxDownmixDts.Checked;
+                if (settings.downmixDTS)
+                {
+                    comboBoxDownmixDts.Enabled = true;
+                }
+                else
+                {
+                    comboBoxDownmixDts.Enabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDownmixAc3_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.downmixAc3 = checkBoxDownmixAc3.Checked;
+                if (settings.downmixAc3)
+                {
+                    comboBoxDownmixAc3.Enabled = true;
+                }
+                else
+                {
+                    comboBoxDownmixAc3.Enabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxDownmixDts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxDownmixDts.SelectedIndex > -1) settings.downmixDTSIndex = comboBoxDownmixDts.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxDownmixAc3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxDownmixAc3.SelectedIndex > -1) settings.downmixAc3Index = comboBoxDownmixAc3.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void linkLabelSurcode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(surcodeLink);
+            }
+            catch (Exception)
+            {
             }
         }
     }
