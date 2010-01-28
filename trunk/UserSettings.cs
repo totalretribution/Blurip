@@ -121,6 +121,10 @@ namespace BluRip
             this.untouchedVideo = orig.untouchedVideo;
             this.lastAvisynthProfile = orig.lastAvisynthProfile;
             this.resize720p = orig.resize720p;
+            this.downmixAc3 = orig.downmixAc3;
+            this.downmixAc3Index = orig.downmixAc3Index;
+            this.downmixDTS = orig.downmixDTS;
+            this.downmixDTSIndex = orig.downmixDTSIndex;
 
             foreach (LanguageInfo li in orig.preferedLanguages)
             {
@@ -253,5 +257,10 @@ namespace BluRip
         public List<AvisynthSettings> avisynthSettings = new List<AvisynthSettings>();
         public int lastAvisynthProfile = 0;
         public bool resize720p = false;
+        public bool downmixDTS= false;
+        public int downmixDTSIndex = 0;
+        public bool downmixAc3 = false;
+        public int downmixAc3Index = 0;
+
     }
 }
