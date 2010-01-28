@@ -52,6 +52,7 @@ namespace BluRip
                 dtsAudioTypes.Add("DTS");
                 dtsAudioTypes.Add("DTS Master Audio");
                 dtsAudioTypes.Add("DTS Express");
+                dtsAudioTypes.Add("DTS Hi-Res");
 
                 comboBoxX264Priority.Items.Clear();
                 foreach (string s in Enum.GetNames(typeof(ProcessPriorityClass)))
