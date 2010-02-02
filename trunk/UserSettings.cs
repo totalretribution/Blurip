@@ -125,6 +125,10 @@ namespace BluRip
             this.downmixAc3Index = orig.downmixAc3Index;
             this.downmixDTS = orig.downmixDTS;
             this.downmixDTSIndex = orig.downmixDTSIndex;
+            this.minimizeAutocrop = orig.minimizeAutocrop;
+            this.muxOnlyForced = orig.muxOnlyForced;
+            this.copySubtitles = orig.copySubtitles;
+            this.copyAllButForced = orig.copyAllButForced;
 
             foreach (LanguageInfo li in orig.preferedLanguages)
             {
@@ -261,6 +265,9 @@ namespace BluRip
         public int downmixDTSIndex = 0;
         public bool downmixAc3 = false;
         public int downmixAc3Index = 0;
-
+        public bool minimizeAutocrop = false;
+        public bool muxOnlyForced = false;
+        public bool copySubtitles = true;
+        public bool copyAllButForced = false;
     }
 }

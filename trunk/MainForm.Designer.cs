@@ -73,7 +73,6 @@
             this.checkBoxResize720p = new System.Windows.Forms.CheckBox();
             this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
             this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
-            this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
             this.groupBoxAutoCrop = new System.Windows.Forms.GroupBox();
             this.labelCropMode = new System.Windows.Forms.Label();
             this.comboBoxCropMode = new System.Windows.Forms.ComboBox();
@@ -82,6 +81,12 @@
             this.numericUpDownBlackValue = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownNrFrames = new System.Windows.Forms.NumericUpDown();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
+            this.groupBoxAudioSettings = new System.Windows.Forms.GroupBox();
+            this.comboBoxDownmixAc3 = new System.Windows.Forms.ComboBox();
+            this.comboBoxDownmixDts = new System.Windows.Forms.ComboBox();
+            this.checkBoxDownmixAc3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxDownmixDts = new System.Windows.Forms.CheckBox();
+            this.checkBoxUseCore = new System.Windows.Forms.CheckBox();
             this.labelAvisynthProfile = new System.Windows.Forms.Label();
             this.labelX264Priority = new System.Windows.Forms.Label();
             this.comboBoxX264Priority = new System.Windows.Forms.ComboBox();
@@ -139,6 +144,7 @@
             this.checkBoxDefaultSubtitleTrack = new System.Windows.Forms.CheckBox();
             this.checkBoxDefaultAudioTrack = new System.Windows.Forms.CheckBox();
             this.tabPageSoftware = new System.Windows.Forms.TabPage();
+            this.linkLabelSurcode = new System.Windows.Forms.LinkLabel();
             this.labelUsefullTools = new System.Windows.Forms.Label();
             this.linkLabelAnyDvd = new System.Windows.Forms.LinkLabel();
             this.linkLabelFilterTweaker = new System.Windows.Forms.LinkLabel();
@@ -157,6 +163,7 @@
             this.contextMenuStripDeleteLog = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBarMain = new System.Windows.Forms.ProgressBar();
             this.buttonAbort = new System.Windows.Forms.Button();
             this.labelLog = new System.Windows.Forms.Label();
@@ -174,12 +181,10 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.groupBoxAudioSettings = new System.Windows.Forms.GroupBox();
-            this.checkBoxDownmixDts = new System.Windows.Forms.CheckBox();
-            this.checkBoxDownmixAc3 = new System.Windows.Forms.CheckBox();
-            this.comboBoxDownmixDts = new System.Windows.Forms.ComboBox();
-            this.comboBoxDownmixAc3 = new System.Windows.Forms.ComboBox();
-            this.linkLabelSurcode = new System.Windows.Forms.LinkLabel();
+            this.checkBoxMinimizeCrop = new System.Windows.Forms.CheckBox();
+            this.checkBoxMuxOnlyForced = new System.Windows.Forms.CheckBox();
+            this.checkBoxCopySubs = new System.Windows.Forms.CheckBox();
+            this.checkBoxCopySubsWithoutForced = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -190,6 +195,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlackValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNrFrames)).BeginInit();
             this.tabPageEncodingSettings.SuspendLayout();
+            this.groupBoxAudioSettings.SuspendLayout();
             this.groupBoxGeneralAviSynthSettings.SuspendLayout();
             this.tabPageProfiles.SuspendLayout();
             this.groupBoxAviSynthProfiles.SuspendLayout();
@@ -209,7 +215,6 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
-            this.groupBoxAudioSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -618,13 +623,16 @@
             // 
             // groupBoxGeneral
             // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxCopySubsWithoutForced);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxCopySubs);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxOnlyForced);
             this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteAfterEncode);
             this.groupBoxGeneral.Controls.Add(this.checkBoxResize720p);
             this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
             this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
             this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 146);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 179);
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
@@ -632,7 +640,7 @@
             // checkBoxDeleteAfterEncode
             // 
             this.checkBoxDeleteAfterEncode.AutoSize = true;
-            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 111);
+            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 157);
             this.checkBoxDeleteAfterEncode.Name = "checkBoxDeleteAfterEncode";
             this.checkBoxDeleteAfterEncode.Size = new System.Drawing.Size(159, 17);
             this.checkBoxDeleteAfterEncode.TabIndex = 18;
@@ -643,7 +651,7 @@
             // checkBoxResize720p
             // 
             this.checkBoxResize720p.AutoSize = true;
-            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 134);
             this.checkBoxResize720p.Name = "checkBoxResize720p";
             this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
             this.checkBoxResize720p.TabIndex = 13;
@@ -654,7 +662,7 @@
             // checkBoxUntouchedVideo
             // 
             this.checkBoxUntouchedVideo.AutoSize = true;
-            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 111);
             this.checkBoxUntouchedVideo.Name = "checkBoxUntouchedVideo";
             this.checkBoxUntouchedVideo.Size = new System.Drawing.Size(168, 17);
             this.checkBoxUntouchedVideo.TabIndex = 12;
@@ -665,7 +673,7 @@
             // checkBoxMuxSubtitle
             // 
             this.checkBoxMuxSubtitle.AutoSize = true;
-            this.checkBoxMuxSubtitle.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxMuxSubtitle.Location = new System.Drawing.Point(6, 19);
             this.checkBoxMuxSubtitle.Name = "checkBoxMuxSubtitle";
             this.checkBoxMuxSubtitle.Size = new System.Drawing.Size(130, 17);
             this.checkBoxMuxSubtitle.TabIndex = 11;
@@ -673,19 +681,9 @@
             this.checkBoxMuxSubtitle.UseVisualStyleBackColor = true;
             this.checkBoxMuxSubtitle.CheckedChanged += new System.EventHandler(this.checkBoxMuxSubtitle_CheckedChanged);
             // 
-            // checkBoxUseCore
-            // 
-            this.checkBoxUseCore.AutoSize = true;
-            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxUseCore.Name = "checkBoxUseCore";
-            this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
-            this.checkBoxUseCore.TabIndex = 10;
-            this.checkBoxUseCore.Text = "Use \'-core\' for DTS-HD tracks";
-            this.checkBoxUseCore.UseVisualStyleBackColor = true;
-            this.checkBoxUseCore.CheckedChanged += new System.EventHandler(this.checkBoxUseCore_CheckedChanged);
-            // 
             // groupBoxAutoCrop
             // 
+            this.groupBoxAutoCrop.Controls.Add(this.checkBoxMinimizeCrop);
             this.groupBoxAutoCrop.Controls.Add(this.labelCropMode);
             this.groupBoxAutoCrop.Controls.Add(this.comboBoxCropMode);
             this.groupBoxAutoCrop.Controls.Add(this.labelBlackValue);
@@ -694,7 +692,7 @@
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownNrFrames);
             this.groupBoxAutoCrop.Location = new System.Drawing.Point(212, 6);
             this.groupBoxAutoCrop.Name = "groupBoxAutoCrop";
-            this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 146);
+            this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 162);
             this.groupBoxAutoCrop.TabIndex = 5;
             this.groupBoxAutoCrop.TabStop = false;
             this.groupBoxAutoCrop.Text = "AutoCrop settings";
@@ -793,6 +791,80 @@
             this.tabPageEncodingSettings.TabIndex = 4;
             this.tabPageEncodingSettings.Text = "Encoding settings";
             this.tabPageEncodingSettings.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxAudioSettings
+            // 
+            this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixAc3);
+            this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixDts);
+            this.groupBoxAudioSettings.Controls.Add(this.checkBoxDownmixAc3);
+            this.groupBoxAudioSettings.Controls.Add(this.checkBoxDownmixDts);
+            this.groupBoxAudioSettings.Controls.Add(this.checkBoxUseCore);
+            this.groupBoxAudioSettings.Location = new System.Drawing.Point(346, 6);
+            this.groupBoxAudioSettings.Name = "groupBoxAudioSettings";
+            this.groupBoxAudioSettings.Size = new System.Drawing.Size(200, 147);
+            this.groupBoxAudioSettings.TabIndex = 36;
+            this.groupBoxAudioSettings.TabStop = false;
+            this.groupBoxAudioSettings.Text = "Audio settings";
+            // 
+            // comboBoxDownmixAc3
+            // 
+            this.comboBoxDownmixAc3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDownmixAc3.FormattingEnabled = true;
+            this.comboBoxDownmixAc3.Items.AddRange(new object[] {
+            "192",
+            "448",
+            "640"});
+            this.comboBoxDownmixAc3.Location = new System.Drawing.Point(6, 115);
+            this.comboBoxDownmixAc3.Name = "comboBoxDownmixAc3";
+            this.comboBoxDownmixAc3.Size = new System.Drawing.Size(188, 21);
+            this.comboBoxDownmixAc3.TabIndex = 14;
+            this.comboBoxDownmixAc3.SelectedIndexChanged += new System.EventHandler(this.comboBoxDownmixAc3_SelectedIndexChanged);
+            // 
+            // comboBoxDownmixDts
+            // 
+            this.comboBoxDownmixDts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDownmixDts.FormattingEnabled = true;
+            this.comboBoxDownmixDts.Items.AddRange(new object[] {
+            "768",
+            "1536"});
+            this.comboBoxDownmixDts.Location = new System.Drawing.Point(6, 65);
+            this.comboBoxDownmixDts.Name = "comboBoxDownmixDts";
+            this.comboBoxDownmixDts.Size = new System.Drawing.Size(188, 21);
+            this.comboBoxDownmixDts.TabIndex = 13;
+            this.comboBoxDownmixDts.SelectedIndexChanged += new System.EventHandler(this.comboBoxDownmixDts_SelectedIndexChanged);
+            // 
+            // checkBoxDownmixAc3
+            // 
+            this.checkBoxDownmixAc3.AutoSize = true;
+            this.checkBoxDownmixAc3.Location = new System.Drawing.Point(6, 92);
+            this.checkBoxDownmixAc3.Name = "checkBoxDownmixAc3";
+            this.checkBoxDownmixAc3.Size = new System.Drawing.Size(132, 17);
+            this.checkBoxDownmixAc3.TabIndex = 12;
+            this.checkBoxDownmixAc3.Text = "Use AC3 bitrate (kbps)";
+            this.checkBoxDownmixAc3.UseVisualStyleBackColor = true;
+            this.checkBoxDownmixAc3.CheckedChanged += new System.EventHandler(this.checkBoxDownmixAc3_CheckedChanged);
+            // 
+            // checkBoxDownmixDts
+            // 
+            this.checkBoxDownmixDts.AutoSize = true;
+            this.checkBoxDownmixDts.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxDownmixDts.Name = "checkBoxDownmixDts";
+            this.checkBoxDownmixDts.Size = new System.Drawing.Size(134, 17);
+            this.checkBoxDownmixDts.TabIndex = 11;
+            this.checkBoxDownmixDts.Text = "Use DTS bitrate (kbps)";
+            this.checkBoxDownmixDts.UseVisualStyleBackColor = true;
+            this.checkBoxDownmixDts.CheckedChanged += new System.EventHandler(this.checkBoxDownmixDts_CheckedChanged);
+            // 
+            // checkBoxUseCore
+            // 
+            this.checkBoxUseCore.AutoSize = true;
+            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxUseCore.Name = "checkBoxUseCore";
+            this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
+            this.checkBoxUseCore.TabIndex = 10;
+            this.checkBoxUseCore.Text = "Use \'-core\' for DTS-HD tracks";
+            this.checkBoxUseCore.UseVisualStyleBackColor = true;
+            this.checkBoxUseCore.CheckedChanged += new System.EventHandler(this.checkBoxUseCore_CheckedChanged);
             // 
             // labelAvisynthProfile
             // 
@@ -1398,6 +1470,17 @@
             this.tabPageSoftware.Text = "Needed tools";
             this.tabPageSoftware.UseVisualStyleBackColor = true;
             // 
+            // linkLabelSurcode
+            // 
+            this.linkLabelSurcode.AutoSize = true;
+            this.linkLabelSurcode.Location = new System.Drawing.Point(320, 42);
+            this.linkLabelSurcode.Name = "linkLabelSurcode";
+            this.linkLabelSurcode.Size = new System.Drawing.Size(99, 13);
+            this.linkLabelSurcode.TabIndex = 12;
+            this.linkLabelSurcode.TabStop = true;
+            this.linkLabelSurcode.Text = "SurCode DVD DTS";
+            this.linkLabelSurcode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSurcode_LinkClicked);
+            // 
             // labelUsefullTools
             // 
             this.labelUsefullTools.AutoSize = true;
@@ -1560,9 +1643,10 @@
             // 
             this.contextMenuStripDeleteLog.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearLogToolStripMenuItem,
-            this.clearAllLogsToolStripMenuItem});
+            this.clearAllLogsToolStripMenuItem,
+            this.saveLogToolStripMenuItem});
             this.contextMenuStripDeleteLog.Name = "contextMenuStripDeleteLog";
-            this.contextMenuStripDeleteLog.Size = new System.Drawing.Size(142, 48);
+            this.contextMenuStripDeleteLog.Size = new System.Drawing.Size(142, 70);
             // 
             // clearLogToolStripMenuItem
             // 
@@ -1577,6 +1661,13 @@
             this.clearAllLogsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.clearAllLogsToolStripMenuItem.Text = "Clear all logs";
             this.clearAllLogsToolStripMenuItem.Click += new System.EventHandler(this.clearAllLogsToolStripMenuItem_Click);
+            // 
+            // saveLogToolStripMenuItem
+            // 
+            this.saveLogToolStripMenuItem.Name = "saveLogToolStripMenuItem";
+            this.saveLogToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.saveLogToolStripMenuItem.Text = "Save log";
+            this.saveLogToolStripMenuItem.Click += new System.EventHandler(this.saveLogToolStripMenuItem_Click);
             // 
             // progressBarMain
             // 
@@ -1654,7 +1745,7 @@
             this.tabPageDemuxLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageDemuxLog.Name = "tabPageDemuxLog";
             this.tabPageDemuxLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDemuxLog.Size = new System.Drawing.Size(762, 163);
+            this.tabPageDemuxLog.Size = new System.Drawing.Size(758, 163);
             this.tabPageDemuxLog.TabIndex = 1;
             this.tabPageDemuxLog.Text = "Demux log";
             this.tabPageDemuxLog.UseVisualStyleBackColor = true;
@@ -1665,7 +1756,7 @@
             this.richTextBoxLogDemux.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLogDemux.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogDemux.Name = "richTextBoxLogDemux";
-            this.richTextBoxLogDemux.Size = new System.Drawing.Size(756, 157);
+            this.richTextBoxLogDemux.Size = new System.Drawing.Size(752, 157);
             this.richTextBoxLogDemux.TabIndex = 2;
             this.richTextBoxLogDemux.Text = "";
             // 
@@ -1675,7 +1766,7 @@
             this.tabPageCropLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageCropLog.Name = "tabPageCropLog";
             this.tabPageCropLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCropLog.Size = new System.Drawing.Size(762, 163);
+            this.tabPageCropLog.Size = new System.Drawing.Size(758, 163);
             this.tabPageCropLog.TabIndex = 2;
             this.tabPageCropLog.Text = "Autocrop log";
             this.tabPageCropLog.UseVisualStyleBackColor = true;
@@ -1686,7 +1777,7 @@
             this.richTextBoxLogCrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLogCrop.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogCrop.Name = "richTextBoxLogCrop";
-            this.richTextBoxLogCrop.Size = new System.Drawing.Size(756, 157);
+            this.richTextBoxLogCrop.Size = new System.Drawing.Size(752, 157);
             this.richTextBoxLogCrop.TabIndex = 2;
             this.richTextBoxLogCrop.Text = "";
             // 
@@ -1696,7 +1787,7 @@
             this.tabPageSubtitleLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageSubtitleLog.Name = "tabPageSubtitleLog";
             this.tabPageSubtitleLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSubtitleLog.Size = new System.Drawing.Size(762, 163);
+            this.tabPageSubtitleLog.Size = new System.Drawing.Size(758, 163);
             this.tabPageSubtitleLog.TabIndex = 3;
             this.tabPageSubtitleLog.Text = "Subtitle log";
             this.tabPageSubtitleLog.UseVisualStyleBackColor = true;
@@ -1707,7 +1798,7 @@
             this.richTextBoxLogSubtitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLogSubtitle.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogSubtitle.Name = "richTextBoxLogSubtitle";
-            this.richTextBoxLogSubtitle.Size = new System.Drawing.Size(756, 157);
+            this.richTextBoxLogSubtitle.Size = new System.Drawing.Size(752, 157);
             this.richTextBoxLogSubtitle.TabIndex = 2;
             this.richTextBoxLogSubtitle.Text = "";
             // 
@@ -1717,7 +1808,7 @@
             this.tabPageEncodeLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageEncodeLog.Name = "tabPageEncodeLog";
             this.tabPageEncodeLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEncodeLog.Size = new System.Drawing.Size(762, 163);
+            this.tabPageEncodeLog.Size = new System.Drawing.Size(758, 163);
             this.tabPageEncodeLog.TabIndex = 4;
             this.tabPageEncodeLog.Text = "Encode log";
             this.tabPageEncodeLog.UseVisualStyleBackColor = true;
@@ -1728,7 +1819,7 @@
             this.richTextBoxLogEncode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLogEncode.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogEncode.Name = "richTextBoxLogEncode";
-            this.richTextBoxLogEncode.Size = new System.Drawing.Size(756, 157);
+            this.richTextBoxLogEncode.Size = new System.Drawing.Size(752, 157);
             this.richTextBoxLogEncode.TabIndex = 2;
             this.richTextBoxLogEncode.Text = "";
             // 
@@ -1738,7 +1829,7 @@
             this.tabPageMuxLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageMuxLog.Name = "tabPageMuxLog";
             this.tabPageMuxLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMuxLog.Size = new System.Drawing.Size(762, 163);
+            this.tabPageMuxLog.Size = new System.Drawing.Size(758, 163);
             this.tabPageMuxLog.TabIndex = 5;
             this.tabPageMuxLog.Text = "Mux log";
             this.tabPageMuxLog.UseVisualStyleBackColor = true;
@@ -1749,83 +1840,53 @@
             this.richTextBoxLogMux.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLogMux.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxLogMux.Name = "richTextBoxLogMux";
-            this.richTextBoxLogMux.Size = new System.Drawing.Size(756, 157);
+            this.richTextBoxLogMux.Size = new System.Drawing.Size(752, 157);
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // groupBoxAudioSettings
+            // checkBoxMinimizeCrop
             // 
-            this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixAc3);
-            this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixDts);
-            this.groupBoxAudioSettings.Controls.Add(this.checkBoxDownmixAc3);
-            this.groupBoxAudioSettings.Controls.Add(this.checkBoxDownmixDts);
-            this.groupBoxAudioSettings.Controls.Add(this.checkBoxUseCore);
-            this.groupBoxAudioSettings.Location = new System.Drawing.Point(346, 6);
-            this.groupBoxAudioSettings.Name = "groupBoxAudioSettings";
-            this.groupBoxAudioSettings.Size = new System.Drawing.Size(200, 147);
-            this.groupBoxAudioSettings.TabIndex = 36;
-            this.groupBoxAudioSettings.TabStop = false;
-            this.groupBoxAudioSettings.Text = "Audio settings";
+            this.checkBoxMinimizeCrop.AutoSize = true;
+            this.checkBoxMinimizeCrop.Location = new System.Drawing.Point(6, 139);
+            this.checkBoxMinimizeCrop.Name = "checkBoxMinimizeCrop";
+            this.checkBoxMinimizeCrop.Size = new System.Drawing.Size(136, 17);
+            this.checkBoxMinimizeCrop.TabIndex = 9;
+            this.checkBoxMinimizeCrop.Text = "Minimize AutoCrop from";
+            this.checkBoxMinimizeCrop.UseVisualStyleBackColor = true;
+            this.checkBoxMinimizeCrop.CheckedChanged += new System.EventHandler(this.checkBoxMinimizeCrop_CheckedChanged);
             // 
-            // checkBoxDownmixDts
+            // checkBoxMuxOnlyForced
             // 
-            this.checkBoxDownmixDts.AutoSize = true;
-            this.checkBoxDownmixDts.Location = new System.Drawing.Point(6, 42);
-            this.checkBoxDownmixDts.Name = "checkBoxDownmixDts";
-            this.checkBoxDownmixDts.Size = new System.Drawing.Size(134, 17);
-            this.checkBoxDownmixDts.TabIndex = 11;
-            this.checkBoxDownmixDts.Text = "Use DTS bitrate (kbps)";
-            this.checkBoxDownmixDts.UseVisualStyleBackColor = true;
-            this.checkBoxDownmixDts.CheckedChanged += new System.EventHandler(this.checkBoxDownmixDts_CheckedChanged);
+            this.checkBoxMuxOnlyForced.AutoSize = true;
+            this.checkBoxMuxOnlyForced.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxMuxOnlyForced.Name = "checkBoxMuxOnlyForced";
+            this.checkBoxMuxOnlyForced.Size = new System.Drawing.Size(126, 17);
+            this.checkBoxMuxOnlyForced.TabIndex = 19;
+            this.checkBoxMuxOnlyForced.Text = "Mux forced subs only";
+            this.checkBoxMuxOnlyForced.UseVisualStyleBackColor = true;
+            this.checkBoxMuxOnlyForced.CheckedChanged += new System.EventHandler(this.checkBoxMuxOnlyForced_CheckedChanged);
             // 
-            // checkBoxDownmixAc3
+            // checkBoxCopySubs
             // 
-            this.checkBoxDownmixAc3.AutoSize = true;
-            this.checkBoxDownmixAc3.Location = new System.Drawing.Point(6, 92);
-            this.checkBoxDownmixAc3.Name = "checkBoxDownmixAc3";
-            this.checkBoxDownmixAc3.Size = new System.Drawing.Size(132, 17);
-            this.checkBoxDownmixAc3.TabIndex = 12;
-            this.checkBoxDownmixAc3.Text = "Use AC3 bitrate (kbps)";
-            this.checkBoxDownmixAc3.UseVisualStyleBackColor = true;
-            this.checkBoxDownmixAc3.CheckedChanged += new System.EventHandler(this.checkBoxDownmixAc3_CheckedChanged);
+            this.checkBoxCopySubs.AutoSize = true;
+            this.checkBoxCopySubs.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxCopySubs.Name = "checkBoxCopySubs";
+            this.checkBoxCopySubs.Size = new System.Drawing.Size(147, 17);
+            this.checkBoxCopySubs.TabIndex = 20;
+            this.checkBoxCopySubs.Text = "Copy subs to \'Subs\' folder";
+            this.checkBoxCopySubs.UseVisualStyleBackColor = true;
+            this.checkBoxCopySubs.CheckedChanged += new System.EventHandler(this.checkBoxCopySubs_CheckedChanged);
             // 
-            // comboBoxDownmixDts
+            // checkBoxCopySubsWithoutForced
             // 
-            this.comboBoxDownmixDts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDownmixDts.FormattingEnabled = true;
-            this.comboBoxDownmixDts.Items.AddRange(new object[] {
-            "768",
-            "1536"});
-            this.comboBoxDownmixDts.Location = new System.Drawing.Point(6, 65);
-            this.comboBoxDownmixDts.Name = "comboBoxDownmixDts";
-            this.comboBoxDownmixDts.Size = new System.Drawing.Size(188, 21);
-            this.comboBoxDownmixDts.TabIndex = 13;
-            this.comboBoxDownmixDts.SelectedIndexChanged += new System.EventHandler(this.comboBoxDownmixDts_SelectedIndexChanged);
-            // 
-            // comboBoxDownmixAc3
-            // 
-            this.comboBoxDownmixAc3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDownmixAc3.FormattingEnabled = true;
-            this.comboBoxDownmixAc3.Items.AddRange(new object[] {
-            "192",
-            "448",
-            "640"});
-            this.comboBoxDownmixAc3.Location = new System.Drawing.Point(6, 115);
-            this.comboBoxDownmixAc3.Name = "comboBoxDownmixAc3";
-            this.comboBoxDownmixAc3.Size = new System.Drawing.Size(188, 21);
-            this.comboBoxDownmixAc3.TabIndex = 14;
-            this.comboBoxDownmixAc3.SelectedIndexChanged += new System.EventHandler(this.comboBoxDownmixAc3_SelectedIndexChanged);
-            // 
-            // linkLabelSurcode
-            // 
-            this.linkLabelSurcode.AutoSize = true;
-            this.linkLabelSurcode.Location = new System.Drawing.Point(320, 42);
-            this.linkLabelSurcode.Name = "linkLabelSurcode";
-            this.linkLabelSurcode.Size = new System.Drawing.Size(99, 13);
-            this.linkLabelSurcode.TabIndex = 12;
-            this.linkLabelSurcode.TabStop = true;
-            this.linkLabelSurcode.Text = "SurCode DVD DTS";
-            this.linkLabelSurcode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSurcode_LinkClicked);
+            this.checkBoxCopySubsWithoutForced.AutoSize = true;
+            this.checkBoxCopySubsWithoutForced.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxCopySubsWithoutForced.Name = "checkBoxCopySubsWithoutForced";
+            this.checkBoxCopySubsWithoutForced.Size = new System.Drawing.Size(139, 17);
+            this.checkBoxCopySubsWithoutForced.TabIndex = 21;
+            this.checkBoxCopySubsWithoutForced.Text = "Copy all subs but forced";
+            this.checkBoxCopySubsWithoutForced.UseVisualStyleBackColor = true;
+            this.checkBoxCopySubsWithoutForced.CheckedChanged += new System.EventHandler(this.checkBoxCopySubsWithoutForced_CheckedChanged);
             // 
             // MainForm
             // 
@@ -1863,6 +1924,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNrFrames)).EndInit();
             this.tabPageEncodingSettings.ResumeLayout(false);
             this.tabPageEncodingSettings.PerformLayout();
+            this.groupBoxAudioSettings.ResumeLayout(false);
+            this.groupBoxAudioSettings.PerformLayout();
             this.groupBoxGeneralAviSynthSettings.ResumeLayout(false);
             this.groupBoxGeneralAviSynthSettings.PerformLayout();
             this.tabPageProfiles.ResumeLayout(false);
@@ -1889,8 +1952,6 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
-            this.groupBoxAudioSettings.ResumeLayout(false);
-            this.groupBoxAudioSettings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2048,6 +2109,11 @@
         private System.Windows.Forms.CheckBox checkBoxDownmixAc3;
         private System.Windows.Forms.CheckBox checkBoxDownmixDts;
         private System.Windows.Forms.LinkLabel linkLabelSurcode;
+        private System.Windows.Forms.ToolStripMenuItem saveLogToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxMinimizeCrop;
+        private System.Windows.Forms.CheckBox checkBoxCopySubsWithoutForced;
+        private System.Windows.Forms.CheckBox checkBoxCopySubs;
+        private System.Windows.Forms.CheckBox checkBoxMuxOnlyForced;
     }
 }
 
