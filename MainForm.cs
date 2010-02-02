@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        private string title = "BluRip 1080p v0.4.2 © _hawk_/PPX";
+        public string title = "BluRip 1080p v0.4.3 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -724,6 +724,14 @@ namespace BluRip
                 checkBoxDownmixAc3_CheckedChanged(null, null);
                 checkBoxDownmixDts_CheckedChanged(null, null);
 
+                checkBoxMinimizeCrop.Checked = settings.minimizeAutocrop;
+                checkBoxMuxOnlyForced.Checked = settings.muxOnlyForced;
+                checkBoxCopySubs.Checked = settings.copySubtitles;
+                checkBoxCopySubsWithoutForced.Checked = settings.copyAllButForced;
+
+                checkBoxCopySubs_CheckedChanged(null, null);
+                checkBoxMuxSubtitle_CheckedChanged(null, null);
+
                 UpdateLanguage();
                 UpdateEncodingSettings();
                 UpdateAvisynthSettings();
@@ -745,6 +753,7 @@ namespace BluRip
                 if (!File.Exists(settingsPath))
                 {
                     UserSettings.SaveSettingsFile(settings, settingsPath);
+                    UserSettings.LoadSettingsFile(ref settings, settingsPath);
                 }
                 else
                 {
@@ -1419,7 +1428,13 @@ namespace BluRip
                         File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
                             "FFVideoSource(\"" + filename + "\")");
                     }
+                    MessageCrop("Starting AutoCrop...");
                     AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
+                    if (settings.minimizeAutocrop)
+                    {
+                        ac.WindowState = FormWindowState.Minimized;
+                    }
+
                     if (ac.error)
                     {
                         MessageCrop("Exception: " + ac.errorStr);
@@ -1525,11 +1540,13 @@ namespace BluRip
 
                 if (settings.workingDir == "")
                 {
+                    MessageMain("Working dir not set");
                     MessageBox.Show("Working dir not set", "Error");
                     return false;
                 }
                 if (comboBoxTitle.SelectedIndex == -1)
                 {
+                    MessageMain("No title selected");
                     MessageBox.Show("No title selected", "Error");
                     return false;
                 }
@@ -1548,11 +1565,13 @@ namespace BluRip
                 }
                 if (audioCount < 1)
                 {
+                    MessageMain("No audio streams selected");
                     MessageBox.Show("No audio streams selected", "Error");
                     return false;
                 }
                 if (videoCount != 1)
                 {
+                    MessageMain("No video stream or more then one selected");
                     MessageBox.Show("No video stream or more then one selected", "Error");
                     return false;
                 }
@@ -1592,6 +1611,7 @@ namespace BluRip
 
                 if (demuxedStreamList.streams.Count == 0)
                 {
+                    MessageMain("No demuxed streams available");
                     MessageBox.Show("No demuxed streams available", "Error");
                     return false;
                 }
@@ -2094,13 +2114,21 @@ namespace BluRip
             public string Text { get { return text; } }
             private MsgHandler Message = null;
             private string lastMsg = "";
+            private UserSettings settings = null;
+            private int index = -1;
+            private MainForm mf = null;
+            private NotifyIcon ni = null;
 
-            public OutputReader(StreamReader sr, MsgHandler Message)
+            public OutputReader(StreamReader sr, MsgHandler Message, UserSettings settings, int index, MainForm mf, NotifyIcon ni)
             {
                 try
                 {
                     this.sr = sr;
                     this.Message = Message;
+                    this.settings = settings;
+                    this.index = index;
+                    this.mf = mf;
+                    this.ni = ni;
                 }
                 catch (Exception)
                 {
@@ -2122,6 +2150,25 @@ namespace BluRip
                             {
                                 Message(text);
                                 lastMsg = substr;
+                                
+                                if (index > -1 && settings.encodingSettings[index].pass2)
+                                {
+                                    if (!mf.secondPass)
+                                    {
+                                        mf.Text = mf.title + " [Encoding 1. pass " + text + "]";
+                                        ni.Text = "Encoding 1. pass - " + substr + "%";
+                                    }
+                                    else
+                                    {
+                                        mf.Text = mf.title + " [Encoding 2. pass " + text + "]";
+                                        ni.Text = "Encoding 2. pass - " + substr + "%";
+                                    }
+                                }
+                                else
+                                {
+                                    mf.Text = mf.title + " [Encoding " + text + "]";
+                                    ni.Text = "Encoding - " + substr + "%";
+                                }
                             }
                         }
                         else
@@ -2137,6 +2184,7 @@ namespace BluRip
             }
         }
 
+        public bool secondPass = false;
         private bool encodeThreadStatus = false;
         private void EncodeThread()
         {
@@ -2145,11 +2193,13 @@ namespace BluRip
                 encodeThreadStatus = false;
                 if (settings.workingDir == "")
                 {
+                    MessageMain("Working dir not set");
                     MessageBox.Show("Working dir not set", "Error");
                     return;
                 }
                 if (demuxedStreamList.streams.Count == 0)
                 {
+                    MessageMain("No demuxed streams available");
                     MessageBox.Show("No demuxed streams available", "Error");
                     return;
                 }
@@ -2169,6 +2219,7 @@ namespace BluRip
 
                 if (filename == "")
                 {
+                    MessageMain("Encode avs not set - do index + autocrop first");
                     MessageBox.Show("Encode avs not set - do index + autocrop first", "Error");
                     return;
                 }
@@ -2176,6 +2227,7 @@ namespace BluRip
                 int index = comboBoxEncodeProfile.SelectedIndex;
                 if (index < 0)
                 {
+                    MessageMain("Encoding profile not set");
                     MessageBox.Show("Encoding profile not set", "Error");
                     return;
                 }
@@ -2189,6 +2241,7 @@ namespace BluRip
                 }
                 else
                 {
+                    secondPass = false;
                     MessageEncode("Starting to encode 1. pass...");
                     MessageEncode("");
                 }
@@ -2214,10 +2267,10 @@ namespace BluRip
 
                 pc.PriorityClass = settings.x264Priority;
                 
-                OutputReader or = new OutputReader(pc.StandardOutput, MessageEncode);
+                OutputReader or = new OutputReader(pc.StandardOutput, MessageEncode, settings, index, this, notifyIconMain);
                 Thread orThread = new Thread(or.Start);
 
-                OutputReader or2 = new OutputReader(pc.StandardError, MessageEncode);
+                OutputReader or2 = new OutputReader(pc.StandardError, MessageEncode, settings, index, this, notifyIconMain);
                 Thread or2Thread = new Thread(or2.Start);
 
                 orThread.Start();
@@ -2236,6 +2289,7 @@ namespace BluRip
                 
                 if (settings.encodingSettings[index].pass2)
                 {
+                    secondPass = true;
                     MessageEncode("Starting to encode 2. pass...");
                     MessageEncode("");
 
@@ -2260,10 +2314,10 @@ namespace BluRip
 
                     pc.PriorityClass = settings.x264Priority;
 
-                    or = new OutputReader(pc.StandardOutput, MessageEncode);
+                    or = new OutputReader(pc.StandardOutput, MessageEncode, settings, index, this, notifyIconMain);
                     orThread = new Thread(or.Start);
 
-                    or2 = new OutputReader(pc.StandardError, MessageEncode);
+                    or2 = new OutputReader(pc.StandardError, MessageEncode, settings, index, this, notifyIconMain);
                     or2Thread = new Thread(or2.Start);
 
                     orThread.Start();
@@ -2346,6 +2400,7 @@ namespace BluRip
                 }
                 if (fps == "")
                 {
+                    MessageMain("Framerate not set - do index + autocrop first");
                     MessageBox.Show("Framerate not set - do index + autocrop first", "Error");
                     return;
                 }
@@ -2513,6 +2568,7 @@ namespace BluRip
             {
                 if (demuxedStreamList.streams.Count == 0)
                 {
+                    MessageMain("No demuxed streams available");
                     MessageBox.Show("No demuxed streams available", "Error");
                     return false;
                 }
@@ -2949,42 +3005,45 @@ namespace BluRip
                         if (si.streamType == StreamType.Subtitle)
                         {
                             SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                            if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
+                            if ((sfi.normalIdx != "" && !settings.muxOnlyForced) || sfi.forcedIdx != "")
                             {
-                                if (!defaultSet)
+                                if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
                                 {
-                                    if (settings.defaultSubtitle)
+                                    if (!defaultSet)
                                     {
-                                        if (!settings.defaultSubtitleForced)
+                                        if (settings.defaultSubtitle)
                                         {
-                                            pc.StartInfo.Arguments += "--default-track 0 ";
-                                            defaultSet = true;
-                                        }
-                                        else
-                                        {
-                                            if (hasForcedSub(si.language))
+                                            if (!settings.defaultSubtitleForced)
                                             {
-                                                if (sfi.forcedIdx != "")
+                                                pc.StartInfo.Arguments += "--default-track 0 ";
+                                                defaultSet = true;
+                                            }
+                                            else
+                                            {
+                                                if (hasForcedSub(si.language))
                                                 {
-                                                    pc.StartInfo.Arguments += "--default-track 0 ";
-                                                    defaultSet = true;
+                                                    if (sfi.forcedIdx != "")
+                                                    {
+                                                        pc.StartInfo.Arguments += "--default-track 0 ";
+                                                        defaultSet = true;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            }
-                            if (!settings.defaultSubtitle)
-                            {
-                                pc.StartInfo.Arguments += "--default-track 0:0 ";
-                            }
-                            if (sfi.normalIdx != "")
-                            {
-                                pc.StartInfo.Arguments += "\"" + sfi.normalIdx + "\" ";
-                            }
-                            else if (sfi.forcedIdx != "")
-                            {
-                                pc.StartInfo.Arguments += "\"" + sfi.forcedIdx + "\" ";
+                                if (!settings.defaultSubtitle)
+                                {
+                                    pc.StartInfo.Arguments += "--default-track 0:0 ";
+                                }
+                                if (sfi.normalIdx != "")
+                                {
+                                    pc.StartInfo.Arguments += "\"" + sfi.normalIdx + "\" ";
+                                }
+                                else if (sfi.forcedIdx != "")
+                                {
+                                    pc.StartInfo.Arguments += "\"" + sfi.forcedIdx + "\" ";
+                                }
                             }
                         }
                     }
@@ -3011,49 +3070,55 @@ namespace BluRip
                 pc.Close();
                 MessageMux("Muxing done!");
 
-                MessageMux("Trying to copy subtitles...");
-                try
+                if (settings.copySubtitles)
                 {
-                    if (!Directory.Exists(settings.targetFolder + "\\Subs"))
+                    MessageMux("Trying to copy subtitles...");
+                    try
                     {
-                        Directory.CreateDirectory(settings.targetFolder + "\\Subs");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageMain("Exception: " + ex.Message);
-                }
-                int sub = 1;
-                foreach (StreamInfo si in demuxedStreamList.streams)
-                {
-                    if (si.streamType == StreamType.Subtitle)
-                    {
-                        if (si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
+                        if (!Directory.Exists(settings.targetFolder + "\\Subs"))
                         {
-                            SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                            try
-                            {
-                                string target = settings.targetFolder + "\\Subs\\" + settings.targetFilename;
-                                if (sfi.normalIdx != "")
-                                {
-                                    File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx", true);
-                                    File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub", true);
-                                }
-                                else if (sfi.forcedIdx != "")
-                                {
-                                    File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx", true);
-                                    File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub", true);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageMux("Exception: " + ex.Message);
-                            }
-                            sub++;
+                            Directory.CreateDirectory(settings.targetFolder + "\\Subs");
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        MessageMain("Exception: " + ex.Message);
+                    }
+                    int sub = 1;
+                    foreach (StreamInfo si in demuxedStreamList.streams)
+                    {
+                        if (si.streamType == StreamType.Subtitle)
+                        {
+                            if (si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
+                            {
+                                SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
+                                if ((sfi.forcedIdx != "" && !settings.copyAllButForced) || sfi.normalIdx != "")
+                                {
+                                    try
+                                    {
+                                        string target = settings.targetFolder + "\\Subs\\" + settings.targetFilename;
+                                        if (sfi.normalIdx != "")
+                                        {
+                                            File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx", true);
+                                            File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub", true);
+                                        }
+                                        else if (sfi.forcedIdx != "")
+                                        {
+                                            File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx", true);
+                                            File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub", true);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageMux("Exception: " + ex.Message);
+                                    }
+                                    sub++;
+                                }
+                            }
+                        }
+                    }
+                    MessageMux("Done.");
                 }
-                MessageMux("Done.");
                 if (settings.deleteAfterEncode)
                 {
                     MessageMux("Deleting source files...");
@@ -3628,6 +3693,14 @@ namespace BluRip
             try
             {
                 settings.muxSubtitles = checkBoxMuxSubtitle.Checked;
+                if (settings.muxSubtitles)
+                {
+                    checkBoxMuxOnlyForced.Enabled = true;
+                }
+                else
+                {
+                    checkBoxMuxOnlyForced.Enabled = false;
+                }
             }
             catch (Exception)
             {
@@ -3720,6 +3793,7 @@ namespace BluRip
             {
                 if (!File.Exists(settings.eac3toPath))
                 {
+                    MessageMain("eac3to path not set");
                     MessageBox.Show("eac3to path not set", "Error");
                     return false;
                 }
@@ -3739,6 +3813,7 @@ namespace BluRip
                 {
                     if (!File.Exists(settings.ffmsindexPath))
                     {
+                        MessageMain("ffmsindex path not set");
                         MessageBox.Show("ffmsindex path not set", "Error");
                         return false;
                     }
@@ -3757,12 +3832,14 @@ namespace BluRip
             {
                 if (!File.Exists(settings.javaPath))
                 {
+                    MessageMain("java path not set");
                     MessageBox.Show("java path not set", "Error");
                     return false;
                 }
                 if (!File.Exists(settings.sup2subPath))
                 {
-                    MessageBox.Show("java path not set", "Error");
+                    MessageMain("BDsup2sub path not set");
+                    MessageBox.Show("BDsup2sub path not set", "Error");
                     return false;
                 }
                 return true;
@@ -3779,6 +3856,7 @@ namespace BluRip
             {
                 if (!File.Exists(settings.x264Path))
                 {
+                    MessageMain("x264 path not set");
                     MessageBox.Show("x264 path not set", "Error");
                     return false;
                 }
@@ -3796,6 +3874,7 @@ namespace BluRip
             {
                 if (!File.Exists(settings.mkvmergePath))
                 {
+                    MessageMain("mkvmerge path not set");
                     MessageBox.Show("mkvmerge path not set", "Error");
                     return false;
                 }
@@ -3906,6 +3985,111 @@ namespace BluRip
             try
             {
                 System.Diagnostics.Process.Start(surcodeLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void SaveLog(string log)
+        {
+            try
+            {
+                string[] lines = log.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string tmp = "";
+                foreach(string s in lines) tmp += s.Trim() + "\r\n";
+                SaveFileDialog sfd = new SaveFileDialog();                
+                sfd.Filter = "Log file|*.txt";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(sfd.FileName, tmp);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void saveLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tabControlLog.SelectedTab == tabPageMainLog)
+                {   
+                    SaveLog(richTextBoxLogMain.Text);
+                }
+                else if (tabControlLog.SelectedTab == tabPageDemuxLog)
+                {
+                    SaveLog(richTextBoxLogDemux.Text);
+                }
+                if (tabControlLog.SelectedTab == tabPageCropLog)
+                {
+                    SaveLog(richTextBoxLogCrop.Text);
+                }
+                if (tabControlLog.SelectedTab == tabPageSubtitleLog)
+                {
+                    SaveLog(richTextBoxLogSubtitle.Text);
+                }
+                if (tabControlLog.SelectedTab == tabPageEncodeLog)
+                {
+                    SaveLog(richTextBoxLogEncode.Text);
+                }
+                if (tabControlLog.SelectedTab == tabPageMuxLog)
+                {
+                    SaveLog(richTextBoxLogMux.Text);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxMinimizeCrop_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.minimizeAutocrop = checkBoxMinimizeCrop.Checked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxMuxOnlyForced_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.muxOnlyForced = checkBoxMuxOnlyForced.Checked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxCopySubs_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.copySubtitles = checkBoxCopySubs.Checked;
+                if (settings.copySubtitles)
+                {
+                    checkBoxCopySubsWithoutForced.Enabled = true;
+                }
+                else
+                {
+                    checkBoxCopySubsWithoutForced.Enabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxCopySubsWithoutForced_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.copyAllButForced = checkBoxCopySubsWithoutForced.Checked;
             }
             catch (Exception)
             {
