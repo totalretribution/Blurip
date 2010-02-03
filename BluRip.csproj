@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="MediaInfoDLL.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AutoCrop.resx">
       <DependentUpon>AutoCrop.cs</DependentUpon>

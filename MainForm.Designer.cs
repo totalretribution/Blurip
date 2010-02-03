@@ -69,11 +69,15 @@
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxCopySubsWithoutForced = new System.Windows.Forms.CheckBox();
+            this.checkBoxCopySubs = new System.Windows.Forms.CheckBox();
+            this.checkBoxMuxOnlyForced = new System.Windows.Forms.CheckBox();
             this.checkBoxDeleteAfterEncode = new System.Windows.Forms.CheckBox();
             this.checkBoxResize720p = new System.Windows.Forms.CheckBox();
             this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
             this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
             this.groupBoxAutoCrop = new System.Windows.Forms.GroupBox();
+            this.checkBoxMinimizeCrop = new System.Windows.Forms.CheckBox();
             this.labelCropMode = new System.Windows.Forms.Label();
             this.comboBoxCropMode = new System.Windows.Forms.ComboBox();
             this.labelBlackValue = new System.Windows.Forms.Label();
@@ -181,10 +185,17 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.checkBoxMinimizeCrop = new System.Windows.Forms.CheckBox();
-            this.checkBoxMuxOnlyForced = new System.Windows.Forms.CheckBox();
-            this.checkBoxCopySubs = new System.Windows.Forms.CheckBox();
-            this.checkBoxCopySubsWithoutForced = new System.Windows.Forms.CheckBox();
+            this.buttonSaveProject = new System.Windows.Forms.Button();
+            this.buttonLoadProject = new System.Windows.Forms.Button();
+            this.tabPageProjectQueue = new System.Windows.Forms.TabPage();
+            this.labelQueueDesc = new System.Windows.Forms.Label();
+            this.listBoxQueue = new System.Windows.Forms.ListBox();
+            this.groupBoxQueue = new System.Windows.Forms.GroupBox();
+            this.buttonQueueCurrent = new System.Windows.Forms.Button();
+            this.buttonQueueExisting = new System.Windows.Forms.Button();
+            this.buttonQueueUp = new System.Windows.Forms.Button();
+            this.buttonQueueDown = new System.Windows.Forms.Button();
+            this.buttonQueueDel = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -215,6 +226,8 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
+            this.tabPageProjectQueue.SuspendLayout();
+            this.groupBoxQueue.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -228,6 +241,7 @@
             this.tabControlMain.Controls.Add(this.tabPageStreams);
             this.tabControlMain.Controls.Add(this.tabPageSoftware);
             this.tabControlMain.Controls.Add(this.tabPageAbout);
+            this.tabControlMain.Controls.Add(this.tabPageProjectQueue);
             this.tabControlMain.Location = new System.Drawing.Point(12, 12);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -637,6 +651,39 @@
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
             // 
+            // checkBoxCopySubsWithoutForced
+            // 
+            this.checkBoxCopySubsWithoutForced.AutoSize = true;
+            this.checkBoxCopySubsWithoutForced.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxCopySubsWithoutForced.Name = "checkBoxCopySubsWithoutForced";
+            this.checkBoxCopySubsWithoutForced.Size = new System.Drawing.Size(139, 17);
+            this.checkBoxCopySubsWithoutForced.TabIndex = 21;
+            this.checkBoxCopySubsWithoutForced.Text = "Copy all subs but forced";
+            this.checkBoxCopySubsWithoutForced.UseVisualStyleBackColor = true;
+            this.checkBoxCopySubsWithoutForced.CheckedChanged += new System.EventHandler(this.checkBoxCopySubsWithoutForced_CheckedChanged);
+            // 
+            // checkBoxCopySubs
+            // 
+            this.checkBoxCopySubs.AutoSize = true;
+            this.checkBoxCopySubs.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxCopySubs.Name = "checkBoxCopySubs";
+            this.checkBoxCopySubs.Size = new System.Drawing.Size(147, 17);
+            this.checkBoxCopySubs.TabIndex = 20;
+            this.checkBoxCopySubs.Text = "Copy subs to \'Subs\' folder";
+            this.checkBoxCopySubs.UseVisualStyleBackColor = true;
+            this.checkBoxCopySubs.CheckedChanged += new System.EventHandler(this.checkBoxCopySubs_CheckedChanged);
+            // 
+            // checkBoxMuxOnlyForced
+            // 
+            this.checkBoxMuxOnlyForced.AutoSize = true;
+            this.checkBoxMuxOnlyForced.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxMuxOnlyForced.Name = "checkBoxMuxOnlyForced";
+            this.checkBoxMuxOnlyForced.Size = new System.Drawing.Size(126, 17);
+            this.checkBoxMuxOnlyForced.TabIndex = 19;
+            this.checkBoxMuxOnlyForced.Text = "Mux forced subs only";
+            this.checkBoxMuxOnlyForced.UseVisualStyleBackColor = true;
+            this.checkBoxMuxOnlyForced.CheckedChanged += new System.EventHandler(this.checkBoxMuxOnlyForced_CheckedChanged);
+            // 
             // checkBoxDeleteAfterEncode
             // 
             this.checkBoxDeleteAfterEncode.AutoSize = true;
@@ -696,6 +743,17 @@
             this.groupBoxAutoCrop.TabIndex = 5;
             this.groupBoxAutoCrop.TabStop = false;
             this.groupBoxAutoCrop.Text = "AutoCrop settings";
+            // 
+            // checkBoxMinimizeCrop
+            // 
+            this.checkBoxMinimizeCrop.AutoSize = true;
+            this.checkBoxMinimizeCrop.Location = new System.Drawing.Point(6, 139);
+            this.checkBoxMinimizeCrop.Name = "checkBoxMinimizeCrop";
+            this.checkBoxMinimizeCrop.Size = new System.Drawing.Size(136, 17);
+            this.checkBoxMinimizeCrop.TabIndex = 9;
+            this.checkBoxMinimizeCrop.Text = "Minimize AutoCrop from";
+            this.checkBoxMinimizeCrop.UseVisualStyleBackColor = true;
+            this.checkBoxMinimizeCrop.CheckedChanged += new System.EventHandler(this.checkBoxMinimizeCrop_CheckedChanged);
             // 
             // labelCropMode
             // 
@@ -1844,49 +1902,116 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // checkBoxMinimizeCrop
+            // buttonSaveProject
             // 
-            this.checkBoxMinimizeCrop.AutoSize = true;
-            this.checkBoxMinimizeCrop.Location = new System.Drawing.Point(6, 139);
-            this.checkBoxMinimizeCrop.Name = "checkBoxMinimizeCrop";
-            this.checkBoxMinimizeCrop.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxMinimizeCrop.TabIndex = 9;
-            this.checkBoxMinimizeCrop.Text = "Minimize AutoCrop from";
-            this.checkBoxMinimizeCrop.UseVisualStyleBackColor = true;
-            this.checkBoxMinimizeCrop.CheckedChanged += new System.EventHandler(this.checkBoxMinimizeCrop_CheckedChanged);
+            this.buttonSaveProject.Location = new System.Drawing.Point(6, 6);
+            this.buttonSaveProject.Name = "buttonSaveProject";
+            this.buttonSaveProject.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveProject.TabIndex = 9;
+            this.buttonSaveProject.Text = "Save project";
+            this.buttonSaveProject.UseVisualStyleBackColor = true;
+            this.buttonSaveProject.Click += new System.EventHandler(this.buttonSaveProject_Click);
             // 
-            // checkBoxMuxOnlyForced
+            // buttonLoadProject
             // 
-            this.checkBoxMuxOnlyForced.AutoSize = true;
-            this.checkBoxMuxOnlyForced.Location = new System.Drawing.Point(6, 42);
-            this.checkBoxMuxOnlyForced.Name = "checkBoxMuxOnlyForced";
-            this.checkBoxMuxOnlyForced.Size = new System.Drawing.Size(126, 17);
-            this.checkBoxMuxOnlyForced.TabIndex = 19;
-            this.checkBoxMuxOnlyForced.Text = "Mux forced subs only";
-            this.checkBoxMuxOnlyForced.UseVisualStyleBackColor = true;
-            this.checkBoxMuxOnlyForced.CheckedChanged += new System.EventHandler(this.checkBoxMuxOnlyForced_CheckedChanged);
+            this.buttonLoadProject.Location = new System.Drawing.Point(87, 6);
+            this.buttonLoadProject.Name = "buttonLoadProject";
+            this.buttonLoadProject.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadProject.TabIndex = 10;
+            this.buttonLoadProject.Text = "Load project";
+            this.buttonLoadProject.UseVisualStyleBackColor = true;
+            this.buttonLoadProject.Click += new System.EventHandler(this.buttonLoadProject_Click);
             // 
-            // checkBoxCopySubs
+            // tabPageProjectQueue
             // 
-            this.checkBoxCopySubs.AutoSize = true;
-            this.checkBoxCopySubs.Location = new System.Drawing.Point(6, 65);
-            this.checkBoxCopySubs.Name = "checkBoxCopySubs";
-            this.checkBoxCopySubs.Size = new System.Drawing.Size(147, 17);
-            this.checkBoxCopySubs.TabIndex = 20;
-            this.checkBoxCopySubs.Text = "Copy subs to \'Subs\' folder";
-            this.checkBoxCopySubs.UseVisualStyleBackColor = true;
-            this.checkBoxCopySubs.CheckedChanged += new System.EventHandler(this.checkBoxCopySubs_CheckedChanged);
+            this.tabPageProjectQueue.Controls.Add(this.groupBoxQueue);
+            this.tabPageProjectQueue.Controls.Add(this.buttonLoadProject);
+            this.tabPageProjectQueue.Controls.Add(this.buttonSaveProject);
+            this.tabPageProjectQueue.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProjectQueue.Name = "tabPageProjectQueue";
+            this.tabPageProjectQueue.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProjectQueue.Size = new System.Drawing.Size(762, 285);
+            this.tabPageProjectQueue.TabIndex = 10;
+            this.tabPageProjectQueue.Text = "Project/Queue";
+            this.tabPageProjectQueue.UseVisualStyleBackColor = true;
             // 
-            // checkBoxCopySubsWithoutForced
+            // labelQueueDesc
             // 
-            this.checkBoxCopySubsWithoutForced.AutoSize = true;
-            this.checkBoxCopySubsWithoutForced.Location = new System.Drawing.Point(6, 88);
-            this.checkBoxCopySubsWithoutForced.Name = "checkBoxCopySubsWithoutForced";
-            this.checkBoxCopySubsWithoutForced.Size = new System.Drawing.Size(139, 17);
-            this.checkBoxCopySubsWithoutForced.TabIndex = 21;
-            this.checkBoxCopySubsWithoutForced.Text = "Copy all subs but forced";
-            this.checkBoxCopySubsWithoutForced.UseVisualStyleBackColor = true;
-            this.checkBoxCopySubsWithoutForced.CheckedChanged += new System.EventHandler(this.checkBoxCopySubsWithoutForced_CheckedChanged);
+            this.labelQueueDesc.AutoSize = true;
+            this.labelQueueDesc.Location = new System.Drawing.Point(6, 16);
+            this.labelQueueDesc.Name = "labelQueueDesc";
+            this.labelQueueDesc.Size = new System.Drawing.Size(76, 13);
+            this.labelQueueDesc.TabIndex = 11;
+            this.labelQueueDesc.Text = "Jobs in queue:";
+            // 
+            // listBoxQueue
+            // 
+            this.listBoxQueue.FormattingEnabled = true;
+            this.listBoxQueue.Location = new System.Drawing.Point(6, 32);
+            this.listBoxQueue.Name = "listBoxQueue";
+            this.listBoxQueue.Size = new System.Drawing.Size(240, 134);
+            this.listBoxQueue.TabIndex = 12;
+            // 
+            // groupBoxQueue
+            // 
+            this.groupBoxQueue.Controls.Add(this.buttonQueueDel);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueDown);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueUp);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueExisting);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueCurrent);
+            this.groupBoxQueue.Controls.Add(this.listBoxQueue);
+            this.groupBoxQueue.Controls.Add(this.labelQueueDesc);
+            this.groupBoxQueue.Location = new System.Drawing.Point(6, 35);
+            this.groupBoxQueue.Name = "groupBoxQueue";
+            this.groupBoxQueue.Size = new System.Drawing.Size(334, 203);
+            this.groupBoxQueue.TabIndex = 13;
+            this.groupBoxQueue.TabStop = false;
+            this.groupBoxQueue.Text = "Queue";
+            // 
+            // buttonQueueCurrent
+            // 
+            this.buttonQueueCurrent.Location = new System.Drawing.Point(6, 172);
+            this.buttonQueueCurrent.Name = "buttonQueueCurrent";
+            this.buttonQueueCurrent.Size = new System.Drawing.Size(118, 23);
+            this.buttonQueueCurrent.TabIndex = 13;
+            this.buttonQueueCurrent.Text = "Add current project";
+            this.buttonQueueCurrent.UseVisualStyleBackColor = true;
+            // 
+            // buttonQueueExisting
+            // 
+            this.buttonQueueExisting.Location = new System.Drawing.Point(130, 172);
+            this.buttonQueueExisting.Name = "buttonQueueExisting";
+            this.buttonQueueExisting.Size = new System.Drawing.Size(116, 23);
+            this.buttonQueueExisting.TabIndex = 14;
+            this.buttonQueueExisting.Text = "Add existing project";
+            this.buttonQueueExisting.UseVisualStyleBackColor = true;
+            // 
+            // buttonQueueUp
+            // 
+            this.buttonQueueUp.Location = new System.Drawing.Point(252, 32);
+            this.buttonQueueUp.Name = "buttonQueueUp";
+            this.buttonQueueUp.Size = new System.Drawing.Size(75, 23);
+            this.buttonQueueUp.TabIndex = 15;
+            this.buttonQueueUp.Text = "Move up";
+            this.buttonQueueUp.UseVisualStyleBackColor = true;
+            // 
+            // buttonQueueDown
+            // 
+            this.buttonQueueDown.Location = new System.Drawing.Point(252, 61);
+            this.buttonQueueDown.Name = "buttonQueueDown";
+            this.buttonQueueDown.Size = new System.Drawing.Size(75, 23);
+            this.buttonQueueDown.TabIndex = 16;
+            this.buttonQueueDown.Text = "Move down";
+            this.buttonQueueDown.UseVisualStyleBackColor = true;
+            // 
+            // buttonQueueDel
+            // 
+            this.buttonQueueDel.Location = new System.Drawing.Point(252, 90);
+            this.buttonQueueDel.Name = "buttonQueueDel";
+            this.buttonQueueDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonQueueDel.TabIndex = 17;
+            this.buttonQueueDel.Text = "Delete";
+            this.buttonQueueDel.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1952,6 +2077,9 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
+            this.tabPageProjectQueue.ResumeLayout(false);
+            this.groupBoxQueue.ResumeLayout(false);
+            this.groupBoxQueue.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2114,6 +2242,17 @@
         private System.Windows.Forms.CheckBox checkBoxCopySubsWithoutForced;
         private System.Windows.Forms.CheckBox checkBoxCopySubs;
         private System.Windows.Forms.CheckBox checkBoxMuxOnlyForced;
+        private System.Windows.Forms.Button buttonLoadProject;
+        private System.Windows.Forms.Button buttonSaveProject;
+        private System.Windows.Forms.TabPage tabPageProjectQueue;
+        private System.Windows.Forms.ListBox listBoxQueue;
+        private System.Windows.Forms.Label labelQueueDesc;
+        private System.Windows.Forms.GroupBox groupBoxQueue;
+        private System.Windows.Forms.Button buttonQueueDel;
+        private System.Windows.Forms.Button buttonQueueDown;
+        private System.Windows.Forms.Button buttonQueueUp;
+        private System.Windows.Forms.Button buttonQueueExisting;
+        private System.Windows.Forms.Button buttonQueueCurrent;
     }
 }
 

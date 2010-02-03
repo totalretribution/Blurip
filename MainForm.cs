@@ -547,6 +547,27 @@ namespace BluRip
             }
         }
 
+        private void UpdateTitleList()
+        {
+            try
+            {
+                comboBoxTitle.Items.Clear();
+                listBoxStreams.Items.Clear();
+
+                foreach (TitleInfo ti in titleList)
+                {
+                    comboBoxTitle.Items.Add(ti.desc);
+                }
+                if (titleList.Count > 0)
+                {
+                    comboBoxTitle.SelectedIndex = 0;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private void buttonGetStreamInfo_Click(object sender, EventArgs e)
         {
             try
@@ -556,9 +577,7 @@ namespace BluRip
 
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
-                                
-                comboBoxTitle.Items.Clear();
-                listBoxStreams.Items.Clear();
+
                 m2tsList.Clear();
 
                 titleInfoThread = new Thread(TitleInfoThread);
@@ -571,14 +590,7 @@ namespace BluRip
                 }
                 titleInfoThread = null;
 
-                foreach (TitleInfo ti in titleList)
-                {
-                    comboBoxTitle.Items.Add(ti.desc);
-                }
-                if (titleList.Count > 0)
-                {
-                    comboBoxTitle.SelectedIndex = 0;
-                }
+                UpdateTitleList();
 
                 demuxedStreamList = new TitleInfo();
                 UpdateDemuxedStreams();
@@ -3505,14 +3517,7 @@ namespace BluRip
                 }
                 titleInfoThread = null;
 
-                foreach (TitleInfo ti in titleList)
-                {
-                    comboBoxTitle.Items.Add(ti.desc);
-                }
-                if (titleList.Count > 0)
-                {
-                    comboBoxTitle.SelectedIndex = 0;
-                }
+                UpdateTitleList();
 
                 demuxedStreamList = new TitleInfo();
                 UpdateDemuxedStreams();
@@ -4092,6 +4097,67 @@ namespace BluRip
                 settings.copyAllButForced = checkBoxCopySubsWithoutForced.Checked;
             }
             catch (Exception)
+            {
+            }
+        }
+
+        private void buttonSaveProject_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (demuxedStreamList.streams.Count == 0 && titleList.Count == 0)
+                {
+                    if (MessageBox.Show("Demuxed stream list/title list empty - continue anyway?", "Stream list empty", MessageBoxButtons.YesNo) == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+
+                Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "BluRip project (*.brp)|*.brp";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    Project.SaveProjectFile(project, sfd.FileName);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonLoadProject_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "BluRip project (*.brp)|*.brp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Project project = new Project();
+                    if (Project.LoadProjectFile(ref project, ofd.FileName))
+                    {
+                        settings = new UserSettings(project.settings);                        
+                        titleList.Clear();
+                        foreach (TitleInfo ti in project.titleList)
+                        {
+                            titleList.Add(new TitleInfo(ti));
+                        }
+                        UpdateTitleList();
+                        demuxedStreamList = new TitleInfo(project.demuxedStreamList);
+
+                        m2tsList.Clear();
+                        foreach (string s in project.m2tsList)
+                        {
+                            m2tsList.Add(s);
+                        }
+
+                        UpdateFromSettings();
+                        UpdateDemuxedStreams();                        
+                    }
+                }
+            }
+            catch (Exception ex)
             {
             }
         }
