@@ -1040,6 +1040,7 @@ namespace BluRip
         {
             try
             {
+                abort = true;
                 if (titleInfoThread != null)
                 {
                     titleInfoThread.Abort();
@@ -1553,13 +1554,13 @@ namespace BluRip
                 if (settings.workingDir == "")
                 {
                     MessageMain("Working dir not set");
-                    MessageBox.Show("Working dir not set", "Error");
+                    if(!silent) MessageBox.Show("Working dir not set", "Error");
                     return false;
                 }
                 if (comboBoxTitle.SelectedIndex == -1)
                 {
                     MessageMain("No title selected");
-                    MessageBox.Show("No title selected", "Error");
+                    if (!silent) MessageBox.Show("No title selected", "Error");
                     return false;
                 }
                 int videoCount = 0;
@@ -1578,13 +1579,13 @@ namespace BluRip
                 if (audioCount < 1)
                 {
                     MessageMain("No audio streams selected");
-                    MessageBox.Show("No audio streams selected", "Error");
+                    if (!silent) MessageBox.Show("No audio streams selected", "Error");
                     return false;
                 }
                 if (videoCount != 1)
                 {
                     MessageMain("No video stream or more then one selected");
-                    MessageBox.Show("No video stream or more then one selected", "Error");
+                    if (!silent) MessageBox.Show("No video stream or more then one selected", "Error");
                     return false;
                 }
 
@@ -1624,7 +1625,7 @@ namespace BluRip
                 if (demuxedStreamList.streams.Count == 0)
                 {
                     MessageMain("No demuxed streams available");
-                    MessageBox.Show("No demuxed streams available", "Error");
+                    if (!silent) MessageBox.Show("No demuxed streams available", "Error");
                     return false;
                 }
 
@@ -2206,13 +2207,13 @@ namespace BluRip
                 if (settings.workingDir == "")
                 {
                     MessageMain("Working dir not set");
-                    MessageBox.Show("Working dir not set", "Error");
+                    if (!silent) MessageBox.Show("Working dir not set", "Error");
                     return;
                 }
                 if (demuxedStreamList.streams.Count == 0)
                 {
                     MessageMain("No demuxed streams available");
-                    MessageBox.Show("No demuxed streams available", "Error");
+                    if (!silent) MessageBox.Show("No demuxed streams available", "Error");
                     return;
                 }
 
@@ -2232,7 +2233,7 @@ namespace BluRip
                 if (filename == "")
                 {
                     MessageMain("Encode avs not set - do index + autocrop first");
-                    MessageBox.Show("Encode avs not set - do index + autocrop first", "Error");
+                    if (!silent) MessageBox.Show("Encode avs not set - do index + autocrop first", "Error");
                     return;
                 }
 
@@ -2240,7 +2241,7 @@ namespace BluRip
                 if (index < 0)
                 {
                     MessageMain("Encoding profile not set");
-                    MessageBox.Show("Encoding profile not set", "Error");
+                    if (!silent) MessageBox.Show("Encoding profile not set", "Error");
                     return;
                 }
 
@@ -2413,7 +2414,7 @@ namespace BluRip
                 if (fps == "")
                 {
                     MessageMain("Framerate not set - do index + autocrop first");
-                    MessageBox.Show("Framerate not set - do index + autocrop first", "Error");
+                    if (!silent) MessageBox.Show("Framerate not set - do index + autocrop first", "Error");
                     return;
                 }
 
@@ -2581,7 +2582,7 @@ namespace BluRip
                 if (demuxedStreamList.streams.Count == 0)
                 {
                     MessageMain("No demuxed streams available");
-                    MessageBox.Show("No demuxed streams available", "Error");
+                    if (!silent) MessageBox.Show("No demuxed streams available", "Error");
                     return false;
                 }
 
@@ -2898,12 +2899,14 @@ namespace BluRip
                 }
                 if (videoStream == 0)
                 {
-                    MessageBox.Show("No videostream or encoded video filename not set", "Error");
+                    if (!silent) MessageBox.Show("No videostream or encoded video filename not set", "Error");
+                    MessageMux("No videostream or encoded video filename not set");
                     return;
                 }
                 if (audioStream == 0)
                 {
-                    MessageBox.Show("No audiostream or audio filename not set", "Error");
+                    if (!silent) MessageBox.Show("No audiostream or audio filename not set", "Error");
+                    MessageMux("No audiostream or audio filename not set");
                     return;
                 }
                 if (chapterStream > 0)
@@ -2921,7 +2924,8 @@ namespace BluRip
                     }
                     if (error)
                     {
-                        MessageBox.Show("Chapter file not found", "Error");
+                        if (!silent) MessageBox.Show("Chapter file not found", "Error");
+                        MessageMux("Chapter file not found");
                         return;
                     }
                 }
@@ -2960,7 +2964,8 @@ namespace BluRip
                     }
                     if (error)
                     {
-                        MessageBox.Show("Subtitle file(s) not found", "Error");
+                        if (!silent) MessageBox.Show("Subtitle file(s) not found", "Error");
+                        MessageMux("Subtitle file(s) not found");
                         return;
                     }
                 }
@@ -3799,7 +3804,7 @@ namespace BluRip
                 if (!File.Exists(settings.eac3toPath))
                 {
                     MessageMain("eac3to path not set");
-                    MessageBox.Show("eac3to path not set", "Error");
+                    if(!silent) MessageBox.Show("eac3to path not set", "Error");
                     return false;
                 }
                 return true;
@@ -3819,7 +3824,7 @@ namespace BluRip
                     if (!File.Exists(settings.ffmsindexPath))
                     {
                         MessageMain("ffmsindex path not set");
-                        MessageBox.Show("ffmsindex path not set", "Error");
+                        if (!silent) MessageBox.Show("ffmsindex path not set", "Error");
                         return false;
                     }
                 }
@@ -3838,13 +3843,13 @@ namespace BluRip
                 if (!File.Exists(settings.javaPath))
                 {
                     MessageMain("java path not set");
-                    MessageBox.Show("java path not set", "Error");
+                    if (!silent) MessageBox.Show("java path not set", "Error");
                     return false;
                 }
                 if (!File.Exists(settings.sup2subPath))
                 {
                     MessageMain("BDsup2sub path not set");
-                    MessageBox.Show("BDsup2sub path not set", "Error");
+                    if (!silent) MessageBox.Show("BDsup2sub path not set", "Error");
                     return false;
                 }
                 return true;
@@ -3862,7 +3867,7 @@ namespace BluRip
                 if (!File.Exists(settings.x264Path))
                 {
                     MessageMain("x264 path not set");
-                    MessageBox.Show("x264 path not set", "Error");
+                    if (!silent) MessageBox.Show("x264 path not set", "Error");
                     return false;
                 }
                 return true;
@@ -3880,7 +3885,7 @@ namespace BluRip
                 if (!File.Exists(settings.mkvmergePath))
                 {
                     MessageMain("mkvmerge path not set");
-                    MessageBox.Show("mkvmerge path not set", "Error");
+                    if (!silent) MessageBox.Show("mkvmerge path not set", "Error");
                     return false;
                 }
                 return true;
@@ -4159,6 +4164,162 @@ namespace BluRip
             }
             catch (Exception ex)
             {
+            }
+        }
+
+        private List<Project> projectQueue = new List<Project>();
+
+        private void UpdateQueue()
+        {
+            try
+            {
+                listBoxQueue.Items.Clear();
+                foreach (Project p in projectQueue)
+                {
+                    listBoxQueue.Items.Add("Title: " + p.settings.movieTitle);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueCurrent_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Project p = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
+                projectQueue.Add(p);
+                UpdateQueue();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueDel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int index = listBoxQueue.SelectedIndex;
+                if (index > -1)
+                {
+                    projectQueue.RemoveAt(index);
+                    UpdateQueue();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int index = listBoxQueue.SelectedIndex;
+                if (index > 0)
+                {
+                    Project p = projectQueue[index];
+                    projectQueue.RemoveAt(index);
+                    projectQueue.Insert(index - 1, p);
+                    UpdateQueue();
+                    listBoxQueue.SelectedIndex = index - 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueDown_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int index = listBoxQueue.SelectedIndex;
+                if (index > -1 && index < projectQueue.Count - 1)
+                {
+                    Project p = projectQueue[index];
+                    projectQueue.RemoveAt(index);
+                    projectQueue.Insert(index + 1, p);
+                    UpdateQueue();
+                    listBoxQueue.SelectedIndex = index + 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueExisting_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "BluRip project (*.brp)|*.brp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Project project = new Project();
+                    if (Project.LoadProjectFile(ref project, ofd.FileName))
+                    {
+                        projectQueue.Add(project);
+                        UpdateQueue();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private bool silent = false;
+        private bool abort = false;
+
+        private void buttonProcessQueue_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                silent = true;
+                abort = false;
+                MessageMain("Starting to process queue...");
+                foreach (Project project in projectQueue)
+                {
+                    if (!abort)
+                    {
+                        MessageMain("Processing project " + project.settings.movieTitle);
+                        settings = new UserSettings(project.settings);
+                        titleList.Clear();
+                        foreach (TitleInfo ti in project.titleList)
+                        {
+                            titleList.Add(new TitleInfo(ti));
+                        }
+                        UpdateTitleList();
+                        demuxedStreamList = new TitleInfo(project.demuxedStreamList);
+
+                        m2tsList.Clear();
+                        foreach (string s in project.m2tsList)
+                        {
+                            m2tsList.Add(s);
+                        }
+
+                        UpdateFromSettings();
+                        UpdateDemuxedStreams();
+
+                        buttonStartConvert_Click(null, null);
+                    }
+                    else
+                    {
+                        MessageMain("Queue canceled");
+                    }
+                }
+                MessageMain("Queue done.");
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                silent = false;
             }
         }
     }

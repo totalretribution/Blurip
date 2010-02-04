@@ -163,6 +163,17 @@
             this.labelSoftwareDesc = new System.Windows.Forms.Label();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
+            this.tabPageProjectQueue = new System.Windows.Forms.TabPage();
+            this.groupBoxQueue = new System.Windows.Forms.GroupBox();
+            this.buttonQueueDel = new System.Windows.Forms.Button();
+            this.buttonQueueDown = new System.Windows.Forms.Button();
+            this.buttonQueueUp = new System.Windows.Forms.Button();
+            this.buttonQueueExisting = new System.Windows.Forms.Button();
+            this.buttonQueueCurrent = new System.Windows.Forms.Button();
+            this.listBoxQueue = new System.Windows.Forms.ListBox();
+            this.labelQueueDesc = new System.Windows.Forms.Label();
+            this.buttonLoadProject = new System.Windows.Forms.Button();
+            this.buttonSaveProject = new System.Windows.Forms.Button();
             this.richTextBoxLogMain = new System.Windows.Forms.RichTextBox();
             this.contextMenuStripDeleteLog = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -185,17 +196,7 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.buttonSaveProject = new System.Windows.Forms.Button();
-            this.buttonLoadProject = new System.Windows.Forms.Button();
-            this.tabPageProjectQueue = new System.Windows.Forms.TabPage();
-            this.labelQueueDesc = new System.Windows.Forms.Label();
-            this.listBoxQueue = new System.Windows.Forms.ListBox();
-            this.groupBoxQueue = new System.Windows.Forms.GroupBox();
-            this.buttonQueueCurrent = new System.Windows.Forms.Button();
-            this.buttonQueueExisting = new System.Windows.Forms.Button();
-            this.buttonQueueUp = new System.Windows.Forms.Button();
-            this.buttonQueueDown = new System.Windows.Forms.Button();
-            this.buttonQueueDel = new System.Windows.Forms.Button();
+            this.buttonProcessQueue = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -218,6 +219,8 @@
             this.groupBoxDefaultTrack.SuspendLayout();
             this.tabPageSoftware.SuspendLayout();
             this.tabPageAbout.SuspendLayout();
+            this.tabPageProjectQueue.SuspendLayout();
+            this.groupBoxQueue.SuspendLayout();
             this.contextMenuStripDeleteLog.SuspendLayout();
             this.tabControlLog.SuspendLayout();
             this.tabPageMainLog.SuspendLayout();
@@ -226,8 +229,6 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
-            this.tabPageProjectQueue.SuspendLayout();
-            this.groupBoxQueue.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -751,7 +752,7 @@
             this.checkBoxMinimizeCrop.Name = "checkBoxMinimizeCrop";
             this.checkBoxMinimizeCrop.Size = new System.Drawing.Size(136, 17);
             this.checkBoxMinimizeCrop.TabIndex = 9;
-            this.checkBoxMinimizeCrop.Text = "Minimize AutoCrop from";
+            this.checkBoxMinimizeCrop.Text = "Minimize AutoCrop form";
             this.checkBoxMinimizeCrop.UseVisualStyleBackColor = true;
             this.checkBoxMinimizeCrop.CheckedChanged += new System.EventHandler(this.checkBoxMinimizeCrop_CheckedChanged);
             // 
@@ -1687,6 +1688,123 @@
             this.richTextBoxAbout.TabIndex = 0;
             this.richTextBoxAbout.Text = resources.GetString("richTextBoxAbout.Text");
             // 
+            // tabPageProjectQueue
+            // 
+            this.tabPageProjectQueue.Controls.Add(this.buttonProcessQueue);
+            this.tabPageProjectQueue.Controls.Add(this.groupBoxQueue);
+            this.tabPageProjectQueue.Controls.Add(this.buttonLoadProject);
+            this.tabPageProjectQueue.Controls.Add(this.buttonSaveProject);
+            this.tabPageProjectQueue.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProjectQueue.Name = "tabPageProjectQueue";
+            this.tabPageProjectQueue.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProjectQueue.Size = new System.Drawing.Size(762, 285);
+            this.tabPageProjectQueue.TabIndex = 10;
+            this.tabPageProjectQueue.Text = "Project/Queue";
+            this.tabPageProjectQueue.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxQueue
+            // 
+            this.groupBoxQueue.Controls.Add(this.buttonQueueDel);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueDown);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueUp);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueExisting);
+            this.groupBoxQueue.Controls.Add(this.buttonQueueCurrent);
+            this.groupBoxQueue.Controls.Add(this.listBoxQueue);
+            this.groupBoxQueue.Controls.Add(this.labelQueueDesc);
+            this.groupBoxQueue.Location = new System.Drawing.Point(6, 35);
+            this.groupBoxQueue.Name = "groupBoxQueue";
+            this.groupBoxQueue.Size = new System.Drawing.Size(334, 203);
+            this.groupBoxQueue.TabIndex = 13;
+            this.groupBoxQueue.TabStop = false;
+            this.groupBoxQueue.Text = "Queue";
+            // 
+            // buttonQueueDel
+            // 
+            this.buttonQueueDel.Location = new System.Drawing.Point(252, 90);
+            this.buttonQueueDel.Name = "buttonQueueDel";
+            this.buttonQueueDel.Size = new System.Drawing.Size(75, 23);
+            this.buttonQueueDel.TabIndex = 17;
+            this.buttonQueueDel.Text = "Delete";
+            this.buttonQueueDel.UseVisualStyleBackColor = true;
+            this.buttonQueueDel.Click += new System.EventHandler(this.buttonQueueDel_Click);
+            // 
+            // buttonQueueDown
+            // 
+            this.buttonQueueDown.Location = new System.Drawing.Point(252, 61);
+            this.buttonQueueDown.Name = "buttonQueueDown";
+            this.buttonQueueDown.Size = new System.Drawing.Size(75, 23);
+            this.buttonQueueDown.TabIndex = 16;
+            this.buttonQueueDown.Text = "Move down";
+            this.buttonQueueDown.UseVisualStyleBackColor = true;
+            this.buttonQueueDown.Click += new System.EventHandler(this.buttonQueueDown_Click);
+            // 
+            // buttonQueueUp
+            // 
+            this.buttonQueueUp.Location = new System.Drawing.Point(252, 32);
+            this.buttonQueueUp.Name = "buttonQueueUp";
+            this.buttonQueueUp.Size = new System.Drawing.Size(75, 23);
+            this.buttonQueueUp.TabIndex = 15;
+            this.buttonQueueUp.Text = "Move up";
+            this.buttonQueueUp.UseVisualStyleBackColor = true;
+            this.buttonQueueUp.Click += new System.EventHandler(this.buttonQueueUp_Click);
+            // 
+            // buttonQueueExisting
+            // 
+            this.buttonQueueExisting.Location = new System.Drawing.Point(130, 172);
+            this.buttonQueueExisting.Name = "buttonQueueExisting";
+            this.buttonQueueExisting.Size = new System.Drawing.Size(116, 23);
+            this.buttonQueueExisting.TabIndex = 14;
+            this.buttonQueueExisting.Text = "Add existing project";
+            this.buttonQueueExisting.UseVisualStyleBackColor = true;
+            this.buttonQueueExisting.Click += new System.EventHandler(this.buttonQueueExisting_Click);
+            // 
+            // buttonQueueCurrent
+            // 
+            this.buttonQueueCurrent.Location = new System.Drawing.Point(6, 172);
+            this.buttonQueueCurrent.Name = "buttonQueueCurrent";
+            this.buttonQueueCurrent.Size = new System.Drawing.Size(118, 23);
+            this.buttonQueueCurrent.TabIndex = 13;
+            this.buttonQueueCurrent.Text = "Add current project";
+            this.buttonQueueCurrent.UseVisualStyleBackColor = true;
+            this.buttonQueueCurrent.Click += new System.EventHandler(this.buttonQueueCurrent_Click);
+            // 
+            // listBoxQueue
+            // 
+            this.listBoxQueue.FormattingEnabled = true;
+            this.listBoxQueue.Location = new System.Drawing.Point(6, 32);
+            this.listBoxQueue.Name = "listBoxQueue";
+            this.listBoxQueue.Size = new System.Drawing.Size(240, 134);
+            this.listBoxQueue.TabIndex = 12;
+            // 
+            // labelQueueDesc
+            // 
+            this.labelQueueDesc.AutoSize = true;
+            this.labelQueueDesc.Location = new System.Drawing.Point(6, 16);
+            this.labelQueueDesc.Name = "labelQueueDesc";
+            this.labelQueueDesc.Size = new System.Drawing.Size(76, 13);
+            this.labelQueueDesc.TabIndex = 11;
+            this.labelQueueDesc.Text = "Jobs in queue:";
+            // 
+            // buttonLoadProject
+            // 
+            this.buttonLoadProject.Location = new System.Drawing.Point(87, 6);
+            this.buttonLoadProject.Name = "buttonLoadProject";
+            this.buttonLoadProject.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadProject.TabIndex = 10;
+            this.buttonLoadProject.Text = "Load project";
+            this.buttonLoadProject.UseVisualStyleBackColor = true;
+            this.buttonLoadProject.Click += new System.EventHandler(this.buttonLoadProject_Click);
+            // 
+            // buttonSaveProject
+            // 
+            this.buttonSaveProject.Location = new System.Drawing.Point(6, 6);
+            this.buttonSaveProject.Name = "buttonSaveProject";
+            this.buttonSaveProject.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveProject.TabIndex = 9;
+            this.buttonSaveProject.Text = "Save project";
+            this.buttonSaveProject.UseVisualStyleBackColor = true;
+            this.buttonSaveProject.Click += new System.EventHandler(this.buttonSaveProject_Click);
+            // 
             // richTextBoxLogMain
             // 
             this.richTextBoxLogMain.ContextMenuStrip = this.contextMenuStripDeleteLog;
@@ -1902,116 +2020,15 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // buttonSaveProject
+            // buttonProcessQueue
             // 
-            this.buttonSaveProject.Location = new System.Drawing.Point(6, 6);
-            this.buttonSaveProject.Name = "buttonSaveProject";
-            this.buttonSaveProject.Size = new System.Drawing.Size(75, 23);
-            this.buttonSaveProject.TabIndex = 9;
-            this.buttonSaveProject.Text = "Save project";
-            this.buttonSaveProject.UseVisualStyleBackColor = true;
-            this.buttonSaveProject.Click += new System.EventHandler(this.buttonSaveProject_Click);
-            // 
-            // buttonLoadProject
-            // 
-            this.buttonLoadProject.Location = new System.Drawing.Point(87, 6);
-            this.buttonLoadProject.Name = "buttonLoadProject";
-            this.buttonLoadProject.Size = new System.Drawing.Size(75, 23);
-            this.buttonLoadProject.TabIndex = 10;
-            this.buttonLoadProject.Text = "Load project";
-            this.buttonLoadProject.UseVisualStyleBackColor = true;
-            this.buttonLoadProject.Click += new System.EventHandler(this.buttonLoadProject_Click);
-            // 
-            // tabPageProjectQueue
-            // 
-            this.tabPageProjectQueue.Controls.Add(this.groupBoxQueue);
-            this.tabPageProjectQueue.Controls.Add(this.buttonLoadProject);
-            this.tabPageProjectQueue.Controls.Add(this.buttonSaveProject);
-            this.tabPageProjectQueue.Location = new System.Drawing.Point(4, 22);
-            this.tabPageProjectQueue.Name = "tabPageProjectQueue";
-            this.tabPageProjectQueue.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProjectQueue.Size = new System.Drawing.Size(762, 285);
-            this.tabPageProjectQueue.TabIndex = 10;
-            this.tabPageProjectQueue.Text = "Project/Queue";
-            this.tabPageProjectQueue.UseVisualStyleBackColor = true;
-            // 
-            // labelQueueDesc
-            // 
-            this.labelQueueDesc.AutoSize = true;
-            this.labelQueueDesc.Location = new System.Drawing.Point(6, 16);
-            this.labelQueueDesc.Name = "labelQueueDesc";
-            this.labelQueueDesc.Size = new System.Drawing.Size(76, 13);
-            this.labelQueueDesc.TabIndex = 11;
-            this.labelQueueDesc.Text = "Jobs in queue:";
-            // 
-            // listBoxQueue
-            // 
-            this.listBoxQueue.FormattingEnabled = true;
-            this.listBoxQueue.Location = new System.Drawing.Point(6, 32);
-            this.listBoxQueue.Name = "listBoxQueue";
-            this.listBoxQueue.Size = new System.Drawing.Size(240, 134);
-            this.listBoxQueue.TabIndex = 12;
-            // 
-            // groupBoxQueue
-            // 
-            this.groupBoxQueue.Controls.Add(this.buttonQueueDel);
-            this.groupBoxQueue.Controls.Add(this.buttonQueueDown);
-            this.groupBoxQueue.Controls.Add(this.buttonQueueUp);
-            this.groupBoxQueue.Controls.Add(this.buttonQueueExisting);
-            this.groupBoxQueue.Controls.Add(this.buttonQueueCurrent);
-            this.groupBoxQueue.Controls.Add(this.listBoxQueue);
-            this.groupBoxQueue.Controls.Add(this.labelQueueDesc);
-            this.groupBoxQueue.Location = new System.Drawing.Point(6, 35);
-            this.groupBoxQueue.Name = "groupBoxQueue";
-            this.groupBoxQueue.Size = new System.Drawing.Size(334, 203);
-            this.groupBoxQueue.TabIndex = 13;
-            this.groupBoxQueue.TabStop = false;
-            this.groupBoxQueue.Text = "Queue";
-            // 
-            // buttonQueueCurrent
-            // 
-            this.buttonQueueCurrent.Location = new System.Drawing.Point(6, 172);
-            this.buttonQueueCurrent.Name = "buttonQueueCurrent";
-            this.buttonQueueCurrent.Size = new System.Drawing.Size(118, 23);
-            this.buttonQueueCurrent.TabIndex = 13;
-            this.buttonQueueCurrent.Text = "Add current project";
-            this.buttonQueueCurrent.UseVisualStyleBackColor = true;
-            // 
-            // buttonQueueExisting
-            // 
-            this.buttonQueueExisting.Location = new System.Drawing.Point(130, 172);
-            this.buttonQueueExisting.Name = "buttonQueueExisting";
-            this.buttonQueueExisting.Size = new System.Drawing.Size(116, 23);
-            this.buttonQueueExisting.TabIndex = 14;
-            this.buttonQueueExisting.Text = "Add existing project";
-            this.buttonQueueExisting.UseVisualStyleBackColor = true;
-            // 
-            // buttonQueueUp
-            // 
-            this.buttonQueueUp.Location = new System.Drawing.Point(252, 32);
-            this.buttonQueueUp.Name = "buttonQueueUp";
-            this.buttonQueueUp.Size = new System.Drawing.Size(75, 23);
-            this.buttonQueueUp.TabIndex = 15;
-            this.buttonQueueUp.Text = "Move up";
-            this.buttonQueueUp.UseVisualStyleBackColor = true;
-            // 
-            // buttonQueueDown
-            // 
-            this.buttonQueueDown.Location = new System.Drawing.Point(252, 61);
-            this.buttonQueueDown.Name = "buttonQueueDown";
-            this.buttonQueueDown.Size = new System.Drawing.Size(75, 23);
-            this.buttonQueueDown.TabIndex = 16;
-            this.buttonQueueDown.Text = "Move down";
-            this.buttonQueueDown.UseVisualStyleBackColor = true;
-            // 
-            // buttonQueueDel
-            // 
-            this.buttonQueueDel.Location = new System.Drawing.Point(252, 90);
-            this.buttonQueueDel.Name = "buttonQueueDel";
-            this.buttonQueueDel.Size = new System.Drawing.Size(75, 23);
-            this.buttonQueueDel.TabIndex = 17;
-            this.buttonQueueDel.Text = "Delete";
-            this.buttonQueueDel.UseVisualStyleBackColor = true;
+            this.buttonProcessQueue.Location = new System.Drawing.Point(6, 244);
+            this.buttonProcessQueue.Name = "buttonProcessQueue";
+            this.buttonProcessQueue.Size = new System.Drawing.Size(124, 23);
+            this.buttonProcessQueue.TabIndex = 14;
+            this.buttonProcessQueue.Text = "Process queue";
+            this.buttonProcessQueue.UseVisualStyleBackColor = true;
+            this.buttonProcessQueue.Click += new System.EventHandler(this.buttonProcessQueue_Click);
             // 
             // MainForm
             // 
@@ -2069,6 +2086,9 @@
             this.tabPageSoftware.ResumeLayout(false);
             this.tabPageSoftware.PerformLayout();
             this.tabPageAbout.ResumeLayout(false);
+            this.tabPageProjectQueue.ResumeLayout(false);
+            this.groupBoxQueue.ResumeLayout(false);
+            this.groupBoxQueue.PerformLayout();
             this.contextMenuStripDeleteLog.ResumeLayout(false);
             this.tabControlLog.ResumeLayout(false);
             this.tabPageMainLog.ResumeLayout(false);
@@ -2077,9 +2097,6 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
-            this.tabPageProjectQueue.ResumeLayout(false);
-            this.groupBoxQueue.ResumeLayout(false);
-            this.groupBoxQueue.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2253,6 +2270,7 @@
         private System.Windows.Forms.Button buttonQueueUp;
         private System.Windows.Forms.Button buttonQueueExisting;
         private System.Windows.Forms.Button buttonQueueCurrent;
+        private System.Windows.Forms.Button buttonProcessQueue;
     }
 }
 
