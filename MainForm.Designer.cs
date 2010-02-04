@@ -85,6 +85,10 @@
             this.numericUpDownBlackValue = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownNrFrames = new System.Windows.Forms.NumericUpDown();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
+            this.labelEncodeInput = new System.Windows.Forms.Label();
+            this.labelCropInput = new System.Windows.Forms.Label();
+            this.comboBoxEncodeInput = new System.Windows.Forms.ComboBox();
+            this.comboBoxCropInput = new System.Windows.Forms.ComboBox();
             this.groupBoxAudioSettings = new System.Windows.Forms.GroupBox();
             this.comboBoxDownmixAc3 = new System.Windows.Forms.ComboBox();
             this.comboBoxDownmixDts = new System.Windows.Forms.ComboBox();
@@ -95,8 +99,6 @@
             this.labelX264Priority = new System.Windows.Forms.Label();
             this.comboBoxX264Priority = new System.Windows.Forms.ComboBox();
             this.groupBoxGeneralAviSynthSettings = new System.Windows.Forms.GroupBox();
-            this.checkBoxEncodeDirectshow = new System.Windows.Forms.CheckBox();
-            this.checkBoxCropDirectshow = new System.Windows.Forms.CheckBox();
             this.comboBoxAvisynthProfile = new System.Windows.Forms.ComboBox();
             this.labelEncodeProfile = new System.Windows.Forms.Label();
             this.comboBoxEncodeProfile = new System.Windows.Forms.ComboBox();
@@ -164,6 +166,7 @@
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             this.tabPageProjectQueue = new System.Windows.Forms.TabPage();
+            this.buttonProcessQueue = new System.Windows.Forms.Button();
             this.groupBoxQueue = new System.Windows.Forms.GroupBox();
             this.buttonQueueDel = new System.Windows.Forms.Button();
             this.buttonQueueDown = new System.Windows.Forms.Button();
@@ -196,7 +199,6 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.buttonProcessQueue = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -851,6 +853,50 @@
             this.tabPageEncodingSettings.Text = "Encoding settings";
             this.tabPageEncodingSettings.UseVisualStyleBackColor = true;
             // 
+            // labelEncodeInput
+            // 
+            this.labelEncodeInput.AutoSize = true;
+            this.labelEncodeInput.Location = new System.Drawing.Point(6, 56);
+            this.labelEncodeInput.Name = "labelEncodeInput";
+            this.labelEncodeInput.Size = new System.Drawing.Size(111, 13);
+            this.labelEncodeInput.TabIndex = 40;
+            this.labelEncodeInput.Text = "Encode input method:";
+            // 
+            // labelCropInput
+            // 
+            this.labelCropInput.AutoSize = true;
+            this.labelCropInput.Location = new System.Drawing.Point(6, 16);
+            this.labelCropInput.Name = "labelCropInput";
+            this.labelCropInput.Size = new System.Drawing.Size(96, 13);
+            this.labelCropInput.TabIndex = 39;
+            this.labelCropInput.Text = "Crop input method:";
+            // 
+            // comboBoxEncodeInput
+            // 
+            this.comboBoxEncodeInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEncodeInput.FormattingEnabled = true;
+            this.comboBoxEncodeInput.Items.AddRange(new object[] {
+            "DirectShowSource",
+            "FFVideoSource"});
+            this.comboBoxEncodeInput.Location = new System.Drawing.Point(9, 72);
+            this.comboBoxEncodeInput.Name = "comboBoxEncodeInput";
+            this.comboBoxEncodeInput.Size = new System.Drawing.Size(213, 21);
+            this.comboBoxEncodeInput.TabIndex = 38;
+            this.comboBoxEncodeInput.SelectedIndexChanged += new System.EventHandler(this.comboBoxEncodeInput_SelectedIndexChanged);
+            // 
+            // comboBoxCropInput
+            // 
+            this.comboBoxCropInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCropInput.FormattingEnabled = true;
+            this.comboBoxCropInput.Items.AddRange(new object[] {
+            "DirectShowSource",
+            "FFVideoSource"});
+            this.comboBoxCropInput.Location = new System.Drawing.Point(9, 32);
+            this.comboBoxCropInput.Name = "comboBoxCropInput";
+            this.comboBoxCropInput.Size = new System.Drawing.Size(213, 21);
+            this.comboBoxCropInput.TabIndex = 37;
+            this.comboBoxCropInput.SelectedIndexChanged += new System.EventHandler(this.comboBoxCropInput_SelectedIndexChanged);
+            // 
             // groupBoxAudioSettings
             // 
             this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixAc3);
@@ -858,7 +904,7 @@
             this.groupBoxAudioSettings.Controls.Add(this.checkBoxDownmixAc3);
             this.groupBoxAudioSettings.Controls.Add(this.checkBoxDownmixDts);
             this.groupBoxAudioSettings.Controls.Add(this.checkBoxUseCore);
-            this.groupBoxAudioSettings.Location = new System.Drawing.Point(346, 6);
+            this.groupBoxAudioSettings.Location = new System.Drawing.Point(240, 8);
             this.groupBoxAudioSettings.Name = "groupBoxAudioSettings";
             this.groupBoxAudioSettings.Size = new System.Drawing.Size(200, 147);
             this.groupBoxAudioSettings.TabIndex = 36;
@@ -928,7 +974,7 @@
             // labelAvisynthProfile
             // 
             this.labelAvisynthProfile.AutoSize = true;
-            this.labelAvisynthProfile.Location = new System.Drawing.Point(6, 156);
+            this.labelAvisynthProfile.Location = new System.Drawing.Point(12, 198);
             this.labelAvisynthProfile.Name = "labelAvisynthProfile";
             this.labelAvisynthProfile.Size = new System.Drawing.Size(78, 13);
             this.labelAvisynthProfile.TabIndex = 35;
@@ -937,7 +983,7 @@
             // labelX264Priority
             // 
             this.labelX264Priority.AutoSize = true;
-            this.labelX264Priority.Location = new System.Drawing.Point(6, 76);
+            this.labelX264Priority.Location = new System.Drawing.Point(12, 118);
             this.labelX264Priority.Name = "labelX264Priority";
             this.labelX264Priority.Size = new System.Drawing.Size(103, 13);
             this.labelX264Priority.TabIndex = 13;
@@ -947,58 +993,38 @@
             // 
             this.comboBoxX264Priority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxX264Priority.FormattingEnabled = true;
-            this.comboBoxX264Priority.Location = new System.Drawing.Point(9, 92);
+            this.comboBoxX264Priority.Location = new System.Drawing.Point(15, 134);
             this.comboBoxX264Priority.Name = "comboBoxX264Priority";
-            this.comboBoxX264Priority.Size = new System.Drawing.Size(331, 21);
+            this.comboBoxX264Priority.Size = new System.Drawing.Size(213, 21);
             this.comboBoxX264Priority.TabIndex = 12;
             this.comboBoxX264Priority.SelectedIndexChanged += new System.EventHandler(this.comboBoxX264Priority_SelectedIndexChanged);
             // 
             // groupBoxGeneralAviSynthSettings
             // 
-            this.groupBoxGeneralAviSynthSettings.Controls.Add(this.checkBoxEncodeDirectshow);
-            this.groupBoxGeneralAviSynthSettings.Controls.Add(this.checkBoxCropDirectshow);
+            this.groupBoxGeneralAviSynthSettings.Controls.Add(this.labelEncodeInput);
+            this.groupBoxGeneralAviSynthSettings.Controls.Add(this.labelCropInput);
+            this.groupBoxGeneralAviSynthSettings.Controls.Add(this.comboBoxCropInput);
+            this.groupBoxGeneralAviSynthSettings.Controls.Add(this.comboBoxEncodeInput);
             this.groupBoxGeneralAviSynthSettings.Location = new System.Drawing.Point(6, 6);
             this.groupBoxGeneralAviSynthSettings.Name = "groupBoxGeneralAviSynthSettings";
-            this.groupBoxGeneralAviSynthSettings.Size = new System.Drawing.Size(334, 67);
+            this.groupBoxGeneralAviSynthSettings.Size = new System.Drawing.Size(228, 109);
             this.groupBoxGeneralAviSynthSettings.TabIndex = 6;
             this.groupBoxGeneralAviSynthSettings.TabStop = false;
             this.groupBoxGeneralAviSynthSettings.Text = "General AviSynth settings";
-            // 
-            // checkBoxEncodeDirectshow
-            // 
-            this.checkBoxEncodeDirectshow.AutoSize = true;
-            this.checkBoxEncodeDirectshow.Location = new System.Drawing.Point(6, 42);
-            this.checkBoxEncodeDirectshow.Name = "checkBoxEncodeDirectshow";
-            this.checkBoxEncodeDirectshow.Size = new System.Drawing.Size(315, 17);
-            this.checkBoxEncodeDirectshow.TabIndex = 2;
-            this.checkBoxEncodeDirectshow.Text = "Use DirectShowSource for encode avs (else FFVideoSource)";
-            this.checkBoxEncodeDirectshow.UseVisualStyleBackColor = true;
-            this.checkBoxEncodeDirectshow.CheckedChanged += new System.EventHandler(this.checkBoxEncodeDirectshow_CheckedChanged);
-            // 
-            // checkBoxCropDirectshow
-            // 
-            this.checkBoxCropDirectshow.AutoSize = true;
-            this.checkBoxCropDirectshow.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxCropDirectshow.Name = "checkBoxCropDirectshow";
-            this.checkBoxCropDirectshow.Size = new System.Drawing.Size(300, 17);
-            this.checkBoxCropDirectshow.TabIndex = 1;
-            this.checkBoxCropDirectshow.Text = "Use DirectShowSource for crop avs (else FFVideoSource)";
-            this.checkBoxCropDirectshow.UseVisualStyleBackColor = true;
-            this.checkBoxCropDirectshow.CheckedChanged += new System.EventHandler(this.checkBoxCropDirectshow_CheckedChanged);
             // 
             // comboBoxAvisynthProfile
             // 
             this.comboBoxAvisynthProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAvisynthProfile.FormattingEnabled = true;
-            this.comboBoxAvisynthProfile.Location = new System.Drawing.Point(9, 172);
+            this.comboBoxAvisynthProfile.Location = new System.Drawing.Point(15, 214);
             this.comboBoxAvisynthProfile.Name = "comboBoxAvisynthProfile";
-            this.comboBoxAvisynthProfile.Size = new System.Drawing.Size(331, 21);
+            this.comboBoxAvisynthProfile.Size = new System.Drawing.Size(213, 21);
             this.comboBoxAvisynthProfile.TabIndex = 34;
             // 
             // labelEncodeProfile
             // 
             this.labelEncodeProfile.AutoSize = true;
-            this.labelEncodeProfile.Location = new System.Drawing.Point(6, 116);
+            this.labelEncodeProfile.Location = new System.Drawing.Point(12, 158);
             this.labelEncodeProfile.Name = "labelEncodeProfile";
             this.labelEncodeProfile.Size = new System.Drawing.Size(83, 13);
             this.labelEncodeProfile.TabIndex = 26;
@@ -1008,9 +1034,9 @@
             // 
             this.comboBoxEncodeProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncodeProfile.FormattingEnabled = true;
-            this.comboBoxEncodeProfile.Location = new System.Drawing.Point(9, 132);
+            this.comboBoxEncodeProfile.Location = new System.Drawing.Point(15, 174);
             this.comboBoxEncodeProfile.Name = "comboBoxEncodeProfile";
-            this.comboBoxEncodeProfile.Size = new System.Drawing.Size(331, 21);
+            this.comboBoxEncodeProfile.Size = new System.Drawing.Size(213, 21);
             this.comboBoxEncodeProfile.TabIndex = 25;
             this.comboBoxEncodeProfile.SelectedIndexChanged += new System.EventHandler(this.comboBoxEncodeProfile_SelectedIndexChanged);
             // 
@@ -1702,6 +1728,16 @@
             this.tabPageProjectQueue.Text = "Project/Queue";
             this.tabPageProjectQueue.UseVisualStyleBackColor = true;
             // 
+            // buttonProcessQueue
+            // 
+            this.buttonProcessQueue.Location = new System.Drawing.Point(6, 244);
+            this.buttonProcessQueue.Name = "buttonProcessQueue";
+            this.buttonProcessQueue.Size = new System.Drawing.Size(124, 23);
+            this.buttonProcessQueue.TabIndex = 14;
+            this.buttonProcessQueue.Text = "Process queue";
+            this.buttonProcessQueue.UseVisualStyleBackColor = true;
+            this.buttonProcessQueue.Click += new System.EventHandler(this.buttonProcessQueue_Click);
+            // 
             // groupBoxQueue
             // 
             this.groupBoxQueue.Controls.Add(this.buttonQueueDel);
@@ -2020,16 +2056,6 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // buttonProcessQueue
-            // 
-            this.buttonProcessQueue.Location = new System.Drawing.Point(6, 244);
-            this.buttonProcessQueue.Name = "buttonProcessQueue";
-            this.buttonProcessQueue.Size = new System.Drawing.Size(124, 23);
-            this.buttonProcessQueue.TabIndex = 14;
-            this.buttonProcessQueue.Text = "Process queue";
-            this.buttonProcessQueue.UseVisualStyleBackColor = true;
-            this.buttonProcessQueue.Click += new System.EventHandler(this.buttonProcessQueue_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2163,8 +2189,6 @@
         private System.Windows.Forms.Button buttonLoadStreamInfo;
         private System.Windows.Forms.GroupBox groupBoxGeneralAviSynthSettings;
         private System.Windows.Forms.TabPage tabPageEncodingSettings;
-        private System.Windows.Forms.CheckBox checkBoxEncodeDirectshow;
-        private System.Windows.Forms.CheckBox checkBoxCropDirectshow;
         private System.Windows.Forms.Label labelX264;
         private System.Windows.Forms.Button buttonDelX264;
         private System.Windows.Forms.Button buttonAddX264;
@@ -2271,6 +2295,10 @@
         private System.Windows.Forms.Button buttonQueueExisting;
         private System.Windows.Forms.Button buttonQueueCurrent;
         private System.Windows.Forms.Button buttonProcessQueue;
+        private System.Windows.Forms.Label labelEncodeInput;
+        private System.Windows.Forms.Label labelCropInput;
+        private System.Windows.Forms.ComboBox comboBoxEncodeInput;
+        private System.Windows.Forms.ComboBox comboBoxCropInput;
     }
 }
 

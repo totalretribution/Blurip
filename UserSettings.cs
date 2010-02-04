@@ -103,9 +103,7 @@ namespace BluRip
             this.nrFrames = orig.nrFrames;
             this.blackValue = orig.blackValue;
             this.filePrefix = orig.filePrefix;
-            this.javaPath = orig.javaPath;
-            this.cropDirectshow = orig.cropDirectshow;
-            this.encodeDirectshow = orig.encodeDirectshow;
+            this.javaPath = orig.javaPath;            
             this.cropMode = orig.cropMode;
             this.mkvmergePath = orig.mkvmergePath;
             this.x264Priority = orig.x264Priority;
@@ -129,6 +127,8 @@ namespace BluRip
             this.muxOnlyForced = orig.muxOnlyForced;
             this.copySubtitles = orig.copySubtitles;
             this.copyAllButForced = orig.copyAllButForced;
+            this.cropInput = orig.cropInput;
+            this.encodeInput = orig.encodeInput;
 
             foreach (LanguageInfo li in orig.preferedLanguages)
             {
@@ -241,9 +241,7 @@ namespace BluRip
         public int blackValue = 50000;
         public string filePrefix = "";
         public string javaPath = "";        
-        public List<EncodingSettings> encodingSettings = new List<EncodingSettings>();
-        public bool cropDirectshow = true;
-        public bool encodeDirectshow = false;
+        public List<EncodingSettings> encodingSettings = new List<EncodingSettings>();        
         public int cropMode = 0;
         public string mkvmergePath = "";
         public System.Diagnostics.ProcessPriorityClass x264Priority = System.Diagnostics.ProcessPriorityClass.Normal;
@@ -269,5 +267,8 @@ namespace BluRip
         public bool muxOnlyForced = false;
         public bool copySubtitles = true;
         public bool copyAllButForced = false;
+
+        public int cropInput = 1;
+        public int encodeInput = 1;
     }
 }
