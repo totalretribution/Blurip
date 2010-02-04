@@ -34,7 +34,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        public string title = "BluRip 1080p v0.4.3 © _hawk_/PPX";
+        public string title = "BluRip 1080p v0.4.4 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -705,8 +705,6 @@ namespace BluRip
                 numericUpDownBlackValue.Value = settings.blackValue;
                 numericUpDownNrFrames.Value = settings.nrFrames;
 
-                checkBoxCropDirectshow.Checked = settings.cropDirectshow;
-                checkBoxEncodeDirectshow.Checked = settings.encodeDirectshow;
                 comboBoxCropMode.SelectedIndex = settings.cropMode;
 
                 comboBoxX264Priority.SelectedItem = Enum.GetName(typeof(ProcessPriorityClass),settings.x264Priority);
@@ -743,6 +741,9 @@ namespace BluRip
 
                 checkBoxCopySubs_CheckedChanged(null, null);
                 checkBoxMuxSubtitle_CheckedChanged(null, null);
+
+                comboBoxCropInput.SelectedIndex = settings.cropInput;
+                comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
 
                 UpdateLanguage();
                 UpdateEncodingSettings();
@@ -1401,7 +1402,7 @@ namespace BluRip
                 sb.Remove(0, sb.Length);
                 if (!settings.untouchedVideo)
                 {
-                    if (!settings.encodeDirectshow || !settings.cropDirectshow)
+                    if (settings.cropInput == 1 || settings.encodeInput == 1)
                     {
                         MessageCrop("Starting to index...");
                         MessageCrop("");
@@ -1431,12 +1432,12 @@ namespace BluRip
                         MessageCrop("Indexing done!");
                     }
 
-                    if (settings.cropDirectshow)
+                    if (settings.cropInput == 0)
                     {
                         File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
                             "DirectShowSource(\"" + filename + "\")");
                     }
-                    else
+                    else if(settings.cropInput == 1)
                     {
                         File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
                             "FFVideoSource(\"" + filename + "\")");
@@ -1470,11 +1471,11 @@ namespace BluRip
                     }                    
 
                     string encode = "";
-                    if (settings.encodeDirectshow)
+                    if (settings.encodeInput == 0)
                     {
                         encode = "DirectShowSource(\"" + filename + "\")\r\n";
                     }
-                    else
+                    else if(settings.encodeInput == 1)
                     {
                         encode = "FFVideoSource(\"" + filename + "\")\r\n";
                     }
@@ -1943,28 +1944,6 @@ namespace BluRip
                         UpdateLanguage();
                     }
                 }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void checkBoxCropDirectshow_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.cropDirectshow = checkBoxCropDirectshow.Checked;
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void checkBoxEncodeDirectshow_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.encodeDirectshow = checkBoxEncodeDirectshow.Checked;
             }
             catch (Exception)
             {
@@ -3819,7 +3798,7 @@ namespace BluRip
         {
             try
             {
-                if (!settings.cropDirectshow || !settings.encodeDirectshow)
+                if (settings.cropInput == 1 || settings.encodeInput == 1)
                 {
                     if (!File.Exists(settings.ffmsindexPath))
                     {
@@ -4320,6 +4299,28 @@ namespace BluRip
             finally
             {
                 silent = false;
+            }
+        }
+
+        private void comboBoxCropInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.cropInput = comboBoxCropInput.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxEncodeInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.encodeInput = comboBoxEncodeInput.SelectedIndex;
+            }
+            catch (Exception)
+            {
             }
         }
     }
