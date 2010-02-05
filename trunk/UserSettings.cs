@@ -129,6 +129,11 @@ namespace BluRip
             this.copyAllButForced = orig.copyAllButForced;
             this.cropInput = orig.cropInput;
             this.encodeInput = orig.encodeInput;
+            this.untouchedAudio = orig.untouchedAudio;
+            this.muxOnlyFirstSub = orig.muxOnlyFirstSub;
+            this.muxSubs = orig.muxSubs;
+            this.copySubs = orig.copySubs;
+            this.dgindexnvPath = orig.dgindexnvPath;
 
             foreach (LanguageInfo li in orig.preferedLanguages)
             {
@@ -267,8 +272,12 @@ namespace BluRip
         public bool muxOnlyForced = false;
         public bool copySubtitles = true;
         public bool copyAllButForced = false;
-
         public int cropInput = 1;
         public int encodeInput = 1;
+        public bool untouchedAudio = false;
+        public bool muxOnlyFirstSub = false;
+        public int muxSubs = 1;
+        public int copySubs = 1;
+        public string dgindexnvPath = "";
     }
 }
