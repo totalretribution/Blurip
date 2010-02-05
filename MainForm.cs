@@ -736,14 +736,27 @@ namespace BluRip
 
                 checkBoxMinimizeCrop.Checked = settings.minimizeAutocrop;
                 checkBoxMuxOnlyForced.Checked = settings.muxOnlyForced;
+                
                 checkBoxCopySubs.Checked = settings.copySubtitles;
                 checkBoxCopySubsWithoutForced.Checked = settings.copyAllButForced;
 
                 checkBoxCopySubs_CheckedChanged(null, null);
+                
                 checkBoxMuxSubtitle_CheckedChanged(null, null);
+                checkBoxMuxOnlyForced_CheckedChanged(null, null);
+                checkBoxMuxSubtitle_CheckedChanged(null, null);
+                checkBoxMuxOnlyForced_CheckedChanged(null, null);
 
                 comboBoxCropInput.SelectedIndex = settings.cropInput;
                 comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
+
+                checkBoxUntouchedAudio.Checked = settings.untouchedAudio;
+                checkBoxMuxedOnlyFirstSub.Checked = settings.muxOnlyFirstSub;
+
+                comboBoxCopySubs.SelectedIndex = settings.copySubs;
+                comboBoxMuxSubs.SelectedIndex = settings.muxSubs;
+
+                textBoxDgindexnvPath.Text = settings.dgindexnvPath;
 
                 UpdateLanguage();
                 UpdateEncodingSettings();
@@ -1178,26 +1191,42 @@ namespace BluRip
                         else if (si.streamType == StreamType.Audio)
                         {
                             if (ac3AudioTypes.Contains(si.typeDesc))
-                            {
-                                pc.StartInfo.Arguments += "audio_ac3_" + si.language + ".ac3\" ";
-                                if (settings.downmixAc3)
+                            {   
+                                if (settings.untouchedAudio && si.typeDesc == "TrueHD/AC3")
                                 {
-                                    pc.StartInfo.Arguments += "-" + comboBoxDownmixAc3.Text + " ";
+                                    pc.StartInfo.Arguments += "audio_thd_" + si.language + ".thd\" ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_thd_" + si.language + ".thd";
                                 }
-                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + si.language + ".ac3";
+                                else
+                                {
+                                    pc.StartInfo.Arguments += "audio_ac3_" + si.language + ".ac3\" ";
+                                    if (settings.downmixAc3)
+                                    {
+                                        pc.StartInfo.Arguments += "-" + comboBoxDownmixAc3.Text + " ";
+                                    }
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + si.language + ".ac3";
+                                }
                             }
                             else if (dtsAudioTypes.Contains(si.typeDesc))
                             {
-                                pc.StartInfo.Arguments += "audio_dts_" + si.language + ".dts\" ";
-                                if (si.addInfo.Contains("core") && settings.dtsHdCore)
+                                if (settings.untouchedAudio && (si.typeDesc == "DTS Master Audio" || si.typeDesc == "DTS Hi-Res"))
                                 {
-                                    pc.StartInfo.Arguments += "-core ";
+                                    pc.StartInfo.Arguments += "audio_dtsHD_" + si.language + ".dtshd\" ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dtsHD_" + si.language + ".dtshd";
                                 }
-                                if (settings.downmixDTS)
+                                else
                                 {
-                                    pc.StartInfo.Arguments += "-" + comboBoxDownmixDts.Text + " ";
+                                    pc.StartInfo.Arguments += "audio_dts_" + si.language + ".dts\" ";
+                                    if (si.addInfo.Contains("core") && settings.dtsHdCore)
+                                    {
+                                        pc.StartInfo.Arguments += "-core ";
+                                    }
+                                    if (settings.downmixDTS)
+                                    {
+                                        pc.StartInfo.Arguments += "-" + comboBoxDownmixDts.Text + " ";
+                                    }
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dts_" + si.language + ".dts";
                                 }
-                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dts_" + si.language + ".dts";
                             }
                         }
                         else if (si.streamType == StreamType.Video)
@@ -1431,6 +1460,37 @@ namespace BluRip
                         pc.Close();
                         MessageCrop("Indexing done!");
                     }
+                    else if (settings.cropInput == 2 || settings.encodeInput == 2)
+                    {
+                        MessageCrop("Starting to index...");
+                        MessageCrop("");
+
+                        string output = Path.ChangeExtension(filename, "dgi");
+
+                        pc = new Process();
+                        pc.StartInfo.FileName = settings.dgindexnvPath;
+                        pc.StartInfo.Arguments = "-i \"" + filename + "\" -o \"" + output + "\" -e";                        
+
+                        MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
+
+                        pc.StartInfo.UseShellExecute = false;
+                        pc.StartInfo.CreateNoWindow = true;
+                        pc.StartInfo.RedirectStandardError = true;
+                        pc.StartInfo.RedirectStandardOutput = true;
+
+                        if (!pc.Start())
+                        {
+                            MessageCrop("Error starting DGIndexNv.exe");
+                            return;
+                        }
+
+                        pc.BeginOutputReadLine();
+
+                        pc.WaitForExit();
+                        pc.Close();
+                        MessageCrop("Indexing done!");
+                    }
 
                     if (settings.cropInput == 0)
                     {
@@ -1441,6 +1501,12 @@ namespace BluRip
                     {
                         File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
                             "FFVideoSource(\"" + filename + "\")");
+                    }
+                    else if (settings.cropInput == 2)
+                    {
+                        string output = Path.ChangeExtension(filename, "dgi");
+                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
+                            "DGSource(\"" + output + "\")");
                     }
                     MessageCrop("Starting AutoCrop...");
                     AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
@@ -2026,7 +2092,7 @@ namespace BluRip
         {
             try
             {
-                if (!checkFfmsindex()) return;
+                if (!checkIndex()) return;
                 progressBarMain.Visible = true;
                 buttonAbort.Visible = true;
                 tabControlMain.Enabled = false;
@@ -2602,6 +2668,7 @@ namespace BluRip
         private string filterTweakerLink = "http://www.codecguide.com/windows7_preferred_filter_tweaker.htm";
         private string anydvdLink = "http://www.slysoft.com/de/anydvdhd.html";
         private string surcodeLink = "http://www.surcode.com/";
+        private string dgdecnvLink = "http://neuron2.net/dgdecnv/dgdecnv.html";
 
         private void linkLabelAviSynth_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -2992,7 +3059,7 @@ namespace BluRip
                         pc.StartInfo.Arguments += "\"" + si.filename + "\" ";
                     }
                 }
-                if (settings.muxSubtitles)
+                if (settings.muxSubs > 0)
                 {
                     // subtitle
                     defaultSet = false;
@@ -3066,7 +3133,7 @@ namespace BluRip
                 pc.Close();
                 MessageMux("Muxing done!");
 
-                if (settings.copySubtitles)
+                if (settings.copySubs > 0)
                 {
                     MessageMux("Trying to copy subtitles...");
                     try
@@ -3685,10 +3752,14 @@ namespace BluRip
                 if (settings.muxSubtitles)
                 {
                     checkBoxMuxOnlyForced.Enabled = true;
+                    checkBoxMuxedOnlyFirstSub.Enabled = true;
                 }
                 else
                 {
+                    checkBoxMuxOnlyForced.Checked = false;
                     checkBoxMuxOnlyForced.Enabled = false;
+                    checkBoxMuxedOnlyFirstSub.Checked = false;
+                    checkBoxMuxedOnlyFirstSub.Enabled = false;
                 }
             }
             catch (Exception)
@@ -3794,7 +3865,7 @@ namespace BluRip
             }
         }
 
-        private bool checkFfmsindex()
+        private bool checkIndex()
         {
             try
             {
@@ -3804,6 +3875,15 @@ namespace BluRip
                     {
                         MessageMain("ffmsindex path not set");
                         if (!silent) MessageBox.Show("ffmsindex path not set", "Error");
+                        return false;
+                    }
+                }
+                else if (settings.cropInput == 2 || settings.encodeInput == 2)
+                {
+                    if (!File.Exists(settings.dgindexnvPath))
+                    {
+                        MessageMain("DGIndexNv path not set");
+                        if (!silent) MessageBox.Show("DGIndexNv path not set", "Error");
                         return false;
                     }
                 }
@@ -3891,7 +3971,7 @@ namespace BluRip
                         }
                     }
                 }
-                if (!checkFfmsindex()) return false;
+                if (!checkIndex()) return false;
                 if (sup > 0)
                 {
                     if (!checkBdsup2sub()) return false;
@@ -4049,6 +4129,15 @@ namespace BluRip
             try
             {
                 settings.muxOnlyForced = checkBoxMuxOnlyForced.Checked;
+                if (settings.muxOnlyForced)
+                {
+                    checkBoxMuxedOnlyFirstSub.Checked = false;
+                    checkBoxMuxedOnlyFirstSub.Enabled = false;
+                }
+                else
+                {
+                    checkBoxMuxedOnlyFirstSub.Enabled = true;
+                }
             }
             catch (Exception)
             {
@@ -4318,6 +4407,96 @@ namespace BluRip
             try
             {
                 settings.encodeInput = comboBoxEncodeInput.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUntouchedAudio_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.untouchedAudio = checkBoxUntouchedAudio.Checked;
+                if (settings.untouchedAudio)
+                {
+                    checkBoxDownmixAc3.Checked = false;
+                    checkBoxDownmixDts.Checked = false;
+                    checkBoxUseCore.Checked = false;
+                    
+                    checkBoxUseCore.Enabled = false;
+                    checkBoxDownmixAc3.Enabled = false;
+                    checkBoxDownmixDts.Enabled = false;
+                }
+                else
+                {
+                    checkBoxUseCore.Enabled = true;
+                    checkBoxDownmixAc3.Enabled = true;
+                    checkBoxDownmixDts.Enabled = true;
+                    checkBoxDownmixDts_CheckedChanged(null, null);
+                    checkBoxDownmixAc3_CheckedChanged(null, null);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxMuxedOnlyFirstSub_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.muxOnlyFirstSub = checkBoxMuxedOnlyFirstSub.Checked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxMuxSubs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.muxSubs = comboBoxMuxSubs.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxCopySubs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.copySubs = comboBoxCopySubs.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void linkLabelDGDecNv_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(dgdecnvLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDgindexnvPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "DGIndexNv.exe|DGIndexNv.exe";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    textBoxDgindexnvPath.Text = ofd.FileName;
+                    settings.dgindexnvPath = ofd.FileName;
+                }
             }
             catch (Exception)
             {

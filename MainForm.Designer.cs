@@ -85,10 +85,6 @@
             this.numericUpDownBlackValue = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownNrFrames = new System.Windows.Forms.NumericUpDown();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
-            this.labelEncodeInput = new System.Windows.Forms.Label();
-            this.labelCropInput = new System.Windows.Forms.Label();
-            this.comboBoxEncodeInput = new System.Windows.Forms.ComboBox();
-            this.comboBoxCropInput = new System.Windows.Forms.ComboBox();
             this.groupBoxAudioSettings = new System.Windows.Forms.GroupBox();
             this.comboBoxDownmixAc3 = new System.Windows.Forms.ComboBox();
             this.comboBoxDownmixDts = new System.Windows.Forms.ComboBox();
@@ -99,6 +95,10 @@
             this.labelX264Priority = new System.Windows.Forms.Label();
             this.comboBoxX264Priority = new System.Windows.Forms.ComboBox();
             this.groupBoxGeneralAviSynthSettings = new System.Windows.Forms.GroupBox();
+            this.labelEncodeInput = new System.Windows.Forms.Label();
+            this.labelCropInput = new System.Windows.Forms.Label();
+            this.comboBoxCropInput = new System.Windows.Forms.ComboBox();
+            this.comboBoxEncodeInput = new System.Windows.Forms.ComboBox();
             this.comboBoxAvisynthProfile = new System.Windows.Forms.ComboBox();
             this.labelEncodeProfile = new System.Windows.Forms.Label();
             this.comboBoxEncodeProfile = new System.Windows.Forms.ComboBox();
@@ -199,6 +199,18 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
+            this.checkBoxUntouchedAudio = new System.Windows.Forms.CheckBox();
+            this.checkBoxMuxedOnlyFirstSub = new System.Windows.Forms.CheckBox();
+            this.comboBoxMuxSubs = new System.Windows.Forms.ComboBox();
+            this.comboBoxCopySubs = new System.Windows.Forms.ComboBox();
+            this.labelMuxSubs = new System.Windows.Forms.Label();
+            this.labelCopySubs = new System.Windows.Forms.Label();
+            this.groupBoxFfmsindex = new System.Windows.Forms.GroupBox();
+            this.groupBoxDgsource = new System.Windows.Forms.GroupBox();
+            this.labelDGIndexNVPath = new System.Windows.Forms.Label();
+            this.textBoxDgindexnvPath = new System.Windows.Forms.TextBox();
+            this.buttonDgindexnvPath = new System.Windows.Forms.Button();
+            this.linkLabelDGDecNv = new System.Windows.Forms.LinkLabel();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -231,6 +243,8 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
+            this.groupBoxFfmsindex.SuspendLayout();
+            this.groupBoxDgsource.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -628,6 +642,10 @@
             // 
             // tabPageSettings
             // 
+            this.tabPageSettings.Controls.Add(this.labelCopySubs);
+            this.tabPageSettings.Controls.Add(this.labelMuxSubs);
+            this.tabPageSettings.Controls.Add(this.comboBoxCopySubs);
+            this.tabPageSettings.Controls.Add(this.comboBoxMuxSubs);
             this.tabPageSettings.Controls.Add(this.groupBoxGeneral);
             this.tabPageSettings.Controls.Add(this.groupBoxAutoCrop);
             this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
@@ -640,6 +658,7 @@
             // 
             // groupBoxGeneral
             // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxedOnlyFirstSub);
             this.groupBoxGeneral.Controls.Add(this.checkBoxCopySubsWithoutForced);
             this.groupBoxGeneral.Controls.Add(this.checkBoxCopySubs);
             this.groupBoxGeneral.Controls.Add(this.checkBoxMuxOnlyForced);
@@ -649,7 +668,7 @@
             this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
             this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 179);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 230);
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
@@ -657,7 +676,7 @@
             // checkBoxCopySubsWithoutForced
             // 
             this.checkBoxCopySubsWithoutForced.AutoSize = true;
-            this.checkBoxCopySubsWithoutForced.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxCopySubsWithoutForced.Location = new System.Drawing.Point(6, 114);
             this.checkBoxCopySubsWithoutForced.Name = "checkBoxCopySubsWithoutForced";
             this.checkBoxCopySubsWithoutForced.Size = new System.Drawing.Size(139, 17);
             this.checkBoxCopySubsWithoutForced.TabIndex = 21;
@@ -668,7 +687,7 @@
             // checkBoxCopySubs
             // 
             this.checkBoxCopySubs.AutoSize = true;
-            this.checkBoxCopySubs.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxCopySubs.Location = new System.Drawing.Point(6, 91);
             this.checkBoxCopySubs.Name = "checkBoxCopySubs";
             this.checkBoxCopySubs.Size = new System.Drawing.Size(147, 17);
             this.checkBoxCopySubs.TabIndex = 20;
@@ -690,7 +709,7 @@
             // checkBoxDeleteAfterEncode
             // 
             this.checkBoxDeleteAfterEncode.AutoSize = true;
-            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 157);
+            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 183);
             this.checkBoxDeleteAfterEncode.Name = "checkBoxDeleteAfterEncode";
             this.checkBoxDeleteAfterEncode.Size = new System.Drawing.Size(159, 17);
             this.checkBoxDeleteAfterEncode.TabIndex = 18;
@@ -701,7 +720,7 @@
             // checkBoxResize720p
             // 
             this.checkBoxResize720p.AutoSize = true;
-            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 134);
+            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 160);
             this.checkBoxResize720p.Name = "checkBoxResize720p";
             this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
             this.checkBoxResize720p.TabIndex = 13;
@@ -712,7 +731,7 @@
             // checkBoxUntouchedVideo
             // 
             this.checkBoxUntouchedVideo.AutoSize = true;
-            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 111);
+            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 137);
             this.checkBoxUntouchedVideo.Name = "checkBoxUntouchedVideo";
             this.checkBoxUntouchedVideo.Size = new System.Drawing.Size(168, 17);
             this.checkBoxUntouchedVideo.TabIndex = 12;
@@ -853,52 +872,9 @@
             this.tabPageEncodingSettings.Text = "Encoding settings";
             this.tabPageEncodingSettings.UseVisualStyleBackColor = true;
             // 
-            // labelEncodeInput
-            // 
-            this.labelEncodeInput.AutoSize = true;
-            this.labelEncodeInput.Location = new System.Drawing.Point(6, 56);
-            this.labelEncodeInput.Name = "labelEncodeInput";
-            this.labelEncodeInput.Size = new System.Drawing.Size(111, 13);
-            this.labelEncodeInput.TabIndex = 40;
-            this.labelEncodeInput.Text = "Encode input method:";
-            // 
-            // labelCropInput
-            // 
-            this.labelCropInput.AutoSize = true;
-            this.labelCropInput.Location = new System.Drawing.Point(6, 16);
-            this.labelCropInput.Name = "labelCropInput";
-            this.labelCropInput.Size = new System.Drawing.Size(96, 13);
-            this.labelCropInput.TabIndex = 39;
-            this.labelCropInput.Text = "Crop input method:";
-            // 
-            // comboBoxEncodeInput
-            // 
-            this.comboBoxEncodeInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEncodeInput.FormattingEnabled = true;
-            this.comboBoxEncodeInput.Items.AddRange(new object[] {
-            "DirectShowSource",
-            "FFVideoSource"});
-            this.comboBoxEncodeInput.Location = new System.Drawing.Point(9, 72);
-            this.comboBoxEncodeInput.Name = "comboBoxEncodeInput";
-            this.comboBoxEncodeInput.Size = new System.Drawing.Size(213, 21);
-            this.comboBoxEncodeInput.TabIndex = 38;
-            this.comboBoxEncodeInput.SelectedIndexChanged += new System.EventHandler(this.comboBoxEncodeInput_SelectedIndexChanged);
-            // 
-            // comboBoxCropInput
-            // 
-            this.comboBoxCropInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCropInput.FormattingEnabled = true;
-            this.comboBoxCropInput.Items.AddRange(new object[] {
-            "DirectShowSource",
-            "FFVideoSource"});
-            this.comboBoxCropInput.Location = new System.Drawing.Point(9, 32);
-            this.comboBoxCropInput.Name = "comboBoxCropInput";
-            this.comboBoxCropInput.Size = new System.Drawing.Size(213, 21);
-            this.comboBoxCropInput.TabIndex = 37;
-            this.comboBoxCropInput.SelectedIndexChanged += new System.EventHandler(this.comboBoxCropInput_SelectedIndexChanged);
-            // 
             // groupBoxAudioSettings
             // 
+            this.groupBoxAudioSettings.Controls.Add(this.checkBoxUntouchedAudio);
             this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixAc3);
             this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixDts);
             this.groupBoxAudioSettings.Controls.Add(this.checkBoxDownmixAc3);
@@ -906,7 +882,7 @@
             this.groupBoxAudioSettings.Controls.Add(this.checkBoxUseCore);
             this.groupBoxAudioSettings.Location = new System.Drawing.Point(240, 8);
             this.groupBoxAudioSettings.Name = "groupBoxAudioSettings";
-            this.groupBoxAudioSettings.Size = new System.Drawing.Size(200, 147);
+            this.groupBoxAudioSettings.Size = new System.Drawing.Size(200, 172);
             this.groupBoxAudioSettings.TabIndex = 36;
             this.groupBoxAudioSettings.TabStop = false;
             this.groupBoxAudioSettings.Text = "Audio settings";
@@ -919,7 +895,7 @@
             "192",
             "448",
             "640"});
-            this.comboBoxDownmixAc3.Location = new System.Drawing.Point(6, 115);
+            this.comboBoxDownmixAc3.Location = new System.Drawing.Point(6, 138);
             this.comboBoxDownmixAc3.Name = "comboBoxDownmixAc3";
             this.comboBoxDownmixAc3.Size = new System.Drawing.Size(188, 21);
             this.comboBoxDownmixAc3.TabIndex = 14;
@@ -932,7 +908,7 @@
             this.comboBoxDownmixDts.Items.AddRange(new object[] {
             "768",
             "1536"});
-            this.comboBoxDownmixDts.Location = new System.Drawing.Point(6, 65);
+            this.comboBoxDownmixDts.Location = new System.Drawing.Point(6, 88);
             this.comboBoxDownmixDts.Name = "comboBoxDownmixDts";
             this.comboBoxDownmixDts.Size = new System.Drawing.Size(188, 21);
             this.comboBoxDownmixDts.TabIndex = 13;
@@ -941,7 +917,7 @@
             // checkBoxDownmixAc3
             // 
             this.checkBoxDownmixAc3.AutoSize = true;
-            this.checkBoxDownmixAc3.Location = new System.Drawing.Point(6, 92);
+            this.checkBoxDownmixAc3.Location = new System.Drawing.Point(6, 115);
             this.checkBoxDownmixAc3.Name = "checkBoxDownmixAc3";
             this.checkBoxDownmixAc3.Size = new System.Drawing.Size(132, 17);
             this.checkBoxDownmixAc3.TabIndex = 12;
@@ -952,7 +928,7 @@
             // checkBoxDownmixDts
             // 
             this.checkBoxDownmixDts.AutoSize = true;
-            this.checkBoxDownmixDts.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxDownmixDts.Location = new System.Drawing.Point(6, 65);
             this.checkBoxDownmixDts.Name = "checkBoxDownmixDts";
             this.checkBoxDownmixDts.Size = new System.Drawing.Size(134, 17);
             this.checkBoxDownmixDts.TabIndex = 11;
@@ -963,7 +939,7 @@
             // checkBoxUseCore
             // 
             this.checkBoxUseCore.AutoSize = true;
-            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxUseCore.Location = new System.Drawing.Point(6, 42);
             this.checkBoxUseCore.Name = "checkBoxUseCore";
             this.checkBoxUseCore.Size = new System.Drawing.Size(167, 17);
             this.checkBoxUseCore.TabIndex = 10;
@@ -1011,6 +987,52 @@
             this.groupBoxGeneralAviSynthSettings.TabIndex = 6;
             this.groupBoxGeneralAviSynthSettings.TabStop = false;
             this.groupBoxGeneralAviSynthSettings.Text = "General AviSynth settings";
+            // 
+            // labelEncodeInput
+            // 
+            this.labelEncodeInput.AutoSize = true;
+            this.labelEncodeInput.Location = new System.Drawing.Point(6, 56);
+            this.labelEncodeInput.Name = "labelEncodeInput";
+            this.labelEncodeInput.Size = new System.Drawing.Size(111, 13);
+            this.labelEncodeInput.TabIndex = 40;
+            this.labelEncodeInput.Text = "Encode input method:";
+            // 
+            // labelCropInput
+            // 
+            this.labelCropInput.AutoSize = true;
+            this.labelCropInput.Location = new System.Drawing.Point(6, 16);
+            this.labelCropInput.Name = "labelCropInput";
+            this.labelCropInput.Size = new System.Drawing.Size(96, 13);
+            this.labelCropInput.TabIndex = 39;
+            this.labelCropInput.Text = "Crop input method:";
+            // 
+            // comboBoxCropInput
+            // 
+            this.comboBoxCropInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCropInput.FormattingEnabled = true;
+            this.comboBoxCropInput.Items.AddRange(new object[] {
+            "DirectShowSource",
+            "FFVideoSource",
+            "DGSource"});
+            this.comboBoxCropInput.Location = new System.Drawing.Point(9, 32);
+            this.comboBoxCropInput.Name = "comboBoxCropInput";
+            this.comboBoxCropInput.Size = new System.Drawing.Size(213, 21);
+            this.comboBoxCropInput.TabIndex = 37;
+            this.comboBoxCropInput.SelectedIndexChanged += new System.EventHandler(this.comboBoxCropInput_SelectedIndexChanged);
+            // 
+            // comboBoxEncodeInput
+            // 
+            this.comboBoxEncodeInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEncodeInput.FormattingEnabled = true;
+            this.comboBoxEncodeInput.Items.AddRange(new object[] {
+            "DirectShowSource",
+            "FFVideoSource",
+            "DGSource"});
+            this.comboBoxEncodeInput.Location = new System.Drawing.Point(9, 72);
+            this.comboBoxEncodeInput.Name = "comboBoxEncodeInput";
+            this.comboBoxEncodeInput.Size = new System.Drawing.Size(213, 21);
+            this.comboBoxEncodeInput.TabIndex = 38;
+            this.comboBoxEncodeInput.SelectedIndexChanged += new System.EventHandler(this.comboBoxEncodeInput_SelectedIndexChanged);
             // 
             // comboBoxAvisynthProfile
             // 
@@ -1156,6 +1178,8 @@
             // 
             // tabPageTools
             // 
+            this.tabPageTools.Controls.Add(this.groupBoxDgsource);
+            this.tabPageTools.Controls.Add(this.groupBoxFfmsindex);
             this.tabPageTools.Controls.Add(this.groupBoxExternalTools);
             this.tabPageTools.Location = new System.Drawing.Point(4, 22);
             this.tabPageTools.Name = "tabPageTools";
@@ -1179,22 +1203,19 @@
             this.groupBoxExternalTools.Controls.Add(this.buttonX264Path);
             this.groupBoxExternalTools.Controls.Add(this.textBoxX264Path);
             this.groupBoxExternalTools.Controls.Add(this.labelX264Path);
-            this.groupBoxExternalTools.Controls.Add(this.buttonFfmsindexPath);
-            this.groupBoxExternalTools.Controls.Add(this.textBoxFfmsindexPath);
-            this.groupBoxExternalTools.Controls.Add(this.labelFfmsindexPath);
             this.groupBoxExternalTools.Controls.Add(this.textBoxEac3toPath);
             this.groupBoxExternalTools.Controls.Add(this.labelEac3toPath);
             this.groupBoxExternalTools.Controls.Add(this.buttonEac3toPath);
             this.groupBoxExternalTools.Location = new System.Drawing.Point(6, 6);
             this.groupBoxExternalTools.Name = "groupBoxExternalTools";
-            this.groupBoxExternalTools.Size = new System.Drawing.Size(400, 258);
+            this.groupBoxExternalTools.Size = new System.Drawing.Size(291, 218);
             this.groupBoxExternalTools.TabIndex = 4;
             this.groupBoxExternalTools.TabStop = false;
             this.groupBoxExternalTools.Text = "External tools";
             // 
             // buttonMkvmergePath
             // 
-            this.buttonMkvmergePath.Location = new System.Drawing.Point(355, 225);
+            this.buttonMkvmergePath.Location = new System.Drawing.Point(241, 186);
             this.buttonMkvmergePath.Name = "buttonMkvmergePath";
             this.buttonMkvmergePath.Size = new System.Drawing.Size(39, 23);
             this.buttonMkvmergePath.TabIndex = 17;
@@ -1204,16 +1225,16 @@
             // 
             // textBoxMkvmergePath
             // 
-            this.textBoxMkvmergePath.Location = new System.Drawing.Point(6, 227);
+            this.textBoxMkvmergePath.Location = new System.Drawing.Point(6, 188);
             this.textBoxMkvmergePath.Name = "textBoxMkvmergePath";
             this.textBoxMkvmergePath.ReadOnly = true;
-            this.textBoxMkvmergePath.Size = new System.Drawing.Size(343, 20);
+            this.textBoxMkvmergePath.Size = new System.Drawing.Size(229, 20);
             this.textBoxMkvmergePath.TabIndex = 16;
             // 
             // labelMkvmergePath
             // 
             this.labelMkvmergePath.AutoSize = true;
-            this.labelMkvmergePath.Location = new System.Drawing.Point(6, 211);
+            this.labelMkvmergePath.Location = new System.Drawing.Point(6, 172);
             this.labelMkvmergePath.Name = "labelMkvmergePath";
             this.labelMkvmergePath.Size = new System.Drawing.Size(116, 13);
             this.labelMkvmergePath.TabIndex = 15;
@@ -1221,7 +1242,7 @@
             // 
             // buttonJavaPath
             // 
-            this.buttonJavaPath.Location = new System.Drawing.Point(355, 186);
+            this.buttonJavaPath.Location = new System.Drawing.Point(241, 147);
             this.buttonJavaPath.Name = "buttonJavaPath";
             this.buttonJavaPath.Size = new System.Drawing.Size(39, 23);
             this.buttonJavaPath.TabIndex = 14;
@@ -1231,16 +1252,16 @@
             // 
             // textBoxJavaPath
             // 
-            this.textBoxJavaPath.Location = new System.Drawing.Point(6, 188);
+            this.textBoxJavaPath.Location = new System.Drawing.Point(6, 149);
             this.textBoxJavaPath.Name = "textBoxJavaPath";
             this.textBoxJavaPath.ReadOnly = true;
-            this.textBoxJavaPath.Size = new System.Drawing.Size(343, 20);
+            this.textBoxJavaPath.Size = new System.Drawing.Size(229, 20);
             this.textBoxJavaPath.TabIndex = 13;
             // 
             // labelJavaPath
             // 
             this.labelJavaPath.AutoSize = true;
-            this.labelJavaPath.Location = new System.Drawing.Point(6, 172);
+            this.labelJavaPath.Location = new System.Drawing.Point(6, 133);
             this.labelJavaPath.Name = "labelJavaPath";
             this.labelJavaPath.Size = new System.Drawing.Size(87, 13);
             this.labelJavaPath.TabIndex = 12;
@@ -1248,7 +1269,7 @@
             // 
             // buttonSup2subPath
             // 
-            this.buttonSup2subPath.Location = new System.Drawing.Point(355, 147);
+            this.buttonSup2subPath.Location = new System.Drawing.Point(241, 108);
             this.buttonSup2subPath.Name = "buttonSup2subPath";
             this.buttonSup2subPath.Size = new System.Drawing.Size(39, 23);
             this.buttonSup2subPath.TabIndex = 11;
@@ -1258,16 +1279,16 @@
             // 
             // textBoxSup2subPath
             // 
-            this.textBoxSup2subPath.Location = new System.Drawing.Point(6, 149);
+            this.textBoxSup2subPath.Location = new System.Drawing.Point(6, 110);
             this.textBoxSup2subPath.Name = "textBoxSup2subPath";
             this.textBoxSup2subPath.ReadOnly = true;
-            this.textBoxSup2subPath.Size = new System.Drawing.Size(343, 20);
+            this.textBoxSup2subPath.Size = new System.Drawing.Size(229, 20);
             this.textBoxSup2subPath.TabIndex = 10;
             // 
             // labelSup2subPath
             // 
             this.labelSup2subPath.AutoSize = true;
-            this.labelSup2subPath.Location = new System.Drawing.Point(6, 133);
+            this.labelSup2subPath.Location = new System.Drawing.Point(6, 94);
             this.labelSup2subPath.Name = "labelSup2subPath";
             this.labelSup2subPath.Size = new System.Drawing.Size(120, 13);
             this.labelSup2subPath.TabIndex = 9;
@@ -1275,7 +1296,7 @@
             // 
             // buttonX264Path
             // 
-            this.buttonX264Path.Location = new System.Drawing.Point(355, 108);
+            this.buttonX264Path.Location = new System.Drawing.Point(241, 69);
             this.buttonX264Path.Name = "buttonX264Path";
             this.buttonX264Path.Size = new System.Drawing.Size(39, 23);
             this.buttonX264Path.TabIndex = 8;
@@ -1285,16 +1306,16 @@
             // 
             // textBoxX264Path
             // 
-            this.textBoxX264Path.Location = new System.Drawing.Point(6, 110);
+            this.textBoxX264Path.Location = new System.Drawing.Point(6, 71);
             this.textBoxX264Path.Name = "textBoxX264Path";
             this.textBoxX264Path.ReadOnly = true;
-            this.textBoxX264Path.Size = new System.Drawing.Size(343, 20);
+            this.textBoxX264Path.Size = new System.Drawing.Size(229, 20);
             this.textBoxX264Path.TabIndex = 7;
             // 
             // labelX264Path
             // 
             this.labelX264Path.AutoSize = true;
-            this.labelX264Path.Location = new System.Drawing.Point(6, 94);
+            this.labelX264Path.Location = new System.Drawing.Point(6, 55);
             this.labelX264Path.Name = "labelX264Path";
             this.labelX264Path.Size = new System.Drawing.Size(90, 13);
             this.labelX264Path.TabIndex = 6;
@@ -1302,7 +1323,7 @@
             // 
             // buttonFfmsindexPath
             // 
-            this.buttonFfmsindexPath.Location = new System.Drawing.Point(355, 69);
+            this.buttonFfmsindexPath.Location = new System.Drawing.Point(241, 30);
             this.buttonFfmsindexPath.Name = "buttonFfmsindexPath";
             this.buttonFfmsindexPath.Size = new System.Drawing.Size(39, 23);
             this.buttonFfmsindexPath.TabIndex = 5;
@@ -1312,16 +1333,16 @@
             // 
             // textBoxFfmsindexPath
             // 
-            this.textBoxFfmsindexPath.Location = new System.Drawing.Point(6, 71);
+            this.textBoxFfmsindexPath.Location = new System.Drawing.Point(6, 33);
             this.textBoxFfmsindexPath.Name = "textBoxFfmsindexPath";
             this.textBoxFfmsindexPath.ReadOnly = true;
-            this.textBoxFfmsindexPath.Size = new System.Drawing.Size(343, 20);
+            this.textBoxFfmsindexPath.Size = new System.Drawing.Size(229, 20);
             this.textBoxFfmsindexPath.TabIndex = 4;
             // 
             // labelFfmsindexPath
             // 
             this.labelFfmsindexPath.AutoSize = true;
-            this.labelFfmsindexPath.Location = new System.Drawing.Point(6, 55);
+            this.labelFfmsindexPath.Location = new System.Drawing.Point(6, 17);
             this.labelFfmsindexPath.Name = "labelFfmsindexPath";
             this.labelFfmsindexPath.Size = new System.Drawing.Size(111, 13);
             this.labelFfmsindexPath.TabIndex = 3;
@@ -1332,7 +1353,7 @@
             this.textBoxEac3toPath.Location = new System.Drawing.Point(6, 32);
             this.textBoxEac3toPath.Name = "textBoxEac3toPath";
             this.textBoxEac3toPath.ReadOnly = true;
-            this.textBoxEac3toPath.Size = new System.Drawing.Size(343, 20);
+            this.textBoxEac3toPath.Size = new System.Drawing.Size(229, 20);
             this.textBoxEac3toPath.TabIndex = 1;
             // 
             // labelEac3toPath
@@ -1346,7 +1367,7 @@
             // 
             // buttonEac3toPath
             // 
-            this.buttonEac3toPath.Location = new System.Drawing.Point(355, 29);
+            this.buttonEac3toPath.Location = new System.Drawing.Point(241, 29);
             this.buttonEac3toPath.Name = "buttonEac3toPath";
             this.buttonEac3toPath.Size = new System.Drawing.Size(39, 23);
             this.buttonEac3toPath.TabIndex = 0;
@@ -1534,6 +1555,7 @@
             // 
             // tabPageSoftware
             // 
+            this.tabPageSoftware.Controls.Add(this.linkLabelDGDecNv);
             this.tabPageSoftware.Controls.Add(this.linkLabelSurcode);
             this.tabPageSoftware.Controls.Add(this.labelUsefullTools);
             this.tabPageSoftware.Controls.Add(this.linkLabelAnyDvd);
@@ -1600,7 +1622,7 @@
             // linkLabelMkvtoolnix
             // 
             this.linkLabelMkvtoolnix.AutoSize = true;
-            this.linkLabelMkvtoolnix.Location = new System.Drawing.Point(6, 107);
+            this.linkLabelMkvtoolnix.Location = new System.Drawing.Point(6, 94);
             this.linkLabelMkvtoolnix.Name = "linkLabelMkvtoolnix";
             this.linkLabelMkvtoolnix.Size = new System.Drawing.Size(57, 13);
             this.linkLabelMkvtoolnix.TabIndex = 8;
@@ -1611,7 +1633,7 @@
             // linkLabelJava
             // 
             this.linkLabelJava.AutoSize = true;
-            this.linkLabelJava.Location = new System.Drawing.Point(6, 94);
+            this.linkLabelJava.Location = new System.Drawing.Point(6, 81);
             this.linkLabelJava.Name = "linkLabelJava";
             this.linkLabelJava.Size = new System.Drawing.Size(30, 13);
             this.linkLabelJava.TabIndex = 7;
@@ -1622,7 +1644,7 @@
             // linkLabelFFMpegSrc
             // 
             this.linkLabelFFMpegSrc.AutoSize = true;
-            this.linkLabelFFMpegSrc.Location = new System.Drawing.Point(6, 81);
+            this.linkLabelFFMpegSrc.Location = new System.Drawing.Point(322, 55);
             this.linkLabelFFMpegSrc.Name = "linkLabelFFMpegSrc";
             this.linkLabelFFMpegSrc.Size = new System.Drawing.Size(62, 13);
             this.linkLabelFFMpegSrc.TabIndex = 6;
@@ -2056,6 +2078,138 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
+            // checkBoxUntouchedAudio
+            // 
+            this.checkBoxUntouchedAudio.AutoSize = true;
+            this.checkBoxUntouchedAudio.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxUntouchedAudio.Name = "checkBoxUntouchedAudio";
+            this.checkBoxUntouchedAudio.Size = new System.Drawing.Size(108, 17);
+            this.checkBoxUntouchedAudio.TabIndex = 15;
+            this.checkBoxUntouchedAudio.Text = "Untouched audio";
+            this.checkBoxUntouchedAudio.UseVisualStyleBackColor = true;
+            this.checkBoxUntouchedAudio.CheckedChanged += new System.EventHandler(this.checkBoxUntouchedAudio_CheckedChanged);
+            // 
+            // checkBoxMuxedOnlyFirstSub
+            // 
+            this.checkBoxMuxedOnlyFirstSub.AutoSize = true;
+            this.checkBoxMuxedOnlyFirstSub.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxMuxedOnlyFirstSub.Name = "checkBoxMuxedOnlyFirstSub";
+            this.checkBoxMuxedOnlyFirstSub.Size = new System.Drawing.Size(176, 17);
+            this.checkBoxMuxedOnlyFirstSub.TabIndex = 8;
+            this.checkBoxMuxedOnlyFirstSub.Text = "Mux only first normal/forced sub";
+            this.checkBoxMuxedOnlyFirstSub.UseVisualStyleBackColor = true;
+            this.checkBoxMuxedOnlyFirstSub.CheckedChanged += new System.EventHandler(this.checkBoxMuxedOnlyFirstSub_CheckedChanged);
+            // 
+            // comboBoxMuxSubs
+            // 
+            this.comboBoxMuxSubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMuxSubs.FormattingEnabled = true;
+            this.comboBoxMuxSubs.Items.AddRange(new object[] {
+            "Do not mux subtitles",
+            "Mux all subtitles",
+            "Mux only forced subtitles",
+            "Mux only first normal/forced subtitle"});
+            this.comboBoxMuxSubs.Location = new System.Drawing.Point(447, 93);
+            this.comboBoxMuxSubs.Name = "comboBoxMuxSubs";
+            this.comboBoxMuxSubs.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxMuxSubs.TabIndex = 8;
+            this.comboBoxMuxSubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxMuxSubs_SelectedIndexChanged);
+            // 
+            // comboBoxCopySubs
+            // 
+            this.comboBoxCopySubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCopySubs.FormattingEnabled = true;
+            this.comboBoxCopySubs.Items.AddRange(new object[] {
+            "Do not copy subtitles",
+            "Copy all subtitles to \'Subs\' folder",
+            "Copy all but forced",
+            "Copy only first normal/forced subtitles"});
+            this.comboBoxCopySubs.Location = new System.Drawing.Point(447, 132);
+            this.comboBoxCopySubs.Name = "comboBoxCopySubs";
+            this.comboBoxCopySubs.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxCopySubs.TabIndex = 9;
+            this.comboBoxCopySubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopySubs_SelectedIndexChanged);
+            // 
+            // labelMuxSubs
+            // 
+            this.labelMuxSubs.AutoSize = true;
+            this.labelMuxSubs.Location = new System.Drawing.Point(444, 77);
+            this.labelMuxSubs.Name = "labelMuxSubs";
+            this.labelMuxSubs.Size = new System.Drawing.Size(71, 13);
+            this.labelMuxSubs.TabIndex = 10;
+            this.labelMuxSubs.Text = "Mux subtitles:";
+            // 
+            // labelCopySubs
+            // 
+            this.labelCopySubs.AutoSize = true;
+            this.labelCopySubs.Location = new System.Drawing.Point(444, 117);
+            this.labelCopySubs.Name = "labelCopySubs";
+            this.labelCopySubs.Size = new System.Drawing.Size(75, 13);
+            this.labelCopySubs.TabIndex = 11;
+            this.labelCopySubs.Text = "Copy subtitles:";
+            // 
+            // groupBoxFfmsindex
+            // 
+            this.groupBoxFfmsindex.Controls.Add(this.labelFfmsindexPath);
+            this.groupBoxFfmsindex.Controls.Add(this.textBoxFfmsindexPath);
+            this.groupBoxFfmsindex.Controls.Add(this.buttonFfmsindexPath);
+            this.groupBoxFfmsindex.Location = new System.Drawing.Point(303, 6);
+            this.groupBoxFfmsindex.Name = "groupBoxFfmsindex";
+            this.groupBoxFfmsindex.Size = new System.Drawing.Size(290, 68);
+            this.groupBoxFfmsindex.TabIndex = 6;
+            this.groupBoxFfmsindex.TabStop = false;
+            this.groupBoxFfmsindex.Text = "When using FFVideoSource";
+            // 
+            // groupBoxDgsource
+            // 
+            this.groupBoxDgsource.Controls.Add(this.labelDGIndexNVPath);
+            this.groupBoxDgsource.Controls.Add(this.textBoxDgindexnvPath);
+            this.groupBoxDgsource.Controls.Add(this.buttonDgindexnvPath);
+            this.groupBoxDgsource.Location = new System.Drawing.Point(303, 80);
+            this.groupBoxDgsource.Name = "groupBoxDgsource";
+            this.groupBoxDgsource.Size = new System.Drawing.Size(290, 68);
+            this.groupBoxDgsource.TabIndex = 7;
+            this.groupBoxDgsource.TabStop = false;
+            this.groupBoxDgsource.Text = "When using DGSource";
+            // 
+            // labelDGIndexNVPath
+            // 
+            this.labelDGIndexNVPath.AutoSize = true;
+            this.labelDGIndexNVPath.Location = new System.Drawing.Point(6, 16);
+            this.labelDGIndexNVPath.Name = "labelDGIndexNVPath";
+            this.labelDGIndexNVPath.Size = new System.Drawing.Size(124, 13);
+            this.labelDGIndexNVPath.TabIndex = 6;
+            this.labelDGIndexNVPath.Text = "Path to DGIndexNV.exe:";
+            // 
+            // textBoxDgindexnvPath
+            // 
+            this.textBoxDgindexnvPath.Location = new System.Drawing.Point(6, 32);
+            this.textBoxDgindexnvPath.Name = "textBoxDgindexnvPath";
+            this.textBoxDgindexnvPath.ReadOnly = true;
+            this.textBoxDgindexnvPath.Size = new System.Drawing.Size(229, 20);
+            this.textBoxDgindexnvPath.TabIndex = 7;
+            // 
+            // buttonDgindexnvPath
+            // 
+            this.buttonDgindexnvPath.Location = new System.Drawing.Point(241, 29);
+            this.buttonDgindexnvPath.Name = "buttonDgindexnvPath";
+            this.buttonDgindexnvPath.Size = new System.Drawing.Size(39, 23);
+            this.buttonDgindexnvPath.TabIndex = 8;
+            this.buttonDgindexnvPath.Text = "...";
+            this.buttonDgindexnvPath.UseVisualStyleBackColor = true;
+            this.buttonDgindexnvPath.Click += new System.EventHandler(this.buttonDgindexnvPath_Click);
+            // 
+            // linkLabelDGDecNv
+            // 
+            this.linkLabelDGDecNv.AutoSize = true;
+            this.linkLabelDGDecNv.Location = new System.Drawing.Point(322, 68);
+            this.linkLabelDGDecNv.Name = "linkLabelDGDecNv";
+            this.linkLabelDGDecNv.Size = new System.Drawing.Size(57, 13);
+            this.linkLabelDGDecNv.TabIndex = 13;
+            this.linkLabelDGDecNv.TabStop = true;
+            this.linkLabelDGDecNv.Text = "DGDecNv";
+            this.linkLabelDGDecNv.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDGDecNv_LinkClicked);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2084,6 +2238,7 @@
             this.groupBoxPath.ResumeLayout(false);
             this.groupBoxPath.PerformLayout();
             this.tabPageSettings.ResumeLayout(false);
+            this.tabPageSettings.PerformLayout();
             this.groupBoxGeneral.ResumeLayout(false);
             this.groupBoxGeneral.PerformLayout();
             this.groupBoxAutoCrop.ResumeLayout(false);
@@ -2123,6 +2278,10 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
+            this.groupBoxFfmsindex.ResumeLayout(false);
+            this.groupBoxFfmsindex.PerformLayout();
+            this.groupBoxDgsource.ResumeLayout(false);
+            this.groupBoxDgsource.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2299,6 +2458,18 @@
         private System.Windows.Forms.Label labelCropInput;
         private System.Windows.Forms.ComboBox comboBoxEncodeInput;
         private System.Windows.Forms.ComboBox comboBoxCropInput;
+        private System.Windows.Forms.CheckBox checkBoxUntouchedAudio;
+        private System.Windows.Forms.CheckBox checkBoxMuxedOnlyFirstSub;
+        private System.Windows.Forms.ComboBox comboBoxMuxSubs;
+        private System.Windows.Forms.ComboBox comboBoxCopySubs;
+        private System.Windows.Forms.Label labelCopySubs;
+        private System.Windows.Forms.Label labelMuxSubs;
+        private System.Windows.Forms.GroupBox groupBoxDgsource;
+        private System.Windows.Forms.GroupBox groupBoxFfmsindex;
+        private System.Windows.Forms.Label labelDGIndexNVPath;
+        private System.Windows.Forms.TextBox textBoxDgindexnvPath;
+        private System.Windows.Forms.Button buttonDgindexnvPath;
+        private System.Windows.Forms.LinkLabel linkLabelDGDecNv;
     }
 }
 
