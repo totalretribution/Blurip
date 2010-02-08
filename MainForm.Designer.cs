@@ -68,7 +68,12 @@
             this.buttonWorkingDir = new System.Windows.Forms.Button();
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
+            this.labelCopySubs = new System.Windows.Forms.Label();
+            this.labelMuxSubs = new System.Windows.Forms.Label();
+            this.comboBoxCopySubs = new System.Windows.Forms.ComboBox();
+            this.comboBoxMuxSubs = new System.Windows.Forms.ComboBox();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxMuxedOnlyFirstSub = new System.Windows.Forms.CheckBox();
             this.checkBoxCopySubsWithoutForced = new System.Windows.Forms.CheckBox();
             this.checkBoxCopySubs = new System.Windows.Forms.CheckBox();
             this.checkBoxMuxOnlyForced = new System.Windows.Forms.CheckBox();
@@ -86,6 +91,7 @@
             this.numericUpDownNrFrames = new System.Windows.Forms.NumericUpDown();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
             this.groupBoxAudioSettings = new System.Windows.Forms.GroupBox();
+            this.checkBoxUntouchedAudio = new System.Windows.Forms.CheckBox();
             this.comboBoxDownmixAc3 = new System.Windows.Forms.ComboBox();
             this.comboBoxDownmixDts = new System.Windows.Forms.ComboBox();
             this.checkBoxDownmixAc3 = new System.Windows.Forms.CheckBox();
@@ -114,6 +120,14 @@
             this.listBoxX264Profiles = new System.Windows.Forms.ListBox();
             this.buttonAddX264 = new System.Windows.Forms.Button();
             this.tabPageTools = new System.Windows.Forms.TabPage();
+            this.groupBoxDgsource = new System.Windows.Forms.GroupBox();
+            this.labelDGIndexNVPath = new System.Windows.Forms.Label();
+            this.textBoxDgindexnvPath = new System.Windows.Forms.TextBox();
+            this.buttonDgindexnvPath = new System.Windows.Forms.Button();
+            this.groupBoxFfmsindex = new System.Windows.Forms.GroupBox();
+            this.labelFfmsindexPath = new System.Windows.Forms.Label();
+            this.textBoxFfmsindexPath = new System.Windows.Forms.TextBox();
+            this.buttonFfmsindexPath = new System.Windows.Forms.Button();
             this.groupBoxExternalTools = new System.Windows.Forms.GroupBox();
             this.buttonMkvmergePath = new System.Windows.Forms.Button();
             this.textBoxMkvmergePath = new System.Windows.Forms.TextBox();
@@ -127,9 +141,6 @@
             this.buttonX264Path = new System.Windows.Forms.Button();
             this.textBoxX264Path = new System.Windows.Forms.TextBox();
             this.labelX264Path = new System.Windows.Forms.Label();
-            this.buttonFfmsindexPath = new System.Windows.Forms.Button();
-            this.textBoxFfmsindexPath = new System.Windows.Forms.TextBox();
-            this.labelFfmsindexPath = new System.Windows.Forms.Label();
             this.textBoxEac3toPath = new System.Windows.Forms.TextBox();
             this.labelEac3toPath = new System.Windows.Forms.Label();
             this.buttonEac3toPath = new System.Windows.Forms.Button();
@@ -150,6 +161,7 @@
             this.checkBoxDefaultSubtitleTrack = new System.Windows.Forms.CheckBox();
             this.checkBoxDefaultAudioTrack = new System.Windows.Forms.CheckBox();
             this.tabPageSoftware = new System.Windows.Forms.TabPage();
+            this.linkLabelDGDecNv = new System.Windows.Forms.LinkLabel();
             this.linkLabelSurcode = new System.Windows.Forms.LinkLabel();
             this.labelUsefullTools = new System.Windows.Forms.Label();
             this.linkLabelAnyDvd = new System.Windows.Forms.LinkLabel();
@@ -199,18 +211,9 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.checkBoxUntouchedAudio = new System.Windows.Forms.CheckBox();
-            this.checkBoxMuxedOnlyFirstSub = new System.Windows.Forms.CheckBox();
-            this.comboBoxMuxSubs = new System.Windows.Forms.ComboBox();
-            this.comboBoxCopySubs = new System.Windows.Forms.ComboBox();
-            this.labelMuxSubs = new System.Windows.Forms.Label();
-            this.labelCopySubs = new System.Windows.Forms.Label();
-            this.groupBoxFfmsindex = new System.Windows.Forms.GroupBox();
-            this.groupBoxDgsource = new System.Windows.Forms.GroupBox();
-            this.labelDGIndexNVPath = new System.Windows.Forms.Label();
-            this.textBoxDgindexnvPath = new System.Windows.Forms.TextBox();
-            this.buttonDgindexnvPath = new System.Windows.Forms.Button();
-            this.linkLabelDGDecNv = new System.Windows.Forms.LinkLabel();
+            this.labelCUVIDServerPath = new System.Windows.Forms.Label();
+            this.textBoxCUVIDServerPath = new System.Windows.Forms.TextBox();
+            this.buttonCUVIDServerPath = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -227,6 +230,8 @@
             this.groupBoxAviSynthProfiles.SuspendLayout();
             this.groupBoxX264Profiles.SuspendLayout();
             this.tabPageTools.SuspendLayout();
+            this.groupBoxDgsource.SuspendLayout();
+            this.groupBoxFfmsindex.SuspendLayout();
             this.groupBoxExternalTools.SuspendLayout();
             this.tabPageStreams.SuspendLayout();
             this.groupBoxAutoSelect.SuspendLayout();
@@ -243,8 +248,6 @@
             this.tabPageSubtitleLog.SuspendLayout();
             this.tabPageEncodeLog.SuspendLayout();
             this.tabPageMuxLog.SuspendLayout();
-            this.groupBoxFfmsindex.SuspendLayout();
-            this.groupBoxDgsource.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -656,6 +659,54 @@
             this.tabPageSettings.Text = "General settings";
             this.tabPageSettings.UseVisualStyleBackColor = true;
             // 
+            // labelCopySubs
+            // 
+            this.labelCopySubs.AutoSize = true;
+            this.labelCopySubs.Location = new System.Drawing.Point(444, 117);
+            this.labelCopySubs.Name = "labelCopySubs";
+            this.labelCopySubs.Size = new System.Drawing.Size(75, 13);
+            this.labelCopySubs.TabIndex = 11;
+            this.labelCopySubs.Text = "Copy subtitles:";
+            // 
+            // labelMuxSubs
+            // 
+            this.labelMuxSubs.AutoSize = true;
+            this.labelMuxSubs.Location = new System.Drawing.Point(444, 77);
+            this.labelMuxSubs.Name = "labelMuxSubs";
+            this.labelMuxSubs.Size = new System.Drawing.Size(71, 13);
+            this.labelMuxSubs.TabIndex = 10;
+            this.labelMuxSubs.Text = "Mux subtitles:";
+            // 
+            // comboBoxCopySubs
+            // 
+            this.comboBoxCopySubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCopySubs.FormattingEnabled = true;
+            this.comboBoxCopySubs.Items.AddRange(new object[] {
+            "Do not copy subtitles",
+            "Copy all subtitles to \'Subs\' folder",
+            "Copy all but forced",
+            "Copy only first normal/forced subtitles"});
+            this.comboBoxCopySubs.Location = new System.Drawing.Point(447, 132);
+            this.comboBoxCopySubs.Name = "comboBoxCopySubs";
+            this.comboBoxCopySubs.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxCopySubs.TabIndex = 9;
+            this.comboBoxCopySubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopySubs_SelectedIndexChanged);
+            // 
+            // comboBoxMuxSubs
+            // 
+            this.comboBoxMuxSubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMuxSubs.FormattingEnabled = true;
+            this.comboBoxMuxSubs.Items.AddRange(new object[] {
+            "Do not mux subtitles",
+            "Mux all subtitles",
+            "Mux only forced subtitles",
+            "Mux only first normal/forced subtitle"});
+            this.comboBoxMuxSubs.Location = new System.Drawing.Point(447, 93);
+            this.comboBoxMuxSubs.Name = "comboBoxMuxSubs";
+            this.comboBoxMuxSubs.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxMuxSubs.TabIndex = 8;
+            this.comboBoxMuxSubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxMuxSubs_SelectedIndexChanged);
+            // 
             // groupBoxGeneral
             // 
             this.groupBoxGeneral.Controls.Add(this.checkBoxMuxedOnlyFirstSub);
@@ -672,6 +723,17 @@
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
+            // 
+            // checkBoxMuxedOnlyFirstSub
+            // 
+            this.checkBoxMuxedOnlyFirstSub.AutoSize = true;
+            this.checkBoxMuxedOnlyFirstSub.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxMuxedOnlyFirstSub.Name = "checkBoxMuxedOnlyFirstSub";
+            this.checkBoxMuxedOnlyFirstSub.Size = new System.Drawing.Size(176, 17);
+            this.checkBoxMuxedOnlyFirstSub.TabIndex = 8;
+            this.checkBoxMuxedOnlyFirstSub.Text = "Mux only first normal/forced sub";
+            this.checkBoxMuxedOnlyFirstSub.UseVisualStyleBackColor = true;
+            this.checkBoxMuxedOnlyFirstSub.CheckedChanged += new System.EventHandler(this.checkBoxMuxedOnlyFirstSub_CheckedChanged);
             // 
             // checkBoxCopySubsWithoutForced
             // 
@@ -886,6 +948,17 @@
             this.groupBoxAudioSettings.TabIndex = 36;
             this.groupBoxAudioSettings.TabStop = false;
             this.groupBoxAudioSettings.Text = "Audio settings";
+            // 
+            // checkBoxUntouchedAudio
+            // 
+            this.checkBoxUntouchedAudio.AutoSize = true;
+            this.checkBoxUntouchedAudio.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxUntouchedAudio.Name = "checkBoxUntouchedAudio";
+            this.checkBoxUntouchedAudio.Size = new System.Drawing.Size(108, 17);
+            this.checkBoxUntouchedAudio.TabIndex = 15;
+            this.checkBoxUntouchedAudio.Text = "Untouched audio";
+            this.checkBoxUntouchedAudio.UseVisualStyleBackColor = true;
+            this.checkBoxUntouchedAudio.CheckedChanged += new System.EventHandler(this.checkBoxUntouchedAudio_CheckedChanged);
             // 
             // comboBoxDownmixAc3
             // 
@@ -1189,6 +1262,87 @@
             this.tabPageTools.Text = "File paths";
             this.tabPageTools.UseVisualStyleBackColor = true;
             // 
+            // groupBoxDgsource
+            // 
+            this.groupBoxDgsource.Controls.Add(this.labelCUVIDServerPath);
+            this.groupBoxDgsource.Controls.Add(this.textBoxCUVIDServerPath);
+            this.groupBoxDgsource.Controls.Add(this.buttonCUVIDServerPath);
+            this.groupBoxDgsource.Controls.Add(this.labelDGIndexNVPath);
+            this.groupBoxDgsource.Controls.Add(this.textBoxDgindexnvPath);
+            this.groupBoxDgsource.Controls.Add(this.buttonDgindexnvPath);
+            this.groupBoxDgsource.Location = new System.Drawing.Point(303, 80);
+            this.groupBoxDgsource.Name = "groupBoxDgsource";
+            this.groupBoxDgsource.Size = new System.Drawing.Size(290, 111);
+            this.groupBoxDgsource.TabIndex = 7;
+            this.groupBoxDgsource.TabStop = false;
+            this.groupBoxDgsource.Text = "When using DGSource";
+            // 
+            // labelDGIndexNVPath
+            // 
+            this.labelDGIndexNVPath.AutoSize = true;
+            this.labelDGIndexNVPath.Location = new System.Drawing.Point(6, 16);
+            this.labelDGIndexNVPath.Name = "labelDGIndexNVPath";
+            this.labelDGIndexNVPath.Size = new System.Drawing.Size(124, 13);
+            this.labelDGIndexNVPath.TabIndex = 6;
+            this.labelDGIndexNVPath.Text = "Path to DGIndexNV.exe:";
+            // 
+            // textBoxDgindexnvPath
+            // 
+            this.textBoxDgindexnvPath.Location = new System.Drawing.Point(6, 32);
+            this.textBoxDgindexnvPath.Name = "textBoxDgindexnvPath";
+            this.textBoxDgindexnvPath.ReadOnly = true;
+            this.textBoxDgindexnvPath.Size = new System.Drawing.Size(229, 20);
+            this.textBoxDgindexnvPath.TabIndex = 7;
+            // 
+            // buttonDgindexnvPath
+            // 
+            this.buttonDgindexnvPath.Location = new System.Drawing.Point(241, 29);
+            this.buttonDgindexnvPath.Name = "buttonDgindexnvPath";
+            this.buttonDgindexnvPath.Size = new System.Drawing.Size(39, 23);
+            this.buttonDgindexnvPath.TabIndex = 8;
+            this.buttonDgindexnvPath.Text = "...";
+            this.buttonDgindexnvPath.UseVisualStyleBackColor = true;
+            this.buttonDgindexnvPath.Click += new System.EventHandler(this.buttonDgindexnvPath_Click);
+            // 
+            // groupBoxFfmsindex
+            // 
+            this.groupBoxFfmsindex.Controls.Add(this.labelFfmsindexPath);
+            this.groupBoxFfmsindex.Controls.Add(this.textBoxFfmsindexPath);
+            this.groupBoxFfmsindex.Controls.Add(this.buttonFfmsindexPath);
+            this.groupBoxFfmsindex.Location = new System.Drawing.Point(303, 6);
+            this.groupBoxFfmsindex.Name = "groupBoxFfmsindex";
+            this.groupBoxFfmsindex.Size = new System.Drawing.Size(290, 68);
+            this.groupBoxFfmsindex.TabIndex = 6;
+            this.groupBoxFfmsindex.TabStop = false;
+            this.groupBoxFfmsindex.Text = "When using FFVideoSource";
+            // 
+            // labelFfmsindexPath
+            // 
+            this.labelFfmsindexPath.AutoSize = true;
+            this.labelFfmsindexPath.Location = new System.Drawing.Point(6, 17);
+            this.labelFfmsindexPath.Name = "labelFfmsindexPath";
+            this.labelFfmsindexPath.Size = new System.Drawing.Size(111, 13);
+            this.labelFfmsindexPath.TabIndex = 3;
+            this.labelFfmsindexPath.Text = "Path to ffmsindex.exe:";
+            // 
+            // textBoxFfmsindexPath
+            // 
+            this.textBoxFfmsindexPath.Location = new System.Drawing.Point(6, 33);
+            this.textBoxFfmsindexPath.Name = "textBoxFfmsindexPath";
+            this.textBoxFfmsindexPath.ReadOnly = true;
+            this.textBoxFfmsindexPath.Size = new System.Drawing.Size(229, 20);
+            this.textBoxFfmsindexPath.TabIndex = 4;
+            // 
+            // buttonFfmsindexPath
+            // 
+            this.buttonFfmsindexPath.Location = new System.Drawing.Point(241, 30);
+            this.buttonFfmsindexPath.Name = "buttonFfmsindexPath";
+            this.buttonFfmsindexPath.Size = new System.Drawing.Size(39, 23);
+            this.buttonFfmsindexPath.TabIndex = 5;
+            this.buttonFfmsindexPath.Text = "...";
+            this.buttonFfmsindexPath.UseVisualStyleBackColor = true;
+            this.buttonFfmsindexPath.Click += new System.EventHandler(this.buttonFfmsindexPath_Click);
+            // 
             // groupBoxExternalTools
             // 
             this.groupBoxExternalTools.Controls.Add(this.buttonMkvmergePath);
@@ -1320,33 +1474,6 @@
             this.labelX264Path.Size = new System.Drawing.Size(90, 13);
             this.labelX264Path.TabIndex = 6;
             this.labelX264Path.Text = "Path to x264.exe:";
-            // 
-            // buttonFfmsindexPath
-            // 
-            this.buttonFfmsindexPath.Location = new System.Drawing.Point(241, 30);
-            this.buttonFfmsindexPath.Name = "buttonFfmsindexPath";
-            this.buttonFfmsindexPath.Size = new System.Drawing.Size(39, 23);
-            this.buttonFfmsindexPath.TabIndex = 5;
-            this.buttonFfmsindexPath.Text = "...";
-            this.buttonFfmsindexPath.UseVisualStyleBackColor = true;
-            this.buttonFfmsindexPath.Click += new System.EventHandler(this.buttonFfmsindexPath_Click);
-            // 
-            // textBoxFfmsindexPath
-            // 
-            this.textBoxFfmsindexPath.Location = new System.Drawing.Point(6, 33);
-            this.textBoxFfmsindexPath.Name = "textBoxFfmsindexPath";
-            this.textBoxFfmsindexPath.ReadOnly = true;
-            this.textBoxFfmsindexPath.Size = new System.Drawing.Size(229, 20);
-            this.textBoxFfmsindexPath.TabIndex = 4;
-            // 
-            // labelFfmsindexPath
-            // 
-            this.labelFfmsindexPath.AutoSize = true;
-            this.labelFfmsindexPath.Location = new System.Drawing.Point(6, 17);
-            this.labelFfmsindexPath.Name = "labelFfmsindexPath";
-            this.labelFfmsindexPath.Size = new System.Drawing.Size(111, 13);
-            this.labelFfmsindexPath.TabIndex = 3;
-            this.labelFfmsindexPath.Text = "Path to ffmsindex.exe:";
             // 
             // textBoxEac3toPath
             // 
@@ -1576,6 +1703,17 @@
             this.tabPageSoftware.TabIndex = 5;
             this.tabPageSoftware.Text = "Needed tools";
             this.tabPageSoftware.UseVisualStyleBackColor = true;
+            // 
+            // linkLabelDGDecNv
+            // 
+            this.linkLabelDGDecNv.AutoSize = true;
+            this.linkLabelDGDecNv.Location = new System.Drawing.Point(322, 68);
+            this.linkLabelDGDecNv.Name = "linkLabelDGDecNv";
+            this.linkLabelDGDecNv.Size = new System.Drawing.Size(57, 13);
+            this.linkLabelDGDecNv.TabIndex = 13;
+            this.linkLabelDGDecNv.TabStop = true;
+            this.linkLabelDGDecNv.Text = "DGDecNv";
+            this.linkLabelDGDecNv.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDGDecNv_LinkClicked);
             // 
             // linkLabelSurcode
             // 
@@ -2078,137 +2216,32 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // checkBoxUntouchedAudio
+            // labelCUVIDServerPath
             // 
-            this.checkBoxUntouchedAudio.AutoSize = true;
-            this.checkBoxUntouchedAudio.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxUntouchedAudio.Name = "checkBoxUntouchedAudio";
-            this.checkBoxUntouchedAudio.Size = new System.Drawing.Size(108, 17);
-            this.checkBoxUntouchedAudio.TabIndex = 15;
-            this.checkBoxUntouchedAudio.Text = "Untouched audio";
-            this.checkBoxUntouchedAudio.UseVisualStyleBackColor = true;
-            this.checkBoxUntouchedAudio.CheckedChanged += new System.EventHandler(this.checkBoxUntouchedAudio_CheckedChanged);
+            this.labelCUVIDServerPath.AutoSize = true;
+            this.labelCUVIDServerPath.Location = new System.Drawing.Point(6, 59);
+            this.labelCUVIDServerPath.Name = "labelCUVIDServerPath";
+            this.labelCUVIDServerPath.Size = new System.Drawing.Size(131, 13);
+            this.labelCUVIDServerPath.TabIndex = 9;
+            this.labelCUVIDServerPath.Text = "Path to CUVIDServer.exe:";
             // 
-            // checkBoxMuxedOnlyFirstSub
+            // textBoxCUVIDServerPath
             // 
-            this.checkBoxMuxedOnlyFirstSub.AutoSize = true;
-            this.checkBoxMuxedOnlyFirstSub.Location = new System.Drawing.Point(6, 65);
-            this.checkBoxMuxedOnlyFirstSub.Name = "checkBoxMuxedOnlyFirstSub";
-            this.checkBoxMuxedOnlyFirstSub.Size = new System.Drawing.Size(176, 17);
-            this.checkBoxMuxedOnlyFirstSub.TabIndex = 8;
-            this.checkBoxMuxedOnlyFirstSub.Text = "Mux only first normal/forced sub";
-            this.checkBoxMuxedOnlyFirstSub.UseVisualStyleBackColor = true;
-            this.checkBoxMuxedOnlyFirstSub.CheckedChanged += new System.EventHandler(this.checkBoxMuxedOnlyFirstSub_CheckedChanged);
+            this.textBoxCUVIDServerPath.Location = new System.Drawing.Point(6, 75);
+            this.textBoxCUVIDServerPath.Name = "textBoxCUVIDServerPath";
+            this.textBoxCUVIDServerPath.ReadOnly = true;
+            this.textBoxCUVIDServerPath.Size = new System.Drawing.Size(229, 20);
+            this.textBoxCUVIDServerPath.TabIndex = 10;
             // 
-            // comboBoxMuxSubs
+            // buttonCUVIDServerPath
             // 
-            this.comboBoxMuxSubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMuxSubs.FormattingEnabled = true;
-            this.comboBoxMuxSubs.Items.AddRange(new object[] {
-            "Do not mux subtitles",
-            "Mux all subtitles",
-            "Mux only forced subtitles",
-            "Mux only first normal/forced subtitle"});
-            this.comboBoxMuxSubs.Location = new System.Drawing.Point(447, 93);
-            this.comboBoxMuxSubs.Name = "comboBoxMuxSubs";
-            this.comboBoxMuxSubs.Size = new System.Drawing.Size(182, 21);
-            this.comboBoxMuxSubs.TabIndex = 8;
-            this.comboBoxMuxSubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxMuxSubs_SelectedIndexChanged);
-            // 
-            // comboBoxCopySubs
-            // 
-            this.comboBoxCopySubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCopySubs.FormattingEnabled = true;
-            this.comboBoxCopySubs.Items.AddRange(new object[] {
-            "Do not copy subtitles",
-            "Copy all subtitles to \'Subs\' folder",
-            "Copy all but forced",
-            "Copy only first normal/forced subtitles"});
-            this.comboBoxCopySubs.Location = new System.Drawing.Point(447, 132);
-            this.comboBoxCopySubs.Name = "comboBoxCopySubs";
-            this.comboBoxCopySubs.Size = new System.Drawing.Size(182, 21);
-            this.comboBoxCopySubs.TabIndex = 9;
-            this.comboBoxCopySubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopySubs_SelectedIndexChanged);
-            // 
-            // labelMuxSubs
-            // 
-            this.labelMuxSubs.AutoSize = true;
-            this.labelMuxSubs.Location = new System.Drawing.Point(444, 77);
-            this.labelMuxSubs.Name = "labelMuxSubs";
-            this.labelMuxSubs.Size = new System.Drawing.Size(71, 13);
-            this.labelMuxSubs.TabIndex = 10;
-            this.labelMuxSubs.Text = "Mux subtitles:";
-            // 
-            // labelCopySubs
-            // 
-            this.labelCopySubs.AutoSize = true;
-            this.labelCopySubs.Location = new System.Drawing.Point(444, 117);
-            this.labelCopySubs.Name = "labelCopySubs";
-            this.labelCopySubs.Size = new System.Drawing.Size(75, 13);
-            this.labelCopySubs.TabIndex = 11;
-            this.labelCopySubs.Text = "Copy subtitles:";
-            // 
-            // groupBoxFfmsindex
-            // 
-            this.groupBoxFfmsindex.Controls.Add(this.labelFfmsindexPath);
-            this.groupBoxFfmsindex.Controls.Add(this.textBoxFfmsindexPath);
-            this.groupBoxFfmsindex.Controls.Add(this.buttonFfmsindexPath);
-            this.groupBoxFfmsindex.Location = new System.Drawing.Point(303, 6);
-            this.groupBoxFfmsindex.Name = "groupBoxFfmsindex";
-            this.groupBoxFfmsindex.Size = new System.Drawing.Size(290, 68);
-            this.groupBoxFfmsindex.TabIndex = 6;
-            this.groupBoxFfmsindex.TabStop = false;
-            this.groupBoxFfmsindex.Text = "When using FFVideoSource";
-            // 
-            // groupBoxDgsource
-            // 
-            this.groupBoxDgsource.Controls.Add(this.labelDGIndexNVPath);
-            this.groupBoxDgsource.Controls.Add(this.textBoxDgindexnvPath);
-            this.groupBoxDgsource.Controls.Add(this.buttonDgindexnvPath);
-            this.groupBoxDgsource.Location = new System.Drawing.Point(303, 80);
-            this.groupBoxDgsource.Name = "groupBoxDgsource";
-            this.groupBoxDgsource.Size = new System.Drawing.Size(290, 68);
-            this.groupBoxDgsource.TabIndex = 7;
-            this.groupBoxDgsource.TabStop = false;
-            this.groupBoxDgsource.Text = "When using DGSource";
-            // 
-            // labelDGIndexNVPath
-            // 
-            this.labelDGIndexNVPath.AutoSize = true;
-            this.labelDGIndexNVPath.Location = new System.Drawing.Point(6, 16);
-            this.labelDGIndexNVPath.Name = "labelDGIndexNVPath";
-            this.labelDGIndexNVPath.Size = new System.Drawing.Size(124, 13);
-            this.labelDGIndexNVPath.TabIndex = 6;
-            this.labelDGIndexNVPath.Text = "Path to DGIndexNV.exe:";
-            // 
-            // textBoxDgindexnvPath
-            // 
-            this.textBoxDgindexnvPath.Location = new System.Drawing.Point(6, 32);
-            this.textBoxDgindexnvPath.Name = "textBoxDgindexnvPath";
-            this.textBoxDgindexnvPath.ReadOnly = true;
-            this.textBoxDgindexnvPath.Size = new System.Drawing.Size(229, 20);
-            this.textBoxDgindexnvPath.TabIndex = 7;
-            // 
-            // buttonDgindexnvPath
-            // 
-            this.buttonDgindexnvPath.Location = new System.Drawing.Point(241, 29);
-            this.buttonDgindexnvPath.Name = "buttonDgindexnvPath";
-            this.buttonDgindexnvPath.Size = new System.Drawing.Size(39, 23);
-            this.buttonDgindexnvPath.TabIndex = 8;
-            this.buttonDgindexnvPath.Text = "...";
-            this.buttonDgindexnvPath.UseVisualStyleBackColor = true;
-            this.buttonDgindexnvPath.Click += new System.EventHandler(this.buttonDgindexnvPath_Click);
-            // 
-            // linkLabelDGDecNv
-            // 
-            this.linkLabelDGDecNv.AutoSize = true;
-            this.linkLabelDGDecNv.Location = new System.Drawing.Point(322, 68);
-            this.linkLabelDGDecNv.Name = "linkLabelDGDecNv";
-            this.linkLabelDGDecNv.Size = new System.Drawing.Size(57, 13);
-            this.linkLabelDGDecNv.TabIndex = 13;
-            this.linkLabelDGDecNv.TabStop = true;
-            this.linkLabelDGDecNv.Text = "DGDecNv";
-            this.linkLabelDGDecNv.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelDGDecNv_LinkClicked);
+            this.buttonCUVIDServerPath.Location = new System.Drawing.Point(241, 72);
+            this.buttonCUVIDServerPath.Name = "buttonCUVIDServerPath";
+            this.buttonCUVIDServerPath.Size = new System.Drawing.Size(39, 23);
+            this.buttonCUVIDServerPath.TabIndex = 11;
+            this.buttonCUVIDServerPath.Text = "...";
+            this.buttonCUVIDServerPath.UseVisualStyleBackColor = true;
+            this.buttonCUVIDServerPath.Click += new System.EventHandler(this.buttonCUVIDServerPath_Click);
             // 
             // MainForm
             // 
@@ -2257,6 +2290,10 @@
             this.groupBoxX264Profiles.ResumeLayout(false);
             this.groupBoxX264Profiles.PerformLayout();
             this.tabPageTools.ResumeLayout(false);
+            this.groupBoxDgsource.ResumeLayout(false);
+            this.groupBoxDgsource.PerformLayout();
+            this.groupBoxFfmsindex.ResumeLayout(false);
+            this.groupBoxFfmsindex.PerformLayout();
             this.groupBoxExternalTools.ResumeLayout(false);
             this.groupBoxExternalTools.PerformLayout();
             this.tabPageStreams.ResumeLayout(false);
@@ -2278,10 +2315,6 @@
             this.tabPageSubtitleLog.ResumeLayout(false);
             this.tabPageEncodeLog.ResumeLayout(false);
             this.tabPageMuxLog.ResumeLayout(false);
-            this.groupBoxFfmsindex.ResumeLayout(false);
-            this.groupBoxFfmsindex.PerformLayout();
-            this.groupBoxDgsource.ResumeLayout(false);
-            this.groupBoxDgsource.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2470,6 +2503,9 @@
         private System.Windows.Forms.TextBox textBoxDgindexnvPath;
         private System.Windows.Forms.Button buttonDgindexnvPath;
         private System.Windows.Forms.LinkLabel linkLabelDGDecNv;
+        private System.Windows.Forms.Label labelCUVIDServerPath;
+        private System.Windows.Forms.TextBox textBoxCUVIDServerPath;
+        private System.Windows.Forms.Button buttonCUVIDServerPath;
     }
 }
 

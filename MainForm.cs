@@ -30,9 +30,11 @@ namespace BluRip
         private Thread encodeThread = null;
         private Thread subtitleThread = null;
         private Thread muxThread = null;
+        private Thread cuvidThread = null;
 
         private Process pc = new Process();
         private Process pc2 = new Process();
+        private Process pc3 = new Process();
 
         public string title = "BluRip 1080p v0.4.4 © _hawk_/PPX";
 
@@ -48,11 +50,14 @@ namespace BluRip
                 ac3AudioTypes.Add("TrueHD/AC3");
                 ac3AudioTypes.Add("AC3");
                 ac3AudioTypes.Add("AC3 Surround");
+                ac3AudioTypes.Add("AC3 EX");
+                ac3AudioTypes.Add("E-AC3");
 
                 dtsAudioTypes.Add("DTS");
                 dtsAudioTypes.Add("DTS Master Audio");
                 dtsAudioTypes.Add("DTS Express");
                 dtsAudioTypes.Add("DTS Hi-Res");
+                dtsAudioTypes.Add("DTS ES");
 
                 comboBoxX264Priority.Items.Clear();
                 foreach (string s in Enum.GetNames(typeof(ProcessPriorityClass)))
@@ -757,6 +762,7 @@ namespace BluRip
                 comboBoxMuxSubs.SelectedIndex = settings.muxSubs;
 
                 textBoxDgindexnvPath.Text = settings.dgindexnvPath;
+                textBoxCUVIDServerPath.Text = settings.cuvidserverPath;
 
                 UpdateLanguage();
                 UpdateEncodingSettings();
@@ -1382,6 +1388,25 @@ namespace BluRip
             }
         }
 
+        private void CuvidThread()
+        {
+            try
+            {
+                pc3 = new Process();
+                pc3.StartInfo.FileName = settings.cuvidserverPath;
+                if (!pc3.Start())
+                {
+                    MessageCrop("Error starting CUVIDServer.exe");
+                    return;
+                }
+                pc3.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                MessageCrop("Exception: " + ex.Message);
+            }
+        }
+
         private bool indexThreadStatus = false;
         private void IndexThread()
         {
@@ -1414,9 +1439,9 @@ namespace BluRip
                     {
                         fps = mi2.Get(StreamKind.Video, 0, "FrameRate");
                     }
-                    mi2.Close();                    
+                    mi2.Close();
                 }
-                catch (Exception ex )
+                catch (Exception ex)
                 {
                     MessageCrop("Error getting MediaInfo: " + ex.Message);
                     return;
@@ -1433,63 +1458,77 @@ namespace BluRip
                 {
                     if (settings.cropInput == 1 || settings.encodeInput == 1)
                     {
-                        MessageCrop("Starting to index...");
-                        MessageCrop("");
-
-                        pc = new Process();
-                        pc.StartInfo.FileName = settings.ffmsindexPath;
-                        pc.StartInfo.Arguments = "\"" + filename + "\"";
-
-                        MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
-
-                        pc.StartInfo.UseShellExecute = false;
-                        pc.StartInfo.CreateNoWindow = true;
-                        pc.StartInfo.RedirectStandardError = true;
-                        pc.StartInfo.RedirectStandardOutput = true;
-
-                        if (!pc.Start())
+                        if (!File.Exists(filename + ".ffindex"))
                         {
-                            MessageCrop("Error starting ffmsindex.exe");
-                            return;
+                            MessageCrop("Starting to index...");
+                            MessageCrop("");
+
+                            pc = new Process();
+                            pc.StartInfo.FileName = settings.ffmsindexPath;
+                            pc.StartInfo.Arguments = "\"" + filename + "\"";
+
+                            MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                            pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
+
+                            pc.StartInfo.UseShellExecute = false;
+                            pc.StartInfo.CreateNoWindow = true;
+                            pc.StartInfo.RedirectStandardError = true;
+                            pc.StartInfo.RedirectStandardOutput = true;
+
+                            if (!pc.Start())
+                            {
+                                MessageCrop("Error starting ffmsindex.exe");
+                                return;
+                            }
+
+                            pc.BeginOutputReadLine();
+
+                            pc.WaitForExit();
+                            pc.Close();
+                            MessageCrop("Indexing done!");
                         }
-
-                        pc.BeginOutputReadLine();
-
-                        pc.WaitForExit();
-                        pc.Close();
-                        MessageCrop("Indexing done!");
+                        else
+                        {
+                            MessageCrop(filename + ".ffindex already exits");
+                        }
                     }
                     else if (settings.cropInput == 2 || settings.encodeInput == 2)
                     {
-                        MessageCrop("Starting to index...");
-                        MessageCrop("");
-
                         string output = Path.ChangeExtension(filename, "dgi");
 
-                        pc = new Process();
-                        pc.StartInfo.FileName = settings.dgindexnvPath;
-                        pc.StartInfo.Arguments = "-i \"" + filename + "\" -o \"" + output + "\" -e";                        
-
-                        MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
-
-                        pc.StartInfo.UseShellExecute = false;
-                        pc.StartInfo.CreateNoWindow = true;
-                        pc.StartInfo.RedirectStandardError = true;
-                        pc.StartInfo.RedirectStandardOutput = true;
-
-                        if (!pc.Start())
+                        if (!File.Exists(output))
                         {
-                            MessageCrop("Error starting DGIndexNv.exe");
-                            return;
+                            MessageCrop("Starting to index...");
+                            MessageCrop("");
+
+                            pc = new Process();
+                            pc.StartInfo.FileName = settings.dgindexnvPath;
+                            pc.StartInfo.Arguments = "-i \"" + filename + "\" -o \"" + output + "\" -e";
+
+                            MessageCrop("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
+                            pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedCrop);
+
+                            pc.StartInfo.UseShellExecute = false;
+                            pc.StartInfo.CreateNoWindow = true;
+                            pc.StartInfo.RedirectStandardError = true;
+                            pc.StartInfo.RedirectStandardOutput = true;
+
+                            if (!pc.Start())
+                            {
+                                MessageCrop("Error starting DGIndexNv.exe");
+                                return;
+                            }
+
+                            pc.BeginOutputReadLine();
+
+                            pc.WaitForExit();
+                            pc.Close();
+                            MessageCrop("Indexing done!");
                         }
-
-                        pc.BeginOutputReadLine();
-
-                        pc.WaitForExit();
-                        pc.Close();
-                        MessageCrop("Indexing done!");
+                        else
+                        {
+                            MessageCrop(output + " already exists");
+                        }
                     }
 
                     if (settings.cropInput == 0)
@@ -1497,7 +1536,7 @@ namespace BluRip
                         File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
                             "DirectShowSource(\"" + filename + "\")");
                     }
-                    else if(settings.cropInput == 1)
+                    else if (settings.cropInput == 1)
                     {
                         File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
                             "FFVideoSource(\"" + filename + "\")");
@@ -1507,6 +1546,16 @@ namespace BluRip
                         string output = Path.ChangeExtension(filename, "dgi");
                         File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
                             "DGSource(\"" + output + "\")");
+                        try
+                        {
+                            cuvidThread = new Thread(CuvidThread);
+                            cuvidThread.Start();
+                            Thread.Sleep(2000);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageCrop("Exception; " + ex.Message);
+                        }
                     }
                     MessageCrop("Starting AutoCrop...");
                     AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
@@ -1523,6 +1572,8 @@ namespace BluRip
                     ac.NrFrames = settings.nrFrames;
                     ac.BlackValue = settings.blackValue;
                     ac.ShowDialog();
+                                       
+
                     MessageCrop("");
                     MessageCrop("Crop top: " + ac.cropTop.ToString());
                     MessageCrop("Crop bottom: " + ac.cropBottom.ToString());
@@ -1534,14 +1585,14 @@ namespace BluRip
                     if (ac.resize)
                     {
                         MessageCrop("Resize to: " + ac.resizeX.ToString() + " x " + ac.resizeY.ToString());
-                    }                    
+                    }
 
                     string encode = "";
                     if (settings.encodeInput == 0)
                     {
                         encode = "DirectShowSource(\"" + filename + "\")\r\n";
                     }
-                    else if(settings.encodeInput == 1)
+                    else if (settings.encodeInput == 1)
                     {
                         encode = "FFVideoSource(\"" + filename + "\")\r\n";
                     }
@@ -1563,7 +1614,7 @@ namespace BluRip
                         else
                         {
                             MessageCrop("Did not add resize command");
-                        }                        
+                        }
                     }
                     int index = comboBoxAvisynthProfile.SelectedIndex;
                     if (index > -1 && index < settings.avisynthSettings.Count)
@@ -1608,6 +1659,22 @@ namespace BluRip
             catch (Exception ex)
             {
                 MessageCrop("Exception: " + ex.Message);
+            }
+            finally
+            {
+                try
+                {
+                    pc3.Kill();
+                    pc3.Close();
+                }
+                catch (Exception)
+                {
+                }
+                if (cuvidThread != null)
+                {
+                    cuvidThread.Abort();
+                    cuvidThread = null;
+                }
             }
         }
 
@@ -3886,6 +3953,12 @@ namespace BluRip
                         if (!silent) MessageBox.Show("DGIndexNv path not set", "Error");
                         return false;
                     }
+                    if (!File.Exists(settings.cuvidserverPath))
+                    {
+                        MessageMain("CUVIDServer path not set");
+                        if (!silent) MessageBox.Show("CUVIDServer path not set", "Error");
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -4496,6 +4569,23 @@ namespace BluRip
                 {
                     textBoxDgindexnvPath.Text = ofd.FileName;
                     settings.dgindexnvPath = ofd.FileName;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonCUVIDServerPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "CUVIDServer.exe|CUVIDServer.exe";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    textBoxCUVIDServerPath.Text = ofd.FileName;
+                    settings.cuvidserverPath = ofd.FileName;
                 }
             }
             catch (Exception)
