@@ -134,6 +134,7 @@ namespace BluRip
             this.muxSubs = orig.muxSubs;
             this.copySubs = orig.copySubs;
             this.dgindexnvPath = orig.dgindexnvPath;
+            this.cuvidserverPath = orig.cuvidserverPath;
 
             foreach (LanguageInfo li in orig.preferedLanguages)
             {
@@ -279,5 +280,6 @@ namespace BluRip
         public int muxSubs = 1;
         public int copySubs = 1;
         public string dgindexnvPath = "";
+        public string cuvidserverPath = "";
     }
 }
