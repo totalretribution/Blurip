@@ -30,7 +30,6 @@ namespace BluRip
         private Thread encodeThread = null;
         private Thread subtitleThread = null;
         private Thread muxThread = null;
-        private Thread cuvidThread = null;
 
         private Process pc = new Process();
         private Process pc2 = new Process();
@@ -1124,6 +1123,8 @@ namespace BluRip
             try
             {
                 FolderBrowserDialog fbd = new FolderBrowserDialog();
+                DirectoryInfo di = Directory.GetParent(settings.workingDir);
+                if (settings.workingDir != "") fbd.SelectedPath = di.FullName;                
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
                     textBoxWorkingDir.Text = fbd.SelectedPath;
@@ -1388,25 +1389,6 @@ namespace BluRip
             }
         }
 
-        private void CuvidThread()
-        {
-            try
-            {
-                pc3 = new Process();
-                pc3.StartInfo.FileName = settings.cuvidserverPath;
-                if (!pc3.Start())
-                {
-                    MessageCrop("Error starting CUVIDServer.exe");
-                    return;
-                }
-                pc3.WaitForExit();
-            }
-            catch (Exception ex)
-            {
-                MessageCrop("Exception: " + ex.Message);
-            }
-        }
-
         private bool indexThreadStatus = false;
         private void IndexThread()
         {
@@ -1548,8 +1530,14 @@ namespace BluRip
                             "DGSource(\"" + output + "\")");
                         try
                         {
-                            cuvidThread = new Thread(CuvidThread);
-                            cuvidThread.Start();
+                            pc3 = new Process();
+                            pc3.StartInfo.FileName = settings.cuvidserverPath;
+                            if (!pc3.Start())
+                            {
+                                MessageCrop("Error starting CUVIDServer.exe");
+                                return;
+                            }
+                            // wait 2 sec until cuvidserver is running
                             Thread.Sleep(2000);
                         }
                         catch (Exception ex)
@@ -1559,16 +1547,17 @@ namespace BluRip
                     }
                     MessageCrop("Starting AutoCrop...");
                     AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
-                    if (settings.minimizeAutocrop)
-                    {
-                        ac.WindowState = FormWindowState.Minimized;
-                    }
-
                     if (ac.error)
                     {
                         MessageCrop("Exception: " + ac.errorStr);
                         return;
                     }
+
+                    if (settings.minimizeAutocrop)
+                    {
+                        ac.WindowState = FormWindowState.Minimized;
+                    }
+                    
                     ac.NrFrames = settings.nrFrames;
                     ac.BlackValue = settings.blackValue;
                     ac.ShowDialog();
@@ -1665,15 +1654,9 @@ namespace BluRip
                 try
                 {
                     pc3.Kill();
-                    pc3.Close();
                 }
                 catch (Exception)
                 {
-                }
-                if (cuvidThread != null)
-                {
-                    cuvidThread.Abort();
-                    cuvidThread = null;
                 }
             }
         }
@@ -1887,6 +1870,7 @@ namespace BluRip
                         if (!DoEncode()) return;
                     }
                     if (!DoMux()) return;
+                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.filePrefix + "_compleLog.txt");
                 }
                 else
                 {
@@ -1903,6 +1887,7 @@ namespace BluRip
                     {
                         if (!DoMux()) return;
                     }
+                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.filePrefix + "_compleLog.txt");
                 }
             }
             catch (Exception ex)
@@ -2357,6 +2342,26 @@ namespace BluRip
                     return;
                 }
 
+                if (settings.encodeInput == 2)
+                {                    
+                    try
+                    {
+                        pc3 = new Process();
+                        pc3.StartInfo.FileName = settings.cuvidserverPath;
+                        if (!pc3.Start())
+                        {
+                            MessageEncode("Error starting CUVIDServer.exe");
+                            return;
+                        }
+                        // wait 2 sec until cuvidserver is running
+                        Thread.Sleep(2000);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageEncode("Exception; " + ex.Message);
+                    }
+                }
+
                 sb.Remove(0, sb.Length);
 
                 if (!settings.encodingSettings[index].pass2)
@@ -2478,6 +2483,16 @@ namespace BluRip
             catch (Exception ex)
             {
                 MessageEncode("Exception: " + ex.Message);
+            }
+            finally
+            {
+                try
+                {
+                    pc3.Kill();
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -3126,6 +3141,15 @@ namespace BluRip
                         pc.StartInfo.Arguments += "\"" + si.filename + "\" ";
                     }
                 }
+
+                List<int> subsCount = new List<int>();
+                List<int> forcedSubsCount = new List<int>();
+                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                {
+                    subsCount.Add(0);
+                    forcedSubsCount.Add(0);
+                }
+
                 if (settings.muxSubs > 0)
                 {
                     // subtitle
@@ -3199,6 +3223,12 @@ namespace BluRip
                 pc.WaitForExit();
                 pc.Close();
                 MessageMux("Muxing done!");
+
+                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                {
+                    subsCount[i] = 0;
+                    forcedSubsCount[i] = 0;
+                }
 
                 if (settings.copySubs > 0)
                 {
@@ -4133,6 +4163,20 @@ namespace BluRip
             }
         }
 
+        private void SaveLog(string log, string filename)
+        {
+            try
+            {
+                string[] lines = log.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string tmp = "";
+                foreach (string s in lines) tmp += s.Trim() + "\r\n";
+                File.WriteAllText(filename, tmp);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private void SaveLog(string log)
         {
             try
@@ -4422,9 +4466,18 @@ namespace BluRip
             {
                 silent = true;
                 abort = false;
-                MessageMain("Starting to process queue...");
+                
                 foreach (Project project in projectQueue)
                 {
+                    richTextBoxLogCrop.Clear();
+                    richTextBoxLogDemux.Clear();
+                    richTextBoxLogEncode.Clear();
+                    richTextBoxLogMain.Clear();
+                    richTextBoxLogMux.Clear();
+                    richTextBoxLogSubtitle.Clear();
+
+                    MessageMain("Starting to process job " + (projectQueue.IndexOf(project) + 1).ToString() + "/" + projectQueue.Count.ToString());
+
                     if (!abort)
                     {
                         MessageMain("Processing project " + project.settings.movieTitle);
@@ -4452,8 +4505,8 @@ namespace BluRip
                     {
                         MessageMain("Queue canceled");
                     }
+                    MessageMain("Job done.");
                 }
-                MessageMain("Queue done.");
             }
             catch (Exception)
             {
