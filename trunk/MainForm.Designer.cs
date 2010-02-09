@@ -121,6 +121,9 @@
             this.buttonAddX264 = new System.Windows.Forms.Button();
             this.tabPageTools = new System.Windows.Forms.TabPage();
             this.groupBoxDgsource = new System.Windows.Forms.GroupBox();
+            this.labelCUVIDServerPath = new System.Windows.Forms.Label();
+            this.textBoxCUVIDServerPath = new System.Windows.Forms.TextBox();
+            this.buttonCUVIDServerPath = new System.Windows.Forms.Button();
             this.labelDGIndexNVPath = new System.Windows.Forms.Label();
             this.textBoxDgindexnvPath = new System.Windows.Forms.TextBox();
             this.buttonDgindexnvPath = new System.Windows.Forms.Button();
@@ -211,9 +214,6 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.labelCUVIDServerPath = new System.Windows.Forms.Label();
-            this.textBoxCUVIDServerPath = new System.Windows.Forms.TextBox();
-            this.buttonCUVIDServerPath = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -313,6 +313,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxStreams.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxStreams.FormattingEnabled = true;
+            this.listBoxStreams.HorizontalScrollbar = true;
             this.listBoxStreams.ItemHeight = 14;
             this.listBoxStreams.Location = new System.Drawing.Point(6, 130);
             this.listBoxStreams.Name = "listBoxStreams";
@@ -502,6 +503,7 @@
             // listBoxDemuxedStreams
             // 
             this.listBoxDemuxedStreams.FormattingEnabled = true;
+            this.listBoxDemuxedStreams.HorizontalScrollbar = true;
             this.listBoxDemuxedStreams.Location = new System.Drawing.Point(359, 22);
             this.listBoxDemuxedStreams.Name = "listBoxDemuxedStreams";
             this.listBoxDemuxedStreams.Size = new System.Drawing.Size(319, 173);
@@ -1277,6 +1279,33 @@
             this.groupBoxDgsource.TabStop = false;
             this.groupBoxDgsource.Text = "When using DGSource";
             // 
+            // labelCUVIDServerPath
+            // 
+            this.labelCUVIDServerPath.AutoSize = true;
+            this.labelCUVIDServerPath.Location = new System.Drawing.Point(6, 59);
+            this.labelCUVIDServerPath.Name = "labelCUVIDServerPath";
+            this.labelCUVIDServerPath.Size = new System.Drawing.Size(131, 13);
+            this.labelCUVIDServerPath.TabIndex = 9;
+            this.labelCUVIDServerPath.Text = "Path to CUVIDServer.exe:";
+            // 
+            // textBoxCUVIDServerPath
+            // 
+            this.textBoxCUVIDServerPath.Location = new System.Drawing.Point(6, 75);
+            this.textBoxCUVIDServerPath.Name = "textBoxCUVIDServerPath";
+            this.textBoxCUVIDServerPath.ReadOnly = true;
+            this.textBoxCUVIDServerPath.Size = new System.Drawing.Size(229, 20);
+            this.textBoxCUVIDServerPath.TabIndex = 10;
+            // 
+            // buttonCUVIDServerPath
+            // 
+            this.buttonCUVIDServerPath.Location = new System.Drawing.Point(241, 72);
+            this.buttonCUVIDServerPath.Name = "buttonCUVIDServerPath";
+            this.buttonCUVIDServerPath.Size = new System.Drawing.Size(39, 23);
+            this.buttonCUVIDServerPath.TabIndex = 11;
+            this.buttonCUVIDServerPath.Text = "...";
+            this.buttonCUVIDServerPath.UseVisualStyleBackColor = true;
+            this.buttonCUVIDServerPath.Click += new System.EventHandler(this.buttonCUVIDServerPath_Click);
+            // 
             // labelDGIndexNVPath
             // 
             this.labelDGIndexNVPath.AutoSize = true;
@@ -1967,6 +1996,7 @@
             // listBoxQueue
             // 
             this.listBoxQueue.FormattingEnabled = true;
+            this.listBoxQueue.HorizontalScrollbar = true;
             this.listBoxQueue.Location = new System.Drawing.Point(6, 32);
             this.listBoxQueue.Name = "listBoxQueue";
             this.listBoxQueue.Size = new System.Drawing.Size(240, 134);
@@ -2215,33 +2245,6 @@
             this.richTextBoxLogMux.Size = new System.Drawing.Size(752, 157);
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
-            // 
-            // labelCUVIDServerPath
-            // 
-            this.labelCUVIDServerPath.AutoSize = true;
-            this.labelCUVIDServerPath.Location = new System.Drawing.Point(6, 59);
-            this.labelCUVIDServerPath.Name = "labelCUVIDServerPath";
-            this.labelCUVIDServerPath.Size = new System.Drawing.Size(131, 13);
-            this.labelCUVIDServerPath.TabIndex = 9;
-            this.labelCUVIDServerPath.Text = "Path to CUVIDServer.exe:";
-            // 
-            // textBoxCUVIDServerPath
-            // 
-            this.textBoxCUVIDServerPath.Location = new System.Drawing.Point(6, 75);
-            this.textBoxCUVIDServerPath.Name = "textBoxCUVIDServerPath";
-            this.textBoxCUVIDServerPath.ReadOnly = true;
-            this.textBoxCUVIDServerPath.Size = new System.Drawing.Size(229, 20);
-            this.textBoxCUVIDServerPath.TabIndex = 10;
-            // 
-            // buttonCUVIDServerPath
-            // 
-            this.buttonCUVIDServerPath.Location = new System.Drawing.Point(241, 72);
-            this.buttonCUVIDServerPath.Name = "buttonCUVIDServerPath";
-            this.buttonCUVIDServerPath.Size = new System.Drawing.Size(39, 23);
-            this.buttonCUVIDServerPath.TabIndex = 11;
-            this.buttonCUVIDServerPath.Text = "...";
-            this.buttonCUVIDServerPath.UseVisualStyleBackColor = true;
-            this.buttonCUVIDServerPath.Click += new System.EventHandler(this.buttonCUVIDServerPath_Click);
             // 
             // MainForm
             // 
