@@ -407,16 +407,23 @@ namespace BluRip
 
         public AviSynthClip(string func, string arg , AviSynthColorspace forceColorspace, AviSynthScriptEnvironment env)
 		{
-
-			_vi = new AVSDLLVideoInfo();
-            _avs =  new IntPtr(0);
-            _colorSpace = AviSynthColorspace.Unknown;
-            _sampleType = AudioSampleType.Unknown;
-            if(0!=dimzon_avs_init_2(ref _avs, func, arg, ref _vi, ref _colorSpace, ref _sampleType, forceColorspace.ToString()))
+            try
             {
-                string err = getLastError();
+                _vi = new AVSDLLVideoInfo();
+                _avs = new IntPtr(0);
+                _colorSpace = AviSynthColorspace.Unknown;
+                _sampleType = AudioSampleType.Unknown;
+                if (0 != dimzon_avs_init_2(ref _avs, func, arg, ref _vi, ref _colorSpace, ref _sampleType, forceColorspace.ToString()))
+                {
+                    string err = getLastError();
+                    cleanup(false);
+                    throw new AviSynthException(err);
+                }
+            }
+            catch (Exception ex)
+            {
                 cleanup(false);
-                throw new AviSynthException(err);
+                throw new AviSynthException(ex.Message);
             }
 		}
 
