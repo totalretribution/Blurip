@@ -181,6 +181,7 @@
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             this.tabPageProjectQueue = new System.Windows.Forms.TabPage();
+            this.checkBoxShutDown = new System.Windows.Forms.CheckBox();
             this.buttonProcessQueue = new System.Windows.Forms.Button();
             this.groupBoxQueue = new System.Windows.Forms.GroupBox();
             this.buttonQueueDel = new System.Windows.Forms.Button();
@@ -214,6 +215,7 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
+            this.checkBoxDtsToAc3 = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -938,6 +940,7 @@
             // 
             // groupBoxAudioSettings
             // 
+            this.groupBoxAudioSettings.Controls.Add(this.checkBoxDtsToAc3);
             this.groupBoxAudioSettings.Controls.Add(this.checkBoxUntouchedAudio);
             this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixAc3);
             this.groupBoxAudioSettings.Controls.Add(this.comboBoxDownmixDts);
@@ -946,7 +949,7 @@
             this.groupBoxAudioSettings.Controls.Add(this.checkBoxUseCore);
             this.groupBoxAudioSettings.Location = new System.Drawing.Point(240, 8);
             this.groupBoxAudioSettings.Name = "groupBoxAudioSettings";
-            this.groupBoxAudioSettings.Size = new System.Drawing.Size(200, 172);
+            this.groupBoxAudioSettings.Size = new System.Drawing.Size(200, 203);
             this.groupBoxAudioSettings.TabIndex = 36;
             this.groupBoxAudioSettings.TabStop = false;
             this.groupBoxAudioSettings.Text = "Audio settings";
@@ -970,7 +973,7 @@
             "192",
             "448",
             "640"});
-            this.comboBoxDownmixAc3.Location = new System.Drawing.Point(6, 138);
+            this.comboBoxDownmixAc3.Location = new System.Drawing.Point(6, 161);
             this.comboBoxDownmixAc3.Name = "comboBoxDownmixAc3";
             this.comboBoxDownmixAc3.Size = new System.Drawing.Size(188, 21);
             this.comboBoxDownmixAc3.TabIndex = 14;
@@ -983,7 +986,7 @@
             this.comboBoxDownmixDts.Items.AddRange(new object[] {
             "768",
             "1536"});
-            this.comboBoxDownmixDts.Location = new System.Drawing.Point(6, 88);
+            this.comboBoxDownmixDts.Location = new System.Drawing.Point(6, 111);
             this.comboBoxDownmixDts.Name = "comboBoxDownmixDts";
             this.comboBoxDownmixDts.Size = new System.Drawing.Size(188, 21);
             this.comboBoxDownmixDts.TabIndex = 13;
@@ -992,7 +995,7 @@
             // checkBoxDownmixAc3
             // 
             this.checkBoxDownmixAc3.AutoSize = true;
-            this.checkBoxDownmixAc3.Location = new System.Drawing.Point(6, 115);
+            this.checkBoxDownmixAc3.Location = new System.Drawing.Point(6, 138);
             this.checkBoxDownmixAc3.Name = "checkBoxDownmixAc3";
             this.checkBoxDownmixAc3.Size = new System.Drawing.Size(132, 17);
             this.checkBoxDownmixAc3.TabIndex = 12;
@@ -1003,7 +1006,7 @@
             // checkBoxDownmixDts
             // 
             this.checkBoxDownmixDts.AutoSize = true;
-            this.checkBoxDownmixDts.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxDownmixDts.Location = new System.Drawing.Point(6, 88);
             this.checkBoxDownmixDts.Name = "checkBoxDownmixDts";
             this.checkBoxDownmixDts.Size = new System.Drawing.Size(134, 17);
             this.checkBoxDownmixDts.TabIndex = 11;
@@ -1905,6 +1908,7 @@
             // 
             // tabPageProjectQueue
             // 
+            this.tabPageProjectQueue.Controls.Add(this.checkBoxShutDown);
             this.tabPageProjectQueue.Controls.Add(this.buttonProcessQueue);
             this.tabPageProjectQueue.Controls.Add(this.groupBoxQueue);
             this.tabPageProjectQueue.Controls.Add(this.buttonLoadProject);
@@ -1916,6 +1920,16 @@
             this.tabPageProjectQueue.TabIndex = 10;
             this.tabPageProjectQueue.Text = "Project/Queue";
             this.tabPageProjectQueue.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxShutDown
+            // 
+            this.checkBoxShutDown.AutoSize = true;
+            this.checkBoxShutDown.Location = new System.Drawing.Point(136, 250);
+            this.checkBoxShutDown.Name = "checkBoxShutDown";
+            this.checkBoxShutDown.Size = new System.Drawing.Size(170, 17);
+            this.checkBoxShutDown.TabIndex = 15;
+            this.checkBoxShutDown.Text = "Shutdown after queue finished";
+            this.checkBoxShutDown.UseVisualStyleBackColor = true;
             // 
             // buttonProcessQueue
             // 
@@ -2246,6 +2260,17 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
+            // checkBoxDtsToAc3
+            // 
+            this.checkBoxDtsToAc3.AutoSize = true;
+            this.checkBoxDtsToAc3.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxDtsToAc3.Name = "checkBoxDtsToAc3";
+            this.checkBoxDtsToAc3.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxDtsToAc3.TabIndex = 16;
+            this.checkBoxDtsToAc3.Text = "Convert DTS to AC3";
+            this.checkBoxDtsToAc3.UseVisualStyleBackColor = true;
+            this.checkBoxDtsToAc3.CheckedChanged += new System.EventHandler(this.checkBoxDtsToAc3_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2308,6 +2333,7 @@
             this.tabPageSoftware.PerformLayout();
             this.tabPageAbout.ResumeLayout(false);
             this.tabPageProjectQueue.ResumeLayout(false);
+            this.tabPageProjectQueue.PerformLayout();
             this.groupBoxQueue.ResumeLayout(false);
             this.groupBoxQueue.PerformLayout();
             this.contextMenuStripDeleteLog.ResumeLayout(false);
@@ -2509,6 +2535,8 @@
         private System.Windows.Forms.Label labelCUVIDServerPath;
         private System.Windows.Forms.TextBox textBoxCUVIDServerPath;
         private System.Windows.Forms.Button buttonCUVIDServerPath;
+        private System.Windows.Forms.CheckBox checkBoxShutDown;
+        private System.Windows.Forms.CheckBox checkBoxDtsToAc3;
     }
 }
 
