@@ -35,7 +35,7 @@ namespace BluRip
         private Process pc2 = new Process();
         private Process pc3 = new Process();
 
-        public string title = "BluRip 1080p v0.4.4 © _hawk_/PPX";
+        public string title = "BluRip 1080p v0.4.5 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -723,7 +723,6 @@ namespace BluRip
                 checkBoxDeleteAfterEncode.Checked = settings.deleteAfterEncode;
 
                 checkBoxUseCore.Checked = settings.dtsHdCore;
-                checkBoxMuxSubtitle.Checked = settings.muxSubtitles;
                 checkBoxUntouchedVideo.Checked = settings.untouchedVideo;
                 checkBoxResize720p.Checked = settings.resize720p;
 
@@ -739,23 +738,12 @@ namespace BluRip
                 checkBoxDownmixDts_CheckedChanged(null, null);
 
                 checkBoxMinimizeCrop.Checked = settings.minimizeAutocrop;
-                checkBoxMuxOnlyForced.Checked = settings.muxOnlyForced;
+                                     
                 
-                checkBoxCopySubs.Checked = settings.copySubtitles;
-                checkBoxCopySubsWithoutForced.Checked = settings.copyAllButForced;
-
-                checkBoxCopySubs_CheckedChanged(null, null);
-                
-                checkBoxMuxSubtitle_CheckedChanged(null, null);
-                checkBoxMuxOnlyForced_CheckedChanged(null, null);
-                checkBoxMuxSubtitle_CheckedChanged(null, null);
-                checkBoxMuxOnlyForced_CheckedChanged(null, null);
-
                 comboBoxCropInput.SelectedIndex = settings.cropInput;
                 comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
 
                 checkBoxUntouchedAudio.Checked = settings.untouchedAudio;
-                checkBoxMuxedOnlyFirstSub.Checked = settings.muxOnlyFirstSub;
 
                 comboBoxCopySubs.SelectedIndex = settings.copySubs;
                 comboBoxMuxSubs.SelectedIndex = settings.muxSubs;
@@ -3263,7 +3251,45 @@ namespace BluRip
                         if (si.streamType == StreamType.Subtitle)
                         {
                             SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                            if ((sfi.normalIdx != "" && !settings.muxOnlyForced) || sfi.forcedIdx != "")
+
+                            bool mux = false;
+                            if (settings.muxSubs == 1)
+                            {
+                                mux = true;
+                            }
+                            else if (settings.muxSubs == 2)
+                            {
+                                if (sfi.forcedIdx != "") mux = true;
+                            }
+                            else if (settings.muxSubs == 3)
+                            {
+                                int lang = -1;
+                                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                                {
+                                    if (settings.preferedLanguages[i].language == si.language) lang = i;
+                                }
+                                if (lang > -1)
+                                {
+                                    if (sfi.normalIdx != "")
+                                    {
+                                        if (subsCount[lang] == 0)
+                                        {
+                                            mux = true;
+                                            subsCount[lang]++;
+                                        }
+                                    }
+                                    else if (sfi.forcedIdx != "")
+                                    {
+                                        if (forcedSubsCount[lang] == 0)
+                                        {
+                                            mux = true;
+                                            forcedSubsCount[lang]++;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (mux)
                             {
                                 if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
                                 {
@@ -3356,7 +3382,46 @@ namespace BluRip
                             if (si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                             {
                                 SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                                if ((sfi.forcedIdx != "" && !settings.copyAllButForced) || sfi.normalIdx != "")
+
+                                bool copy = false;
+                                if (settings.copySubs == 1)
+                                {
+                                    copy = true;
+                                }
+                                else if (settings.copySubs == 2)
+                                {
+                                    if (sfi.normalIdx != "") copy = true;
+                                }
+                                else if (settings.copySubs == 3)
+                                {
+                                    int lang = -1;
+                                    for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                                    {
+                                        if (settings.preferedLanguages[i].language == si.language) lang = i;
+                                    }
+                                    if (lang > -1)
+                                    {
+                                        if (sfi.normalIdx != "")
+                                        {
+                                            if (subsCount[lang] == 0)
+                                            {
+                                                copy = true;
+                                                subsCount[lang]++;
+                                            }
+                                        }
+                                        else if (sfi.forcedIdx != "")
+                                        {
+                                            if (forcedSubsCount[lang] == 0)
+                                            {
+                                                copy = true;
+                                                forcedSubsCount[lang]++;
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                if (copy)
                                 {
                                     try
                                     {
@@ -3943,30 +4008,7 @@ namespace BluRip
             {
                 MessageDemux("Exception: " + ex.Message);
             }
-        }
-
-        private void checkBoxMuxSubtitle_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.muxSubtitles = checkBoxMuxSubtitle.Checked;
-                if (settings.muxSubtitles)
-                {
-                    checkBoxMuxOnlyForced.Enabled = true;
-                    checkBoxMuxedOnlyFirstSub.Enabled = true;
-                }
-                else
-                {
-                    checkBoxMuxOnlyForced.Checked = false;
-                    checkBoxMuxOnlyForced.Enabled = false;
-                    checkBoxMuxedOnlyFirstSub.Checked = false;
-                    checkBoxMuxedOnlyFirstSub.Enabled = false;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
+        }        
 
         private void checkBoxUntouchedVideo_CheckedChanged(object sender, EventArgs e)
         {
@@ -4345,56 +4387,6 @@ namespace BluRip
             }
         }
 
-        private void checkBoxMuxOnlyForced_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.muxOnlyForced = checkBoxMuxOnlyForced.Checked;
-                if (settings.muxOnlyForced)
-                {
-                    checkBoxMuxedOnlyFirstSub.Checked = false;
-                    checkBoxMuxedOnlyFirstSub.Enabled = false;
-                }
-                else
-                {
-                    checkBoxMuxedOnlyFirstSub.Enabled = true;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void checkBoxCopySubs_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.copySubtitles = checkBoxCopySubs.Checked;
-                if (settings.copySubtitles)
-                {
-                    checkBoxCopySubsWithoutForced.Enabled = true;
-                }
-                else
-                {
-                    checkBoxCopySubsWithoutForced.Enabled = false;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void checkBoxCopySubsWithoutForced_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.copyAllButForced = checkBoxCopySubsWithoutForced.Checked;
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         private void buttonSaveProject_Click(object sender, EventArgs e)
         {
             try
@@ -4673,17 +4665,6 @@ namespace BluRip
                     checkBoxDownmixDts_CheckedChanged(null, null);
                     checkBoxDownmixAc3_CheckedChanged(null, null);
                 }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void checkBoxMuxedOnlyFirstSub_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                settings.muxOnlyFirstSub = checkBoxMuxedOnlyFirstSub.Checked;
             }
             catch (Exception)
             {

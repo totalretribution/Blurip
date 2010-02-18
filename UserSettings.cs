@@ -115,7 +115,6 @@ namespace BluRip
             this.defaultSubtitleForced = orig.defaultSubtitleForced;
             this.lastProfile = orig.lastProfile;
             this.dtsHdCore = orig.dtsHdCore;
-            this.muxSubtitles = orig.muxSubtitles;
             this.untouchedVideo = orig.untouchedVideo;
             this.lastAvisynthProfile = orig.lastAvisynthProfile;
             this.resize720p = orig.resize720p;
@@ -124,13 +123,9 @@ namespace BluRip
             this.downmixDTS = orig.downmixDTS;
             this.downmixDTSIndex = orig.downmixDTSIndex;
             this.minimizeAutocrop = orig.minimizeAutocrop;
-            this.muxOnlyForced = orig.muxOnlyForced;
-            this.copySubtitles = orig.copySubtitles;
-            this.copyAllButForced = orig.copyAllButForced;
             this.cropInput = orig.cropInput;
             this.encodeInput = orig.encodeInput;
             this.untouchedAudio = orig.untouchedAudio;
-            this.muxOnlyFirstSub = orig.muxOnlyFirstSub;
             this.muxSubs = orig.muxSubs;
             this.copySubs = orig.copySubs;
             this.dgindexnvPath = orig.dgindexnvPath;
@@ -260,8 +255,7 @@ namespace BluRip
         public bool defaultSubtitleForced = true;
         public int lastProfile = 0;
         public bool deleteAfterEncode = false;
-        public bool dtsHdCore = true;
-        public bool muxSubtitles = true;
+        public bool dtsHdCore = true;        
         public bool untouchedVideo = false;
         public List<AvisynthSettings> avisynthSettings = new List<AvisynthSettings>();
         public int lastAvisynthProfile = 0;
@@ -271,13 +265,9 @@ namespace BluRip
         public bool downmixAc3 = false;
         public int downmixAc3Index = 0;
         public bool minimizeAutocrop = false;
-        public bool muxOnlyForced = false;
-        public bool copySubtitles = true;
-        public bool copyAllButForced = false;
         public int cropInput = 1;
         public int encodeInput = 1;
         public bool untouchedAudio = false;
-        public bool muxOnlyFirstSub = false;
         public int muxSubs = 1;
         public int copySubs = 1;
         public string dgindexnvPath = "";
