@@ -73,14 +73,9 @@
             this.comboBoxCopySubs = new System.Windows.Forms.ComboBox();
             this.comboBoxMuxSubs = new System.Windows.Forms.ComboBox();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
-            this.checkBoxMuxedOnlyFirstSub = new System.Windows.Forms.CheckBox();
-            this.checkBoxCopySubsWithoutForced = new System.Windows.Forms.CheckBox();
-            this.checkBoxCopySubs = new System.Windows.Forms.CheckBox();
-            this.checkBoxMuxOnlyForced = new System.Windows.Forms.CheckBox();
             this.checkBoxDeleteAfterEncode = new System.Windows.Forms.CheckBox();
             this.checkBoxResize720p = new System.Windows.Forms.CheckBox();
             this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
-            this.checkBoxMuxSubtitle = new System.Windows.Forms.CheckBox();
             this.groupBoxAutoCrop = new System.Windows.Forms.GroupBox();
             this.checkBoxMinimizeCrop = new System.Windows.Forms.CheckBox();
             this.labelCropMode = new System.Windows.Forms.Label();
@@ -91,6 +86,7 @@
             this.numericUpDownNrFrames = new System.Windows.Forms.NumericUpDown();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
             this.groupBoxAudioSettings = new System.Windows.Forms.GroupBox();
+            this.checkBoxDtsToAc3 = new System.Windows.Forms.CheckBox();
             this.checkBoxUntouchedAudio = new System.Windows.Forms.CheckBox();
             this.comboBoxDownmixAc3 = new System.Windows.Forms.ComboBox();
             this.comboBoxDownmixDts = new System.Windows.Forms.ComboBox();
@@ -215,7 +211,6 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.checkBoxDtsToAc3 = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
@@ -649,10 +644,6 @@
             // 
             // tabPageSettings
             // 
-            this.tabPageSettings.Controls.Add(this.labelCopySubs);
-            this.tabPageSettings.Controls.Add(this.labelMuxSubs);
-            this.tabPageSettings.Controls.Add(this.comboBoxCopySubs);
-            this.tabPageSettings.Controls.Add(this.comboBoxMuxSubs);
             this.tabPageSettings.Controls.Add(this.groupBoxGeneral);
             this.tabPageSettings.Controls.Add(this.groupBoxAutoCrop);
             this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
@@ -666,7 +657,7 @@
             // labelCopySubs
             // 
             this.labelCopySubs.AutoSize = true;
-            this.labelCopySubs.Location = new System.Drawing.Point(444, 117);
+            this.labelCopySubs.Location = new System.Drawing.Point(6, 56);
             this.labelCopySubs.Name = "labelCopySubs";
             this.labelCopySubs.Size = new System.Drawing.Size(75, 13);
             this.labelCopySubs.TabIndex = 11;
@@ -675,7 +666,7 @@
             // labelMuxSubs
             // 
             this.labelMuxSubs.AutoSize = true;
-            this.labelMuxSubs.Location = new System.Drawing.Point(444, 77);
+            this.labelMuxSubs.Location = new System.Drawing.Point(6, 16);
             this.labelMuxSubs.Name = "labelMuxSubs";
             this.labelMuxSubs.Size = new System.Drawing.Size(71, 13);
             this.labelMuxSubs.TabIndex = 10;
@@ -690,7 +681,7 @@
             "Copy all subtitles to \'Subs\' folder",
             "Copy all but forced",
             "Copy only first normal/forced subtitles"});
-            this.comboBoxCopySubs.Location = new System.Drawing.Point(447, 132);
+            this.comboBoxCopySubs.Location = new System.Drawing.Point(9, 71);
             this.comboBoxCopySubs.Name = "comboBoxCopySubs";
             this.comboBoxCopySubs.Size = new System.Drawing.Size(182, 21);
             this.comboBoxCopySubs.TabIndex = 9;
@@ -705,7 +696,7 @@
             "Mux all subtitles",
             "Mux only forced subtitles",
             "Mux only first normal/forced subtitle"});
-            this.comboBoxMuxSubs.Location = new System.Drawing.Point(447, 93);
+            this.comboBoxMuxSubs.Location = new System.Drawing.Point(9, 32);
             this.comboBoxMuxSubs.Name = "comboBoxMuxSubs";
             this.comboBoxMuxSubs.Size = new System.Drawing.Size(182, 21);
             this.comboBoxMuxSubs.TabIndex = 8;
@@ -713,69 +704,24 @@
             // 
             // groupBoxGeneral
             // 
-            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxedOnlyFirstSub);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxCopySubsWithoutForced);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxCopySubs);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxOnlyForced);
+            this.groupBoxGeneral.Controls.Add(this.labelCopySubs);
             this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteAfterEncode);
+            this.groupBoxGeneral.Controls.Add(this.labelMuxSubs);
+            this.groupBoxGeneral.Controls.Add(this.comboBoxCopySubs);
             this.groupBoxGeneral.Controls.Add(this.checkBoxResize720p);
+            this.groupBoxGeneral.Controls.Add(this.comboBoxMuxSubs);
             this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxSubtitle);
             this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 230);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 168);
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
             // 
-            // checkBoxMuxedOnlyFirstSub
-            // 
-            this.checkBoxMuxedOnlyFirstSub.AutoSize = true;
-            this.checkBoxMuxedOnlyFirstSub.Location = new System.Drawing.Point(6, 65);
-            this.checkBoxMuxedOnlyFirstSub.Name = "checkBoxMuxedOnlyFirstSub";
-            this.checkBoxMuxedOnlyFirstSub.Size = new System.Drawing.Size(176, 17);
-            this.checkBoxMuxedOnlyFirstSub.TabIndex = 8;
-            this.checkBoxMuxedOnlyFirstSub.Text = "Mux only first normal/forced sub";
-            this.checkBoxMuxedOnlyFirstSub.UseVisualStyleBackColor = true;
-            this.checkBoxMuxedOnlyFirstSub.CheckedChanged += new System.EventHandler(this.checkBoxMuxedOnlyFirstSub_CheckedChanged);
-            // 
-            // checkBoxCopySubsWithoutForced
-            // 
-            this.checkBoxCopySubsWithoutForced.AutoSize = true;
-            this.checkBoxCopySubsWithoutForced.Location = new System.Drawing.Point(6, 114);
-            this.checkBoxCopySubsWithoutForced.Name = "checkBoxCopySubsWithoutForced";
-            this.checkBoxCopySubsWithoutForced.Size = new System.Drawing.Size(139, 17);
-            this.checkBoxCopySubsWithoutForced.TabIndex = 21;
-            this.checkBoxCopySubsWithoutForced.Text = "Copy all subs but forced";
-            this.checkBoxCopySubsWithoutForced.UseVisualStyleBackColor = true;
-            this.checkBoxCopySubsWithoutForced.CheckedChanged += new System.EventHandler(this.checkBoxCopySubsWithoutForced_CheckedChanged);
-            // 
-            // checkBoxCopySubs
-            // 
-            this.checkBoxCopySubs.AutoSize = true;
-            this.checkBoxCopySubs.Location = new System.Drawing.Point(6, 91);
-            this.checkBoxCopySubs.Name = "checkBoxCopySubs";
-            this.checkBoxCopySubs.Size = new System.Drawing.Size(147, 17);
-            this.checkBoxCopySubs.TabIndex = 20;
-            this.checkBoxCopySubs.Text = "Copy subs to \'Subs\' folder";
-            this.checkBoxCopySubs.UseVisualStyleBackColor = true;
-            this.checkBoxCopySubs.CheckedChanged += new System.EventHandler(this.checkBoxCopySubs_CheckedChanged);
-            // 
-            // checkBoxMuxOnlyForced
-            // 
-            this.checkBoxMuxOnlyForced.AutoSize = true;
-            this.checkBoxMuxOnlyForced.Location = new System.Drawing.Point(6, 42);
-            this.checkBoxMuxOnlyForced.Name = "checkBoxMuxOnlyForced";
-            this.checkBoxMuxOnlyForced.Size = new System.Drawing.Size(126, 17);
-            this.checkBoxMuxOnlyForced.TabIndex = 19;
-            this.checkBoxMuxOnlyForced.Text = "Mux forced subs only";
-            this.checkBoxMuxOnlyForced.UseVisualStyleBackColor = true;
-            this.checkBoxMuxOnlyForced.CheckedChanged += new System.EventHandler(this.checkBoxMuxOnlyForced_CheckedChanged);
-            // 
             // checkBoxDeleteAfterEncode
             // 
             this.checkBoxDeleteAfterEncode.AutoSize = true;
-            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 183);
+            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 144);
             this.checkBoxDeleteAfterEncode.Name = "checkBoxDeleteAfterEncode";
             this.checkBoxDeleteAfterEncode.Size = new System.Drawing.Size(159, 17);
             this.checkBoxDeleteAfterEncode.TabIndex = 18;
@@ -786,7 +732,7 @@
             // checkBoxResize720p
             // 
             this.checkBoxResize720p.AutoSize = true;
-            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 160);
+            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 121);
             this.checkBoxResize720p.Name = "checkBoxResize720p";
             this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
             this.checkBoxResize720p.TabIndex = 13;
@@ -797,24 +743,13 @@
             // checkBoxUntouchedVideo
             // 
             this.checkBoxUntouchedVideo.AutoSize = true;
-            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 137);
+            this.checkBoxUntouchedVideo.Location = new System.Drawing.Point(6, 98);
             this.checkBoxUntouchedVideo.Name = "checkBoxUntouchedVideo";
             this.checkBoxUntouchedVideo.Size = new System.Drawing.Size(168, 17);
             this.checkBoxUntouchedVideo.TabIndex = 12;
             this.checkBoxUntouchedVideo.Text = "Untouched video (no encode)";
             this.checkBoxUntouchedVideo.UseVisualStyleBackColor = true;
             this.checkBoxUntouchedVideo.CheckedChanged += new System.EventHandler(this.checkBoxUntouchedVideo_CheckedChanged);
-            // 
-            // checkBoxMuxSubtitle
-            // 
-            this.checkBoxMuxSubtitle.AutoSize = true;
-            this.checkBoxMuxSubtitle.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxMuxSubtitle.Name = "checkBoxMuxSubtitle";
-            this.checkBoxMuxSubtitle.Size = new System.Drawing.Size(130, 17);
-            this.checkBoxMuxSubtitle.TabIndex = 11;
-            this.checkBoxMuxSubtitle.Text = "Mux subtitles into mkv";
-            this.checkBoxMuxSubtitle.UseVisualStyleBackColor = true;
-            this.checkBoxMuxSubtitle.CheckedChanged += new System.EventHandler(this.checkBoxMuxSubtitle_CheckedChanged);
             // 
             // groupBoxAutoCrop
             // 
@@ -827,7 +762,7 @@
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownNrFrames);
             this.groupBoxAutoCrop.Location = new System.Drawing.Point(212, 6);
             this.groupBoxAutoCrop.Name = "groupBoxAutoCrop";
-            this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 162);
+            this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 168);
             this.groupBoxAutoCrop.TabIndex = 5;
             this.groupBoxAutoCrop.TabStop = false;
             this.groupBoxAutoCrop.Text = "AutoCrop settings";
@@ -953,6 +888,17 @@
             this.groupBoxAudioSettings.TabIndex = 36;
             this.groupBoxAudioSettings.TabStop = false;
             this.groupBoxAudioSettings.Text = "Audio settings";
+            // 
+            // checkBoxDtsToAc3
+            // 
+            this.checkBoxDtsToAc3.AutoSize = true;
+            this.checkBoxDtsToAc3.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxDtsToAc3.Name = "checkBoxDtsToAc3";
+            this.checkBoxDtsToAc3.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxDtsToAc3.TabIndex = 16;
+            this.checkBoxDtsToAc3.Text = "Convert DTS to AC3";
+            this.checkBoxDtsToAc3.UseVisualStyleBackColor = true;
+            this.checkBoxDtsToAc3.CheckedChanged += new System.EventHandler(this.checkBoxDtsToAc3_CheckedChanged);
             // 
             // checkBoxUntouchedAudio
             // 
@@ -1739,7 +1685,7 @@
             // linkLabelDGDecNv
             // 
             this.linkLabelDGDecNv.AutoSize = true;
-            this.linkLabelDGDecNv.Location = new System.Drawing.Point(322, 68);
+            this.linkLabelDGDecNv.Location = new System.Drawing.Point(320, 68);
             this.linkLabelDGDecNv.Name = "linkLabelDGDecNv";
             this.linkLabelDGDecNv.Size = new System.Drawing.Size(57, 13);
             this.linkLabelDGDecNv.TabIndex = 13;
@@ -1814,7 +1760,7 @@
             // linkLabelFFMpegSrc
             // 
             this.linkLabelFFMpegSrc.AutoSize = true;
-            this.linkLabelFFMpegSrc.Location = new System.Drawing.Point(322, 55);
+            this.linkLabelFFMpegSrc.Location = new System.Drawing.Point(320, 55);
             this.linkLabelFFMpegSrc.Name = "linkLabelFFMpegSrc";
             this.linkLabelFFMpegSrc.Size = new System.Drawing.Size(62, 13);
             this.linkLabelFFMpegSrc.TabIndex = 6;
@@ -2260,17 +2206,6 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // checkBoxDtsToAc3
-            // 
-            this.checkBoxDtsToAc3.AutoSize = true;
-            this.checkBoxDtsToAc3.Location = new System.Drawing.Point(6, 65);
-            this.checkBoxDtsToAc3.Name = "checkBoxDtsToAc3";
-            this.checkBoxDtsToAc3.Size = new System.Drawing.Size(123, 17);
-            this.checkBoxDtsToAc3.TabIndex = 16;
-            this.checkBoxDtsToAc3.Text = "Convert DTS to AC3";
-            this.checkBoxDtsToAc3.UseVisualStyleBackColor = true;
-            this.checkBoxDtsToAc3.CheckedChanged += new System.EventHandler(this.checkBoxDtsToAc3_CheckedChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2299,7 +2234,6 @@
             this.groupBoxPath.ResumeLayout(false);
             this.groupBoxPath.PerformLayout();
             this.tabPageSettings.ResumeLayout(false);
-            this.tabPageSettings.PerformLayout();
             this.groupBoxGeneral.ResumeLayout(false);
             this.groupBoxGeneral.PerformLayout();
             this.groupBoxAutoCrop.ResumeLayout(false);
@@ -2479,7 +2413,6 @@
         private System.Windows.Forms.CheckBox checkBoxUseCore;
         private System.Windows.Forms.Button buttonOpenM2ts;
         private System.Windows.Forms.GroupBox groupBoxGeneral;
-        private System.Windows.Forms.CheckBox checkBoxMuxSubtitle;
         private System.Windows.Forms.CheckBox checkBoxUntouchedVideo;
         private System.Windows.Forms.Label labelUsefullTools;
         private System.Windows.Forms.GroupBox groupBoxAviSynthProfiles;
@@ -2501,9 +2434,6 @@
         private System.Windows.Forms.LinkLabel linkLabelSurcode;
         private System.Windows.Forms.ToolStripMenuItem saveLogToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxMinimizeCrop;
-        private System.Windows.Forms.CheckBox checkBoxCopySubsWithoutForced;
-        private System.Windows.Forms.CheckBox checkBoxCopySubs;
-        private System.Windows.Forms.CheckBox checkBoxMuxOnlyForced;
         private System.Windows.Forms.Button buttonLoadProject;
         private System.Windows.Forms.Button buttonSaveProject;
         private System.Windows.Forms.TabPage tabPageProjectQueue;
@@ -2521,7 +2451,6 @@
         private System.Windows.Forms.ComboBox comboBoxEncodeInput;
         private System.Windows.Forms.ComboBox comboBoxCropInput;
         private System.Windows.Forms.CheckBox checkBoxUntouchedAudio;
-        private System.Windows.Forms.CheckBox checkBoxMuxedOnlyFirstSub;
         private System.Windows.Forms.ComboBox comboBoxMuxSubs;
         private System.Windows.Forms.ComboBox comboBoxCopySubs;
         private System.Windows.Forms.Label labelCopySubs;
