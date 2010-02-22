@@ -68,13 +68,13 @@
             this.buttonWorkingDir = new System.Windows.Forms.Button();
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
+            this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
             this.labelCopySubs = new System.Windows.Forms.Label();
+            this.checkBoxDeleteAfterEncode = new System.Windows.Forms.CheckBox();
             this.labelMuxSubs = new System.Windows.Forms.Label();
             this.comboBoxCopySubs = new System.Windows.Forms.ComboBox();
-            this.comboBoxMuxSubs = new System.Windows.Forms.ComboBox();
-            this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
-            this.checkBoxDeleteAfterEncode = new System.Windows.Forms.CheckBox();
             this.checkBoxResize720p = new System.Windows.Forms.CheckBox();
+            this.comboBoxMuxSubs = new System.Windows.Forms.ComboBox();
             this.checkBoxUntouchedVideo = new System.Windows.Forms.CheckBox();
             this.groupBoxAutoCrop = new System.Windows.Forms.GroupBox();
             this.checkBoxMinimizeCrop = new System.Windows.Forms.CheckBox();
@@ -654,6 +654,22 @@
             this.tabPageSettings.Text = "General settings";
             this.tabPageSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBoxGeneral
+            // 
+            this.groupBoxGeneral.Controls.Add(this.labelCopySubs);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteAfterEncode);
+            this.groupBoxGeneral.Controls.Add(this.labelMuxSubs);
+            this.groupBoxGeneral.Controls.Add(this.comboBoxCopySubs);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxResize720p);
+            this.groupBoxGeneral.Controls.Add(this.comboBoxMuxSubs);
+            this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
+            this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxGeneral.Name = "groupBoxGeneral";
+            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 168);
+            this.groupBoxGeneral.TabIndex = 7;
+            this.groupBoxGeneral.TabStop = false;
+            this.groupBoxGeneral.Text = "General options";
+            // 
             // labelCopySubs
             // 
             this.labelCopySubs.AutoSize = true;
@@ -662,6 +678,17 @@
             this.labelCopySubs.Size = new System.Drawing.Size(75, 13);
             this.labelCopySubs.TabIndex = 11;
             this.labelCopySubs.Text = "Copy subtitles:";
+            // 
+            // checkBoxDeleteAfterEncode
+            // 
+            this.checkBoxDeleteAfterEncode.AutoSize = true;
+            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 144);
+            this.checkBoxDeleteAfterEncode.Name = "checkBoxDeleteAfterEncode";
+            this.checkBoxDeleteAfterEncode.Size = new System.Drawing.Size(170, 17);
+            this.checkBoxDeleteAfterEncode.TabIndex = 18;
+            this.checkBoxDeleteAfterEncode.Text = "Delete demuxed files after mux";
+            this.checkBoxDeleteAfterEncode.UseVisualStyleBackColor = true;
+            this.checkBoxDeleteAfterEncode.CheckedChanged += new System.EventHandler(this.checkBoxDeleteAfterEncode_CheckedChanged);
             // 
             // labelMuxSubs
             // 
@@ -687,6 +714,17 @@
             this.comboBoxCopySubs.TabIndex = 9;
             this.comboBoxCopySubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopySubs_SelectedIndexChanged);
             // 
+            // checkBoxResize720p
+            // 
+            this.checkBoxResize720p.AutoSize = true;
+            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 121);
+            this.checkBoxResize720p.Name = "checkBoxResize720p";
+            this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
+            this.checkBoxResize720p.TabIndex = 13;
+            this.checkBoxResize720p.Text = "Resize to 720p";
+            this.checkBoxResize720p.UseVisualStyleBackColor = true;
+            this.checkBoxResize720p.CheckedChanged += new System.EventHandler(this.checkBoxResize720p_CheckedChanged);
+            // 
             // comboBoxMuxSubs
             // 
             this.comboBoxMuxSubs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -701,44 +739,6 @@
             this.comboBoxMuxSubs.Size = new System.Drawing.Size(182, 21);
             this.comboBoxMuxSubs.TabIndex = 8;
             this.comboBoxMuxSubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxMuxSubs_SelectedIndexChanged);
-            // 
-            // groupBoxGeneral
-            // 
-            this.groupBoxGeneral.Controls.Add(this.labelCopySubs);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteAfterEncode);
-            this.groupBoxGeneral.Controls.Add(this.labelMuxSubs);
-            this.groupBoxGeneral.Controls.Add(this.comboBoxCopySubs);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxResize720p);
-            this.groupBoxGeneral.Controls.Add(this.comboBoxMuxSubs);
-            this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
-            this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
-            this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 168);
-            this.groupBoxGeneral.TabIndex = 7;
-            this.groupBoxGeneral.TabStop = false;
-            this.groupBoxGeneral.Text = "General options";
-            // 
-            // checkBoxDeleteAfterEncode
-            // 
-            this.checkBoxDeleteAfterEncode.AutoSize = true;
-            this.checkBoxDeleteAfterEncode.Location = new System.Drawing.Point(6, 144);
-            this.checkBoxDeleteAfterEncode.Name = "checkBoxDeleteAfterEncode";
-            this.checkBoxDeleteAfterEncode.Size = new System.Drawing.Size(159, 17);
-            this.checkBoxDeleteAfterEncode.TabIndex = 18;
-            this.checkBoxDeleteAfterEncode.Text = "Delete source files after mux";
-            this.checkBoxDeleteAfterEncode.UseVisualStyleBackColor = true;
-            this.checkBoxDeleteAfterEncode.CheckedChanged += new System.EventHandler(this.checkBoxDeleteAfterEncode_CheckedChanged);
-            // 
-            // checkBoxResize720p
-            // 
-            this.checkBoxResize720p.AutoSize = true;
-            this.checkBoxResize720p.Location = new System.Drawing.Point(6, 121);
-            this.checkBoxResize720p.Name = "checkBoxResize720p";
-            this.checkBoxResize720p.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxResize720p.TabIndex = 13;
-            this.checkBoxResize720p.Text = "Resize to 720p";
-            this.checkBoxResize720p.UseVisualStyleBackColor = true;
-            this.checkBoxResize720p.CheckedChanged += new System.EventHandler(this.checkBoxResize720p_CheckedChanged);
             // 
             // checkBoxUntouchedVideo
             // 
