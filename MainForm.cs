@@ -35,7 +35,7 @@ namespace BluRip
         private Process pc2 = new Process();
         private Process pc3 = new Process();
 
-        public string title = "BluRip 1080p v0.4.5 © _hawk_/PPX";
+        public string title = "BluRip v0.4.5 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -1507,7 +1507,23 @@ namespace BluRip
                 if (fps == "")
                 {
                     MessageCrop("Error getting framerate");
-                    return;
+                    foreach (StreamInfo si in demuxedStreamList.streams)
+                    {
+                        if (si.streamType == StreamType.Video)
+                        {
+                            if (si.addInfo.Contains("24p /1.001"))
+                            {
+                                MessageCrop("Assume fps is 23.976");
+                                fps = "23.976";
+                                break;
+                            }
+                            // add other framerates here
+                        }
+                    }
+                    if (fps == "")
+                    {
+                        return;
+                    }
                 }
 
                 sb.Remove(0, sb.Length);
@@ -2955,8 +2971,11 @@ namespace BluRip
             try
             {
                 notifyIconMain.Visible = true;
-                notifyIconMain.Text = this.Text;
                 this.Hide();
+                if (this.Text.Length < 64)
+                {
+                    notifyIconMain.Text = this.Text;
+                }
             }
             catch (Exception)
             {
@@ -3201,12 +3220,17 @@ namespace BluRip
                 // video + chapter
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
+                    string lan = "";
+                    if (settings.preferedLanguages.Count > 0) lan = settings.preferedLanguages[0].languageShort;
+
                     if (si.streamType == StreamType.Chapter)
                     {
+                        if (lan != "") pc.StartInfo.Arguments += "--language 0:" + lan + " ";
                         pc.StartInfo.Arguments += "--chapters \"" + si.filename + "\" ";
                     }
                     else if (si.streamType == StreamType.Video)
                     {
+                        if (lan != "") pc.StartInfo.Arguments += "--language 0:" + lan + " ";
                         pc.StartInfo.Arguments += "\"" + ((VideoFileInfo)si.extraFileInfo).encodedFile + "\" ";
                     }                    
                 }
@@ -3297,6 +3321,10 @@ namespace BluRip
                                     {
                                         if (settings.defaultSubtitle)
                                         {
+                                            string st = "";
+                                            st = getShortLanguage(si.language);
+                                            if (st != "") pc.StartInfo.Arguments += "--language 0" + ":" + st + " ";
+
                                             if (!settings.defaultSubtitleForced)
                                             {
                                                 pc.StartInfo.Arguments += "--default-track 0 ";
