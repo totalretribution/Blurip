@@ -3225,12 +3225,11 @@ namespace BluRip
 
                     if (si.streamType == StreamType.Chapter)
                     {
-                        if (lan != "") pc.StartInfo.Arguments += "--language 0:" + lan + " ";
+                        if (lan != "") pc.StartInfo.Arguments += "--chapter-language " + lan + " ";
                         pc.StartInfo.Arguments += "--chapters \"" + si.filename + "\" ";
                     }
                     else if (si.streamType == StreamType.Video)
-                    {
-                        if (lan != "") pc.StartInfo.Arguments += "--language 0:" + lan + " ";
+                    {                        
                         pc.StartInfo.Arguments += "\"" + ((VideoFileInfo)si.extraFileInfo).encodedFile + "\" ";
                     }                    
                 }
