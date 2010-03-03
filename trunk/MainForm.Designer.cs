@@ -1854,7 +1854,6 @@
             // 
             // tabPageProjectQueue
             // 
-            this.tabPageProjectQueue.Controls.Add(this.checkBoxShutDown);
             this.tabPageProjectQueue.Controls.Add(this.buttonProcessQueue);
             this.tabPageProjectQueue.Controls.Add(this.groupBoxQueue);
             this.tabPageProjectQueue.Controls.Add(this.buttonLoadProject);
@@ -1870,7 +1869,7 @@
             // checkBoxShutDown
             // 
             this.checkBoxShutDown.AutoSize = true;
-            this.checkBoxShutDown.Location = new System.Drawing.Point(136, 250);
+            this.checkBoxShutDown.Location = new System.Drawing.Point(612, 358);
             this.checkBoxShutDown.Name = "checkBoxShutDown";
             this.checkBoxShutDown.Size = new System.Drawing.Size(170, 17);
             this.checkBoxShutDown.TabIndex = 15;
@@ -2212,6 +2211,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(794, 572);
+            this.Controls.Add(this.checkBoxShutDown);
             this.Controls.Add(this.tabControlLog);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.labelLog);
@@ -2267,7 +2267,6 @@
             this.tabPageSoftware.PerformLayout();
             this.tabPageAbout.ResumeLayout(false);
             this.tabPageProjectQueue.ResumeLayout(false);
-            this.tabPageProjectQueue.PerformLayout();
             this.groupBoxQueue.ResumeLayout(false);
             this.groupBoxQueue.PerformLayout();
             this.contextMenuStripDeleteLog.ResumeLayout(false);
