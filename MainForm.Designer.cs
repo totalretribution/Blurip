@@ -117,9 +117,6 @@
             this.buttonAddX264 = new System.Windows.Forms.Button();
             this.tabPageTools = new System.Windows.Forms.TabPage();
             this.groupBoxDgsource = new System.Windows.Forms.GroupBox();
-            this.labelCUVIDServerPath = new System.Windows.Forms.Label();
-            this.textBoxCUVIDServerPath = new System.Windows.Forms.TextBox();
-            this.buttonCUVIDServerPath = new System.Windows.Forms.Button();
             this.labelDGIndexNVPath = new System.Windows.Forms.Label();
             this.textBoxDgindexnvPath = new System.Windows.Forms.TextBox();
             this.buttonDgindexnvPath = new System.Windows.Forms.Button();
@@ -177,7 +174,6 @@
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             this.tabPageProjectQueue = new System.Windows.Forms.TabPage();
-            this.checkBoxShutDown = new System.Windows.Forms.CheckBox();
             this.buttonProcessQueue = new System.Windows.Forms.Button();
             this.groupBoxQueue = new System.Windows.Forms.GroupBox();
             this.buttonQueueDel = new System.Windows.Forms.Button();
@@ -189,6 +185,7 @@
             this.labelQueueDesc = new System.Windows.Forms.Label();
             this.buttonLoadProject = new System.Windows.Forms.Button();
             this.buttonSaveProject = new System.Windows.Forms.Button();
+            this.checkBoxShutDown = new System.Windows.Forms.CheckBox();
             this.richTextBoxLogMain = new System.Windows.Forms.RichTextBox();
             this.contextMenuStripDeleteLog = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1215,45 +1212,15 @@
             // 
             // groupBoxDgsource
             // 
-            this.groupBoxDgsource.Controls.Add(this.labelCUVIDServerPath);
-            this.groupBoxDgsource.Controls.Add(this.textBoxCUVIDServerPath);
-            this.groupBoxDgsource.Controls.Add(this.buttonCUVIDServerPath);
             this.groupBoxDgsource.Controls.Add(this.labelDGIndexNVPath);
             this.groupBoxDgsource.Controls.Add(this.textBoxDgindexnvPath);
             this.groupBoxDgsource.Controls.Add(this.buttonDgindexnvPath);
             this.groupBoxDgsource.Location = new System.Drawing.Point(303, 80);
             this.groupBoxDgsource.Name = "groupBoxDgsource";
-            this.groupBoxDgsource.Size = new System.Drawing.Size(290, 111);
+            this.groupBoxDgsource.Size = new System.Drawing.Size(290, 72);
             this.groupBoxDgsource.TabIndex = 7;
             this.groupBoxDgsource.TabStop = false;
             this.groupBoxDgsource.Text = "When using DGSource";
-            // 
-            // labelCUVIDServerPath
-            // 
-            this.labelCUVIDServerPath.AutoSize = true;
-            this.labelCUVIDServerPath.Location = new System.Drawing.Point(6, 59);
-            this.labelCUVIDServerPath.Name = "labelCUVIDServerPath";
-            this.labelCUVIDServerPath.Size = new System.Drawing.Size(131, 13);
-            this.labelCUVIDServerPath.TabIndex = 9;
-            this.labelCUVIDServerPath.Text = "Path to CUVIDServer.exe:";
-            // 
-            // textBoxCUVIDServerPath
-            // 
-            this.textBoxCUVIDServerPath.Location = new System.Drawing.Point(6, 75);
-            this.textBoxCUVIDServerPath.Name = "textBoxCUVIDServerPath";
-            this.textBoxCUVIDServerPath.ReadOnly = true;
-            this.textBoxCUVIDServerPath.Size = new System.Drawing.Size(229, 20);
-            this.textBoxCUVIDServerPath.TabIndex = 10;
-            // 
-            // buttonCUVIDServerPath
-            // 
-            this.buttonCUVIDServerPath.Location = new System.Drawing.Point(241, 72);
-            this.buttonCUVIDServerPath.Name = "buttonCUVIDServerPath";
-            this.buttonCUVIDServerPath.Size = new System.Drawing.Size(39, 23);
-            this.buttonCUVIDServerPath.TabIndex = 11;
-            this.buttonCUVIDServerPath.Text = "...";
-            this.buttonCUVIDServerPath.UseVisualStyleBackColor = true;
-            this.buttonCUVIDServerPath.Click += new System.EventHandler(this.buttonCUVIDServerPath_Click);
             // 
             // labelDGIndexNVPath
             // 
@@ -1866,16 +1833,6 @@
             this.tabPageProjectQueue.Text = "Project/Queue";
             this.tabPageProjectQueue.UseVisualStyleBackColor = true;
             // 
-            // checkBoxShutDown
-            // 
-            this.checkBoxShutDown.AutoSize = true;
-            this.checkBoxShutDown.Location = new System.Drawing.Point(612, 358);
-            this.checkBoxShutDown.Name = "checkBoxShutDown";
-            this.checkBoxShutDown.Size = new System.Drawing.Size(170, 17);
-            this.checkBoxShutDown.TabIndex = 15;
-            this.checkBoxShutDown.Text = "Shutdown after queue finished";
-            this.checkBoxShutDown.UseVisualStyleBackColor = true;
-            // 
             // buttonProcessQueue
             // 
             this.buttonProcessQueue.Location = new System.Drawing.Point(6, 244);
@@ -1989,6 +1946,16 @@
             this.buttonSaveProject.Text = "Save project";
             this.buttonSaveProject.UseVisualStyleBackColor = true;
             this.buttonSaveProject.Click += new System.EventHandler(this.buttonSaveProject_Click);
+            // 
+            // checkBoxShutDown
+            // 
+            this.checkBoxShutDown.AutoSize = true;
+            this.checkBoxShutDown.Location = new System.Drawing.Point(612, 358);
+            this.checkBoxShutDown.Name = "checkBoxShutDown";
+            this.checkBoxShutDown.Size = new System.Drawing.Size(170, 17);
+            this.checkBoxShutDown.TabIndex = 15;
+            this.checkBoxShutDown.Text = "Shutdown after queue finished";
+            this.checkBoxShutDown.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogMain
             // 
@@ -2460,9 +2427,6 @@
         private System.Windows.Forms.TextBox textBoxDgindexnvPath;
         private System.Windows.Forms.Button buttonDgindexnvPath;
         private System.Windows.Forms.LinkLabel linkLabelDGDecNv;
-        private System.Windows.Forms.Label labelCUVIDServerPath;
-        private System.Windows.Forms.TextBox textBoxCUVIDServerPath;
-        private System.Windows.Forms.Button buttonCUVIDServerPath;
         private System.Windows.Forms.CheckBox checkBoxShutDown;
         private System.Windows.Forms.CheckBox checkBoxDtsToAc3;
     }
