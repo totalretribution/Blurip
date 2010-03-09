@@ -52,9 +52,8 @@ namespace BluRip
 
         private Process pc = new Process();
         private Process pc2 = new Process();
-        private Process pc3 = new Process();
 
-        public string title = "BluRip v0.4.5 © _hawk_/PPX";
+        public string title = "BluRip v0.4.6 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -381,6 +380,7 @@ namespace BluRip
                 pc2.BeginOutputReadLine();
                 pc2.BeginErrorReadLine();
                 pc2.WaitForExit();
+                MessageDemux("eac3to return code: " + pc2.ExitCode.ToString());
                 pc2.Close();
                 res = sb.ToString();
                 res = res.Replace("\b", "");
@@ -528,6 +528,7 @@ namespace BluRip
                 pc.BeginOutputReadLine();
                 pc.BeginErrorReadLine();
                 pc.WaitForExit();
+                MessageDemux("eac3to return code: " + pc.ExitCode.ToString());
                 pc.Close();
 
                 MessageDemux("");
@@ -769,7 +770,6 @@ namespace BluRip
                 comboBoxMuxSubs.SelectedIndex = settings.muxSubs;
 
                 textBoxDgindexnvPath.Text = settings.dgindexnvPath;
-                textBoxCUVIDServerPath.Text = settings.cuvidserverPath;
 
                 checkBoxDtsToAc3.Checked = settings.convertDtsToAc3;
 
@@ -999,11 +999,17 @@ namespace BluRip
                                 else
                                 {
                                     if (ac3AudioTypes.Contains(si.typeDesc))
-                                    {
+                                    {   
                                         if (ac3List[index] == 0)
                                         {
-                                            ac3List[index]++;
-                                            si.selected = true;
+                                            if (si.typeDesc == "AC3 Surround" && maxac3List.Count > 0)
+                                            {
+                                            }
+                                            else
+                                            {
+                                                ac3List[index]++;
+                                                si.selected = true;
+                                            }
                                         }
                                     }
                                     if (dtsAudioTypes.Contains(si.typeDesc) && maxac3List[index] == 0)
@@ -1114,15 +1120,6 @@ namespace BluRip
                 try
                 {
                     pc2.Kill();
-                    pc.Close();
-                }
-                catch (Exception)
-                {
-                }
-
-                try
-                {
-                    pc3.Kill();
                     pc.Close();
                 }
                 catch (Exception)
@@ -1317,7 +1314,8 @@ namespace BluRip
                 pc.BeginOutputReadLine();
                 
                 pc.WaitForExit();
-                pc.Close();
+                MessageDemux("eac3to return code: " + pc.ExitCode.ToString());
+                pc.Close();                
 
                 demuxedStreamList = new TitleInfo();
                 demuxedStreamList.desc = titleList[comboBoxTitle.SelectedIndex].desc;
@@ -1439,51 +1437,6 @@ namespace BluRip
             }
         }
 
-        private bool startCuvidServer()
-        {
-            try
-            {
-                try
-                {
-                    pc3.Kill();
-                    pc3.Close();
-                }
-                catch (Exception)
-                {
-                }
-                try
-                {   
-                    pc3.Close();
-                    pc3 = null;
-                    GC.Collect();
-                }
-                catch (Exception)
-                {
-                }
-                pc3 = new Process();
-                pc3.StartInfo.FileName = settings.cuvidserverPath;
-                if (!pc3.Start())
-                {                    
-                    return false;
-                }
-                // wait 5 sec until cuvidserver is running
-                Thread.Sleep(5000);
-                try
-                {
-                    IntPtr ptr = pc3.MainWindowHandle;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
         private bool indexThreadStatus = false;
         private void IndexThread()
         {
@@ -1577,6 +1530,7 @@ namespace BluRip
                             pc.BeginOutputReadLine();
 
                             pc.WaitForExit();
+                            MessageCrop("ffmsindex return code: " + pc.ExitCode.ToString());
                             pc.Close();
                             MessageCrop("Indexing done!");
                         }
@@ -1615,6 +1569,7 @@ namespace BluRip
                             pc.BeginOutputReadLine();
 
                             pc.WaitForExit();
+                            MessageCrop("dgindexnv return code: " + pc.ExitCode.ToString());
                             pc.Close();
                             MessageCrop("Indexing done!");
                         }
@@ -1631,29 +1586,26 @@ namespace BluRip
                     }
                     else if (settings.cropInput == 1)
                     {
-                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
-                            "FFVideoSource(\"" + filename + "\")");
+                        string data = "";
+                        string dlldir = Path.GetDirectoryName(settings.ffmsindexPath);
+                        if (File.Exists(dlldir + "\\ffms2.dll"))
+                        {
+                            data = "LoadPlugin(\"" + dlldir + "\\ffms2.dll" + "\")\r\n";
+                        }
+                        data += "FFVideoSource(\"" + filename + "\")";
+                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
                     }
                     else if (settings.cropInput == 2)
                     {
                         string output = Path.ChangeExtension(filename, "dgi");
-                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
-                            "DGSource(\"" + output + "\")");
-                        
-                        int count = 0;
-                        bool ok = false;
-                        while (!ok)
+                        string data = "";
+                        string dlldir = Path.GetDirectoryName(settings.dgindexnvPath);
+                        if (File.Exists(dlldir + "\\DGMultiDecodeNV.dll"))
                         {
-                            ok = startCuvidServer();
-                            count++;
-                            if (count == 6) break;
+                            data = "LoadPlugin(\"" + dlldir + "\\DGMultiDecodeNV.dll" + "\")\r\n";
                         }
-
-                        if (!ok)
-                        {
-                            MessageCrop("Could not start CuvidServer");
-                            return;
-                        }
+                        data += "DGMultiSource(\"" + output + "\")";
+                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);                        
                     }
                     MessageCrop("Starting AutoCrop...");
                     AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings);
@@ -1693,12 +1645,22 @@ namespace BluRip
                     }
                     else if (settings.encodeInput == 1)
                     {
-                        encode = "FFVideoSource(\"" + filename + "\")\r\n";
+                        string dlldir = Path.GetDirectoryName(settings.ffmsindexPath);
+                        if (File.Exists(dlldir + "\\ffms2.dll"))
+                        {
+                            encode += "LoadPlugin(\"" + dlldir + "\\ffms2.dll" + "\")\r\n";
+                        }
+                        encode += "FFVideoSource(\"" + filename + "\")\r\n";
                     }
                     else if (settings.encodeInput == 2)
                     {
                         string output = Path.ChangeExtension(filename, "dgi");
-                        encode = "DGSource(\"" + output + "\")\r\n";
+                        string dlldir = Path.GetDirectoryName(settings.dgindexnvPath);
+                        if (File.Exists(dlldir + "\\DGMultiDecodeNV.dll"))
+                        {
+                            encode += "LoadPlugin(\"" + dlldir + "\\DGMultiDecodeNV.dll" + "\")\r\n";
+                        }
+                        encode += "DGMultiSource(\"" + output + "\")\r\n";
                     }
                     if (ac.cropTop != 0 || ac.cropBottom != 0)
                     {
@@ -1766,14 +1728,7 @@ namespace BluRip
             }
             finally
             {
-                try
-                {
-                    pc3.Kill();
-                    pc3.Close();
-                }
-                catch (Exception)
-                {
-                }
+                
             }
         }
 
@@ -1798,6 +1753,7 @@ namespace BluRip
                 }
                 int videoCount = 0;
                 int audioCount = 0;
+                int unknown = 0;
                 foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
                 {
                     if (si.streamType == StreamType.Audio && si.selected)
@@ -1807,6 +1763,10 @@ namespace BluRip
                     if (si.streamType == StreamType.Video && si.selected)
                     {
                         videoCount++;
+                    }
+                    if (si.streamType == StreamType.Unknown && si.selected)
+                    {
+                        unknown++;
                     }
                 }
                 if (audioCount < 1)
@@ -1819,6 +1779,12 @@ namespace BluRip
                 {
                     MessageMain("No video stream or more then one selected");
                     if (!silent) MessageBox.Show("No video stream or more then one selected", "Error");
+                    return false;
+                }
+                if (unknown > 0)
+                {
+                    MessageMain("Unknown tracks selected - please report log to developer");
+                    if (!silent) MessageBox.Show("Unknown tracks selected - please report log to developer", "Error");
                     return false;
                 }
 
@@ -1986,7 +1952,7 @@ namespace BluRip
                         if (!DoEncode()) return;
                     }
                     if (!DoMux()) return;
-                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.filePrefix + "_compleLog.txt");
+                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.filePrefix + "_completeLog.txt");
                 }
                 else
                 {
@@ -2003,7 +1969,7 @@ namespace BluRip
                     {
                         if (!DoMux()) return;
                     }
-                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.filePrefix + "_compleLog.txt");
+                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.filePrefix + "_completeLog.txt");
                 }
             }
             catch (Exception ex)
@@ -2458,24 +2424,6 @@ namespace BluRip
                     return;
                 }
 
-                if (settings.encodeInput == 2)
-                {
-                    int count = 0;
-                    bool ok = false;
-                    while (!ok)
-                    {
-                        ok = startCuvidServer();
-                        count++;
-                        if (count == 6) break;
-                    }
-
-                    if (!ok)
-                    {
-                        MessageEncode("Could not start CuvidServer");
-                        return;
-                    }
-                }
-
                 sb.Remove(0, sb.Length);
 
                 if (!settings.encodingSettings[index].pass2)
@@ -2524,7 +2472,7 @@ namespace BluRip
                 or2Thread.Join();
 
                 pc.WaitForExit();
-                                
+                MessageEncode("x264 return code: " + pc.ExitCode.ToString());
                 MessageEncode(or.Text);
                 MessageEncode(or2.Text);
                                 
@@ -2600,14 +2548,7 @@ namespace BluRip
             }
             finally
             {
-                try
-                {
-                    pc3.Kill();                    
-                    pc3.Close();
-                }
-                catch (Exception)
-                {
-                }
+                
             }
         }
 
@@ -2721,6 +2662,7 @@ namespace BluRip
                         pc.BeginOutputReadLine();
 
                         pc.WaitForExit();
+                        MessageSubtitle("bdsup2sub return code: " + pc.ExitCode.ToString());
                         pc.Close();
                         MessageSubtitle("Processing done!");
 
@@ -3398,6 +3340,7 @@ namespace BluRip
                 pc.BeginOutputReadLine();
 
                 pc.WaitForExit();
+                MessageMux("mkvmerge return code: " + pc.ExitCode.ToString());
                 pc.Close();
                 MessageMux("Muxing done!");
 
@@ -3498,6 +3441,7 @@ namespace BluRip
                 if (settings.deleteAfterEncode)
                 {
                     MessageMux("Deleting source files...");
+                    string filename = "";
                     foreach (StreamInfo si in demuxedStreamList.streams)
                     {
                         try
@@ -3507,6 +3451,7 @@ namespace BluRip
                             {
                                 File.Delete(((VideoFileInfo)si.extraFileInfo).encodedFile);
                                 File.Delete(((VideoFileInfo)si.extraFileInfo).encodeAvs);
+                                filename = si.filename;
                             }
                             if (si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                             {
@@ -3530,6 +3475,23 @@ namespace BluRip
                     catch (Exception ex)
                     {
                         MessageMux("Exception: " + ex.Message);
+                    }
+
+                    // delete index files
+                    try
+                    {
+                        File.Delete(filename + ".ffindex");
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    try
+                    {
+                        string output = Path.ChangeExtension(filename, "dgi");
+                        File.Delete(output);
+                    }
+                    catch (Exception)
+                    {
                     }
                     MessageMux("Done.");
                 }
@@ -4761,23 +4723,6 @@ namespace BluRip
                 {
                     textBoxDgindexnvPath.Text = ofd.FileName;
                     settings.dgindexnvPath = ofd.FileName;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void buttonCUVIDServerPath_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "CUVIDServer.exe|CUVIDServer.exe";
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    textBoxCUVIDServerPath.Text = ofd.FileName;
-                    settings.cuvidserverPath = ofd.FileName;
                 }
             }
             catch (Exception)
