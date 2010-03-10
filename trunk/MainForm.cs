@@ -4138,12 +4138,6 @@ namespace BluRip
                         if (!silent) MessageBox.Show("DGIndexNv path not set", "Error");
                         return false;
                     }
-                    if (!File.Exists(settings.cuvidserverPath))
-                    {
-                        MessageMain("CUVIDServer path not set");
-                        if (!silent) MessageBox.Show("CUVIDServer path not set", "Error");
-                        return false;
-                    }
                 }
                 return true;
             }
