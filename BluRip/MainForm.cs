@@ -523,7 +523,21 @@ namespace BluRip
             try
             {
                 UserSettings.SaveSettingsFile(settings, settingsPath);
-                abortThreads();
+                if (!silent)
+                {
+                    if (MessageBox.Show("Are you sure?", "Exit BluRip", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        abortThreads();
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    abortThreads();
+                }
             }
             catch (Exception)
             {

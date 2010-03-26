@@ -107,7 +107,7 @@ namespace BluRip
                 bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
                 return bmp;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 if(bmp != null) bmp.Dispose();
                 throw;
