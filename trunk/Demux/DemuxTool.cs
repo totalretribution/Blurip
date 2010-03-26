@@ -29,7 +29,6 @@ namespace BluRip
     {
         private UserSettings settings = null;
         private List<string> m2tsFiles = null;
-        private string path = "";
         private List<string> videoTypes = null;
         private List<string> ac3AudioTypes = null;
         private List<string> dtsAudioTypes = null;
