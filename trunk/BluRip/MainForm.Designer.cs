@@ -32,9 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStreamSelect = new System.Windows.Forms.TabPage();
+            this.checkedListBoxStreams = new System.Windows.Forms.CheckedListBox();
+            this.contextMenuStripStream = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemAdvancedOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemDeleteAdvancedOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonOpenM2ts = new System.Windows.Forms.Button();
             this.labelStreams = new System.Windows.Forms.Label();
-            this.listBoxStreams = new System.Windows.Forms.ListBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.comboBoxTitle = new System.Windows.Forms.ComboBox();
             this.buttonGetStreamInfo = new System.Windows.Forms.Button();
@@ -210,6 +213,7 @@
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
+            this.contextMenuStripStream.SuspendLayout();
             this.tabPageProcess.SuspendLayout();
             this.groupBoxPath.SuspendLayout();
             this.tabPageSettings.SuspendLayout();
@@ -264,9 +268,9 @@
             // 
             // tabPageStreamSelect
             // 
+            this.tabPageStreamSelect.Controls.Add(this.checkedListBoxStreams);
             this.tabPageStreamSelect.Controls.Add(this.buttonOpenM2ts);
             this.tabPageStreamSelect.Controls.Add(this.labelStreams);
-            this.tabPageStreamSelect.Controls.Add(this.listBoxStreams);
             this.tabPageStreamSelect.Controls.Add(this.labelTitle);
             this.tabPageStreamSelect.Controls.Add(this.comboBoxTitle);
             this.tabPageStreamSelect.Controls.Add(this.buttonGetStreamInfo);
@@ -280,6 +284,45 @@
             this.tabPageStreamSelect.TabIndex = 0;
             this.tabPageStreamSelect.Text = "Stream selection";
             this.tabPageStreamSelect.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBoxStreams
+            // 
+            this.checkedListBoxStreams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkedListBoxStreams.ContextMenuStrip = this.contextMenuStripStream;
+            this.checkedListBoxStreams.Font = new System.Drawing.Font("Courier New", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBoxStreams.FormattingEnabled = true;
+            this.checkedListBoxStreams.HorizontalScrollbar = true;
+            this.checkedListBoxStreams.Location = new System.Drawing.Point(6, 130);
+            this.checkedListBoxStreams.Name = "checkedListBoxStreams";
+            this.checkedListBoxStreams.Size = new System.Drawing.Size(750, 139);
+            this.checkedListBoxStreams.TabIndex = 9;
+            this.checkedListBoxStreams.ThreeDCheckBoxes = true;
+            this.checkedListBoxStreams.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxStreams_SelectedIndexChanged);
+            this.checkedListBoxStreams.SelectedValueChanged += new System.EventHandler(this.checkedListBoxStreams_SelectedValueChanged);
+            // 
+            // contextMenuStripStream
+            // 
+            this.contextMenuStripStream.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemAdvancedOptions,
+            this.toolStripMenuItemDeleteAdvancedOptions});
+            this.contextMenuStripStream.Name = "contextMenuStripStream";
+            this.contextMenuStripStream.Size = new System.Drawing.Size(205, 70);
+            // 
+            // toolStripMenuItemAdvancedOptions
+            // 
+            this.toolStripMenuItemAdvancedOptions.Name = "toolStripMenuItemAdvancedOptions";
+            this.toolStripMenuItemAdvancedOptions.Size = new System.Drawing.Size(204, 22);
+            this.toolStripMenuItemAdvancedOptions.Text = "Edit advanced options";
+            this.toolStripMenuItemAdvancedOptions.Click += new System.EventHandler(this.toolStripMenuItemAdvancedOptions_Click);
+            // 
+            // toolStripMenuItemDeleteAdvancedOptions
+            // 
+            this.toolStripMenuItemDeleteAdvancedOptions.Name = "toolStripMenuItemDeleteAdvancedOptions";
+            this.toolStripMenuItemDeleteAdvancedOptions.Size = new System.Drawing.Size(204, 22);
+            this.toolStripMenuItemDeleteAdvancedOptions.Text = "Delete advanced options";
+            this.toolStripMenuItemDeleteAdvancedOptions.Click += new System.EventHandler(this.toolStripMenuItemDeleteAdvancedOptions_Click);
             // 
             // buttonOpenM2ts
             // 
@@ -299,22 +342,6 @@
             this.labelStreams.Size = new System.Drawing.Size(48, 13);
             this.labelStreams.TabIndex = 7;
             this.labelStreams.Text = "Streams:";
-            // 
-            // listBoxStreams
-            // 
-            this.listBoxStreams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxStreams.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxStreams.FormattingEnabled = true;
-            this.listBoxStreams.HorizontalScrollbar = true;
-            this.listBoxStreams.ItemHeight = 14;
-            this.listBoxStreams.Location = new System.Drawing.Point(6, 130);
-            this.listBoxStreams.Name = "listBoxStreams";
-            this.listBoxStreams.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxStreams.Size = new System.Drawing.Size(750, 144);
-            this.listBoxStreams.TabIndex = 6;
-            this.listBoxStreams.SelectedIndexChanged += new System.EventHandler(this.listBoxStreams_SelectedIndexChanged);
             // 
             // labelTitle
             // 
@@ -2196,6 +2223,7 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageStreamSelect.ResumeLayout(false);
             this.tabPageStreamSelect.PerformLayout();
+            this.contextMenuStripStream.ResumeLayout(false);
             this.tabPageProcess.ResumeLayout(false);
             this.tabPageProcess.PerformLayout();
             this.groupBoxPath.ResumeLayout(false);
@@ -2263,7 +2291,6 @@
         private System.Windows.Forms.Button buttonEac3toPath;
         private System.Windows.Forms.RichTextBox richTextBoxLogMain;
         private System.Windows.Forms.Label labelStreams;
-        private System.Windows.Forms.ListBox listBoxStreams;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.ComboBox comboBoxTitle;
         private System.Windows.Forms.GroupBox groupBoxAutoSelect;
@@ -2429,6 +2456,10 @@
         private System.Windows.Forms.LinkLabel linkLabelDGDecNv;
         private System.Windows.Forms.CheckBox checkBoxShutDown;
         private System.Windows.Forms.CheckBox checkBoxDtsToAc3;
+        private System.Windows.Forms.CheckedListBox checkedListBoxStreams;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripStream;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAdvancedOptions;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteAdvancedOptions;
     }
 }
 

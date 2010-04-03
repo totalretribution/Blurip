@@ -131,6 +131,11 @@ namespace BluRip
                                     Parameter += "audio_eac3_" + si.language + ".eac3\" ";
                                     si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_eac3_" + si.language + ".eac3";
                                 }
+                                else if (settings.untouchedAudio && si.typeDesc == "RAW/PCM")
+                                {
+                                    Parameter += "audio_pcm_" + si.language + ".pcm\" ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_pcm_" + si.language + ".pcm";
+                                }
                                 else
                                 {
                                     Parameter += "audio_ac3_" + si.language + ".ac3\" ";

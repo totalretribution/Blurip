@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -66,6 +65,7 @@ namespace BluRip
                 ac3AudioTypes.Add("AC3 Surround");
                 ac3AudioTypes.Add("AC3 EX");
                 ac3AudioTypes.Add("E-AC3");
+                ac3AudioTypes.Add("RAW/PCM"); // convert to ac3 by default
 
                 dtsAudioTypes.Add("DTS");
                 dtsAudioTypes.Add("DTS Master Audio");
@@ -550,7 +550,7 @@ namespace BluRip
             {
                 if (comboBoxTitle.SelectedIndex > -1)
                 {
-                    listBoxStreams.Items.Clear();
+                    checkedListBoxStreams.Items.Clear();
                     UpdateStreamList();
                 }
             }
@@ -614,23 +614,10 @@ namespace BluRip
         {
             try
             {
-                listBoxStreams.BeginUpdate();
                 int maxLength = 0;
                 foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
                 {                    
                     maxLength = Math.Max(maxLength, StreamTypeToString(si.streamType).Length);
-                }
-
-                foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
-                {                    
-                    string desc = "[ " + si.number.ToString("d3") + " ] - [ " + StreamTypeToString(si.streamType);
-                    for (int i = 0; i < maxLength - StreamTypeToString(si.streamType).Length; i++) desc += " ";
-                    desc += " ] - (" + si.desc + ")";
-                    if (si.addInfo != "")
-                    {
-                        desc += " - (" + si.addInfo + ")";
-                    }
-                    listBoxStreams.Items.Add(desc);
                 }
 
                 List<int> maxac3List = new List<int>();
@@ -756,12 +743,23 @@ namespace BluRip
                                 videoCount++;
                             }
                         }
-                        
-                        listBoxStreams.SetSelected(titleList[comboBoxTitle.SelectedIndex].streams.IndexOf(si),si.selected);
-                        
                     }
                 }
-                listBoxStreams.EndUpdate();
+
+                checkedListBoxStreams.Items.Clear();
+                foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                {
+                    string desc = "[ " + si.number.ToString("d3") + " ] - [ " + StreamTypeToString(si.streamType);
+                    for (int i = 0; i < maxLength - StreamTypeToString(si.streamType).Length; i++) desc += " ";
+                    desc += " ] - (" + si.desc + ")";
+                    if (si.addInfo != "")
+                    {
+                        desc += " - (" + si.addInfo + ")";
+                    }
+
+                    checkedListBoxStreams.Items.Add(desc);
+                    checkedListBoxStreams.SetItemChecked(checkedListBoxStreams.Items.Count - 1, si.selected);
+                }
             }
             catch (Exception)
             {
@@ -903,21 +901,6 @@ namespace BluRip
             {
             }
         }
-
-        private void listBoxStreams_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                for (int i = 0; i < titleList[comboBoxTitle.SelectedIndex].streams.Count; i++)
-                {
-                    if (listBoxStreams.SelectedIndices.Contains(i)) titleList[comboBoxTitle.SelectedIndex].streams[i].selected = true;
-                    else titleList[comboBoxTitle.SelectedIndex].streams[i].selected = false;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }        
 
         private bool indexThreadStatus = false;
         private void IndexThread()
@@ -3878,5 +3861,95 @@ namespace BluRip
             {
             }
         }
+
+        private void checkedListBoxStreams_SelectedValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].selected =
+                    checkedListBoxStreams.GetItemChecked(checkedListBoxStreams.SelectedIndex);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkedListBoxStreams_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].selected =
+                    checkedListBoxStreams.GetItemChecked(checkedListBoxStreams.SelectedIndex);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void toolStripMenuItemDeleteAdvancedOptions_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxTitle.SelectedIndex > -1 && checkedListBoxStreams.SelectedIndex > -1)
+                {
+                    titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].advancedOptions = new AdvancedOptions();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void toolStripMenuItemAdvancedOptions_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxTitle.SelectedIndex > -1 && checkedListBoxStreams.SelectedIndex > -1)
+                {
+                    StreamInfo si = titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex];
+                    if (si.streamType == StreamType.Audio)
+                    {
+                        AdvancedAudioOptions aao = null;
+                        if (si.advancedOptions.GetType() != typeof(AdvancedAudioOptions))
+                        {
+                            aao = new AdvancedAudioOptions();
+                        }
+                        else
+                        {
+                            aao = new AdvancedAudioOptions(si.advancedOptions);
+                        }
+                        AdvancedAudioOptionsEdit aaoe = new AdvancedAudioOptionsEdit(aao);
+                        if (aaoe.ShowDialog() == DialogResult.OK)
+                        {
+                            titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].advancedOptions =
+                                new AdvancedAudioOptions(aaoe.ao);
+                        }
+                    }
+                    else if (si.streamType == StreamType.Video)
+                    {
+                        AdvancedVideoOptions avo = null;
+                        if (si.advancedOptions.GetType() != typeof(AdvancedVideoOptions))
+                        {
+                            avo = new AdvancedVideoOptions();
+                        }
+                        else
+                        {
+                            avo = new AdvancedVideoOptions(si.advancedOptions);
+                        }
+                        AdvancedVideoOptionsEdit avoe = new AdvancedVideoOptionsEdit(avo);
+                        if (avoe.ShowDialog() == DialogResult.OK)
+                        {
+                            titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].advancedOptions =
+                                new AdvancedVideoOptions(avoe.ao);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        
     }
 }
