@@ -187,7 +187,9 @@ namespace BluRip
                 this.streamType = orig.streamType;
                 this.typeDesc = orig.typeDesc;
                 Type extraFileInfoType = orig.extraFileInfo.GetType();
+                Type advancedOptionsType = orig.advancedOptions.GetType();
                 this.extraFileInfo = (ExtraFileInfo)Activator.CreateInstance(extraFileInfoType, orig.extraFileInfo);
+                this.advancedOptions = (AdvancedOptions)Activator.CreateInstance(advancedOptionsType, orig.advancedOptions);
             }
             catch (Exception)
             {
@@ -203,5 +205,75 @@ namespace BluRip
         public bool selected = false;
         public string filename = "";        
         public ExtraFileInfo extraFileInfo = new ExtraFileInfo();
+        public AdvancedOptions advancedOptions = new AdvancedOptions();
+    }
+
+    public class AdvancedOptions
+    {
+        public AdvancedOptions() { }
+
+        public AdvancedOptions(AdvancedOptions orig) { }
+    }
+
+    public class AdvancedAudioOptions : AdvancedOptions
+    {
+        public AdvancedAudioOptions() { }
+
+        public AdvancedAudioOptions(AdvancedOptions orig)
+        {
+            this.bitrate = ((AdvancedAudioOptions)orig).bitrate;
+            this.extension = ((AdvancedAudioOptions)orig).extension;
+            this.filename = ((AdvancedAudioOptions)orig).filename;
+            this.parameter = ((AdvancedAudioOptions)orig).parameter;
+        }
+
+        public string extension = "";
+        public string bitrate = "";
+        public string parameter = "";
+        public string filename = "";
+    }
+
+    public class AdvancedVideoOptions : AdvancedOptions
+    {
+        public AdvancedVideoOptions() { }
+
+        public AdvancedVideoOptions(AdvancedOptions orig)
+        {
+            this.disableFps = ((AdvancedVideoOptions)orig).disableFps;
+            this.fps = ((AdvancedVideoOptions)orig).fps;
+
+            this.disableAutocrop = ((AdvancedVideoOptions)orig).disableAutocrop;
+            this.manualResize = ((AdvancedVideoOptions)orig).manualResize;
+            this.sizeX = ((AdvancedVideoOptions)orig).sizeX;
+            this.sizeY = ((AdvancedVideoOptions)orig).sizeY;
+            this.manualBorders = ((AdvancedVideoOptions)orig).manualBorders;
+            this.borderBottom = ((AdvancedVideoOptions)orig).borderBottom;
+            this.borderLeft = ((AdvancedVideoOptions)orig).borderLeft;
+            this.borderRight = ((AdvancedVideoOptions)orig).borderRight;
+            this.borderTop = ((AdvancedVideoOptions)orig).borderTop;
+            this.manualCrop = ((AdvancedVideoOptions)orig).manualCrop;
+            this.cropBottom = ((AdvancedVideoOptions)orig).cropBottom;
+            this.cropLeft = ((AdvancedVideoOptions)orig).cropLeft;
+            this.cropRight = ((AdvancedVideoOptions)orig).cropRight;
+            this.cropTop = ((AdvancedVideoOptions)orig).cropTop;
+        }
+
+        public bool disableFps = false;
+        public string fps = "";
+
+        public bool disableAutocrop = false;
+        public bool manualResize = false;
+        public int sizeX = 0;
+        public int sizeY = 0;
+        public bool manualBorders = false;
+        public int borderLeft = 0;
+        public int borderRight = 0;
+        public int borderTop = 0;
+        public int borderBottom = 0;
+        public bool manualCrop = false;
+        public int cropLeft = 0;
+        public int cropRight = 0;
+        public int cropTop = 0;
+        public int cropBottom = 0;
     }
 }

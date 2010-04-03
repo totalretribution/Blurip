@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -51,7 +50,7 @@ namespace BluRip
             try
             {
                 comboBoxTitle.Items.Clear();
-                listBoxStreams.Items.Clear();
+                checkedListBoxStreams.Items.Clear();
 
                 foreach (TitleInfo ti in titleList)
                 {
@@ -78,7 +77,7 @@ namespace BluRip
                 buttonAbort.Visible = true;
 
                 comboBoxTitle.Items.Clear();
-                listBoxStreams.Items.Clear();
+                checkedListBoxStreams.Items.Clear();
                 m2tsList.Clear();
 
                 sit = new StreamInfoTool(settings, ref titleList, textBoxPath.Text, videoTypes, ac3AudioTypes, dtsAudioTypes);
@@ -117,7 +116,7 @@ namespace BluRip
                 if (flf.ShowDialog() == DialogResult.OK)
                 {
                     comboBoxTitle.Items.Clear();
-                    listBoxStreams.Items.Clear();
+                    checkedListBoxStreams.Items.Clear();
 
                     titleList.Clear();
                     m2tsList.Clear();
@@ -143,7 +142,7 @@ namespace BluRip
                 buttonAbort.Visible = true;
 
                 comboBoxTitle.Items.Clear();
-                listBoxStreams.Items.Clear();
+                checkedListBoxStreams.Items.Clear();
 
                 mit = new M2tsInfoTool(settings, ref titleList, m2tsList, videoTypes, ac3AudioTypes, dtsAudioTypes);
                 mit.OnInfoMsg += new ExternalTool.InfoEventHandler(DemuxMsg);
