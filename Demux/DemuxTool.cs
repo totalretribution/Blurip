@@ -114,12 +114,32 @@ namespace BluRip
                         Parameter += si.number.ToString() + ": \"" + settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_";
                         if (si.streamType == StreamType.Chapter)
                         {
-                            Parameter += "chapter.txt\" ";
+                            Parameter += "chapter.txt\" ";                            
                             si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_chapter.txt";
                         }
                         else if (si.streamType == StreamType.Audio)
                         {
-                            if (ac3AudioTypes.Contains(si.typeDesc))
+                            if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
+                            {
+                                Parameter += "audio_custom_" + si.language + ((AdvancedAudioOptions)si.advancedOptions).extension + "\" ";
+                                if (((AdvancedAudioOptions)si.advancedOptions).parameter != "")
+                                {
+                                    Parameter += ((AdvancedAudioOptions)si.advancedOptions).parameter + " ";
+                                }
+                                if (((AdvancedAudioOptions)si.advancedOptions).bitrate != "")
+                                {
+                                    Parameter += "-" + ((AdvancedAudioOptions)si.advancedOptions).bitrate + " ";
+                                }
+                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_custom_" + si.language + ((AdvancedAudioOptions)si.advancedOptions).extension;
+                                if (((AdvancedAudioOptions)si.advancedOptions).additionalAc3Track)
+                                {
+                                    Parameter += si.number.ToString() + ": \"" + settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_";
+                                    Parameter += "audio_additionalAc3_" + si.language + ".ac3\" ";
+                                    ((AdvancedAudioOptions)si.advancedOptions).additionalFilename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_";
+                                    ((AdvancedAudioOptions)si.advancedOptions).additionalFilename += "audio_additionalAc3_" + si.language + ".ac3";
+                                }
+                            }
+                            else if (ac3AudioTypes.Contains(si.typeDesc))
                             {
                                 if (settings.untouchedAudio && si.typeDesc == "TrueHD/AC3")
                                 {

@@ -223,14 +223,16 @@ namespace BluRip
         {
             this.bitrate = ((AdvancedAudioOptions)orig).bitrate;
             this.extension = ((AdvancedAudioOptions)orig).extension;
-            this.filename = ((AdvancedAudioOptions)orig).filename;
             this.parameter = ((AdvancedAudioOptions)orig).parameter;
+            this.additionalAc3Track = ((AdvancedAudioOptions)orig).additionalAc3Track;
+            this.additionalFilename = ((AdvancedAudioOptions)orig).additionalFilename;
         }
 
         public string extension = "";
         public string bitrate = "";
         public string parameter = "";
-        public string filename = "";
+        public bool additionalAc3Track = false;
+        public string additionalFilename = "";
     }
 
     public class AdvancedVideoOptions : AdvancedOptions
@@ -256,6 +258,9 @@ namespace BluRip
             this.cropLeft = ((AdvancedVideoOptions)orig).cropLeft;
             this.cropRight = ((AdvancedVideoOptions)orig).cropRight;
             this.cropTop = ((AdvancedVideoOptions)orig).cropTop;
+            this.manualInputRes = ((AdvancedVideoOptions)orig).manualInputRes;
+            this.inputResX = ((AdvancedVideoOptions)orig).inputResX;
+            this.inputresY = ((AdvancedVideoOptions)orig).inputresY;
         }
 
         public bool disableFps = false;
@@ -275,5 +280,8 @@ namespace BluRip
         public int cropRight = 0;
         public int cropTop = 0;
         public int cropBottom = 0;
+        public bool manualInputRes = false;
+        public int inputResX = 1920;
+        public int inputresY = 1080;
     }
 }

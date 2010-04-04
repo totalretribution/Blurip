@@ -1,4 +1,23 @@
-﻿using System;
+﻿//BluRip - one click BluRay/m2ts to mkv converter
+//Copyright (C) 2009-2010 _hawk_
+
+//This program is free software; you can redistribute it and/or
+//modify it under the terms of the GNU General Public License
+//as published by the Free Software Foundation; either version 2
+//of the License, or (at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program; if not, write to the Free Software
+//Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+//Contact: hawk.ac@gmx.net
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,6 +60,10 @@ namespace BluRip
                 textBoxBorderLeft.Text = ((AdvancedVideoOptions)ao).borderLeft.ToString();
                 textBoxBorderRight.Text = ((AdvancedVideoOptions)ao).borderRight.ToString();
                 textBoxBorderTop.Text = ((AdvancedVideoOptions)ao).borderTop.ToString();
+
+                checkBoxManualInputRes.Checked = ((AdvancedVideoOptions)ao).manualInputRes;
+                textBoxInputResX.Text = ((AdvancedVideoOptions)ao).inputResX.ToString();
+                textBoxInputResY.Text = ((AdvancedVideoOptions)ao).inputresY.ToString();
             }
             catch (Exception)
             {
@@ -69,6 +92,7 @@ namespace BluRip
                 checkBoxManualCrop_CheckedChanged(null, null);
                 checkBoxManualBorders_CheckedChanged(null, null);
                 checkBoxManualResize_CheckedChanged(null, null);
+                checkBoxManualInputRes_CheckedChanged(null, null);
             }
             catch (Exception)
             {
@@ -242,6 +266,55 @@ namespace BluRip
             try
             {
                 ((AdvancedVideoOptions)ao).sizeY = Convert.ToInt32(textBoxSizeY.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxFramerate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxFramerate.SelectedIndex > -1)
+                {
+                    textBoxFps.Text = comboBoxFramerate.Text;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxManualInputRes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxManualInputRes.Checked)
+            {
+                groupBoxInputResolution.Enabled = true;
+            }
+            else
+            {
+                groupBoxInputResolution.Enabled = false;
+            }
+            ((AdvancedVideoOptions)ao).manualInputRes = checkBoxManualInputRes.Checked;
+        }
+
+        private void textBoxInputResX_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ((AdvancedVideoOptions)ao).inputResX = Convert.ToInt32(textBoxInputResX.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxInputResY_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ((AdvancedVideoOptions)ao).inputresY = Convert.ToInt32(textBoxInputResY.Text);
             }
             catch (Exception)
             {

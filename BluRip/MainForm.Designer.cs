@@ -174,8 +174,6 @@
             this.linkLabelHaali = new System.Windows.Forms.LinkLabel();
             this.linkLabelAviSynth = new System.Windows.Forms.LinkLabel();
             this.labelSoftwareDesc = new System.Windows.Forms.Label();
-            this.tabPageAbout = new System.Windows.Forms.TabPage();
-            this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             this.tabPageProjectQueue = new System.Windows.Forms.TabPage();
             this.buttonProcessQueue = new System.Windows.Forms.Button();
             this.groupBoxQueue = new System.Windows.Forms.GroupBox();
@@ -188,6 +186,8 @@
             this.labelQueueDesc = new System.Windows.Forms.Label();
             this.buttonLoadProject = new System.Windows.Forms.Button();
             this.buttonSaveProject = new System.Windows.Forms.Button();
+            this.tabPageAbout = new System.Windows.Forms.TabPage();
+            this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             this.checkBoxShutDown = new System.Windows.Forms.CheckBox();
             this.richTextBoxLogMain = new System.Windows.Forms.RichTextBox();
             this.contextMenuStripDeleteLog = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -211,6 +211,7 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
+            this.labelAdvancedOptions = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.contextMenuStripStream.SuspendLayout();
@@ -235,9 +236,9 @@
             this.groupBoxAutoSelect.SuspendLayout();
             this.groupBoxDefaultTrack.SuspendLayout();
             this.tabPageSoftware.SuspendLayout();
-            this.tabPageAbout.SuspendLayout();
             this.tabPageProjectQueue.SuspendLayout();
             this.groupBoxQueue.SuspendLayout();
+            this.tabPageAbout.SuspendLayout();
             this.contextMenuStripDeleteLog.SuspendLayout();
             this.tabControlLog.SuspendLayout();
             this.tabPageMainLog.SuspendLayout();
@@ -258,8 +259,8 @@
             this.tabControlMain.Controls.Add(this.tabPageTools);
             this.tabControlMain.Controls.Add(this.tabPageStreams);
             this.tabControlMain.Controls.Add(this.tabPageSoftware);
-            this.tabControlMain.Controls.Add(this.tabPageAbout);
             this.tabControlMain.Controls.Add(this.tabPageProjectQueue);
+            this.tabControlMain.Controls.Add(this.tabPageAbout);
             this.tabControlMain.Location = new System.Drawing.Point(12, 12);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -268,6 +269,7 @@
             // 
             // tabPageStreamSelect
             // 
+            this.tabPageStreamSelect.Controls.Add(this.labelAdvancedOptions);
             this.tabPageStreamSelect.Controls.Add(this.checkedListBoxStreams);
             this.tabPageStreamSelect.Controls.Add(this.buttonOpenM2ts);
             this.tabPageStreamSelect.Controls.Add(this.labelStreams);
@@ -308,7 +310,7 @@
             this.toolStripMenuItemAdvancedOptions,
             this.toolStripMenuItemDeleteAdvancedOptions});
             this.contextMenuStripStream.Name = "contextMenuStripStream";
-            this.contextMenuStripStream.Size = new System.Drawing.Size(205, 70);
+            this.contextMenuStripStream.Size = new System.Drawing.Size(205, 48);
             // 
             // toolStripMenuItemAdvancedOptions
             // 
@@ -1826,26 +1828,6 @@
             this.labelSoftwareDesc.TabIndex = 0;
             this.labelSoftwareDesc.Text = "The following tools are needed to use BluRip:";
             // 
-            // tabPageAbout
-            // 
-            this.tabPageAbout.Controls.Add(this.richTextBoxAbout);
-            this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAbout.Name = "tabPageAbout";
-            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAbout.Size = new System.Drawing.Size(762, 285);
-            this.tabPageAbout.TabIndex = 6;
-            this.tabPageAbout.Text = "About";
-            this.tabPageAbout.UseVisualStyleBackColor = true;
-            // 
-            // richTextBoxAbout
-            // 
-            this.richTextBoxAbout.Location = new System.Drawing.Point(6, 6);
-            this.richTextBoxAbout.Name = "richTextBoxAbout";
-            this.richTextBoxAbout.ReadOnly = true;
-            this.richTextBoxAbout.Size = new System.Drawing.Size(386, 243);
-            this.richTextBoxAbout.TabIndex = 0;
-            this.richTextBoxAbout.Text = resources.GetString("richTextBoxAbout.Text");
-            // 
             // tabPageProjectQueue
             // 
             this.tabPageProjectQueue.Controls.Add(this.buttonProcessQueue);
@@ -1974,14 +1956,34 @@
             this.buttonSaveProject.UseVisualStyleBackColor = true;
             this.buttonSaveProject.Click += new System.EventHandler(this.buttonSaveProject_Click);
             // 
+            // tabPageAbout
+            // 
+            this.tabPageAbout.Controls.Add(this.richTextBoxAbout);
+            this.tabPageAbout.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAbout.Name = "tabPageAbout";
+            this.tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAbout.Size = new System.Drawing.Size(762, 285);
+            this.tabPageAbout.TabIndex = 6;
+            this.tabPageAbout.Text = "About";
+            this.tabPageAbout.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxAbout
+            // 
+            this.richTextBoxAbout.Location = new System.Drawing.Point(6, 6);
+            this.richTextBoxAbout.Name = "richTextBoxAbout";
+            this.richTextBoxAbout.ReadOnly = true;
+            this.richTextBoxAbout.Size = new System.Drawing.Size(386, 243);
+            this.richTextBoxAbout.TabIndex = 0;
+            this.richTextBoxAbout.Text = resources.GetString("richTextBoxAbout.Text");
+            // 
             // checkBoxShutDown
             // 
             this.checkBoxShutDown.AutoSize = true;
-            this.checkBoxShutDown.Location = new System.Drawing.Point(612, 358);
+            this.checkBoxShutDown.Location = new System.Drawing.Point(592, 355);
             this.checkBoxShutDown.Name = "checkBoxShutDown";
-            this.checkBoxShutDown.Size = new System.Drawing.Size(170, 17);
+            this.checkBoxShutDown.Size = new System.Drawing.Size(190, 17);
             this.checkBoxShutDown.TabIndex = 15;
-            this.checkBoxShutDown.Text = "Shutdown after queue finished";
+            this.checkBoxShutDown.Text = "Shutdown after queue has finished";
             this.checkBoxShutDown.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLogMain
@@ -2199,15 +2201,24 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
+            // labelAdvancedOptions
+            // 
+            this.labelAdvancedOptions.AutoSize = true;
+            this.labelAdvancedOptions.Location = new System.Drawing.Point(6, 269);
+            this.labelAdvancedOptions.Name = "labelAdvancedOptions";
+            this.labelAdvancedOptions.Size = new System.Drawing.Size(177, 13);
+            this.labelAdvancedOptions.TabIndex = 10;
+            this.labelAdvancedOptions.Text = "Right click to edit advanced options";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(794, 572);
-            this.Controls.Add(this.checkBoxShutDown);
             this.Controls.Add(this.tabControlLog);
             this.Controls.Add(this.tabControlMain);
+            this.Controls.Add(this.checkBoxShutDown);
             this.Controls.Add(this.labelLog);
             this.Controls.Add(this.progressBarMain);
             this.Controls.Add(this.buttonAbort);
@@ -2260,10 +2271,10 @@
             this.groupBoxDefaultTrack.PerformLayout();
             this.tabPageSoftware.ResumeLayout(false);
             this.tabPageSoftware.PerformLayout();
-            this.tabPageAbout.ResumeLayout(false);
             this.tabPageProjectQueue.ResumeLayout(false);
             this.groupBoxQueue.ResumeLayout(false);
             this.groupBoxQueue.PerformLayout();
+            this.tabPageAbout.ResumeLayout(false);
             this.contextMenuStripDeleteLog.ResumeLayout(false);
             this.tabControlLog.ResumeLayout(false);
             this.tabPageMainLog.ResumeLayout(false);
@@ -2460,6 +2471,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripStream;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAdvancedOptions;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteAdvancedOptions;
+        private System.Windows.Forms.Label labelAdvancedOptions;
     }
 }
 
