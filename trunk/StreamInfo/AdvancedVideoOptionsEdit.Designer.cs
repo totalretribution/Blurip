@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBoxFps = new System.Windows.Forms.GroupBox();
+            this.labelFramerate = new System.Windows.Forms.Label();
+            this.comboBoxFramerate = new System.Windows.Forms.ComboBox();
             this.textBoxFps = new System.Windows.Forms.TextBox();
             this.groupBoxAutocrop = new System.Windows.Forms.GroupBox();
             this.checkBoxManualResize = new System.Windows.Forms.CheckBox();
@@ -59,36 +61,68 @@
             this.labelCropLeft = new System.Windows.Forms.Label();
             this.checkBoxManualFps = new System.Windows.Forms.CheckBox();
             this.checkBoxManualAutoCrop = new System.Windows.Forms.CheckBox();
+            this.groupBoxInputResolution = new System.Windows.Forms.GroupBox();
+            this.textBoxInputResY = new System.Windows.Forms.TextBox();
+            this.labelInputResY = new System.Windows.Forms.Label();
+            this.textBoxInputResX = new System.Windows.Forms.TextBox();
+            this.labelInputResX = new System.Windows.Forms.Label();
+            this.checkBoxManualInputRes = new System.Windows.Forms.CheckBox();
             this.groupBoxFps.SuspendLayout();
             this.groupBoxAutocrop.SuspendLayout();
             this.groupBoxResize.SuspendLayout();
             this.groupBoxAddBorders.SuspendLayout();
             this.groupBoxCrop.SuspendLayout();
+            this.groupBoxInputResolution.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(12, 400);
+            this.buttonOk.Location = new System.Drawing.Point(12, 411);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(93, 400);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 411);
             // 
             // groupBoxFps
             // 
+            this.groupBoxFps.Controls.Add(this.labelFramerate);
+            this.groupBoxFps.Controls.Add(this.comboBoxFramerate);
             this.groupBoxFps.Controls.Add(this.textBoxFps);
             this.groupBoxFps.Location = new System.Drawing.Point(12, 35);
             this.groupBoxFps.Name = "groupBoxFps";
-            this.groupBoxFps.Size = new System.Drawing.Size(167, 50);
+            this.groupBoxFps.Size = new System.Drawing.Size(156, 61);
             this.groupBoxFps.TabIndex = 2;
             this.groupBoxFps.TabStop = false;
             this.groupBoxFps.Text = "Framerate";
             // 
+            // labelFramerate
+            // 
+            this.labelFramerate.AutoSize = true;
+            this.labelFramerate.Location = new System.Drawing.Point(78, 15);
+            this.labelFramerate.Name = "labelFramerate";
+            this.labelFramerate.Size = new System.Drawing.Size(66, 13);
+            this.labelFramerate.TabIndex = 2;
+            this.labelFramerate.Text = "Choose from";
+            // 
+            // comboBoxFramerate
+            // 
+            this.comboBoxFramerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFramerate.FormattingEnabled = true;
+            this.comboBoxFramerate.Items.AddRange(new object[] {
+            "23.976",
+            "25.0",
+            "29.967"});
+            this.comboBoxFramerate.Location = new System.Drawing.Point(81, 31);
+            this.comboBoxFramerate.Name = "comboBoxFramerate";
+            this.comboBoxFramerate.Size = new System.Drawing.Size(69, 21);
+            this.comboBoxFramerate.TabIndex = 1;
+            this.comboBoxFramerate.SelectedIndexChanged += new System.EventHandler(this.comboBoxFramerate_SelectedIndexChanged);
+            // 
             // textBoxFps
             // 
-            this.textBoxFps.Location = new System.Drawing.Point(6, 19);
+            this.textBoxFps.Location = new System.Drawing.Point(6, 32);
             this.textBoxFps.Name = "textBoxFps";
-            this.textBoxFps.Size = new System.Drawing.Size(150, 20);
+            this.textBoxFps.Size = new System.Drawing.Size(69, 20);
             this.textBoxFps.TabIndex = 0;
             this.textBoxFps.TextChanged += new System.EventHandler(this.textBoxFps_TextChanged);
             // 
@@ -100,9 +134,9 @@
             this.groupBoxAutocrop.Controls.Add(this.groupBoxResize);
             this.groupBoxAutocrop.Controls.Add(this.groupBoxAddBorders);
             this.groupBoxAutocrop.Controls.Add(this.groupBoxCrop);
-            this.groupBoxAutocrop.Location = new System.Drawing.Point(12, 114);
+            this.groupBoxAutocrop.Location = new System.Drawing.Point(12, 125);
             this.groupBoxAutocrop.Name = "groupBoxAutocrop";
-            this.groupBoxAutocrop.Size = new System.Drawing.Size(239, 278);
+            this.groupBoxAutocrop.Size = new System.Drawing.Size(316, 278);
             this.groupBoxAutocrop.TabIndex = 3;
             this.groupBoxAutocrop.TabStop = false;
             this.groupBoxAutocrop.Text = "Autocrop";
@@ -148,7 +182,7 @@
             this.groupBoxResize.Controls.Add(this.labelSizeX);
             this.groupBoxResize.Location = new System.Drawing.Point(6, 212);
             this.groupBoxResize.Name = "groupBoxResize";
-            this.groupBoxResize.Size = new System.Drawing.Size(221, 59);
+            this.groupBoxResize.Size = new System.Drawing.Size(304, 59);
             this.groupBoxResize.TabIndex = 1;
             this.groupBoxResize.TabStop = false;
             this.groupBoxResize.Text = "Resize";
@@ -199,10 +233,10 @@
             this.groupBoxAddBorders.Controls.Add(this.labelBorderLeft);
             this.groupBoxAddBorders.Location = new System.Drawing.Point(6, 131);
             this.groupBoxAddBorders.Name = "groupBoxAddBorders";
-            this.groupBoxAddBorders.Size = new System.Drawing.Size(221, 61);
+            this.groupBoxAddBorders.Size = new System.Drawing.Size(304, 61);
             this.groupBoxAddBorders.TabIndex = 1;
             this.groupBoxAddBorders.TabStop = false;
-            this.groupBoxAddBorders.Text = "Add borders";
+            this.groupBoxAddBorders.Text = "Add borders (only positive values)";
             // 
             // textBoxBorderBottom
             // 
@@ -284,10 +318,10 @@
             this.groupBoxCrop.Controls.Add(this.labelCropLeft);
             this.groupBoxCrop.Location = new System.Drawing.Point(6, 42);
             this.groupBoxCrop.Name = "groupBoxCrop";
-            this.groupBoxCrop.Size = new System.Drawing.Size(221, 60);
+            this.groupBoxCrop.Size = new System.Drawing.Size(304, 60);
             this.groupBoxCrop.TabIndex = 0;
             this.groupBoxCrop.TabStop = false;
-            this.groupBoxCrop.Text = "Crop";
+            this.groupBoxCrop.Text = "Crop (only positive values)";
             // 
             // textBoxCropBottom
             // 
@@ -360,7 +394,7 @@
             // checkBoxManualFps
             // 
             this.checkBoxManualFps.AutoSize = true;
-            this.checkBoxManualFps.Location = new System.Drawing.Point(12, 12);
+            this.checkBoxManualFps.Location = new System.Drawing.Point(8, 12);
             this.checkBoxManualFps.Name = "checkBoxManualFps";
             this.checkBoxManualFps.Size = new System.Drawing.Size(133, 17);
             this.checkBoxManualFps.TabIndex = 4;
@@ -371,7 +405,7 @@
             // checkBoxManualAutoCrop
             // 
             this.checkBoxManualAutoCrop.AutoSize = true;
-            this.checkBoxManualAutoCrop.Location = new System.Drawing.Point(12, 91);
+            this.checkBoxManualAutoCrop.Location = new System.Drawing.Point(8, 102);
             this.checkBoxManualAutoCrop.Name = "checkBoxManualAutoCrop";
             this.checkBoxManualAutoCrop.Size = new System.Drawing.Size(106, 17);
             this.checkBoxManualAutoCrop.TabIndex = 5;
@@ -379,10 +413,70 @@
             this.checkBoxManualAutoCrop.UseVisualStyleBackColor = true;
             this.checkBoxManualAutoCrop.CheckedChanged += new System.EventHandler(this.checkBoxManualAutoCrop_CheckedChanged);
             // 
+            // groupBoxInputResolution
+            // 
+            this.groupBoxInputResolution.Controls.Add(this.textBoxInputResY);
+            this.groupBoxInputResolution.Controls.Add(this.labelInputResY);
+            this.groupBoxInputResolution.Controls.Add(this.textBoxInputResX);
+            this.groupBoxInputResolution.Controls.Add(this.labelInputResX);
+            this.groupBoxInputResolution.Location = new System.Drawing.Point(174, 35);
+            this.groupBoxInputResolution.Name = "groupBoxInputResolution";
+            this.groupBoxInputResolution.Size = new System.Drawing.Size(154, 61);
+            this.groupBoxInputResolution.TabIndex = 6;
+            this.groupBoxInputResolution.TabStop = false;
+            this.groupBoxInputResolution.Text = "Input resolution";
+            // 
+            // textBoxInputResY
+            // 
+            this.textBoxInputResY.Location = new System.Drawing.Point(71, 31);
+            this.textBoxInputResY.Name = "textBoxInputResY";
+            this.textBoxInputResY.Size = new System.Drawing.Size(59, 20);
+            this.textBoxInputResY.TabIndex = 3;
+            this.textBoxInputResY.TextChanged += new System.EventHandler(this.textBoxInputResY_TextChanged);
+            // 
+            // labelInputResY
+            // 
+            this.labelInputResY.AutoSize = true;
+            this.labelInputResY.Location = new System.Drawing.Point(71, 16);
+            this.labelInputResY.Name = "labelInputResY";
+            this.labelInputResY.Size = new System.Drawing.Size(14, 13);
+            this.labelInputResY.TabIndex = 2;
+            this.labelInputResY.Text = "Y";
+            // 
+            // textBoxInputResX
+            // 
+            this.textBoxInputResX.Location = new System.Drawing.Point(6, 31);
+            this.textBoxInputResX.Name = "textBoxInputResX";
+            this.textBoxInputResX.Size = new System.Drawing.Size(59, 20);
+            this.textBoxInputResX.TabIndex = 1;
+            this.textBoxInputResX.TextChanged += new System.EventHandler(this.textBoxInputResX_TextChanged);
+            // 
+            // labelInputResX
+            // 
+            this.labelInputResX.AutoSize = true;
+            this.labelInputResX.Location = new System.Drawing.Point(6, 16);
+            this.labelInputResX.Name = "labelInputResX";
+            this.labelInputResX.Size = new System.Drawing.Size(14, 13);
+            this.labelInputResX.TabIndex = 0;
+            this.labelInputResX.Text = "X";
+            // 
+            // checkBoxManualInputRes
+            // 
+            this.checkBoxManualInputRes.AutoSize = true;
+            this.checkBoxManualInputRes.Location = new System.Drawing.Point(180, 12);
+            this.checkBoxManualInputRes.Name = "checkBoxManualInputRes";
+            this.checkBoxManualInputRes.Size = new System.Drawing.Size(160, 17);
+            this.checkBoxManualInputRes.TabIndex = 7;
+            this.checkBoxManualInputRes.Text = "Set input resolution manually";
+            this.checkBoxManualInputRes.UseVisualStyleBackColor = true;
+            this.checkBoxManualInputRes.CheckedChanged += new System.EventHandler(this.checkBoxManualInputRes_CheckedChanged);
+            // 
             // AdvancedVideoOptionsEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(262, 435);
+            this.ClientSize = new System.Drawing.Size(340, 446);
+            this.Controls.Add(this.checkBoxManualInputRes);
+            this.Controls.Add(this.groupBoxInputResolution);
             this.Controls.Add(this.checkBoxManualFps);
             this.Controls.Add(this.checkBoxManualAutoCrop);
             this.Controls.Add(this.groupBoxAutocrop);
@@ -396,6 +490,8 @@
             this.Controls.SetChildIndex(this.groupBoxAutocrop, 0);
             this.Controls.SetChildIndex(this.checkBoxManualAutoCrop, 0);
             this.Controls.SetChildIndex(this.checkBoxManualFps, 0);
+            this.Controls.SetChildIndex(this.groupBoxInputResolution, 0);
+            this.Controls.SetChildIndex(this.checkBoxManualInputRes, 0);
             this.groupBoxFps.ResumeLayout(false);
             this.groupBoxFps.PerformLayout();
             this.groupBoxAutocrop.ResumeLayout(false);
@@ -406,6 +502,8 @@
             this.groupBoxAddBorders.PerformLayout();
             this.groupBoxCrop.ResumeLayout(false);
             this.groupBoxCrop.PerformLayout();
+            this.groupBoxInputResolution.ResumeLayout(false);
+            this.groupBoxInputResolution.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,5 +542,13 @@
         private System.Windows.Forms.Label labelBorderRight;
         private System.Windows.Forms.TextBox textBoxBorderLeft;
         private System.Windows.Forms.Label labelBorderLeft;
+        private System.Windows.Forms.Label labelFramerate;
+        private System.Windows.Forms.ComboBox comboBoxFramerate;
+        private System.Windows.Forms.GroupBox groupBoxInputResolution;
+        private System.Windows.Forms.TextBox textBoxInputResY;
+        private System.Windows.Forms.Label labelInputResY;
+        private System.Windows.Forms.TextBox textBoxInputResX;
+        private System.Windows.Forms.Label labelInputResX;
+        private System.Windows.Forms.CheckBox checkBoxManualInputRes;
     }
 }

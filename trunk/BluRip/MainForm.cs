@@ -751,7 +751,9 @@ namespace BluRip
                 {
                     string desc = "[ " + si.number.ToString("d3") + " ] - [ " + StreamTypeToString(si.streamType);
                     for (int i = 0; i < maxLength - StreamTypeToString(si.streamType).Length; i++) desc += " ";
-                    desc += " ] - (" + si.desc + ")";
+                    desc += " ] - ";
+                    if (si.advancedOptions != null && si.advancedOptions.GetType() != typeof(AdvancedOptions)) desc += "AO* ";
+                    desc += "(" + si.desc + ")";
                     if (si.addInfo != "")
                     {
                         desc += " - (" + si.addInfo + ")";
@@ -909,11 +911,13 @@ namespace BluRip
             {
                 indexThreadStatus = false;
                 string filename = "";
+                AdvancedVideoOptions avo = null;
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Video)
                     {
                         filename = si.filename;
+                        if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions)) avo = (AdvancedVideoOptions)si.advancedOptions;
                         break;
                     }
                 }
@@ -942,6 +946,12 @@ namespace BluRip
                     return;
                 }
 
+                if (avo.disableFps)
+                {
+                    MessageCrop("Using manual fps - override MediaInfo value");
+                    fps = avo.fps;
+                }
+
                 if (fps == "")
                 {
                     MessageCrop("Error getting framerate");
@@ -960,6 +970,7 @@ namespace BluRip
                     }
                     if (fps == "")
                     {
+                        MessageCrop("Could not get framerate - please report log to developer");
                         return;
                     }
                 }
@@ -1044,52 +1055,76 @@ namespace BluRip
                         }
                     }
 
-                    if (settings.cropInput == 0)
-                    {
-                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
-                            "DirectShowSource(\"" + filename + "\")");
-                    }
-                    else if (settings.cropInput == 1)
-                    {
-                        string data = "";
-                        string dlldir = Path.GetDirectoryName(settings.ffmsindexPath);
-                        if (File.Exists(dlldir + "\\ffms2.dll"))
-                        {
-                            data = "LoadPlugin(\"" + dlldir + "\\ffms2.dll" + "\")\r\n";
-                        }
-                        data += "FFVideoSource(\"" + filename + "\")";
-                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
-                    }
-                    else if (settings.cropInput == 2)
-                    {
-                        string output = Path.ChangeExtension(filename, "dgi");
-                        string data = "";
-                        string dlldir = Path.GetDirectoryName(settings.dgindexnvPath);
-                        if (File.Exists(dlldir + "\\DGMultiDecodeNV.dll"))
-                        {
-                            data = "LoadPlugin(\"" + dlldir + "\\DGMultiDecodeNV.dll" + "\")\r\n";
-                        }
-                        data += "DGMultiSource(\"" + output + "\")";
-                        File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);                        
-                    }
-                    MessageCrop("Starting AutoCrop...");
                     CropInfo cropInfo = new CropInfo();
-                    AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings, ref cropInfo);
-                    if (cropInfo.error)
-                    {
-                        MessageCrop("Exception: " + cropInfo.errorStr);
-                        return;
-                    }
 
-                    if (settings.minimizeAutocrop)
+                    if (!avo.disableAutocrop)
                     {
-                        ac.WindowState = FormWindowState.Minimized;
+                        if (settings.cropInput == 0)
+                        {
+                            File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs",
+                                "DirectShowSource(\"" + filename + "\")");
+                        }
+                        else if (settings.cropInput == 1)
+                        {
+                            string data = "";
+                            string dlldir = Path.GetDirectoryName(settings.ffmsindexPath);
+                            if (File.Exists(dlldir + "\\ffms2.dll"))
+                            {
+                                data = "LoadPlugin(\"" + dlldir + "\\ffms2.dll" + "\")\r\n";
+                            }
+                            data += "FFVideoSource(\"" + filename + "\")";
+                            File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
+                        }
+                        else if (settings.cropInput == 2)
+                        {
+                            string output = Path.ChangeExtension(filename, "dgi");
+                            string data = "";
+                            string dlldir = Path.GetDirectoryName(settings.dgindexnvPath);
+                            if (File.Exists(dlldir + "\\DGMultiDecodeNV.dll"))
+                            {
+                                data = "LoadPlugin(\"" + dlldir + "\\DGMultiDecodeNV.dll" + "\")\r\n";
+                            }
+                            data += "DGMultiSource(\"" + output + "\")";
+                            File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
+                        }
+                        MessageCrop("Starting AutoCrop...");
+
+                        AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings, ref cropInfo);
+                        if (cropInfo.error)
+                        {
+                            MessageCrop("Exception: " + cropInfo.errorStr);
+                            return;
+                        }
+
+                        if (settings.minimizeAutocrop)
+                        {
+                            ac.WindowState = FormWindowState.Minimized;
+                        }
+
+                        ac.NrFrames = settings.nrFrames;
+                        ac.BlackValue = settings.blackValue;
+                        ac.ShowDialog();
                     }
-                    
-                    ac.NrFrames = settings.nrFrames;
-                    ac.BlackValue = settings.blackValue;
-                    ac.ShowDialog();
-                                       
+                    else
+                    {
+                        cropInfo.border = avo.manualBorders;
+                        cropInfo.borderBottom = avo.borderBottom;
+                        cropInfo.borderTop = avo.borderTop;
+                        cropInfo.resize = avo.manualResize;
+                        cropInfo.resizeX = avo.sizeX;
+                        cropInfo.resizeY = avo.sizeY;
+                        cropInfo.error = false;
+                        if (avo.manualCrop)
+                        {
+                            cropInfo.cropBottom = avo.cropBottom;
+                            cropInfo.cropTop = avo.cropTop;
+                        }
+                        else
+                        {
+                            cropInfo.cropBottom = 0;
+                            cropInfo.cropTop = 0;
+                        }
+                    }
 
                     MessageCrop("");
                     MessageCrop("Crop top: " + cropInfo.cropTop.ToString());
@@ -3892,7 +3927,10 @@ namespace BluRip
             {
                 if (comboBoxTitle.SelectedIndex > -1 && checkedListBoxStreams.SelectedIndex > -1)
                 {
-                    titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].advancedOptions = new AdvancedOptions();
+                    int index = checkedListBoxStreams.SelectedIndex;
+                    titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions = new AdvancedOptions();
+                    UpdateStreamList();
+                    checkedListBoxStreams.SelectedIndex = index;
                 }
             }
             catch (Exception)
@@ -3921,8 +3959,11 @@ namespace BluRip
                         AdvancedAudioOptionsEdit aaoe = new AdvancedAudioOptionsEdit(aao);
                         if (aaoe.ShowDialog() == DialogResult.OK)
                         {
-                            titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].advancedOptions =
+                            int index = checkedListBoxStreams.SelectedIndex;
+                            titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions =
                                 new AdvancedAudioOptions(aaoe.ao);
+                            UpdateStreamList();
+                            checkedListBoxStreams.SelectedIndex = index;
                         }
                     }
                     else if (si.streamType == StreamType.Video)
@@ -3939,8 +3980,11 @@ namespace BluRip
                         AdvancedVideoOptionsEdit avoe = new AdvancedVideoOptionsEdit(avo);
                         if (avoe.ShowDialog() == DialogResult.OK)
                         {
-                            titleList[comboBoxTitle.SelectedIndex].streams[checkedListBoxStreams.SelectedIndex].advancedOptions =
+                            int index = checkedListBoxStreams.SelectedIndex;
+                            titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions =
                                 new AdvancedVideoOptions(avoe.ao);
+                            UpdateStreamList();
+                            checkedListBoxStreams.SelectedIndex = index;
                         }
                     }
                 }
