@@ -49,7 +49,7 @@ namespace BluRip
         private Process pc = new Process();
         private Process pc2 = new Process();
 
-        public string title = "BluRip v0.4.7 © _hawk_/PPX";
+        public string title = "BluRip v0.4.8 © _hawk_/PPX";
 
         public MainForm()
         {
@@ -2612,6 +2612,14 @@ namespace BluRip
                             }
                         }
                         pc.StartInfo.Arguments += "\"" + si.filename + "\" ";
+
+                        // add additional ac3 track
+                        if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
+                        {
+                            AdvancedAudioOptions aao = (AdvancedAudioOptions)si.advancedOptions;
+                            if (st != "") pc.StartInfo.Arguments += "--language 0" + ":" + st + " ";
+                            pc.StartInfo.Arguments += "\"" + aao.additionalFilename + "\" ";
+                        }
                     }
                 }
 
