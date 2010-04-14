@@ -47,6 +47,13 @@ namespace BluRip
         public string languageShort = "";
     }
 
+    public enum SizeType
+    {
+        None, // when using crf
+        Bitrate, // specify bitrate
+        Size // specify target size
+    }
+
     public class EncodingSettings
     {
         public EncodingSettings() { }
@@ -57,6 +64,8 @@ namespace BluRip
             this.settings = orig.settings;
             this.settings2 = orig.settings2;
             this.pass2 = orig.pass2;
+            this.sizeValue = orig.sizeValue;
+            this.sizeType = orig.sizeType;
         }
 
         public EncodingSettings(string desc, string parameter)
@@ -77,6 +86,8 @@ namespace BluRip
         public string settings = "";
         public bool pass2 = false;
         public string settings2 = "";
+        public double sizeValue = 0;
+        public SizeType sizeType = SizeType.None;
     }
 
     public class AvisynthSettings
@@ -147,6 +158,9 @@ namespace BluRip
             this.copySubs = orig.copySubs;
             this.dgindexnvPath = orig.dgindexnvPath;
             this.convertDtsToAc3 = orig.convertDtsToAc3;
+            this.x264x64Path = orig.x264x64Path;
+            this.avs2yuvPath = orig.avs2yuvPath;
+            this.use64bit = orig.use64bit;
 
             foreach (LanguageInfo li in orig.preferedLanguages)
             {
@@ -288,5 +302,8 @@ namespace BluRip
         public int copySubs = 1;
         public string dgindexnvPath = "";
         public bool convertDtsToAc3 = false;
+        public string x264x64Path = "";
+        public string avs2yuvPath = "";
+        public bool use64bit = false;
     }
 }

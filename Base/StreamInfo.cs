@@ -134,6 +134,8 @@ namespace BluRip
                 this.encodeAvs = ((VideoFileInfo)orig).encodeAvs;
                 this.encodedFile = ((VideoFileInfo)orig).encodedFile;
                 this.fps = ((VideoFileInfo)orig).fps;
+                this.resX = ((VideoFileInfo)orig).resX;
+                this.resY = ((VideoFileInfo)orig).resY;
             }
             catch (Exception)
             {
@@ -143,6 +145,8 @@ namespace BluRip
         public string encodeAvs = "";
         public string fps = "";
         public string encodedFile = "";
+        public string resX = "";
+        public string resY = "";
     }
 
     public class SubtitleFileInfo : ExtraFileInfo

@@ -37,13 +37,17 @@
             this.checkBox2pass = new System.Windows.Forms.CheckBox();
             this.textBoxSettings2 = new System.Windows.Forms.TextBox();
             this.labelSettings2 = new System.Windows.Forms.Label();
+            this.labelSizeValue = new System.Windows.Forms.Label();
+            this.textBoxSizeValue = new System.Windows.Forms.TextBox();
+            this.comboBoxSizeType = new System.Windows.Forms.ComboBox();
+            this.labelSizeType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(12, 154);
+            this.buttonOk.Location = new System.Drawing.Point(12, 194);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 5;
@@ -55,7 +59,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(93, 154);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 194);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -75,7 +79,7 @@
             // 
             this.textBoxDesc.Location = new System.Drawing.Point(12, 25);
             this.textBoxDesc.Name = "textBoxDesc";
-            this.textBoxDesc.Size = new System.Drawing.Size(298, 20);
+            this.textBoxDesc.Size = new System.Drawing.Size(406, 20);
             this.textBoxDesc.TabIndex = 1;
             // 
             // labelSettings
@@ -91,13 +95,13 @@
             // 
             this.textBoxSettings.Location = new System.Drawing.Point(12, 64);
             this.textBoxSettings.Name = "textBoxSettings";
-            this.textBoxSettings.Size = new System.Drawing.Size(298, 20);
+            this.textBoxSettings.Size = new System.Drawing.Size(406, 20);
             this.textBoxSettings.TabIndex = 2;
             // 
             // checkBox2pass
             // 
             this.checkBox2pass.AutoSize = true;
-            this.checkBox2pass.Location = new System.Drawing.Point(12, 129);
+            this.checkBox2pass.Location = new System.Drawing.Point(12, 90);
             this.checkBox2pass.Name = "checkBox2pass";
             this.checkBox2pass.Size = new System.Drawing.Size(88, 17);
             this.checkBox2pass.TabIndex = 4;
@@ -107,19 +111,57 @@
             // 
             // textBoxSettings2
             // 
-            this.textBoxSettings2.Location = new System.Drawing.Point(12, 103);
+            this.textBoxSettings2.Location = new System.Drawing.Point(12, 126);
             this.textBoxSettings2.Name = "textBoxSettings2";
-            this.textBoxSettings2.Size = new System.Drawing.Size(298, 20);
+            this.textBoxSettings2.Size = new System.Drawing.Size(406, 20);
             this.textBoxSettings2.TabIndex = 3;
             // 
             // labelSettings2
             // 
             this.labelSettings2.AutoSize = true;
-            this.labelSettings2.Location = new System.Drawing.Point(12, 87);
+            this.labelSettings2.Location = new System.Drawing.Point(12, 110);
             this.labelSettings2.Name = "labelSettings2";
             this.labelSettings2.Size = new System.Drawing.Size(124, 13);
             this.labelSettings2.TabIndex = 7;
             this.labelSettings2.Text = "Parameter (second pass)";
+            // 
+            // labelSizeValue
+            // 
+            this.labelSizeValue.AutoSize = true;
+            this.labelSizeValue.Location = new System.Drawing.Point(12, 149);
+            this.labelSizeValue.Name = "labelSizeValue";
+            this.labelSizeValue.Size = new System.Drawing.Size(56, 13);
+            this.labelSizeValue.TabIndex = 9;
+            this.labelSizeValue.Text = "Size value";
+            // 
+            // textBoxSizeValue
+            // 
+            this.textBoxSizeValue.Location = new System.Drawing.Point(15, 165);
+            this.textBoxSizeValue.Name = "textBoxSizeValue";
+            this.textBoxSizeValue.Size = new System.Drawing.Size(228, 20);
+            this.textBoxSizeValue.TabIndex = 10;
+            // 
+            // comboBoxSizeType
+            // 
+            this.comboBoxSizeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSizeType.FormattingEnabled = true;
+            this.comboBoxSizeType.Items.AddRange(new object[] {
+            "Not used",
+            "Specify Bitrate",
+            "Specify target size [MB]"});
+            this.comboBoxSizeType.Location = new System.Drawing.Point(249, 165);
+            this.comboBoxSizeType.Name = "comboBoxSizeType";
+            this.comboBoxSizeType.Size = new System.Drawing.Size(169, 21);
+            this.comboBoxSizeType.TabIndex = 11;
+            // 
+            // labelSizeType
+            // 
+            this.labelSizeType.AutoSize = true;
+            this.labelSizeType.Location = new System.Drawing.Point(246, 149);
+            this.labelSizeType.Name = "labelSizeType";
+            this.labelSizeType.Size = new System.Drawing.Size(79, 13);
+            this.labelSizeType.TabIndex = 12;
+            this.labelSizeType.Text = "Size value type";
             // 
             // EncoderSettingsForm
             // 
@@ -127,7 +169,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(322, 187);
+            this.ClientSize = new System.Drawing.Size(431, 227);
+            this.Controls.Add(this.labelSizeType);
+            this.Controls.Add(this.comboBoxSizeType);
+            this.Controls.Add(this.textBoxSizeValue);
+            this.Controls.Add(this.labelSizeValue);
             this.Controls.Add(this.textBoxSettings2);
             this.Controls.Add(this.labelSettings2);
             this.Controls.Add(this.checkBox2pass);
@@ -157,5 +203,9 @@
         private System.Windows.Forms.CheckBox checkBox2pass;
         private System.Windows.Forms.TextBox textBoxSettings2;
         private System.Windows.Forms.Label labelSettings2;
+        private System.Windows.Forms.Label labelSizeValue;
+        private System.Windows.Forms.TextBox textBoxSizeValue;
+        private System.Windows.Forms.ComboBox comboBoxSizeType;
+        private System.Windows.Forms.Label labelSizeType;
     }
 }

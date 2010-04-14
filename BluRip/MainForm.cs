@@ -469,8 +469,7 @@ namespace BluRip
                 checkBoxDownmixAc3_CheckedChanged(null, null);
                 checkBoxDownmixDts_CheckedChanged(null, null);
 
-                checkBoxMinimizeCrop.Checked = settings.minimizeAutocrop;
-                                     
+                checkBoxMinimizeCrop.Checked = settings.minimizeAutocrop;                                     
                 
                 comboBoxCropInput.SelectedIndex = settings.cropInput;
                 comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
@@ -483,6 +482,10 @@ namespace BluRip
                 textBoxDgindexnvPath.Text = settings.dgindexnvPath;
 
                 checkBoxDtsToAc3.Checked = settings.convertDtsToAc3;
+
+                textBoxX264x64Path.Text = settings.x264x64Path;
+                textBoxAvs2yuvPath.Text = settings.avs2yuvPath;
+                checkBoxUse64bit.Checked = settings.use64bit;
 
                 UpdateLanguage();
                 UpdateEncodingSettings();
@@ -923,6 +926,8 @@ namespace BluRip
                 }
 
                 string fps = "";
+                string resX = "";
+                string resY = "";
 
                 try
                 {
@@ -937,6 +942,8 @@ namespace BluRip
                     if (mi2.Count_Get(StreamKind.Video) > 0)
                     {
                         fps = mi2.Get(StreamKind.Video, 0, "FrameRate");
+                        resX = mi2.Get(StreamKind.Video, 0, "Width");
+                        resY = mi2.Get(StreamKind.Video, 0, "Height");
                     }
                     mi2.Close();
                 }
@@ -946,7 +953,7 @@ namespace BluRip
                     return;
                 }
 
-                if (avo.disableFps)
+                if (avo != null && avo.disableFps)
                 {
                     MessageCrop("Using manual fps - override MediaInfo value");
                     fps = avo.fps;
@@ -959,7 +966,7 @@ namespace BluRip
                     {
                         if (si.streamType == StreamType.Video)
                         {
-                            if (si.addInfo.Contains("24p /1.001"))
+                            if (si.desc.Contains("24 /1.001"))
                             {
                                 MessageCrop("Assume fps is 23.976");
                                 fps = "23.976";
@@ -976,6 +983,7 @@ namespace BluRip
                 }
 
                 sb.Remove(0, sb.Length);
+                CropInfo cropInfo = new CropInfo();
                 if (!settings.untouchedVideo)
                 {
                     if (settings.cropInput == 1 || settings.encodeInput == 1)
@@ -1055,9 +1063,7 @@ namespace BluRip
                         }
                     }
 
-                    CropInfo cropInfo = new CropInfo();
-
-                    if (!avo.disableAutocrop)
+                    if (avo == null || !avo.disableAutocrop)
                     {
                         if (settings.cropInput == 0)
                         {
@@ -1217,6 +1223,18 @@ namespace BluRip
                             ((VideoFileInfo)si.extraFileInfo).encodeAvs = settings.workingDir + "\\" + settings.filePrefix + "_encode.avs";
                         }
                         ((VideoFileInfo)si.extraFileInfo).fps = fps;
+                        if (cropInfo.resize)
+                        {
+                            ((VideoFileInfo)si.extraFileInfo).resX = cropInfo.resizeX.ToString();
+                            ((VideoFileInfo)si.extraFileInfo).resY = cropInfo.resizeY.ToString();
+                        }
+                        else
+                        {
+                            int tmp = cropInfo.cropBottom + cropInfo.cropTop;
+                            int y = Convert.ToInt32(resY) - tmp;
+                            ((VideoFileInfo)si.extraFileInfo).resX = resX;
+                            ((VideoFileInfo)si.extraFileInfo).resY = y.ToString();
+                        }
                     }
                 }
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
@@ -1610,6 +1628,7 @@ namespace BluRip
                     {
                         settings.encodingSettings[index] = new EncodingSettings(esf.es);
                         UpdateEncodingSettings();
+                        listBoxX264Profiles.SelectedIndex = index;
                     }
                 }
             }
@@ -1793,12 +1812,19 @@ namespace BluRip
                 }
 
                 string filename = "";
+                string fps = "";
+                string resX = "";
+                string resY = "";
+
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Video)
                     {
                         if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                         {
+                            fps = ((VideoFileInfo)si.extraFileInfo).fps;
+                            resX = ((VideoFileInfo)si.extraFileInfo).resX;
+                            resY = ((VideoFileInfo)si.extraFileInfo).resY;
                             filename = ((VideoFileInfo)si.extraFileInfo).encodeAvs;
                             break;
                         }
@@ -1835,9 +1861,19 @@ namespace BluRip
                 }
 
                 pc = new Process();
-                pc.StartInfo.FileName = settings.x264Path;
-                pc.StartInfo.Arguments = settings.encodingSettings[index].settings + " \"" + filename + "\" -o \"" + settings.workingDir +
-                    "\\" + settings.filePrefix + "_video.mkv\"";
+                if (!settings.use64bit)
+                {
+                    pc.StartInfo.FileName = settings.x264Path;
+                    pc.StartInfo.Arguments = settings.encodingSettings[index].settings + " \"" + filename + "\" -o \"" + settings.workingDir +
+                        "\\" + settings.filePrefix + "_video.mkv\"";
+                }
+                else
+                {
+                    pc.StartInfo.FileName = "cmd.exe";
+                    pc.StartInfo.Arguments = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + filename + "\" -o - | \"" +
+                        settings.x264x64Path + "\" " + settings.encodingSettings[index].settings + " --fps " + fps + " -o \"" + settings.workingDir + "\\" + settings.filePrefix + "_video.mkv\"" +
+                        " - " + resX + "x" + resY + "\"";
+                }
 
                 MessageEncode("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
                 
@@ -1882,9 +1918,19 @@ namespace BluRip
                     MessageEncode("");
 
                     pc = new Process();
-                    pc.StartInfo.FileName = settings.x264Path;
-                    pc.StartInfo.Arguments = settings.encodingSettings[index].settings2 + " \"" + filename + "\" -o \"" + settings.workingDir +
-                        "\\" + settings.filePrefix + "_video.mkv\"";
+                    if (!settings.use64bit)
+                    {
+                        pc.StartInfo.FileName = settings.x264Path;
+                        pc.StartInfo.Arguments = settings.encodingSettings[index].settings2 + " \"" + filename + "\" -o \"" + settings.workingDir +
+                            "\\" + settings.filePrefix + "_video.mkv\"";
+                    }
+                    else
+                    {
+                        pc.StartInfo.FileName = "cmd.exe";
+                        pc.StartInfo.Arguments = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + filename + "\" -o - | \"" +
+                            settings.x264x64Path + "\" " + settings.encodingSettings[index].settings2 + " --fps " + fps + " -o \"" + settings.workingDir + "\\" + settings.filePrefix + "_video.mkv\"" +
+                            " - " + resX + "x" + resY + "\"";
+                    }
 
                     MessageEncode("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
 
@@ -3248,6 +3294,7 @@ namespace BluRip
                     {
                         settings.avisynthSettings[index] = new AvisynthSettings(avsf.avs);
                         UpdateAvisynthSettings();
+                        listBoxAviSynthProfiles.SelectedIndex = index;
                     }
                 }
             }
@@ -3343,11 +3390,29 @@ namespace BluRip
         {
             try
             {
-                if (!File.Exists(settings.x264Path))
+                if (settings.use64bit)
                 {
-                    MessageMain("x264 path not set");
-                    if (!silent) MessageBox.Show("x264 path not set", "Error");
-                    return false;
+                    if (!File.Exists(settings.x264x64Path))
+                    {
+                        MessageMain("x264 64 bit path not set");
+                        if (!silent) MessageBox.Show("x264 64 bit path not set", "Error");
+                        return false;
+                    }
+                    if (!File.Exists(settings.avs2yuvPath))
+                    {
+                        MessageMain("avs2yuv path not set");
+                        if (!silent) MessageBox.Show("avs2yuv path not set", "Error");
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!File.Exists(settings.x264Path))
+                    {
+                        MessageMain("x264 path not set");
+                        if (!silent) MessageBox.Show("x264 path not set", "Error");
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -3996,6 +4061,51 @@ namespace BluRip
                         }
                     }
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonX264x64Path_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "x264.exe|x264.exe";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    textBoxX264x64Path.Text = ofd.FileName;
+                    settings.x264x64Path = ofd.FileName;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonAvs2yuvPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "avs2yuv.exe|avs2yuv.exe";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    textBoxAvs2yuvPath.Text = ofd.FileName;
+                    settings.avs2yuvPath= ofd.FileName;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUse64bit_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.use64bit = checkBoxUse64bit.Checked;
             }
             catch (Exception)
             {

@@ -15,6 +15,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demux", "Demux\Demux.csproj", "{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encode", "Encode\Encode.csproj", "{6FD30AE5-4EFF-43BB-910C-99FBF8807480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,16 @@ Global
 		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|Win32.ActiveCfg = Release|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6FD30AE5-4EFF-43BB-910C-99FBF8807480}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
