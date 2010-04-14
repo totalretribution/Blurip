@@ -144,6 +144,10 @@
       <Project>{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}</Project>
       <Name>Demux</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Encode\Encode.csproj">
+      <Project>{6FD30AE5-4EFF-43BB-910C-99FBF8807480}</Project>
+      <Name>Encode</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StreamInfo\StreamInfo.csproj">
       <Project>{4D800710-B329-42D7-9034-5201374C59CE}</Project>
       <Name>StreamInfo</Name>

@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStreamSelect = new System.Windows.Forms.TabPage();
+            this.labelAdvancedOptions = new System.Windows.Forms.Label();
             this.checkedListBoxStreams = new System.Windows.Forms.CheckedListBox();
             this.contextMenuStripStream = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemAdvancedOptions = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,6 +89,7 @@
             this.numericUpDownBlackValue = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownNrFrames = new System.Windows.Forms.NumericUpDown();
             this.tabPageEncodingSettings = new System.Windows.Forms.TabPage();
+            this.checkBoxUse64bit = new System.Windows.Forms.CheckBox();
             this.groupBoxAudioSettings = new System.Windows.Forms.GroupBox();
             this.checkBoxDtsToAc3 = new System.Windows.Forms.CheckBox();
             this.checkBoxUntouchedAudio = new System.Windows.Forms.CheckBox();
@@ -119,6 +121,13 @@
             this.listBoxX264Profiles = new System.Windows.Forms.ListBox();
             this.buttonAddX264 = new System.Windows.Forms.Button();
             this.tabPageTools = new System.Windows.Forms.TabPage();
+            this.groupBoxX264x64 = new System.Windows.Forms.GroupBox();
+            this.buttonAvs2yuvPath = new System.Windows.Forms.Button();
+            this.textBoxAvs2yuvPath = new System.Windows.Forms.TextBox();
+            this.labelAvs2yuvPath = new System.Windows.Forms.Label();
+            this.buttonX264x64Path = new System.Windows.Forms.Button();
+            this.textBoxX264x64Path = new System.Windows.Forms.TextBox();
+            this.labelX264x64Path = new System.Windows.Forms.Label();
             this.groupBoxDgsource = new System.Windows.Forms.GroupBox();
             this.labelDGIndexNVPath = new System.Windows.Forms.Label();
             this.textBoxDgindexnvPath = new System.Windows.Forms.TextBox();
@@ -211,7 +220,6 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.labelAdvancedOptions = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.contextMenuStripStream.SuspendLayout();
@@ -229,6 +237,7 @@
             this.groupBoxAviSynthProfiles.SuspendLayout();
             this.groupBoxX264Profiles.SuspendLayout();
             this.tabPageTools.SuspendLayout();
+            this.groupBoxX264x64.SuspendLayout();
             this.groupBoxDgsource.SuspendLayout();
             this.groupBoxFfmsindex.SuspendLayout();
             this.groupBoxExternalTools.SuspendLayout();
@@ -286,6 +295,15 @@
             this.tabPageStreamSelect.TabIndex = 0;
             this.tabPageStreamSelect.Text = "Stream selection";
             this.tabPageStreamSelect.UseVisualStyleBackColor = true;
+            // 
+            // labelAdvancedOptions
+            // 
+            this.labelAdvancedOptions.AutoSize = true;
+            this.labelAdvancedOptions.Location = new System.Drawing.Point(6, 269);
+            this.labelAdvancedOptions.Name = "labelAdvancedOptions";
+            this.labelAdvancedOptions.Size = new System.Drawing.Size(177, 13);
+            this.labelAdvancedOptions.TabIndex = 10;
+            this.labelAdvancedOptions.Text = "Right click to edit advanced options";
             // 
             // checkedListBoxStreams
             // 
@@ -883,6 +901,7 @@
             // 
             // tabPageEncodingSettings
             // 
+            this.tabPageEncodingSettings.Controls.Add(this.checkBoxUse64bit);
             this.tabPageEncodingSettings.Controls.Add(this.groupBoxAudioSettings);
             this.tabPageEncodingSettings.Controls.Add(this.labelAvisynthProfile);
             this.tabPageEncodingSettings.Controls.Add(this.labelX264Priority);
@@ -898,6 +917,17 @@
             this.tabPageEncodingSettings.TabIndex = 4;
             this.tabPageEncodingSettings.Text = "Encoding settings";
             this.tabPageEncodingSettings.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxUse64bit
+            // 
+            this.checkBoxUse64bit.AutoSize = true;
+            this.checkBoxUse64bit.Location = new System.Drawing.Point(15, 241);
+            this.checkBoxUse64bit.Name = "checkBoxUse64bit";
+            this.checkBoxUse64bit.Size = new System.Drawing.Size(100, 17);
+            this.checkBoxUse64bit.TabIndex = 37;
+            this.checkBoxUse64bit.Text = "Use 64-bit x264";
+            this.checkBoxUse64bit.UseVisualStyleBackColor = true;
+            this.checkBoxUse64bit.CheckedChanged += new System.EventHandler(this.checkBoxUse64bit_CheckedChanged);
             // 
             // groupBoxAudioSettings
             // 
@@ -1228,6 +1258,7 @@
             // 
             // tabPageTools
             // 
+            this.tabPageTools.Controls.Add(this.groupBoxX264x64);
             this.tabPageTools.Controls.Add(this.groupBoxDgsource);
             this.tabPageTools.Controls.Add(this.groupBoxFfmsindex);
             this.tabPageTools.Controls.Add(this.groupBoxExternalTools);
@@ -1239,14 +1270,83 @@
             this.tabPageTools.Text = "File paths";
             this.tabPageTools.UseVisualStyleBackColor = true;
             // 
+            // groupBoxX264x64
+            // 
+            this.groupBoxX264x64.Controls.Add(this.buttonAvs2yuvPath);
+            this.groupBoxX264x64.Controls.Add(this.textBoxAvs2yuvPath);
+            this.groupBoxX264x64.Controls.Add(this.labelAvs2yuvPath);
+            this.groupBoxX264x64.Controls.Add(this.buttonX264x64Path);
+            this.groupBoxX264x64.Controls.Add(this.textBoxX264x64Path);
+            this.groupBoxX264x64.Controls.Add(this.labelX264x64Path);
+            this.groupBoxX264x64.Location = new System.Drawing.Point(303, 139);
+            this.groupBoxX264x64.Name = "groupBoxX264x64";
+            this.groupBoxX264x64.Size = new System.Drawing.Size(290, 105);
+            this.groupBoxX264x64.TabIndex = 8;
+            this.groupBoxX264x64.TabStop = false;
+            this.groupBoxX264x64.Text = "When using 64 bit x264";
+            // 
+            // buttonAvs2yuvPath
+            // 
+            this.buttonAvs2yuvPath.Location = new System.Drawing.Point(241, 72);
+            this.buttonAvs2yuvPath.Name = "buttonAvs2yuvPath";
+            this.buttonAvs2yuvPath.Size = new System.Drawing.Size(39, 23);
+            this.buttonAvs2yuvPath.TabIndex = 14;
+            this.buttonAvs2yuvPath.Text = "...";
+            this.buttonAvs2yuvPath.UseVisualStyleBackColor = true;
+            this.buttonAvs2yuvPath.Click += new System.EventHandler(this.buttonAvs2yuvPath_Click);
+            // 
+            // textBoxAvs2yuvPath
+            // 
+            this.textBoxAvs2yuvPath.Location = new System.Drawing.Point(6, 74);
+            this.textBoxAvs2yuvPath.Name = "textBoxAvs2yuvPath";
+            this.textBoxAvs2yuvPath.ReadOnly = true;
+            this.textBoxAvs2yuvPath.Size = new System.Drawing.Size(229, 20);
+            this.textBoxAvs2yuvPath.TabIndex = 13;
+            // 
+            // labelAvs2yuvPath
+            // 
+            this.labelAvs2yuvPath.AutoSize = true;
+            this.labelAvs2yuvPath.Location = new System.Drawing.Point(6, 58);
+            this.labelAvs2yuvPath.Name = "labelAvs2yuvPath";
+            this.labelAvs2yuvPath.Size = new System.Drawing.Size(107, 13);
+            this.labelAvs2yuvPath.TabIndex = 12;
+            this.labelAvs2yuvPath.Text = "Path to avs2yuv.exe:";
+            // 
+            // buttonX264x64Path
+            // 
+            this.buttonX264x64Path.Location = new System.Drawing.Point(241, 30);
+            this.buttonX264x64Path.Name = "buttonX264x64Path";
+            this.buttonX264x64Path.Size = new System.Drawing.Size(39, 23);
+            this.buttonX264x64Path.TabIndex = 11;
+            this.buttonX264x64Path.Text = "...";
+            this.buttonX264x64Path.UseVisualStyleBackColor = true;
+            this.buttonX264x64Path.Click += new System.EventHandler(this.buttonX264x64Path_Click);
+            // 
+            // textBoxX264x64Path
+            // 
+            this.textBoxX264x64Path.Location = new System.Drawing.Point(6, 32);
+            this.textBoxX264x64Path.Name = "textBoxX264x64Path";
+            this.textBoxX264x64Path.ReadOnly = true;
+            this.textBoxX264x64Path.Size = new System.Drawing.Size(229, 20);
+            this.textBoxX264x64Path.TabIndex = 10;
+            // 
+            // labelX264x64Path
+            // 
+            this.labelX264x64Path.AutoSize = true;
+            this.labelX264x64Path.Location = new System.Drawing.Point(6, 16);
+            this.labelX264x64Path.Name = "labelX264x64Path";
+            this.labelX264x64Path.Size = new System.Drawing.Size(119, 13);
+            this.labelX264x64Path.TabIndex = 9;
+            this.labelX264x64Path.Text = "Path to 64 bit x264.exe:";
+            // 
             // groupBoxDgsource
             // 
             this.groupBoxDgsource.Controls.Add(this.labelDGIndexNVPath);
             this.groupBoxDgsource.Controls.Add(this.textBoxDgindexnvPath);
             this.groupBoxDgsource.Controls.Add(this.buttonDgindexnvPath);
-            this.groupBoxDgsource.Location = new System.Drawing.Point(303, 80);
+            this.groupBoxDgsource.Location = new System.Drawing.Point(303, 73);
             this.groupBoxDgsource.Name = "groupBoxDgsource";
-            this.groupBoxDgsource.Size = new System.Drawing.Size(290, 72);
+            this.groupBoxDgsource.Size = new System.Drawing.Size(290, 60);
             this.groupBoxDgsource.TabIndex = 7;
             this.groupBoxDgsource.TabStop = false;
             this.groupBoxDgsource.Text = "When using DGSource";
@@ -1285,7 +1385,7 @@
             this.groupBoxFfmsindex.Controls.Add(this.buttonFfmsindexPath);
             this.groupBoxFfmsindex.Location = new System.Drawing.Point(303, 6);
             this.groupBoxFfmsindex.Name = "groupBoxFfmsindex";
-            this.groupBoxFfmsindex.Size = new System.Drawing.Size(290, 68);
+            this.groupBoxFfmsindex.Size = new System.Drawing.Size(290, 61);
             this.groupBoxFfmsindex.TabIndex = 6;
             this.groupBoxFfmsindex.TabStop = false;
             this.groupBoxFfmsindex.Text = "When using FFVideoSource";
@@ -2201,15 +2301,6 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // labelAdvancedOptions
-            // 
-            this.labelAdvancedOptions.AutoSize = true;
-            this.labelAdvancedOptions.Location = new System.Drawing.Point(6, 269);
-            this.labelAdvancedOptions.Name = "labelAdvancedOptions";
-            this.labelAdvancedOptions.Size = new System.Drawing.Size(177, 13);
-            this.labelAdvancedOptions.TabIndex = 10;
-            this.labelAdvancedOptions.Text = "Right click to edit advanced options";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2258,6 +2349,8 @@
             this.groupBoxX264Profiles.ResumeLayout(false);
             this.groupBoxX264Profiles.PerformLayout();
             this.tabPageTools.ResumeLayout(false);
+            this.groupBoxX264x64.ResumeLayout(false);
+            this.groupBoxX264x64.PerformLayout();
             this.groupBoxDgsource.ResumeLayout(false);
             this.groupBoxDgsource.PerformLayout();
             this.groupBoxFfmsindex.ResumeLayout(false);
@@ -2472,6 +2565,14 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAdvancedOptions;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteAdvancedOptions;
         private System.Windows.Forms.Label labelAdvancedOptions;
+        private System.Windows.Forms.GroupBox groupBoxX264x64;
+        private System.Windows.Forms.Button buttonAvs2yuvPath;
+        private System.Windows.Forms.TextBox textBoxAvs2yuvPath;
+        private System.Windows.Forms.Label labelAvs2yuvPath;
+        private System.Windows.Forms.Button buttonX264x64Path;
+        private System.Windows.Forms.TextBox textBoxX264x64Path;
+        private System.Windows.Forms.Label labelX264x64Path;
+        private System.Windows.Forms.CheckBox checkBoxUse64bit;
     }
 }
 

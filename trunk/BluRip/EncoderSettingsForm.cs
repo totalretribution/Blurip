@@ -47,6 +47,8 @@ namespace BluRip
                 textBoxSettings2.Text = this.es.settings2;
                 checkBox2pass.Checked = this.es.pass2;
                 checkBox2pass_CheckedChanged(null, null);
+                textBoxSizeValue.Text = this.es.sizeValue.ToString();
+                comboBoxSizeType.SelectedIndex = (int)this.es.sizeType;
             }
             catch (Exception)
             {
@@ -61,6 +63,14 @@ namespace BluRip
                 es.settings = textBoxSettings.Text;
                 es.pass2 = checkBox2pass.Checked;
                 es.settings2 = textBoxSettings2.Text;
+                try
+                {
+                    es.sizeType = (SizeType)Enum.ToObject(typeof(SizeType), comboBoxSizeType.SelectedIndex);
+                    es.sizeValue = Convert.ToDouble(textBoxSizeValue.Text);
+                }
+                catch (Exception)
+                {
+                }
             }
             catch (Exception)
             {
@@ -73,14 +83,18 @@ namespace BluRip
             {
                 if (checkBox2pass.Checked)
                 {
-                    labelSettings2.Visible = true;
-                    textBoxSettings2.Visible = true;
+                    labelSettings2.Enabled = true;
+                    textBoxSettings2.Enabled = true;
+                    textBoxSizeValue.Enabled = true;
+                    comboBoxSizeType.Enabled = true;
                     labelSettings.Text = "Parameter (first pass)";
                 }
                 else
                 {
-                    labelSettings2.Visible = false;
-                    textBoxSettings2.Visible = false;
+                    labelSettings2.Enabled = false;
+                    textBoxSettings2.Enabled = false;
+                    textBoxSizeValue.Enabled = false;
+                    comboBoxSizeType.Enabled = false;
                     labelSettings.Text = "Parameter";
                 }
             }
