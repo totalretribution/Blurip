@@ -29,8 +29,9 @@ namespace BluRip
     {
         private UserSettings settings = null;
         private bool secondPass = false;
+        private VideoFileInfo vfi = null;
 
-        public EncodeTool(UserSettings settings, int profile, bool secondPass)
+        public EncodeTool(UserSettings settings, int profile, bool secondPass, VideoFileInfo vfi)
             : base()
         {
             try
@@ -38,18 +39,43 @@ namespace BluRip
                 this.settings = settings;
                 this.secondPass = secondPass;
                 this.Priority = settings.x264Priority;
+                this.vfi = vfi;
 
-                if (!settings.use64bit)
+                if (!secondPass)
                 {
-                    this.Path = settings.x264Path;
+                    if (!settings.use64bit)
+                    {
+                        this.Path = settings.x264Path;
+                        this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
+                                "\\" + settings.filePrefix + "_video.mkv\"";
+                    }
+                    else
+                    {
+                        this.Path = "cmd.exe";
+                        this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
+                            settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " -o \"" + settings.workingDir + "\\" + settings.filePrefix + "_video.mkv\"" +
+                            " - " + vfi.resX + "x" + vfi.resY + "\"";
+                    }
                 }
                 else
                 {
-                    this.Path = "cmd.exe";
                 }
             }
             catch (Exception)
             {
+                if (!settings.use64bit)
+                {
+                    this.Path = settings.x264Path;
+                    this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
+                            "\\" + settings.filePrefix + "_video.mkv\"";
+                }
+                else
+                {
+                    this.Path = "cmd.exe";
+                    this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
+                        settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + settings.workingDir + "\\" + settings.filePrefix + "_video.mkv\"" +
+                        " - " + vfi.resX + "x" + vfi.resY + "\"";
+                }
             }
         }
 

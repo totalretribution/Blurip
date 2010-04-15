@@ -58,6 +58,9 @@
     <Compile Include="Demux.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Encode.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EncoderSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +86,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MediaInfoDLL.cs" />
+    <Compile Include="Mux.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AvisynthSettingsForm.resx">
@@ -147,6 +153,10 @@
     <ProjectReference Include="..\Encode\Encode.csproj">
       <Project>{6FD30AE5-4EFF-43BB-910C-99FBF8807480}</Project>
       <Name>Encode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mux\Mux.csproj">
+      <Project>{5B2CB9B3-3FBB-438E-BB73-BB61CED42B7E}</Project>
+      <Name>Mux</Name>
     </ProjectReference>
     <ProjectReference Include="..\StreamInfo\StreamInfo.csproj">
       <Project>{4D800710-B329-42D7-9034-5201374C59CE}</Project>
