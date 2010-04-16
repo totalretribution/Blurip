@@ -49,7 +49,6 @@ namespace BluRip
 
     public enum SizeType
     {
-        None, // when using crf
         Bitrate, // specify bitrate
         Size // specify target size
     }
@@ -87,7 +86,7 @@ namespace BluRip
         public bool pass2 = false;
         public string settings2 = "";
         public double sizeValue = 0;
-        public SizeType sizeType = SizeType.None;
+        public SizeType sizeType = SizeType.Bitrate;
     }
 
     public class AvisynthSettings

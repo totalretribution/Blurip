@@ -146,7 +146,6 @@
             this.comboBoxSizeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSizeType.FormattingEnabled = true;
             this.comboBoxSizeType.Items.AddRange(new object[] {
-            "Not used",
             "Specify Bitrate",
             "Specify target size [MB]"});
             this.comboBoxSizeType.Location = new System.Drawing.Point(249, 165);

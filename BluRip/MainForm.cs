@@ -42,10 +42,8 @@ namespace BluRip
         private List<string> dtsAudioTypes = new List<string>();
                 
         private Thread indexThread = null;
-        private Thread subtitleThread = null;
 
         private Process pc = new Process();
-        private Process pc2 = new Process();
 
         public string title = "BluRip v0.4.8 © _hawk_/PPX";
 
@@ -828,29 +826,20 @@ namespace BluRip
                     mt.Stop();
                     mt = null;
                 }
+                if (st != null)
+                {
+                    st.Stop();
+                    st = null;
+                }
                 if (indexThread != null)
                 {
                     indexThread.Abort();
                     indexThread = null;
                 }
-                if (subtitleThread != null)
-                {
-                    subtitleThread.Abort();
-                    subtitleThread = null;
-                }
 
                 try
                 {
                     pc.Kill();
-                    pc.Close();
-                }
-                catch (Exception)
-                {
-                }
-
-                try
-                {
-                    pc2.Kill();
                     pc.Close();
                 }
                 catch (Exception)
@@ -1655,250 +1644,6 @@ namespace BluRip
                 tabControlMain.Enabled = true;
                 progressBarMain.Visible = false;
                 buttonAbort.Visible = false;
-            }
-        }
-
-        private void buttonDoSubtitle_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!checkBdsup2sub()) return;
-                progressBarMain.Visible = true;
-                buttonAbort.Visible = true;
-                tabControlMain.Enabled = false;
-
-                DoSubtitle();
-            }
-            catch (Exception ex)
-            {
-                MessageSubtitle("Exception: " + ex.Message);
-            }
-            finally
-            {
-                tabControlMain.Enabled = true;
-                progressBarMain.Visible = false;
-                buttonAbort.Visible = false;
-            }
-        }
-
-        private bool subtitleThreadStatus = false;
-        private void SubtitleThread()
-        {
-            try
-            {
-                subtitleThreadStatus = false;
-                
-                string fps = "";
-                foreach (StreamInfo si in demuxedStreamList.streams)
-                {
-                    if (si.streamType == StreamType.Video)
-                    {
-                        if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
-                        {
-                            fps = ((VideoFileInfo)si.extraFileInfo).fps;
-                            break;
-                        }
-                    }
-                }
-                if (fps == "")
-                {
-                    MessageMain("Framerate not set - do index + autocrop first");
-                    if (!silent) MessageBox.Show("Framerate not set - do index + autocrop first", "Error");
-                    return;
-                }
-
-                int subtitleCount = 0;
-                foreach (StreamInfo si in demuxedStreamList.streams)
-                {
-                    if (si.streamType == StreamType.Subtitle)
-                    {
-                        subtitleCount++;
-                    }
-                }
-
-                int subtitle = 0;
-                foreach (StreamInfo si in demuxedStreamList.streams)
-                {
-                    if (si.streamType == StreamType.Subtitle)
-                    {
-                        subtitle++;
-                        this.Text = title + " [Processing subtitles (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
-                        si.extraFileInfo = new SubtitleFileInfo();
-                        SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-
-                        string output = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_complete.sub";
-
-                        string outputIdx = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_complete.idx";
-
-                        sb.Remove(0, sb.Length);
-                        MessageSubtitle("Starting to process subtitle...");
-                        MessageSubtitle("");
-
-                        pc = new Process();
-                        pc.StartInfo.FileName = settings.javaPath;
-                        pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" \"" + output + "\" /fps:" + fps;
-
-                        if (!settings.resize720p)
-                        {
-                            pc.StartInfo.Arguments += " /res:1080";
-                        }
-                        else
-                        {
-                            pc.StartInfo.Arguments += " /res:720";
-                        }
-
-                        MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-                        
-                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedSubtitle);
-
-                        pc.StartInfo.UseShellExecute = false;
-                        pc.StartInfo.CreateNoWindow = true;
-                        pc.StartInfo.RedirectStandardError = true;
-                        pc.StartInfo.RedirectStandardOutput = true;
-
-                        if (!pc.Start())
-                        {
-                            MessageSubtitle("Error starting java.exe");
-                            return;
-                        }
-
-                        pc.BeginOutputReadLine();
-
-                        pc.WaitForExit();
-                        MessageSubtitle("bdsup2sub return code: " + pc.ExitCode.ToString());
-                        pc.Close();
-                        MessageSubtitle("Processing done!");
-
-                        if (File.Exists(output))
-                        {
-                            sfi.normalSub = output;
-                        }
-                        if (File.Exists(outputIdx))
-                        {
-                            sfi.normalIdx = outputIdx;
-                        }
-                        ////////////////////////////////////////////////////////
-
-                        output = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_onlyforced.sub";
-
-                        outputIdx = settings.workingDir + "\\" + Path.GetFileNameWithoutExtension(si.filename) +
-                            "_onlyforced.idx";
-
-                        sb.Remove(0, sb.Length);
-                        MessageSubtitle("Starting to process subtitle...");
-                        MessageSubtitle("");
-
-                        pc = new Process();
-                        pc.StartInfo.FileName = settings.javaPath;
-                        pc.StartInfo.Arguments = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" \"" + output + "\" /forced+ /fps:" + fps;
-
-                        if (!settings.resize720p)
-                        {
-                            pc.StartInfo.Arguments += " /res:1080";
-                        }
-                        else
-                        {
-                            pc.StartInfo.Arguments += " /res:720";
-                        }
-
-                        MessageSubtitle("Command: " + pc.StartInfo.FileName + pc.StartInfo.Arguments);
-
-                        pc.OutputDataReceived += new DataReceivedEventHandler(OutputDataReceivedSubtitle);
-
-                        pc.StartInfo.UseShellExecute = false;
-                        pc.StartInfo.CreateNoWindow = true;
-                        pc.StartInfo.RedirectStandardError = true;
-                        pc.StartInfo.RedirectStandardOutput = true;
-
-                        if (!pc.Start())
-                        {
-                            MessageSubtitle("Error starting java.exe");
-                            return;
-                        }
-
-                        pc.BeginOutputReadLine();
-
-                        pc.WaitForExit();
-                        pc.Close();
-                        MessageSubtitle("Processing done!");
-
-                        if (File.Exists(output))
-                        {
-                            sfi.forcedSub = output;
-                        }
-                        if (File.Exists(outputIdx))
-                        {
-                            sfi.forcedIdx = outputIdx;
-                        }
-                        try
-                        {
-                            if (sfi.normalIdx != "" && sfi.normalSub != "" && sfi.forcedIdx != "" && sfi.forcedSub != "")
-                            {
-                                FileInfo f1 = new FileInfo(sfi.normalSub);
-                                FileInfo f2 = new FileInfo(sfi.forcedSub);
-                                if (f1.Length == f2.Length)
-                                {
-                                    File.Delete(sfi.normalSub);
-                                    File.Delete(sfi.normalIdx);
-                                    sfi.normalSub = "";
-                                    sfi.normalIdx = "";
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageSubtitle("Exception: " + ex.Message);
-                        }
-                    }
-                }
-                TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
-                subtitleThreadStatus = true;
-            }
-            catch (Exception ex)
-            {
-                MessageSubtitle("Exception: " + ex.Message);
-            }
-        }
-
-        private bool DoSubtitle()
-        {
-            try
-            {
-                if (demuxedStreamList.streams.Count == 0)
-                {
-                    MessageMain("No demuxed streams available");
-                    if (!silent) MessageBox.Show("No demuxed streams available", "Error");
-                    return false;
-                }
-
-                this.Text = title + " [Processing subtitles...]";
-                notifyIconMain.Text = this.Text;
-                
-                subtitleThread = new Thread(SubtitleThread);
-                subtitleThread.Start();
-
-                while (subtitleThread.IsAlive)
-                {
-                    Application.DoEvents();
-                    Thread.Sleep(5);
-                }
-                subtitleThread = null;
-                return subtitleThreadStatus;
-            }
-            catch (Exception ex)
-            {
-                MessageSubtitle("Exception: " + ex.Message);
-                return false;
-            }
-            finally
-            {
-                this.Text = title;
-                notifyIconMain.Text = this.Text;
             }
         }
 
