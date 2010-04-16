@@ -130,6 +130,9 @@
     <Compile Include="StreamInfo.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Subtitle.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Blu-ray.ico" />
@@ -161,6 +164,10 @@
     <ProjectReference Include="..\StreamInfo\StreamInfo.csproj">
       <Project>{4D800710-B329-42D7-9034-5201374C59CE}</Project>
       <Name>StreamInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Subtitle\Subtitle.csproj">
+      <Project>{D1E28C6A-5ABB-4226-B3DE-940875301EA5}</Project>
+      <Name>Subtitle</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

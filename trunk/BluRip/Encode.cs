@@ -35,6 +35,8 @@ namespace BluRip
     public partial class MainForm : Form
     {
         private EncodeTool et = null;
+        private string lastMsg = "";
+        public bool secondPass = false;
 
         private void buttonDoEncode_Click(object sender, EventArgs e)
         {
@@ -61,7 +63,49 @@ namespace BluRip
 
         private void EncodeMsg(object sender, ExternalTool.MsgEventArgs e)
         {
-            MessageEncode(e.Message.Replace("\b", "").Trim());
+            string text = e.Message;
+
+            if (!settings.use64bit)
+            {
+                int start = text.IndexOf('[');
+                int end = text.IndexOf(']');
+                if (start == 0 && end > 0)
+                {
+                    int index = comboBoxEncodeProfile.SelectedIndex;
+                    string substr = text.Substring(start + 1, end - start - 2);
+                    if (substr != lastMsg)
+                    {
+                        lastMsg = substr;
+                        MessageEncode(text);
+                        if (index > -1 && settings.encodingSettings[index].pass2)
+                        {
+                            if (!secondPass)
+                            {
+                                Text = title + " [Encoding 1. pass " + text + "]";
+                                notifyIconMain.Text = "Encoding 1. pass - " + substr + "%";
+                            }
+                            else
+                            {
+                                Text = title + " [Encoding 2. pass " + text + "]";
+                                notifyIconMain.Text = "Encoding 2. pass - " + substr + "%";
+                            }
+                        }
+                        else
+                        {
+                            Text = title + " [Encoding " + text + "]";
+                            notifyIconMain.Text = "Encoding - " + substr + "%";
+                        }
+                    }
+                }
+                else
+                {
+                    MessageEncode(text);
+                }
+            }
+            else
+            {
+                MessageEncode(text);
+            }
         }
 
         private bool DoEncode()
@@ -113,7 +157,10 @@ namespace BluRip
                     return false;
                 }
 
-                et = new EncodeTool(settings, profile, false, vfi);
+                lastMsg = "";
+                secondPass = false;
+
+                et = new EncodeTool(settings, demuxedStreamList, profile, false, vfi);
                 et.OnInfoMsg += new ExternalTool.InfoEventHandler(EncodeMsg);
                 et.OnLogMsg += new ExternalTool.LogEventHandler(EncodeMsg);
                 et.Start();
@@ -122,7 +169,8 @@ namespace BluRip
                 if (!et.Successfull) return false;
                 if (settings.encodingSettings[profile].pass2)
                 {
-                    et = new EncodeTool(settings, profile, true, vfi);
+                    secondPass = true;
+                    et = new EncodeTool(settings, demuxedStreamList, profile, true, vfi);
                     et.OnInfoMsg += new ExternalTool.InfoEventHandler(EncodeMsg);
                     et.OnLogMsg += new ExternalTool.LogEventHandler(EncodeMsg);
                     et.Start();
@@ -143,85 +191,5 @@ namespace BluRip
                 notifyIconMain.Text = this.Text;
             }
         }
-
-        private class OutputReader
-        {
-
-            private StreamReader sr = null;
-            private string text = "";
-            public string Text { get { return text; } }
-            private MsgHandler Message = null;
-            private string lastMsg = "";
-            private UserSettings settings = null;
-            private int index = -1;
-            private MainForm mf = null;
-            private NotifyIcon ni = null;
-
-            public OutputReader(StreamReader sr, MsgHandler Message, UserSettings settings, int index, MainForm mf, NotifyIcon ni)
-            {
-                try
-                {
-                    this.sr = sr;
-                    this.Message = Message;
-                    this.settings = settings;
-                    this.index = index;
-                    this.mf = mf;
-                    this.ni = ni;
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            public void Start()
-            {
-                try
-                {
-                    while ((text = sr.ReadLine()) != null)
-                    {
-                        int s = text.IndexOf('[');
-                        int e = text.IndexOf(']');
-                        if (s == 0 && e > 0)
-                        {
-                            string substr = text.Substring(s + 1, e - s - 2);
-                            if (substr != lastMsg)
-                            {
-                                Message(text);
-                                lastMsg = substr;
-
-                                if (index > -1 && settings.encodingSettings[index].pass2)
-                                {
-                                    if (!mf.secondPass)
-                                    {
-                                        mf.Text = mf.title + " [Encoding 1. pass " + text + "]";
-                                        ni.Text = "Encoding 1. pass - " + substr + "%";
-                                    }
-                                    else
-                                    {
-                                        mf.Text = mf.title + " [Encoding 2. pass " + text + "]";
-                                        ni.Text = "Encoding 2. pass - " + substr + "%";
-                                    }
-                                }
-                                else
-                                {
-                                    mf.Text = mf.title + " [Encoding " + text + "]";
-                                    ni.Text = "Encoding - " + substr + "%";
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Message(text);
-                        }
-                    }
-                    text = sr.ReadToEnd();
-                }
-                catch (Exception)
-                {
-                }
-            }
-        }
-
-        public bool secondPass = false;
     }
 }
