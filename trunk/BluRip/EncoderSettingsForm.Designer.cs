@@ -121,9 +121,9 @@
             this.labelSettings2.AutoSize = true;
             this.labelSettings2.Location = new System.Drawing.Point(12, 110);
             this.labelSettings2.Name = "labelSettings2";
-            this.labelSettings2.Size = new System.Drawing.Size(124, 13);
+            this.labelSettings2.Size = new System.Drawing.Size(289, 13);
             this.labelSettings2.TabIndex = 7;
-            this.labelSettings2.Text = "Parameter (second pass)";
+            this.labelSettings2.Text = "Parameter (second pass) [do not specify --pass and --bitrate]";
             // 
             // labelSizeValue
             // 
@@ -146,7 +146,7 @@
             this.comboBoxSizeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSizeType.FormattingEnabled = true;
             this.comboBoxSizeType.Items.AddRange(new object[] {
-            "Specify Bitrate",
+            "Specify Bitrate [Kbit/s]",
             "Specify target size [MB]"});
             this.comboBoxSizeType.Location = new System.Drawing.Point(249, 165);
             this.comboBoxSizeType.Name = "comboBoxSizeType";
