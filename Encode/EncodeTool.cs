@@ -44,37 +44,96 @@ namespace BluRip
                 this.titleInfo = titleInfo;
 
                 bool is2pass = settings.encodingSettings[profile].pass2;
+                int bitrate = 0;
+
+                if (settings.encodingSettings[profile].pass2)
+                {
+                    if (settings.encodingSettings[profile].sizeType == SizeType.Bitrate)
+                    {
+                        bitrate = (int)settings.encodingSettings[profile].sizeValue;
+                    }
+                    else if (settings.encodingSettings[profile].sizeType == SizeType.Size)
+                    {
+                    }
+                }
 
                 if (!secondPass)
                 {
-                    if (!settings.use64bit)
+                    if (!settings.encodingSettings[profile].pass2)
                     {
-                        this.Path = settings.x264Path;
-                        this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
-                                "\\" + settings.filePrefix + "_video.mkv\"";
+                        if (!settings.use64bit)
+                        {
+                            this.Path = settings.x264Path;
+                            this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
+                                    "\\" + settings.filePrefix + "_video.mkv\"";
+                        }
+                        else
+                        {
+                            this.Path = "cmd.exe";
+                            this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
+                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " " +
+                                " -o \"" + settings.workingDir + "\\" + 
+                                settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                        }
                     }
                     else
                     {
-                        this.Path = "cmd.exe";
-                        this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                            settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " -o \"" + settings.workingDir + "\\" + settings.filePrefix + "_video.mkv\"" +
-                            " - " + vfi.resX + "x" + vfi.resY + "\"";
+                        if (!settings.use64bit)
+                        {
+                            this.Path = settings.x264Path;
+                            this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" " +
+                                "--pass 1 --bitrate " + bitrate.ToString() +
+                                " -o \"" + settings.workingDir +
+                                "\\" + settings.filePrefix + "_video.mkv\"";
+                        }
+                        else
+                        {
+                            this.Path = "cmd.exe";
+                            this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
+                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " " +
+                                "--pass 1 --bitrate " + bitrate.ToString() +
+                                " -o \"" + settings.workingDir + "\\" +
+                                settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                        }
                     }
                 }
                 else
                 {
-                    if (!settings.use64bit)
+                    if (!settings.encodingSettings[profile].pass2)
                     {
-                        this.Path = settings.x264Path;
-                        this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
-                                "\\" + settings.filePrefix + "_video.mkv\"";
+                        if (!settings.use64bit)
+                        {
+                            this.Path = settings.x264Path;
+                            this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
+                                    "\\" + settings.filePrefix + "_video.mkv\"";
+                        }
+                        else
+                        {
+                            this.Path = "cmd.exe";
+                            this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
+                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + settings.workingDir + "\\" + 
+                                settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                        }
                     }
                     else
                     {
-                        this.Path = "cmd.exe";
-                        this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                            settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + settings.workingDir + "\\" + settings.filePrefix + "_video.mkv\"" +
-                            " - " + vfi.resX + "x" + vfi.resY + "\"";
+                        if (!settings.use64bit)
+                        {
+                            this.Path = settings.x264Path;
+                            this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" " +
+                                "--pass 2 --bitrate " + bitrate.ToString() +
+                                " -o \"" + settings.workingDir +
+                                "\\" + settings.filePrefix + "_video.mkv\"";
+                        }
+                        else
+                        {
+                            this.Path = "cmd.exe";
+                            this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
+                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " " +
+                                "--pass 2 --bitrate " + bitrate.ToString() +
+                                " -o \"" + settings.workingDir + "\\" +
+                                settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                        }
                     }
                 }
             }
