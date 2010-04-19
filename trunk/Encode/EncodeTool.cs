@@ -54,6 +54,10 @@ namespace BluRip
                     }
                     else if (settings.encodingSettings[profile].sizeType == SizeType.Size)
                     {
+                        long totalSize = GetSize();
+                        long targetSize = Convert.ToInt64(settings.encodingSettings[profile].sizeValue * 1024.0 * 1024.0);
+                        bitrate = (int)(targetSize - totalSize) / 1024;
+                        // no mkv overhead used yet
                     }
                 }
 
@@ -139,6 +143,136 @@ namespace BluRip
             }
             catch (Exception)
             {   
+            }
+        }
+
+        private long GetSize()
+        {
+            try
+            {
+                List<int> subsCount = new List<int>();
+                List<int> forcedSubsCount = new List<int>();
+                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                {
+                    subsCount.Add(0);
+                    forcedSubsCount.Add(0);
+                }
+
+                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                {
+                    subsCount[i] = 0;
+                    forcedSubsCount[i] = 0;
+                }
+
+                long totalSize = 0;
+                foreach (StreamInfo si in titleInfo.streams)
+                {
+                    if (si.streamType == StreamType.Audio)
+                    {
+                        try
+                        {
+                            FileInfo fi = new FileInfo(si.filename);
+                            totalSize += fi.Length;
+
+                            if (si.advancedOptions != null &&  si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
+                            {
+                                if (((AdvancedAudioOptions)si.advancedOptions).additionalAc3Track && ((AdvancedAudioOptions)si.advancedOptions).additionalFilename != "")
+                                {
+                                    try
+                                    {
+                                        FileInfo fi2 = new FileInfo(((AdvancedAudioOptions)si.advancedOptions).additionalFilename);
+                                        totalSize += fi2.Length;
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                    else if (si.streamType == StreamType.Subtitle)
+                    {
+                        if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
+                        {
+                            SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
+                            long normalSize = 0;
+                            long forcedSize = 0;
+                            if (sfi.normalIdx != "" && sfi.normalSub != "")
+                            {
+                                try
+                                {
+                                    FileInfo fi = new FileInfo(sfi.normalIdx);
+                                    normalSize += fi.Length;
+                                    fi = new FileInfo(sfi.normalSub);
+                                    normalSize += fi.Length;
+                                }
+                                catch (Exception)
+                                {
+                                }
+                            }
+                            if (sfi.forcedIdx != "" && sfi.forcedSub != "")
+                            {
+                                try
+                                {
+                                    FileInfo fi = new FileInfo(sfi.forcedIdx);
+                                    forcedSize += fi.Length;
+                                    fi = new FileInfo(sfi.forcedSub);
+                                    forcedSize += fi.Length;
+                                }
+                                catch (Exception)
+                                {
+                                }
+                            }
+                            // mux all subs
+                            if (settings.muxSubs == 1)
+                            {
+                                totalSize += normalSize;
+                                totalSize += forcedSize;
+                            }
+                            // mux only forced
+                            else if (settings.muxSubs == 2)
+                            {
+                                totalSize += forcedSize;
+                            }
+                            // only first normal/forced sub
+                            else if (settings.muxSubs == 3)
+                            {
+                                int lang = -1;
+                                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                                {
+                                    if (settings.preferedLanguages[i].language == si.language) lang = i;
+                                }
+                                if (lang > -1)
+                                {
+                                    if (sfi.normalIdx != "")
+                                    {
+                                        if (subsCount[lang] == 0)
+                                        {                                            
+                                            subsCount[lang]++;
+                                            totalSize += normalSize;
+                                        }
+                                    }
+                                    else if (sfi.forcedIdx != "")
+                                    {
+                                        if (forcedSubsCount[lang] == 0)
+                                        {                                            
+                                            forcedSubsCount[lang]++;
+                                            totalSize += forcedSize;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return totalSize;
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
 
