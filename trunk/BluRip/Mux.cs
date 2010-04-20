@@ -163,20 +163,7 @@ namespace BluRip
                 mt.OnLogMsg += new ExternalTool.LogEventHandler(MuxMsg);
                 mt.Start();
                 mt.WaitForExit();
-                return mt.Successfull;
-
-                /*
-                muxThread = new Thread(MuxThread);
-                muxThread.Start();
-
-                while (muxThread.IsAlive)
-                {
-                    Application.DoEvents();
-                    Thread.Sleep(5);
-                }
-                muxThread = null;
-                return muxThreadStatus;
-                */
+                return mt.Successfull;                
             }
             catch (Exception ex)
             {

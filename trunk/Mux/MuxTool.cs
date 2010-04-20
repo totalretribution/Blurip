@@ -48,12 +48,15 @@ namespace BluRip
 
                     if (si.streamType == StreamType.Chapter)
                     {
-                        if (lan != "") pc.StartInfo.Arguments += "--chapter-language " + lan + " ";
-                        pc.StartInfo.Arguments += "--chapters \"" + si.filename + "\" ";
+                        if (lan != "") this.Parameter += "--chapter-language " + lan + " ";
+                        this.Parameter += "--chapters \"" + si.filename + "\" ";
                     }
                     else if (si.streamType == StreamType.Video)
                     {
-                        pc.StartInfo.Arguments += "\"" + ((VideoFileInfo)si.extraFileInfo).encodedFile + "\" ";
+                        if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                        {
+                            this.Parameter += "\"" + ((VideoFileInfo)si.extraFileInfo).encodedFile + "\" ";
+                        }
                     }
                 }
                 // audio
@@ -64,26 +67,26 @@ namespace BluRip
                     {
                         string st = "";
                         st = getShortLanguage(si.language);
-                        if (st != "") pc.StartInfo.Arguments += "--language 0" + ":" + st + " ";
+                        if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
                         if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
                         {
                             if (!defaultSet)
                             {
                                 if (settings.defaultAudio)
                                 {
-                                    pc.StartInfo.Arguments += "--default-track 0 ";
+                                    this.Parameter += "--default-track 0 ";
                                 }
                                 defaultSet = true;
                             }
                         }
-                        pc.StartInfo.Arguments += "\"" + si.filename + "\" ";
+                        this.Parameter += "\"" + si.filename + "\" ";
 
                         // add additional ac3 track
                         if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
                         {
                             AdvancedAudioOptions aao = (AdvancedAudioOptions)si.advancedOptions;
-                            if (st != "") pc.StartInfo.Arguments += "--language 0" + ":" + st + " ";
-                            pc.StartInfo.Arguments += "\"" + aao.additionalFilename + "\" ";
+                            if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
+                            this.Parameter += "\"" + aao.additionalFilename + "\" ";
                         }
                     }
                 }
@@ -153,11 +156,11 @@ namespace BluRip
                                         {
                                             string st = "";
                                             st = getShortLanguage(si.language);
-                                            if (st != "") pc.StartInfo.Arguments += "--language 0" + ":" + st + " ";
+                                            if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
 
                                             if (!settings.defaultSubtitleForced)
                                             {
-                                                pc.StartInfo.Arguments += "--default-track 0 ";
+                                                this.Parameter += "--default-track 0 ";
                                                 defaultSet = true;
                                             }
                                             else
@@ -166,7 +169,7 @@ namespace BluRip
                                                 {
                                                     if (sfi.forcedIdx != "")
                                                     {
-                                                        pc.StartInfo.Arguments += "--default-track 0 ";
+                                                        this.Parameter += "--default-track 0 ";
                                                         defaultSet = true;
                                                     }
                                                 }
@@ -176,23 +179,24 @@ namespace BluRip
                                 }
                                 if (!settings.defaultSubtitle)
                                 {
-                                    pc.StartInfo.Arguments += "--default-track 0:0 ";
+                                    this.Parameter += "--default-track 0:0 ";
                                 }
                                 if (sfi.normalIdx != "")
                                 {
-                                    pc.StartInfo.Arguments += "\"" + sfi.normalIdx + "\" ";
+                                    this.Parameter += "\"" + sfi.normalIdx + "\" ";
                                 }
                                 else if (sfi.forcedIdx != "")
                                 {
-                                    pc.StartInfo.Arguments += "\"" + sfi.forcedIdx + "\" ";
+                                    this.Parameter += "\"" + sfi.forcedIdx + "\" ";
                                 }
                             }
                         }
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Info("Exception: " + ex.Message); 
             }
         }
 
