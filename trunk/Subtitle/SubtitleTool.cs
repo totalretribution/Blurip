@@ -66,6 +66,14 @@ namespace BluRip
                 this.Parameter = "-jar \"" + settings.sup2subPath + "\" \"" +
                             si.filename + "\" \"" + output + "\" /fps:" + this.fps;
 
+                if (!onlyForced)
+                {
+                }
+                else
+                {
+                    this.Parameter += " /forced";
+                }
+
                 if (!settings.resize720p)
                 {
                     this.Parameter += " /res:1080";
