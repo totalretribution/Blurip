@@ -959,6 +959,12 @@ namespace BluRip
                                 fps = "23.976";
                                 break;
                             }
+                            else if (si.desc.Contains("1080p24 (16:9)"))
+                            {
+                                MessageCrop("Assume fps is 24");
+                                fps = "24";
+                                break;
+                            }
                             // add other framerates here
                         }
                     }

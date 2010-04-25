@@ -39,7 +39,7 @@ namespace BluRip
         private void SubtitleMsg(object sender, ExternalTool.MsgEventArgs e)
         {
             string tmp = e.Message.Replace("\b", "").Trim();
-            if (!tmp.StartsWith("#>") && !tmp.StartsWith("Decoding frame"))
+            if (!tmp.StartsWith("#>") && !tmp.StartsWith("Decoding frame") && !tmp.StartsWith("#<"))
             {
                 MessageSubtitle(tmp);
             }

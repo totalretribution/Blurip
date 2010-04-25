@@ -293,5 +293,36 @@ namespace BluRip
         {
             Info("Done.");
         }
+
+        protected override bool StartProcessing()
+        {
+            if (Ok && ExitCode == 0) return true;
+            else return false;
+        }
+
+        protected override void Process()
+        {
+            try
+            {
+                if (File.Exists(settings.workingDir + "\\" + settings.filePrefix + "_video.mkv"))
+                {
+                    foreach (StreamInfo si in titleInfo.streams)
+                    {
+                        if (si.streamType == StreamType.Video)
+                        {
+                            if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                            {
+                                ((VideoFileInfo)si.extraFileInfo).encodedFile = settings.workingDir + "\\" + settings.filePrefix + "_video.mkv";
+                                successfull = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }
