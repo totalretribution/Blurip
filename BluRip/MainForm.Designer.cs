@@ -110,6 +110,7 @@
             this.labelEncodeProfile = new System.Windows.Forms.Label();
             this.comboBoxEncodeProfile = new System.Windows.Forms.ComboBox();
             this.tabPageProfiles = new System.Windows.Forms.TabPage();
+            this.linkLabelx264Info = new System.Windows.Forms.LinkLabel();
             this.groupBoxAviSynthProfiles = new System.Windows.Forms.GroupBox();
             this.labelAvisynthProfiles = new System.Windows.Forms.Label();
             this.buttonDelAvisynth = new System.Windows.Forms.Button();
@@ -220,6 +221,7 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
+            this.labelx264Info = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.contextMenuStripStream.SuspendLayout();
@@ -1135,6 +1137,7 @@
             // comboBoxEncodeProfile
             // 
             this.comboBoxEncodeProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEncodeProfile.DropDownWidth = 400;
             this.comboBoxEncodeProfile.FormattingEnabled = true;
             this.comboBoxEncodeProfile.Location = new System.Drawing.Point(15, 174);
             this.comboBoxEncodeProfile.Name = "comboBoxEncodeProfile";
@@ -1144,6 +1147,8 @@
             // 
             // tabPageProfiles
             // 
+            this.tabPageProfiles.Controls.Add(this.labelx264Info);
+            this.tabPageProfiles.Controls.Add(this.linkLabelx264Info);
             this.tabPageProfiles.Controls.Add(this.groupBoxAviSynthProfiles);
             this.tabPageProfiles.Controls.Add(this.groupBoxX264Profiles);
             this.tabPageProfiles.Location = new System.Drawing.Point(4, 22);
@@ -1154,13 +1159,24 @@
             this.tabPageProfiles.Text = "Profiles";
             this.tabPageProfiles.UseVisualStyleBackColor = true;
             // 
+            // linkLabelx264Info
+            // 
+            this.linkLabelx264Info.AutoSize = true;
+            this.linkLabelx264Info.Location = new System.Drawing.Point(3, 269);
+            this.linkLabelx264Info.Name = "linkLabelx264Info";
+            this.linkLabelx264Info.Size = new System.Drawing.Size(123, 13);
+            this.linkLabelx264Info.TabIndex = 16;
+            this.linkLabelx264Info.TabStop = true;
+            this.linkLabelx264Info.Text = "x264 settings description";
+            this.linkLabelx264Info.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelx264Info_LinkClicked);
+            // 
             // groupBoxAviSynthProfiles
             // 
             this.groupBoxAviSynthProfiles.Controls.Add(this.labelAvisynthProfiles);
             this.groupBoxAviSynthProfiles.Controls.Add(this.buttonDelAvisynth);
             this.groupBoxAviSynthProfiles.Controls.Add(this.listBoxAviSynthProfiles);
             this.groupBoxAviSynthProfiles.Controls.Add(this.buttonAddAvisynth);
-            this.groupBoxAviSynthProfiles.Location = new System.Drawing.Point(279, 6);
+            this.groupBoxAviSynthProfiles.Location = new System.Drawing.Point(423, 6);
             this.groupBoxAviSynthProfiles.Name = "groupBoxAviSynthProfiles";
             this.groupBoxAviSynthProfiles.Size = new System.Drawing.Size(267, 245);
             this.groupBoxAviSynthProfiles.TabIndex = 15;
@@ -1213,7 +1229,7 @@
             this.groupBoxX264Profiles.Controls.Add(this.buttonAddX264);
             this.groupBoxX264Profiles.Location = new System.Drawing.Point(6, 6);
             this.groupBoxX264Profiles.Name = "groupBoxX264Profiles";
-            this.groupBoxX264Profiles.Size = new System.Drawing.Size(267, 245);
+            this.groupBoxX264Profiles.Size = new System.Drawing.Size(411, 245);
             this.groupBoxX264Profiles.TabIndex = 11;
             this.groupBoxX264Profiles.TabStop = false;
             this.groupBoxX264Profiles.Text = "Encoding profiles";
@@ -1242,7 +1258,7 @@
             this.listBoxX264Profiles.FormattingEnabled = true;
             this.listBoxX264Profiles.Location = new System.Drawing.Point(9, 32);
             this.listBoxX264Profiles.Name = "listBoxX264Profiles";
-            this.listBoxX264Profiles.Size = new System.Drawing.Size(247, 173);
+            this.listBoxX264Profiles.Size = new System.Drawing.Size(396, 173);
             this.listBoxX264Profiles.TabIndex = 8;
             this.listBoxX264Profiles.DoubleClick += new System.EventHandler(this.listBoxX264Profiles_DoubleClick);
             // 
@@ -2301,6 +2317,15 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
+            // labelx264Info
+            // 
+            this.labelx264Info.AutoSize = true;
+            this.labelx264Info.Location = new System.Drawing.Point(136, 269);
+            this.labelx264Info.Name = "labelx264Info";
+            this.labelx264Info.Size = new System.Drawing.Size(353, 13);
+            this.labelx264Info.TabIndex = 17;
+            this.labelx264Info.Text = "For old cartoons use \'animation\' profiles, for animation/cgi use \'aq-mode 0\'";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2344,6 +2369,7 @@
             this.groupBoxGeneralAviSynthSettings.ResumeLayout(false);
             this.groupBoxGeneralAviSynthSettings.PerformLayout();
             this.tabPageProfiles.ResumeLayout(false);
+            this.tabPageProfiles.PerformLayout();
             this.groupBoxAviSynthProfiles.ResumeLayout(false);
             this.groupBoxAviSynthProfiles.PerformLayout();
             this.groupBoxX264Profiles.ResumeLayout(false);
@@ -2573,6 +2599,8 @@
         private System.Windows.Forms.TextBox textBoxX264x64Path;
         private System.Windows.Forms.Label labelX264x64Path;
         private System.Windows.Forms.CheckBox checkBoxUse64bit;
+        private System.Windows.Forms.LinkLabel linkLabelx264Info;
+        private System.Windows.Forms.Label labelx264Info;
     }
 }
 

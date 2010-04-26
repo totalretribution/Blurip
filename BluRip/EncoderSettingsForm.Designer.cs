@@ -121,9 +121,9 @@
             this.labelSettings2.AutoSize = true;
             this.labelSettings2.Location = new System.Drawing.Point(12, 110);
             this.labelSettings2.Name = "labelSettings2";
-            this.labelSettings2.Size = new System.Drawing.Size(289, 13);
+            this.labelSettings2.Size = new System.Drawing.Size(299, 13);
             this.labelSettings2.TabIndex = 7;
-            this.labelSettings2.Text = "Parameter (second pass) [do not specify --pass and --bitrate]";
+            this.labelSettings2.Text = "Parameter (second pass) [do not specify --pass --bitrate --stats]";
             // 
             // labelSizeValue
             // 
