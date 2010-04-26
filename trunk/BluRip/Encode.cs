@@ -164,9 +164,13 @@ namespace BluRip
                 et.OnInfoMsg += new ExternalTool.InfoEventHandler(EncodeMsg);
                 et.OnLogMsg += new ExternalTool.LogEventHandler(EncodeMsg);
                 et.Start();
-                et.WaitForExit();                
+                et.WaitForExit();
 
-                if (!et.Successfull) return false;
+                if (!et.Successfull)
+                {
+                    MessageMain("Encode failed!");
+                    return false;
+                }
                 if (settings.encodingSettings[profile].pass2)
                 {
                     secondPass = true;
