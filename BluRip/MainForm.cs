@@ -1667,6 +1667,7 @@ namespace BluRip
         private string surcodeLink = "http://www.surcode.com/";
         private string dgdecnvLink = "http://neuron2.net/dgdecnv/dgdecnv.html";
         private string x264InfoLink = "http://mewiki.project357.com/wiki/X264_Settings";
+        private string avs2yuvLink = "http://akuvian.org/src/avisynth/avs2yuv/";
 
         private void linkLabelAviSynth_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -2988,6 +2989,17 @@ namespace BluRip
             try
             {
                 System.Diagnostics.Process.Start(x264InfoLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void linkLabelavs2yuv_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(avs2yuvLink);
             }
             catch (Exception)
             {
