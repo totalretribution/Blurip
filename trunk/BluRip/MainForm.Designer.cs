@@ -110,6 +110,7 @@
             this.labelEncodeProfile = new System.Windows.Forms.Label();
             this.comboBoxEncodeProfile = new System.Windows.Forms.ComboBox();
             this.tabPageProfiles = new System.Windows.Forms.TabPage();
+            this.labelx264Info = new System.Windows.Forms.Label();
             this.linkLabelx264Info = new System.Windows.Forms.LinkLabel();
             this.groupBoxAviSynthProfiles = new System.Windows.Forms.GroupBox();
             this.labelAvisynthProfiles = new System.Windows.Forms.Label();
@@ -221,7 +222,7 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.labelx264Info = new System.Windows.Forms.Label();
+            this.linkLabelavs2yuv = new System.Windows.Forms.LinkLabel();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.contextMenuStripStream.SuspendLayout();
@@ -1159,6 +1160,15 @@
             this.tabPageProfiles.Text = "Profiles";
             this.tabPageProfiles.UseVisualStyleBackColor = true;
             // 
+            // labelx264Info
+            // 
+            this.labelx264Info.AutoSize = true;
+            this.labelx264Info.Location = new System.Drawing.Point(136, 269);
+            this.labelx264Info.Name = "labelx264Info";
+            this.labelx264Info.Size = new System.Drawing.Size(353, 13);
+            this.labelx264Info.TabIndex = 17;
+            this.labelx264Info.Text = "For old cartoons use \'animation\' profiles, for animation/cgi use \'aq-mode 0\'";
+            // 
             // linkLabelx264Info
             // 
             this.linkLabelx264Info.AutoSize = true;
@@ -1772,6 +1782,7 @@
             // 
             // tabPageSoftware
             // 
+            this.tabPageSoftware.Controls.Add(this.linkLabelavs2yuv);
             this.tabPageSoftware.Controls.Add(this.linkLabelDGDecNv);
             this.tabPageSoftware.Controls.Add(this.linkLabelSurcode);
             this.tabPageSoftware.Controls.Add(this.labelUsefullTools);
@@ -2317,14 +2328,16 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // labelx264Info
+            // linkLabelavs2yuv
             // 
-            this.labelx264Info.AutoSize = true;
-            this.labelx264Info.Location = new System.Drawing.Point(136, 269);
-            this.labelx264Info.Name = "labelx264Info";
-            this.labelx264Info.Size = new System.Drawing.Size(353, 13);
-            this.labelx264Info.TabIndex = 17;
-            this.labelx264Info.Text = "For old cartoons use \'animation\' profiles, for animation/cgi use \'aq-mode 0\'";
+            this.linkLabelavs2yuv.AutoSize = true;
+            this.linkLabelavs2yuv.Location = new System.Drawing.Point(320, 81);
+            this.linkLabelavs2yuv.Name = "linkLabelavs2yuv";
+            this.linkLabelavs2yuv.Size = new System.Drawing.Size(47, 13);
+            this.linkLabelavs2yuv.TabIndex = 14;
+            this.linkLabelavs2yuv.TabStop = true;
+            this.linkLabelavs2yuv.Text = "avs2yuv";
+            this.linkLabelavs2yuv.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelavs2yuv_LinkClicked);
             // 
             // MainForm
             // 
@@ -2601,6 +2614,7 @@
         private System.Windows.Forms.CheckBox checkBoxUse64bit;
         private System.Windows.Forms.LinkLabel linkLabelx264Info;
         private System.Windows.Forms.Label labelx264Info;
+        private System.Windows.Forms.LinkLabel linkLabelavs2yuv;
     }
 }
 
