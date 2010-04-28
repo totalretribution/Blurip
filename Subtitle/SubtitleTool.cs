@@ -151,6 +151,7 @@ namespace BluRip
                             sfi.normalIdx = "";
                         }
                     }
+                    successfull = true;
                 }
                 catch (Exception ex)
                 {

@@ -124,8 +124,12 @@ namespace BluRip
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedIdx = "";
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSub = "";
                                     }
-                                    sfi.normalIdx = "";
-                                    sfi.normalSub = "";
+                                    si2.desc += " (only forced)"; ;
+                                    if (si2.extraFileInfo != null && si2.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
+                                    {
+                                        ((SubtitleFileInfo)si2.extraFileInfo).normalIdx = "";
+                                        ((SubtitleFileInfo)si2.extraFileInfo).normalSub = "";
+                                    }
                                     demuxedStreamList.streams.Insert(i + 1, si2);
                                     i++;
                                 }
@@ -134,6 +138,7 @@ namespace BluRip
                     }
                 }
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
+                UpdateDemuxedStreams();
                 return error;
             }
             catch (Exception ex)
