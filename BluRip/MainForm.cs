@@ -1382,7 +1382,6 @@ namespace BluRip
                         if (!DoEncode()) return;
                     }
                     if (!DoMux()) return;
-                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");
                 }
                 else
                 {
@@ -1398,8 +1397,7 @@ namespace BluRip
                     else
                     {
                         if (!DoMux()) return;
-                    }
-                    SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");
+                    }                    
                 }
             }
             catch (Exception ex)
@@ -1408,6 +1406,7 @@ namespace BluRip
             }
             finally
             {
+                SaveLog(richTextBoxLogMain.Text, settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");
                 tabControlMain.Enabled = true;
                 progressBarMain.Visible = false;
                 buttonAbort.Visible = false;
