@@ -64,6 +64,9 @@ namespace BluRip
                 checkBoxManualInputRes.Checked = ((AdvancedVideoOptions)ao).manualInputRes;
                 textBoxInputResX.Text = ((AdvancedVideoOptions)ao).inputResX.ToString();
                 textBoxInputResY.Text = ((AdvancedVideoOptions)ao).inputresY.ToString();
+
+                checkBoxnoMkvDemux.Checked = ((AdvancedVideoOptions)ao).noMkvDemux;
+                textBoxVideoExtension.Text = ((AdvancedVideoOptions)ao).videoExtension;
             }
             catch (Exception)
             {
@@ -93,6 +96,7 @@ namespace BluRip
                 checkBoxManualBorders_CheckedChanged(null, null);
                 checkBoxManualResize_CheckedChanged(null, null);
                 checkBoxManualInputRes_CheckedChanged(null, null);
+                checkBoxnoMkvDemux_CheckedChanged(null, null);
             }
             catch (Exception)
             {
@@ -315,6 +319,45 @@ namespace BluRip
             try
             {
                 ((AdvancedVideoOptions)ao).inputresY = Convert.ToInt32(textBoxInputResY.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxnoMkvDemux_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxnoMkvDemux.Checked)
+            {
+                groupBoxNoMkvDemux.Enabled = true;
+            }
+            else
+            {
+                groupBoxNoMkvDemux.Enabled = false;
+            }
+            ((AdvancedVideoOptions)ao).noMkvDemux = checkBoxnoMkvDemux.Checked;
+        }
+
+        private void comboBoxVideoExtension_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (comboBoxVideoExtension.SelectedIndex > -1)
+                {
+                    textBoxVideoExtension.Text = comboBoxVideoExtension.Text;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxVideoExtension_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                ((AdvancedVideoOptions)ao).videoExtension = textBoxVideoExtension.Text;
             }
             catch (Exception)
             {

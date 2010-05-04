@@ -46,13 +46,13 @@ namespace BluRip
 
                 if (!Directory.Exists(settings.workingDir))
                 {
-                    MessageMain("Working dir not set");
+                    MessageDemux("Working dir not set");
                     if (!silent) MessageBox.Show("Working dir not set", "Error");
                     return false;
                 }
                 if (comboBoxTitle.SelectedIndex == -1)
                 {
-                    MessageMain("No title selected");
+                    MessageDemux("No title selected");
                     if (!silent) MessageBox.Show("No title selected", "Error");
                     return false;
                 }
@@ -76,19 +76,19 @@ namespace BluRip
                 }
                 if (audioCount < 1)
                 {
-                    MessageMain("No audio streams selected");
+                    MessageDemux("No audio streams selected");
                     if (!silent) MessageBox.Show("No audio streams selected", "Error");
                     return false;
                 }
                 if (videoCount != 1)
                 {
-                    MessageMain("No video stream or more then one selected");
+                    MessageDemux("No video stream or more then one selected");
                     if (!silent) MessageBox.Show("No video stream or more then one selected", "Error");
                     return false;
                 }
                 if (unknown > 0)
                 {
-                    MessageMain("Unknown tracks selected - please report log to developer");
+                    MessageDemux("Unknown tracks selected - please report log to developer");
                     if (!silent) MessageBox.Show("Unknown tracks selected - please report log to developer", "Error");
                     return false;
                 }

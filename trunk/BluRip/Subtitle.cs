@@ -51,7 +51,7 @@ namespace BluRip
             {
                 if (demuxedStreamList.streams.Count == 0)
                 {
-                    MessageMain("No demuxed streams available");
+                    MessageSubtitle("No demuxed streams available");
                     if (!silent) MessageBox.Show("No demuxed streams available", "Error");
                     return false;
                 }
@@ -70,7 +70,7 @@ namespace BluRip
                 }
                 if (fps == "")
                 {
-                    MessageMain("Framerate not set - do index + autocrop first");
+                    MessageSubtitle("Framerate not set - do index + autocrop first");
                     if (!silent) MessageBox.Show("Framerate not set - do index + autocrop first", "Error");
                     return false;
                 }
@@ -85,6 +85,12 @@ namespace BluRip
                     {
                         subtitleCount++;
                     }
+                }
+
+                if (subtitleCount == 0)
+                {
+                    MessageSubtitle("No subtitles to process");
+                    return true;
                 }
 
                 bool error = false;
@@ -137,9 +143,17 @@ namespace BluRip
                         }
                     }
                 }
+
+                if (error)
+                {
+                    MessageSubtitle("Error processing subtitle");
+                    return false;
+                }
+
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
                 UpdateDemuxedStreams();
-                return error;
+                
+                return true;
             }
             catch (Exception ex)
             {

@@ -1393,6 +1393,7 @@ namespace BluRip
                         }
                         if (!DoSubtitle()) return;
                         if (!DoEncode()) return;
+                        if (!DoMux()) return;
                     }
                     else
                     {
