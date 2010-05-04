@@ -67,21 +67,28 @@
             this.textBoxInputResX = new System.Windows.Forms.TextBox();
             this.labelInputResX = new System.Windows.Forms.Label();
             this.checkBoxManualInputRes = new System.Windows.Forms.CheckBox();
+            this.checkBoxnoMkvDemux = new System.Windows.Forms.CheckBox();
+            this.groupBoxNoMkvDemux = new System.Windows.Forms.GroupBox();
+            this.labelChooseVideoExtension = new System.Windows.Forms.Label();
+            this.comboBoxVideoExtension = new System.Windows.Forms.ComboBox();
+            this.labelVideoExtension = new System.Windows.Forms.Label();
+            this.textBoxVideoExtension = new System.Windows.Forms.TextBox();
             this.groupBoxFps.SuspendLayout();
             this.groupBoxAutocrop.SuspendLayout();
             this.groupBoxResize.SuspendLayout();
             this.groupBoxAddBorders.SuspendLayout();
             this.groupBoxCrop.SuspendLayout();
             this.groupBoxInputResolution.SuspendLayout();
+            this.groupBoxNoMkvDemux.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(12, 411);
+            this.buttonOk.Location = new System.Drawing.Point(12, 408);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(93, 411);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 408);
             // 
             // groupBoxFps
             // 
@@ -471,19 +478,89 @@
             this.checkBoxManualInputRes.UseVisualStyleBackColor = true;
             this.checkBoxManualInputRes.CheckedChanged += new System.EventHandler(this.checkBoxManualInputRes_CheckedChanged);
             // 
+            // checkBoxnoMkvDemux
+            // 
+            this.checkBoxnoMkvDemux.AutoSize = true;
+            this.checkBoxnoMkvDemux.Location = new System.Drawing.Point(12, 409);
+            this.checkBoxnoMkvDemux.Name = "checkBoxnoMkvDemux";
+            this.checkBoxnoMkvDemux.Size = new System.Drawing.Size(130, 17);
+            this.checkBoxnoMkvDemux.TabIndex = 8;
+            this.checkBoxnoMkvDemux.Text = "Do not demux to .mkv";
+            this.checkBoxnoMkvDemux.UseVisualStyleBackColor = true;
+            this.checkBoxnoMkvDemux.Visible = false;
+            this.checkBoxnoMkvDemux.CheckedChanged += new System.EventHandler(this.checkBoxnoMkvDemux_CheckedChanged);
+            // 
+            // groupBoxNoMkvDemux
+            // 
+            this.groupBoxNoMkvDemux.Controls.Add(this.labelChooseVideoExtension);
+            this.groupBoxNoMkvDemux.Controls.Add(this.comboBoxVideoExtension);
+            this.groupBoxNoMkvDemux.Controls.Add(this.labelVideoExtension);
+            this.groupBoxNoMkvDemux.Controls.Add(this.textBoxVideoExtension);
+            this.groupBoxNoMkvDemux.Location = new System.Drawing.Point(12, 432);
+            this.groupBoxNoMkvDemux.Name = "groupBoxNoMkvDemux";
+            this.groupBoxNoMkvDemux.Size = new System.Drawing.Size(316, 59);
+            this.groupBoxNoMkvDemux.TabIndex = 9;
+            this.groupBoxNoMkvDemux.TabStop = false;
+            this.groupBoxNoMkvDemux.Text = "Demuxing options";
+            this.groupBoxNoMkvDemux.Visible = false;
+            // 
+            // labelChooseVideoExtension
+            // 
+            this.labelChooseVideoExtension.AutoSize = true;
+            this.labelChooseVideoExtension.Location = new System.Drawing.Point(132, 16);
+            this.labelChooseVideoExtension.Name = "labelChooseVideoExtension";
+            this.labelChooseVideoExtension.Size = new System.Drawing.Size(66, 13);
+            this.labelChooseVideoExtension.TabIndex = 3;
+            this.labelChooseVideoExtension.Text = "Choose from";
+            // 
+            // comboBoxVideoExtension
+            // 
+            this.comboBoxVideoExtension.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxVideoExtension.FormattingEnabled = true;
+            this.comboBoxVideoExtension.Items.AddRange(new object[] {
+            ".vc1",
+            ".h264",
+            ".d2v"});
+            this.comboBoxVideoExtension.Location = new System.Drawing.Point(135, 31);
+            this.comboBoxVideoExtension.Name = "comboBoxVideoExtension";
+            this.comboBoxVideoExtension.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxVideoExtension.TabIndex = 2;
+            this.comboBoxVideoExtension.SelectedIndexChanged += new System.EventHandler(this.comboBoxVideoExtension_SelectedIndexChanged);
+            // 
+            // labelVideoExtension
+            // 
+            this.labelVideoExtension.AutoSize = true;
+            this.labelVideoExtension.Location = new System.Drawing.Point(6, 16);
+            this.labelVideoExtension.Name = "labelVideoExtension";
+            this.labelVideoExtension.Size = new System.Drawing.Size(82, 13);
+            this.labelVideoExtension.TabIndex = 1;
+            this.labelVideoExtension.Text = "Video extension";
+            // 
+            // textBoxVideoExtension
+            // 
+            this.textBoxVideoExtension.Location = new System.Drawing.Point(6, 32);
+            this.textBoxVideoExtension.Name = "textBoxVideoExtension";
+            this.textBoxVideoExtension.Size = new System.Drawing.Size(123, 20);
+            this.textBoxVideoExtension.TabIndex = 0;
+            this.textBoxVideoExtension.TextChanged += new System.EventHandler(this.textBoxVideoExtension_TextChanged);
+            // 
             // AdvancedVideoOptionsEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(340, 446);
+            this.ClientSize = new System.Drawing.Size(340, 443);
             this.Controls.Add(this.checkBoxManualInputRes);
             this.Controls.Add(this.groupBoxInputResolution);
             this.Controls.Add(this.checkBoxManualFps);
             this.Controls.Add(this.checkBoxManualAutoCrop);
             this.Controls.Add(this.groupBoxAutocrop);
             this.Controls.Add(this.groupBoxFps);
+            this.Controls.Add(this.groupBoxNoMkvDemux);
+            this.Controls.Add(this.checkBoxnoMkvDemux);
             this.Name = "AdvancedVideoOptionsEdit";
             this.Text = "Edit advanced video options";
             this.Shown += new System.EventHandler(this.AdvancedVideoOptionsEdit_Shown);
+            this.Controls.SetChildIndex(this.checkBoxnoMkvDemux, 0);
+            this.Controls.SetChildIndex(this.groupBoxNoMkvDemux, 0);
             this.Controls.SetChildIndex(this.buttonOk, 0);
             this.Controls.SetChildIndex(this.buttonCancel, 0);
             this.Controls.SetChildIndex(this.groupBoxFps, 0);
@@ -504,6 +581,8 @@
             this.groupBoxCrop.PerformLayout();
             this.groupBoxInputResolution.ResumeLayout(false);
             this.groupBoxInputResolution.PerformLayout();
+            this.groupBoxNoMkvDemux.ResumeLayout(false);
+            this.groupBoxNoMkvDemux.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -550,5 +629,11 @@
         private System.Windows.Forms.TextBox textBoxInputResX;
         private System.Windows.Forms.Label labelInputResX;
         private System.Windows.Forms.CheckBox checkBoxManualInputRes;
+        private System.Windows.Forms.CheckBox checkBoxnoMkvDemux;
+        private System.Windows.Forms.GroupBox groupBoxNoMkvDemux;
+        private System.Windows.Forms.Label labelChooseVideoExtension;
+        private System.Windows.Forms.ComboBox comboBoxVideoExtension;
+        private System.Windows.Forms.Label labelVideoExtension;
+        private System.Windows.Forms.TextBox textBoxVideoExtension;
     }
 }

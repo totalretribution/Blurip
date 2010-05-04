@@ -265,6 +265,8 @@ namespace BluRip
             this.manualInputRes = ((AdvancedVideoOptions)orig).manualInputRes;
             this.inputResX = ((AdvancedVideoOptions)orig).inputResX;
             this.inputresY = ((AdvancedVideoOptions)orig).inputresY;
+            this.noMkvDemux = ((AdvancedVideoOptions)orig).noMkvDemux;
+            this.videoExtension = ((AdvancedVideoOptions)orig).videoExtension;
         }
 
         public bool disableFps = false;
@@ -287,5 +289,7 @@ namespace BluRip
         public bool manualInputRes = false;
         public int inputResX = 1920;
         public int inputresY = 1080;
+        public bool noMkvDemux = false;
+        public string videoExtension = "";
     }
 }

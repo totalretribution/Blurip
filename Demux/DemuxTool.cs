@@ -199,8 +199,16 @@ namespace BluRip
                         }
                         else if (si.streamType == StreamType.Video)
                         {
-                            Parameter += "video.mkv\" ";
-                            si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video.mkv";
+                            if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions) && ((AdvancedVideoOptions)si.advancedOptions).noMkvDemux)
+                            {
+                                Parameter += "video" + ((AdvancedVideoOptions)si.advancedOptions).videoExtension + "\" ";
+                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video" + ((AdvancedVideoOptions)si.advancedOptions).videoExtension;
+                            }
+                            else
+                            {
+                                Parameter += "video.mkv\" ";
+                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video.mkv";
+                            }                            
                         }
                         else if (si.streamType == StreamType.Subtitle)
                         {

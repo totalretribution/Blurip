@@ -167,7 +167,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                MessageMain("Exception: " + ex.Message);
+                MessageMux("Exception: " + ex.Message);
                 return false;
             }
             finally

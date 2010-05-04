@@ -117,13 +117,13 @@ namespace BluRip
 
                 if (settings.workingDir == "")
                 {
-                    MessageMain("Working dir not set");
+                    MessageEncode("Working dir not set");
                     if (!silent) MessageBox.Show("Working dir not set", "Error");
                     return false;
                 }
                 if (demuxedStreamList.streams.Count == 0)
                 {
-                    MessageMain("No demuxed streams available");
+                    MessageEncode("No demuxed streams available");
                     if (!silent) MessageBox.Show("No demuxed streams available", "Error");
                     return false;
                 }
@@ -144,7 +144,7 @@ namespace BluRip
 
                 if (vfi == null || vfi.encodeAvs == "")
                 {
-                    MessageMain("Encode avs not set - do index + autocrop first");
+                    MessageEncode("Encode avs not set - do index + autocrop first");
                     if (!silent) MessageBox.Show("Encode avs not set - do index + autocrop first", "Error");
                     return false;
                 }
@@ -152,7 +152,7 @@ namespace BluRip
                 int profile = comboBoxEncodeProfile.SelectedIndex;
                 if (profile < 0)
                 {
-                    MessageMain("Encoding profile not set");
+                    MessageEncode("Encoding profile not set");
                     if (!silent) MessageBox.Show("Encoding profile not set", "Error");
                     return false;
                 }
@@ -168,7 +168,7 @@ namespace BluRip
 
                 if (!et.Successfull)
                 {
-                    MessageMain("Encode failed!");
+                    MessageEncode("Encode failed!");
                     return false;
                 }
                 if (settings.encodingSettings[profile].pass2)
@@ -179,9 +179,14 @@ namespace BluRip
                     et.OnLogMsg += new ExternalTool.LogEventHandler(EncodeMsg);
                     et.Start();
                     et.WaitForExit();
-                    return et.Successfull;
+                    if (!et.Successfull)
+                    {
+                        MessageEncode("Encode (2. pass) failed!");
+                        return false;
+                    }
                 }
 
+                TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
                 return true;
             }
             catch (Exception ex)
