@@ -73,6 +73,7 @@
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxMuxLowResSubs = new System.Windows.Forms.CheckBox();
             this.labelCopySubs = new System.Windows.Forms.Label();
             this.checkBoxDeleteAfterEncode = new System.Windows.Forms.CheckBox();
             this.labelMuxSubs = new System.Windows.Forms.Label();
@@ -171,6 +172,7 @@
             this.checkBoxDefaultSubtitleTrack = new System.Windows.Forms.CheckBox();
             this.checkBoxDefaultAudioTrack = new System.Windows.Forms.CheckBox();
             this.tabPageSoftware = new System.Windows.Forms.TabPage();
+            this.linkLabelavs2yuv = new System.Windows.Forms.LinkLabel();
             this.linkLabelDGDecNv = new System.Windows.Forms.LinkLabel();
             this.linkLabelSurcode = new System.Windows.Forms.LinkLabel();
             this.labelUsefullTools = new System.Windows.Forms.Label();
@@ -222,7 +224,6 @@
             this.richTextBoxLogEncode = new System.Windows.Forms.RichTextBox();
             this.tabPageMuxLog = new System.Windows.Forms.TabPage();
             this.richTextBoxLogMux = new System.Windows.Forms.RichTextBox();
-            this.linkLabelavs2yuv = new System.Windows.Forms.LinkLabel();
             this.tabControlMain.SuspendLayout();
             this.tabPageStreamSelect.SuspendLayout();
             this.contextMenuStripStream.SuspendLayout();
@@ -703,6 +704,7 @@
             // 
             // groupBoxGeneral
             // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxMuxLowResSubs);
             this.groupBoxGeneral.Controls.Add(this.labelCopySubs);
             this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteAfterEncode);
             this.groupBoxGeneral.Controls.Add(this.labelMuxSubs);
@@ -712,10 +714,21 @@
             this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
             this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(200, 168);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(232, 194);
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
+            // 
+            // checkBoxMuxLowResSubs
+            // 
+            this.checkBoxMuxLowResSubs.AutoSize = true;
+            this.checkBoxMuxLowResSubs.Location = new System.Drawing.Point(6, 167);
+            this.checkBoxMuxLowResSubs.Name = "checkBoxMuxLowResSubs";
+            this.checkBoxMuxLowResSubs.Size = new System.Drawing.Size(224, 17);
+            this.checkBoxMuxLowResSubs.TabIndex = 19;
+            this.checkBoxMuxLowResSubs.Text = "Mux low res subs (high res in \'Subs\' folder)";
+            this.checkBoxMuxLowResSubs.UseVisualStyleBackColor = true;
+            this.checkBoxMuxLowResSubs.CheckedChanged += new System.EventHandler(this.checkBoxMuxLowResSubs_CheckedChanged);
             // 
             // labelCopySubs
             // 
@@ -757,7 +770,7 @@
             "Copy only first normal/forced subtitles"});
             this.comboBoxCopySubs.Location = new System.Drawing.Point(9, 71);
             this.comboBoxCopySubs.Name = "comboBoxCopySubs";
-            this.comboBoxCopySubs.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxCopySubs.Size = new System.Drawing.Size(217, 21);
             this.comboBoxCopySubs.TabIndex = 9;
             this.comboBoxCopySubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxCopySubs_SelectedIndexChanged);
             // 
@@ -783,7 +796,7 @@
             "Mux only first normal/forced subtitle"});
             this.comboBoxMuxSubs.Location = new System.Drawing.Point(9, 32);
             this.comboBoxMuxSubs.Name = "comboBoxMuxSubs";
-            this.comboBoxMuxSubs.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxMuxSubs.Size = new System.Drawing.Size(217, 21);
             this.comboBoxMuxSubs.TabIndex = 8;
             this.comboBoxMuxSubs.SelectedIndexChanged += new System.EventHandler(this.comboBoxMuxSubs_SelectedIndexChanged);
             // 
@@ -807,7 +820,7 @@
             this.groupBoxAutoCrop.Controls.Add(this.labelNrFrames);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownBlackValue);
             this.groupBoxAutoCrop.Controls.Add(this.numericUpDownNrFrames);
-            this.groupBoxAutoCrop.Location = new System.Drawing.Point(212, 6);
+            this.groupBoxAutoCrop.Location = new System.Drawing.Point(244, 6);
             this.groupBoxAutoCrop.Name = "groupBoxAutoCrop";
             this.groupBoxAutoCrop.Size = new System.Drawing.Size(194, 168);
             this.groupBoxAutoCrop.TabIndex = 5;
@@ -1805,6 +1818,17 @@
             this.tabPageSoftware.Text = "Needed tools";
             this.tabPageSoftware.UseVisualStyleBackColor = true;
             // 
+            // linkLabelavs2yuv
+            // 
+            this.linkLabelavs2yuv.AutoSize = true;
+            this.linkLabelavs2yuv.Location = new System.Drawing.Point(320, 81);
+            this.linkLabelavs2yuv.Name = "linkLabelavs2yuv";
+            this.linkLabelavs2yuv.Size = new System.Drawing.Size(47, 13);
+            this.linkLabelavs2yuv.TabIndex = 14;
+            this.linkLabelavs2yuv.TabStop = true;
+            this.linkLabelavs2yuv.Text = "avs2yuv";
+            this.linkLabelavs2yuv.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelavs2yuv_LinkClicked);
+            // 
             // linkLabelDGDecNv
             // 
             this.linkLabelDGDecNv.AutoSize = true;
@@ -2328,17 +2352,6 @@
             this.richTextBoxLogMux.TabIndex = 2;
             this.richTextBoxLogMux.Text = "";
             // 
-            // linkLabelavs2yuv
-            // 
-            this.linkLabelavs2yuv.AutoSize = true;
-            this.linkLabelavs2yuv.Location = new System.Drawing.Point(320, 81);
-            this.linkLabelavs2yuv.Name = "linkLabelavs2yuv";
-            this.linkLabelavs2yuv.Size = new System.Drawing.Size(47, 13);
-            this.linkLabelavs2yuv.TabIndex = 14;
-            this.linkLabelavs2yuv.TabStop = true;
-            this.linkLabelavs2yuv.Text = "avs2yuv";
-            this.linkLabelavs2yuv.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelavs2yuv_LinkClicked);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2615,6 +2628,7 @@
         private System.Windows.Forms.LinkLabel linkLabelx264Info;
         private System.Windows.Forms.Label labelx264Info;
         private System.Windows.Forms.LinkLabel linkLabelavs2yuv;
+        private System.Windows.Forms.CheckBox checkBoxMuxLowResSubs;
     }
 }
 

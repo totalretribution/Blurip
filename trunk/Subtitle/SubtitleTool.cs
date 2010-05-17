@@ -33,8 +33,9 @@ namespace BluRip
         private bool onlyForced = false;
         private string output = "";
         private string outputIdx = "";
+        private bool lowRes = false;
 
-        public SubtitleTool(UserSettings settings, string fps, ref StreamInfo si, bool onlyForced)
+        public SubtitleTool(UserSettings settings, string fps, ref StreamInfo si, bool onlyForced, bool lowRes)
             : base()
         {
             try
@@ -45,22 +46,45 @@ namespace BluRip
                 this.si = new StreamInfo();
                 this.si = si;
                 this.onlyForced = onlyForced;
+                this.lowRes = lowRes;
 
-                if (!onlyForced)
+                if (!lowRes)
                 {
-                    output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
-                            "_complete.sub";
+                    if (!onlyForced)
+                    {
+                        output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                                "_complete.sub";
 
-                    outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
-                        "_complete.idx";
+                        outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                            "_complete.idx";
+                    }
+                    else
+                    {
+                        output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                                "_onlyforced.sub";
+
+                        outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                            "_onlyforced.idx";
+                    }
                 }
                 else
                 {
-                    output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
-                            "_onlyforced.sub";
+                    if (!onlyForced)
+                    {
+                        output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                                "_complete_lowres.sub";
 
-                    outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
-                        "_onlyforced.idx";
+                        outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                            "_complete_lowres.idx";
+                    }
+                    else
+                    {
+                        output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                                "_onlyforced_lowres.sub";
+
+                        outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
+                            "_onlyforced_lowres.idx";
+                    }
                 }
 
                 this.Parameter = "-jar \"" + settings.sup2subPath + "\" \"" +
@@ -74,13 +98,20 @@ namespace BluRip
                     this.Parameter += " /forced";
                 }
 
-                if (!settings.resize720p)
+                if (!lowRes)
                 {
-                    this.Parameter += " /res:1080";
+                    if (!settings.resize720p)
+                    {
+                        this.Parameter += " /res:1080";
+                    }
+                    else
+                    {
+                        this.Parameter += " /res:720";
+                    }
                 }
                 else
                 {
-                    this.Parameter += " /res:720";
+                    this.Parameter += " /res:576";
                 }
             }
             catch (Exception)
@@ -114,48 +145,97 @@ namespace BluRip
                 SubtitleFileInfo sfi = null;
                 sfi = (SubtitleFileInfo)si.extraFileInfo;
 
-                if (!onlyForced)
+                if (!lowRes)
                 {
-                    if (File.Exists(output))
+                    if (!onlyForced)
                     {
-                        sfi.normalSub = output;
+                        if (File.Exists(output))
+                        {
+                            sfi.normalSub = output;
+                        }
+                        if (File.Exists(outputIdx))
+                        {
+                            sfi.normalIdx = outputIdx;
+                        }
                     }
-                    if (File.Exists(outputIdx))
+                    else
                     {
-                        sfi.normalIdx = outputIdx;
+                        if (File.Exists(output))
+                        {
+                            sfi.forcedSub = output;
+                        }
+                        if (File.Exists(outputIdx))
+                        {
+                            sfi.forcedIdx = outputIdx;
+                        }
+                    }
+
+                    try
+                    {
+                        if (sfi.normalIdx != "" && sfi.normalSub != "" && sfi.forcedIdx != "" && sfi.forcedSub != "")
+                        {
+                            FileInfo f1 = new FileInfo(sfi.normalSub);
+                            FileInfo f2 = new FileInfo(sfi.forcedSub);
+                            if (f1.Length == f2.Length)
+                            {
+                                File.Delete(sfi.normalSub);
+                                File.Delete(sfi.normalIdx);
+                                sfi.normalSub = "";
+                                sfi.normalIdx = "";
+                            }
+                        }
+                        successfull = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Info("Exception: " + ex.Message);
                     }
                 }
                 else
                 {
-                    if (File.Exists(output))
+                    if (!onlyForced)
                     {
-                        sfi.forcedSub = output;
-                    }
-                    if (File.Exists(outputIdx))
-                    {
-                        sfi.forcedIdx = outputIdx;
-                    }
-                }
-
-                try
-                {
-                    if (sfi.normalIdx != "" && sfi.normalSub != "" && sfi.forcedIdx != "" && sfi.forcedSub != "")
-                    {
-                        FileInfo f1 = new FileInfo(sfi.normalSub);
-                        FileInfo f2 = new FileInfo(sfi.forcedSub);
-                        if (f1.Length == f2.Length)
+                        if (File.Exists(output))
                         {
-                            File.Delete(sfi.normalSub);
-                            File.Delete(sfi.normalIdx);
-                            sfi.normalSub = "";
-                            sfi.normalIdx = "";
+                            sfi.normalSubLowRes = output;
+                        }
+                        if (File.Exists(outputIdx))
+                        {
+                            sfi.normalIdxLowRes = outputIdx;
                         }
                     }
-                    successfull = true;
-                }
-                catch (Exception ex)
-                {
-                    Info("Exception: " + ex.Message);
+                    else
+                    {
+                        if (File.Exists(output))
+                        {
+                            sfi.forcedSubLowRes = output;
+                        }
+                        if (File.Exists(outputIdx))
+                        {
+                            sfi.forcedIdxLowRes = outputIdx;
+                        }
+                    }
+
+                    try
+                    {
+                        if (sfi.normalIdxLowRes != "" && sfi.normalSubLowRes != "" && sfi.forcedIdxLowRes != "" && sfi.forcedSubLowRes != "")
+                        {
+                            FileInfo f1 = new FileInfo(sfi.normalSubLowRes);
+                            FileInfo f2 = new FileInfo(sfi.forcedSubLowRes);
+                            if (f1.Length == f2.Length)
+                            {
+                                File.Delete(sfi.normalSubLowRes);
+                                File.Delete(sfi.normalIdxLowRes);
+                                sfi.normalSubLowRes = "";
+                                sfi.normalIdxLowRes = "";
+                            }
+                        }
+                        successfull = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Info("Exception: " + ex.Message);
+                    }
                 }
             }
             catch (Exception)

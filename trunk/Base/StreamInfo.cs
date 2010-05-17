@@ -161,6 +161,11 @@ namespace BluRip
                 this.forcedSub = ((SubtitleFileInfo)orig).forcedSub;
                 this.normalIdx = ((SubtitleFileInfo)orig).normalIdx;
                 this.normalSub = ((SubtitleFileInfo)orig).normalSub;
+
+                this.forcedIdxLowRes = ((SubtitleFileInfo)orig).forcedIdxLowRes;
+                this.forcedSubLowRes = ((SubtitleFileInfo)orig).forcedSubLowRes;
+                this.normalIdxLowRes = ((SubtitleFileInfo)orig).normalIdxLowRes;
+                this.normalSubLowRes = ((SubtitleFileInfo)orig).normalSubLowRes;
             }
             catch (Exception)
             {
@@ -172,6 +177,12 @@ namespace BluRip
 
         public string forcedSub = "";
         public string forcedIdx = "";
+
+        public string normalSubLowRes = "";
+        public string normalIdxLowRes = "";
+
+        public string forcedSubLowRes = "";
+        public string forcedIdxLowRes = "";
     }
 
     public class StreamInfo

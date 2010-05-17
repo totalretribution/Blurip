@@ -181,13 +181,27 @@ namespace BluRip
                                 {
                                     this.Parameter += "--default-track 0:0 ";
                                 }
-                                if (sfi.normalIdx != "")
+                                if (!settings.muxLowResSubs)
                                 {
-                                    this.Parameter += "\"" + sfi.normalIdx + "\" ";
+                                    if (sfi.normalIdx != "")
+                                    {
+                                        this.Parameter += "\"" + sfi.normalIdx + "\" ";
+                                    }
+                                    else if (sfi.forcedIdx != "")
+                                    {
+                                        this.Parameter += "\"" + sfi.forcedIdx + "\" ";
+                                    }
                                 }
-                                else if (sfi.forcedIdx != "")
+                                else
                                 {
-                                    this.Parameter += "\"" + sfi.forcedIdx + "\" ";
+                                    if (sfi.normalIdxLowRes != "")
+                                    {
+                                        this.Parameter += "\"" + sfi.normalIdxLowRes + "\" ";
+                                    }
+                                    else if (sfi.forcedIdxLowRes != "")
+                                    {
+                                        this.Parameter += "\"" + sfi.forcedIdxLowRes + "\" ";
+                                    }
                                 }
                             }
                         }
