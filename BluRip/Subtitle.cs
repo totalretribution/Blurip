@@ -102,7 +102,7 @@ namespace BluRip
                         subtitle++;
                         this.Text = title + " [Processing subtitles (normal) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
                         StreamInfo si = demuxedStreamList.streams[i];
-                        st = new SubtitleTool(settings, fps, ref si, false);
+                        st = new SubtitleTool(settings, fps, ref si, false, false);
                         st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                         st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                         st.Start();
@@ -110,12 +110,32 @@ namespace BluRip
                         if (!st.Successfull) error = true;
 
                         this.Text = title + " [Processing subtitles (forced) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
-                        st = new SubtitleTool(settings, fps, ref si, true);
+                        st = new SubtitleTool(settings, fps, ref si, true, false);
                         st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                         st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                         st.Start();
                         st.WaitForExit();
                         if (!st.Successfull) error = true;
+
+                        if (settings.muxLowResSubs)
+                        {
+                            this.Text = title + " [Processing lowres subtitles (normal) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
+                            si = demuxedStreamList.streams[i];
+                            st = new SubtitleTool(settings, fps, ref si, false, true);
+                            st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
+                            st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
+                            st.Start();
+                            st.WaitForExit();
+                            if (!st.Successfull) error = true;
+
+                            this.Text = title + " [Processing lowres subtitles (forced) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
+                            st = new SubtitleTool(settings, fps, ref si, true, true);
+                            st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
+                            st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
+                            st.Start();
+                            st.WaitForExit();
+                            if (!st.Successfull) error = true;
+                        }
 
                         if (!error)
                         {
@@ -129,12 +149,16 @@ namespace BluRip
                                     {
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedIdx = "";
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSub = "";
+                                        ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedIdxLowRes = "";
+                                        ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSubLowRes = "";
                                     }
                                     si2.desc += " (only forced)"; ;
                                     if (si2.extraFileInfo != null && si2.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                                     {
                                         ((SubtitleFileInfo)si2.extraFileInfo).normalIdx = "";
                                         ((SubtitleFileInfo)si2.extraFileInfo).normalSub = "";
+                                        ((SubtitleFileInfo)si2.extraFileInfo).normalIdxLowRes = "";
+                                        ((SubtitleFileInfo)si2.extraFileInfo).normalSubLowRes = "";
                                     }
                                     demuxedStreamList.streams.Insert(i + 1, si2);
                                     i++;

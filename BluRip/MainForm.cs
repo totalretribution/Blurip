@@ -45,7 +45,7 @@ namespace BluRip
 
         private Process pc = new Process();
 
-        public string title = "BluRip v0.4.8 © _hawk_";
+        public string title = "BluRip v0.4.9 © _hawk_";
 
         public MainForm()
         {
@@ -482,6 +482,8 @@ namespace BluRip
                 textBoxX264x64Path.Text = settings.x264x64Path;
                 textBoxAvs2yuvPath.Text = settings.avs2yuvPath;
                 checkBoxUse64bit.Checked = settings.use64bit;
+
+                checkBoxMuxLowResSubs.Checked = settings.muxLowResSubs;
 
                 UpdateLanguage();
                 UpdateEncodingSettings();
@@ -3000,6 +3002,17 @@ namespace BluRip
             try
             {
                 System.Diagnostics.Process.Start(avs2yuvLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxMuxLowResSubs_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                settings.muxLowResSubs = checkBoxMuxLowResSubs.Checked;
             }
             catch (Exception)
             {
