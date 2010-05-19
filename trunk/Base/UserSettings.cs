@@ -132,7 +132,7 @@ namespace BluRip
             this.includeChapter = orig.includeChapter;
             this.includeSubtitle = orig.includeSubtitle;
             this.preferDTS = orig.preferDTS;
-            this.preferedLanguages.Clear();
+            this.preferredLanguages.Clear();
             this.workingDir = orig.workingDir;
             this.ffmsindexPath = orig.ffmsindexPath;
             this.x264Path = orig.x264Path;
@@ -172,9 +172,9 @@ namespace BluRip
             this.use64bit = orig.use64bit;
             this.muxLowResSubs = orig.muxLowResSubs;
 
-            foreach (LanguageInfo li in orig.preferedLanguages)
+            foreach (LanguageInfo li in orig.preferredLanguages)
             {
-                this.preferedLanguages.Add(new LanguageInfo(li));
+                this.preferredLanguages.Add(new LanguageInfo(li));
             }
 
             foreach (EncodingSettings es in orig.encodingSettings)
@@ -235,10 +235,10 @@ namespace BluRip
                 settings = (UserSettings)xs.Deserialize(ms);
                 ms.Close();
 
-                if (settings.preferedLanguages.Count == 0)
+                if (settings.preferredLanguages.Count == 0)
                 {
-                    settings.preferedLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
-                    settings.preferedLanguages.Add(new LanguageInfo("English","Englisch","en"));
+                    settings.preferredLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
+                    settings.preferredLanguages.Add(new LanguageInfo("English","Englisch","en"));
                 }
 
                 if(settings.encodingSettings.Count == 0)
@@ -293,7 +293,7 @@ namespace BluRip
         public bool includeChapter = true;
         public bool includeSubtitle = true;
         public bool preferDTS = true;        
-        public List<LanguageInfo> preferedLanguages = new List<LanguageInfo>();
+        public List<LanguageInfo> preferredLanguages = new List<LanguageInfo>();
         public string workingDir = "";
         public string ffmsindexPath = "";
         public string x264Path = "";
