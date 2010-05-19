@@ -154,13 +154,13 @@ namespace BluRip
             {
                 List<int> subsCount = new List<int>();
                 List<int> forcedSubsCount = new List<int>();
-                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                 {
                     subsCount.Add(0);
                     forcedSubsCount.Add(0);
                 }
 
-                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                 {
                     subsCount[i] = 0;
                     forcedSubsCount[i] = 0;
@@ -243,9 +243,9 @@ namespace BluRip
                             else if (settings.muxSubs == 3)
                             {
                                 int lang = -1;
-                                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                                 {
-                                    if (settings.preferedLanguages[i].language == si.language) lang = i;
+                                    if (settings.preferredLanguages[i].language == si.language) lang = i;
                                 }
                                 if (lang > -1)
                                 {

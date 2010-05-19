@@ -36,6 +36,7 @@
             this.textBoxLanguageShort = new System.Windows.Forms.TextBox();
             this.labelLanguageShort = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelExample = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelLanguage
@@ -56,8 +57,9 @@
             // 
             // buttonOk
             // 
+            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(12, 129);
+            this.buttonOk.Location = new System.Drawing.Point(12, 148);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 2;
@@ -99,19 +101,30 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(93, 129);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 148);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // labelExample
+            // 
+            this.labelExample.AutoSize = true;
+            this.labelExample.Location = new System.Drawing.Point(12, 126);
+            this.labelExample.Name = "labelExample";
+            this.labelExample.Size = new System.Drawing.Size(160, 13);
+            this.labelExample.TabIndex = 8;
+            this.labelExample.Text = "Example: German - Deutsch - de";
+            // 
             // LanguageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 163);
+            this.ClientSize = new System.Drawing.Size(289, 183);
+            this.Controls.Add(this.labelExample);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxLanguageShort);
             this.Controls.Add(this.labelLanguageShort);
@@ -139,5 +152,6 @@
         private System.Windows.Forms.TextBox textBoxLanguageShort;
         private System.Windows.Forms.Label labelLanguageShort;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label labelExample;
     }
 }

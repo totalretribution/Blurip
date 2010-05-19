@@ -225,7 +225,7 @@ namespace BluRip
 
         private bool HasLanguage(string s)
         {
-            foreach (LanguageInfo li in settings.preferedLanguages)
+            foreach (LanguageInfo li in settings.preferredLanguages)
             {
                 if (li.language == s) return true;
             }
@@ -278,7 +278,7 @@ namespace BluRip
                     }
                 }
                 // audio
-                foreach (LanguageInfo li in settings.preferedLanguages)
+                foreach (LanguageInfo li in settings.preferredLanguages)
                 {
                     foreach (StreamInfo si in tmpList2.streams)
                     {
@@ -302,7 +302,7 @@ namespace BluRip
                     }
                 }
                 // subtitle
-                foreach (LanguageInfo li in settings.preferedLanguages)
+                foreach (LanguageInfo li in settings.preferredLanguages)
                 {
                     foreach (StreamInfo si in tmpList2.streams)
                     {

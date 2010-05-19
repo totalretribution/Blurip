@@ -361,10 +361,10 @@ namespace BluRip
         {
             try
             {
-                listBoxPreferedLanguages.Items.Clear();
-                foreach (LanguageInfo li in settings.preferedLanguages)
+                listBoxPreferredLanguages.Items.Clear();
+                foreach (LanguageInfo li in settings.preferredLanguages)
                 {
-                    listBoxPreferedLanguages.Items.Add(li.language + " (" + li.translation + " - " + li.languageShort + ")");
+                    listBoxPreferredLanguages.Items.Add(li.language + " (" + li.translation + " - " + li.languageShort + ")");
                 }
             }
             catch (Exception)
@@ -425,7 +425,7 @@ namespace BluRip
                 checkBoxIncludeSubtitle.Checked = settings.includeSubtitle;
                 checkBoxPreferDts.Checked = settings.preferDTS;
                 checkBoxSelectChapters.Checked = settings.includeChapter;
-                listBoxPreferedLanguages.Items.Clear();
+                listBoxPreferredLanguages.Items.Clear();
                 textBoxWorkingDir.Text = settings.workingDir;
                 textBoxFfmsindexPath.Text = settings.ffmsindexPath;
                 textBoxX264Path.Text = settings.x264Path;
@@ -590,7 +590,7 @@ namespace BluRip
 
         private bool HasLanguage(string s)
         {
-            foreach (LanguageInfo li in settings.preferedLanguages)
+            foreach (LanguageInfo li in settings.preferredLanguages)
             {
                 if (li.language == s) return true;
             }
@@ -600,9 +600,9 @@ namespace BluRip
         private int LanguagIndex(string s)
         {
             int index = -1;
-            for (int i = 0; i < settings.preferedLanguages.Count; i++)
+            for (int i = 0; i < settings.preferredLanguages.Count; i++)
             {
-                if (settings.preferedLanguages[i].language == s)
+                if (settings.preferredLanguages[i].language == s)
                 {
                     index = i;
                     break;
@@ -624,7 +624,7 @@ namespace BluRip
                 List<int> maxac3List = new List<int>();
                 List<int> maxdtsList = new List<int>();
 
-                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                 {
                     maxac3List.Add(0);
                     maxdtsList.Add(0);
@@ -641,7 +641,7 @@ namespace BluRip
                     List<int> ac3List = new List<int>();
                     List<int> dtsList = new List<int>();
 
-                    for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                    for (int i = 0; i < settings.preferredLanguages.Count; i++)
                     {
                         ac3List.Add(0);
                         dtsList.Add(0);
@@ -771,9 +771,9 @@ namespace BluRip
 
         private void buttonDeleteLanguage_Click(object sender, EventArgs e)
         {
-            if (listBoxPreferedLanguages.SelectedIndex > -1)
+            if (listBoxPreferredLanguages.SelectedIndex > -1)
             {
-                settings.preferedLanguages.RemoveAt(listBoxPreferedLanguages.SelectedIndex);
+                settings.preferredLanguages.RemoveAt(listBoxPreferredLanguages.SelectedIndex);
                 UpdateLanguage();
             }
         }
@@ -1554,7 +1554,7 @@ namespace BluRip
                 li.language = "Language";
                 li.languageShort = "la";
                 li.translation = "Language";
-                settings.preferedLanguages.Add(li);
+                settings.preferredLanguages.Add(li);
                 UpdateLanguage();
             }
             catch (Exception)
@@ -1566,13 +1566,13 @@ namespace BluRip
         {
             try
             {
-                int index = listBoxPreferedLanguages.SelectedIndex;
+                int index = listBoxPreferredLanguages.SelectedIndex;
                 if (index > -1)
                 {
-                    LanguageForm lf = new LanguageForm(settings.preferedLanguages[index]);
+                    LanguageForm lf = new LanguageForm(settings.preferredLanguages[index]);
                     if (lf.ShowDialog() == DialogResult.OK)
                     {
-                        settings.preferedLanguages[index] = new LanguageInfo(lf.li);
+                        settings.preferredLanguages[index] = new LanguageInfo(lf.li);
                         UpdateLanguage();
                     }
                 }
@@ -1924,14 +1924,14 @@ namespace BluRip
         {
             try
             {
-                int index = listBoxPreferedLanguages.SelectedIndex;
+                int index = listBoxPreferredLanguages.SelectedIndex;
                 if (index > 0)
                 {
-                    LanguageInfo li = settings.preferedLanguages[index];
-                    settings.preferedLanguages.RemoveAt(index);
-                    settings.preferedLanguages.Insert(index - 1, li);
+                    LanguageInfo li = settings.preferredLanguages[index];
+                    settings.preferredLanguages.RemoveAt(index);
+                    settings.preferredLanguages.Insert(index - 1, li);
                     UpdateLanguage();
-                    listBoxPreferedLanguages.SelectedIndex = index - 1;
+                    listBoxPreferredLanguages.SelectedIndex = index - 1;
                 }
             }
             catch (Exception)
@@ -1943,14 +1943,14 @@ namespace BluRip
         {
             try
             {
-                int index = listBoxPreferedLanguages.SelectedIndex;
-                if (index < settings.preferedLanguages.Count - 1)
+                int index = listBoxPreferredLanguages.SelectedIndex;
+                if (index < settings.preferredLanguages.Count - 1)
                 {
-                    LanguageInfo li = settings.preferedLanguages[index];
-                    settings.preferedLanguages.RemoveAt(index);
-                    settings.preferedLanguages.Insert(index + 1, li);
+                    LanguageInfo li = settings.preferredLanguages[index];
+                    settings.preferredLanguages.RemoveAt(index);
+                    settings.preferredLanguages.Insert(index + 1, li);
                     UpdateLanguage();
-                    listBoxPreferedLanguages.SelectedIndex = index + 1;
+                    listBoxPreferredLanguages.SelectedIndex = index + 1;
                 }
             }
             catch (Exception)

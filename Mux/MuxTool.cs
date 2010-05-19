@@ -44,7 +44,7 @@ namespace BluRip
                 foreach (StreamInfo si in titleInfo.streams)
                 {
                     string lan = "";
-                    if (settings.preferedLanguages.Count > 0) lan = settings.preferedLanguages[0].languageShort;
+                    if (settings.preferredLanguages.Count > 0) lan = settings.preferredLanguages[0].languageShort;
 
                     if (si.streamType == StreamType.Chapter)
                     {
@@ -68,7 +68,7 @@ namespace BluRip
                         string st = "";
                         st = getShortLanguage(si.language);
                         if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
-                        if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
+                        if (settings.preferredLanguages.Count > 0 && settings.preferredLanguages[0].language == si.language)
                         {
                             if (!defaultSet)
                             {
@@ -93,7 +93,7 @@ namespace BluRip
 
                 List<int> subsCount = new List<int>();
                 List<int> forcedSubsCount = new List<int>();
-                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                 {
                     subsCount.Add(0);
                     forcedSubsCount.Add(0);
@@ -121,9 +121,9 @@ namespace BluRip
                             else if (settings.muxSubs == 3)
                             {
                                 int lang = -1;
-                                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                                 {
-                                    if (settings.preferedLanguages[i].language == si.language) lang = i;
+                                    if (settings.preferredLanguages[i].language == si.language) lang = i;
                                 }
                                 if (lang > -1)
                                 {
@@ -148,7 +148,7 @@ namespace BluRip
 
                             if (mux)
                             {
-                                if (settings.preferedLanguages.Count > 0 && settings.preferedLanguages[0].language == si.language)
+                                if (settings.preferredLanguages.Count > 0 && settings.preferredLanguages[0].language == si.language)
                                 {
                                     if (!defaultSet)
                                     {
@@ -229,7 +229,7 @@ namespace BluRip
         {
             try
             {
-                foreach (LanguageInfo li in settings.preferedLanguages)
+                foreach (LanguageInfo li in settings.preferredLanguages)
                 {
                     if (li.language == language) return li.languageShort;
                 }
@@ -275,13 +275,13 @@ namespace BluRip
             {
                 List<int> subsCount = new List<int>();
                 List<int> forcedSubsCount = new List<int>();
-                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                 {
                     subsCount.Add(0);
                     forcedSubsCount.Add(0);
                 }
 
-                for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredLanguages.Count; i++)
                 {
                     subsCount[i] = 0;
                     forcedSubsCount[i] = 0;
@@ -322,9 +322,9 @@ namespace BluRip
                                 else if (settings.copySubs == 3)
                                 {
                                     int lang = -1;
-                                    for (int i = 0; i < settings.preferedLanguages.Count; i++)
+                                    for (int i = 0; i < settings.preferredLanguages.Count; i++)
                                     {
-                                        if (settings.preferedLanguages[i].language == si.language) lang = i;
+                                        if (settings.preferredLanguages[i].language == si.language) lang = i;
                                     }
                                     if (lang > -1)
                                     {

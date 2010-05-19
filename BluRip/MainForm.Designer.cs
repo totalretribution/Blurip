@@ -162,8 +162,8 @@
             this.buttonDeleteLanguage = new System.Windows.Forms.Button();
             this.buttonAddLanguage = new System.Windows.Forms.Button();
             this.checkBoxIncludeSubtitle = new System.Windows.Forms.CheckBox();
-            this.listBoxPreferedLanguages = new System.Windows.Forms.ListBox();
-            this.labelPreferedLanguage = new System.Windows.Forms.Label();
+            this.listBoxPreferredLanguages = new System.Windows.Forms.ListBox();
+            this.labelPreferredLanguage = new System.Windows.Forms.Label();
             this.checkBoxPreferDts = new System.Windows.Forms.CheckBox();
             this.checkBoxSelectChapters = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoSelect = new System.Windows.Forms.CheckBox();
@@ -1634,8 +1634,8 @@
             this.groupBoxAutoSelect.Controls.Add(this.buttonDeleteLanguage);
             this.groupBoxAutoSelect.Controls.Add(this.buttonAddLanguage);
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxIncludeSubtitle);
-            this.groupBoxAutoSelect.Controls.Add(this.listBoxPreferedLanguages);
-            this.groupBoxAutoSelect.Controls.Add(this.labelPreferedLanguage);
+            this.groupBoxAutoSelect.Controls.Add(this.listBoxPreferredLanguages);
+            this.groupBoxAutoSelect.Controls.Add(this.labelPreferredLanguage);
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxPreferDts);
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxSelectChapters);
             this.groupBoxAutoSelect.Controls.Add(this.checkBoxAutoSelect);
@@ -1697,23 +1697,23 @@
             this.checkBoxIncludeSubtitle.UseVisualStyleBackColor = true;
             this.checkBoxIncludeSubtitle.CheckedChanged += new System.EventHandler(this.checkBoxIncludeSubtitle_CheckedChanged);
             // 
-            // listBoxPreferedLanguages
+            // listBoxPreferredLanguages
             // 
-            this.listBoxPreferedLanguages.FormattingEnabled = true;
-            this.listBoxPreferedLanguages.Location = new System.Drawing.Point(131, 38);
-            this.listBoxPreferedLanguages.Name = "listBoxPreferedLanguages";
-            this.listBoxPreferedLanguages.Size = new System.Drawing.Size(239, 95);
-            this.listBoxPreferedLanguages.TabIndex = 4;
-            this.listBoxPreferedLanguages.DoubleClick += new System.EventHandler(this.listBoxPreferedLanguages_DoubleClick);
+            this.listBoxPreferredLanguages.FormattingEnabled = true;
+            this.listBoxPreferredLanguages.Location = new System.Drawing.Point(131, 38);
+            this.listBoxPreferredLanguages.Name = "listBoxPreferredLanguages";
+            this.listBoxPreferredLanguages.Size = new System.Drawing.Size(239, 95);
+            this.listBoxPreferredLanguages.TabIndex = 4;
+            this.listBoxPreferredLanguages.DoubleClick += new System.EventHandler(this.listBoxPreferedLanguages_DoubleClick);
             // 
-            // labelPreferedLanguage
+            // labelPreferredLanguage
             // 
-            this.labelPreferedLanguage.AutoSize = true;
-            this.labelPreferedLanguage.Location = new System.Drawing.Point(128, 16);
-            this.labelPreferedLanguage.Name = "labelPreferedLanguage";
-            this.labelPreferedLanguage.Size = new System.Drawing.Size(220, 13);
-            this.labelPreferedLanguage.TabIndex = 3;
-            this.labelPreferedLanguage.Text = "Prefered language (first will be set as default):";
+            this.labelPreferredLanguage.AutoSize = true;
+            this.labelPreferredLanguage.Location = new System.Drawing.Point(128, 16);
+            this.labelPreferredLanguage.Name = "labelPreferredLanguage";
+            this.labelPreferredLanguage.Size = new System.Drawing.Size(223, 13);
+            this.labelPreferredLanguage.TabIndex = 3;
+            this.labelPreferredLanguage.Text = "Preferred language (first will be set as default):";
             // 
             // checkBoxPreferDts
             // 
@@ -2457,8 +2457,8 @@
         private System.Windows.Forms.Button buttonDeleteLanguage;
         private System.Windows.Forms.Button buttonAddLanguage;
         private System.Windows.Forms.CheckBox checkBoxIncludeSubtitle;
-        private System.Windows.Forms.ListBox listBoxPreferedLanguages;
-        private System.Windows.Forms.Label labelPreferedLanguage;
+        private System.Windows.Forms.ListBox listBoxPreferredLanguages;
+        private System.Windows.Forms.Label labelPreferredLanguage;
         private System.Windows.Forms.ProgressBar progressBarMain;
         private System.Windows.Forms.Button buttonAbort;
         private System.Windows.Forms.Label labelWorkingDir;
