@@ -56,9 +56,31 @@ namespace BluRip
                     }
                     else if (settings.encodingSettings[profile].sizeType == SizeType.Size)
                     {
+                        int length = 0;
+                        int frames = 0;
+                        try
+                        {
+                            length = Convert.ToInt32(vfi.length);
+                            length = (int)(length / 1000);
+                        }
+                        catch (Exception)
+                        {
+                        }
+
+                        try
+                        {
+                            frames = Convert.ToInt32(vfi.frames);
+                        }
+                        catch (Exception)
+                        {
+                        }
+
+                        // use frame count to calculate overhead
+                        // to be done...
+
                         long totalSize = GetSize();
                         long targetSize = Convert.ToInt64(settings.encodingSettings[profile].sizeValue * 1024.0 * 1024.0);
-                        bitrate = (int)(targetSize - totalSize) / 1024;
+                        bitrate = (int)((targetSize - totalSize) / 1024 / length);
                         // no mkv overhead used yet
                     }
                 }

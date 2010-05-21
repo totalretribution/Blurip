@@ -73,6 +73,10 @@
             this.comboBoxVideoExtension = new System.Windows.Forms.ComboBox();
             this.labelVideoExtension = new System.Windows.Forms.Label();
             this.textBoxVideoExtension = new System.Windows.Forms.TextBox();
+            this.labelLength = new System.Windows.Forms.Label();
+            this.textBoxLength = new System.Windows.Forms.TextBox();
+            this.textBoxFrames = new System.Windows.Forms.TextBox();
+            this.labelFrames = new System.Windows.Forms.Label();
             this.groupBoxFps.SuspendLayout();
             this.groupBoxAutocrop.SuspendLayout();
             this.groupBoxResize.SuspendLayout();
@@ -84,20 +88,24 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(12, 408);
+            this.buttonOk.Location = new System.Drawing.Point(12, 485);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(93, 408);
+            this.buttonCancel.Location = new System.Drawing.Point(93, 485);
             // 
             // groupBoxFps
             // 
+            this.groupBoxFps.Controls.Add(this.textBoxFrames);
+            this.groupBoxFps.Controls.Add(this.labelFrames);
+            this.groupBoxFps.Controls.Add(this.textBoxLength);
+            this.groupBoxFps.Controls.Add(this.labelLength);
             this.groupBoxFps.Controls.Add(this.labelFramerate);
             this.groupBoxFps.Controls.Add(this.comboBoxFramerate);
             this.groupBoxFps.Controls.Add(this.textBoxFps);
             this.groupBoxFps.Location = new System.Drawing.Point(12, 35);
             this.groupBoxFps.Name = "groupBoxFps";
-            this.groupBoxFps.Size = new System.Drawing.Size(156, 61);
+            this.groupBoxFps.Size = new System.Drawing.Size(156, 139);
             this.groupBoxFps.TabIndex = 2;
             this.groupBoxFps.TabStop = false;
             this.groupBoxFps.Text = "Framerate";
@@ -141,7 +149,7 @@
             this.groupBoxAutocrop.Controls.Add(this.groupBoxResize);
             this.groupBoxAutocrop.Controls.Add(this.groupBoxAddBorders);
             this.groupBoxAutocrop.Controls.Add(this.groupBoxCrop);
-            this.groupBoxAutocrop.Location = new System.Drawing.Point(12, 125);
+            this.groupBoxAutocrop.Location = new System.Drawing.Point(12, 203);
             this.groupBoxAutocrop.Name = "groupBoxAutocrop";
             this.groupBoxAutocrop.Size = new System.Drawing.Size(316, 278);
             this.groupBoxAutocrop.TabIndex = 3;
@@ -412,7 +420,7 @@
             // checkBoxManualAutoCrop
             // 
             this.checkBoxManualAutoCrop.AutoSize = true;
-            this.checkBoxManualAutoCrop.Location = new System.Drawing.Point(8, 102);
+            this.checkBoxManualAutoCrop.Location = new System.Drawing.Point(8, 180);
             this.checkBoxManualAutoCrop.Name = "checkBoxManualAutoCrop";
             this.checkBoxManualAutoCrop.Size = new System.Drawing.Size(106, 17);
             this.checkBoxManualAutoCrop.TabIndex = 5;
@@ -481,7 +489,7 @@
             // checkBoxnoMkvDemux
             // 
             this.checkBoxnoMkvDemux.AutoSize = true;
-            this.checkBoxnoMkvDemux.Location = new System.Drawing.Point(12, 409);
+            this.checkBoxnoMkvDemux.Location = new System.Drawing.Point(12, 487);
             this.checkBoxnoMkvDemux.Name = "checkBoxnoMkvDemux";
             this.checkBoxnoMkvDemux.Size = new System.Drawing.Size(130, 17);
             this.checkBoxnoMkvDemux.TabIndex = 8;
@@ -496,7 +504,7 @@
             this.groupBoxNoMkvDemux.Controls.Add(this.comboBoxVideoExtension);
             this.groupBoxNoMkvDemux.Controls.Add(this.labelVideoExtension);
             this.groupBoxNoMkvDemux.Controls.Add(this.textBoxVideoExtension);
-            this.groupBoxNoMkvDemux.Location = new System.Drawing.Point(12, 432);
+            this.groupBoxNoMkvDemux.Location = new System.Drawing.Point(12, 510);
             this.groupBoxNoMkvDemux.Name = "groupBoxNoMkvDemux";
             this.groupBoxNoMkvDemux.Size = new System.Drawing.Size(316, 59);
             this.groupBoxNoMkvDemux.TabIndex = 9;
@@ -544,10 +552,44 @@
             this.textBoxVideoExtension.TabIndex = 0;
             this.textBoxVideoExtension.TextChanged += new System.EventHandler(this.textBoxVideoExtension_TextChanged);
             // 
+            // labelLength
+            // 
+            this.labelLength.AutoSize = true;
+            this.labelLength.Location = new System.Drawing.Point(6, 55);
+            this.labelLength.Name = "labelLength";
+            this.labelLength.Size = new System.Drawing.Size(73, 13);
+            this.labelLength.TabIndex = 10;
+            this.labelLength.Text = "Length (in ms)";
+            // 
+            // textBoxLength
+            // 
+            this.textBoxLength.Location = new System.Drawing.Point(6, 71);
+            this.textBoxLength.Name = "textBoxLength";
+            this.textBoxLength.Size = new System.Drawing.Size(144, 20);
+            this.textBoxLength.TabIndex = 10;
+            this.textBoxLength.TextChanged += new System.EventHandler(this.textBoxLength_TextChanged);
+            // 
+            // textBoxFrames
+            // 
+            this.textBoxFrames.Location = new System.Drawing.Point(6, 110);
+            this.textBoxFrames.Name = "textBoxFrames";
+            this.textBoxFrames.Size = new System.Drawing.Size(144, 20);
+            this.textBoxFrames.TabIndex = 12;
+            this.textBoxFrames.TextChanged += new System.EventHandler(this.textBoxFrames_TextChanged);
+            // 
+            // labelFrames
+            // 
+            this.labelFrames.AutoSize = true;
+            this.labelFrames.Location = new System.Drawing.Point(6, 94);
+            this.labelFrames.Name = "labelFrames";
+            this.labelFrames.Size = new System.Drawing.Size(66, 13);
+            this.labelFrames.TabIndex = 11;
+            this.labelFrames.Text = "Frame count";
+            // 
             // AdvancedVideoOptionsEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(340, 443);
+            this.ClientSize = new System.Drawing.Size(340, 520);
             this.Controls.Add(this.checkBoxManualInputRes);
             this.Controls.Add(this.groupBoxInputResolution);
             this.Controls.Add(this.checkBoxManualFps);
@@ -635,5 +677,9 @@
         private System.Windows.Forms.ComboBox comboBoxVideoExtension;
         private System.Windows.Forms.Label labelVideoExtension;
         private System.Windows.Forms.TextBox textBoxVideoExtension;
+        private System.Windows.Forms.TextBox textBoxLength;
+        private System.Windows.Forms.Label labelLength;
+        private System.Windows.Forms.TextBox textBoxFrames;
+        private System.Windows.Forms.Label labelFrames;
     }
 }

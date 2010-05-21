@@ -147,6 +147,8 @@ namespace BluRip
         public string encodedFile = "";
         public string resX = "";
         public string resY = "";
+        public string length = "";
+        public string frames = "";
     }
 
     public class SubtitleFileInfo : ExtraFileInfo
@@ -258,6 +260,8 @@ namespace BluRip
         {
             this.disableFps = ((AdvancedVideoOptions)orig).disableFps;
             this.fps = ((AdvancedVideoOptions)orig).fps;
+            this.length = ((AdvancedVideoOptions)orig).length;
+            this.frames = ((AdvancedVideoOptions)orig).frames;
 
             this.disableAutocrop = ((AdvancedVideoOptions)orig).disableAutocrop;
             this.manualResize = ((AdvancedVideoOptions)orig).manualResize;
@@ -282,6 +286,8 @@ namespace BluRip
 
         public bool disableFps = false;
         public string fps = "";
+        public string length = "";
+        public string frames = "";
 
         public bool disableAutocrop = false;
         public bool manualResize = false;

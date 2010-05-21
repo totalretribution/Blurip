@@ -917,6 +917,8 @@ namespace BluRip
                 string fps = "";
                 string resX = "";
                 string resY = "";
+                string length = "";
+                string frames = "";
 
                 try
                 {
@@ -933,6 +935,8 @@ namespace BluRip
                         fps = mi2.Get(StreamKind.Video, 0, "FrameRate");
                         resX = mi2.Get(StreamKind.Video, 0, "Width");
                         resY = mi2.Get(StreamKind.Video, 0, "Height");
+                        length = mi2.Get(StreamKind.Video, 0, "Duration");
+                        frames = mi2.Get(StreamKind.Video, 0, "FrameCount");
                     }
                     mi2.Close();
                 }
@@ -946,6 +950,8 @@ namespace BluRip
                 {
                     MessageCrop("Using manual fps - override MediaInfo value");
                     fps = avo.fps;
+                    length = avo.length;
+                    frames = avo.frames;
                 }
 
                 if (fps == "")
@@ -975,6 +981,11 @@ namespace BluRip
                         MessageCrop("Could not get framerate - please report log to developer");
                         return;
                     }
+                }
+
+                if (frames == "" || length == "")
+                {
+                    MessageCrop("WARNING: frames or length not set - bitrate calculation not possible");
                 }
 
                 sb.Remove(0, sb.Length);
@@ -1218,6 +1229,8 @@ namespace BluRip
                             ((VideoFileInfo)si.extraFileInfo).encodeAvs = settings.workingDir + "\\" + settings.filePrefix + "_encode.avs";
                         }
                         ((VideoFileInfo)si.extraFileInfo).fps = fps;
+                        ((VideoFileInfo)si.extraFileInfo).length = length;
+                        ((VideoFileInfo)si.extraFileInfo).frames = frames;
                         if (cropInfo.resize)
                         {
                             ((VideoFileInfo)si.extraFileInfo).resX = cropInfo.resizeX.ToString();
