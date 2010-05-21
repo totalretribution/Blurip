@@ -43,6 +43,9 @@ namespace BluRip
                 checkBoxManualFps.Checked = ((AdvancedVideoOptions)ao).disableFps;
                 checkBoxManualAutoCrop.Checked = ((AdvancedVideoOptions)ao).disableAutocrop;
                 textBoxFps.Text = ((AdvancedVideoOptions)ao).fps;
+                textBoxLength.Text = ((AdvancedVideoOptions)ao).length;
+                textBoxFrames.Text = ((AdvancedVideoOptions)ao).frames;
+
                 checkBoxManualAutoCrop.Checked = ((AdvancedVideoOptions)ao).disableAutocrop;
                 checkBoxManualCrop.Checked = ((AdvancedVideoOptions)ao).manualCrop;
                 checkBoxManualBorders.Checked = ((AdvancedVideoOptions)ao).manualBorders;
@@ -358,6 +361,28 @@ namespace BluRip
             {
 
                 ((AdvancedVideoOptions)ao).videoExtension = textBoxVideoExtension.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxLength_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ((AdvancedVideoOptions)ao).length = textBoxLength.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxFrames_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ((AdvancedVideoOptions)ao).frames = textBoxFrames.Text;
             }
             catch (Exception)
             {
