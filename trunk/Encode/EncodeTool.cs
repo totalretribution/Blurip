@@ -32,6 +32,11 @@ namespace BluRip
         private VideoFileInfo vfi = null;
         private TitleInfo titleInfo = null;
         private int profile = -1;
+        private int length = 0;
+        private int frames = 0;
+        private long totalSize = 0;
+        private long targetSize = 0;
+        int bitrate = 0;
 
         public EncodeTool(UserSettings settings, TitleInfo titleInfo, int profile, bool secondPass, VideoFileInfo vfi)
             : base()
@@ -46,8 +51,7 @@ namespace BluRip
                 this.profile = profile;
 
                 bool is2pass = settings.encodingSettings[profile].pass2;
-                int bitrate = 0;
-
+                
                 if (settings.encodingSettings[profile].pass2)
                 {
                     if (settings.encodingSettings[profile].sizeType == SizeType.Bitrate)
@@ -56,8 +60,7 @@ namespace BluRip
                     }
                     else if (settings.encodingSettings[profile].sizeType == SizeType.Size)
                     {
-                        int length = 0;
-                        int frames = 0;
+                        
                         try
                         {
                             length = Convert.ToInt32(vfi.length);
@@ -78,9 +81,11 @@ namespace BluRip
                         // use frame count to calculate overhead
                         // to be done...
 
-                        long totalSize = GetSize();
-                        long targetSize = Convert.ToInt64(settings.encodingSettings[profile].sizeValue * 1024.0 * 1024.0);
-                        bitrate = (int)((targetSize - totalSize) / 1024 / length);
+                        totalSize = GetSize();
+                        targetSize = Convert.ToInt64(settings.encodingSettings[profile].sizeValue * 1024.0 * 1024.0);
+                        bitrate = (int)((targetSize - totalSize) / 1024 / length); //kbyte/s
+                        bitrate *= 8; //kbit/s
+
                         // no mkv overhead used yet
                     }
                 }
@@ -302,15 +307,30 @@ namespace BluRip
 
         protected override void StartInfo()
         {
-            if (!secondPass)
+            try
             {
-                Info("Starting to encode...");
+                if (settings.encodingSettings[profile].pass2 && settings.encodingSettings[profile].sizeType == SizeType.Size && !secondPass)
+                {
+                    Info("Size of audio & subtitle: " + totalSize.ToString() + " bytes (" + (totalSize / 1024 / 1024).ToString() + " MB)");
+                    Info("Size for video: " + (targetSize - totalSize).ToString() + " bytes (" + ((targetSize - totalSize) / 1024 / 1024).ToString() + " MB)");
+                    Info("Length: " + length.ToString() + " seconds");
+                    Info("Bitrate: " + bitrate.ToString() + " kbit/s");
+                    Info("Framecount: " + frames.ToString());
+                    Info("Framerate: " + vfi.fps);
+                }
+                if (!secondPass)
+                {
+                    Info("Starting to encode...");
+                }
+                else
+                {
+                    Info("Starting to encode 2. pass...");
+                }
+                Info("");
             }
-            else
+            catch (Exception)
             {
-                Info("Starting to encode 2. pass...");
             }
-            Info("");
         }
 
         protected override void EndInfo()
