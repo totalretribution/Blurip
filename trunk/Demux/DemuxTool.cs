@@ -153,8 +153,8 @@ namespace BluRip
                                 }
                                 else if (settings.untouchedAudio && si.typeDesc == "RAW/PCM")
                                 {
-                                    Parameter += "audio_pcm_" + si.language + ".pcm\" ";
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_pcm_" + si.language + ".pcm";
+                                    Parameter += "audio_pcm_wav_" + si.language + ".wav\" -blu-ray ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_pcm_wav_" + si.language + ".wav";
                                 }
                                 else
                                 {
@@ -162,6 +162,11 @@ namespace BluRip
                                     if (settings.downmixAc3)
                                     {
                                         Parameter += "-" + ac3Bitrate + " ";
+                                    }
+                                    // maybe not needed?
+                                    if (si.typeDesc == "RAW/PCM")
+                                    {
+                                        Parameter += "-blu-ray ";
                                     }
                                     si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + si.language + ".ac3";
                                 }
