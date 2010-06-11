@@ -271,6 +271,10 @@ namespace BluRip
                         this.Invalidate();
                         Thread.Sleep(500);
                     }
+                    if (tmpTop == 0 && tmpBottom == 0)
+                    {
+                        break;
+                    }
                 }
 
                 bool mod8ok = false;
