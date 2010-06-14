@@ -171,6 +171,7 @@ namespace BluRip
             this.avs2yuvPath = orig.avs2yuvPath;
             this.use64bit = orig.use64bit;
             this.muxLowResSubs = orig.muxLowResSubs;
+            this.deleteIndex = orig.deleteIndex;
 
             foreach (LanguageInfo li in orig.preferredLanguages)
             {
@@ -335,5 +336,6 @@ namespace BluRip
         public string avs2yuvPath = "";
         public bool use64bit = false;
         public bool muxLowResSubs = false;
+        public bool deleteIndex = false;
     }
 }
