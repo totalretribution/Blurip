@@ -73,6 +73,7 @@
             this.buttonStartConvert = new System.Windows.Forms.Button();
             this.tabPageSettings = new System.Windows.Forms.TabPage();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
+            this.checkBoxDeleteIndex = new System.Windows.Forms.CheckBox();
             this.checkBoxMuxLowResSubs = new System.Windows.Forms.CheckBox();
             this.labelCopySubs = new System.Windows.Forms.Label();
             this.checkBoxDeleteAfterEncode = new System.Windows.Forms.CheckBox();
@@ -704,6 +705,7 @@
             // 
             // groupBoxGeneral
             // 
+            this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteIndex);
             this.groupBoxGeneral.Controls.Add(this.checkBoxMuxLowResSubs);
             this.groupBoxGeneral.Controls.Add(this.labelCopySubs);
             this.groupBoxGeneral.Controls.Add(this.checkBoxDeleteAfterEncode);
@@ -714,10 +716,21 @@
             this.groupBoxGeneral.Controls.Add(this.checkBoxUntouchedVideo);
             this.groupBoxGeneral.Location = new System.Drawing.Point(6, 6);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(232, 194);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(232, 214);
             this.groupBoxGeneral.TabIndex = 7;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General options";
+            // 
+            // checkBoxDeleteIndex
+            // 
+            this.checkBoxDeleteIndex.AutoSize = true;
+            this.checkBoxDeleteIndex.Location = new System.Drawing.Point(6, 190);
+            this.checkBoxDeleteIndex.Name = "checkBoxDeleteIndex";
+            this.checkBoxDeleteIndex.Size = new System.Drawing.Size(220, 17);
+            this.checkBoxDeleteIndex.TabIndex = 20;
+            this.checkBoxDeleteIndex.Text = "Always delete index files before AutoCrop";
+            this.checkBoxDeleteIndex.UseVisualStyleBackColor = true;
+            this.checkBoxDeleteIndex.CheckedChanged += new System.EventHandler(this.checkBoxDeleteIndex_CheckedChanged);
             // 
             // checkBoxMuxLowResSubs
             // 
@@ -2629,6 +2642,7 @@
         private System.Windows.Forms.Label labelx264Info;
         private System.Windows.Forms.LinkLabel linkLabelavs2yuv;
         private System.Windows.Forms.CheckBox checkBoxMuxLowResSubs;
+        private System.Windows.Forms.CheckBox checkBoxDeleteIndex;
     }
 }
 

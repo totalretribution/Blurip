@@ -73,6 +73,9 @@
     <Compile Include="FileListForm.Designer.cs">
       <DependentUpon>FileListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IndexAutocrop.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LanguageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +159,10 @@
     <ProjectReference Include="..\Encode\Encode.csproj">
       <Project>{6FD30AE5-4EFF-43BB-910C-99FBF8807480}</Project>
       <Name>Encode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Index\Index.csproj">
+      <Project>{EC1BAB42-2236-427B-8662-BD39CC64E9E6}</Project>
+      <Name>Index</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mux\Mux.csproj">
       <Project>{5B2CB9B3-3FBB-438E-BB73-BB61CED42B7E}</Project>
