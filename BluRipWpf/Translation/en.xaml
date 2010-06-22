@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="MenuFile">File</system:String>
+    <system:String x:Key="MenuFileOpen">Open</system:String>
+    <system:String x:Key="MenuFileSave">Save</system:String>
+    <system:String x:Key="MenuFileExit">Exit</system:String>
+
+    <system:String x:Key="MenuView">View</system:String>
+    <system:String x:Key="MenuViewLog">Log window</system:String>
+
+    <system:String x:Key="MenuLanguage">Language</system:String>
+
+    <system:String x:Key="MenuSettings">Settings</system:String>
+    
+    <system:String x:Key="MenuHelp">Help</system:String>
+
+    <system:String x:Key="TabInput">Input</system:String>
+    <system:String x:Key="TabOutput">Output</system:String>
+
+
+    <system:String x:Key="LabelBluerayPath">Path to BluRay drive/folder:</system:String>
+    <system:String x:Key="ButtonBluerayPath">...</system:String>
+    <system:String x:Key="ButtonBluerayPathTooltip">Set path to BluRay drive or folder containing ripped BluRay structure</system:String>
+    <system:String x:Key="ButtonGetStreamInfo">Get stream infos</system:String>
+    <system:String x:Key="ButtonOpenM2ts">Open *.m2ts file(s)</system:String>
+    <system:String x:Key="ButtonAbort">Abort</system:String>
+
+
+    <system:String x:Key="TabMainLog">Main log</system:String>
+    <system:String x:Key="TabDemuxLog">Demux log</system:String>
+    <system:String x:Key="TabCropLog">Crop/Index log</system:String>
+    <system:String x:Key="TabSubtitleLog">Subtitle log</system:String>
+    <system:String x:Key="TabEncodeLog">Encode log</system:String>
+    <system:String x:Key="TabMuxLog">Mux log</system:String>
+
+    <system:String x:Key="StatusBar">Status:</system:String>
+    <system:String x:Key="StatusBarReady">Ready.</system:String>
+    <system:String x:Key="StatusBarStreamInfo">Getting stream info...</system:String>
+
+</ResourceDictionary>
