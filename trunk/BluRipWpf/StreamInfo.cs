@@ -51,18 +51,35 @@ namespace BluRip
             }
         }
 
+        private bool checkEac3to()
+        {
+            try
+            {
+                if (!File.Exists(settings.eac3toPath))
+                {
+                    logWindow.MessageMain((string)App.Current.Resources["ErrorEac3toPath"]);
+                    if (!silent) System.Windows.MessageBox.Show((string)App.Current.Resources["ErrorEac3toPath"], (string)App.Current.Resources["ErrorHeader"], MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private void buttonGetStreamInfo_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //if (!checkEac3to()) return;
-                //this.Text = title + " [Getting stream info...]";
+                if (!checkEac3to()) return;
                 UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarStreamInfo"]);
                 progressBarMain.Visibility = Visibility.Visible;
                 buttonAbort.Visibility = Visibility.Visible;
 
                 comboBoxTitle.Items.Clear();
-                listBoxStreams.Items.Clear();
+                listBoxStreams.ItemsSource = null;
                 m2tsList.Clear();
 
                 sit = new StreamInfoTool(settings, ref titleList, settings.lastBluRayPath, videoTypes, ac3AudioTypes, dtsAudioTypes);
@@ -89,7 +106,239 @@ namespace BluRip
                 progressBarMain.Visibility = Visibility.Hidden;
                 buttonAbort.Visibility = Visibility.Hidden;
                 UpdateStatus((string)App.Current.Resources["StatusBar"] + " " +(string)App.Current.Resources["StatusBarReady"]);
-                //this.Text = title;
+            }
+        }        
+
+        private string StreamTypeToString(StreamType st)
+        {
+            if (st == StreamType.Audio)
+            {
+                return "AUDIO";
+            }
+            else if (st == StreamType.Chapter)
+            {
+                return "CHAPTER";
+            }
+            else if (st == StreamType.Subtitle)
+            {
+                return "SUBTITLE";
+            }
+            else if (st == StreamType.Unknown)
+            {
+                return "UNKNOWN";
+            }
+            else if (st == StreamType.Video)
+            {
+                return "VIDEO";
+            }
+            else
+            {
+                return "UNKNOWN";
+            }
+        }
+
+        private bool HasLanguage(string s)
+        {
+            foreach (LanguageInfo li in settings.preferredLanguages)
+            {
+                if (li.language == s) return true;
+            }
+            return false;
+        }
+
+        private int LanguagIndex(string s)
+        {
+            int index = -1;
+            for (int i = 0; i < settings.preferredLanguages.Count; i++)
+            {
+                if (settings.preferredLanguages[i].language == s)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        private void UpdateStreamList()
+        {
+            try
+            {
+                int maxLength = 0;
+                foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                {
+                    maxLength = Math.Max(maxLength, StreamTypeToString(si.streamType).Length);
+                }
+
+                List<int> maxac3List = new List<int>();
+                List<int> maxdtsList = new List<int>();
+
+                for (int i = 0; i < settings.preferredLanguages.Count; i++)
+                {
+                    maxac3List.Add(0);
+                    maxdtsList.Add(0);
+                }
+                foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                {
+                }
+
+                int videoCount = 0;
+                int chapterCount = 0;
+
+                if (settings.useAutoSelect)
+                {
+                    List<int> ac3List = new List<int>();
+                    List<int> dtsList = new List<int>();
+
+                    for (int i = 0; i < settings.preferredLanguages.Count; i++)
+                    {
+                        ac3List.Add(0);
+                        dtsList.Add(0);
+                    }
+                    foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                    {
+                        if (si.streamType == StreamType.Audio)
+                        {
+                            if (HasLanguage(si.language))
+                            {
+                                int index = LanguagIndex(si.language);
+                                if (dtsAudioTypes.Contains(si.typeDesc))
+                                {
+                                    maxdtsList[index]++;
+                                }
+                                if (ac3AudioTypes.Contains(si.typeDesc))
+                                {
+                                    maxac3List[index]++;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                    {
+                        if (si.streamType == StreamType.Chapter)
+                        {
+                            if (settings.includeChapter && chapterCount == 0)
+                            {
+                                si.selected = true;
+                                chapterCount++;
+                            }
+                        }
+                        if (si.streamType == StreamType.Subtitle)
+                        {
+                            if (settings.includeSubtitle)
+                            {
+                                if (HasLanguage(si.language))
+                                {
+                                    si.selected = true;
+                                }
+                            }
+                        }
+                        if (si.streamType == StreamType.Audio)
+                        {
+                            if (HasLanguage(si.language))
+                            {
+                                int index = LanguagIndex(si.language);
+                                if (settings.preferDTS)
+                                {
+                                    if (dtsAudioTypes.Contains(si.typeDesc))
+                                    {
+                                        if (dtsList[index] == 0)
+                                        {
+                                            dtsList[index]++;
+                                            si.selected = true;
+                                        }
+                                    }
+                                    if (ac3AudioTypes.Contains(si.typeDesc) && maxdtsList[index] == 0)
+                                    {
+                                        if (ac3List[index] == 0)
+                                        {
+                                            ac3List[index]++;
+                                            si.selected = true;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (ac3AudioTypes.Contains(si.typeDesc))
+                                    {
+                                        if (ac3List[index] == 0)
+                                        {
+                                            if (si.typeDesc == "AC3 Surround" && maxac3List.Count > 0)
+                                            {
+                                            }
+                                            else
+                                            {
+                                                ac3List[index]++;
+                                                si.selected = true;
+                                            }
+                                        }
+                                    }
+                                    if (dtsAudioTypes.Contains(si.typeDesc) && maxac3List[index] == 0)
+                                    {
+                                        if (dtsList[index] == 0)
+                                        {
+                                            dtsList[index]++;
+                                            si.selected = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (si.streamType == StreamType.Video)
+                        {
+                            if (si.desc.Contains("1080") && videoCount == 0)
+                            {
+                                si.selected = true;
+                                videoCount++;
+                            }
+                        }
+                    }
+                }
+
+                listBoxStreams.ItemsSource = null;
+                listBoxStreams.ItemsSource = titleList[comboBoxTitle.SelectedIndex].streams;
+                listBoxStreams.Items.Refresh();
+
+                foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                {
+                    string desc = "[ " + si.number.ToString("d3") + " ] - [ " + StreamTypeToString(si.streamType);
+                    for (int i = 0; i < maxLength - StreamTypeToString(si.streamType).Length; i++) desc += " ";
+                    desc += " ] - ";
+                    if (si.advancedOptions != null && si.advancedOptions.GetType() != typeof(AdvancedOptions)) desc += "AO* ";
+                    desc += "(" + si.desc + ")";
+                    if (si.addInfo != "")
+                    {
+                        desc += " - (" + si.addInfo + ")";
+                    }
+
+                    //listBoxStreams.Items.Add(desc);
+                    if (si.selected)
+                    {
+                        int index = titleList[comboBoxTitle.SelectedIndex].streams.IndexOf(si);
+                        object li = listBoxStreams.Items[index];
+                        //listBoxStreams.SelectedItems.Add(li);
+                    }
+                    //checkedListBoxStreams.SetItemChecked(checkedListBoxStreams.Items.Count - 1, si.selected);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxTitle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxTitle.SelectedIndex > -1)
+                {
+                    listBoxStreams.ItemsSource = null;
+                    UpdateStreamList();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
