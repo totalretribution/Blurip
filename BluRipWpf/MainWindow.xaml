@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BluRip.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BluRip" Height="543" Width="789" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" Loaded="Window_Loaded" Name="windowMain">
+        Title="BluRip" Height="543" Width="789" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" Name="windowMain" Closing="windowMain_Closing">
     <Grid Name="gridMain">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,23 +18,25 @@
                 <MenuItem Header="{DynamicResource MenuViewLog}" Name="menuItemViewLog" Click="menuItemViewLog_Click" IsCheckable="True" />
             </MenuItem>
             <MenuItem Header="{DynamicResource MenuLanguage}" Name="menuItemLanguage" />
-            <MenuItem Header="{DynamicResource MenuSettings}" Name="menuItemSettings" />
+            <MenuItem Header="{DynamicResource MenuSettings}" Name="menuItemSettings">
+                <MenuItem Header="{DynamicResource MenuSettingsExternalTools}" Name="menuItemSettingsExternalTools" Click="menuItemSettingsExternalTools_Click" />
+            </MenuItem>
             <MenuItem Header="{DynamicResource MenuHelp}" Name="menuItemHelp" />
         </Menu>
         <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" Name="statusBarMain" VerticalAlignment="Bottom">
             <StatusBarItem Content="Text" Name="statusBarItemMain" />
         </StatusBar>
         <Grid Grid.Row="1" HorizontalAlignment="Stretch" Name="gridContent" VerticalAlignment="Stretch">
-            <TabControl HorizontalAlignment="Stretch" Name="tabControlMain" VerticalAlignment="Stretch" Margin="0,0,0,35">
+            <TabControl HorizontalAlignment="Stretch" Name="tabControlMain" VerticalAlignment="Stretch" Margin="5,5,5,35">
                 <TabItem Header="{DynamicResource TabInput}" Name="tabItemInput">
                     <Grid>
                         <Button Content="{DynamicResource ButtonBluerayPath}" Height="23" HorizontalAlignment="Left" Margin="298,31,0,0" Name="buttonBluRayPath" VerticalAlignment="Top" Width="75" Click="buttonBluRayPath_Click" ToolTip="{DynamicResource ButtonBluerayPathTooltip}" />
                         <Label Content="{DynamicResource LabelBluerayPath}" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" />
-                        <TextBox HorizontalAlignment="Left" Name="textBoxBlurayPath" VerticalAlignment="Top" Width="286" IsReadOnly="True" Margin="6,32,0,0" />
-                        <Button Content="{DynamicResource ButtonGetStreamInfo}" Height="23" HorizontalAlignment="Left" Margin="6,60,0,0" Name="buttonGetStreamInfos" VerticalAlignment="Top" Width="140" Click="buttonGetStreamInfo_Click" />
-                        <Button Content="{DynamicResource ButtonOpenM2ts}" Height="23" HorizontalAlignment="Left" Margin="152,60,0,0" Name="buttonOpenM2ts" VerticalAlignment="Top" Width="140" />
-                        <ListBox HorizontalAlignment="Left" Margin="6,134,0,6" Name="listBoxStreams" VerticalAlignment="Stretch" Width="615"></ListBox>
-                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,105,0,0" Name="comboBoxTitle" VerticalAlignment="Top" Width="615" />
+                        <TextBox HorizontalAlignment="Left" Name="textBoxBlurayPath" VerticalAlignment="Top" Width="286" IsReadOnly="True" Margin="6,32,0,0" Height="23" />
+                        <Button Content="{DynamicResource ButtonGetStreamInfo}" Height="23" HorizontalAlignment="Left" Margin="6,61,0,0" Name="buttonGetStreamInfos" VerticalAlignment="Top" Width="140" Click="buttonGetStreamInfo_Click" />
+                        <Button Content="{DynamicResource ButtonOpenM2ts}" Height="23" HorizontalAlignment="Left" Margin="152,61,0,0" Name="buttonOpenM2ts" VerticalAlignment="Top" Width="140" />
+                        <ListBox HorizontalAlignment="Stretch" Margin="6,134,0,6" Name="listBoxStreams" VerticalAlignment="Stretch" MouseDoubleClick="listBoxStreams_MouseDoubleClick"></ListBox>
+                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,105,0,0" Name="comboBoxTitle" VerticalAlignment="Top" Width="615" SelectionChanged="comboBoxTitle_SelectionChanged" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabOutput}" Name="tabItemOutput">

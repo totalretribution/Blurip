@@ -223,6 +223,16 @@ namespace BluRip
         public string filename = "";        
         public ExtraFileInfo extraFileInfo = new ExtraFileInfo();
         public AdvancedOptions advancedOptions = new AdvancedOptions();
+
+        public string Desc
+        {
+            get { return desc; }
+        }
+
+        public bool Selected
+        {
+            get { return selected; }
+        }
     }
 
     public class AdvancedOptions

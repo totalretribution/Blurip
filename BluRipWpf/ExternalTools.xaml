@@ -1,0 +1,27 @@
+﻿<Window x:Class="BluRip.ExternalTools"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ExternalTools" Height="408" Width="950" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="95" IsDefault="True" Click="buttonOk_Click" />
+        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="113,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="95" IsCancel="True" />
+        <Label Content="{DynamicResource LabelEac3toPath}" HorizontalAlignment="Left" Name="labelEac3toPath" VerticalAlignment="Top" Margin="12,12,0,0" />
+        <TextBox HorizontalAlignment="Left" Margin="12,44,0,0" Name="textBoxEac3toPath" VerticalAlignment="Top" Width="368" Height="23" IsReadOnly="True" />
+        <Button Content="{DynamicResource ButtonEac3toPath}" Height="23" HorizontalAlignment="Left" Margin="386,44,0,0" Name="buttonEac3toPath" VerticalAlignment="Top" Width="75" Click="buttonEac3toPath_Click" />
+        <Label Content="{DynamicResource LabelBDSup2subPath}" HorizontalAlignment="Left" Margin="12,73,0,0" Name="labelBDSup2subPath" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="12,105,0,0" Name="textBoxBDSup2subPath" VerticalAlignment="Top" Width="368" />
+        <Button Content="{DynamicResource ButtonBDSup2subPath}" Height="23" HorizontalAlignment="Left" Margin="386,105,0,0" Name="buttonBDSup2subPath" VerticalAlignment="Top" Width="75" Click="buttonBDSup2subPath_Click" />
+        <Label Content="{DynamicResource LabelX264Path}" HorizontalAlignment="Left" Margin="12,134,0,0" Name="labelX264Path" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="12,166,0,0" Name="textBoxX264Path" VerticalAlignment="Top" Width="368" />
+        <Button Content="{DynamicResource ButtonX264Path}" Height="23" HorizontalAlignment="Left" Margin="386,166,0,0" Name="buttonX264Path" VerticalAlignment="Top" Width="75" Click="buttonX264Path_Click" />
+        <Label Content="{DynamicResource LabelJavaPath}" HorizontalAlignment="Left" Margin="12,195,0,0" Name="labelJavaPath" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="12,227,0,0" Name="textBoxJavaPath" VerticalAlignment="Top" Width="368" />
+        <Button Content="{DynamicResource ButtonJavaPath}" Height="23" HorizontalAlignment="Left" Margin="386,227,0,0" Name="buttonJavaPath" VerticalAlignment="Top" Width="75" Click="buttonJavaPath_Click" />
+        <Label Content="{DynamicResource LabelMkvmergePath}" HorizontalAlignment="Left" Margin="12,256,0,0" Name="labelMkvmergePath" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="12,288,0,0" Name="textBoxMkvmergePath" VerticalAlignment="Top" Width="368" />
+        <Button Content="{DynamicResource ButtonMkvmergePath}" Height="23" HorizontalAlignment="Left" Margin="386,288,0,0" Name="buttonMkvmergePath" VerticalAlignment="Top" Width="75" Click="buttonMkvmergePath_Click" />
+        <Label Content="{DynamicResource LabelX264Path}" HorizontalAlignment="Left" Margin="467,12,0,0" Name="label3" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="467,44,0,0" Name="textBox3" VerticalAlignment="Top" Width="368" />
+        <Button Content="{DynamicResource ButtonX264Path}" Height="23" HorizontalAlignment="Left" Margin="841,44,0,0" Name="button3" VerticalAlignment="Top" Width="75" />
+    </Grid>
+</Window>

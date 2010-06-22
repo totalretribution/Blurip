@@ -56,7 +56,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ExternalTools.xaml.cs">
+      <DependentUpon>ExternalTools.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StreamInfo.cs" />
+    <Page Include="ExternalTools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

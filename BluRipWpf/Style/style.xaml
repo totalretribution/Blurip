@@ -1,12 +1,54 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BluRip;assembly=Base"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <Style TargetType="{x:Type ListBox}">
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabControl}">
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type Button}">
         <Setter Property="Button.Background" Value="#FF3131E2" />
         <Setter Property="Button.Foreground" Value="White" />
-        <Setter Property="Button.BitmapEffect">
+        <Setter Property="BitmapEffect">
             <Setter.Value>
-                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="5" Softness="1" Opacity="0.5"/>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Button.Template">
@@ -66,4 +108,23 @@
         </Style.Triggers>
     </Style>
 
+    <DataTemplate DataType="{x:Type local:StreamInfo}">        
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=Selected}">
+                <DataTrigger.Value>
+                    <system:Boolean>true</system:Boolean>
+                </DataTrigger.Value>
+                <Setter Property="TextBlock.Foreground" Value="Green"/>
+                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Selected}">
+                <DataTrigger.Value>
+                    <system:Boolean>false</system:Boolean>
+                </DataTrigger.Value>
+                <Setter Property="TextBlock.Foreground" Value="Black"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+        <TextBlock Text="{Binding Path=Desc}" />
+    </DataTemplate>
+    
 </ResourceDictionary>

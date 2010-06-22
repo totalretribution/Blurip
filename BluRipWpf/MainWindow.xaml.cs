@@ -31,6 +31,8 @@ namespace BluRip
         public string title = "BluRip v0.5.0 © _hawk_";
 
         private LogWindow logWindow = null;
+        private bool silent = false;
+        private bool abort = false;
 
         public MainWindow()
         {
@@ -85,7 +87,7 @@ namespace BluRip
                 {
                     UserSettings.LoadSettingsFile(ref settings, settingsPath);
                 }
-                //UpdateFromSettings();
+                UpdateFromSettings();
                 logWindow = new LogWindow();
                 logWindow.Owner = this;
 
@@ -135,6 +137,60 @@ namespace BluRip
             try
             {
                 statusBarItemMain.Content = msg;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemSettingsExternalTools_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ExternalTools et = new ExternalTools(settings);
+                et.ShowDialog();
+                if (et.DialogResult == true)
+                {
+                    settings = new UserSettings(et.userSettings);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void windowMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                UserSettings.SaveSettingsFile(settings, settingsPath);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateFromSettings()
+        {
+            try
+            {
+                textBoxBlurayPath.Text = settings.lastBluRayPath;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void listBoxStreams_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = listBoxStreams.SelectedIndex;
+                if (index > -1)
+                {
+                    titleList[comboBoxTitle.SelectedIndex].streams[index].selected = !titleList[comboBoxTitle.SelectedIndex].streams[index].selected;
+                    listBoxStreams.Items.Refresh();
+                }
             }
             catch (Exception)
             {

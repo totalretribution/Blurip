@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BluRip.LogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LogWindow" Height="348" Width="784" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="LogWindow" Height="348" Width="784" Closing="Window_Closing" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl HorizontalAlignment="Stretch" Name="tabControlLog" VerticalAlignment="Stretch">
             <TabItem Header="{DynamicResource TabMainLog}" Name="tabItemMainLog">
