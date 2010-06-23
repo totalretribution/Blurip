@@ -31,7 +31,13 @@
 
     <!-- Tab Output -->
     <system:String x:Key="TabOutput">Output</system:String>
-    
+    <system:String x:Key="LabelWorkingDirectory">Working directory</system:String>
+    <system:String x:Key="ButtonWorkingDirectory">...</system:String>
+    <system:String x:Key="LabelFilePrefix">File prefix</system:String>
+    <system:String x:Key="LabelTargetDirectory">Target directory</system:String>
+    <system:String x:Key="ButtonTargetDirectory">...</system:String>
+    <system:String x:Key="LabelTargetFilename">Target filename (without .mkv)</system:String>
+    <system:String x:Key="LabelMovieTitle">Movie title</system:String>    
 
     <!-- General -->
     <system:String x:Key="ButtonOk">Ok</system:String>
