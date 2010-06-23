@@ -27,12 +27,16 @@ namespace BluRip
             try
             {
                 this.settings = new UserSettings(settings);
-
+                
                 textBoxEac3toPath.Text = settings.eac3toPath;
                 textBoxBDSup2subPath.Text = settings.sup2subPath;
                 textBoxJavaPath.Text = settings.javaPath;
                 textBoxX264Path.Text = settings.x264Path;
                 textBoxMkvmergePath.Text = settings.mkvmergePath;
+                textBoxFfmsindexPath.Text = settings.ffmsindexPath;
+                textBoxDgindexnvPath.Text = settings.dgindexnvPath;
+                textBoxX264x64Path.Text = settings.x264x64Path;
+                textBoxAvs2yuvPath.Text = settings.avs2yuvPath;
             }
             catch (Exception)
             {
@@ -137,6 +141,50 @@ namespace BluRip
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void buttonFfmsindexPath_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "ffmsindex.exe|ffmsindex.exe";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxFfmsindexPath.Text = ofd.FileName;
+                settings.ffmsindexPath = ofd.FileName;
+            }
+        }
+
+        private void buttonDgindexnvPath_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "DGIndexNv.exe|DGIndexNv.exe";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxDgindexnvPath.Text = ofd.FileName;
+                settings.dgindexnvPath = ofd.FileName;
+            }
+        }
+
+        private void buttonX264x64Path_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "x264.exe|x264*.exe";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxX264x64Path.Text = ofd.FileName;
+                settings.x264x64Path = ofd.FileName;
+            }
+        }
+
+        private void buttonAvs2yuvPath_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "avs2yuv.exe|avs2yuv.exe";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxAvs2yuvPath.Text = ofd.FileName;
+                settings.avs2yuvPath = ofd.FileName;
             }
         }
     }

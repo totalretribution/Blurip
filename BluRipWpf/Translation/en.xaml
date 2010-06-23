@@ -2,63 +2,102 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <!-- Menu -->
     <system:String x:Key="MenuFile">File</system:String>
     <system:String x:Key="MenuFileOpen">Open</system:String>
     <system:String x:Key="MenuFileSave">Save</system:String>
     <system:String x:Key="MenuFileExit">Exit</system:String>
-
     <system:String x:Key="MenuView">View</system:String>
     <system:String x:Key="MenuViewLog">Log window</system:String>
-
+    <system:String x:Key="MenuViewDemuxedStreams">Demuxed streams window</system:String>
+    <system:String x:Key="MenuViewReset">Reset settings</system:String>
+    <system:String x:Key="MenuViewSnap">Snap to main window</system:String>
     <system:String x:Key="MenuLanguage">Language</system:String>
-
     <system:String x:Key="MenuSettings">Settings</system:String>
-    <system:String x:Key="MenuSettingsExternalTools">External tools</system:String>
-    
+    <system:String x:Key="MenuSettingsExternalTools">External tools</system:String>    
     <system:String x:Key="MenuHelp">Help</system:String>
 
+    <!-- Tab Input -->
     <system:String x:Key="TabInput">Input</system:String>
-    <system:String x:Key="TabOutput">Output</system:String>
-
-
     <system:String x:Key="LabelBluerayPath">Path to BluRay drive/folder:</system:String>
     <system:String x:Key="ButtonBluerayPath">...</system:String>
     <system:String x:Key="ButtonBluerayPathTooltip">Set path to BluRay drive or folder containing ripped BluRay structure</system:String>
     <system:String x:Key="ButtonGetStreamInfo">Get stream infos</system:String>
     <system:String x:Key="ButtonOpenM2ts">Open *.m2ts file(s)</system:String>
+    <system:String x:Key="LabelStreamDesc">Double click to select/deselect - right click for advanced options</system:String>
+    <system:String x:Key="LabelTitleDesc">Title selection</system:String>
+    <system:String x:Key="LabelStreamListDesc">Available streams</system:String>
     <system:String x:Key="ButtonAbort">Abort</system:String>
 
+    <!-- Tab Output -->
+    <system:String x:Key="TabOutput">Output</system:String>
+    
+
+    <!-- General -->
     <system:String x:Key="ButtonOk">Ok</system:String>
     <system:String x:Key="ButtonCancel">Cancel</system:String>
+    <system:String x:Key="MessageExitHeader">Exit BluRip?</system:String>
+    <system:String x:Key="MessageExit">Do you really want to exit BluRip?</system:String>
 
+    <!-- ExternalTools Window -->
     <system:String x:Key="ButtonEac3toPath">...</system:String>
-    <system:String x:Key="LabelEac3toPath">Path to eac3to.exe:</system:String>
-    
+    <system:String x:Key="LabelEac3toPath">Path to eac3to.exe:</system:String>    
     <system:String x:Key="ButtonBDSup2subPath">...</system:String>
-    <system:String x:Key="LabelBDSup2subPath">Path to BDSup2sub.jar:</system:String>
-    
+    <system:String x:Key="LabelBDSup2subPath">Path to BDSup2sub.jar:</system:String>    
     <system:String x:Key="ButtonX264Path">...</system:String>
     <system:String x:Key="LabelX264Path">Path to x264.exe:</system:String>
-
     <system:String x:Key="ButtonJavaPath">...</system:String>
     <system:String x:Key="LabelJavaPath">Path to java.exe:</system:String>
-
     <system:String x:Key="ButtonMkvmergePath">...</system:String>
     <system:String x:Key="LabelMkvmergePath">Path to mkvmerge.exe:</system:String>
+    <system:String x:Key="ButtonFfmsindexPath">...</system:String>
+    <system:String x:Key="LabelFfmsindexPath">Path to ffmsindex.exe:</system:String>
+    <system:String x:Key="ButtonDgindexnvPath">...</system:String>
+    <system:String x:Key="LabelDgindexnvPath">Path to DGIndexNV.exe:</system:String>
+    <system:String x:Key="ButtonX264x64Path">...</system:String>
+    <system:String x:Key="LabelX264x64Path">Path to 64-bit x264.exe:</system:String>
+    <system:String x:Key="ButtonAvs2yuvPath">...</system:String>
+    <system:String x:Key="LabelAvs2yuvPath">Path to avs2yuv.exe:</system:String>
+    <system:String x:Key="HeaderExternalTools">External tools</system:String>
+    <system:String x:Key="HeaderFfmpegsrc">When using FFMpegSrc</system:String>
+    <system:String x:Key="HeaderDgdecnv">When using DGMultiDec</system:String>
+    <system:String x:Key="HeaderX264x64">When using 64-bit x264</system:String>
+    <system:String x:Key="CaptionExternalToolsWindow">Settings for external tools</system:String>
 
-
+    <!-- Log Window -->
     <system:String x:Key="TabMainLog">Main log</system:String>
     <system:String x:Key="TabDemuxLog">Demux log</system:String>
     <system:String x:Key="TabCropLog">Crop/Index log</system:String>
     <system:String x:Key="TabSubtitleLog">Subtitle log</system:String>
     <system:String x:Key="TabEncodeLog">Encode log</system:String>
     <system:String x:Key="TabMuxLog">Mux log</system:String>
+    <system:String x:Key="CaptionLogWindow">Log</system:String>
+    <system:String x:Key="MenuLogClearAll">Clear all logs</system:String>
+    <system:String x:Key="MenuLogClear">Clear log</system:String>
+    <system:String x:Key="MenuLogSave">Save log</system:String>
 
+    <!-- Status bar -->
     <system:String x:Key="StatusBar">Status:</system:String>
     <system:String x:Key="StatusBarReady">Ready.</system:String>
     <system:String x:Key="StatusBarStreamInfo">Getting stream info...</system:String>
+    <system:String x:Key="StatusBarM2tsInfo">Getting *.m2ts stream info...</system:String>
 
+    <!-- FileList Window -->
+    <system:String x:Key="CaptionFileListWindow">Open *.m2ts file(s)</system:String>
+    <system:String x:Key="LabelFileList">File list:</system:String>
+    <system:String x:Key="ButtonFileListUp">Move up</system:String>
+    <system:String x:Key="ButtonFileListDown">Move down</system:String>
+    <system:String x:Key="ButtonFileListDelete">Delete</system:String>
+    <system:String x:Key="ButtonFileListAdd">Add</system:String>
+
+    <!-- DemuxedStreams Window -->
+    <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed streams</system:String>
+    <system:String x:Key="LabelDemuxedStreamsList">Demuxed streams list:</system:String>
+    <system:String x:Key="ButtonLoadDemuxedStreams">Load existing *.streamInfo.xml</system:String>
+    
+    <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>
     <system:String x:Key="ErrorEac3toPath">Path to eac3to.exe not set or found.</system:String>
+    <system:String x:Key="ErrorBlurayPath">Path to BluRay drive/folder not set or found.</system:String>
 
 </ResourceDictionary>

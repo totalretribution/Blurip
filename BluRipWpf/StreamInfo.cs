@@ -25,6 +25,12 @@ namespace BluRip
         private List<string> m2tsList = new List<string>();
         private TitleInfo demuxedStreamList = new TitleInfo();
 
+        public TitleInfo DemuxedStreams
+        {
+            get { return demuxedStreamList; }
+            set { demuxedStreamList = value; }
+        }
+
         private void DemuxMsg(object sender, ExternalTool.MsgEventArgs e)
         {
             logWindow.MessageDemux(e.Message.Replace("\b", "").Trim());
@@ -58,7 +64,7 @@ namespace BluRip
                 if (!File.Exists(settings.eac3toPath))
                 {
                     logWindow.MessageMain((string)App.Current.Resources["ErrorEac3toPath"]);
-                    if (!silent) System.Windows.MessageBox.Show((string)App.Current.Resources["ErrorEac3toPath"], (string)App.Current.Resources["ErrorHeader"], MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (!silent) ErrorMsg((string)App.Current.Resources["ErrorEac3toPath"]);
                     return false;
                 }
                 return true;
@@ -73,6 +79,12 @@ namespace BluRip
         {
             try
             {
+                if (!Directory.Exists(settings.lastBluRayPath))
+                {
+                    logWindow.MessageDemux((string)App.Current.Resources["ErrorBlurayPath"]);
+                    if (!silent) ErrorMsg((string)App.Current.Resources["ErrorBlurayPath"]);
+                    return;
+                }
                 if (!checkEac3to()) return;
                 UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarStreamInfo"]);
                 progressBarMain.Visibility = Visibility.Visible;
@@ -95,7 +107,7 @@ namespace BluRip
                 UpdateTitleList();
 
                 demuxedStreamList = new TitleInfo();
-                //UpdateDemuxedStreams();
+                demuxedStreamsWindow.UpdateDemuxedStreams();
             }
             catch (Exception ex)
             {
@@ -180,6 +192,7 @@ namespace BluRip
                 }
                 foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
                 {
+                    si.maxLength = maxLength;
                 }
 
                 int videoCount = 0;
@@ -342,21 +355,21 @@ namespace BluRip
             }
         }
 
-        /*
-        private void buttonOpenM2ts_Click(object sender, EventArgs e)
+        private void buttonOpenM2ts_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (!checkEac3to()) return;
-                FileListForm flf = new FileListForm();
-                if (flf.ShowDialog() == DialogResult.OK)
+                FileListWindow flw = new FileListWindow();
+                flw.ShowDialog();
+                if (flw.DialogResult == true)
                 {
                     comboBoxTitle.Items.Clear();
-                    checkedListBoxStreams.Items.Clear();
+                    listBoxStreams.ItemsSource = null;
 
                     titleList.Clear();
                     m2tsList.Clear();
-                    foreach (string s in flf.fileList)
+                    foreach (string s in flw.fileList)
                     {
                         m2tsList.Add(s);
                     }
@@ -366,19 +379,18 @@ namespace BluRip
             catch (Exception)
             {
             }
-        }
+        }        
 
         private void DoM2tsInfo()
         {
             try
             {
-                this.Text = title + " [Getting m2ts stream info...]";
-
-                progressBarMain.Visible = true;
-                buttonAbort.Visible = true;
-
+                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarM2tsInfo"]);
+                progressBarMain.Visibility = Visibility.Visible;
+                buttonAbort.Visibility = Visibility.Visible;
+                
                 comboBoxTitle.Items.Clear();
-                checkedListBoxStreams.Items.Clear();
+                listBoxStreams.ItemsSource = null;
 
                 mit = new M2tsInfoTool(settings, ref titleList, m2tsList, videoTypes, ac3AudioTypes, dtsAudioTypes);
                 mit.OnInfoMsg += new ExternalTool.InfoEventHandler(DemuxMsg);
@@ -393,19 +405,50 @@ namespace BluRip
                 UpdateTitleList();
 
                 demuxedStreamList = new TitleInfo();
-                UpdateDemuxedStreams();
+                demuxedStreamsWindow.UpdateDemuxedStreams();
             }
             catch (Exception ex)
             {
-                MessageDemux("Exception: " + ex.Message);
+                logWindow.MessageDemux("Exception: " + ex.Message);
             }
             finally
             {
-                progressBarMain.Visible = false;
-                buttonAbort.Visible = false;
-                this.Text = title;
+                progressBarMain.Visibility = Visibility.Hidden;
+                buttonAbort.Visibility = Visibility.Hidden;
+                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarReady"]);
             }
         }
-       */
+
+        private void buttonBluRayPath_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    textBoxBlurayPath.Text = fbd.SelectedPath;
+                    settings.lastBluRayPath = fbd.SelectedPath;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void listBoxStreams_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = listBoxStreams.SelectedIndex;
+                if (index > -1)
+                {
+                    titleList[comboBoxTitle.SelectedIndex].streams[index].selected = !titleList[comboBoxTitle.SelectedIndex].streams[index].selected;
+                    listBoxStreams.Items.Refresh();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

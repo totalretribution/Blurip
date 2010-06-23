@@ -223,15 +223,58 @@ namespace BluRip
         public string filename = "";        
         public ExtraFileInfo extraFileInfo = new ExtraFileInfo();
         public AdvancedOptions advancedOptions = new AdvancedOptions();
+        
+        [XmlIgnore]
+        public int maxLength = 0;
 
         public string Desc
         {
-            get { return desc; }
+            get 
+            {
+                string tmp = "[ " + number.ToString("d3") + " " + StreamTypeToString(streamType);
+                for (int i = 0; i < maxLength - StreamTypeToString(streamType).Length; i++) tmp += " ";
+                tmp += " ] - ";
+                if (advancedOptions != null && advancedOptions.GetType() != typeof(AdvancedOptions)) tmp += "AO* ";
+                tmp += "(" + desc + ")";
+                if (addInfo != "")
+                {
+                    tmp += " - (" + addInfo + ")";
+                }
+                return tmp; 
+            }
         }
 
         public bool Selected
         {
             get { return selected; }
+        }
+
+        private string StreamTypeToString(StreamType st)
+        {
+            if (st == StreamType.Audio)
+            {
+                return "AUDIO";
+            }
+            else if (st == StreamType.Chapter)
+            {
+                return "CHAPTER";
+            }
+            else if (st == StreamType.Subtitle)
+            {
+                return "SUBTITLE";
+            }
+            else if (st == StreamType.Unknown)
+            {
+                return "UNKNOWN";
+            }
+            else if (st == StreamType.Video)
+            {
+                return "VIDEO";
+            }
+            else
+            {
+                return "UNKNOWN";
+            }
         }
     }
 

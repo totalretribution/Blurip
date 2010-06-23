@@ -31,6 +31,7 @@ namespace BluRip
         public string title = "BluRip v0.5.0 © _hawk_";
 
         private LogWindow logWindow = null;
+        private DemuxedStreamsWindow demuxedStreamsWindow = null;
         private bool silent = false;
         private bool abort = false;
 
@@ -69,7 +70,7 @@ namespace BluRip
             {
             }
         }
-
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -87,9 +88,14 @@ namespace BluRip
                 {
                     UserSettings.LoadSettingsFile(ref settings, settingsPath);
                 }
-                UpdateFromSettings();
-                logWindow = new LogWindow();
+                
+                logWindow = new LogWindow(this);
                 logWindow.Owner = this;
+
+                demuxedStreamsWindow = new DemuxedStreamsWindow(this);
+                demuxedStreamsWindow.Owner = this;
+
+                UpdateFromSettings();
 
                 UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarReady"]);
             }
@@ -115,23 +121,7 @@ namespace BluRip
             {
             }
         }
-
-        private void buttonBluRayPath_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                FolderBrowserDialog fbd = new FolderBrowserDialog();
-                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    textBoxBlurayPath.Text = fbd.SelectedPath;
-                    settings.lastBluRayPath = fbd.SelectedPath;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
+        
         private void UpdateStatus(string msg)
         {
             try
@@ -163,7 +153,34 @@ namespace BluRip
         {
             try
             {
+                settings.snap = menuItemViewSnap.IsChecked;
+                settings.showDemuxedStream = menuItemViewDemuxedStreams.IsChecked;
+                settings.demuxedStreamsX = demuxedStreamsWindow.Left;
+                settings.demuxedStreamsY = demuxedStreamsWindow.Top;
+
+                settings.showLog = menuItemViewLog.IsChecked;
+                settings.logX = logWindow.Left;
+                settings.logY = logWindow.Top;
+
+                settings.bluripX = this.Left;
+                settings.bluripY = this.Top;
+
                 UserSettings.SaveSettingsFile(settings, settingsPath);
+                if (!silent)
+                {
+                    if (System.Windows.MessageBox.Show((string)App.Current.Resources["MessageExit"], (string)App.Current.Resources["MessageExitHeader"], MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        abortThreads();
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    abortThreads();
+                }
             }
             catch (Exception)
             {
@@ -175,26 +192,225 @@ namespace BluRip
             try
             {
                 textBoxBlurayPath.Text = settings.lastBluRayPath;
+
+                this.Left = settings.bluripX;
+                this.Top = settings.bluripY;
+
+                logWindow.Left = settings.logX;
+                logWindow.Top = settings.logY;
+                menuItemViewDemuxedStreams.IsChecked = settings.showDemuxedStream;
+
+                demuxedStreamsWindow.Left = settings.demuxedStreamsX;
+                demuxedStreamsWindow.Top = settings.demuxedStreamsY;
+                menuItemViewLog.IsChecked = settings.showLog;
+
+                menuItemViewSnap.IsChecked = settings.snap;
+
+                UpdateDiff();
+
+                menuItemViewLog_Click(null, null);
+                menuItemViewDemuxedStreams_Click(null, null);
+            }
+            catch (Exception)
+            {
+            }
+        }
+        
+        private void ErrorMsg(string msg)
+        {
+            try
+            {
+                System.Windows.MessageBox.Show(msg, (string)App.Current.Resources["ErrorHeader"], MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception)
             {
             }
         }
 
-        private void listBoxStreams_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void menuItemViewDemuxedStreams_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                int index = listBoxStreams.SelectedIndex;
-                if (index > -1)
+                if (menuItemViewDemuxedStreams.IsChecked)
                 {
-                    titleList[comboBoxTitle.SelectedIndex].streams[index].selected = !titleList[comboBoxTitle.SelectedIndex].streams[index].selected;
-                    listBoxStreams.Items.Refresh();
+                    demuxedStreamsWindow.Show();
+                }
+                else
+                {
+                    demuxedStreamsWindow.Hide();
                 }
             }
             catch (Exception)
             {
             }
         }
+
+        private void menuItemFileExit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void abortThreads()
+        {
+            try
+            {
+                abort = true;
+                if (sit != null)
+                {
+                    sit.Stop();
+                    sit = null;
+                }
+                if (mit != null)
+                {
+                    mit.Stop();
+                    mit = null;
+                }
+                /*
+                if (dt != null)
+                {
+                    dt.Stop();
+                    dt = null;
+                }
+                if (et != null)
+                {
+                    et.Stop();
+                    et = null;
+                }
+                if (mt != null)
+                {
+                    mt.Stop();
+                    mt = null;
+                }
+                if (st != null)
+                {
+                    st.Stop();
+                    st = null;
+                }
+                if (it != null)
+                {
+                    it.Stop();
+                    it = null;
+                }
+                */
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemViewReset_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.snap = false;
+                settings.showLog = false;
+                settings.logX = 80;
+                settings.logY = 80;
+
+                settings.showDemuxedStream = false;
+                settings.demuxedStreamsX = 100;
+                settings.demuxedStreamsY = 100;
+
+                settings.bluripX = 120;
+                settings.bluripY = 120;
+
+                this.Left = settings.bluripX;
+                this.Top = settings.bluripY;
+
+                logWindow.Left = settings.logX;
+                logWindow.Top = settings.logY;
+                menuItemViewDemuxedStreams.IsChecked = settings.showDemuxedStream;
+
+                demuxedStreamsWindow.Left = settings.demuxedStreamsX;
+                demuxedStreamsWindow.Top = settings.demuxedStreamsY;
+                menuItemViewLog.IsChecked = settings.showLog;
+
+                UpdateDiff();
+
+                menuItemViewLog_Click(null, null);
+                menuItemViewDemuxedStreams_Click(null, null);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void UpdateDiff()
+        {
+            try
+            {
+                diffLogX = logWindow.Left - this.Left;
+                diffLogY = logWindow.Top - this.Top;
+                diffDemuxedStreamsX = demuxedStreamsWindow.Left - this.Left;
+                diffDemuxedStreamsY = demuxedStreamsWindow.Top - this.Top;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void UpdateDiffLog()
+        {
+            try
+            {
+                diffLogX = logWindow.Left - this.Left;
+                diffLogY = logWindow.Top - this.Top;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void UpdateDiffDemuxedStreams()
+        {
+            try
+            {
+                diffDemuxedStreamsX = demuxedStreamsWindow.Left - this.Left;
+                diffDemuxedStreamsY = demuxedStreamsWindow.Top - this.Top;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private double diffLogX = 0;
+        private double diffLogY = 0;
+        private double diffDemuxedStreamsX = 0;
+        private double diffDemuxedStreamsY = 0;
+
+        private void windowMain_LocationChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (menuItemViewSnap.IsChecked)
+                {
+                    logWindow.Left = this.Left + diffLogX;
+                    logWindow.Top = this.Top + diffLogY;
+
+                    demuxedStreamsWindow.Left = this.Left + diffDemuxedStreamsX;
+                    demuxedStreamsWindow.Top = this.Top + diffDemuxedStreamsY;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemViewSnap_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                UpdateDiff();
+            }
+            catch (Exception)
+            {
+            }
+        }        
     }
 }
