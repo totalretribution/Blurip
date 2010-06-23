@@ -46,7 +46,20 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabOutput}" Name="tabItemOutput">
-                    <Grid />
+                    <Grid>
+                        <Label Content="{DynamicResource LabelWorkingDirectory}" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelWorkingDirectory" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,40,0,0" Name="textBoxWorkingDirectory" VerticalAlignment="Top" Width="279" />
+                        <Label Content="{DynamicResource LabelFilePrefix}" Height="28" HorizontalAlignment="Left" Margin="6,69,0,0" Name="labelFilePrefix" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,103,0,0" Name="textBoxFilePrefix" VerticalAlignment="Top" Width="279" />
+                        <Label Content="{DynamicResource LabelTargetDirectory}" Height="28" HorizontalAlignment="Left" Margin="6,132,0,0" Name="labelTargetDirectory" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,166,0,0" Name="textBoxTargetDirectory" VerticalAlignment="Top" Width="279" />
+                        <Label Content="{DynamicResource LabelTargetFilename}" Height="28" HorizontalAlignment="Left" Margin="6,195,0,0" Name="labelTargetFilename" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,229,0,0" Name="textBoxTargetFilename" VerticalAlignment="Top" Width="279" />
+                        <Label Content="{DynamicResource LabelMovieTitle}" Height="28" HorizontalAlignment="Left" Margin="6,258,0,0" Name="labelMovieTitle" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,292,0,0" Name="textBoxMovieTitle" VerticalAlignment="Top" Width="279" />
+                        <Button Content="{DynamicResource ButtonWorkingDirectory}" Height="23" HorizontalAlignment="Left" Margin="291,39,0,0" Name="buttonWorkingDirectory" VerticalAlignment="Top" Width="75" />
+                        <Button Content="{DynamicResource ButtonTargetDirectory}" Height="23" HorizontalAlignment="Left" Margin="291,165,0,0" Name="buttonTargetDirectory" VerticalAlignment="Top" Width="75" />
+                    </Grid>
                 </TabItem>
             </TabControl>
             <ProgressBar Height="23" HorizontalAlignment="Stretch" Margin="6,0,87,6" Name="progressBarMain" VerticalAlignment="Bottom" Visibility="Hidden" IsIndeterminate="True" />

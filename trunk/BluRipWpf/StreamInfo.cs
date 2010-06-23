@@ -311,29 +311,7 @@ namespace BluRip
 
                 listBoxStreams.ItemsSource = null;
                 listBoxStreams.ItemsSource = titleList[comboBoxTitle.SelectedIndex].streams;
-                listBoxStreams.Items.Refresh();
-
-                foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
-                {
-                    string desc = "[ " + si.number.ToString("d3") + " ] - [ " + StreamTypeToString(si.streamType);
-                    for (int i = 0; i < maxLength - StreamTypeToString(si.streamType).Length; i++) desc += " ";
-                    desc += " ] - ";
-                    if (si.advancedOptions != null && si.advancedOptions.GetType() != typeof(AdvancedOptions)) desc += "AO* ";
-                    desc += "(" + si.desc + ")";
-                    if (si.addInfo != "")
-                    {
-                        desc += " - (" + si.addInfo + ")";
-                    }
-
-                    //listBoxStreams.Items.Add(desc);
-                    if (si.selected)
-                    {
-                        int index = titleList[comboBoxTitle.SelectedIndex].streams.IndexOf(si);
-                        object li = listBoxStreams.Items[index];
-                        //listBoxStreams.SelectedItems.Add(li);
-                    }
-                    //checkedListBoxStreams.SetItemChecked(checkedListBoxStreams.Items.Count - 1, si.selected);
-                }
+                listBoxStreams.Items.Refresh();                
             }
             catch (Exception)
             {
