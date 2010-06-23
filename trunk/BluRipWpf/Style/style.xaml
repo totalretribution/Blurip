@@ -11,6 +11,14 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type GroupBox}">
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type ComboBox}">
         <Setter Property="BitmapEffect">
             <Setter.Value>
@@ -20,14 +28,6 @@
     </Style>
 
     <Style TargetType="{x:Type TextBox}">
-        <Setter Property="BitmapEffect">
-            <Setter.Value>
-                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type TabItem}">
         <Setter Property="BitmapEffect">
             <Setter.Value>
                 <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
@@ -126,5 +126,42 @@
         </DataTemplate.Triggers>
         <TextBlock Text="{Binding Path=Desc}" />
     </DataTemplate>
-    
+
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
+            </Setter.Value>
+        </Setter>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid>                        
+                        <Rectangle x:Name="GelBackground" Opacity="1" RadiusX="0" RadiusY="0" Fill="{TemplateBinding Background}" StrokeThickness="0.35">                            
+                        </Rectangle>
+                        <Rectangle x:Name="GelShine" Margin="0,0,0,0" VerticalAlignment="Top" RadiusX="0" RadiusY="0" Opacity="1" Stroke="Transparent" Height="15px">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="#ccffffff" Offset="0"/>
+                                    <GradientStop Color="Transparent" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background"  Value="#FF3131E2" />
+                            <Setter Property="Foreground"  Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

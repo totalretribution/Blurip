@@ -173,6 +173,16 @@ namespace BluRip
             this.muxLowResSubs = orig.muxLowResSubs;
             this.deleteIndex = orig.deleteIndex;
 
+            this.snap = orig.snap;
+            this.showLog = orig.showLog;
+            this.logX = orig.logX;
+            this.logY = orig.logY;
+            this.showDemuxedStream = orig.showDemuxedStream;
+            this.demuxedStreamsX = orig.demuxedStreamsX;
+            this.demuxedStreamsY = orig.demuxedStreamsY;
+            this.bluripX = orig.bluripX;
+            this.bluripY = orig.bluripY;
+
             foreach (LanguageInfo li in orig.preferredLanguages)
             {
                 this.preferredLanguages.Add(new LanguageInfo(li));
@@ -337,5 +347,19 @@ namespace BluRip
         public bool use64bit = false;
         public bool muxLowResSubs = false;
         public bool deleteIndex = false;
+
+        // window settings
+
+        public bool snap = false;
+        public bool showLog = false;
+        public double logX = 80;
+        public double logY = 80;
+
+        public bool showDemuxedStream = false;
+        public double demuxedStreamsX = 100;
+        public double demuxedStreamsY = 100;
+
+        public double bluripX = 120;
+        public double bluripY = 120;
     }
 }
