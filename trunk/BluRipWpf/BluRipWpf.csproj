@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Demux.cs" />
     <Compile Include="DemuxedStreamsWindow.xaml.cs">
       <DependentUpon>DemuxedStreamsWindow.xaml</DependentUpon>
     </Compile>
@@ -67,6 +68,9 @@
     </Compile>
     <Compile Include="FileListWindow.xaml.cs">
       <DependentUpon>FileListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QueueWindow.xaml.cs">
+      <DependentUpon>QueueWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StreamInfo.cs" />
     <Page Include="DemuxedStreamsWindow.xaml">
@@ -97,6 +101,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="FileListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QueueWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +145,10 @@
     <ProjectReference Include="..\Base\BaseWpf.csproj">
       <Project>{B1E7E40A-0C26-48A1-A368-E8E37E7714C5}</Project>
       <Name>BaseWpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Demux\DemuxWpf.csproj">
+      <Project>{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}</Project>
+      <Name>DemuxWpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\StreamInfo\StreamInfoWpf.csproj">
       <Project>{4D800710-B329-42D7-9034-5201374C59CE}</Project>

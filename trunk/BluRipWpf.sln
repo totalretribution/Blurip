@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseWpf", "Base\BaseWpf.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamInfoWpf", "StreamInfo\StreamInfoWpf.csproj", "{4D800710-B329-42D7-9034-5201374C59CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemuxWpf", "Demux\DemuxWpf.csproj", "{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{4D800710-B329-42D7-9034-5201374C59CE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4D800710-B329-42D7-9034-5201374C59CE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4D800710-B329-42D7-9034-5201374C59CE}.Release|x86.ActiveCfg = Release|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -174,14 +174,26 @@ namespace BluRip
             this.deleteIndex = orig.deleteIndex;
 
             this.snap = orig.snap;
+            this.expertMode = orig.expertMode;
             this.showLog = orig.showLog;
             this.logX = orig.logX;
             this.logY = orig.logY;
+            this.logHeight = orig.logHeight;
+            this.logWidth = orig.logWidth;
             this.showDemuxedStream = orig.showDemuxedStream;
             this.demuxedStreamsX = orig.demuxedStreamsX;
             this.demuxedStreamsY = orig.demuxedStreamsY;
+            this.demuxedStreamsHeight = orig.demuxedStreamsHeight;
+            this.demuxedStreamsWidth = orig.demuxedStreamsWidth;
+            this.showQueue = orig.showQueue;
+            this.queueX = orig.queueX;
+            this.queueY = orig.queueY;
+            this.queueHeight = orig.queueHeight;
+            this.queueWidth = orig.queueWidth;
             this.bluripX = orig.bluripX;
             this.bluripY = orig.bluripY;
+            this.bluripHeight = orig.bluripHeight;
+            this.bluripWidth = orig.bluripWidth;
 
             foreach (LanguageInfo li in orig.preferredLanguages)
             {
@@ -350,16 +362,30 @@ namespace BluRip
 
         // window settings
 
-        public bool snap = false;
+        public bool snap = false;        
+        public bool expertMode = false;
+
         public bool showLog = false;
         public double logX = 80;
         public double logY = 80;
+        public double logHeight = 300;
+        public double logWidth = 700;
 
         public bool showDemuxedStream = false;
         public double demuxedStreamsX = 100;
         public double demuxedStreamsY = 100;
+        public double demuxedStreamsHeight = 300;
+        public double demuxedStreamsWidth = 400;
 
-        public double bluripX = 120;
-        public double bluripY = 120;
+        public bool showQueue = false;
+        public double queueX = 120;
+        public double queueY = 120;
+        public double queueHeight = 400;
+        public double queueWidth = 400;
+
+        public double bluripX = 140;
+        public double bluripY = 140;
+        public double bluripHeight = 800;
+        public double bluripWidth = 600;
     }
 }

@@ -10,8 +10,10 @@
     <system:String x:Key="MenuView">View</system:String>
     <system:String x:Key="MenuViewLog">Log window</system:String>
     <system:String x:Key="MenuViewDemuxedStreams">Demuxed streams window</system:String>
+    <system:String x:Key="MenuViewQueue">Queue window</system:String>
     <system:String x:Key="MenuViewReset">Reset settings</system:String>
     <system:String x:Key="MenuViewSnap">Snap to main window</system:String>
+    <system:String x:Key="MenuViewExpertMode">Show advanced options</system:String>
     <system:String x:Key="MenuLanguage">Language</system:String>
     <system:String x:Key="MenuSettings">Settings</system:String>
     <system:String x:Key="MenuSettingsExternalTools">External tools</system:String>    
@@ -37,8 +39,23 @@
     <system:String x:Key="LabelTargetDirectory">Target directory</system:String>
     <system:String x:Key="ButtonTargetDirectory">...</system:String>
     <system:String x:Key="LabelTargetFilename">Target filename (without .mkv)</system:String>
-    <system:String x:Key="LabelMovieTitle">Movie title</system:String>    
+    <system:String x:Key="LabelMovieTitle">Movie title</system:String>
 
+    <!-- Tab Settings -->
+    <system:String x:Key="TabSettings">Settings</system:String>
+
+    <!-- Tab Start -->
+    <system:String x:Key="TabStart">Start</system:String>
+    <system:String x:Key="ButtonStartStart">Start</system:String>
+    <system:String x:Key="ButtonStartQueue">Add to queue</system:String>
+    <system:String x:Key="ButtonStartQueueStart">Add to queue and start</system:String>
+    <system:String x:Key="ButtonStartDemux">Only demux</system:String>
+    <system:String x:Key="ButtonStartCrop">Only index and autocrop</system:String>
+    <system:String x:Key="ButtonStartSubtitle">Only subtitle processing</system:String>
+    <system:String x:Key="ButtonStartEncode">Only encode</system:String>
+    <system:String x:Key="ButtonStartMux">Only mux</system:String>
+    
+    
     <!-- General -->
     <system:String x:Key="ButtonOk">Ok</system:String>
     <system:String x:Key="ButtonCancel">Cancel</system:String>
@@ -87,6 +104,7 @@
     <system:String x:Key="StatusBarReady">Ready.</system:String>
     <system:String x:Key="StatusBarStreamInfo">Getting stream info...</system:String>
     <system:String x:Key="StatusBarM2tsInfo">Getting *.m2ts stream info...</system:String>
+    <system:String x:Key="StatusBarDemux">Demuxing...</system:String>
 
     <!-- FileList Window -->
     <system:String x:Key="CaptionFileListWindow">Open *.m2ts file(s)</system:String>
@@ -95,6 +113,15 @@
     <system:String x:Key="ButtonFileListDown">Move down</system:String>
     <system:String x:Key="ButtonFileListDelete">Delete</system:String>
     <system:String x:Key="ButtonFileListAdd">Add</system:String>
+
+    <!-- Queue Window -->
+    <system:String x:Key="CaptionQueueWindow">Project queue</system:String>
+    <system:String x:Key="LabelQueueList">Queue list</system:String>
+    <system:String x:Key="ButtonQueueUp">Move up</system:String>
+    <system:String x:Key="ButtonQueueDown">Move down</system:String>
+    <system:String x:Key="ButtonQueueDelete">Delete</system:String>
+    <system:String x:Key="ButtonQueueStart">Start</system:String>
+    <system:String x:Key="CheckBoxQueueShutdown">Shutdown after queue</system:String>
 
     <!-- DemuxedStreams Window -->
     <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed streams</system:String>

@@ -79,6 +79,7 @@ namespace BluRip
         {
             try
             {
+                DisableControls();
                 if (!Directory.Exists(settings.lastBluRayPath))
                 {
                     logWindow.MessageDemux((string)App.Current.Resources["ErrorBlurayPath"]);
@@ -115,6 +116,7 @@ namespace BluRip
             }
             finally
             {
+                EnableControls();
                 progressBarMain.Visibility = Visibility.Hidden;
                 buttonAbort.Visibility = Visibility.Hidden;
                 UpdateStatus((string)App.Current.Resources["StatusBar"] + " " +(string)App.Current.Resources["StatusBarReady"]);
@@ -363,6 +365,7 @@ namespace BluRip
         {
             try
             {
+                DisableControls();
                 UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarM2tsInfo"]);
                 progressBarMain.Visibility = Visibility.Visible;
                 buttonAbort.Visibility = Visibility.Visible;
@@ -391,6 +394,7 @@ namespace BluRip
             }
             finally
             {
+                EnableControls();
                 progressBarMain.Visibility = Visibility.Hidden;
                 buttonAbort.Visibility = Visibility.Hidden;
                 UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarReady"]);
