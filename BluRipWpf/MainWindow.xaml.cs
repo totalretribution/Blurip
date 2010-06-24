@@ -32,6 +32,7 @@ namespace BluRip
 
         private LogWindow logWindow = null;
         private DemuxedStreamsWindow demuxedStreamsWindow = null;
+        private QueueWindow queueWindow = null;
         private bool silent = false;
         private bool abort = false;
 
@@ -92,12 +93,15 @@ namespace BluRip
                 logWindow = new LogWindow(this);
                 logWindow.Owner = this;
 
+                queueWindow = new QueueWindow(this);
+                queueWindow.Owner = this;
+
                 demuxedStreamsWindow = new DemuxedStreamsWindow(this);
                 demuxedStreamsWindow.Owner = this;
 
                 UpdateFromSettings();
 
-                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarReady"]);
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
             }
             catch (Exception)
             {
@@ -154,21 +158,35 @@ namespace BluRip
             try
             {
                 settings.snap = menuItemViewSnap.IsChecked;
+                settings.expertMode = menuItemViewExpertMode.IsChecked;
+                
                 settings.showDemuxedStream = menuItemViewDemuxedStreams.IsChecked;
                 settings.demuxedStreamsX = demuxedStreamsWindow.Left;
                 settings.demuxedStreamsY = demuxedStreamsWindow.Top;
+                settings.demuxedStreamsHeight = demuxedStreamsWindow.Height;
+                settings.demuxedStreamsWidth = demuxedStreamsWindow.Width;
 
                 settings.showLog = menuItemViewLog.IsChecked;
                 settings.logX = logWindow.Left;
                 settings.logY = logWindow.Top;
+                settings.logHeight = logWindow.Height;
+                settings.logWidth = logWindow.Width;
+
+                settings.showQueue = menuItemViewQueue.IsChecked;
+                settings.queueX = queueWindow.Left;
+                settings.queueY = queueWindow.Top;
+                settings.queueHeight = queueWindow.Height;
+                settings.queueWidth = queueWindow.Width;
 
                 settings.bluripX = this.Left;
                 settings.bluripY = this.Top;
+                settings.bluripHeight = this.Height;
+                settings.bluripWidth = this.Width;
 
                 UserSettings.SaveSettingsFile(settings, settingsPath);
                 if (!silent)
                 {
-                    if (System.Windows.MessageBox.Show((string)App.Current.Resources["MessageExit"], (string)App.Current.Resources["MessageExitHeader"], MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (System.Windows.MessageBox.Show(Res("MessageExit"), Res("MessageExitHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         abortThreads();
                     }
@@ -192,24 +210,44 @@ namespace BluRip
             try
             {
                 textBoxBlurayPath.Text = settings.lastBluRayPath;
+                textBoxWorkingDirectory.Text = settings.workingDir;
+                textBoxFilePrefix.Text = settings.filePrefix;
+                textBoxTargetDirectory.Text = settings.targetFolder;
+                textBoxTargetFilename.Text = settings.targetFilename;
+                textBoxMovieTitle.Text = settings.movieTitle;
 
                 this.Left = settings.bluripX;
                 this.Top = settings.bluripY;
+                this.Height = settings.bluripHeight;
+                this.Width = settings.bluripWidth;
 
                 logWindow.Left = settings.logX;
                 logWindow.Top = settings.logY;
-                menuItemViewDemuxedStreams.IsChecked = settings.showDemuxedStream;
+                logWindow.Height = settings.logHeight;
+                logWindow.Width = settings.logWidth;
+                menuItemViewLog.IsChecked = settings.showLog;
+                
+                queueWindow.Left = settings.queueX;
+                queueWindow.Top = settings.queueY;
+                queueWindow.Height = settings.queueHeight;
+                queueWindow.Width = settings.queueWidth;
+                menuItemViewQueue.IsChecked = settings.showQueue;
 
                 demuxedStreamsWindow.Left = settings.demuxedStreamsX;
                 demuxedStreamsWindow.Top = settings.demuxedStreamsY;
-                menuItemViewLog.IsChecked = settings.showLog;
+                demuxedStreamsWindow.Height = settings.demuxedStreamsHeight;
+                demuxedStreamsWindow.Width = settings.demuxedStreamsWidth;
+                menuItemViewDemuxedStreams.IsChecked = settings.showDemuxedStream;
 
                 menuItemViewSnap.IsChecked = settings.snap;
+                menuItemViewExpertMode.IsChecked = settings.expertMode;
 
                 UpdateDiff();
 
                 menuItemViewLog_Click(null, null);
                 menuItemViewDemuxedStreams_Click(null, null);
+                menuItemViewQueue_Click(null, null);
+                menuItemViewExpertMode_Click(null, null);
             }
             catch (Exception)
             {
@@ -220,7 +258,7 @@ namespace BluRip
         {
             try
             {
-                System.Windows.MessageBox.Show(msg, (string)App.Current.Resources["ErrorHeader"], MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show(msg, Res("ErrorHeader"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception)
             {
@@ -270,13 +308,13 @@ namespace BluRip
                 {
                     mit.Stop();
                     mit = null;
-                }
-                /*
+                }                
                 if (dt != null)
                 {
                     dt.Stop();
                     dt = null;
                 }
+                /*
                 if (et != null)
                 {
                     et.Stop();
@@ -308,33 +346,36 @@ namespace BluRip
         {
             try
             {
-                settings.snap = false;
-                settings.showLog = false;
-                settings.logX = 80;
-                settings.logY = 80;
-
-                settings.showDemuxedStream = false;
-                settings.demuxedStreamsX = 100;
-                settings.demuxedStreamsY = 100;
-
-                settings.bluripX = 120;
-                settings.bluripY = 120;
+                UserSettings settings = new UserSettings();
 
                 this.Left = settings.bluripX;
                 this.Top = settings.bluripY;
+                this.Height = settings.bluripHeight;
+                this.Width = settings.bluripWidth;
 
                 logWindow.Left = settings.logX;
                 logWindow.Top = settings.logY;
-                menuItemViewDemuxedStreams.IsChecked = settings.showDemuxedStream;
-
+                logWindow.Width = settings.logWidth;
+                logWindow.Height = settings.logHeight;
+                menuItemViewLog.IsChecked = settings.showLog;
+                
                 demuxedStreamsWindow.Left = settings.demuxedStreamsX;
                 demuxedStreamsWindow.Top = settings.demuxedStreamsY;
-                menuItemViewLog.IsChecked = settings.showLog;
+                demuxedStreamsWindow.Height = settings.demuxedStreamsHeight;
+                demuxedStreamsWindow.Width = settings.demuxedStreamsWidth;
+                menuItemViewDemuxedStreams.IsChecked = settings.showDemuxedStream;
+
+                queueWindow.Left = settings.queueX;
+                queueWindow.Top = settings.queueY;
+                queueWindow.Height = settings.queueHeight;
+                queueWindow.Width = settings.queueWidth;
+                menuItemViewQueue.IsChecked = settings.showQueue;
 
                 UpdateDiff();
 
                 menuItemViewLog_Click(null, null);
                 menuItemViewDemuxedStreams_Click(null, null);
+                menuItemViewQueue_Click(null, null);
             }
             catch (Exception)
             {
@@ -349,6 +390,8 @@ namespace BluRip
                 diffLogY = logWindow.Top - this.Top;
                 diffDemuxedStreamsX = demuxedStreamsWindow.Left - this.Left;
                 diffDemuxedStreamsY = demuxedStreamsWindow.Top - this.Top;
+                diffQueueX = queueWindow.Left - this.Left;
+                diffQueueY = queueWindow.Top - this.Top;
             }
             catch (Exception)
             {
@@ -361,6 +404,18 @@ namespace BluRip
             {
                 diffLogX = logWindow.Left - this.Left;
                 diffLogY = logWindow.Top - this.Top;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void UpdateDiffQueue()
+        {
+            try
+            {
+                diffQueueX = queueWindow.Left - this.Left;
+                diffQueueY = queueWindow.Top - this.Top;
             }
             catch (Exception)
             {
@@ -383,6 +438,8 @@ namespace BluRip
         private double diffLogY = 0;
         private double diffDemuxedStreamsX = 0;
         private double diffDemuxedStreamsY = 0;
+        private double diffQueueX = 0;
+        private double diffQueueY = 0;
 
         private void windowMain_LocationChanged(object sender, EventArgs e)
         {
@@ -395,6 +452,9 @@ namespace BluRip
 
                     demuxedStreamsWindow.Left = this.Left + diffDemuxedStreamsX;
                     demuxedStreamsWindow.Top = this.Top + diffDemuxedStreamsY;
+
+                    queueWindow.Left = this.Left + diffQueueX;
+                    queueWindow.Top = this.Top + diffQueueY;
                 }
             }
             catch (Exception)
@@ -411,6 +471,217 @@ namespace BluRip
             catch (Exception)
             {
             }
-        }        
+        }
+
+        private void buttonWorkingDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+                try
+                {
+                    if (settings.workingDir != "")
+                    {
+                        DirectoryInfo di = Directory.GetParent(settings.workingDir);
+                        fbd.SelectedPath = di.FullName;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    textBoxWorkingDirectory.Text = fbd.SelectedPath;
+                    settings.workingDir = fbd.SelectedPath;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonTargetDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+                try
+                {
+                    if (settings.targetFolder != "")
+                    {
+                        DirectoryInfo di = Directory.GetParent(settings.targetFolder);
+                        fbd.SelectedPath = di.FullName;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    textBoxTargetDirectory.Text = fbd.SelectedPath;
+                    settings.targetFolder = fbd.SelectedPath;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void DisableControls()
+        {
+            try
+            {
+                menuItemFile.IsEnabled = false;
+                menuItemSettings.IsEnabled = false;
+                tabControlMain.IsEnabled = false;
+                demuxedStreamsWindow.IsEnabled = false;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void EnableControls()
+        {
+            try
+            {
+                menuItemFile.IsEnabled = true;
+                menuItemSettings.IsEnabled = true;
+                tabControlMain.IsEnabled = true;
+                demuxedStreamsWindow.IsEnabled = true;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemViewQueue_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (menuItemViewQueue.IsChecked)
+                {
+                    queueWindow.Show();
+                }
+                else
+                {
+                    queueWindow.Hide();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxFilePrefix_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.filePrefix = textBoxFilePrefix.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxTargetFilename_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.targetFilename = textBoxTargetFilename.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxMovieTitle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.movieTitle = textBoxMovieTitle.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void EnableExpert()
+        {
+            try
+            {
+                buttonOnlyDemux.Visibility = System.Windows.Visibility.Visible;
+                buttonOnlyCrop.Visibility = System.Windows.Visibility.Visible;
+                buttonOnlySubtitle.Visibility = System.Windows.Visibility.Visible;
+                buttonOnlyEncode.Visibility = System.Windows.Visibility.Visible;
+                buttonOnlyMux.Visibility = System.Windows.Visibility.Visible;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void DisableExpert()
+        {
+            try
+            {
+                buttonOnlyDemux.Visibility = System.Windows.Visibility.Hidden;
+                buttonOnlyCrop.Visibility = System.Windows.Visibility.Hidden;
+                buttonOnlySubtitle.Visibility = System.Windows.Visibility.Hidden;
+                buttonOnlyEncode.Visibility = System.Windows.Visibility.Hidden;
+                buttonOnlyMux.Visibility = System.Windows.Visibility.Hidden;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemViewExpertMode_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (menuItemViewExpertMode.IsChecked)
+                {
+                    EnableExpert();
+                }
+                else
+                {
+                    DisableExpert();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private string Res(string key)
+        {
+            try
+            {
+                return (string)App.Current.Resources[key];
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        private void buttonAbort_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (System.Windows.MessageBox.Show(Res("MessageExit"), Res("MessageExitHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    abortThreads();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }
