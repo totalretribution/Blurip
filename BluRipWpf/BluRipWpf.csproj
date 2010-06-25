@@ -63,16 +63,20 @@
     <Compile Include="DemuxedStreamsWindow.xaml.cs">
       <DependentUpon>DemuxedStreamsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Encode.cs" />
     <Compile Include="ExternalToolsWindow.xaml.cs">
       <DependentUpon>ExternalToolsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileListWindow.xaml.cs">
       <DependentUpon>FileListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IndexCrop.cs" />
+    <Compile Include="MediaInfoDLL.cs" />
     <Compile Include="QueueWindow.xaml.cs">
       <DependentUpon>QueueWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="StreamInfo.cs" />
+    <Compile Include="Subtitle.cs" />
     <Page Include="DemuxedStreamsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +146,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoCrop\AutoCropWpf.csproj">
+      <Project>{780D97C5-38DF-4A5F-90F3-3D19EE27837D}</Project>
+      <Name>AutoCropWpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Base\BaseWpf.csproj">
       <Project>{B1E7E40A-0C26-48A1-A368-E8E37E7714C5}</Project>
       <Name>BaseWpf</Name>
@@ -150,13 +158,34 @@
       <Project>{752E3205-34F3-4DB4-9EFB-49CAF885F3F3}</Project>
       <Name>DemuxWpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Encode\EncodeWpf.csproj">
+      <Project>{6FD30AE5-4EFF-43BB-910C-99FBF8807480}</Project>
+      <Name>EncodeWpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Index\IndexWpf.csproj">
+      <Project>{EC1BAB42-2236-427B-8662-BD39CC64E9E6}</Project>
+      <Name>IndexWpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mux\MuxWpf.csproj">
+      <Project>{5B2CB9B3-3FBB-438E-BB73-BB61CED42B7E}</Project>
+      <Name>MuxWpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StreamInfo\StreamInfoWpf.csproj">
       <Project>{4D800710-B329-42D7-9034-5201374C59CE}</Project>
       <Name>StreamInfoWpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Subtitle\SubtitleWpf.csproj">
+      <Project>{D1E28C6A-5ABB-4226-B3DE-940875301EA5}</Project>
+      <Name>SubtitleWpf</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Blu-ray.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MediaInfo.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

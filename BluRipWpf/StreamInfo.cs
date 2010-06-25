@@ -63,8 +63,8 @@ namespace BluRip
             {
                 if (!File.Exists(settings.eac3toPath))
                 {
-                    logWindow.MessageMain((string)App.Current.Resources["ErrorEac3toPath"]);
-                    if (!silent) ErrorMsg((string)App.Current.Resources["ErrorEac3toPath"]);
+                    logWindow.MessageMain(Res("ErrorEac3toPath"));
+                    if (!silent) ErrorMsg(Res("ErrorEac3toPath"));
                     return false;
                 }
                 return true;
@@ -78,19 +78,17 @@ namespace BluRip
         private void buttonGetStreamInfo_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                DisableControls();
+            {                
                 if (!Directory.Exists(settings.lastBluRayPath))
                 {
-                    logWindow.MessageDemux((string)App.Current.Resources["ErrorBlurayPath"]);
-                    if (!silent) ErrorMsg((string)App.Current.Resources["ErrorBlurayPath"]);
+                    logWindow.MessageDemux(Res("ErrorBlurayPath"));
+                    if (!silent) ErrorMsg(Res("ErrorBlurayPath"));
                     return;
                 }
                 if (!checkEac3to()) return;
-                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarStreamInfo"]);
-                progressBarMain.Visibility = Visibility.Visible;
-                buttonAbort.Visibility = Visibility.Visible;
-
+                DisableControls();
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarStreamInfo"));
+                
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.ItemsSource = null;
                 m2tsList.Clear();
@@ -112,14 +110,13 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux("Exception: " + ex.Message);
+                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
             }
             finally
             {
                 EnableControls();
-                progressBarMain.Visibility = Visibility.Hidden;
-                buttonAbort.Visibility = Visibility.Hidden;
-                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " +(string)App.Current.Resources["StatusBarReady"]);
+                
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
             }
         }        
 
@@ -366,10 +363,8 @@ namespace BluRip
             try
             {
                 DisableControls();
-                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarM2tsInfo"]);
-                progressBarMain.Visibility = Visibility.Visible;
-                buttonAbort.Visibility = Visibility.Visible;
-                
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarM2tsInfo"));
+                                
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.ItemsSource = null;
 
@@ -390,14 +385,13 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux("Exception: " + ex.Message);
+                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
             }
             finally
             {
                 EnableControls();
-                progressBarMain.Visibility = Visibility.Hidden;
-                buttonAbort.Visibility = Visibility.Hidden;
-                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarReady"]);
+                
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
             }
         }
 

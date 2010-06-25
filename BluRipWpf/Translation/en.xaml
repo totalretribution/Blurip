@@ -105,6 +105,15 @@
     <system:String x:Key="StatusBarStreamInfo">Getting stream info...</system:String>
     <system:String x:Key="StatusBarM2tsInfo">Getting *.m2ts stream info...</system:String>
     <system:String x:Key="StatusBarDemux">Demuxing...</system:String>
+    <system:String x:Key="StatusBarSubtitle">Processing subtitles...</system:String>
+    <system:String x:Key="StatusBarSubtitleNormal">Processing subtitles (normal) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleForced">Processing subtitles (forced) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleLowresNormal">Processing lowres subtitles (normal) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleLowresForced">Processing lowres subtitles (forced) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarCrop">Indexing and AutoCrop...</system:String>
+    <system:String x:Key="StatusBarEncode">Encoding {0}</system:String>
+    <system:String x:Key="StatusBarEncodeFirstPass">Encoding 1. pass {0}</system:String>
+    <system:String x:Key="StatusBarEncodeSecondPass">Encoding 2. pass {0}</system:String>
 
     <!-- FileList Window -->
     <system:String x:Key="CaptionFileListWindow">Open *.m2ts file(s)</system:String>
@@ -130,7 +139,39 @@
     
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>
+    <system:String x:Key="ErrorException">Exception:</system:String>
     <system:String x:Key="ErrorEac3toPath">Path to eac3to.exe not set or found.</system:String>
     <system:String x:Key="ErrorBlurayPath">Path to BluRay drive/folder not set or found.</system:String>
+    <system:String x:Key="ErrorNoDemuxedStreams">No demuxed streams available</system:String>
+    <system:String x:Key="ErrorFfmsindexPath">ffmsindex path not set</system:String>
+    <system:String x:Key="ErrorDgindexPath">DGIndexNv path not set</system:String>
+    <system:String x:Key="ErrorMediaInfo">Error getting MediaInfo:</system:String>
+    <system:String x:Key="ErrorFramerate">Error getting framerate</system:String>
+    <system:String x:Key="ErrorNoFramerate">Could not get framerate - please report log to developer</system:String>
+    <system:String x:Key="ErrorIndex">Error while indexing!</system:String>
+    <system:String x:Key="ErrorSetFramerate">Framerate not set - do index + autocrop first</system:String>
+    <system:String x:Key="ErrorSubtitle">Error processing subtitle</system:String>
+    <system:String x:Key="ErrorJavaPath">Path to java.exe not set or found.</system:String>
+    <system:String x:Key="ErrorBdsup2subPath">Path to BDSup2sub.jar not set or found.</system:String>
+    <system:String x:Key="ErrorNoVideo">No video stream or more then one selected</system:String>
+    <system:String x:Key="ErrorNoAudio">No audio streams selected</system:String>
+    <system:String x:Key="ErrorUnknownTracks">Unknown tracks selected - please report log to developer</system:String>
+    <system:String x:Key="ErrorNoTitle">No title selected</system:String>
+    <system:String x:Key="ErrorWorkingDirectory">Working dir not set</system:String>
+    
+    <!-- Info msg -->
+    <system:String x:Key="InfoManualFps">Using manual fps - override MediaInfo value</system:String>
+    <system:String x:Key="InfoFps">Assume fps is {0}</system:String>
+    <system:String x:Key="InfoFrames">WARNING: frames or length not set - bitrate calculation not possible</system:String>
+    <system:String x:Key="InfoStartCrop">Starting AutoCrop...</system:String>
+    <system:String x:Key="InfoCropTop">Crop top: {0}</system:String>
+    <system:String x:Key="InfoCropBottom">Crop bottom: {0}</system:String>
+    <system:String x:Key="InfoBorderTop">Border top: {0}</system:String>
+    <system:String x:Key="InfoBorderBottom">Border bottom: {0}</system:String>
+    <system:String x:Key="InfoResize">Resize to: {0} x {1}</system:String>
+    <system:String x:Key="InfoNoResize">Did not add resize command</system:String>
+    <system:String x:Key="InfoNoBorder">Did not add AddBorders command</system:String>
+    <system:String x:Key="InfoAvsContent">Content of encode avs:</system:String>
+    <system:String x:Key="InfoNoSubtitles">No subtitles to process</system:String>
 
 </ResourceDictionary>

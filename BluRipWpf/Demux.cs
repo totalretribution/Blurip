@@ -26,14 +26,14 @@ namespace BluRip
             {
                 if (!Directory.Exists(settings.workingDir))
                 {
-                    logWindow.MessageDemux("Working dir not set");
-                    if (!silent) ErrorMsg("Working dir not set");
+                    logWindow.MessageDemux(Res("ErrorWorkingDirectory"));
+                    if (!silent) ErrorMsg(Res("ErrorWorkingDirectory"));
                     return false;
                 }
                 if (comboBoxTitle.SelectedIndex == -1)
                 {
-                    logWindow.MessageDemux("No title selected");
-                    if (!silent) ErrorMsg("No title selected");
+                    logWindow.MessageDemux(Res("ErrorNoTitle"));
+                    if (!silent) ErrorMsg(Res("ErrorNoTitle"));
                     return false;
                 }
                 int videoCount = 0;
@@ -56,31 +56,33 @@ namespace BluRip
                 }
                 if (audioCount < 1)
                 {
-                    logWindow.MessageDemux("No audio streams selected");
-                    if (!silent) ErrorMsg("No audio streams selected");
+                    logWindow.MessageDemux(Res("ErrorNoAudio"));
+                    if (!silent) ErrorMsg(Res("ErrorNoAudio"));
                     return false;
                 }
                 if (videoCount != 1)
                 {
-                    logWindow.MessageDemux("No video stream or more then one selected");
-                    if (!silent) ErrorMsg("No video stream or more then one selected");
+                    logWindow.MessageDemux(Res("ErrorNoVideo"));
+                    if (!silent) ErrorMsg(Res("ErrorNoVideo"));
                     return false;
                 }
                 if (unknown > 0)
                 {
-                    logWindow.MessageDemux("Unknown tracks selected - please report log to developer");
-                    if (!silent) ErrorMsg("Unknown tracks selected - please report log to developer");
+                    logWindow.MessageDemux(Res("ErrorUnknownTracks"));
+                    if (!silent) ErrorMsg(Res("ErrorUnknownTracks"));
                     return false;
                 }
 
-                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarDemux"]);
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarDemux"));
                 DisableControls();
-
-                progressBarMain.Visibility = Visibility.Visible;
-                buttonAbort.Visibility = Visibility.Visible;
+                
+                string dtsBitrate = "1536";
+                string ac3Bitrate = "640";
+                if(settings.downmixDTSIndex >= 0 && settings.downmixDTSIndex < dtsBitrates.Count) dtsBitrate = dtsBitrates[settings.downmixDTSIndex];
+                if(settings.downmixAc3Index >= 0 && settings.downmixAc3Index < ac3Bitrates.Count) ac3Bitrate = ac3Bitrates[settings.downmixAc3Index];
 
                 dt = new DemuxTool(settings, m2tsList, videoTypes, ac3AudioTypes, dtsAudioTypes,
-                    titleList[comboBoxTitle.SelectedIndex], ref demuxedStreamList, "", "");
+                    titleList[comboBoxTitle.SelectedIndex], ref demuxedStreamList, ac3Bitrate, dtsBitrate);
 
                 dt.OnInfoMsg += new ExternalTool.InfoEventHandler(DemuxMsg);
                 dt.OnLogMsg += new ExternalTool.LogEventHandler(DemuxMsg);
@@ -94,15 +96,14 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux("Exception: " + ex.Message);
+                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
             {
                 EnableControls();
-                progressBarMain.Visibility = Visibility.Hidden;
-                buttonAbort.Visibility = Visibility.Hidden;
-                UpdateStatus((string)App.Current.Resources["StatusBar"] + " " + (string)App.Current.Resources["StatusBarReady"]);
+                
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
             }
         }
 
@@ -115,7 +116,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux("Exception: " + ex.Message);
+                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
             }
             finally
             {

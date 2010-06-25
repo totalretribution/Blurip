@@ -39,6 +39,8 @@ namespace BluRip
         private int maxFrames = 0;
 
         private object drawLock = new object();
+                
+        private delegate void UpdateStatusDelegate(int tmpTop, int tmpBottom, int cropTop, int cropBottom, int progress);
 
         public AutoCrop()
         {
@@ -185,11 +187,15 @@ namespace BluRip
 
         private void UpdateStatusText(int tmpTop, int tmpBottom, int cropTop, int cropBottom, int progress)
         {
-            string tmp = "";
-            tmp = "AutoCrop frame: " + progress.ToString() + "/" + nrFrames.ToString() + " - frame crop values: ";
-            tmp += tmpTop.ToString() + "/" + tmpBottom.ToString() + " - global crop values: ";
-            tmp += cropTop.ToString() + "/" + cropBottom.ToString();
-            this.Text = tmp;
+            if (this.InvokeRequired) this.Invoke(new UpdateStatusDelegate(UpdateStatusText), tmpTop, tmpBottom, cropTop, cropBottom, progress);
+            else
+            {
+                string tmp = "";
+                tmp = "AutoCrop frame: " + progress.ToString() + "/" + nrFrames.ToString() + " - frame crop values: ";
+                tmp += tmpTop.ToString() + "/" + tmpBottom.ToString() + " - global crop values: ";
+                tmp += cropTop.ToString() + "/" + cropBottom.ToString();
+                this.Text = tmp;
+            }
         }
 
         public void DoCrop()
@@ -217,8 +223,8 @@ namespace BluRip
                     bitmapCopy = new Bitmap(bitmap);
                     Monitor.Exit(drawLock);
 
-
-                    this.Refresh();
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                    else this.Refresh();
 
                     for (int row = 0; row < bitmapCopy.Height; row++)
                     {
@@ -227,7 +233,8 @@ namespace BluRip
                         {   
                             FillRow(bitmapCopy, row);
                             tmpTop++;
-                            this.Refresh();
+                            if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                            else this.Refresh();
                         }
                         else
                         {                            
@@ -235,7 +242,8 @@ namespace BluRip
                         }
                         UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
                     }
-                    this.Refresh();
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                    else this.Refresh();
                     Thread.Sleep(1000);
                     for (int row = bitmapCopy.Height - 1; row >= 0; row--)
                     {
@@ -244,7 +252,8 @@ namespace BluRip
                         {
                             FillRow(bitmapCopy, row);
                             tmpBottom++;
-                            this.Refresh();
+                            if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                            else this.Refresh();
                         }
                         else
                         {
@@ -252,7 +261,8 @@ namespace BluRip
                         }
                         UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
                     }
-                    this.Refresh();
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                    else this.Refresh();
                     cropInfo.cropBottom = Math.Min(cropInfo.cropBottom, tmpBottom);
                     cropInfo.cropTop = Math.Min(cropInfo.cropTop, tmpTop);
 
@@ -783,8 +793,8 @@ namespace BluRip
                     }
                 }
                 
-                
-                this.Close();
+                if(this.InvokeRequired) this.Invoke(new MethodInvoker(this.Close));
+                else this.Close();
             }
             catch (Exception)
             {
