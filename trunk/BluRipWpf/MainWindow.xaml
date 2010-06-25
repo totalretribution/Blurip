@@ -72,9 +72,9 @@
                         <Button Content="{DynamicResource ButtonStartQueue}" Height="23" HorizontalAlignment="Left" Margin="6,35,0,0" Name="buttonQueue" VerticalAlignment="Top" Width="170" />
                         <Button Content="{DynamicResource ButtonStartQueueStart}" Height="23" HorizontalAlignment="Left" Margin="6,64,0,0" Name="buttonQueueStart" VerticalAlignment="Top" Width="170" />
                         <Button Content="{DynamicResource ButtonStartDemux}" Height="23" HorizontalAlignment="Left" Margin="6,151,0,0" Name="buttonOnlyDemux" VerticalAlignment="Top" Width="170" Click="buttonOnlyDemux_Click" />
-                        <Button Content="{DynamicResource ButtonStartCrop}" Height="23" HorizontalAlignment="Left" Margin="6,180,0,0" Name="buttonOnlyCrop" VerticalAlignment="Top" Width="170" />
-                        <Button Content="{DynamicResource ButtonStartSubtitle}" Height="23" HorizontalAlignment="Left" Margin="6,209,0,0" Name="buttonOnlySubtitle" VerticalAlignment="Top" Width="170" />
-                        <Button Content="{DynamicResource ButtonStartEncode}" Height="23" HorizontalAlignment="Left" Margin="6,238,0,0" Name="buttonOnlyEncode" VerticalAlignment="Top" Width="170" />
+                        <Button Content="{DynamicResource ButtonStartCrop}" Height="23" HorizontalAlignment="Left" Margin="6,180,0,0" Name="buttonOnlyCrop" VerticalAlignment="Top" Width="170" Click="buttonOnlyCrop_Click" />
+                        <Button Content="{DynamicResource ButtonStartSubtitle}" Height="23" HorizontalAlignment="Left" Margin="6,209,0,0" Name="buttonOnlySubtitle" VerticalAlignment="Top" Width="170" Click="buttonOnlySubtitle_Click" />
+                        <Button Content="{DynamicResource ButtonStartEncode}" Height="23" HorizontalAlignment="Left" Margin="6,238,0,0" Name="buttonOnlyEncode" VerticalAlignment="Top" Width="170" Click="buttonOnlyEncode_Click" />
                         <Button Content="{DynamicResource ButtonStartMux}" Height="23" HorizontalAlignment="Left" Margin="6,267,0,0" Name="buttonOnlyMux" VerticalAlignment="Top" Width="170" />
                     </Grid>
                 </TabItem>

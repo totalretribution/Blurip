@@ -27,6 +27,8 @@ namespace BluRip
         private List<string> videoTypes = new List<string>();
         private List<string> ac3AudioTypes = new List<string>();
         private List<string> dtsAudioTypes = new List<string>();
+        private List<string> ac3Bitrates = new List<string>();
+        private List<string> dtsBitrates = new List<string>();
 
         public string title = "BluRip v0.5.0 © _hawk_";
 
@@ -59,6 +61,13 @@ namespace BluRip
                 dtsAudioTypes.Add("DTS ES"); // have to check if needed
                 dtsAudioTypes.Add("DTS-ES");
 
+                dtsBitrates.Add("768");
+                dtsBitrates.Add("1536");
+
+                ac3Bitrates.Add("192");
+                ac3Bitrates.Add("448");
+                ac3Bitrates.Add("640");
+
                 /*
                 comboBoxX264Priority.Items.Clear();
                 foreach (string s in Enum.GetNames(typeof(ProcessPriorityClass)))
@@ -76,7 +85,6 @@ namespace BluRip
         {
             try
             {
-                //CheckForIllegalCrossThreadCalls = false;
                 this.Title = title;
                 settingsPath = AppDomain.CurrentDomain.BaseDirectory + "\\settings.xml";
 
@@ -125,12 +133,21 @@ namespace BluRip
             {
             }
         }
-        
+
+        private delegate void UpdateDelegate(string msg);
+
         private void UpdateStatus(string msg)
         {
             try
             {
-                statusBarItemMain.Content = msg;
+                if (this.Dispatcher.CheckAccess())
+                {
+                    statusBarItemMain.Content = msg;
+                }
+                else
+                {
+                    this.Dispatcher.Invoke(new UpdateDelegate(UpdateStatus), msg);
+                }
             }
             catch (Exception)
             {
@@ -314,17 +331,6 @@ namespace BluRip
                     dt.Stop();
                     dt = null;
                 }
-                /*
-                if (et != null)
-                {
-                    et.Stop();
-                    et = null;
-                }
-                if (mt != null)
-                {
-                    mt.Stop();
-                    mt = null;
-                }
                 if (st != null)
                 {
                     st.Stop();
@@ -334,6 +340,17 @@ namespace BluRip
                 {
                     it.Stop();
                     it = null;
+                }
+                if (et != null)
+                {
+                    et.Stop();
+                    et = null;
+                }
+                /*                
+                if (mt != null)
+                {
+                    mt.Stop();
+                    mt = null;
                 }
                 */
             }
@@ -539,6 +556,9 @@ namespace BluRip
                 menuItemSettings.IsEnabled = false;
                 tabControlMain.IsEnabled = false;
                 demuxedStreamsWindow.IsEnabled = false;
+
+                progressBarMain.Visibility = Visibility.Visible;
+                buttonAbort.Visibility = Visibility.Visible;
             }
             catch (Exception)
             {
@@ -553,6 +573,9 @@ namespace BluRip
                 menuItemSettings.IsEnabled = true;
                 tabControlMain.IsEnabled = true;
                 demuxedStreamsWindow.IsEnabled = true;
+
+                progressBarMain.Visibility = Visibility.Hidden;
+                buttonAbort.Visibility = Visibility.Hidden;
             }
             catch (Exception)
             {
@@ -663,6 +686,18 @@ namespace BluRip
             try
             {
                 return (string)App.Current.Resources[key];
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        private string ResFormat(string key, params object[] para)
+        {
+            try
+            {
+                return String.Format((string)App.Current.Resources[key], para);
             }
             catch (Exception)
             {
