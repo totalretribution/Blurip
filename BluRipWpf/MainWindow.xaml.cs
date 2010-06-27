@@ -265,6 +265,44 @@ namespace BluRip
                 menuItemViewDemuxedStreams_Click(null, null);
                 menuItemViewQueue_Click(null, null);
                 menuItemViewExpertMode_Click(null, null);
+
+                UpdateEncodingProfiles();
+
+                if (settings.language == "en")
+                {
+                    menuItemLanguageEnglish.IsChecked = true;
+                }
+                else if (settings.language == "de")
+                {
+                    menuItemLanguageGerman.IsChecked = true;
+                }
+                else
+                {
+                    menuItemLanguageEnglish.IsChecked = true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateEncodingProfiles()
+        {
+            try
+            {
+                comboBoxEncodingProfile.Items.Clear();
+                foreach(EncodingSettings es in settings.encodingSettings)
+                {
+                    comboBoxEncodingProfile.Items.Add(es.desc);
+                }
+                if(settings.lastProfile > -1 && settings.lastProfile < settings.encodingSettings.Count)
+                {
+                    comboBoxEncodingProfile.SelectedIndex = settings.lastProfile;
+                }
+                else
+                {
+                    settings.lastProfile = -1;
+                }
             }
             catch (Exception)
             {
@@ -346,13 +384,11 @@ namespace BluRip
                     et.Stop();
                     et = null;
                 }
-                /*                
                 if (mt != null)
                 {
                     mt.Stop();
                     mt = null;
                 }
-                */
             }
             catch (Exception)
             {
@@ -716,6 +752,201 @@ namespace BluRip
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void comboBoxEncodingProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxEncodingProfile.SelectedIndex > -1) settings.lastProfile = comboBoxEncodingProfile.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemLanguageEnglish_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (menuItemLanguageEnglish.IsChecked)
+                {
+                    menuItemLanguageGerman.IsChecked = false;
+                    settings.language = "en";
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemLanguageGerman_Click(object sender, RoutedEventArgs e)
+        {
+            if (menuItemLanguageGerman.IsChecked)
+            {
+                menuItemLanguageEnglish.IsChecked = false;
+                settings.language = "de";
+            }
+        }
+
+        private bool checkComplete()
+        {
+            try
+            {
+                if (!checkEac3to()) return false;
+                int sup = 0;
+                if (comboBoxTitle.SelectedIndex > -1)
+                {
+                    foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                    {
+                        if (si.streamType == StreamType.Subtitle)
+                        {
+                            sup++;
+                        }
+                    }
+                }
+                if (!checkIndex()) return false;
+                if (sup > 0)
+                {
+                    if (!checkBdsup2sub()) return false;
+                }
+                if (!settings.untouchedVideo)
+                {
+                    if (!checkX264()) return false;
+                }
+                if (!checkMkvmerge()) return false;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool hasAvsValue()
+        {
+            try
+            {
+                if (demuxedStreamList.streams.Count == 0)
+                {
+                    return false;
+                }
+                foreach (StreamInfo si in demuxedStreamList.streams)
+                {
+                    if (si.streamType == StreamType.Video)
+                    {
+                        if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                        {
+                            if (((VideoFileInfo)si.extraFileInfo).encodeAvs != "") return true;
+                        }
+                        else return false;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool hasOutputVideoValue()
+        {
+            try
+            {
+                if (demuxedStreamList.streams.Count == 0)
+                {
+                    return false;
+                }
+                foreach (StreamInfo si in demuxedStreamList.streams)
+                {
+                    if (si.streamType == StreamType.Video)
+                    {
+                        if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                        {
+                            if (((VideoFileInfo)si.extraFileInfo).encodedFile != "") return true;
+                        }
+                        else return false;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool hasFpsValue()
+        {
+            try
+            {
+                if (demuxedStreamList.streams.Count == 0)
+                {
+                    return false;
+                }
+                foreach (StreamInfo si in demuxedStreamList.streams)
+                {
+                    if (si.streamType == StreamType.Video)
+                    {
+                        if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                        {
+                            if (((VideoFileInfo)si.extraFileInfo).fps != "") return true;
+                        }
+                        else return false;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private void buttonStart_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!checkComplete()) return;
+
+                if (demuxedStreamList.streams.Count == 0)
+                {
+                    if (!DoDemux()) return;
+                    if (!DoIndex()) return;
+                    if (!DoSubtitle()) return;
+                    if (!settings.untouchedVideo)
+                    {
+                        if (!DoEncode()) return;
+                    }
+                    if (!DoMux()) return;
+                }
+                else
+                {
+                    if (!hasOutputVideoValue())
+                    {
+                        if (!hasAvsValue() || !hasFpsValue())
+                        {
+                            if (!DoIndex()) return;
+                        }
+                        if (!DoSubtitle()) return;
+                        if (!DoEncode()) return;
+                        if (!DoMux()) return;
+                    }
+                    else
+                    {
+                        if (!DoMux()) return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
+            }
+            finally
+            {
+                logWindow.SaveMainLog( settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");                
             }
         }
     }

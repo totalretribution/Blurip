@@ -263,5 +263,30 @@ namespace BluRip
             {
             }
         }
+
+        public void SaveMainLog(string filename)
+        {
+            try
+            {
+                //SaveLog(richTextBoxMainLog.Document.Blocks.FirstBlock.
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void SaveLog(string log, string filename)
+        {
+            try
+            {
+                string[] lines = log.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string tmp = "";
+                foreach (string s in lines) tmp += s.Trim() + "\r\n";
+                System.IO.File.WriteAllText(filename, tmp);
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

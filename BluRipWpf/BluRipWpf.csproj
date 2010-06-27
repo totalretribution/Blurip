@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="IndexCrop.cs" />
     <Compile Include="MediaInfoDLL.cs" />
+    <Compile Include="Mux.cs" />
     <Compile Include="QueueWindow.xaml.cs">
       <DependentUpon>QueueWindow.xaml</DependentUpon>
     </Compile>
