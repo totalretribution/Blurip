@@ -22,11 +22,19 @@
                 <MenuItem Name="menuItemViewExpertMode" Header="{DynamicResource MenuViewExpertMode}" IsCheckable="True" Click="menuItemViewExpertMode_Click" />
                 <MenuItem Name="menuItemViewReset" Click="menuItemViewReset_Click" Header="{DynamicResource MenuViewReset}" />
             </MenuItem>
-            <MenuItem Header="{DynamicResource MenuLanguage}" Name="menuItemLanguage" />
+            <MenuItem Header="{DynamicResource MenuLanguage}" Name="menuItemLanguage">
+                <MenuItem Header="English" Name="menuItemLanguageEnglish" IsCheckable="True" Click="menuItemLanguageEnglish_Click" />
+                <MenuItem Header="Deutsch" Name="menuItemLanguageGerman" IsCheckable="True" Click="menuItemLanguageGerman_Click" />
+            </MenuItem>
             <MenuItem Header="{DynamicResource MenuSettings}" Name="menuItemSettings">
                 <MenuItem Header="{DynamicResource MenuSettingsExternalTools}" Name="menuItemSettingsExternalTools" Click="menuItemSettingsExternalTools_Click" />
+                <MenuItem Header="Encoding profiles" Name="menuItemSettingsProfiles" />
+                <MenuItem Header="Advanced options" Name="menuItemSettingsAdvanced" />
             </MenuItem>
-            <MenuItem Header="{DynamicResource MenuHelp}" Name="menuItemHelp" />
+            <MenuItem Header="{DynamicResource MenuHelp}" Name="menuItemHelp">
+                <MenuItem Name="menuItemHelpLinks" Header="Usefull links" />
+                <MenuItem Name="menuItemHelpAbout" Header="About" />
+            </MenuItem>
         </Menu>
         <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" Name="statusBarMain" VerticalAlignment="Bottom">
             <StatusBarItem Content="Text" Name="statusBarItemMain" />
@@ -64,18 +72,21 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabSettings}" Name="tabItemSettings">
-                    <Grid />
+                    <Grid>
+                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,40,0,0" Name="comboBoxEncodingProfile" VerticalAlignment="Top" Width="343" SelectionChanged="comboBoxEncodingProfile_SelectionChanged" />
+                        <Label Content="{DynamicResource LabelEncodingProfile}" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelEncodingProfile" VerticalAlignment="Top" />
+                    </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabStart}" Name="tabItemStart">
                     <Grid>
-                        <Button Content="{DynamicResource ButtonStartStart}" Height="23" HorizontalAlignment="Left" Margin="6,6,0,0" Name="buttonStart" VerticalAlignment="Top" Width="170" />
+                        <Button Content="{DynamicResource ButtonStartStart}" Height="23" HorizontalAlignment="Left" Margin="6,6,0,0" Name="buttonStart" VerticalAlignment="Top" Width="170" Click="buttonStart_Click" />
                         <Button Content="{DynamicResource ButtonStartQueue}" Height="23" HorizontalAlignment="Left" Margin="6,35,0,0" Name="buttonQueue" VerticalAlignment="Top" Width="170" />
                         <Button Content="{DynamicResource ButtonStartQueueStart}" Height="23" HorizontalAlignment="Left" Margin="6,64,0,0" Name="buttonQueueStart" VerticalAlignment="Top" Width="170" />
                         <Button Content="{DynamicResource ButtonStartDemux}" Height="23" HorizontalAlignment="Left" Margin="6,151,0,0" Name="buttonOnlyDemux" VerticalAlignment="Top" Width="170" Click="buttonOnlyDemux_Click" />
                         <Button Content="{DynamicResource ButtonStartCrop}" Height="23" HorizontalAlignment="Left" Margin="6,180,0,0" Name="buttonOnlyCrop" VerticalAlignment="Top" Width="170" Click="buttonOnlyCrop_Click" />
                         <Button Content="{DynamicResource ButtonStartSubtitle}" Height="23" HorizontalAlignment="Left" Margin="6,209,0,0" Name="buttonOnlySubtitle" VerticalAlignment="Top" Width="170" Click="buttonOnlySubtitle_Click" />
                         <Button Content="{DynamicResource ButtonStartEncode}" Height="23" HorizontalAlignment="Left" Margin="6,238,0,0" Name="buttonOnlyEncode" VerticalAlignment="Top" Width="170" Click="buttonOnlyEncode_Click" />
-                        <Button Content="{DynamicResource ButtonStartMux}" Height="23" HorizontalAlignment="Left" Margin="6,267,0,0" Name="buttonOnlyMux" VerticalAlignment="Top" Width="170" />
+                        <Button Content="{DynamicResource ButtonStartMux}" Height="23" HorizontalAlignment="Left" Margin="6,267,0,0" Name="buttonOnlyMux" VerticalAlignment="Top" Width="170" Click="buttonOnlyMux_Click" />
                     </Grid>
                 </TabItem>
             </TabControl>

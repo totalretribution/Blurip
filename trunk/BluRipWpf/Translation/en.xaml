@@ -43,6 +43,7 @@
 
     <!-- Tab Settings -->
     <system:String x:Key="TabSettings">Settings</system:String>
+    <system:String x:Key="LabelEncodingProfile">Encoding profile</system:String>
 
     <!-- Tab Start -->
     <system:String x:Key="TabStart">Start</system:String>

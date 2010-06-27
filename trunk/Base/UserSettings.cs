@@ -194,6 +194,7 @@ namespace BluRip
             this.bluripY = orig.bluripY;
             this.bluripHeight = orig.bluripHeight;
             this.bluripWidth = orig.bluripWidth;
+            this.language = orig.language;
 
             foreach (LanguageInfo li in orig.preferredLanguages)
             {
@@ -387,5 +388,7 @@ namespace BluRip
         public double bluripY = 140;
         public double bluripHeight = 800;
         public double bluripWidth = 600;
+
+        public string language = "en";
     }
 }
