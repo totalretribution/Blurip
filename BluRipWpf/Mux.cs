@@ -67,14 +67,14 @@ namespace BluRip
                 }
                 if (videoStream == 0)
                 {
-                    if (!silent) ErrorMsg("No videostream or encoded video filename not set");
-                    logWindow.MessageMux("No videostream or encoded video filename not set");
+                    if (!silent) ErrorMsg(Res("ErrorVideoFile"));
+                    logWindow.MessageMux(Res("ErrorVideoFile"));
                     return false;
                 }
                 if (audioStream == 0)
                 {
-                    if (!silent) ErrorMsg("No audiostream or audio filename not set");
-                    logWindow.MessageMux("No audiostream or audio filename not set");
+                    if (!silent) ErrorMsg(Res("ErrorAudioFile"));
+                    logWindow.MessageMux(Res("ErrorAudioFile"));
                     return false;
                 }
                 if (chapterStream > 0)
@@ -92,8 +92,8 @@ namespace BluRip
                     }
                     if (error)
                     {
-                        if (!silent) ErrorMsg("Chapter file not found");
-                        logWindow.MessageMux("Chapter file not found");
+                        if (!silent) ErrorMsg(Res("ErrorChapterFile"));
+                        logWindow.MessageMux(Res("ErrorChapterFile"));
                         return false;
                     }
                 }
@@ -133,13 +133,14 @@ namespace BluRip
                     }
                     if (error)
                     {
-                        if (!silent) ErrorMsg("Subtitle file(s) not found");
-                        logWindow.MessageMux("Subtitle file(s) not found");
+                        if (!silent) ErrorMsg(Res("ErrorSubtitleFile"));
+                        logWindow.MessageMux(Res("ErrorSubtitleFile"));
                         return false;
                     }
                 }
 
                 DisableControls();
+                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarMux"));
 
                 mt = new MuxTool(settings, demuxedStreamList);
                 mt.OnInfoMsg += new ExternalTool.InfoEventHandler(MuxMsg);
@@ -150,7 +151,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageMux("Exception: " + ex.Message);
+                logWindow.MessageMux(Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
@@ -166,8 +167,8 @@ namespace BluRip
             {
                 if (!File.Exists(settings.mkvmergePath))
                 {
-                    logWindow.MessageMain("mkvmerge path not set");
-                    if (!silent) ErrorMsg("mkvmerge path not set");
+                    logWindow.MessageMain(Res("ErrorMkvmergePath"));
+                    if (!silent) ErrorMsg(Res("ErrorMkvmergePath"));
                     return false;
                 }
                 return true;

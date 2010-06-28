@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:BluRip">
 
     <!-- Menu -->
     <system:String x:Key="MenuFile">File</system:String>
@@ -15,9 +16,16 @@
     <system:String x:Key="MenuViewSnap">Snap to main window</system:String>
     <system:String x:Key="MenuViewExpertMode">Show advanced options</system:String>
     <system:String x:Key="MenuLanguage">Language</system:String>
+    <system:String x:Key="MenuLanguageEnglish">English</system:String>
+    <system:String x:Key="MenuLanguageGerman">Deutsch</system:String>
     <system:String x:Key="MenuSettings">Settings</system:String>
-    <system:String x:Key="MenuSettingsExternalTools">External tools</system:String>    
+    <system:String x:Key="MenuSettingsExternalTools">External tools</system:String>
+    <system:String x:Key="MenuSettingsEncodingProfiles">Edit encoding profiles</system:String>
+    <system:String x:Key="MenuSettingsAvisynthProfiles">Edit AviSynth profiles</system:String>
+    <system:String x:Key="MenuSettingsAdvancedOptions">Advanced options</system:String>
     <system:String x:Key="MenuHelp">Help</system:String>
+    <system:String x:Key="MenuHelpLinks">Usefull links</system:String>
+    <system:String x:Key="MenuHelpAbout">About</system:String>
 
     <!-- Tab Input -->
     <system:String x:Key="TabInput">Input</system:String>
@@ -44,6 +52,35 @@
     <!-- Tab Settings -->
     <system:String x:Key="TabSettings">Settings</system:String>
     <system:String x:Key="LabelEncodingProfile">Encoding profile</system:String>
+    <system:String x:Key="HeaderVideoSettings">Video settings</system:String>
+    <system:String x:Key="checkBoxUntouchedVideo">Use untouched video</system:String>
+    <system:String x:Key="HeaderAudioSettings">Audio settings</system:String>
+    <system:String x:Key="checkBoxUntouchedAudio">Use untouched audio</system:String>
+    <system:String x:Key="checkBoxConvertDTStoAc3">Convert DTS tracks to AC3</system:String>
+    <system:String x:Key="HeaderSubtitleSettings">Subtitle settings</system:String>
+    <system:String x:Key="LabelMuxSubtitle">Mux subtitles</system:String>
+    <system:String x:Key="LabelCopySubtitle">Copy subtitles</system:String>
+    <local:ObjectCollection x:Key="comboBoxMuxSubtitle">
+        <system:String>Do not mux subtitles</system:String>
+        <system:String>Mux all subtitles</system:String>
+        <system:String>Mux only forced subtitles</system:String>
+        <system:String>Mux only first normal/forced subtitle</system:String>
+    </local:ObjectCollection>
+    <local:ObjectCollection x:Key="comboBoxCopySubtitle">
+        <system:String>Do not copy subtitles</system:String>
+        <system:String>Copy all subtitles to 'Subs' folder</system:String>
+        <system:String>Copy all but forced</system:String>
+        <system:String>Copy only first normal/forced subtitles</system:String>
+    </local:ObjectCollection>
+    <system:String x:Key="HeaderExpertSettings">Expert settings</system:String>
+    <system:String x:Key="LabelAvisynthProfile">Avisynth profile</system:String>
+    <system:String x:Key="LabelCropInput">AutoCrop input method</system:String>
+    <system:String x:Key="LabelEncodeInput">Encoding input method</system:String>
+    <system:String x:Key="checkBoxResize720p">Resize to 720p</system:String>
+    <system:String x:Key="checkBoxUseDTSCore">Use DTS core</system:String>
+    <system:String x:Key="checkBoxUse64bitX264">Use 64-bit x264</system:String>
+    <system:String x:Key="checkBoxMuxLowResSubs">Mux LowRes subs</system:String>
+
 
     <!-- Tab Start -->
     <system:String x:Key="TabStart">Start</system:String>
@@ -115,6 +152,7 @@
     <system:String x:Key="StatusBarEncode">Encoding {0}</system:String>
     <system:String x:Key="StatusBarEncodeFirstPass">Encoding 1. pass {0}</system:String>
     <system:String x:Key="StatusBarEncodeSecondPass">Encoding 2. pass {0}</system:String>
+    <system:String x:Key="StatusBarMux">Muxing...</system:String>
 
     <!-- FileList Window -->
     <system:String x:Key="CaptionFileListWindow">Open *.m2ts file(s)</system:String>
@@ -159,6 +197,11 @@
     <system:String x:Key="ErrorUnknownTracks">Unknown tracks selected - please report log to developer</system:String>
     <system:String x:Key="ErrorNoTitle">No title selected</system:String>
     <system:String x:Key="ErrorWorkingDirectory">Working dir not set</system:String>
+    <system:String x:Key="ErrorMkvmergePath">Path to mkvmerge.exe not set or found.</system:String>
+    <system:String x:Key="ErrorSubtitleFile">Subtitle file(s) not found</system:String>
+    <system:String x:Key="ErrorChapterFile">Chapter file not found</system:String>
+    <system:String x:Key="ErrorVideoFile">Video file not found</system:String>
+    <system:String x:Key="ErrorAudioFile">Audio file(s) not found</system:String>
     
     <!-- Info msg -->
     <system:String x:Key="InfoManualFps">Using manual fps - override MediaInfo value</system:String>

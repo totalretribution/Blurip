@@ -23,17 +23,18 @@
                 <MenuItem Name="menuItemViewReset" Click="menuItemViewReset_Click" Header="{DynamicResource MenuViewReset}" />
             </MenuItem>
             <MenuItem Header="{DynamicResource MenuLanguage}" Name="menuItemLanguage">
-                <MenuItem Header="English" Name="menuItemLanguageEnglish" IsCheckable="True" Click="menuItemLanguageEnglish_Click" />
-                <MenuItem Header="Deutsch" Name="menuItemLanguageGerman" IsCheckable="True" Click="menuItemLanguageGerman_Click" />
+                <MenuItem Header="{DynamicResource MenuLanguageEnglish}" Name="menuItemLanguageEnglish" IsCheckable="True" Click="menuItemLanguageEnglish_Click" />
+                <MenuItem Header="{DynamicResource MenuLanguageGerman}" Name="menuItemLanguageGerman" IsCheckable="True" Click="menuItemLanguageGerman_Click" />
             </MenuItem>
             <MenuItem Header="{DynamicResource MenuSettings}" Name="menuItemSettings">
                 <MenuItem Header="{DynamicResource MenuSettingsExternalTools}" Name="menuItemSettingsExternalTools" Click="menuItemSettingsExternalTools_Click" />
-                <MenuItem Header="Encoding profiles" Name="menuItemSettingsProfiles" />
-                <MenuItem Header="Advanced options" Name="menuItemSettingsAdvanced" />
+                <MenuItem Header="{DynamicResource MenuSettingsEncodingProfiles}" Name="menuItemSettingsEncodingProfiles" Click="menuItemSettingsProfiles_Click" />
+                <MenuItem Header="{DynamicResource MenuSettingsAvisynthProfiles}" Name="menuItemSettingsAvisynthProfiles" Click="menuItemSettingsAvisynthProfiles_Click" />
+                <MenuItem Header="{DynamicResource MenuSettingsAdvancedOptions}" Name="menuItemSettingsAdvanced" Click="menuItemSettingsAdvanced_Click" />
             </MenuItem>
             <MenuItem Header="{DynamicResource MenuHelp}" Name="menuItemHelp">
-                <MenuItem Name="menuItemHelpLinks" Header="Usefull links" />
-                <MenuItem Name="menuItemHelpAbout" Header="About" />
+                <MenuItem Name="menuItemHelpLinks" Header="{DynamicResource MenuHelpLinks}" Click="menuItemHelpLinks_Click" />
+                <MenuItem Name="menuItemHelpAbout" Header="{DynamicResource MenuHelpAbout}" Click="menuItemHelpAbout_Click" />
             </MenuItem>
         </Menu>
         <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" Name="statusBarMain" VerticalAlignment="Bottom">
@@ -43,38 +44,79 @@
             <TabControl HorizontalAlignment="Stretch" Name="tabControlMain" VerticalAlignment="Stretch" Margin="5,5,5,35">
                 <TabItem Header="{DynamicResource TabInput}" Name="tabItemInput">
                     <Grid>
-                        <Button Content="{DynamicResource ButtonBluerayPath}" Height="23" HorizontalAlignment="Left" Margin="298,31,0,0" Name="buttonBluRayPath" VerticalAlignment="Top" Width="75" Click="buttonBluRayPath_Click" ToolTip="{DynamicResource ButtonBluerayPathTooltip}" />
-                        <Label Content="{DynamicResource LabelBluerayPath}" HorizontalAlignment="Left" Name="labelBlurayPath" VerticalAlignment="Top" />
+                        <Button Content="{DynamicResource ButtonBluerayPath}" Height="23" HorizontalAlignment="Left" Margin="347,32,0,0" Name="buttonBluRayPath" VerticalAlignment="Top" Width="75" Click="buttonBluRayPath_Click" ToolTip="{DynamicResource ButtonBluerayPathTooltip}" />
+                        <Label Content="{DynamicResource LabelBluerayPath}" HorizontalAlignment="Left" Name="labelBlurayPath" VerticalAlignment="Top" Margin="6,6,0,0" />
                         <TextBox HorizontalAlignment="Left" Name="textBoxBlurayPath" VerticalAlignment="Top" Width="286" IsReadOnly="True" Margin="6,32,0,0" Height="23" />
-                        <Button Content="{DynamicResource ButtonGetStreamInfo}" Height="23" HorizontalAlignment="Right" Margin="0,31,152,0" Name="buttonGetStreamInfos" VerticalAlignment="Top" Width="140" Click="buttonGetStreamInfo_Click" />
-                        <Button Content="{DynamicResource ButtonOpenM2ts}" Height="23" HorizontalAlignment="Right" Margin="0,31,6,0" Name="buttonOpenM2ts" VerticalAlignment="Top" Width="140" Click="buttonOpenM2ts_Click" />
-                        <ListBox HorizontalAlignment="Stretch" Margin="6,158,0,34" Name="listBoxStreams" VerticalAlignment="Stretch" MouseDoubleClick="listBoxStreams_MouseDoubleClick" FontFamily="Courier New" FontSize="12"></ListBox>
-                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,95,0,0" Name="comboBoxTitle" VerticalAlignment="Top" Width="615" SelectionChanged="comboBoxTitle_SelectionChanged" />
-                        <Label Content="{DynamicResource LabelStreamDesc}" Height="28" HorizontalAlignment="Left" Margin="6,361,0,0" Name="labelStreamDesc" VerticalAlignment="Bottom" />
-                        <Label Content="{DynamicResource LabelStreamListDesc}" Height="28" HorizontalAlignment="Left" Margin="6,124,0,0" Name="labelStreamListDesc" VerticalAlignment="Top" />
-                        <Label Content="{DynamicResource LabelTitleDesc}" Height="28" HorizontalAlignment="Left" Margin="6,61,0,0" Name="labelTitleDesc" VerticalAlignment="Top" />
+                        <Button Content="{DynamicResource ButtonGetStreamInfo}" Height="23" HorizontalAlignment="Right" Margin="0,32,152,0" Name="buttonGetStreamInfos" VerticalAlignment="Top" Width="140" Click="buttonGetStreamInfo_Click" />
+                        <Button Content="{DynamicResource ButtonOpenM2ts}" Height="23" HorizontalAlignment="Right" Margin="0,32,6,0" Name="buttonOpenM2ts" VerticalAlignment="Top" Width="140" Click="buttonOpenM2ts_Click" />
+                        <ListBox HorizontalAlignment="Stretch" Margin="6,142,0,32" Name="listBoxStreams" VerticalAlignment="Stretch" MouseDoubleClick="listBoxStreams_MouseDoubleClick" FontFamily="Courier New" FontSize="12"></ListBox>
+                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,87,0,0" Name="comboBoxTitle" VerticalAlignment="Top" Width="615" SelectionChanged="comboBoxTitle_SelectionChanged" />
+                        <Label Content="{DynamicResource LabelStreamDesc}" HorizontalAlignment="Left" Margin="6,0,0,6" Name="labelStreamDesc" VerticalAlignment="Bottom" />
+                        <Label Content="{DynamicResource LabelStreamListDesc}" HorizontalAlignment="Left" Margin="6,116,0,0" Name="labelStreamListDesc" VerticalAlignment="Top" />
+                        <Label Content="{DynamicResource LabelTitleDesc}" HorizontalAlignment="Left" Margin="6,61,0,0" Name="labelTitleDesc" VerticalAlignment="Top" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabOutput}" Name="tabItemOutput">
                     <Grid>
-                        <Label Content="{DynamicResource LabelWorkingDirectory}" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelWorkingDirectory" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,40,0,0" Name="textBoxWorkingDirectory" VerticalAlignment="Top" Width="433" IsReadOnly="True" />
-                        <Label Content="{DynamicResource LabelFilePrefix}" Height="28" HorizontalAlignment="Left" Margin="6,69,0,0" Name="labelFilePrefix" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,103,0,0" Name="textBoxFilePrefix" VerticalAlignment="Top" Width="433" TextChanged="textBoxFilePrefix_TextChanged" />
-                        <Label Content="{DynamicResource LabelTargetDirectory}" Height="28" HorizontalAlignment="Left" Margin="6,132,0,0" Name="labelTargetDirectory" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,166,0,0" Name="textBoxTargetDirectory" VerticalAlignment="Top" Width="433" IsReadOnly="True" />
-                        <Label Content="{DynamicResource LabelTargetFilename}" Height="28" HorizontalAlignment="Left" Margin="6,195,0,0" Name="labelTargetFilename" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,229,0,0" Name="textBoxTargetFilename" VerticalAlignment="Top" Width="433" TextChanged="textBoxTargetFilename_TextChanged" />
-                        <Label Content="{DynamicResource LabelMovieTitle}" Height="28" HorizontalAlignment="Left" Margin="6,258,0,0" Name="labelMovieTitle" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,292,0,0" Name="textBoxMovieTitle" VerticalAlignment="Top" Width="433" TextChanged="textBoxMovieTitle_TextChanged" />
-                        <Button Content="{DynamicResource ButtonWorkingDirectory}" Height="23" HorizontalAlignment="Right" Margin="0,39,238,0" Name="buttonWorkingDirectory" VerticalAlignment="Top" Width="75" Click="buttonWorkingDirectory_Click" />
-                        <Button Content="{DynamicResource ButtonTargetDirectory}" Height="23" HorizontalAlignment="Left" Margin="445,165,0,0" Name="buttonTargetDirectory" VerticalAlignment="Top" Width="75" Click="buttonTargetDirectory_Click" />
+                        <Label Content="{DynamicResource LabelWorkingDirectory}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelWorkingDirectory" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxWorkingDirectory" VerticalAlignment="Top" Width="433" IsReadOnly="True" />
+                        <Label Content="{DynamicResource LabelFilePrefix}" HorizontalAlignment="Left" Margin="6,61,0,0" Name="labelFilePrefix" VerticalAlignment="Top" Padding="2" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,87,0,0" Name="textBoxFilePrefix" VerticalAlignment="Top" Width="433" TextChanged="textBoxFilePrefix_TextChanged" />
+                        <Label Content="{DynamicResource LabelTargetDirectory}" HorizontalAlignment="Left" Margin="6,116,0,0" Name="labelTargetDirectory" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,142,0,0" Name="textBoxTargetDirectory" VerticalAlignment="Top" Width="433" IsReadOnly="True" />
+                        <Label Content="{DynamicResource LabelTargetFilename}" HorizontalAlignment="Left" Margin="6,171,0,0" Name="labelTargetFilename" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,197,0,0" Name="textBoxTargetFilename" VerticalAlignment="Top" Width="433" TextChanged="textBoxTargetFilename_TextChanged" />
+                        <Label Content="{DynamicResource LabelMovieTitle}" HorizontalAlignment="Left" Margin="6,226,0,0" Name="labelMovieTitle" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,252,0,0" Name="textBoxMovieTitle" VerticalAlignment="Top" Width="433" TextChanged="textBoxMovieTitle_TextChanged" />
+                        <Button Content="{DynamicResource ButtonWorkingDirectory}" Height="23" HorizontalAlignment="Right" Margin="0,31,238,0" Name="buttonWorkingDirectory" VerticalAlignment="Top" Width="75" Click="buttonWorkingDirectory_Click" />
+                        <Button Content="{DynamicResource ButtonTargetDirectory}" Height="23" HorizontalAlignment="Left" Margin="445,141,0,0" Name="buttonTargetDirectory" VerticalAlignment="Top" Width="75" Click="buttonTargetDirectory_Click" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabSettings}" Name="tabItemSettings">
                     <Grid>
-                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,40,0,0" Name="comboBoxEncodingProfile" VerticalAlignment="Top" Width="343" SelectionChanged="comboBoxEncodingProfile_SelectionChanged" />
-                        <Label Content="{DynamicResource LabelEncodingProfile}" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelEncodingProfile" VerticalAlignment="Top" />
+                        <GroupBox Header="{DynamicResource HeaderVideoSettings}" Height="104" HorizontalAlignment="Left" Margin="6,6,0,0" Name="groupBoxVideoSettings" VerticalAlignment="Top" Width="614">
+                            <Grid>
+                                <Label Content="{DynamicResource LabelEncodingProfile}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelEncodingProfile" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxEncodingProfile" VerticalAlignment="Top" Width="470" SelectionChanged="comboBoxEncodingProfile_SelectionChanged" />
+                                <CheckBox Content="{DynamicResource checkBoxUntouchedVideo}" Height="16" HorizontalAlignment="Left" Margin="6,61,0,0" Name="checkBoxUntouchedVideo" VerticalAlignment="Top" Checked="checkBoxUntouchedVideo_Checked" Unchecked="checkBoxUntouchedVideo_Checked" />
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="{DynamicResource HeaderAudioSettings}" Height="50" HorizontalAlignment="Left" Margin="6,116,0,0" Name="groupBoxAudioSettings" VerticalAlignment="Top" Width="614">
+                            <Grid>
+                                <CheckBox Content="{DynamicResource checkBoxUntouchedAudio}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxUntouchedAudio" VerticalAlignment="Top" Checked="checkBoxUntouchedAudio_Checked" Unchecked="checkBoxUntouchedAudio_Checked" />
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="{DynamicResource HeaderSubtitleSettings}" Height="91" HorizontalAlignment="Left" Margin="6,172,0,0" Name="groupBoxSubtitleSettings" VerticalAlignment="Top" Width="614">
+                            <Grid>
+                                <Label Content="{DynamicResource LabelMuxSubtitle}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelMuxSubtitles" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxMuxSubtitles" VerticalAlignment="Top" Width="284" ItemsSource="{DynamicResource comboBoxMuxSubtitle}" SelectionChanged="comboBoxMuxSubtitles_SelectionChanged" />
+                                <Label Content="{DynamicResource LabelCopySubtitle}" HorizontalAlignment="Left" Margin="336,6,0,0" Name="labelCopySubtitles" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="336,32,0,0" Name="comboBoxCopySubtitles" VerticalAlignment="Top" Width="260" ItemsSource="{DynamicResource comboBoxCopySubtitle}" SelectionChanged="comboBoxCopySubtitles_SelectionChanged" />
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="{DynamicResource HeaderExpertSettings}" Height="126" Margin="6,269,138,0" Name="groupBoxExpertSettings" VerticalAlignment="Top" Width="614">
+                            <Grid>
+                                <Label Content="{DynamicResource LabelAvisynthProfile}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelAvisynthProfile" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxAvisynthProfile" VerticalAlignment="Top" Width="166" SelectionChanged="comboBoxAvisynthProfile_SelectionChanged" />
+                                <CheckBox Content="{DynamicResource checkBoxResize720p}" Height="16" HorizontalAlignment="Left" Margin="6,61,0,0" Name="checkBoxResize720p" VerticalAlignment="Top" Checked="checkBoxResize720p_Checked" Unchecked="checkBoxResize720p_Checked" />
+                                <CheckBox Content="{DynamicResource checkBoxMuxLowResSubs}" Height="16" HorizontalAlignment="Left" Margin="196,83,0,0" Name="checkBoxMuxLowResSubs" VerticalAlignment="Top" Checked="checkBoxMuxLowResSubs_Checked" Unchecked="checkBoxMuxLowResSubs_Checked" />
+                                <CheckBox Content="{DynamicResource checkBoxUse64bitX264}" Height="16" HorizontalAlignment="Left" Margin="196,61,0,0" Name="checkBoxUse64BitX264" VerticalAlignment="Top" Checked="checkBoxUse64BitX264_Checked" Unchecked="checkBoxUse64BitX264_Checked" />
+                                <CheckBox Content="{DynamicResource checkBoxUseDTSCore}" Height="16" HorizontalAlignment="Left" Margin="6,83,0,0" Name="checkBoxUseDTSCore" VerticalAlignment="Top" Checked="checkBoxUseDTSCore_Checked" Unchecked="checkBoxUseDTSCore_Checked" />
+                                <Label Content="{DynamicResource LabelCropInput}" HorizontalAlignment="Left" Margin="196,6,0,0" Name="labelCropInput" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="196,32,0,0" Name="comboBoxCropInput" VerticalAlignment="Top" Width="150" SelectionChanged="comboBoxCropInput_SelectionChanged">
+                                    <ComboBoxItem Content="DirectShowSource" />
+                                    <ComboBoxItem Content="FFVideoSource" />
+                                    <ComboBoxItem Content="DGMultiSource" />
+                                </ComboBox>
+                                <Label Content="{DynamicResource LabelEncodeInput}" HorizontalAlignment="Left" Margin="408,6,0,0" Name="labelEncodeInput" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="408,32,0,0" Name="comboBoxEncodeInput" VerticalAlignment="Top" Width="154" SelectionChanged="comboBoxEncodeInput_SelectionChanged">
+                                    <ComboBoxItem Content="DirectShowSource" />
+                                    <ComboBoxItem Content="FFVideoSource" />
+                                    <ComboBoxItem Content="DGMultiSource" />
+                                </ComboBox>
+                                <CheckBox Content="{DynamicResource checkBoxConvertDTStoAc3}" Height="16" HorizontalAlignment="Left" Margin="408,61,0,0" Name="checkBoxConvertDtsToAc3" VerticalAlignment="Top" Checked="checkBoxConvertDtsToAc3_Checked" Unchecked="checkBoxConvertDtsToAc3_Checked" />
+                            </Grid>
+                        </GroupBox>
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabStart}" Name="tabItemStart">

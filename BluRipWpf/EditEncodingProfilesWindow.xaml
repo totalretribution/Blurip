@@ -1,0 +1,9 @@
+﻿<Window x:Class="BluRip.EditEncodingProfilesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EditProfilesWindow" Height="300" Width="300">
+    <Grid>
+        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="12,226,0,0" Name="buttonOk" VerticalAlignment="Top" Width="75" IsDefault="True" Click="buttonOk_Click" />
+        <Button Content="Button" Height="23" HorizontalAlignment="Right" Margin="0,226,110,0" Name="buttonCancel" VerticalAlignment="Top" Width="75" IsCancel="True" />
+    </Grid>
+</Window>
