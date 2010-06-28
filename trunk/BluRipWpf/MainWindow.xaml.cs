@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace BluRip
 {
@@ -266,7 +267,21 @@ namespace BluRip
                 menuItemViewQueue_Click(null, null);
                 menuItemViewExpertMode_Click(null, null);
 
+                UpdateAvisynthSettings();
                 UpdateEncodingProfiles();
+                UpdateMuxSettings();
+
+                if (settings.cropInput > -1 && settings.cropInput < 3) comboBoxCropInput.SelectedIndex = settings.cropInput;
+                else
+                {
+                    comboBoxCropInput.SelectedIndex = 0;
+                }
+
+                if (settings.encodeInput > -1 && settings.encodeInput < 3) comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
+                else
+                {
+                    comboBoxEncodeInput.SelectedIndex = 0;
+                }
 
                 if (settings.language == "en")
                 {
@@ -279,6 +294,37 @@ namespace BluRip
                 else
                 {
                     menuItemLanguageEnglish.IsChecked = true;
+                }
+
+                checkBoxUntouchedAudio.IsChecked = settings.untouchedAudio;
+                checkBoxUntouchedVideo.IsChecked = settings.untouchedVideo;
+                checkBoxConvertDtsToAc3.IsChecked = settings.convertDtsToAc3;
+                checkBoxMuxLowResSubs.IsChecked = settings.muxLowResSubs;
+                checkBoxResize720p.IsChecked = settings.resize720p;
+                checkBoxUse64BitX264.IsChecked = settings.use64bit;
+                checkBoxUseDTSCore.IsChecked = settings.dtsHdCore;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateAvisynthSettings()
+        {
+            try
+            {                
+                comboBoxAvisynthProfile.Items.Clear();
+                foreach (AvisynthSettings avs in settings.avisynthSettings)
+                {
+                    comboBoxAvisynthProfile.Items.Add(avs.desc);
+                }
+                if (settings.lastAvisynthProfile > -1 && settings.lastAvisynthProfile < settings.avisynthSettings.Count)
+                {
+                    comboBoxAvisynthProfile.SelectedIndex = settings.lastAvisynthProfile;
+                }
+                else
+                {
+                    settings.lastAvisynthProfile = -1;
                 }
             }
             catch (Exception)
@@ -308,7 +354,33 @@ namespace BluRip
             {
             }
         }
-        
+
+        private void UpdateMuxSettings()
+        {
+            try
+            {
+                if (settings.muxSubs > -1 && settings.muxSubs < comboBoxMuxSubtitles.Items.Count)
+                {
+                    comboBoxMuxSubtitles.SelectedIndex = settings.muxSubs;
+                }
+                else
+                {
+                    comboBoxMuxSubtitles.SelectedIndex = 0;
+                }
+                if (settings.copySubs > -1 && settings.copySubs < comboBoxCopySubtitles.Items.Count)
+                {
+                    comboBoxCopySubtitles.SelectedIndex = settings.copySubs;
+                }
+                else
+                {
+                    comboBoxCopySubtitles.SelectedIndex = 0;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private void ErrorMsg(string msg)
         {
             try
@@ -678,6 +750,7 @@ namespace BluRip
                 buttonOnlySubtitle.Visibility = System.Windows.Visibility.Visible;
                 buttonOnlyEncode.Visibility = System.Windows.Visibility.Visible;
                 buttonOnlyMux.Visibility = System.Windows.Visibility.Visible;
+                groupBoxExpertSettings.Visibility = System.Windows.Visibility.Visible;
             }
             catch (Exception)
             {
@@ -693,6 +766,7 @@ namespace BluRip
                 buttonOnlySubtitle.Visibility = System.Windows.Visibility.Hidden;
                 buttonOnlyEncode.Visibility = System.Windows.Visibility.Hidden;
                 buttonOnlyMux.Visibility = System.Windows.Visibility.Hidden;
+                groupBoxExpertSettings.Visibility = System.Windows.Visibility.Hidden;
             }
             catch (Exception)
             {
@@ -949,5 +1023,227 @@ namespace BluRip
                 logWindow.SaveMainLog( settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");                
             }
         }
+
+        private void menuItemSettingsProfiles_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                EditEncodingProfilesWindow epw = new EditEncodingProfilesWindow(settings);
+                epw.ShowDialog();
+                if (epw.DialogResult == true)
+                {
+                    settings = new UserSettings(epw.UserSettings);
+                    UpdateEncodingProfiles();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemSettingsAdvanced_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings);
+                aow.ShowDialog();
+                if (aow.DialogResult == true)
+                {
+                    settings = new UserSettings(aow.UserSettings);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemSettingsAvisynthProfiles_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                EditAvisynthProfilesWindow eapw = new EditAvisynthProfilesWindow(settings);
+                eapw.ShowDialog();
+                if (eapw.DialogResult == true)
+                {
+                    settings = new UserSettings(eapw.UserSettings);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemHelpLinks_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LinkWindow lw = new LinkWindow();
+                lw.ShowDialog();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemHelpAbout_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AboutWindow aw = new AboutWindow();
+                aw.ShowDialog();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxMuxSubtitles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxMuxSubtitles.SelectedIndex > -1)
+                {
+                    settings.muxSubs = comboBoxMuxSubtitles.SelectedIndex;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxCopySubtitles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxCopySubtitles.SelectedIndex > -1)
+                {
+                    settings.copySubs = comboBoxCopySubtitles.SelectedIndex;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxCropInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxCropInput.SelectedIndex > -1)
+                {
+                    settings.cropInput = comboBoxCropInput.SelectedIndex;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxEncodeInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxEncodeInput.SelectedIndex > -1)
+                {
+                    settings.encodeInput = comboBoxEncodeInput.SelectedIndex;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUntouchedVideo_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.untouchedVideo = checkBoxUntouchedVideo.IsChecked.Value;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUntouchedAudio_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.untouchedAudio = checkBoxUntouchedAudio.IsChecked.Value;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxConvertDtsToAc3_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.convertDtsToAc3 = checkBoxConvertDtsToAc3.IsChecked.Value;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxResize720p_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.resize720p = checkBoxResize720p.IsChecked.Value;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUseDTSCore_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.dtsHdCore = checkBoxUseDTSCore.IsChecked.Value;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxUse64BitX264_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.use64bit = checkBoxUse64BitX264.IsChecked.Value;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxMuxLowResSubs_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.muxLowResSubs = checkBoxMuxLowResSubs.IsChecked.Value;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxAvisynthProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxAvisynthProfile.SelectedIndex > -1)
+                {
+                    settings.lastAvisynthProfile = comboBoxAvisynthProfile.SelectedIndex;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
+
+    public class ObjectCollection : ObservableCollection<object> { }
 }

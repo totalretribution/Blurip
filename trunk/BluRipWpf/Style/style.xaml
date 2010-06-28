@@ -12,11 +12,8 @@
     </Style>
 
     <Style TargetType="{x:Type GroupBox}">
-        <Setter Property="BitmapEffect">
-            <Setter.Value>
-                <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
-            </Setter.Value>
-        </Setter>
+        
+        <Setter Property="Foreground" Value="Black"/>
     </Style>
 
     <Style TargetType="{x:Type ComboBox}">
@@ -25,6 +22,11 @@
                 <DropShadowBitmapEffect Color="Black" Direction="320"  ShadowDepth="2" Softness="1" Opacity="0.5"/>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Padding" Value="2"/>
     </Style>
 
     <Style TargetType="{x:Type TextBox}">

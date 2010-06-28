@@ -59,9 +59,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedOptionsWindow.xaml.cs">
+      <DependentUpon>AdvancedOptionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Demux.cs" />
     <Compile Include="DemuxedStreamsWindow.xaml.cs">
       <DependentUpon>DemuxedStreamsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditAvisynthProfilesWindow.xaml.cs">
+      <DependentUpon>EditAvisynthProfilesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditEncodingProfilesWindow.xaml.cs">
+      <DependentUpon>EditEncodingProfilesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Encode.cs" />
     <Compile Include="ExternalToolsWindow.xaml.cs">
@@ -71,6 +83,9 @@
       <DependentUpon>FileListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IndexCrop.cs" />
+    <Compile Include="LinkWindow.xaml.cs">
+      <DependentUpon>LinkWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MediaInfoDLL.cs" />
     <Compile Include="Mux.cs" />
     <Compile Include="QueueWindow.xaml.cs">
@@ -78,11 +93,31 @@
     </Compile>
     <Compile Include="StreamInfo.cs" />
     <Compile Include="Subtitle.cs" />
+    <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdvancedOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DemuxedStreamsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditAvisynthProfilesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditEncodingProfilesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ExternalToolsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LinkWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
