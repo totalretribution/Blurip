@@ -34,8 +34,9 @@ namespace BluRip
         private string output = "";
         private string outputIdx = "";
         private bool lowRes = false;
+        private bool pgs = false;
 
-        public SubtitleTool(UserSettings settings, string fps, ref StreamInfo si, bool onlyForced, bool lowRes)
+        public SubtitleTool(UserSettings settings, string fps, ref StreamInfo si, bool onlyForced, bool lowRes, bool pgs)
             : base()
         {
             try
@@ -47,13 +48,20 @@ namespace BluRip
                 this.si = si;
                 this.onlyForced = onlyForced;
                 this.lowRes = lowRes;
+                this.pgs = pgs;
+
+                string format = ".sub";
+                if (pgs)
+                {
+                    format = ".sup";
+                }
 
                 if (!lowRes)
                 {
                     if (!onlyForced)
                     {
                         output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
-                                "_complete.sub";
+                                "_complete" + format;
 
                         outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
                             "_complete.idx";
@@ -61,7 +69,7 @@ namespace BluRip
                     else
                     {
                         output = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
-                                "_onlyforced.sub";
+                                "_onlyforced" + format;
 
                         outputIdx = settings.workingDir + "\\" + System.IO.Path.GetFileNameWithoutExtension(si.filename) +
                             "_onlyforced.idx";
@@ -151,22 +159,42 @@ namespace BluRip
                     {
                         if (File.Exists(output))
                         {
-                            sfi.normalSub = output;
+                            if (!pgs)
+                            {
+                                sfi.normalSub = output;
+                            }
+                            else
+                            {
+                                sfi.normalSup = output;
+                            }
                         }
                         if (File.Exists(outputIdx))
                         {
-                            sfi.normalIdx = outputIdx;
+                            if (!pgs)
+                            {
+                                sfi.normalIdx = outputIdx;
+                            }
                         }
                     }
                     else
                     {
                         if (File.Exists(output))
                         {
-                            sfi.forcedSub = output;
+                            if (!pgs)
+                            {
+                                sfi.forcedSub = output;
+                            }
+                            else
+                            {
+                                sfi.forcedSup = output;
+                            }
                         }
                         if (File.Exists(outputIdx))
                         {
-                            sfi.forcedIdx = outputIdx;
+                            if (!pgs)
+                            {
+                                sfi.forcedIdx = outputIdx;
+                            }
                         }
                     }
 
@@ -182,6 +210,16 @@ namespace BluRip
                                 File.Delete(sfi.normalIdx);
                                 sfi.normalSub = "";
                                 sfi.normalIdx = "";
+                            }
+                        }
+                        if (sfi.normalSup != "" && sfi.forcedSup != "")
+                        {
+                            FileInfo f1 = new FileInfo(sfi.normalSup);
+                            FileInfo f2 = new FileInfo(sfi.forcedSup);
+                            if (f1.Length == f2.Length)
+                            {
+                                File.Delete(sfi.normalSup);
+                                sfi.normalSup = "";
                             }
                         }
                         successfull = true;

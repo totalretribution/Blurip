@@ -26,6 +26,22 @@ namespace BluRip
             try
             {
                 this.settings = new UserSettings(settings);
+                UpdateAvisynthProfiles();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateAvisynthProfiles()
+        {
+            try
+            {
+                listBoxAvisynthProfiles.Items.Clear();
+                foreach(AvisynthSettings avs in settings.avisynthSettings)
+                {
+                    listBoxAvisynthProfiles.Items.Add(avs.desc);
+                }
             }
             catch (Exception)
             {

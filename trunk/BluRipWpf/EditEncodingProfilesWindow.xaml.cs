@@ -26,6 +26,22 @@ namespace BluRip
             try
             {
                 this.settings = new UserSettings(settings);
+                UpdateEncodingProfile();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateEncodingProfile()
+        {
+            try
+            {
+                listBoxEncodingProfiles.Items.Clear();
+                foreach (EncodingSettings es in settings.encodingSettings)
+                {
+                    listBoxEncodingProfiles.Items.Add(es.desc);
+                }
             }
             catch (Exception)
             {
