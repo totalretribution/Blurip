@@ -172,6 +172,8 @@ namespace BluRip
             this.use64bit = orig.use64bit;
             this.muxLowResSubs = orig.muxLowResSubs;
             this.deleteIndex = orig.deleteIndex;
+            this.muxUntouchedSubs = orig.muxUntouchedSubs;
+            this.copyUntouchedSubs = orig.copyUntouchedSubs;
 
             this.snap = orig.snap;
             this.expertMode = orig.expertMode;
@@ -360,6 +362,8 @@ namespace BluRip
         public bool use64bit = false;
         public bool muxLowResSubs = false;
         public bool deleteIndex = false;
+        public bool muxUntouchedSubs = false;
+        public bool copyUntouchedSubs = false;
 
         // window settings
 

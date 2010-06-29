@@ -91,6 +91,9 @@
     <Compile Include="QueueWindow.xaml.cs">
       <DependentUpon>QueueWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShutdownWindow.xaml.cs">
+      <DependentUpon>ShutdownWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StreamInfo.cs" />
     <Compile Include="Subtitle.cs" />
     <Page Include="AboutWindow.xaml">
@@ -145,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="QueueWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShutdownWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

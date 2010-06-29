@@ -1,9 +1,14 @@
 ﻿<Window x:Class="BluRip.AdvancedOptionsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AdvancedOptionsWindow" Height="300" Width="300">
+        Title="AdvancedOptionsWindow" Height="438" Width="600" ResizeMode="NoResize" Icon="/BluRip;component/Blu-ray.ico" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="12,226,0,0" Name="buttonOk" VerticalAlignment="Top" Width="75" IsDefault="True" Click="buttonOk_Click" />
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="93,226,0,0" Name="buttonCancel" VerticalAlignment="Top" Width="75" IsCancel="True" />
+        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="11,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" />
+        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="92,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
+        <TabControl HorizontalAlignment="Stretch" Margin="12,12,12,41" Name="tabControlSettings" VerticalAlignment="Stretch">
+            <TabItem Header="tabItem1" Name="tabItem1">
+                <Grid />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -391,7 +391,11 @@ namespace BluRip
         {
             try
             {
-                if (settings.cropInput == 1 || settings.encodeInput == 1)
+                if (settings.untouchedVideo)
+                {
+                    return true;
+                }
+                else if (settings.cropInput == 1 || settings.encodeInput == 1)
                 {
                     if (!File.Exists(settings.ffmsindexPath))
                     {

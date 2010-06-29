@@ -44,7 +44,7 @@
             <TabControl HorizontalAlignment="Stretch" Name="tabControlMain" VerticalAlignment="Stretch" Margin="5,5,5,35">
                 <TabItem Header="{DynamicResource TabInput}" Name="tabItemInput">
                     <Grid>
-                        <Button Content="{DynamicResource ButtonBluerayPath}" Height="23" HorizontalAlignment="Left" Margin="347,32,0,0" Name="buttonBluRayPath" VerticalAlignment="Top" Width="75" Click="buttonBluRayPath_Click" ToolTip="{DynamicResource ButtonBluerayPathTooltip}" />
+                        <Button Content="{DynamicResource ButtonBluerayPath}" Height="23" HorizontalAlignment="Left" Margin="298,31,0,0" Name="buttonBluRayPath" VerticalAlignment="Top" Width="75" Click="buttonBluRayPath_Click" ToolTip="{DynamicResource ButtonBluerayPathTooltip}" />
                         <Label Content="{DynamicResource LabelBluerayPath}" HorizontalAlignment="Left" Name="labelBlurayPath" VerticalAlignment="Top" Margin="6,6,0,0" />
                         <TextBox HorizontalAlignment="Left" Name="textBoxBlurayPath" VerticalAlignment="Top" Width="286" IsReadOnly="True" Margin="6,32,0,0" Height="23" />
                         <Button Content="{DynamicResource ButtonGetStreamInfo}" Height="23" HorizontalAlignment="Right" Margin="0,32,152,0" Name="buttonGetStreamInfos" VerticalAlignment="Top" Width="140" Click="buttonGetStreamInfo_Click" />
@@ -86,15 +86,17 @@
                                 <CheckBox Content="{DynamicResource checkBoxUntouchedAudio}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxUntouchedAudio" VerticalAlignment="Top" Checked="checkBoxUntouchedAudio_Checked" Unchecked="checkBoxUntouchedAudio_Checked" />
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="{DynamicResource HeaderSubtitleSettings}" Height="91" HorizontalAlignment="Left" Margin="6,172,0,0" Name="groupBoxSubtitleSettings" VerticalAlignment="Top" Width="614">
+                        <GroupBox Header="{DynamicResource HeaderSubtitleSettings}" Height="106" HorizontalAlignment="Left" Margin="6,172,0,0" Name="groupBoxSubtitleSettings" VerticalAlignment="Top" Width="614">
                             <Grid>
                                 <Label Content="{DynamicResource LabelMuxSubtitle}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelMuxSubtitles" VerticalAlignment="Top" />
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxMuxSubtitles" VerticalAlignment="Top" Width="284" ItemsSource="{DynamicResource comboBoxMuxSubtitle}" SelectionChanged="comboBoxMuxSubtitles_SelectionChanged" />
                                 <Label Content="{DynamicResource LabelCopySubtitle}" HorizontalAlignment="Left" Margin="336,6,0,0" Name="labelCopySubtitles" VerticalAlignment="Top" />
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="336,32,0,0" Name="comboBoxCopySubtitles" VerticalAlignment="Top" Width="260" ItemsSource="{DynamicResource comboBoxCopySubtitle}" SelectionChanged="comboBoxCopySubtitles_SelectionChanged" />
+                                <CheckBox Content="{DynamicResource checkBoxMuxUntouchedSubs}" Height="16" HorizontalAlignment="Left" Margin="6,61,0,0" Name="checkBoxMuxUntouchedSubs" VerticalAlignment="Top" Checked="checkBoxMuxUntouchedSubs_Checked" Unchecked="checkBoxMuxUntouchedSubs_Checked" />
+                                <CheckBox Content="{DynamicResource checkBoxCopyUntouchedSubs}" Height="16" HorizontalAlignment="Left" Margin="336,61,0,0" Name="checkBoxCopyUntouchedSubs" VerticalAlignment="Top" Checked="checkBoxCopyUntouchedSubs_Checked" Unchecked="checkBoxCopyUntouchedSubs_Checked" />
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="{DynamicResource HeaderExpertSettings}" Height="126" Margin="6,269,138,0" Name="groupBoxExpertSettings" VerticalAlignment="Top" Width="614">
+                        <GroupBox Header="{DynamicResource HeaderExpertSettings}" Height="126" Margin="6,284,138,0" Name="groupBoxExpertSettings" VerticalAlignment="Top" Width="614">
                             <Grid>
                                 <Label Content="{DynamicResource LabelAvisynthProfile}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelAvisynthProfile" VerticalAlignment="Top" />
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxAvisynthProfile" VerticalAlignment="Top" Width="166" SelectionChanged="comboBoxAvisynthProfile_SelectionChanged" />

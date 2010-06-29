@@ -303,6 +303,8 @@ namespace BluRip
                 checkBoxResize720p.IsChecked = settings.resize720p;
                 checkBoxUse64BitX264.IsChecked = settings.use64bit;
                 checkBoxUseDTSCore.IsChecked = settings.dtsHdCore;
+                checkBoxMuxUntouchedSubs.IsChecked = settings.muxUntouchedSubs;
+                checkBoxCopyUntouchedSubs.IsChecked = settings.copyUntouchedSubs;
             }
             catch (Exception)
             {
@@ -868,20 +870,22 @@ namespace BluRip
         {
             try
             {
+                // check path/settings here, too
+
                 if (!checkEac3to()) return false;
-                int sup = 0;
+                int supCount = 0;
                 if (comboBoxTitle.SelectedIndex > -1)
                 {
                     foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
                     {
                         if (si.streamType == StreamType.Subtitle)
                         {
-                            sup++;
+                            supCount++;
                         }
                     }
                 }
                 if (!checkIndex()) return false;
-                if (sup > 0)
+                if (supCount > 0)
                 {
                     if (!checkBdsup2sub()) return false;
                 }
@@ -979,22 +983,22 @@ namespace BluRip
             }
         }
 
-        private void buttonStart_Click(object sender, RoutedEventArgs e)
+        private bool StartAll()
         {
             try
             {
-                if (!checkComplete()) return;
+                if (!checkComplete()) return false;
 
                 if (demuxedStreamList.streams.Count == 0)
                 {
-                    if (!DoDemux()) return;
-                    if (!DoIndex()) return;
-                    if (!DoSubtitle()) return;
+                    if (!DoDemux()) return false;
+                    if (!DoIndex()) return false;
+                    if (!DoSubtitle()) return false;
                     if (!settings.untouchedVideo)
                     {
-                        if (!DoEncode()) return;
+                        if (!DoEncode()) return false;
                     }
-                    if (!DoMux()) return;
+                    if (!DoMux()) return false;
                 }
                 else
                 {
@@ -1002,25 +1006,49 @@ namespace BluRip
                     {
                         if (!hasAvsValue() || !hasFpsValue())
                         {
-                            if (!DoIndex()) return;
+                            if (!DoIndex()) return false;
                         }
-                        if (!DoSubtitle()) return;
-                        if (!DoEncode()) return;
-                        if (!DoMux()) return;
+                        if (!DoSubtitle()) return false;
+                        if (!DoEncode()) return false;
+                        if (!DoMux()) return false;
                     }
                     else
                     {
-                        if (!DoMux()) return;
+                        if (!DoMux()) return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                logWindow.SaveMainLog(settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");
+            }
+        }
+
+        private void buttonStart_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StartAll();
+
+                if (queueWindow.checkBoxQueueShutdown.IsChecked == true)
+                {
+                    ShutdownWindow sw = new ShutdownWindow();
+                    sw.ShowDialog();
+                    if (sw.DialogResult == true)
+                    {
+                        System.Diagnostics.Process.Start("ShutDown", "-s -f");
                     }
                 }
             }
             catch (Exception ex)
             {
                 logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
-            }
-            finally
-            {
-                logWindow.SaveMainLog( settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");                
             }
         }
 
@@ -1158,6 +1186,14 @@ namespace BluRip
             try
             {
                 settings.untouchedVideo = checkBoxUntouchedVideo.IsChecked.Value;
+                if (settings.untouchedVideo)
+                {
+                    comboBoxEncodingProfile.IsEnabled = false;
+                }
+                else
+                {
+                    comboBoxEncodingProfile.IsEnabled = true;
+                }
             }
             catch (Exception)
             {
@@ -1237,6 +1273,44 @@ namespace BluRip
                 if (comboBoxAvisynthProfile.SelectedIndex > -1)
                 {
                     settings.lastAvisynthProfile = comboBoxAvisynthProfile.SelectedIndex;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxMuxUntouchedSubs_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.muxUntouchedSubs = checkBoxMuxUntouchedSubs.IsChecked.Value;
+                if (settings.muxUntouchedSubs)
+                {
+                    comboBoxMuxSubtitles.IsEnabled = false;
+                }
+                else
+                {
+                    comboBoxMuxSubtitles.IsEnabled = true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxCopyUntouchedSubs_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.copyUntouchedSubs = checkBoxCopyUntouchedSubs.IsChecked.Value;
+                if (settings.copyUntouchedSubs)
+                {
+                    comboBoxCopySubtitles.IsEnabled = false;
+                }
+                else
+                {
+                    comboBoxCopySubtitles.IsEnabled = true;
                 }
             }
             catch (Exception)

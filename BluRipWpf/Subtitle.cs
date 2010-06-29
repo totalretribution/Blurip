@@ -33,6 +33,13 @@ namespace BluRip
         {
             try
             {
+                if (!Directory.Exists(settings.workingDir))
+                {
+                    logWindow.MessageDemux(Res("ErrorWorkingDirectory"));
+                    if (!silent) ErrorMsg(Res("ErrorWorkingDirectory"));
+                    return false;
+                }
+
                 if (demuxedStreamList.streams.Count == 0)
                 {
                     logWindow.MessageSubtitle(Res("ErrorNoDemuxedStreams"));
@@ -68,6 +75,7 @@ namespace BluRip
                     if (si.streamType == StreamType.Subtitle)
                     {
                         subtitleCount++;
+                        if (si.extraFileInfo == null || si.extraFileInfo.GetType() != typeof(SubtitleFileInfo)) si.extraFileInfo = new SubtitleFileInfo();
                     }
                 }
 
@@ -77,7 +85,51 @@ namespace BluRip
                     return true;
                 }
 
+                // do not mux and copy subs
+                if (settings.muxSubs == 0 && settings.copySubs == 0)
+                {
+                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    return true;
+                }
+                // only untouched subs
+                else if (settings.muxUntouchedSubs && settings.copyUntouchedSubs)
+                {
+                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    return true;
+                }
+                else if (settings.muxUntouchedSubs && settings.copySubs == 0)
+                {
+                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    return true;
+                }
+                else if (settings.muxSubs == 0 && settings.copyUntouchedSubs)
+                {
+                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    return true;
+                }
+
                 DisableControls();
+
+                bool sub = false;
+                bool sup = false;
+
+                if (settings.muxSubs > 0 && settings.muxSubs < 4)
+                {
+                    sub = true;
+                }
+                else if (settings.muxSubs >= 4)
+                {
+                    sup = true;
+                }
+
+                if (settings.copySubs > 0 && settings.copySubs < 4)
+                {
+                    sub = true;
+                }
+                else if (settings.copySubs >= 4)
+                {
+                    sup = true;
+                }
 
                 bool error = false;
                 int subtitle = 0;
@@ -86,28 +138,49 @@ namespace BluRip
                     if (demuxedStreamList.streams[i].streamType == StreamType.Subtitle)
                     {
                         subtitle++;
-                        UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleNormal"), subtitle, subtitleCount));
                         StreamInfo si = demuxedStreamList.streams[i];
-                        st = new SubtitleTool(settings, fps, ref si, false, false);
-                        st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
-                        st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
-                        st.Start();
-                        st.WaitForExit();
-                        if (!st.Successfull) error = true;
+                        if (sub)
+                        {
+                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleNormal"), subtitle, subtitleCount));                            
+                            st = new SubtitleTool(settings, fps, ref si, false, false, false);
+                            st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
+                            st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
+                            st.Start();
+                            st.WaitForExit();
+                            if (!st.Successfull) error = true;
 
-                        UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleForced"), subtitle, subtitleCount));
-                        st = new SubtitleTool(settings, fps, ref si, true, false);
-                        st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
-                        st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
-                        st.Start();
-                        st.WaitForExit();
-                        if (!st.Successfull) error = true;
+                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleForced"), subtitle, subtitleCount));
+                            st = new SubtitleTool(settings, fps, ref si, true, false, false);
+                            st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
+                            st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
+                            st.Start();
+                            st.WaitForExit();
+                            if (!st.Successfull) error = true;
+                        }
+                        if (sup)
+                        {
+                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleNormalPgs"), subtitle, subtitleCount));
+                            st = new SubtitleTool(settings, fps, ref si, false, false, true);
+                            st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
+                            st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
+                            st.Start();
+                            st.WaitForExit();
+                            if (!st.Successfull) error = true;
 
-                        if (settings.muxLowResSubs)
+                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleForcedPgs"), subtitle, subtitleCount));
+                            st = new SubtitleTool(settings, fps, ref si, true, false, true);
+                            st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
+                            st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
+                            st.Start();
+                            st.WaitForExit();
+                            if (!st.Successfull) error = true;
+                        }
+
+                        if (settings.muxLowResSubs && (settings.muxSubs > 0 && settings.muxSubs <4))
                         {
                             UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleLowresNormal"), subtitle, subtitleCount));
                             si = demuxedStreamList.streams[i];
-                            st = new SubtitleTool(settings, fps, ref si, false, true);
+                            st = new SubtitleTool(settings, fps, ref si, false, true, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
@@ -115,7 +188,7 @@ namespace BluRip
                             if (!st.Successfull) error = true;
 
                             UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleLowresForced"), subtitle, subtitleCount));
-                            st = new SubtitleTool(settings, fps, ref si, true, true);
+                            st = new SubtitleTool(settings, fps, ref si, true, true, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
@@ -128,13 +201,14 @@ namespace BluRip
                             if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                             {
                                 SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                                if (sfi.forcedIdx != "" && sfi.normalIdx != "")
+                                if ((sfi.forcedIdx != "" && sfi.normalIdx != "") || (sfi.forcedSup != "" && sfi.normalSup != ""))
                                 {
                                     StreamInfo si2 = new StreamInfo(demuxedStreamList.streams[i]);
                                     if (demuxedStreamList.streams[i].extraFileInfo != null && demuxedStreamList.streams[i].extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                                     {
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedIdx = "";
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSub = "";
+                                        ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSup = "";
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedIdxLowRes = "";
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSubLowRes = "";
                                     }
@@ -143,8 +217,10 @@ namespace BluRip
                                     {
                                         ((SubtitleFileInfo)si2.extraFileInfo).normalIdx = "";
                                         ((SubtitleFileInfo)si2.extraFileInfo).normalSub = "";
+                                        ((SubtitleFileInfo)si2.extraFileInfo).normalSup = "";
                                         ((SubtitleFileInfo)si2.extraFileInfo).normalIdxLowRes = "";
                                         ((SubtitleFileInfo)si2.extraFileInfo).normalSubLowRes = "";
+                                        ((SubtitleFileInfo)si2.extraFileInfo).isSecond = true;
                                     }
                                     demuxedStreamList.streams.Insert(i + 1, si2);
                                     i++;
