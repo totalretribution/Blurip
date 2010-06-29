@@ -275,17 +275,59 @@ namespace BluRip
         {
             try
             {
-                if (!File.Exists(settings.javaPath))
-                {
-                    logWindow.MessageMain(Res("ErrorJavaPath"));
-                    if (!silent) ErrorMsg(Res("ErrorJavaPath"));
-                    return false;
+                // do not mux and copy subs
+                if (settings.muxSubs == 0 && settings.copySubs == 0)
+                {                    
+                    return true;
                 }
-                if (!File.Exists(settings.sup2subPath))
+                // only untouched subs
+                else if (settings.muxUntouchedSubs && settings.copyUntouchedSubs)
+                {                    
+                    return true;
+                }
+                else if (settings.muxUntouchedSubs && settings.copySubs == 0)
                 {
-                    logWindow.MessageMain(Res("ErrorBdsup2subPath"));
-                    if (!silent) ErrorMsg(Res("ErrorBdsup2subPath"));
-                    return false;
+                    return true;
+                }
+                else if (settings.muxSubs == 0 && settings.copyUntouchedSubs)
+                {
+                    return true;
+                }
+                
+                bool sub = false;
+                bool sup = false;
+
+                if (settings.muxSubs > 0 && settings.muxSubs < 4)
+                {
+                    sub = true;
+                }
+                else if (settings.muxSubs >= 4)
+                {
+                    sup = true;
+                }
+
+                if (settings.copySubs > 0 && settings.copySubs < 4)
+                {
+                    sub = true;
+                }
+                else if (settings.copySubs >= 4)
+                {
+                    sup = true;
+                }
+                if (sub || sup)
+                {
+                    if (!File.Exists(settings.javaPath))
+                    {
+                        logWindow.MessageMain(Res("ErrorJavaPath"));
+                        if (!silent) ErrorMsg(Res("ErrorJavaPath"));
+                        return false;
+                    }
+                    if (!File.Exists(settings.sup2subPath))
+                    {
+                        logWindow.MessageMain(Res("ErrorBdsup2subPath"));
+                        if (!silent) ErrorMsg(Res("ErrorBdsup2subPath"));
+                        return false;
+                    }
                 }
                 return true;
             }
