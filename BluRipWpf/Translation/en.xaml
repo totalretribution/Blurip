@@ -89,8 +89,19 @@
     <system:String x:Key="checkBoxUseDTSCore">Use DTS core</system:String>
     <system:String x:Key="checkBoxUse64bitX264">Use 64-bit x264</system:String>
     <system:String x:Key="checkBoxMuxLowResSubs">Mux LowRes subs</system:String>
-
-
+    <system:String x:Key="LabelPreferedAudioLanguages">Prefered audio languages</system:String>
+    <system:String x:Key="LabelPreferedAudioLanguagesDesc">Double click to edit</system:String>
+    <system:String x:Key="ButtonPreferedAudioLanguagesUp">Move up</system:String>
+    <system:String x:Key="ButtonPreferedAudioLanguagesDown">Move down</system:String>
+    <system:String x:Key="ButtonPreferedAudioLanguagesDel">Delete</system:String>
+    <system:String x:Key="ButtonPreferedAudioLanguagesAdd">Add</system:String>
+    <system:String x:Key="LabelPreferedSubLanguages">Prefered subtitle languages</system:String>
+    <system:String x:Key="LabelPreferedSubLanguagesDesc">Double click to edit</system:String>
+    <system:String x:Key="ButtonPreferedSubLanguagesUp">Move up</system:String>
+    <system:String x:Key="ButtonPreferedSubLanguagesDown">Move down</system:String>
+    <system:String x:Key="ButtonPreferedSubLanguagesDel">Delete</system:String>
+    <system:String x:Key="ButtonPreferedSubLanguagesAdd">Add</system:String>
+    
     <!-- Tab Start -->
     <system:String x:Key="TabStart">Start</system:String>
     <system:String x:Key="ButtonStartStart">Start</system:String>
@@ -100,7 +111,7 @@
     <system:String x:Key="ButtonStartSubtitle">Only subtitle processing</system:String>
     <system:String x:Key="ButtonStartEncode">Only encode</system:String>
     <system:String x:Key="ButtonStartMux">Only mux</system:String>
-    
+        
     
     <!-- General -->
     <system:String x:Key="ButtonOk">Ok</system:String>

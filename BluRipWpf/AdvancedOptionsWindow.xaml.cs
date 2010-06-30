@@ -51,6 +51,39 @@ namespace BluRip
                 }
 
                 comboBoxProcessPriority.SelectedItem = Enum.GetName(typeof(ProcessPriorityClass), settings.x264Priority);
+
+                UpdatePreferedAudio();
+                UpdatePreferedSub();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdatePreferedAudio()
+        {
+            try
+            {
+                listBoxPreferedAudioLanguages.Items.Clear();
+                foreach (LanguageInfo li in settings.preferredAudioLanguages)
+                {
+                    listBoxPreferedAudioLanguages.Items.Add(li.language + " - " + li.translation + " - " + li.languageShort);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdatePreferedSub()
+        {
+            try
+            {
+                listBoxPreferedSubLanguages.Items.Clear();
+                foreach (LanguageInfo li in settings.preferredSubtitleLanguages)
+                {
+                    listBoxPreferedSubLanguages.Items.Add(li.language + " - " + li.translation + " - " + li.languageShort);
+                }
             }
             catch (Exception)
             {

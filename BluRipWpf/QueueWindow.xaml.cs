@@ -116,5 +116,59 @@ namespace BluRip
             }
         }
 
+        private void buttonQueueUp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxQueue.SelectedIndex;
+                if (index > 0)
+                {
+                    Project p = mainWindow.ProjectQueue[index];
+                    mainWindow.ProjectQueue.RemoveAt(index);
+                    mainWindow.ProjectQueue.Insert(index - 1, p);
+                    UpdateQueue();
+                    listBoxQueue.SelectedIndex = index - 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueDown_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxQueue.SelectedIndex;
+                if (index < mainWindow.ProjectQueue.Count - 1)
+                {
+                    Project p = mainWindow.ProjectQueue[index];
+                    mainWindow.ProjectQueue.RemoveAt(index);
+                    mainWindow.ProjectQueue.Insert(index + 1, p);
+                    UpdateQueue();
+                    listBoxQueue.SelectedIndex = index + 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxQueue.SelectedIndex;
+                if (index > -1)
+                {
+                    mainWindow.ProjectQueue.RemoveAt(index);
+                    UpdateQueue();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
     }
 }

@@ -32,6 +32,20 @@
                     <CheckBox Content="{DynamicResource CheckBoxDefaultAudioTrack}" Height="16" HorizontalAlignment="Left" Margin="324,6,0,0" Name="checkBoxDefaultAudioTrack" VerticalAlignment="Top" Checked="checkBoxDefaultAudioTrack_Checked" Unchecked="checkBoxDefaultAudioTrack_Checked" />
                     <CheckBox Content="{DynamicResource CheckBoxDefaultSubtitleTrack}" Height="16" HorizontalAlignment="Left" Margin="324,28,0,0" Name="checkBoxDefaultSubtitleTrack" VerticalAlignment="Top" Checked="checkBoxDefaultSubtitleTrack_Checked" Unchecked="checkBoxDefaultSubtitleTrack_Checked" />
                     <CheckBox Content="{DynamicResource CheckBoxDefaultSubtitleForced}" Height="16" HorizontalAlignment="Left" Margin="324,50,0,0" Name="checkBoxDefaultSubtitleForced" VerticalAlignment="Top" Checked="checkBoxDefaultSubtitleForced_Checked" Unchecked="checkBoxDefaultSubtitleForced_Checked" />
+                    <ListBox Height="130" HorizontalAlignment="Left" Margin="6,152,0,0" Name="listBoxPreferedAudioLanguages" VerticalAlignment="Top" Width="182" />
+                    <Label Content="{DynamicResource LabelPreferedAudioLanguages}" HorizontalAlignment="Left" Margin="6,126,0,0" Name="labelPreferefAudioLanguages" VerticalAlignment="Top" />
+                    <Label Content="{DynamicResource LabelPreferedAudioLanguagesDesc}" HorizontalAlignment="Left" Margin="6,288,0,0" Name="labelPreferedAudioLanguagesClick" VerticalAlignment="Top" />
+                    <Button Content="{DynamicResource ButtonPreferedAudioLanguagesUp}" Height="23" HorizontalAlignment="Left" Margin="194,152,0,0" Name="buttonPreferedAudioLanguagesUp" VerticalAlignment="Top" Width="111" />
+                    <Button Content="{DynamicResource ButtonPreferedAudioLanguagesDown}" Height="23" HorizontalAlignment="Left" Margin="194,181,0,0" Name="buttonPreferedAudioLanguagesDown" VerticalAlignment="Top" Width="111" />
+                    <Button Content="{DynamicResource ButtonPreferedAudioLanguagesDel}" Height="23" HorizontalAlignment="Left" Margin="194,210,0,0" Name="buttonPreferedAudioLanguagesDel" VerticalAlignment="Top" Width="111" />
+                    <Button Content="{DynamicResource ButtonPreferedAudioLanguagesAdd}" HorizontalAlignment="Left" Margin="194,0,0,32" Name="buttonPreferedAudioLanguagesAdd" Width="111" Height="23" VerticalAlignment="Bottom" />
+                    <ListBox Height="130" HorizontalAlignment="Left" Margin="362,152,0,0" Name="listBoxPreferedSubLanguages" VerticalAlignment="Top" Width="182" />
+                    <Label Content="{DynamicResource LabelPreferedSubLanguages}" HorizontalAlignment="Left" Margin="362,126,0,0" Name="labelPreferedSubLanguages" VerticalAlignment="Top" />
+                    <Label Content="{DynamicResource LabelPreferedSubLanguagesDesc}" HorizontalAlignment="Left" Margin="362,288,0,0" Name="labelPreferedSubLanguagesDesc" VerticalAlignment="Top" />
+                    <Button Content="{DynamicResource ButtonPreferedSubLanguagesUp}" Height="23" HorizontalAlignment="Left" Margin="550,152,0,0" Name="buttonPreferedSubLanguagesUp" VerticalAlignment="Top" Width="111" />
+                    <Button Content="{DynamicResource ButtonPreferedSubLanguagesDown}" Height="23" HorizontalAlignment="Left" Margin="550,181,0,0" Name="buttonPreferedSubLanguagesDown" VerticalAlignment="Top" Width="111" />
+                    <Button Content="{DynamicResource ButtonPreferedSubLanguagesDel}" Height="23" HorizontalAlignment="Left" Margin="550,210,0,0" Name="buttonPreferedSubLanguagesDel" VerticalAlignment="Top" Width="111" />
+                    <Button Content="{DynamicResource ButtonPreferedSubLanguagesAdd}" Height="23" HorizontalAlignment="Left" Margin="550,0,0,32" Name="buttonPreferedSubLanguagesAdd" VerticalAlignment="Bottom" Width="111" />
                 </Grid>
             </TabItem>
             <TabItem Header="Video" Name="tabItemVideo">

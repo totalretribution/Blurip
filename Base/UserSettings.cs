@@ -132,7 +132,7 @@ namespace BluRip
             this.includeChapter = orig.includeChapter;
             this.includeSubtitle = orig.includeSubtitle;
             this.preferDTS = orig.preferDTS;
-            this.preferredLanguages.Clear();
+            this.preferredAudioLanguages.Clear();
             this.workingDir = orig.workingDir;
             this.ffmsindexPath = orig.ffmsindexPath;
             this.x264Path = orig.x264Path;
@@ -198,10 +198,20 @@ namespace BluRip
             this.bluripHeight = orig.bluripHeight;
             this.bluripWidth = orig.bluripWidth;
             this.language = orig.language;
+            
+            this.preferredAudioLanguages.Clear();
+            this.preferredSubtitleLanguages.Clear();
+            this.encodingSettings.Clear();
+            this.avisynthSettings.Clear();
 
-            foreach (LanguageInfo li in orig.preferredLanguages)
+            foreach (LanguageInfo li in orig.preferredAudioLanguages)
             {
-                this.preferredLanguages.Add(new LanguageInfo(li));
+                this.preferredAudioLanguages.Add(new LanguageInfo(li));
+            }
+
+            foreach (LanguageInfo li in orig.preferredSubtitleLanguages)
+            {
+                this.preferredSubtitleLanguages.Add(new LanguageInfo(li));
             }
 
             foreach (EncodingSettings es in orig.encodingSettings)
@@ -262,10 +272,16 @@ namespace BluRip
                 settings = (UserSettings)xs.Deserialize(ms);
                 ms.Close();
 
-                if (settings.preferredLanguages.Count == 0)
+                if (settings.preferredAudioLanguages.Count == 0)
                 {
-                    settings.preferredLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
-                    settings.preferredLanguages.Add(new LanguageInfo("English","Englisch","en"));
+                    settings.preferredAudioLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
+                    settings.preferredAudioLanguages.Add(new LanguageInfo("English","Englisch","en"));
+                }
+
+                if (settings.preferredSubtitleLanguages.Count == 0)
+                {
+                    settings.preferredSubtitleLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
+                    settings.preferredSubtitleLanguages.Add(new LanguageInfo("English", "Englisch", "en"));
                 }
 
                 if(settings.encodingSettings.Count == 0)
@@ -320,7 +336,8 @@ namespace BluRip
         public bool includeChapter = true;
         public bool includeSubtitle = true;
         public bool preferDTS = true;        
-        public List<LanguageInfo> preferredLanguages = new List<LanguageInfo>();
+        public List<LanguageInfo> preferredAudioLanguages = new List<LanguageInfo>();
+        public List<LanguageInfo> preferredSubtitleLanguages = new List<LanguageInfo>();
         public string workingDir = "";
         public string ffmsindexPath = "";
         public string x264Path = "";
