@@ -174,6 +174,7 @@ namespace BluRip
             this.deleteIndex = orig.deleteIndex;
             this.muxUntouchedSubs = orig.muxUntouchedSubs;
             this.copyUntouchedSubs = orig.copyUntouchedSubs;
+            this.deleteAfterEncode = orig.deleteAfterEncode;
 
             this.snap = orig.snap;
             this.expertMode = orig.expertMode;

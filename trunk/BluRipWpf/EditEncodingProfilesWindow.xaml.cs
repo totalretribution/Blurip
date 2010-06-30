@@ -57,5 +57,107 @@ namespace BluRip
         {
             get { return settings; }
         }
+
+        private void listBoxEncodingProfiles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = listBoxEncodingProfiles.SelectedIndex;
+                if (index > -1)
+                {
+                    EditEncodingProfileWindow eepw = new EditEncodingProfileWindow(settings.encodingSettings[index]);
+                    eepw.ShowDialog();
+                    if (eepw.DialogResult == true)
+                    {
+                        settings.encodingSettings[index] = new EncodingSettings(eepw.encodingSettings);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonProfileUp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxEncodingProfiles.SelectedIndex;
+                if (index > 0)
+                {
+                    EncodingSettings es = new EncodingSettings(settings.encodingSettings[index]);
+                    settings.encodingSettings.RemoveAt(index);
+                    settings.encodingSettings.Insert(index - 1, es);
+                    UpdateEncodingProfile();
+                    listBoxEncodingProfiles.SelectedIndex = index - 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonProfileDown_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxEncodingProfiles.SelectedIndex;
+                if (index < settings.encodingSettings.Count - 1)
+                {
+                    EncodingSettings es = new EncodingSettings(settings.encodingSettings[index]);
+                    settings.encodingSettings.RemoveAt(index);
+                    settings.encodingSettings.Insert(index + 1, es);
+                    UpdateEncodingProfile();
+                    listBoxEncodingProfiles.SelectedIndex = index + 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonProfileDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxEncodingProfiles.SelectedIndex;
+                if (index > -1)
+                {
+                    settings.encodingSettings.RemoveAt(index);
+                    UpdateEncodingProfile();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private string Res(string key)
+        {
+            try
+            {
+                return (string)App.Current.Resources[key];
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        private void buttonProfileAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                EncodingSettings es = new EncodingSettings();
+                es.desc = Res("NewProfileDesc");
+                settings.encodingSettings.Add(es);
+                UpdateEncodingProfile();
+                listBoxEncodingProfiles.SelectedIndex = settings.encodingSettings.Count - 1;
+                listBoxEncodingProfiles_MouseDoubleClick(null, null);
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

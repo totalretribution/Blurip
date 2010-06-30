@@ -5,12 +5,12 @@
     <Grid>
         <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" />
         <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
-        <ListBox HorizontalAlignment="Stretch" Margin="12,38,114,68" Name="listBoxAvisynthProfiles" VerticalAlignment="Stretch" />
+        <ListBox HorizontalAlignment="Stretch" Margin="12,38,114,68" Name="listBoxAvisynthProfiles" VerticalAlignment="Stretch" MouseDoubleClick="listBoxAvisynthProfiles_MouseDoubleClick" />
         <Label Content="{DynamicResource LabelAvisynthProfiles}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelAvisynthProfiles" VerticalAlignment="Top" />
-        <Button Content="{DynamicResource ButtonAviProfileUp}" Height="23" HorizontalAlignment="Right" Margin="0,38,12,0" Name="buttonAviProfileUp" VerticalAlignment="Top" Width="96" />
-        <Button Content="{DynamicResource ButtonAviProfileDown}" Height="23" HorizontalAlignment="Right" Margin="0,67,12,0" Name="buttonAviProfileDown" VerticalAlignment="Top" Width="96" />
-        <Button Content="{DynamicResource ButtonAviProfileDelete}" Height="23" HorizontalAlignment="Right" Margin="0,96,12,0" Name="buttonAviProfileDelete" VerticalAlignment="Top" Width="96" />
-        <Button Content="{DynamicResource ButtonAviProfileAdd}" Height="23" HorizontalAlignment="Right" Margin="0,249,12,0" Name="buttonAviProfileAdd" VerticalAlignment="Top" Width="96" />
+        <Button Content="{DynamicResource ButtonAviProfileUp}" Height="23" HorizontalAlignment="Right" Margin="0,38,12,0" Name="buttonAviProfileUp" VerticalAlignment="Top" Width="96" Click="buttonAviProfileUp_Click" />
+        <Button Content="{DynamicResource ButtonAviProfileDown}" HorizontalAlignment="Right" Margin="0,67,12,0" Name="buttonAviProfileDown" Width="96" Click="buttonAviProfileDown_Click" Height="23" VerticalAlignment="Top" />
+        <Button Content="{DynamicResource ButtonAviProfileDelete}" Height="23" HorizontalAlignment="Right" Margin="0,96,12,0" Name="buttonAviProfileDelete" VerticalAlignment="Top" Width="96" Click="buttonAviProfileDelete_Click" />
+        <Button Content="{DynamicResource ButtonAviProfileAdd}" Height="23" HorizontalAlignment="Right" Margin="0,0,12,68" Name="buttonAviProfileAdd" VerticalAlignment="Bottom" Width="96" Click="buttonAviProfileAdd_Click" />
         <Label Content="{DynamicResource LabelAvisynthProfilesEdit}" HorizontalAlignment="Left" Margin="12,0,0,41" Name="labelAvisynthProfilesEdit" VerticalAlignment="Bottom" />
     </Grid>
 </Window>

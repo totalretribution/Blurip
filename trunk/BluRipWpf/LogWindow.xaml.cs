@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace BluRip
 {
@@ -190,6 +191,17 @@ namespace BluRip
             }
         }
 
+        public void ClearAll()
+        {
+            try
+            {
+                menuLogClearAll_Click(null, null);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private void menuLogClear_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -232,16 +244,22 @@ namespace BluRip
                 switch (index)
                 {
                     case 0:
+                        SaveLog(richTextBoxMainLog);
                         break;
                     case 1:
+                        SaveLog(richTextBoxDemuxLog);
                         break;
                     case 2:
+                        SaveLog(richTextBoxCropLog);
                         break;
                     case 3:
+                        SaveLog(richTextBoxSubtitleLog);
                         break;
                     case 4:
+                        SaveLog(richTextBoxEncodeLog);
                         break;
                     case 5:
+                        SaveLog(richTextBoxMuxLog);
                         break;
                     default:
                         break;
@@ -264,11 +282,52 @@ namespace BluRip
             }
         }
 
+        private string Res(string key)
+        {
+            try
+            {
+                return (string)App.Current.Resources[key];
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        private void SaveLog(System.Windows.Controls.RichTextBox rtb)
+        {
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = Res("LogSaveFileFilter");
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    SaveLog(GetText(rtb), sfd.FileName);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private string GetText(System.Windows.Controls.RichTextBox rtb)
+        {
+            try
+            {
+                TextRange textRange = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+                return textRange.Text;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
         public void SaveMainLog(string filename)
         {
             try
             {
-                //SaveLog(richTextBoxMainLog.Document.Blocks.FirstBlock.
+                SaveLog(GetText(richTextBoxMainLog), filename);
             }
             catch (Exception)
             {

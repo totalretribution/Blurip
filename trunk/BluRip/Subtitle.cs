@@ -102,7 +102,7 @@ namespace BluRip
                         subtitle++;
                         this.Text = title + " [Processing subtitles (normal) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
                         StreamInfo si = demuxedStreamList.streams[i];
-                        st = new SubtitleTool(settings, fps, ref si, false, false);
+                        st = new SubtitleTool(settings, fps, ref si, false, false, false);
                         st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                         st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                         st.Start();
@@ -110,7 +110,7 @@ namespace BluRip
                         if (!st.Successfull) error = true;
 
                         this.Text = title + " [Processing subtitles (forced) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
-                        st = new SubtitleTool(settings, fps, ref si, true, false);
+                        st = new SubtitleTool(settings, fps, ref si, true, false, false);
                         st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                         st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                         st.Start();
@@ -121,7 +121,7 @@ namespace BluRip
                         {
                             this.Text = title + " [Processing lowres subtitles (normal) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
                             si = demuxedStreamList.streams[i];
-                            st = new SubtitleTool(settings, fps, ref si, false, true);
+                            st = new SubtitleTool(settings, fps, ref si, false, true, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
@@ -129,7 +129,7 @@ namespace BluRip
                             if (!st.Successfull) error = true;
 
                             this.Text = title + " [Processing lowres subtitles (forced) (" + subtitle.ToString() + "/" + subtitleCount.ToString() + ")...]";
-                            st = new SubtitleTool(settings, fps, ref si, true, true);
+                            st = new SubtitleTool(settings, fps, ref si, true, true, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
