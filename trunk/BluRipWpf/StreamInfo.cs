@@ -150,7 +150,7 @@ namespace BluRip
 
         private bool HasLanguage(string s)
         {
-            foreach (LanguageInfo li in settings.preferredLanguages)
+            foreach (LanguageInfo li in settings.preferredAudioLanguages)
             {
                 if (li.language == s) return true;
             }
@@ -160,9 +160,9 @@ namespace BluRip
         private int LanguagIndex(string s)
         {
             int index = -1;
-            for (int i = 0; i < settings.preferredLanguages.Count; i++)
+            for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
             {
-                if (settings.preferredLanguages[i].language == s)
+                if (settings.preferredAudioLanguages[i].language == s)
                 {
                     index = i;
                     break;
@@ -186,7 +186,7 @@ namespace BluRip
                 List<int> maxac3List = new List<int>();
                 List<int> maxdtsList = new List<int>();
 
-                for (int i = 0; i < settings.preferredLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
                 {
                     maxac3List.Add(0);
                     maxdtsList.Add(0);
@@ -204,7 +204,7 @@ namespace BluRip
                     List<int> ac3List = new List<int>();
                     List<int> dtsList = new List<int>();
 
-                    for (int i = 0; i < settings.preferredLanguages.Count; i++)
+                    for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
                     {
                         ac3List.Add(0);
                         dtsList.Add(0);
