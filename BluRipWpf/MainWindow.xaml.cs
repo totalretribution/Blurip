@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 
 namespace BluRip
 {
@@ -38,6 +39,7 @@ namespace BluRip
         private QueueWindow queueWindow = null;
         private bool silent = false;
         private bool abort = false;
+        private List<Project> projectQueue = new List<Project>();
 
         public MainWindow()
         {
@@ -267,7 +269,7 @@ namespace BluRip
                 menuItemViewQueue_Click(null, null);
                 menuItemViewExpertMode_Click(null, null);
 
-                UpdateAvisynthSettings();
+                UpdateAvisynthProfiles();
                 UpdateEncodingProfiles();
                 UpdateMuxSettings();
 
@@ -311,7 +313,7 @@ namespace BluRip
             }
         }
 
-        private void UpdateAvisynthSettings()
+        private void UpdateAvisynthProfiles()
         {
             try
             {                
@@ -658,6 +660,18 @@ namespace BluRip
             }
         }
 
+        public enum EXECUTION_STATE : uint
+        {
+            ES_SYSTEM_REQUIRED = 0x00000001,
+            ES_DISPLAY_REQUIRED = 0x00000002,
+            // Legacy flag, should not be used.
+            // ES_USER_PRESENT   = 0x00000004,
+            ES_CONTINUOUS = 0x80000000,
+        }
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
+
         public void DisableControls()
         {
             try
@@ -669,6 +683,9 @@ namespace BluRip
 
                 progressBarMain.Visibility = Visibility.Visible;
                 buttonAbort.Visibility = Visibility.Visible;
+                queueWindow.DisableControls();
+
+                SetThreadExecutionState(EXECUTION_STATE.ES_SYSTEM_REQUIRED);
             }
             catch (Exception)
             {
@@ -686,6 +703,9 @@ namespace BluRip
 
                 progressBarMain.Visibility = Visibility.Hidden;
                 buttonAbort.Visibility = Visibility.Hidden;
+                queueWindow.EnableControls();
+
+                SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
             }
             catch (Exception)
             {
@@ -821,7 +841,7 @@ namespace BluRip
         {
             try
             {
-                if (System.Windows.MessageBox.Show(Res("MessageExit"), Res("MessageExitHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (System.Windows.MessageBox.Show(Res("MessageAbort"), Res("MessageAbortHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     abortThreads();
                 }
@@ -1094,6 +1114,7 @@ namespace BluRip
                 if (eapw.DialogResult == true)
                 {
                     settings = new UserSettings(eapw.UserSettings);
+                    UpdateAvisynthProfiles();
                 }
             }
             catch (Exception)
@@ -1189,10 +1210,14 @@ namespace BluRip
                 if (settings.untouchedVideo)
                 {
                     comboBoxEncodingProfile.IsEnabled = false;
+                    comboBoxCropInput.IsEnabled = false;
+                    comboBoxEncodeInput.IsEnabled = false;
                 }
                 else
                 {
                     comboBoxEncodingProfile.IsEnabled = true;
+                    comboBoxCropInput.IsEnabled = true;
+                    comboBoxEncodeInput.IsEnabled = true;
                 }
             }
             catch (Exception)
@@ -1312,6 +1337,161 @@ namespace BluRip
                 {
                     comboBoxCopySubtitles.IsEnabled = true;
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemFileSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = Res("ProjectFileFilter");
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Project.SaveProjectFile(project, sfd.FileName);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemFileOpen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = Res("ProjectFileFilter");
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Project project = new Project();
+                    if (Project.LoadProjectFile(ref project, ofd.FileName))
+                    {
+                        settings = new UserSettings(project.settings);
+                        titleList.Clear();
+                        foreach (TitleInfo ti in project.titleList)
+                        {
+                            titleList.Add(new TitleInfo(ti));
+                        }
+                        UpdateTitleList();
+                        comboBoxTitle.SelectedIndex = project.titleIndex;
+                        demuxedStreamList = new TitleInfo(project.demuxedStreamList);
+
+                        m2tsList.Clear();
+                        foreach (string s in project.m2tsList)
+                        {
+                            m2tsList.Add(s);
+                        }
+
+                        UpdateFromSettings();
+                        demuxedStreamsWindow.UpdateDemuxedStreams();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public List<Project> ProjectQueue
+        {
+            get { return projectQueue; }
+            set { projectQueue = value; }
+        }
+
+        private void buttonQueue_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
+                projectQueue.Add(project);
+                queueWindow.UpdateQueue();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void ProcessQueue()
+        {
+            try
+            {
+                silent = true;
+                abort = false;
+
+                foreach (Project project in projectQueue)
+                {
+                    logWindow.ClearAll();
+
+                    logWindow.MessageMain(ResFormat("InfoQueueStart", (projectQueue.IndexOf(project) + 1), projectQueue.Count));
+
+                    if (!abort)
+                    {
+                        logWindow.MessageMain(ResFormat("InfoQueueProjectStart", project.settings.movieTitle));
+                        settings = new UserSettings(project.settings);
+                        titleList.Clear();
+                        foreach (TitleInfo ti in project.titleList)
+                        {
+                            titleList.Add(new TitleInfo(ti));
+                        }
+                        UpdateTitleList();
+                        comboBoxTitle.SelectedIndex = project.titleIndex;
+                        demuxedStreamList = new TitleInfo(project.demuxedStreamList);
+
+                        m2tsList.Clear();
+                        foreach (string s in project.m2tsList)
+                        {
+                            m2tsList.Add(s);
+                        }
+
+                        UpdateFromSettings();
+                        demuxedStreamsWindow.UpdateDemuxedStreams();
+
+                        StartAll();
+                    }
+                    else
+                    {
+                        logWindow.MessageMain(Res("InfoQueueCancel"));
+                    }
+                    logWindow.MessageMain(Res("InfoQueueDone"));
+                }                
+
+                if (queueWindow.checkBoxQueueShutdown.IsChecked == true)
+                {
+                    ShutdownWindow sw = new ShutdownWindow();
+                    sw.ShowDialog();
+                    if (sw.DialogResult == true)
+                    {
+                        System.Diagnostics.Process.Start("ShutDown", "-s -f");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
+            }
+            finally
+            {
+                silent = false;
+            }
+        }
+
+        private void buttonResetStreams_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (TitleInfo ti in titleList)
+                {
+                    foreach (StreamInfo si in ti.streams)
+                    {
+                        si.selected = false;
+                    }
+                }
+                UpdateStreamList();
             }
             catch (Exception)
             {

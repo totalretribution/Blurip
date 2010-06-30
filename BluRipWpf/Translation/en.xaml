@@ -34,6 +34,7 @@
     <system:String x:Key="ButtonBluerayPathTooltip">Set path to BluRay drive or folder containing ripped BluRay structure</system:String>
     <system:String x:Key="ButtonGetStreamInfo">Get stream infos</system:String>
     <system:String x:Key="ButtonOpenM2ts">Open *.m2ts file(s)</system:String>
+    <system:String x:Key="ButtonResetStreams">Reset stream selection</system:String>
     <system:String x:Key="LabelStreamDesc">Double click to select/deselect - right click for advanced options</system:String>
     <system:String x:Key="LabelTitleDesc">Title selection</system:String>
     <system:String x:Key="LabelStreamListDesc">Available streams</system:String>
@@ -94,7 +95,6 @@
     <system:String x:Key="TabStart">Start</system:String>
     <system:String x:Key="ButtonStartStart">Start</system:String>
     <system:String x:Key="ButtonStartQueue">Add to queue</system:String>
-    <system:String x:Key="ButtonStartQueueStart">Add to queue and start</system:String>
     <system:String x:Key="ButtonStartDemux">Only demux</system:String>
     <system:String x:Key="ButtonStartCrop">Only index and autocrop</system:String>
     <system:String x:Key="ButtonStartSubtitle">Only subtitle processing</system:String>
@@ -107,6 +107,9 @@
     <system:String x:Key="ButtonCancel">Cancel</system:String>
     <system:String x:Key="MessageExitHeader">Exit BluRip?</system:String>
     <system:String x:Key="MessageExit">Do you really want to exit BluRip?</system:String>
+    <system:String x:Key="MessageAbortHeader">Abort all threads?</system:String>
+    <system:String x:Key="MessageAbort">Do you really want to abort all threads?</system:String>
+    <system:String x:Key="ProjectFileFilter">BluRip project (*.brp)|*.brp</system:String>
 
     <!-- ExternalTools Window -->
     <system:String x:Key="ButtonEac3toPath">...</system:String>
@@ -144,6 +147,7 @@
     <system:String x:Key="MenuLogClearAll">Clear all logs</system:String>
     <system:String x:Key="MenuLogClear">Clear log</system:String>
     <system:String x:Key="MenuLogSave">Save log</system:String>
+    <system:String x:Key="LogSaveFileFilter">Log file (*.txt)|*.txt</system:String>
 
     <!-- Status bar -->
     <system:String x:Key="StatusBar">Status:</system:String>
@@ -195,6 +199,20 @@
     <system:String x:Key="ButtonProfileDelete">Delete</system:String>
     <system:String x:Key="ButtonProfileAdd">Add</system:String>
 
+    <!-- EncodingProfile Window -->
+    <system:String x:Key="CaptionEncodingProfileWindow">Edit encoding profile</system:String>
+    <system:String x:Key="LabelEncodingProfileDescription">Profile description</system:String>
+    <system:String x:Key="LabelEncodingProfileSettings">Parameter</system:String>
+    <system:String x:Key="CheckBoxEncodingProfile2pass">2-pass profile</system:String>
+    <system:String x:Key="LabelEncodingProfileSettings2">Parameter for second pass (without --pass --bitrate --stats)</system:String>
+    <system:String x:Key="LabelEncodingProfileSizeValue">Size value</system:String>
+    <system:String x:Key="LabelEncodingProfileSizeType">Size value type</system:String>
+    <local:ObjectCollection x:Key="comboBoxSizeType">
+        <system:String>Specify Bitrate [Kbit/s]</system:String>
+        <system:String>Specify target size [MB]</system:String>
+    </local:ObjectCollection>
+    <system:String x:Key="NewEncodingProfileDesc">New encoding profile</system:String>
+    
     <!-- AvisynthProfiles Window -->
     <system:String x:Key="CaptionAvisynthProfilesWindow">Edit AviSynth profiles</system:String>
     <system:String x:Key="LabelAvisynthProfiles">AviSynth profiles</system:String>
@@ -204,10 +222,47 @@
     <system:String x:Key="ButtonAviProfileDelete">Delete</system:String>
     <system:String x:Key="ButtonAviProfileAdd">Add</system:String>
 
+    <!-- AvisynthProfile Window -->
+    <system:String x:Key="CaptionAvisynthProfileWindow">Edit AviSynth profile</system:String>
+    <system:String x:Key="LabelAvisynthProfileDescription">Profile description</system:String>
+    <system:String x:Key="LabelAvisynthProfileCommands">Commands</system:String>
+    <system:String x:Key="NewAvisynthProfileDesc">New encoding profile</system:String>
+    
     <!-- Shutdown Window -->
     <system:String x:Key="CaptionShutdownWindow">Shutdown</system:String>
     <system:String x:Key="LabelShutdownCounter">Seconds until automatic shutdown: {0}</system:String>
-    
+
+    <!-- AdvancedOptions Window -->
+    <system:String x:Key="CaptionAdvancedOptionsWindow">Edit advanced options</system:String>
+    <system:String x:Key="TabAdvancedGeneral">General settings</system:String>
+    <system:String x:Key="CheckBoxDeleteDemuxedFiles">Delete demuxed files when finished</system:String>
+    <system:String x:Key="CheckBoxAlwaysDeleteIndex">Always delete index files</system:String>
+    <system:String x:Key="TabAutoCrop">AutoCrop settings</system:String>
+    <system:String x:Key="LabelAutocropNrFrames">Number of frames to analyze</system:String>
+    <system:String x:Key="LabelAutocropBlackValue">Max row sum to count as black</system:String>
+    <system:String x:Key="LabelAutocropCropMethod">Crop calculation method</system:String>
+    <system:String x:Key="CheckBoxAutocropMinimize">Start AutoCrop window minimized</system:String>
+    <local:ObjectCollection x:Key="comboBoxCropMethod">
+        <system:String>Undercrop - Height mod 8</system:String>
+        <system:String>Undercrop - Height mod 16</system:String>
+        <system:String>Overcrop - Height mod 8</system:String>
+        <system:String>Overcrop - Height mod 16</system:String>
+        <system:String>Resize - Height mod 8</system:String>
+        <system:String>Resize - Height mod 16</system:String>
+        <system:String>AddBorder - Height mod 8</system:String>
+        <system:String>AddBorder - Height mod 16</system:String>
+    </local:ObjectCollection>
+    <system:String x:Key="TabAdvancedStreamselection">Stream selection</system:String>
+    <system:String x:Key="CheckBoxUseAutoselect">Use automatic stream selection</system:String>
+    <system:String x:Key="CheckBoxIncludeChapters">Select chapters</system:String>
+    <system:String x:Key="CheckBoxPreferDTS">Prefer DTS tracks</system:String>
+    <system:String x:Key="CheckBoxIncludeSubtitles">Select subtitles</system:String>
+    <system:String x:Key="CheckBoxDefaultAudioTrack">Set first audio track with first prefered language as default track</system:String>
+    <system:String x:Key="CheckBoxDefaultSubtitleTrack">Set first subtitle track with first prefered language as default track</system:String>
+    <system:String x:Key="CheckBoxDefaultSubtitleForced">Use forced subtitle track if available</system:String>
+    <system:String x:Key="TabAdvancedVideo">Video</system:String>
+    <system:String x:Key="LabelProcessPriority">x264 process priority</system:String>
+
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>
     <system:String x:Key="ErrorException">Exception:</system:String>
@@ -250,5 +305,10 @@
     <system:String x:Key="InfoAvsContent">Content of encode avs:</system:String>
     <system:String x:Key="InfoNoSubtitles">No subtitles to process</system:String>
     <system:String x:Key="InfoNoSubtitlesProcessing">No subtitles processing needed</system:String>
+    <system:String x:Key="InfoQueueStart">Starting to process job {0}/{1}</system:String>
+    <system:String x:Key="InfoQueueProjectStart">Processing project {0}</system:String>
+    <system:String x:Key="InfoQueueCancel">Queue canceled.</system:String>
+    <system:String x:Key="InfoQueueDone">Queue done.</system:String>
+    <system:String x:Key="InfoQueueTitle">Project:</system:String>
 
 </ResourceDictionary>

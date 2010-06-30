@@ -1,16 +1,16 @@
 ﻿<Window x:Class="BluRip.EditEncodingProfilesWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{StaticResource CaptionEncodingProfilesWindow}" Height="379" Width="598" Icon="/BluRip;component/Blu-ray.ico" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="{StaticResource CaptionEncodingProfilesWindow}" Height="379" Width="717" Icon="/BluRip;component/Blu-ray.ico" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" />
         <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
-        <ListBox HorizontalAlignment="Stretch" Margin="12,38,114,68" Name="listBoxEncodingProfiles" VerticalAlignment="Stretch" />
+        <ListBox HorizontalAlignment="Stretch" Margin="12,38,114,68" Name="listBoxEncodingProfiles" VerticalAlignment="Stretch" MouseDoubleClick="listBoxEncodingProfiles_MouseDoubleClick" />
         <Label Content="{DynamicResource LabelEncodingProfiles}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelEncodingProfiles" VerticalAlignment="Top" />
-        <Button Content="{DynamicResource ButtonProfileUp}" Height="23" HorizontalAlignment="Right" Margin="0,38,12,0" Name="buttonProfileUp" VerticalAlignment="Top" Width="96" />
-        <Button Content="{DynamicResource ButtonProfileDown}" Height="23" HorizontalAlignment="Right" Margin="0,67,12,0" Name="buttonProfileDown" VerticalAlignment="Top" Width="96" />
-        <Button Content="{DynamicResource ButtonProfileDelete}" Height="23" HorizontalAlignment="Right" Margin="0,96,12,0" Name="buttonProfileDelete" VerticalAlignment="Top" Width="96" />
-        <Button Content="{DynamicResource ButtonProfileAdd}" Height="23" HorizontalAlignment="Right" Margin="0,249,12,0" Name="buttonProfileAdd" VerticalAlignment="Top" Width="96" />
+        <Button Content="{DynamicResource ButtonProfileUp}" Height="23" HorizontalAlignment="Right" Margin="0,38,12,0" Name="buttonProfileUp" VerticalAlignment="Top" Width="96" Click="buttonProfileUp_Click" />
+        <Button Content="{DynamicResource ButtonProfileDown}" Height="23" HorizontalAlignment="Right" Margin="0,67,12,0" Name="buttonProfileDown" VerticalAlignment="Top" Width="96" Click="buttonProfileDown_Click" />
+        <Button Content="{DynamicResource ButtonProfileDelete}" Height="23" HorizontalAlignment="Right" Margin="0,96,12,0" Name="buttonProfileDelete" VerticalAlignment="Top" Width="96" Click="buttonProfileDelete_Click" />
+        <Button Content="{DynamicResource ButtonProfileAdd}" Height="23" HorizontalAlignment="Right" Margin="0,0,12,68" Name="buttonProfileAdd" VerticalAlignment="Bottom" Width="96" Click="buttonProfileAdd_Click" />
         <Label Content="{DynamicResource LabelEncodingProfilesEdit}" HorizontalAlignment="Left" Margin="12,0,0,41" Name="labelEncodingProfilesEdit" VerticalAlignment="Bottom" />
     </Grid>
 </Window>

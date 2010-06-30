@@ -44,6 +44,28 @@ namespace BluRip
             }
         }
 
+        public void EnableControls()
+        {
+            try
+            {
+                groupBoxQueue.IsEnabled = true;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void DisableControls()
+        {
+            try
+            {
+                groupBoxQueue.IsEnabled = false;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private void Window_LocationChanged(object sender, EventArgs e)
         {
             try
@@ -55,5 +77,44 @@ namespace BluRip
             {
             }
         }
+
+        private string Res(string key)
+        {
+            try
+            {
+                return (string)App.Current.Resources[key];
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        public void UpdateQueue()
+        {
+            try
+            {
+                listBoxQueue.Items.Clear();
+                foreach (Project p in mainWindow.ProjectQueue)
+                {
+                    listBoxQueue.Items.Add(Res("InfoQueueTitle") + " " + p.settings.movieTitle);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonQueueStart_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                mainWindow.ProcessQueue();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
     }
 }

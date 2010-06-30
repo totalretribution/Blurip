@@ -41,7 +41,7 @@ namespace BluRip
             try
             {
                 comboBoxTitle.Items.Clear();
-                listBoxStreams.Items.Clear();
+                listBoxStreams.ItemsSource = null;
 
                 foreach (TitleInfo ti in titleList)
                 {
@@ -176,9 +176,11 @@ namespace BluRip
             try
             {
                 int maxLength = 0;
+                int selectionCount = 0;
                 foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
                 {
                     maxLength = Math.Max(maxLength, StreamTypeToString(si.streamType).Length);
+                    if (si.selected) selectionCount++;
                 }
 
                 List<int> maxac3List = new List<int>();
@@ -197,7 +199,7 @@ namespace BluRip
                 int videoCount = 0;
                 int chapterCount = 0;
 
-                if (settings.useAutoSelect)
+                if (settings.useAutoSelect && selectionCount == 0)
                 {
                     List<int> ac3List = new List<int>();
                     List<int> dtsList = new List<int>();

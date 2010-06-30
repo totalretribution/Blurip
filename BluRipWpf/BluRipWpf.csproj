@@ -41,6 +41,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +51,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -72,8 +75,14 @@
     <Compile Include="EditAvisynthProfilesWindow.xaml.cs">
       <DependentUpon>EditAvisynthProfilesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditAvisynthProfileWindow.xaml.cs">
+      <DependentUpon>EditAvisynthProfileWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditEncodingProfilesWindow.xaml.cs">
       <DependentUpon>EditEncodingProfilesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditEncodingProfileWindow.xaml.cs">
+      <DependentUpon>EditEncodingProfileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Encode.cs" />
     <Compile Include="ExternalToolsWindow.xaml.cs">
@@ -112,7 +121,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditAvisynthProfileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditEncodingProfilesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditEncodingProfileWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
