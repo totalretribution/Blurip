@@ -1,8 +1,8 @@
 ﻿<Window x:Class="BluRip.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AboutWindow" Height="300" Width="300">
+        Title="AboutWindow" Height="300" Width="300" Icon="/BluRip;component/Blu-ray.ico" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="12,226,0,0" Name="button1" VerticalAlignment="Top" Width="75" />
+        <Button Content="{DynamicResource ButtonOk}" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" Width="75" Height="23" VerticalAlignment="Bottom" IsDefault="True" Click="buttonOk_Click" />
     </Grid>
 </Window>
