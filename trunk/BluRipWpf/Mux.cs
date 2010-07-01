@@ -115,6 +115,10 @@ namespace BluRip
                                 {
                                     if (!File.Exists(sfi.forcedSub)) error = true;
                                 }
+                                if (sfi.forcedSup != "")
+                                {
+                                    if (!File.Exists(sfi.forcedSup)) error = true;
+                                }
 
                                 if (sfi.normalIdx != "")
                                 {
@@ -123,6 +127,10 @@ namespace BluRip
                                 if (sfi.normalSub != "")
                                 {
                                     if (!File.Exists(sfi.normalSub)) error = true;
+                                }
+                                if (sfi.normalSup != "")
+                                {
+                                    if (!File.Exists(sfi.normalSup)) error = true;
                                 }
                             }
                             else

@@ -88,19 +88,7 @@
     <system:String x:Key="checkBoxResize720p">Resize to 720p</system:String>
     <system:String x:Key="checkBoxUseDTSCore">Use DTS core</system:String>
     <system:String x:Key="checkBoxUse64bitX264">Use 64-bit x264</system:String>
-    <system:String x:Key="checkBoxMuxLowResSubs">Mux LowRes subs</system:String>
-    <system:String x:Key="LabelPreferedAudioLanguages">Prefered audio languages</system:String>
-    <system:String x:Key="LabelPreferedAudioLanguagesDesc">Double click to edit</system:String>
-    <system:String x:Key="ButtonPreferedAudioLanguagesUp">Move up</system:String>
-    <system:String x:Key="ButtonPreferedAudioLanguagesDown">Move down</system:String>
-    <system:String x:Key="ButtonPreferedAudioLanguagesDel">Delete</system:String>
-    <system:String x:Key="ButtonPreferedAudioLanguagesAdd">Add</system:String>
-    <system:String x:Key="LabelPreferedSubLanguages">Prefered subtitle languages</system:String>
-    <system:String x:Key="LabelPreferedSubLanguagesDesc">Double click to edit</system:String>
-    <system:String x:Key="ButtonPreferedSubLanguagesUp">Move up</system:String>
-    <system:String x:Key="ButtonPreferedSubLanguagesDown">Move down</system:String>
-    <system:String x:Key="ButtonPreferedSubLanguagesDel">Delete</system:String>
-    <system:String x:Key="ButtonPreferedSubLanguagesAdd">Add</system:String>
+    <system:String x:Key="checkBoxMuxLowResSubs">Mux LowRes subs</system:String>    
     
     <!-- Tab Start -->
     <system:String x:Key="TabStart">Start</system:String>
@@ -194,7 +182,7 @@
     <system:String x:Key="ButtonQueueDown">Move down</system:String>
     <system:String x:Key="ButtonQueueDelete">Delete</system:String>
     <system:String x:Key="ButtonQueueStart">Start</system:String>
-    <system:String x:Key="CheckBoxQueueShutdown">Shutdown after queue</system:String>
+    <system:String x:Key="CheckBoxQueueShutdown">Shutdown when finished</system:String>
 
     <!-- DemuxedStreams Window -->
     <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed streams</system:String>
@@ -238,6 +226,13 @@
     <system:String x:Key="LabelAvisynthProfileDescription">Profile description</system:String>
     <system:String x:Key="LabelAvisynthProfileCommands">Commands</system:String>
     <system:String x:Key="NewAvisynthProfileDesc">New encoding profile</system:String>
+
+    <!-- PreferredLanguage Window -->
+    <system:String x:Key="CaptionPreferredLanguageWindow">Edit preferred language</system:String>
+    <system:String x:Key="LabelPreferredLanguage">Language (in english)</system:String>
+    <system:String x:Key="LabelPreferredLanguageTranslation">Translation</system:String>
+    <system:String x:Key="LabelPreferredLanguageShort">Short language tag (ISO639-1 or ISO639-2)</system:String>
+    <system:String x:Key="LabelPreferredLanguageExample">Example: German - Deutsch - de</system:String>
     
     <!-- Shutdown Window -->
     <system:String x:Key="CaptionShutdownWindow">Shutdown</system:String>
@@ -271,8 +266,24 @@
     <system:String x:Key="CheckBoxDefaultAudioTrack">Set first audio track with first prefered language as default track</system:String>
     <system:String x:Key="CheckBoxDefaultSubtitleTrack">Set first subtitle track with first prefered language as default track</system:String>
     <system:String x:Key="CheckBoxDefaultSubtitleForced">Use forced subtitle track if available</system:String>
+    <system:String x:Key="LabelPreferredAudioLanguages">Preferred audio languages</system:String>
+    <system:String x:Key="LabelPreferredAudioLanguagesDesc">Double click to edit</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesUp">Move up</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesDown">Move down</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesDel">Delete</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesAdd">Add</system:String>
+    <system:String x:Key="LabelPreferredSubLanguages">Preferred subtitle languages</system:String>
+    <system:String x:Key="LabelPreferredSubLanguagesDesc">Double click to edit</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesUp">Move up</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesDown">Move down</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesDel">Delete</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesAdd">Add</system:String>
+    <system:String x:Key="NewLanguage">new language</system:String>
     <system:String x:Key="TabAdvancedVideo">Video</system:String>
     <system:String x:Key="LabelProcessPriority">x264 process priority</system:String>
+    <system:String x:Key="TabAdvancedAudio">Audio</system:String>
+    <system:String x:Key="CheckBoxConvertDTSBitrate">Convert DTS bitrate</system:String>
+    <system:String x:Key="CheckBoxConvertAC3Bitrate">Convert AC3 bitrate</system:String>
 
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>

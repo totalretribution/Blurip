@@ -22,5 +22,10 @@ namespace BluRip
         {
             InitializeComponent();
         }
+
+        private void buttonOk_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

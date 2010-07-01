@@ -71,13 +71,7 @@ namespace BluRip
                 ac3Bitrates.Add("448");
                 ac3Bitrates.Add("640");
 
-                /*
-                comboBoxX264Priority.Items.Clear();
-                foreach (string s in Enum.GetNames(typeof(ProcessPriorityClass)))
-                {
-                    comboBoxX264Priority.Items.Add(s);
-                }
-                */
+                menuItemLanguageGerman.Visibility = System.Windows.Visibility.Collapsed;
             }
             catch (Exception)
             {
@@ -1093,7 +1087,10 @@ namespace BluRip
         {
             try
             {
-                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings);
+                bool expert = false;
+                if (menuItemViewExpertMode.IsChecked) expert = true;
+
+                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings, expert, dtsBitrates, ac3Bitrates);
                 aow.ShowDialog();
                 if (aow.DialogResult == true)
                 {

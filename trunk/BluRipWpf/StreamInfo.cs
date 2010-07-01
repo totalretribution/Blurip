@@ -148,7 +148,7 @@ namespace BluRip
             }
         }
 
-        private bool HasLanguage(string s)
+        private bool HasAudioLanguage(string s)
         {
             foreach (LanguageInfo li in settings.preferredAudioLanguages)
             {
@@ -157,12 +157,35 @@ namespace BluRip
             return false;
         }
 
-        private int LanguagIndex(string s)
+        private bool HasSubLanguage(string s)
+        {
+            foreach (LanguageInfo li in settings.preferredSubtitleLanguages)
+            {
+                if (li.language == s) return true;
+            }
+            return false;
+        }
+
+        private int AudioLanguageIndex(string s)
         {
             int index = -1;
             for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
             {
                 if (settings.preferredAudioLanguages[i].language == s)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        private int SubLanguageIndex(string s)
+        {
+            int index = -1;
+            for (int i = 0; i < settings.preferredSubtitleLanguages.Count; i++)
+            {
+                if (settings.preferredSubtitleLanguages[i].language == s)
                 {
                     index = i;
                     break;
@@ -213,9 +236,9 @@ namespace BluRip
                     {
                         if (si.streamType == StreamType.Audio)
                         {
-                            if (HasLanguage(si.language))
+                            if (HasAudioLanguage(si.language))
                             {
-                                int index = LanguagIndex(si.language);
+                                int index = AudioLanguageIndex(si.language);
                                 if (dtsAudioTypes.Contains(si.typeDesc))
                                 {
                                     maxdtsList[index]++;
@@ -242,7 +265,7 @@ namespace BluRip
                         {
                             if (settings.includeSubtitle)
                             {
-                                if (HasLanguage(si.language))
+                                if (HasSubLanguage(si.language))
                                 {
                                     si.selected = true;
                                 }
@@ -250,9 +273,9 @@ namespace BluRip
                         }
                         if (si.streamType == StreamType.Audio)
                         {
-                            if (HasLanguage(si.language))
+                            if (HasAudioLanguage(si.language))
                             {
-                                int index = LanguagIndex(si.language);
+                                int index = AudioLanguageIndex(si.language);
                                 if (settings.preferDTS)
                                 {
                                     if (dtsAudioTypes.Contains(si.typeDesc))

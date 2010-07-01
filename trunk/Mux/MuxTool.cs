@@ -66,7 +66,7 @@ namespace BluRip
                     if (si.streamType == StreamType.Audio)
                     {
                         string st = "";
-                        st = getShortLanguage(si.language);
+                        st = getShortAudioLanguage(si.language);
                         if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
                         if (settings.preferredAudioLanguages.Count > 0 && settings.preferredAudioLanguages[0].language == si.language)
                         {
@@ -93,7 +93,7 @@ namespace BluRip
 
                 List<int> subsCount = new List<int>();
                 List<int> forcedSubsCount = new List<int>();
-                for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
+                for (int i = 0; i < settings.preferredSubtitleLanguages.Count; i++)
                 {
                     subsCount.Add(0);
                     forcedSubsCount.Add(0);
@@ -132,9 +132,9 @@ namespace BluRip
                             else if (settings.muxSubs == 3)
                             {
                                 int lang = -1;
-                                for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
+                                for (int i = 0; i < settings.preferredSubtitleLanguages.Count; i++)
                                 {
-                                    if (settings.preferredAudioLanguages[i].language == si.language) lang = i;
+                                    if (settings.preferredSubtitleLanguages[i].language == si.language) lang = i;
                                 }
                                 if (lang > -1)
                                 {
@@ -173,9 +173,9 @@ namespace BluRip
                             else if (settings.muxSubs == 6)
                             {
                                 int lang = -1;
-                                for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
+                                for (int i = 0; i < settings.preferredSubtitleLanguages.Count; i++)
                                 {
-                                    if (settings.preferredAudioLanguages[i].language == si.language) lang = i;
+                                    if (settings.preferredSubtitleLanguages[i].language == si.language) lang = i;
                                 }
                                 if (lang > -1)
                                 {
@@ -202,14 +202,14 @@ namespace BluRip
 
                             if (mux)
                             {
-                                if (settings.preferredAudioLanguages.Count > 0 && settings.preferredAudioLanguages[0].language == si.language)
+                                if (settings.preferredSubtitleLanguages.Count > 0 && settings.preferredSubtitleLanguages[0].language == si.language)
                                 {
                                     if (!defaultSet)
                                     {
                                         if (settings.defaultSubtitle)
                                         {
                                             string st = "";
-                                            st = getShortLanguage(si.language);
+                                            st = getShortSubLanguage(si.language);
                                             if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
 
                                             if (!settings.defaultSubtitleForced)
@@ -261,6 +261,7 @@ namespace BluRip
                                     }
                                     else if (sfi.forcedIdx != "")
                                     {
+                                        this.Parameter += " --track-name 0:Forced ";
                                         this.Parameter += "\"" + sfi.forcedIdx + "\" ";
                                     }
                                 }
@@ -272,6 +273,7 @@ namespace BluRip
                                     }
                                     else if (sfi.forcedSup != "")
                                     {
+                                        this.Parameter += " --track-name 0:Forced ";
                                         this.Parameter += "\"" + sfi.forcedSup + "\" ";
                                     }
                                 }
@@ -283,6 +285,7 @@ namespace BluRip
                                     }
                                     else if (sfi.forcedIdxLowRes != "")
                                     {
+                                        this.Parameter += " --track-name 0:Forced ";
                                         this.Parameter += "\"" + sfi.forcedIdxLowRes + "\" ";
                                     }
                                 }
@@ -308,11 +311,27 @@ namespace BluRip
             Info("Done.");
         }
 
-        private string getShortLanguage(string language)
+        private string getShortAudioLanguage(string language)
         {
             try
             {
                 foreach (LanguageInfo li in settings.preferredAudioLanguages)
+                {
+                    if (li.language == language) return li.languageShort;
+                }
+                return "";
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        private string getShortSubLanguage(string language)
+        {
+            try
+            {
+                foreach (LanguageInfo li in settings.preferredSubtitleLanguages)
                 {
                     if (li.language == language) return li.languageShort;
                 }
@@ -335,7 +354,7 @@ namespace BluRip
                         if (si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                         {
                             if (((SubtitleFileInfo)si.extraFileInfo).forcedIdx != "") return true;
-                            if (((SubtitleFileInfo)si.extraFileInfo).forcedSup != "") return true;
+                            if (((SubtitleFileInfo)si.extraFileInfo).forcedSup != "") return true;                            
                         }
                     }
                 }
@@ -494,31 +513,31 @@ namespace BluRip
                                         {
                                             if (si.filename != "")
                                             {
-                                                File.Copy(si.filename, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sup", true);
+                                                if (File.Exists(si.filename)) File.Copy(si.filename, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sup", true);
                                             }
                                         }
                                         else if (!pgs)
                                         {
                                             if (sfi.normalIdx != "")
                                             {
-                                                File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx", true);
-                                                File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub", true);
+                                                if (File.Exists(sfi.normalIdx)) File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx", true);
+                                                if (File.Exists(sfi.normalSub)) File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub", true);
                                             }
                                             else if (sfi.forcedIdx != "")
                                             {
-                                                File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx", true);
-                                                File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub", true);
+                                                if (File.Exists(sfi.forcedIdx)) File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx", true);
+                                                if (File.Exists(sfi.forcedSub)) File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub", true);
                                             }
                                         }
                                         else if (pgs)
                                         {
                                             if (sfi.normalSup != "")
-                                            {                                                
-                                                File.Copy(sfi.normalSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sup", true);
+                                            {
+                                                if (File.Exists(sfi.normalSup)) File.Copy(sfi.normalSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sup", true);
                                             }
                                             else if (sfi.forcedSup != "")
                                             {
-                                                File.Copy(sfi.forcedSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sup", true);
+                                                if (File.Exists(sfi.forcedSup)) File.Copy(sfi.forcedSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sup", true);
                                             }
                                         }
                                     }
@@ -541,29 +560,59 @@ namespace BluRip
                     {
                         try
                         {
-                            File.Delete(si.filename);
+                            if(File.Exists(si.filename)) File.Delete(si.filename);
                             if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                             {
-                                File.Delete(((VideoFileInfo)si.extraFileInfo).encodedFile);
-                                File.Delete(((VideoFileInfo)si.extraFileInfo).encodeAvs);
+                                if(File.Exists(((VideoFileInfo)si.extraFileInfo).encodedFile)) File.Delete(((VideoFileInfo)si.extraFileInfo).encodedFile);
+                                if(File.Exists(((VideoFileInfo)si.extraFileInfo).encodeAvs)) File.Delete(((VideoFileInfo)si.extraFileInfo).encodeAvs);
                                 filename = si.filename;
                             }
                             if (si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                             {
                                 SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                                if (sfi.forcedIdx != "") File.Delete(sfi.forcedIdx);
-                                if (sfi.forcedSub != "") File.Delete(sfi.forcedSub);
-                                if (sfi.forcedSup != "") File.Delete(sfi.forcedSup);
+                                if (sfi.forcedIdx != "")
+                                {
+                                    if(File.Exists(sfi.forcedIdx)) File.Delete(sfi.forcedIdx);
+                                }
+                                if (sfi.forcedSub != "")
+                                {
+                                    if(File.Exists(sfi.forcedSub)) File.Delete(sfi.forcedSub);
+                                }
+                                if (sfi.forcedSup != "")
+                                {
+                                    if(File.Exists(sfi.forcedSup)) File.Delete(sfi.forcedSup);
+                                }
 
-                                if (sfi.normalIdx != "") File.Delete(sfi.normalIdx);
-                                if (sfi.normalSub != "") File.Delete(sfi.normalSub);
-                                if (sfi.normalSup != "") File.Delete(sfi.normalSup);
+                                if (sfi.normalIdx != "")
+                                {
+                                    if(File.Exists(sfi.normalIdx)) File.Delete(sfi.normalIdx);
+                                }
+                                if (sfi.normalSub != "")
+                                {
+                                    if(File.Exists(sfi.normalSub)) File.Delete(sfi.normalSub);
+                                }
+                                if (sfi.normalSup != "")
+                                {
+                                    if(File.Exists(sfi.normalSup)) File.Delete(sfi.normalSup);
+                                }
 
-                                if (sfi.forcedIdxLowRes != "") File.Delete(sfi.forcedIdxLowRes);
-                                if (sfi.forcedSubLowRes != "") File.Delete(sfi.forcedSubLowRes);
+                                if (sfi.forcedIdxLowRes != "")
+                                {
+                                    if(File.Exists(sfi.forcedIdxLowRes)) File.Delete(sfi.forcedIdxLowRes);
+                                }
+                                if (sfi.forcedSubLowRes != "")
+                                {
+                                    if(File.Exists(sfi.forcedSubLowRes)) File.Delete(sfi.forcedSubLowRes);
+                                }
 
-                                if (sfi.normalIdxLowRes != "") File.Delete(sfi.normalIdxLowRes);
-                                if (sfi.normalSubLowRes != "") File.Delete(sfi.normalSubLowRes);
+                                if (sfi.normalIdxLowRes != "")
+                                {
+                                    if(File.Exists(sfi.normalIdxLowRes)) File.Delete(sfi.normalIdxLowRes);
+                                }
+                                if (sfi.normalSubLowRes != "")
+                                {
+                                    if(File.Exists(sfi.normalSubLowRes)) File.Delete(sfi.normalSubLowRes);
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -573,8 +622,8 @@ namespace BluRip
                     }
                     try
                     {
-                        File.Delete(settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
-                        File.Delete(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs");
+                        if (File.Exists(settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml")) File.Delete(settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
+                        if(File.Exists(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs")) File.Delete(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs");
                     }
                     catch (Exception ex)
                     {
@@ -584,7 +633,7 @@ namespace BluRip
                     // delete index files
                     try
                     {
-                        File.Delete(filename + ".ffindex");
+                        if(File.Exists(filename + ".ffindex")) File.Delete(filename + ".ffindex");
                     }
                     catch (Exception)
                     {
@@ -593,7 +642,7 @@ namespace BluRip
                     try
                     {
                         string output = System.IO.Path.ChangeExtension(filename, "dgi");
-                        File.Delete(output);
+                        if(File.Exists(output)) File.Delete(output);
                     }
                     catch (Exception)
                     {

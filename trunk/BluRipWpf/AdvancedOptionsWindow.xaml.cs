@@ -21,7 +21,7 @@ namespace BluRip
     {
         private UserSettings settings = null;
 
-        public AdvancedOptionsWindow(UserSettings settings)
+        public AdvancedOptionsWindow(UserSettings settings, bool expert, List<string> dtsBitrates, List<string> ac3Bitrates)
         {
             InitializeComponent();
             try
@@ -50,24 +50,39 @@ namespace BluRip
                     comboBoxProcessPriority.Items.Add(s);
                 }
 
+                comboBoxDTSBitrate.Items.Clear();
+                foreach (string s in dtsBitrates)
+                {
+                    comboBoxDTSBitrate.Items.Add(s);
+                }
+
+                comboBoxAC3Bitrate.Items.Clear();
+                foreach (string s in ac3Bitrates)
+                {
+                    comboBoxAC3Bitrate.Items.Add(s);
+                }
+
+                checkBoxConvertDTSBitrate.IsChecked = settings.downmixDTS;
+                checkBoxConvertAC3Bitrate.IsChecked = settings.downmixAc3;
+
+                checkBoxConvertAC3Bitrate_Checked(null, null);
+                checkBoxConvertDTSBitrate_Checked(null, null);
+
+                if (settings.downmixDTSIndex > -1 && settings.downmixDTSIndex < dtsBitrates.Count) comboBoxDTSBitrate.SelectedIndex = settings.downmixDTSIndex;
+                if (settings.downmixAc3Index > -1 && settings.downmixAc3Index < ac3Bitrates.Count) comboBoxAC3Bitrate.SelectedIndex = settings.downmixAc3Index;
+
                 comboBoxProcessPriority.SelectedItem = Enum.GetName(typeof(ProcessPriorityClass), settings.x264Priority);
 
-                UpdatePreferedAudio();
-                UpdatePreferedSub();
-            }
-            catch (Exception)
-            {
-            }
-        }
+                UpdatePreferredAudio();
+                UpdatePreferredSub();
 
-        private void UpdatePreferedAudio()
-        {
-            try
-            {
-                listBoxPreferedAudioLanguages.Items.Clear();
-                foreach (LanguageInfo li in settings.preferredAudioLanguages)
+                if (expert)
                 {
-                    listBoxPreferedAudioLanguages.Items.Add(li.language + " - " + li.translation + " - " + li.languageShort);
+                    EnableExpert();
+                }
+                else
+                {
+                    DisableExpert();
                 }
             }
             catch (Exception)
@@ -75,14 +90,55 @@ namespace BluRip
             }
         }
 
-        private void UpdatePreferedSub()
+        public void DisableExpert()
         {
             try
             {
-                listBoxPreferedSubLanguages.Items.Clear();
+                tabItemAutocrop.Visibility = System.Windows.Visibility.Collapsed;
+                tabItemVideo.Visibility = System.Windows.Visibility.Collapsed;
+                tabItemAudio.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void EnableExpert()
+        {
+            try
+            {
+                tabItemAutocrop.Visibility = System.Windows.Visibility.Visible;
+                tabItemVideo.Visibility = System.Windows.Visibility.Visible;
+                tabItemAudio.Visibility = System.Windows.Visibility.Visible;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdatePreferredAudio()
+        {
+            try
+            {
+                listBoxPreferredAudioLanguages.Items.Clear();
+                foreach (LanguageInfo li in settings.preferredAudioLanguages)
+                {
+                    listBoxPreferredAudioLanguages.Items.Add(li.language + " - " + li.translation + " - " + li.languageShort);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdatePreferredSub()
+        {
+            try
+            {
+                listBoxPreferredSubLanguages.Items.Clear();
                 foreach (LanguageInfo li in settings.preferredSubtitleLanguages)
                 {
-                    listBoxPreferedSubLanguages.Items.Add(li.language + " - " + li.translation + " - " + li.languageShort);
+                    listBoxPreferredSubLanguages.Items.Add(li.language + " - " + li.translation + " - " + li.languageShort);
                 }
             }
             catch (Exception)
@@ -253,6 +309,268 @@ namespace BluRip
                 if (comboBoxProcessPriority.SelectedIndex > -1)
                 {
                     settings.x264Priority = (ProcessPriorityClass)Enum.Parse(typeof(ProcessPriorityClass), comboBoxProcessPriority.SelectedValue.ToString());
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void listBoxPreferredAudioLanguages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredAudioLanguages.SelectedIndex;
+                if (index > -1)
+                {
+                    EditPreferredLanguageWindow eplw = new EditPreferredLanguageWindow(settings.preferredAudioLanguages[index]);
+                    eplw.ShowDialog();
+                    if (eplw.DialogResult == true)
+                    {
+                        settings.preferredAudioLanguages[index] = new LanguageInfo(eplw.languageInfo);
+                        UpdatePreferredAudio();
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void listBoxPreferredSubLanguages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredSubLanguages.SelectedIndex;
+                if (index > -1)
+                {
+                    EditPreferredLanguageWindow eplw = new EditPreferredLanguageWindow(settings.preferredSubtitleLanguages[index]);
+                    eplw.ShowDialog();
+                    if (eplw.DialogResult == true)
+                    {
+                        settings.preferredSubtitleLanguages[index] = new LanguageInfo(eplw.languageInfo);
+                        UpdatePreferredSub();
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonPreferredAudioLanguagesUp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredAudioLanguages.SelectedIndex;
+                if (index > 0)
+                {
+                    LanguageInfo li = settings.preferredAudioLanguages[index];
+                    settings.preferredAudioLanguages.RemoveAt(index);
+                    settings.preferredAudioLanguages.Insert(index - 1, li);
+                    UpdatePreferredAudio();
+                    listBoxPreferredAudioLanguages.SelectedIndex = index - 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonPreferredAudioLanguagesDown_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredAudioLanguages.SelectedIndex;
+                if (index < settings.preferredAudioLanguages.Count - 1)
+                {
+                    LanguageInfo li = settings.preferredAudioLanguages[index];
+                    settings.preferredAudioLanguages.RemoveAt(index);
+                    settings.preferredAudioLanguages.Insert(index + 1, li);
+                    UpdatePreferredAudio();
+                    listBoxPreferredAudioLanguages.SelectedIndex = index + 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonPreferredAudioLanguagesDel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredAudioLanguages.SelectedIndex;
+                if (index > -1)
+                {
+                    settings.preferredAudioLanguages.RemoveAt(index);
+                    UpdatePreferredAudio();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private string Res(string key)
+        {
+            try
+            {
+                return (string)App.Current.Resources[key];
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        private void buttonPreferredAudioLanguagesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LanguageInfo li = new LanguageInfo();
+                li.language = Res("NewLanguage");
+                settings.preferredAudioLanguages.Add(li);
+                UpdatePreferredAudio();
+                listBoxPreferredAudioLanguages.SelectedIndex = settings.preferredAudioLanguages.Count - 1;
+                listBoxPreferredAudioLanguages_MouseDoubleClick(null, null);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonPreferredSubLanguagesUp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredSubLanguages.SelectedIndex;
+                if (index > 0)
+                {
+                    LanguageInfo li = settings.preferredSubtitleLanguages[index];
+                    settings.preferredSubtitleLanguages.RemoveAt(index);
+                    settings.preferredSubtitleLanguages.Insert(index - 1, li);
+                    UpdatePreferredSub();
+                    listBoxPreferredSubLanguages.SelectedIndex = index - 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonPreferredSubLanguagesDown_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredSubLanguages.SelectedIndex;
+                if (index < settings.preferredSubtitleLanguages.Count - 1)
+                {
+                    LanguageInfo li = settings.preferredSubtitleLanguages[index];
+                    settings.preferredSubtitleLanguages.RemoveAt(index);
+                    settings.preferredSubtitleLanguages.Insert(index + 1, li);
+                    UpdatePreferredSub();
+                    listBoxPreferredSubLanguages.SelectedIndex = index + 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonPreferredSubLanguagesDel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPreferredSubLanguages.SelectedIndex;
+                if (index > -1)
+                {
+                    settings.preferredSubtitleLanguages.RemoveAt(index);
+                    UpdatePreferredSub();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonPreferredSubLanguagesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LanguageInfo li = new LanguageInfo();
+                li.language = Res("NewLanguage");
+                settings.preferredSubtitleLanguages.Add(li);
+                UpdatePreferredSub();
+                listBoxPreferredSubLanguages.SelectedIndex = settings.preferredSubtitleLanguages.Count - 1;
+                listBoxPreferredSubLanguages_MouseDoubleClick(null, null);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxConvertDTSBitrate_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.downmixDTS = (bool)checkBoxConvertDTSBitrate.IsChecked;
+                if (settings.downmixDTS)
+                {
+                    comboBoxDTSBitrate.IsEnabled = true;
+                }
+                else
+                {
+                    comboBoxDTSBitrate.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxConvertAC3Bitrate_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.downmixAc3 = (bool)checkBoxConvertAC3Bitrate.IsChecked;
+                if (settings.downmixAc3)
+                {
+                    comboBoxAC3Bitrate.IsEnabled = true;
+                }
+                else
+                {
+                    comboBoxAC3Bitrate.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxDTSBitrate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxDTSBitrate.SelectedIndex > -1)
+                {
+                    settings.downmixDTSIndex = comboBoxDTSBitrate.SelectedIndex;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxAC3Bitrate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxAC3Bitrate.SelectedIndex > -1)
+                {
+                    settings.downmixAc3Index = comboBoxAC3Bitrate.SelectedIndex;
                 }
             }
             catch (Exception)
