@@ -23,14 +23,15 @@ namespace BluRip
         private MainWindow mainWindow = null;
 
         public LogWindow(MainWindow mainWindow)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.mainWindow = mainWindow;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 
@@ -282,24 +283,12 @@ namespace BluRip
             }
         }
 
-        private string Res(string key)
-        {
-            try
-            {
-                return (string)App.Current.Resources[key];
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
-            }
-        }
-
         private void SaveLog(System.Windows.Controls.RichTextBox rtb)
         {
             try
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = Res("LogSaveFileFilter");
+                sfd.Filter = Global.Res("LogSaveFileFilter");
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     SaveLog(GetText(rtb), sfd.FileName);

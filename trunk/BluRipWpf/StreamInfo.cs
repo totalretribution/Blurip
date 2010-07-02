@@ -63,8 +63,8 @@ namespace BluRip
             {
                 if (!File.Exists(settings.eac3toPath))
                 {
-                    logWindow.MessageMain(Res("ErrorEac3toPath"));
-                    if (!silent) ErrorMsg(Res("ErrorEac3toPath"));
+                    logWindow.MessageMain(Global.Res("ErrorEac3toPath"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorEac3toPath"));
                     return false;
                 }
                 return true;
@@ -81,13 +81,13 @@ namespace BluRip
             {                
                 if (!Directory.Exists(settings.lastBluRayPath))
                 {
-                    logWindow.MessageDemux(Res("ErrorBlurayPath"));
-                    if (!silent) ErrorMsg(Res("ErrorBlurayPath"));
+                    logWindow.MessageDemux(Global.Res("ErrorBlurayPath"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorBlurayPath"));
                     return;
                 }
                 if (!checkEac3to()) return;
                 DisableControls();
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarStreamInfo"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarStreamInfo"));
                 
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.ItemsSource = null;
@@ -110,13 +110,13 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageDemux(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {
                 EnableControls();
-                
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
         }        
 
@@ -388,7 +388,7 @@ namespace BluRip
             try
             {
                 DisableControls();
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarM2tsInfo"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarM2tsInfo"));
                                 
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.ItemsSource = null;
@@ -410,13 +410,13 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageDemux(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {
                 EnableControls();
-                
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
         }
 

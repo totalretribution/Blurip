@@ -31,13 +31,13 @@ namespace BluRip
                     if (!File.Exists(settings.x264x64Path))
                     {
                         logWindow.MessageMain("x264 64 bit path not set");
-                        if (!silent) ErrorMsg("x264 64 bit path not set");
+                        if (!silent) Global.ErrorMsg("x264 64 bit path not set");
                         return false;
                     }
                     if (!File.Exists(settings.avs2yuvPath))
                     {
                         logWindow.MessageMain("avs2yuv path not set");
-                        if (!silent) ErrorMsg("avs2yuv path not set");
+                        if (!silent) Global.ErrorMsg("avs2yuv path not set");
                         return false;
                     }
                 }
@@ -46,7 +46,7 @@ namespace BluRip
                     if (!File.Exists(settings.x264Path))
                     {
                         logWindow.MessageMain("x264 path not set");
-                        if (!silent) ErrorMsg("x264 path not set");
+                        if (!silent) Global.ErrorMsg("x264 path not set");
                         return false;
                     }
                 }
@@ -68,7 +68,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageEncode(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageEncode(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {
@@ -96,16 +96,16 @@ namespace BluRip
                         {
                             if (!secondPass)
                             {
-                                UpdateStatus(Res("StatusBar") + " " + ResFormat("StatusBarEncodeFirstPass",text));
+                                UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeFirstPass", text));
                             }
                             else
                             {
-                                UpdateStatus(Res("StatusBar") + " " + ResFormat("StatusBarEncodeSecondPass", text));
+                                UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeSecondPass", text));
                             }
                         }
                         else
                         {
-                            UpdateStatus(Res("StatusBar") + " " + ResFormat("StatusBarEncode", text));
+                            UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncode", text));
                         }
                     }
                 }
@@ -126,14 +126,14 @@ namespace BluRip
             {
                 if (!Directory.Exists(settings.workingDir))
                 {
-                    logWindow.MessageDemux(Res("ErrorWorkingDirectory"));
-                    if (!silent) ErrorMsg(Res("ErrorWorkingDirectory"));
+                    logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorWorkingDirectory"));
                     return false;
                 }
                 if (demuxedStreamList.streams.Count == 0)
                 {
-                    logWindow.MessageSubtitle(Res("ErrorNoDemuxedStreams"));
-                    if (!silent) ErrorMsg(Res("ErrorNoDemuxedStreams"));
+                    logWindow.MessageSubtitle(Global.Res("ErrorNoDemuxedStreams"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorNoDemuxedStreams"));
                     return false;
                 }
 
@@ -154,7 +154,7 @@ namespace BluRip
                 if (vfi == null || vfi.encodeAvs == "")
                 {
                     logWindow.MessageEncode("Encode avs not set - do index + autocrop first");
-                    if (!silent) ErrorMsg("Encode avs not set - do index + autocrop first");
+                    if (!silent) Global.ErrorMsg("Encode avs not set - do index + autocrop first");
                     return false;
                 }
 
@@ -162,11 +162,11 @@ namespace BluRip
                 if (profile < 0)
                 {
                     logWindow.MessageEncode("Encoding profile not set");
-                    if (!silent) ErrorMsg("Encoding profile not set");
+                    if (!silent) Global.ErrorMsg("Encoding profile not set");
                     return false;
                 }
 
-                UpdateStatus(Res("StatusBar") + " " + ResFormat("StatusBarEncode",""));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncode", ""));
                 DisableControls();
 
                 lastMsg = "";
@@ -210,7 +210,7 @@ namespace BluRip
             {
                 EnableControls();
 
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
         }
     }

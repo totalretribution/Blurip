@@ -21,15 +21,16 @@ namespace BluRip
         private UserSettings settings = null;
 
         public EditEncodingProfilesWindow(UserSettings settings)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.settings = new UserSettings(settings);
                 UpdateEncodingProfile();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 
@@ -131,25 +132,13 @@ namespace BluRip
             {
             }
         }
-
-        private string Res(string key)
-        {
-            try
-            {
-                return (string)App.Current.Resources[key];
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
-            }
-        }
-
+                
         private void buttonProfileAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 EncodingSettings es = new EncodingSettings();
-                es.desc = Res("NewProfileDesc");
+                es.desc = Global.Res("NewProfileDesc");
                 settings.encodingSettings.Add(es);
                 UpdateEncodingProfile();
                 listBoxEncodingProfiles.SelectedIndex = settings.encodingSettings.Count - 1;

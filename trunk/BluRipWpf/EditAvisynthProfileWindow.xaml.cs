@@ -21,16 +21,17 @@ namespace BluRip
         AvisynthSettings avs = null;
 
         public EditAvisynthProfileWindow(AvisynthSettings avs)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.avs = new AvisynthSettings(avs);
                 textBoxDescription.Text = avs.desc;
                 richTextBoxCommands.AppendText(avs.commands);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 

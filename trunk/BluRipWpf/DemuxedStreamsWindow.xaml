@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BluRip.DemuxedStreamsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionDemuxedStreamsWindow}" Height="300" Width="400" Closing="Window_Closing" Icon="/BluRip;component/Blu-ray.ico" ResizeMode="CanResizeWithGrip" LocationChanged="Window_LocationChanged" ShowInTaskbar="False" MinHeight="400" MinWidth="300">
+        Title="{DynamicResource CaptionDemuxedStreamsWindow}" Height="300" Width="400" Closing="Window_Closing" ResizeMode="CanResizeWithGrip" LocationChanged="Window_LocationChanged" ShowInTaskbar="False" MinHeight="400" MinWidth="300" Icon="/BluRip;component/blurip.ico">
     <Grid>
         <ListBox HorizontalAlignment="Stretch" Margin="12,46,12,41" Name="listBoxDemuxedStreams" VerticalAlignment="Stretch" />
         <Label Content="{DynamicResource LabelDemuxedStreamsList}" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelDemuxedStreamsList" VerticalAlignment="Top" />

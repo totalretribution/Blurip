@@ -21,10 +21,10 @@ namespace BluRip
         EncodingSettings es = null;
 
         public EditEncodingProfileWindow(EncodingSettings es)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.es = new EncodingSettings(es);
                 textBoxDescription.Text = es.desc;
                 textBoxSettings.Text = es.settings;
@@ -35,8 +35,9 @@ namespace BluRip
 
                 checkBox2pass_Checked(null, null);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 

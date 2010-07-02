@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BluRip.FileListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionFileListWindow}" Height="346" Width="451" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/BluRip;component/Blu-ray.ico">
+        Title="{DynamicResource CaptionFileListWindow}" Height="346" Width="451" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/BluRip;component/blurip.ico">
     <Grid>
         <ListBox Height="220" HorizontalAlignment="Left" Margin="12,46,0,0" Name="listBoxFileList" VerticalAlignment="Top" Width="325" />
         <Label Content="{DynamicResource LabelFileList}" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelFileList" VerticalAlignment="Top" />

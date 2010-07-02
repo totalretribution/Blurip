@@ -21,15 +21,16 @@ namespace BluRip
         private UserSettings settings = null;
 
         public EditAvisynthProfilesWindow(UserSettings settings)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.settings = new UserSettings(settings);
                 UpdateAvisynthProfiles();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 
@@ -57,19 +58,7 @@ namespace BluRip
         {
             get { return settings; }
         }
-
-        private string Res(string key)
-        {
-            try
-            {
-                return (string)App.Current.Resources[key];
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
-            }
-        }
-
+        
         private void listBoxAvisynthProfiles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
@@ -95,7 +84,7 @@ namespace BluRip
             try
             {
                 AvisynthSettings avs = new AvisynthSettings();
-                avs.desc = Res("NewAvisynthProfileDesc");
+                avs.desc = Global.Res("NewAvisynthProfileDesc");
                 settings.avisynthSettings.Add(avs);
                 UpdateAvisynthProfiles();
                 listBoxAvisynthProfiles.SelectedIndex = settings.avisynthSettings.Count - 1;

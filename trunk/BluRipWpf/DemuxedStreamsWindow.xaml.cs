@@ -22,14 +22,15 @@ namespace BluRip
         private MainWindow mainWindow = null;
 
         public DemuxedStreamsWindow(MainWindow mainWindow)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.mainWindow = mainWindow;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                Global.ErrorMsg(ex.Message);
             }
         }
 
