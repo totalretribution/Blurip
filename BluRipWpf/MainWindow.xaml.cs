@@ -42,10 +42,11 @@ namespace BluRip
         private List<Project> projectQueue = new List<Project>();
 
         public MainWindow()
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
+
                 videoTypes.Add("h264/AVC");
                 videoTypes.Add("VC-1");
                 videoTypes.Add("MPEG2");
@@ -73,8 +74,9 @@ namespace BluRip
 
                 menuItemLanguageGerman.Visibility = System.Windows.Visibility.Collapsed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
         
@@ -94,10 +96,10 @@ namespace BluRip
                 {
                     UserSettings.LoadSettingsFile(ref settings, settingsPath);
                 }
-                
+                                
                 logWindow = new LogWindow(this);
                 logWindow.Owner = this;
-
+                                
                 queueWindow = new QueueWindow(this);
                 queueWindow.Owner = this;
 
@@ -106,10 +108,11 @@ namespace BluRip
 
                 UpdateFromSettings();
 
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 
@@ -200,7 +203,7 @@ namespace BluRip
                 UserSettings.SaveSettingsFile(settings, settingsPath);
                 if (!silent)
                 {
-                    if (System.Windows.MessageBox.Show(Res("MessageExit"), Res("MessageExitHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (System.Windows.MessageBox.Show(Global.Res("MessageExit"), Global.Res("MessageExitHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         abortThreads();
                     }
@@ -378,18 +381,7 @@ namespace BluRip
             {
             }
         }
-
-        private void ErrorMsg(string msg)
-        {
-            try
-            {
-                System.Windows.MessageBox.Show(msg, Res("ErrorHeader"), MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception)
-            {
-            }
-        }
-
+        
         private void menuItemViewDemuxedStreams_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -806,36 +798,12 @@ namespace BluRip
             {
             }
         }
-
-        private string Res(string key)
-        {
-            try
-            {
-                return (string)App.Current.Resources[key];
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
-            }
-        }
-
-        private string ResFormat(string key, params object[] para)
-        {
-            try
-            {
-                return String.Format((string)App.Current.Resources[key], para);
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
-            }
-        }
-
+        
         private void buttonAbort_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (System.Windows.MessageBox.Show(Res("MessageAbort"), Res("MessageAbortHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (System.Windows.MessageBox.Show(Global.Res("MessageAbort"), Global.Res("MessageAbortHeader"), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     abortThreads();
                 }
@@ -1035,7 +1003,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageMain(Global.Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
@@ -1062,7 +1030,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageMain(Global.Res("ErrorException") + " " + ex.Message);
             }
         }
 
@@ -1346,7 +1314,7 @@ namespace BluRip
             {
                 Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = Res("ProjectFileFilter");
+                sfd.Filter = Global.Res("ProjectFileFilter");
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     Project.SaveProjectFile(project, sfd.FileName);
@@ -1362,7 +1330,7 @@ namespace BluRip
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = Res("ProjectFileFilter");
+                ofd.Filter = Global.Res("ProjectFileFilter");
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     Project project = new Project();
@@ -1424,11 +1392,11 @@ namespace BluRip
                 {
                     logWindow.ClearAll();
 
-                    logWindow.MessageMain(ResFormat("InfoQueueStart", (projectQueue.IndexOf(project) + 1), projectQueue.Count));
+                    logWindow.MessageMain(Global.ResFormat("InfoQueueStart", (projectQueue.IndexOf(project) + 1), projectQueue.Count));
 
                     if (!abort)
                     {
-                        logWindow.MessageMain(ResFormat("InfoQueueProjectStart", project.settings.movieTitle));
+                        logWindow.MessageMain(Global.ResFormat("InfoQueueProjectStart", project.settings.movieTitle));
                         settings = new UserSettings(project.settings);
                         titleList.Clear();
                         foreach (TitleInfo ti in project.titleList)
@@ -1452,9 +1420,9 @@ namespace BluRip
                     }
                     else
                     {
-                        logWindow.MessageMain(Res("InfoQueueCancel"));
+                        logWindow.MessageMain(Global.Res("InfoQueueCancel"));
                     }
-                    logWindow.MessageMain(Res("InfoQueueDone"));
+                    logWindow.MessageMain(Global.Res("InfoQueueDone"));
                 }                
 
                 if (queueWindow.checkBoxQueueShutdown.IsChecked == true)
@@ -1469,7 +1437,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageMain(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {
@@ -1496,5 +1464,62 @@ namespace BluRip
         }
     }
 
-    public class ObjectCollection : ObservableCollection<object> { }
+    public static class Global
+    {
+        public static string Res(string key)
+        {
+            try
+            {
+                string tmp = (string)App.Current.Resources[key];
+                if (tmp != "") return tmp;
+                else return "Unknown resource";
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        public static string ResFormat(string key, params object[] para)
+        {
+            try
+            {
+                string tmp = String.Format((string)App.Current.Resources[key], para);
+                if (tmp != "") return tmp;
+                else return "Unknown resource";
+            }
+            catch (Exception)
+            {
+                return "Unknown resource";
+            }
+        }
+
+        public static void ErrorMsg(string msg)
+        {
+            try
+            {
+                System.Windows.MessageBox.Show(msg, Res("ErrorHeader"), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public static void ErrorMsg(Exception ex)
+        {
+            try
+            {
+                string tmp = " (";
+                if (ex.InnerException != null)
+                {
+                    tmp += ex.InnerException.Message;
+                }
+                tmp += ")";
+                System.Windows.MessageBox.Show(ex.Message + tmp, Res("ErrorHeader"), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+            }
+        }
+    }
 }

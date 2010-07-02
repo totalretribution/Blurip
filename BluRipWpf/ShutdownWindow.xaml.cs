@@ -23,30 +23,19 @@ namespace BluRip
         private int countdown = 120;
 
         public ShutdownWindow()
-        {
-            InitializeComponent();
+        {            
             try
             {
-                labelShutdownCounter.Content = ResFormat("LabelShutdownCounter", countdown);
+                InitializeComponent();
+                labelShutdownCounter.Content = Global.ResFormat("LabelShutdownCounter", countdown);
                 timer = new DispatcherTimer();
                 timer.Interval = new TimeSpan(0, 0, 1);
                 timer.Tick += new EventHandler(TimerTick);
                 timer.Start();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-            }
-        }
-
-        private string ResFormat(string key, params object[] para)
-        {
-            try
-            {
-                return String.Format((string)App.Current.Resources[key], para);
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
+                Global.ErrorMsg(ex);
             }
         }
 
@@ -54,7 +43,7 @@ namespace BluRip
         {
             try
             {
-                labelShutdownCounter.Content = ResFormat("LabelShutdownCounter", countdown);
+                labelShutdownCounter.Content = Global.ResFormat("LabelShutdownCounter", countdown);
                 countdown--;
                 if (countdown == 0)
                 {

@@ -35,15 +35,15 @@ namespace BluRip
             {
                 if (!Directory.Exists(settings.workingDir))
                 {
-                    logWindow.MessageDemux(Res("ErrorWorkingDirectory"));
-                    if (!silent) ErrorMsg(Res("ErrorWorkingDirectory"));
+                    logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorWorkingDirectory"));
                     return false;
                 }
 
                 if (demuxedStreamList.streams.Count == 0)
                 {
-                    logWindow.MessageSubtitle(Res("ErrorNoDemuxedStreams"));
-                    if (!silent) ErrorMsg(Res("ErrorNoDemuxedStreams"));
+                    logWindow.MessageSubtitle(Global.Res("ErrorNoDemuxedStreams"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorNoDemuxedStreams"));
                     return false;
                 }
 
@@ -61,12 +61,12 @@ namespace BluRip
                 }
                 if (fps == "")
                 {
-                    logWindow.MessageSubtitle(Res("ErrorSetFramerate"));
-                    if (!silent) ErrorMsg(Res("ErrorSetFramerate"));
+                    logWindow.MessageSubtitle(Global.Res("ErrorSetFramerate"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorSetFramerate"));
                     return false;
                 }
 
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarSubtitle"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarSubtitle"));
                 
 
                 int subtitleCount = 0;
@@ -81,30 +81,30 @@ namespace BluRip
 
                 if (subtitleCount == 0)
                 {
-                    logWindow.MessageSubtitle(Res("InfoNoSubtitles"));
+                    logWindow.MessageSubtitle(Global.Res("InfoNoSubtitles"));
                     return true;
                 }
 
                 // do not mux and copy subs
                 if (settings.muxSubs == 0 && settings.copySubs == 0)
                 {
-                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
                 }
                 // only untouched subs
                 else if (settings.muxUntouchedSubs && settings.copyUntouchedSubs)
                 {
-                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
                 }
                 else if (settings.muxUntouchedSubs && settings.copySubs == 0)
                 {
-                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
                 }
                 else if (settings.muxSubs == 0 && settings.copyUntouchedSubs)
                 {
-                    logWindow.MessageSubtitle(Res("InfoNoSubtitlesProcessing"));
+                    logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
                 }
 
@@ -141,7 +141,7 @@ namespace BluRip
                         StreamInfo si = demuxedStreamList.streams[i];
                         if (sub)
                         {
-                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleNormal"), subtitle, subtitleCount));                            
+                            UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleNormal"), subtitle, subtitleCount));                            
                             st = new SubtitleTool(settings, fps, ref si, false, false, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
@@ -149,7 +149,7 @@ namespace BluRip
                             st.WaitForExit();
                             if (!st.Successfull) error = true;
 
-                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleForced"), subtitle, subtitleCount));
+                            UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleForced"), subtitle, subtitleCount));
                             st = new SubtitleTool(settings, fps, ref si, true, false, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
@@ -159,7 +159,7 @@ namespace BluRip
                         }
                         if (sup)
                         {
-                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleNormalPgs"), subtitle, subtitleCount));
+                            UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleNormalPgs"), subtitle, subtitleCount));
                             st = new SubtitleTool(settings, fps, ref si, false, false, true);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
@@ -167,7 +167,7 @@ namespace BluRip
                             st.WaitForExit();
                             if (!st.Successfull) error = true;
 
-                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleForcedPgs"), subtitle, subtitleCount));
+                            UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleForcedPgs"), subtitle, subtitleCount));
                             st = new SubtitleTool(settings, fps, ref si, true, false, true);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
@@ -178,7 +178,7 @@ namespace BluRip
 
                         if (settings.muxLowResSubs && (settings.muxSubs > 0 && settings.muxSubs <4))
                         {
-                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleLowresNormal"), subtitle, subtitleCount));
+                            UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleLowresNormal"), subtitle, subtitleCount));
                             si = demuxedStreamList.streams[i];
                             st = new SubtitleTool(settings, fps, ref si, false, true, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
@@ -187,7 +187,7 @@ namespace BluRip
                             st.WaitForExit();
                             if (!st.Successfull) error = true;
 
-                            UpdateStatus(Res("StatusBar") + " " + String.Format(Res("StatusBarSubtitleLowresForced"), subtitle, subtitleCount));
+                            UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleLowresForced"), subtitle, subtitleCount));
                             st = new SubtitleTool(settings, fps, ref si, true, true, false);
                             st.OnInfoMsg += new ExternalTool.InfoEventHandler(SubtitleMsg);
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
@@ -232,7 +232,7 @@ namespace BluRip
 
                 if (error)
                 {
-                    logWindow.MessageSubtitle(Res("ErrorSubtitle"));
+                    logWindow.MessageSubtitle(Global.Res("ErrorSubtitle"));
                     return false;
                 }
 
@@ -243,13 +243,13 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageSubtitle(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageSubtitle(Global.Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
             {
                 EnableControls();
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
         }
 
@@ -263,7 +263,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageSubtitle(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageSubtitle(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {
@@ -318,14 +318,14 @@ namespace BluRip
                 {
                     if (!File.Exists(settings.javaPath))
                     {
-                        logWindow.MessageMain(Res("ErrorJavaPath"));
-                        if (!silent) ErrorMsg(Res("ErrorJavaPath"));
+                        logWindow.MessageMain(Global.Res("ErrorJavaPath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorJavaPath"));
                         return false;
                     }
                     if (!File.Exists(settings.sup2subPath))
                     {
-                        logWindow.MessageMain(Res("ErrorBdsup2subPath"));
-                        if (!silent) ErrorMsg(Res("ErrorBdsup2subPath"));
+                        logWindow.MessageMain(Global.Res("ErrorBdsup2subPath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorBdsup2subPath"));
                         return false;
                     }
                 }

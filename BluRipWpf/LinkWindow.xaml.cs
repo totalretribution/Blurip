@@ -20,7 +20,14 @@ namespace BluRip
     {
         public LinkWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                Global.ErrorMsg(ex);
+            }            
         }
 
         private void buttonOk_Click(object sender, RoutedEventArgs e)

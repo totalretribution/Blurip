@@ -22,10 +22,10 @@ namespace BluRip
         private UserSettings settings = null;
 
         public AdvancedOptionsWindow(UserSettings settings, bool expert, List<string> dtsBitrates, List<string> ac3Bitrates)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.settings = new UserSettings(settings);
 
                 textBoxNrFrames.Text = settings.nrFrames.ToString();
@@ -85,8 +85,9 @@ namespace BluRip
                     DisableExpert();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 
@@ -413,25 +414,13 @@ namespace BluRip
             {
             }
         }
-
-        private string Res(string key)
-        {
-            try
-            {
-                return (string)App.Current.Resources[key];
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
-            }
-        }
-
+        
         private void buttonPreferredAudioLanguagesAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 LanguageInfo li = new LanguageInfo();
-                li.language = Res("NewLanguage");
+                li.language = Global.Res("NewLanguage");
                 settings.preferredAudioLanguages.Add(li);
                 UpdatePreferredAudio();
                 listBoxPreferredAudioLanguages.SelectedIndex = settings.preferredAudioLanguages.Count - 1;
@@ -501,7 +490,7 @@ namespace BluRip
             try
             {
                 LanguageInfo li = new LanguageInfo();
-                li.language = Res("NewLanguage");
+                li.language = Global.Res("NewLanguage");
                 settings.preferredSubtitleLanguages.Add(li);
                 UpdatePreferredSub();
                 listBoxPreferredSubLanguages.SelectedIndex = settings.preferredSubtitleLanguages.Count - 1;

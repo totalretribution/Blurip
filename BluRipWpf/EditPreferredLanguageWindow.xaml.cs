@@ -21,18 +21,19 @@ namespace BluRip
         private LanguageInfo li = null;
 
         public EditPreferredLanguageWindow(LanguageInfo li)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.li = new LanguageInfo(li);
 
                 textBoxLanguage.Text = li.language;
                 textBoxTranslation.Text = li.translation;
                 textBoxLanguageShort.Text = li.languageShort;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 

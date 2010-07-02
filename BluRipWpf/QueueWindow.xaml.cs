@@ -21,14 +21,15 @@ namespace BluRip
         private MainWindow mainWindow = null;
 
         public QueueWindow(MainWindow mainWindow)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.mainWindow = mainWindow;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex.Message);
             }
         }
 
@@ -78,18 +79,6 @@ namespace BluRip
             }
         }
 
-        private string Res(string key)
-        {
-            try
-            {
-                return (string)App.Current.Resources[key];
-            }
-            catch (Exception)
-            {
-                return "Unknown resource";
-            }
-        }
-
         public void UpdateQueue()
         {
             try
@@ -97,7 +86,7 @@ namespace BluRip
                 listBoxQueue.Items.Clear();
                 foreach (Project p in mainWindow.ProjectQueue)
                 {
-                    listBoxQueue.Items.Add(Res("InfoQueueTitle") + " " + p.settings.movieTitle);
+                    listBoxQueue.Items.Add(Global.Res("InfoQueueTitle") + " " + p.settings.movieTitle);
                 }
             }
             catch (Exception)

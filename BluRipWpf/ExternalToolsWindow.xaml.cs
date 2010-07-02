@@ -22,10 +22,10 @@ namespace BluRip
         private UserSettings settings = null;
 
         public ExternalTools(UserSettings settings)
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 this.settings = new UserSettings(settings);
                 
                 textBoxEac3toPath.Text = settings.eac3toPath;
@@ -38,8 +38,9 @@ namespace BluRip
                 textBoxX264x64Path.Text = settings.x264x64Path;
                 textBoxAvs2yuvPath.Text = settings.avs2yuvPath;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 

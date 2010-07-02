@@ -26,14 +26,14 @@ namespace BluRip
             {
                 if (!Directory.Exists(settings.workingDir))
                 {
-                    logWindow.MessageDemux(Res("ErrorWorkingDirectory"));
-                    if (!silent) ErrorMsg(Res("ErrorWorkingDirectory"));
+                    logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorWorkingDirectory"));
                     return false;
                 }
                 if (comboBoxTitle.SelectedIndex == -1)
                 {
-                    logWindow.MessageDemux(Res("ErrorNoTitle"));
-                    if (!silent) ErrorMsg(Res("ErrorNoTitle"));
+                    logWindow.MessageDemux(Global.Res("ErrorNoTitle"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorNoTitle"));
                     return false;
                 }
                 int videoCount = 0;
@@ -56,24 +56,24 @@ namespace BluRip
                 }
                 if (audioCount < 1)
                 {
-                    logWindow.MessageDemux(Res("ErrorNoAudio"));
-                    if (!silent) ErrorMsg(Res("ErrorNoAudio"));
+                    logWindow.MessageDemux(Global.Res("ErrorNoAudio"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorNoAudio"));
                     return false;
                 }
                 if (videoCount != 1)
                 {
-                    logWindow.MessageDemux(Res("ErrorNoVideo"));
-                    if (!silent) ErrorMsg(Res("ErrorNoVideo"));
+                    logWindow.MessageDemux(Global.Res("ErrorNoVideo"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorNoVideo"));
                     return false;
                 }
                 if (unknown > 0)
                 {
-                    logWindow.MessageDemux(Res("ErrorUnknownTracks"));
-                    if (!silent) ErrorMsg(Res("ErrorUnknownTracks"));
+                    logWindow.MessageDemux(Global.Res("ErrorUnknownTracks"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorUnknownTracks"));
                     return false;
                 }
 
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarDemux"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarDemux"));
                 DisableControls();
                 
                 string dtsBitrate = "1536";
@@ -96,14 +96,14 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageDemux(Global.Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
             {
                 EnableControls();
-                
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
         }
 
@@ -116,7 +116,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageDemux(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageDemux(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {

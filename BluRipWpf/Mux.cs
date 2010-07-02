@@ -67,14 +67,14 @@ namespace BluRip
                 }
                 if (videoStream == 0)
                 {
-                    if (!silent) ErrorMsg(Res("ErrorVideoFile"));
-                    logWindow.MessageMux(Res("ErrorVideoFile"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorVideoFile"));
+                    logWindow.MessageMux(Global.Res("ErrorVideoFile"));
                     return false;
                 }
                 if (audioStream == 0)
                 {
-                    if (!silent) ErrorMsg(Res("ErrorAudioFile"));
-                    logWindow.MessageMux(Res("ErrorAudioFile"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorAudioFile"));
+                    logWindow.MessageMux(Global.Res("ErrorAudioFile"));
                     return false;
                 }
                 if (chapterStream > 0)
@@ -92,8 +92,8 @@ namespace BluRip
                     }
                     if (error)
                     {
-                        if (!silent) ErrorMsg(Res("ErrorChapterFile"));
-                        logWindow.MessageMux(Res("ErrorChapterFile"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorChapterFile"));
+                        logWindow.MessageMux(Global.Res("ErrorChapterFile"));
                         return false;
                     }
                 }
@@ -141,14 +141,14 @@ namespace BluRip
                     }
                     if (error)
                     {
-                        if (!silent) ErrorMsg(Res("ErrorSubtitleFile"));
-                        logWindow.MessageMux(Res("ErrorSubtitleFile"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorSubtitleFile"));
+                        logWindow.MessageMux(Global.Res("ErrorSubtitleFile"));
                         return false;
                     }
                 }
 
                 DisableControls();
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarMux"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarMux"));
 
                 mt = new MuxTool(settings, demuxedStreamList);
                 mt.OnInfoMsg += new ExternalTool.InfoEventHandler(MuxMsg);
@@ -159,13 +159,13 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageMux(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageMux(Global.Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
             {
                 EnableControls();
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
         }
 
@@ -175,8 +175,8 @@ namespace BluRip
             {
                 if (!File.Exists(settings.mkvmergePath))
                 {
-                    logWindow.MessageMain(Res("ErrorMkvmergePath"));
-                    if (!silent) ErrorMsg(Res("ErrorMkvmergePath"));
+                    logWindow.MessageMain(Global.Res("ErrorMkvmergePath"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorMkvmergePath"));
                     return false;
                 }
                 return true;
@@ -197,7 +197,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageMain(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageMain(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {

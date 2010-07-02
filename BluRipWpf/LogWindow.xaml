@@ -1,7 +1,8 @@
 ﻿<Window x:Class="BluRip.LogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionLogWindow}" Height="300" Width="700" Closing="Window_Closing" Loaded="Window_Loaded" Icon="/BluRip;component/Blu-ray.ico" LocationChanged="Window_LocationChanged" ResizeMode="CanResizeWithGrip" ShowInTaskbar="False" MinWidth="700" MinHeight="300">
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        Title="{DynamicResource CaptionLogWindow}" Height="300" Width="700" Closing="Window_Closing" Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" ResizeMode="CanResizeWithGrip" ShowInTaskbar="False" MinWidth="700" MinHeight="300" Icon="/BluRip;component/blurip.ico">
     <Window.Resources>
         <ContextMenu x:Key="contextMenuLog">
             <MenuItem Header="{DynamicResource MenuLogClearAll}" Name="menuLogClearAll" Click="menuLogClearAll_Click" />

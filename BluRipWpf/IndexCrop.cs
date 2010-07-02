@@ -70,13 +70,13 @@ namespace BluRip
                 }
                 catch (Exception ex)
                 {
-                    logWindow.MessageCrop(Res("ErrorMediaInfo") + " " + ex.Message);
+                    logWindow.MessageCrop(Global.Res("ErrorMediaInfo") + " " + ex.Message);
                     return false;
                 }
 
                 if (avo != null && avo.disableFps)
                 {
-                    logWindow.MessageCrop(Res("InfoManualFps"));
+                    logWindow.MessageCrop(Global.Res("InfoManualFps"));
                     fps = avo.fps;
                     length = avo.length;
                     frames = avo.frames;
@@ -84,20 +84,20 @@ namespace BluRip
 
                 if (fps == "")
                 {
-                    logWindow.MessageCrop(Res("ErrorFramerate"));
+                    logWindow.MessageCrop(Global.Res("ErrorFramerate"));
                     foreach (StreamInfo si in demuxedStreamList.streams)
                     {
                         if (si.streamType == StreamType.Video)
                         {
                             if (si.desc.Contains("24 /1.001"))
                             {
-                                logWindow.MessageCrop(ResFormat("InfoFps", " 23.976"));
+                                logWindow.MessageCrop(Global.ResFormat("InfoFps", " 23.976"));
                                 fps = "23.976";
                                 break;
                             }
                             else if (si.desc.Contains("1080p24 (16:9)"))
                             {
-                                logWindow.MessageCrop(ResFormat("InfoFps", " 24"));
+                                logWindow.MessageCrop(Global.ResFormat("InfoFps", " 24"));
                                 fps = "24";
                                 break;
                             }
@@ -106,14 +106,14 @@ namespace BluRip
                     }
                     if (fps == "")
                     {
-                        logWindow.MessageCrop(Res("ErrorNoFramerate"));
+                        logWindow.MessageCrop(Global.Res("ErrorNoFramerate"));
                         return false;
                     }
                 }
 
                 if (frames == "" || length == "")
                 {
-                    logWindow.MessageCrop(Res("InfoFrames"));
+                    logWindow.MessageCrop(Global.Res("InfoFrames"));
                 }
 
                 CropInfo cropInfo = new CropInfo();
@@ -135,7 +135,7 @@ namespace BluRip
                             it.WaitForExit();
                             if (!it.Successfull)
                             {
-                                logWindow.MessageCrop(Res("ErrorIndex"));
+                                logWindow.MessageCrop(Global.Res("ErrorIndex"));
                                 return false;
                             }
                         }
@@ -159,7 +159,7 @@ namespace BluRip
                             it.WaitForExit();
                             if (!it.Successfull)
                             {
-                                logWindow.MessageCrop(Res("ErrorIndex"));
+                                logWindow.MessageCrop(Global.Res("ErrorIndex"));
                                 return false;
                             }
                         }
@@ -195,13 +195,13 @@ namespace BluRip
                             data += "DGMultiSource(\"" + output + "\")";
                             File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
                         }
-                        logWindow.MessageCrop(Res("InfoStartCrop"));
+                        logWindow.MessageCrop(Global.Res("InfoStartCrop"));
 
                         AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings, ref cropInfo);
                         
                         if (cropInfo.error)
                         {
-                            logWindow.MessageCrop(Res("ErrorException") + " " + cropInfo.errorStr);
+                            logWindow.MessageCrop(Global.Res("ErrorException") + " " + cropInfo.errorStr);
                             return false;
                         }
 
@@ -236,16 +236,16 @@ namespace BluRip
                     }
 
                     logWindow.MessageCrop("");
-                    logWindow.MessageCrop(ResFormat("InfoCropTop", cropInfo.cropTop));
-                    logWindow.MessageCrop(ResFormat("InfoCropBottom", cropInfo.cropBottom));
+                    logWindow.MessageCrop(Global.ResFormat("InfoCropTop", cropInfo.cropTop));
+                    logWindow.MessageCrop(Global.ResFormat("InfoCropBottom", cropInfo.cropBottom));
                     if (cropInfo.border)
                     {
-                        logWindow.MessageCrop(ResFormat("InfoBorderTop", cropInfo.borderTop));
-                        logWindow.MessageCrop(ResFormat("InfoBorderBottom", cropInfo.borderBottom));
+                        logWindow.MessageCrop(Global.ResFormat("InfoBorderTop", cropInfo.borderTop));
+                        logWindow.MessageCrop(Global.ResFormat("InfoBorderBottom", cropInfo.borderBottom));
                     }
                     if (cropInfo.resize)
                     {
-                        logWindow.MessageCrop(ResFormat("InfoResize", cropInfo.resizeX, cropInfo.resizeY));
+                        logWindow.MessageCrop(Global.ResFormat("InfoResize", cropInfo.resizeX, cropInfo.resizeY));
                     }
 
                     string encode = "";
@@ -281,7 +281,7 @@ namespace BluRip
                         }
                         else
                         {
-                            logWindow.MessageCrop(Res("InfoNoBorder"));
+                            logWindow.MessageCrop(Global.Res("InfoNoBorder"));
                         }
                         if (cropInfo.resize)
                         {
@@ -289,7 +289,7 @@ namespace BluRip
                         }
                         else
                         {
-                            logWindow.MessageCrop(Res("InfoNoResize"));
+                            logWindow.MessageCrop(Global.Res("InfoNoResize"));
                         }
                     }
                     
@@ -306,7 +306,7 @@ namespace BluRip
                     File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_encode.avs", encode);
 
                     logWindow.MessageCrop("");
-                    logWindow.MessageCrop(Res("InfoAvsContent"));
+                    logWindow.MessageCrop(Global.Res("InfoAvsContent"));
                     logWindow.MessageCrop("");
                     string[] tmpstr2 = encode.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string s in tmpstr2)
@@ -349,7 +349,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageCrop(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageCrop(Global.Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
@@ -364,26 +364,26 @@ namespace BluRip
             {
                 if (demuxedStreamList.streams.Count == 0)
                 {
-                    logWindow.MessageMain(Res("ErrorNoDemuxedStreams"));
-                    if (!silent) ErrorMsg(Res("ErrorNoDemuxedStreams"));
+                    logWindow.MessageMain(Global.Res("ErrorNoDemuxedStreams"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorNoDemuxedStreams"));
                     return false;
                 }
 
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarCrop"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarCrop"));
                 DisableControls();
 
                 return IndexCrop();
             }
             catch (Exception ex)
             {
-                logWindow.MessageCrop(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageCrop(Global.Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally
             {
                 EnableControls();
 
-                UpdateStatus(Res("StatusBar") + " " + Res("StatusBarReady"));
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
         }
 
@@ -399,8 +399,8 @@ namespace BluRip
                 {
                     if (!File.Exists(settings.ffmsindexPath))
                     {
-                        logWindow.MessageMain(Res("ErrorFfmsindexPath"));
-                        if (!silent) ErrorMsg(Res("ErrorFfmsindexPath"));
+                        logWindow.MessageMain(Global.Res("ErrorFfmsindexPath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorFfmsindexPath"));
                         return false;
                     }
                 }
@@ -408,8 +408,8 @@ namespace BluRip
                 {
                     if (!File.Exists(settings.dgindexnvPath))
                     {
-                        logWindow.MessageMain(Res("ErrorDgindexPath"));
-                        if (!silent) ErrorMsg(Res("ErrorDgindexPath"));
+                        logWindow.MessageMain(Global.Res("ErrorDgindexPath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorDgindexPath"));
                         return false;
                     }
                 }
@@ -431,7 +431,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageCrop(Res("ErrorException") + " " + ex.Message);
+                logWindow.MessageCrop(Global.Res("ErrorException") + " " + ex.Message);
             }
             finally
             {

@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
-                    xmlns:local="clr-namespace:BluRip">
+                    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib">
 
     <!-- Menu -->
     <system:String x:Key="MenuFile">File</system:String>
@@ -61,7 +61,7 @@
     <system:String x:Key="HeaderSubtitleSettings">Subtitle settings</system:String>
     <system:String x:Key="LabelMuxSubtitle">Mux subtitles</system:String>
     <system:String x:Key="LabelCopySubtitle">Copy subtitles</system:String>
-    <local:ObjectCollection x:Key="comboBoxMuxSubtitle">
+    <col:ArrayList x:Key="comboBoxMuxSubtitle">
         <system:String>Do not mux subtitles</system:String>
         <system:String>Mux all subtitles (sub/idx)</system:String>
         <system:String>Mux only forced subtitles (sub/idx)</system:String>
@@ -69,8 +69,8 @@
         <system:String>Mux all subtitles (pgs)</system:String>
         <system:String>Mux only forced subtitles (pgs)</system:String>
         <system:String>Mux only first normal/forced subtitle (pgs)</system:String>
-    </local:ObjectCollection>
-    <local:ObjectCollection x:Key="comboBoxCopySubtitle">
+    </col:ArrayList>
+    <col:ArrayList x:Key="comboBoxCopySubtitle">
         <system:String>Do not copy subtitles</system:String>
         <system:String>Copy all subtitles to 'Subs' folder (sub/idx)</system:String>
         <system:String>Copy all but forced (sub/idx)</system:String>
@@ -78,7 +78,7 @@
         <system:String>Copy all subtitles to 'Subs' folder (pgs)</system:String>
         <system:String>Copy all but forced (pgs)</system:String>
         <system:String>Copy only first normal/forced subtitles (pgs)</system:String>
-    </local:ObjectCollection>
+    </col:ArrayList>
     <system:String x:Key="checkBoxMuxUntouchedSubs">Mux untouched subtitles (PGS)</system:String>
     <system:String x:Key="checkBoxCopyUntouchedSubs">Copy untouched subtitles (PGS)</system:String>
     <system:String x:Key="HeaderExpertSettings">Expert settings</system:String>
@@ -206,10 +206,10 @@
     <system:String x:Key="LabelEncodingProfileSettings2">Parameter for second pass (without --pass --bitrate --stats)</system:String>
     <system:String x:Key="LabelEncodingProfileSizeValue">Size value</system:String>
     <system:String x:Key="LabelEncodingProfileSizeType">Size value type</system:String>
-    <local:ObjectCollection x:Key="comboBoxSizeType">
+    <col:ArrayList x:Key="comboBoxSizeType">
         <system:String>Specify Bitrate [Kbit/s]</system:String>
         <system:String>Specify target size [MB]</system:String>
-    </local:ObjectCollection>
+    </col:ArrayList>
     <system:String x:Key="NewEncodingProfileDesc">New encoding profile</system:String>
     
     <!-- AvisynthProfiles Window -->
@@ -248,7 +248,7 @@
     <system:String x:Key="LabelAutocropBlackValue">Max row sum to count as black</system:String>
     <system:String x:Key="LabelAutocropCropMethod">Crop calculation method</system:String>
     <system:String x:Key="CheckBoxAutocropMinimize">Start AutoCrop window minimized</system:String>
-    <local:ObjectCollection x:Key="comboBoxCropMethod">
+    <col:ArrayList x:Key="comboBoxCropMethod">
         <system:String>Undercrop - Height mod 8</system:String>
         <system:String>Undercrop - Height mod 16</system:String>
         <system:String>Overcrop - Height mod 8</system:String>
@@ -257,7 +257,7 @@
         <system:String>Resize - Height mod 16</system:String>
         <system:String>AddBorder - Height mod 8</system:String>
         <system:String>AddBorder - Height mod 16</system:String>
-    </local:ObjectCollection>
+    </col:ArrayList>
     <system:String x:Key="TabAdvancedStreamselection">Stream selection</system:String>
     <system:String x:Key="CheckBoxUseAutoselect">Use automatic stream selection</system:String>
     <system:String x:Key="CheckBoxIncludeChapters">Select chapters</system:String>

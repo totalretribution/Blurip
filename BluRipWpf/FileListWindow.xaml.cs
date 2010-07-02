@@ -37,14 +37,15 @@ namespace BluRip
         }
 
         public FileListWindow()
-        {
-            InitializeComponent();
+        {            
             try
             {
+                InitializeComponent();
                 listBoxFileList.Items.Clear();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.ErrorMsg(ex);
             }
         }
 
