@@ -30,14 +30,14 @@ namespace BluRip
                 {
                     if (!File.Exists(settings.x264x64Path))
                     {
-                        logWindow.MessageMain("x264 64 bit path not set");
-                        if (!silent) Global.ErrorMsg("x264 64 bit path not set");
+                        logWindow.MessageMain(Global.Res("ErrorX264x64Path"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorX264x64Path"));
                         return false;
                     }
                     if (!File.Exists(settings.avs2yuvPath))
                     {
-                        logWindow.MessageMain("avs2yuv path not set");
-                        if (!silent) Global.ErrorMsg("avs2yuv path not set");
+                        logWindow.MessageMain(Global.Res("ErrorAvs2yuvPath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorAvs2yuvPath"));
                         return false;
                     }
                 }
@@ -45,8 +45,8 @@ namespace BluRip
                 {
                     if (!File.Exists(settings.x264Path))
                     {
-                        logWindow.MessageMain("x264 path not set");
-                        if (!silent) Global.ErrorMsg("x264 path not set");
+                        logWindow.MessageMain(Global.Res("ErrorX264Path"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorX264Path"));
                         return false;
                     }
                 }
@@ -153,16 +153,16 @@ namespace BluRip
 
                 if (vfi == null || vfi.encodeAvs == "")
                 {
-                    logWindow.MessageEncode("Encode avs not set - do index + autocrop first");
-                    if (!silent) Global.ErrorMsg("Encode avs not set - do index + autocrop first");
+                    logWindow.MessageEncode(Global.Res("ErrorEncodeAvsNotSet"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorEncodeAvsNotSet"));
                     return false;
                 }
 
                 int profile = settings.lastProfile;
                 if (profile < 0)
                 {
-                    logWindow.MessageEncode("Encoding profile not set");
-                    if (!silent) Global.ErrorMsg("Encoding profile not set");
+                    logWindow.MessageEncode(Global.Res("ErrorEncodingProfileNotSet"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorEncodingProfileNotSet"));
                     return false;
                 }
 
@@ -180,7 +180,7 @@ namespace BluRip
 
                 if (!et.Successfull)
                 {
-                    logWindow.MessageEncode("Encode failed!");
+                    logWindow.MessageEncode(Global.Res("ErrorEncodeFailed"));
                     return false;
                 }
                 if (settings.encodingSettings[profile].pass2)
@@ -193,7 +193,7 @@ namespace BluRip
                     et.WaitForExit();
                     if (!et.Successfull)
                     {
-                        logWindow.MessageEncode("Encode (2. pass) failed!");
+                        logWindow.MessageEncode(Global.Res("ErrorEncode2passFailed"));
                         return false;
                     }
                 }
@@ -203,7 +203,7 @@ namespace BluRip
             }
             catch (Exception ex)
             {
-                logWindow.MessageEncode("Exception: " + ex.Message);
+                logWindow.MessageEncode(Global.Res("ErrorException") + " " + ex.Message);
                 return false;
             }
             finally

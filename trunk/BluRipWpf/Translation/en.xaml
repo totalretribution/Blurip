@@ -311,6 +311,14 @@
     <system:String x:Key="ErrorChapterFile">Chapter file not found</system:String>
     <system:String x:Key="ErrorVideoFile">Video file not found</system:String>
     <system:String x:Key="ErrorAudioFile">Audio file(s) not found</system:String>
+    <system:String x:Key="ErrorX264Path">Path to x264.exe not set or found.</system:String>
+    <system:String x:Key="ErrorX264x64Path">Path to 64-bit x264.exe not set or found.</system:String>
+    <system:String x:Key="ErrorAvs2yuvPath">Path to avs2yuv.exe not set or found.</system:String>
+    <system:String x:Key="ErrorEncodeAvsNotSet">Encode avs not set - do index + autocrop first</system:String>
+    <system:String x:Key="ErrorEncodingProfileNotSet">Encoding profile not set</system:String>
+    <system:String x:Key="ErrorEncodeFailed">Encode failed!</system:String>
+    <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) failed!</system:String>
+    
     
     <!-- Info msg -->
     <system:String x:Key="InfoManualFps">Using manual fps - override MediaInfo value</system:String>
