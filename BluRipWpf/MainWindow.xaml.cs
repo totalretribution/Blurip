@@ -671,7 +671,7 @@ namespace BluRip
                 buttonAbort.Visibility = Visibility.Visible;
                 queueWindow.DisableControls();
 
-                SetThreadExecutionState(EXECUTION_STATE.ES_SYSTEM_REQUIRED);
+                SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS | EXECUTION_STATE.ES_SYSTEM_REQUIRED);
             }
             catch (Exception)
             {
