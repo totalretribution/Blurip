@@ -65,8 +65,14 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdvancedAudioOptionsWindow.xaml.cs">
+      <DependentUpon>AdvancedAudioOptionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdvancedOptionsWindow.xaml.cs">
       <DependentUpon>AdvancedOptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdvancedVideoOptionsWindow.xaml.cs">
+      <DependentUpon>AdvancedVideoOptionsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Demux.cs" />
     <Compile Include="DemuxedStreamsWindow.xaml.cs">
@@ -112,7 +118,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdvancedAudioOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdvancedOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdvancedVideoOptionsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

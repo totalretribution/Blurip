@@ -1462,6 +1462,81 @@ namespace BluRip
             {
             }
         }
+
+        private void menuEditAdvancedOptions_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxTitle.SelectedIndex > -1 && listBoxStreams.SelectedIndex > -1)
+                {
+                    StreamInfo si = titleList[comboBoxTitle.SelectedIndex].streams[listBoxStreams.SelectedIndex];
+                    if (si.streamType == StreamType.Audio)
+                    {
+                        AdvancedAudioOptions aao = null;
+                        if (si.advancedOptions.GetType() != typeof(AdvancedAudioOptions))
+                        {
+                            aao = new AdvancedAudioOptions();
+                        }
+                        else
+                        {
+                            aao = new AdvancedAudioOptions(si.advancedOptions);
+                        }
+                        AdvancedAudioOptionsWindow aaow = new AdvancedAudioOptionsWindow(aao);
+                        aaow.ShowDialog();
+                        if (aaow.DialogResult == true)
+                        {
+                            int index = listBoxStreams.SelectedIndex;
+                            titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions =
+                                new AdvancedAudioOptions(aaow.advancedAudioOptions);
+                            UpdateStreamList();
+                            listBoxStreams.SelectedIndex = index;
+                        }
+                    }
+                    else if (si.streamType == StreamType.Video)
+                    {
+                        AdvancedVideoOptions avo = null;
+                        if (si.advancedOptions.GetType() != typeof(AdvancedVideoOptions))
+                        {
+                            avo = new AdvancedVideoOptions();
+                        }
+                        else
+                        {
+                            avo = new AdvancedVideoOptions(si.advancedOptions);
+                        }
+                        AdvancedVideoOptionsWindow avow = new AdvancedVideoOptionsWindow(avo);
+                        avow.ShowDialog();
+                        if (avow.DialogResult == true)
+                        {
+                            int index = listBoxStreams.SelectedIndex;
+                            titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions =
+                                new AdvancedVideoOptions(avow.advancedVideoOptions);
+                            UpdateStreamList();
+                            listBoxStreams.SelectedIndex = index;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuDelAdvancedOptions_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxTitle.SelectedIndex > -1 && listBoxStreams.SelectedIndex > -1)
+                {
+                    int index = listBoxStreams.SelectedIndex;
+                    titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions = new AdvancedOptions();
+                    UpdateStreamList();
+                    listBoxStreams.SelectedIndex = index;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 
     public static class Global

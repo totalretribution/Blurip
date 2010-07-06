@@ -39,6 +39,8 @@
     <system:String x:Key="LabelTitleDesc">Title selection</system:String>
     <system:String x:Key="LabelStreamListDesc">Available streams</system:String>
     <system:String x:Key="ButtonAbort">Abort</system:String>
+    <system:String x:Key="ContextMenuEditAdvancedOptions">Edit advanced options</system:String>
+    <system:String x:Key="ContextMenuDelAdvancedOptions">Delete advanced options</system:String>
 
     <!-- Tab Output -->
     <system:String x:Key="TabOutput">Output</system:String>
@@ -285,6 +287,33 @@
     <system:String x:Key="CheckBoxConvertDTSBitrate">Convert DTS bitrate</system:String>
     <system:String x:Key="CheckBoxConvertAC3Bitrate">Convert AC3 bitrate</system:String>
 
+    <!-- AdvancedAudioOptions Window -->
+    <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Edit advanced audio options</system:String>
+    <system:String x:Key="GroupBoxRequired">Required settings</system:String>
+    <system:String x:Key="GroupBoxOptional">Optional settings</system:String>
+    <system:String x:Key="LabelExtension">Audio extension (e.g. .ac3)</system:String>
+    <system:String x:Key="LabelChooseExtension">Choose from</system:String>
+    <system:String x:Key="LabelBitrate">Bitrate (e.g. 768)</system:String>
+    <system:String x:Key="LabelChooseBitrate">Choose from</system:String>
+    <system:String x:Key="LabelExtraParameter">Extra parameter (e.g. -core)</system:String>
+    <system:String x:Key="CheckBoxAddAc3Track">Add additional AC3 track</system:String>
+    <col:ArrayList x:Key="comboBoxExtension">
+        <system:String>.ac3</system:String>
+        <system:String>.dts</system:String>
+        <system:String>.wav</system:String>
+        <system:String>.flac</system:String>
+        <system:String>.thd</system:String>
+        <system:String>.dtshd</system:String>
+        <system:String>.eac3</system:String>
+    </col:ArrayList>
+    <col:ArrayList x:Key="comboBoxBitrate">
+        <system:String>192</system:String>
+        <system:String>448</system:String>
+        <system:String>640</system:String>
+        <system:String>768</system:String>
+        <system:String>1536</system:String>
+    </col:ArrayList>
+    
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>
     <system:String x:Key="ErrorException">Exception:</system:String>
