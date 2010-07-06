@@ -1,0 +1,71 @@
+﻿<Window x:Class="BluRip.AdvancedVideoOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AdvancedVideoOptionsWindow" Height="611" Width="611" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Button Content="{DynamicResource ButtonOk}" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" Width="75" Height="23" VerticalAlignment="Bottom" IsDefault="True" Click="buttonOk_Click" />
+        <Button Content="{DynamicResource ButtonCancel}" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" Width="75" Height="23" VerticalAlignment="Bottom" IsCancel="True" />
+        <CheckBox Content="CheckBox" Height="16" HorizontalAlignment="Left" Margin="12,12,0,0" Name="checkBox1" VerticalAlignment="Top" />
+        <CheckBox Content="CheckBox" Height="16" HorizontalAlignment="Left" Margin="289,12,0,0" Name="checkBox2" VerticalAlignment="Top" />
+        <GroupBox Header="groupBox1" Height="196" HorizontalAlignment="Left" Margin="12,34,0,0" Name="groupBox1" VerticalAlignment="Top" Width="265">
+            <Grid>
+                <Label Content="Label" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label3" VerticalAlignment="Top" />
+                <Label Content="Label" HorizontalAlignment="Left" Margin="140,6,0,0" Name="label4" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBox3" VerticalAlignment="Top" Width="128" />
+                <Label Content="Label" HorizontalAlignment="Left" Margin="6,61,0,0" Name="label5" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,87,0,0" Name="textBox4" VerticalAlignment="Top" Width="241" />
+                <Label Content="Label" HorizontalAlignment="Left" Margin="6,116,0,0" Name="label6" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,142,0,0" Name="textBox5" VerticalAlignment="Top" Width="241" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="140,32,0,0" Name="comboBox1" VerticalAlignment="Top" Width="107" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="groupBox2" Height="100" HorizontalAlignment="Left" Margin="283,34,0,0" Name="groupBox2" VerticalAlignment="Top" Width="200">
+            <Grid>
+                <Label Content="Label" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label1" VerticalAlignment="Top" />
+                <Label Content="Label" HorizontalAlignment="Left" Margin="102,6,0,0" Name="label2" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBox1" VerticalAlignment="Top" Width="81" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="102,32,0,0" Name="textBox2" VerticalAlignment="Top" Width="80" />
+            </Grid>
+        </GroupBox>
+        <CheckBox Content="CheckBox" Height="16" HorizontalAlignment="Left" Margin="12,236,0,0" Name="checkBox3" VerticalAlignment="Top" />
+        <GroupBox Header="groupBox3" Height="273" HorizontalAlignment="Left" Margin="12,258,0,0" Name="groupBox3" VerticalAlignment="Top" Width="565">
+            <Grid>
+                <CheckBox Content="CheckBox" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBox4" VerticalAlignment="Top" />
+                <CheckBox Content="CheckBox" Height="16" HorizontalAlignment="Left" Margin="271,6,0,0" Name="checkBox5" VerticalAlignment="Top" />
+                <GroupBox Header="groupBox4" Height="100" HorizontalAlignment="Left" Margin="6,28,0,0" Name="groupBox4" VerticalAlignment="Top" Width="253">
+                    <Grid>
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label7" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBox6" VerticalAlignment="Top" Width="44" />
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="63,6,0,0" Name="label8" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="63,32,0,0" Name="textBox7" VerticalAlignment="Top" Width="44" />
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="116,6,0,0" Name="label9" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="116,32,0,0" Name="textBox8" VerticalAlignment="Top" Width="44" />
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="166,6,0,0" Name="label10" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="166,32,0,0" Name="textBox9" VerticalAlignment="Top" Width="44" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="groupBox5" Height="100" HorizontalAlignment="Left" Margin="265,28,0,0" Name="groupBox5" VerticalAlignment="Top" Width="282">
+                    <Grid>
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label11" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBox10" VerticalAlignment="Top" Width="44" />
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="55,6,0,0" Name="label12" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="55,32,0,0" Name="textBox11" VerticalAlignment="Top" Width="44" />
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="102,6,0,0" Name="label13" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="102,32,0,0" Name="textBox12" VerticalAlignment="Top" Width="44" />
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="150,6,0,0" Name="label14" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="150,32,0,0" Name="textBox13" VerticalAlignment="Top" Width="44" />
+                    </Grid>
+                </GroupBox>
+                <CheckBox Content="CheckBox" Height="16" HorizontalAlignment="Left" Margin="6,134,0,0" Name="checkBox6" VerticalAlignment="Top" />
+                <GroupBox Header="groupBox6" Height="88" HorizontalAlignment="Left" Margin="6,156,0,0" Name="groupBox6" VerticalAlignment="Top" Width="253">
+                    <Grid>
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label15" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBox14" VerticalAlignment="Top" Width="44" />
+                        <Label Content="Label" HorizontalAlignment="Left" Margin="55,6,0,0" Name="label16" VerticalAlignment="Top" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="55,32,0,0" Name="textBox15" VerticalAlignment="Top" Width="44" />
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
