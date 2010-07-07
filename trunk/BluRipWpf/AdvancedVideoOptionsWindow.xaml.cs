@@ -26,6 +26,14 @@ namespace BluRip
             {
                 InitializeComponent();
                 this.avo = new AdvancedVideoOptions(avo);
+
+                checkBoxManualFramerate.IsChecked = avo.disableFps;
+                textBoxFramerate.Text = avo.fps;
+                textBoxLength.Text = avo.length;
+                textBoxFrameCount.Text = avo.frames;
+                checkBoxManualFramerate_Checked(null, null);
+
+
             }
             catch (Exception ex)
             {
@@ -41,6 +49,72 @@ namespace BluRip
         private void buttonOk_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void checkBoxManualFramerate_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.disableFps = (bool)checkBoxManualFramerate.IsChecked;
+                if (avo.disableFps)
+                {
+                    groupBoxFramerate.IsEnabled = true;
+                }
+                else
+                {
+                    groupBoxFramerate.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxFramerate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.fps = textBoxFramerate.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxLength_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.length = textBoxLength.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxFrameCount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.frames = textBoxFrameCount.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxFramerate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxFramerate.SelectedIndex > -1)
+                {
+                    textBoxFramerate.Text = (string)comboBoxFramerate.SelectedItem;
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

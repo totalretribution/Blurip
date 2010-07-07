@@ -136,6 +136,8 @@ namespace BluRip
                 this.fps = ((VideoFileInfo)orig).fps;
                 this.resX = ((VideoFileInfo)orig).resX;
                 this.resY = ((VideoFileInfo)orig).resY;
+                this.length = ((VideoFileInfo)orig).length;
+                this.frames = ((VideoFileInfo)orig).frames;
             }
             catch (Exception)
             {
@@ -343,6 +345,8 @@ namespace BluRip
             this.inputresY = ((AdvancedVideoOptions)orig).inputresY;
             this.noMkvDemux = ((AdvancedVideoOptions)orig).noMkvDemux;
             this.videoExtension = ((AdvancedVideoOptions)orig).videoExtension;
+            this.manualAspectRatio = ((AdvancedVideoOptions)orig).manualAspectRatio;
+            this.aspectRatio = ((AdvancedVideoOptions)orig).aspectRatio;
         }
 
         public bool disableFps = false;
@@ -369,5 +373,7 @@ namespace BluRip
         public int inputresY = 1080;
         public bool noMkvDemux = false;
         public string videoExtension = "";
+        public bool manualAspectRatio = false;
+        public string aspectRatio = "";
     }
 }

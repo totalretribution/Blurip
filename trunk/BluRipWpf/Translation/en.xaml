@@ -313,7 +313,46 @@
         <system:String>768</system:String>
         <system:String>1536</system:String>
     </col:ArrayList>
-    
+
+    <!-- AdvancedVideoOptions Window -->
+    <system:String x:Key="CaptionAdvancedVideoOptionsWindow">Edit advanced video options</system:String>
+    <system:String x:Key="CheckBoxManualFramerate">Set framerate manually</system:String>
+    <system:String x:Key="GroupBoxFramerate">Framerate</system:String>
+    <system:String x:Key="LabelFramerate">Framerate</system:String>
+    <system:String x:Key="LabelChooseFramerate">Choose from</system:String>
+    <system:String x:Key="LabelLength">Length (in ms)</system:String>
+    <system:String x:Key="LabelFramecount">Frame count</system:String>
+    <col:ArrayList x:Key="comboBoxFramerate">
+        <system:String>23.976</system:String>
+        <system:String>25.0</system:String>
+        <system:String>29.967</system:String>
+    </col:ArrayList>
+    <system:String x:Key="CheckBoxManualInputResolution">Set input resolution manually</system:String>
+    <system:String x:Key="GroupBoxInputResolution">Input resolution</system:String>
+    <system:String x:Key="LabelInputResX">X (width)</system:String>
+    <system:String x:Key="LabelInputResY">Y (heigth)</system:String>
+    <system:String x:Key="CheckBoxDisableAutocrop">Disable AutoCrop</system:String>
+    <system:String x:Key="GroupBoxAutocrop">Manual crop settings</system:String>    
+    <system:String x:Key="CheckBoxManualCrop">Set crop values manually</system:String>
+    <system:String x:Key="GroupBoxManualCrop">Crop</system:String>
+    <system:String x:Key="LabelCropTop">Top</system:String>
+    <system:String x:Key="LabelCropBottom">Bottom</system:String>
+    <system:String x:Key="LabelCropLeft">Left</system:String>
+    <system:String x:Key="LabelCropRight">Right</system:String>
+    <system:String x:Key="CheckBoxManualBorders">Set add borders values manually</system:String>
+    <system:String x:Key="GroupBoxManualBorders">Add borders</system:String>
+    <system:String x:Key="LabelBorderTop">Top</system:String>
+    <system:String x:Key="LabelBorderBottom">Bottom</system:String>
+    <system:String x:Key="LabelBorderLeft">Left</system:String>
+    <system:String x:Key="LabelBorderRight">Right</system:String>
+    <system:String x:Key="CheckBoxManualResize">Set resize values manually</system:String>
+    <system:String x:Key="GroupBoxManualResize">Resize</system:String>
+    <system:String x:Key="LabelResizeX">X (width)</system:String>
+    <system:String x:Key="LabelResizeY">Y (heigth)</system:String>
+    <system:String x:Key="CheckBoxManualAspectRatio">Set mkvmerge aspect ratio</system:String>
+    <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
+    <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
+
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>
     <system:String x:Key="ErrorException">Exception:</system:String>
