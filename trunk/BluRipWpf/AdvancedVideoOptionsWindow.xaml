@@ -6,7 +6,7 @@
         <Button Content="{DynamicResource ButtonOk}" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" Width="75" Height="23" VerticalAlignment="Bottom" IsDefault="True" Click="buttonOk_Click" />
         <Button Content="{DynamicResource ButtonCancel}" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" Width="75" Height="23" VerticalAlignment="Bottom" IsCancel="True" />
         <CheckBox Content="{DynamicResource CheckBoxManualFramerate}" Height="16" HorizontalAlignment="Left" Margin="12,12,0,0" Name="checkBoxManualFramerate" VerticalAlignment="Top" Checked="checkBoxManualFramerate_Checked" Unchecked="checkBoxManualFramerate_Checked" />
-        <CheckBox Content="{DynamicResource CheckBoxManualInputResolution}" Height="16" HorizontalAlignment="Left" Margin="289,12,0,0" Name="checkBoxManualInputResolution" VerticalAlignment="Top" />
+        <CheckBox Content="{DynamicResource CheckBoxManualInputResolution}" Height="16" HorizontalAlignment="Left" Margin="289,12,0,0" Name="checkBoxManualInputResolution" VerticalAlignment="Top" Checked="checkBoxManualInputResolution_Checked" Unchecked="checkBoxManualInputResolution_Checked" />
         <GroupBox Header="{DynamicResource GroupBoxFramerate}" Height="196" HorizontalAlignment="Left" Margin="12,34,0,0" Name="groupBoxFramerate" VerticalAlignment="Top" Width="265">
             <Grid>
                 <Label Content="{DynamicResource LabelFramerate}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelFramerate" VerticalAlignment="Top" />
@@ -23,55 +23,55 @@
             <Grid>
                 <Label Content="{DynamicResource LabelInputResX}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelInputResX" VerticalAlignment="Top" />
                 <Label Content="{DynamicResource LabelInputResY}" Margin="102,6,0,0" Name="labelInputResY" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxInputResX" VerticalAlignment="Top" Width="81" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="102,32,0,0" Name="textBoxInputResY" VerticalAlignment="Top" Width="80" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxInputResX" VerticalAlignment="Top" Width="81" TextChanged="textBoxInputResX_TextChanged" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="102,32,0,0" Name="textBoxInputResY" VerticalAlignment="Top" Width="80" TextChanged="textBoxInputResY_TextChanged" />
             </Grid>
         </GroupBox>
-        <CheckBox Content="{DynamicResource CheckBoxDisableAutocrop}" Height="16" HorizontalAlignment="Left" Margin="12,236,0,0" Name="checkBoxDisableAutocrop" VerticalAlignment="Top" />
+        <CheckBox Content="{DynamicResource CheckBoxDisableAutocrop}" Height="16" HorizontalAlignment="Left" Margin="12,236,0,0" Name="checkBoxDisableAutocrop" VerticalAlignment="Top" Checked="checkBoxDisableAutocrop_Checked" Unchecked="checkBoxDisableAutocrop_Checked" />
         <GroupBox Header="{DynamicResource GroupBoxAutocrop}" Height="273" HorizontalAlignment="Left" Margin="12,258,0,0" Name="groupBoxAutocrop" VerticalAlignment="Top" Width="565">
             <Grid>
-                <CheckBox Content="{DynamicResource CheckBoxManualCrop}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxManualCrop" VerticalAlignment="Top" />
-                <CheckBox Content="{DynamicResource CheckBoxManualBorders}" Height="16" HorizontalAlignment="Left" Margin="271,6,0,0" Name="checkBoxManualBorders" VerticalAlignment="Top" />
+                <CheckBox Content="{DynamicResource CheckBoxManualCrop}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxManualCrop" VerticalAlignment="Top" Checked="checkBoxManualCrop_Checked" Unchecked="checkBoxManualCrop_Checked" />
+                <CheckBox Content="{DynamicResource CheckBoxManualBorders}" Height="16" HorizontalAlignment="Left" Margin="271,6,0,0" Name="checkBoxManualBorders" VerticalAlignment="Top" Checked="checkBoxManualBorders_Checked" Unchecked="checkBoxManualBorders_Checked" />
                 <GroupBox Header="{DynamicResource GroupBoxManualCrop}" Height="100" HorizontalAlignment="Left" Margin="6,28,0,0" Name="groupBoxManualCrop" VerticalAlignment="Top" Width="253">
                     <Grid>
                         <Label Content="{DynamicResource LabelCropTop}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelCropTop" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxCropTop" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxCropTop" VerticalAlignment="Top" Width="44" TextChanged="textBoxCropTop_TextChanged" />
                         <Label Content="{DynamicResource LabelCropBottom}" HorizontalAlignment="Left" Margin="63,6,0,0" Name="labelCropBottom" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="63,32,0,0" Name="textBoxCropBottom" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="63,32,0,0" Name="textBoxCropBottom" VerticalAlignment="Top" Width="44" TextChanged="textBoxCropBottom_TextChanged" />
                         <Label Content="{DynamicResource LabelCropLeft}" HorizontalAlignment="Left" Margin="116,6,0,0" Name="labelCropLeft" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="116,32,0,0" Name="textBoxCropLeft" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="116,32,0,0" Name="textBoxCropLeft" VerticalAlignment="Top" Width="44" TextChanged="textBoxCropLeft_TextChanged" />
                         <Label Content="{DynamicResource LabelCropRight}" HorizontalAlignment="Left" Margin="166,6,0,0" Name="labelCropRight" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="166,32,0,0" Name="textBoxCropRight" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="166,32,0,0" Name="textBoxCropRight" VerticalAlignment="Top" Width="44" TextChanged="textBoxCropRight_TextChanged" />
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="{DynamicResource GroupBoxManualBorders}" Height="100" HorizontalAlignment="Left" Margin="265,28,0,0" Name="groupBoxManualBorders" VerticalAlignment="Top" Width="282">
                     <Grid>
                         <Label Content="{DynamicResource LabelBorderTop}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelBorderTop" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxBorderTop" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxBorderTop" VerticalAlignment="Top" Width="44" TextChanged="textBoxBorderTop_TextChanged" />
                         <Label Content="{DynamicResource LabelBorderBottom}" HorizontalAlignment="Left" Margin="55,6,0,0" Name="labelBorderBottom" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="55,32,0,0" Name="textBoxBorderBottom" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="55,32,0,0" Name="textBoxBorderBottom" VerticalAlignment="Top" Width="44" TextChanged="textBoxBorderBottom_TextChanged" />
                         <Label Content="{DynamicResource LabelBorderLeft}" HorizontalAlignment="Left" Margin="102,6,0,0" Name="labelBorderLeft" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="102,32,0,0" Name="textBoxBorderLeft" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="102,32,0,0" Name="textBoxBorderLeft" VerticalAlignment="Top" Width="44" TextChanged="textBoxBorderLeft_TextChanged" />
                         <Label Content="{DynamicResource LabelBorderRight}" HorizontalAlignment="Left" Margin="150,6,0,0" Name="labelBorderRight" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="150,32,0,0" Name="textBoxBorderRight" VerticalAlignment="Top" Width="44" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="150,32,0,0" Name="textBoxBorderRight" VerticalAlignment="Top" Width="44" TextChanged="textBoxBorderRight_TextChanged" />
                     </Grid>
                 </GroupBox>
-                <CheckBox Content="{DynamicResource CheckBoxManualResize}" Height="16" HorizontalAlignment="Left" Margin="6,134,0,0" Name="checkBoxManualResize" VerticalAlignment="Top" />
+                <CheckBox Content="{DynamicResource CheckBoxManualResize}" Height="16" HorizontalAlignment="Left" Margin="6,134,0,0" Name="checkBoxManualResize" VerticalAlignment="Top" Checked="checkBoxManualResize_Checked" Unchecked="checkBoxManualResize_Checked" />
                 <GroupBox Header="{DynamicResource GroupBoxManualResize}" Height="88" HorizontalAlignment="Left" Margin="6,156,0,0" Name="groupBoxManualResize" VerticalAlignment="Top" Width="253">
                     <Grid>
                         <Label Content="{DynamicResource LabelResizeX}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelResizeX" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxResizeX" VerticalAlignment="Top" Width="86" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxResizeX" VerticalAlignment="Top" Width="86" TextChanged="textBoxResizeX_TextChanged" />
                         <Label Content="{DynamicResource LabelResizeY}" HorizontalAlignment="Left" Margin="104,6,0,0" Name="labelResizeY" VerticalAlignment="Top" />
-                        <TextBox Height="23" HorizontalAlignment="Left" Margin="104,32,0,0" Name="textBoxResizeY" VerticalAlignment="Top" Width="82" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="104,32,0,0" Name="textBoxResizeY" VerticalAlignment="Top" Width="82" TextChanged="textBoxResizeY_TextChanged" />
                     </Grid>
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <CheckBox Content="{DynamicResource CheckBoxManualAspectRatio}" Height="16" HorizontalAlignment="Left" Margin="289,138,0,0" Name="checkBoxManualAspectRatio" VerticalAlignment="Top" />
+        <CheckBox Content="{DynamicResource CheckBoxManualAspectRatio}" Height="16" HorizontalAlignment="Left" Margin="289,138,0,0" Name="checkBoxManualAspectRatio" VerticalAlignment="Top" Checked="checkBoxManualAspectRatio_Checked" Unchecked="checkBoxManualAspectRatio_Checked" />
         <GroupBox Header="{DynamicResource GroupBoxAspectRatio}" Height="88" HorizontalAlignment="Left" Margin="283,158,0,0" Name="groupBoxAspectRatio" VerticalAlignment="Top" Width="282">
             <Grid>
                 <Label Content="{DynamicResource LabelAspectRatio}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelAspectRatio" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxAspectRatio" VerticalAlignment="Top" Width="93" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="textBoxAspectRatio" VerticalAlignment="Top" Width="93" TextChanged="textBoxAspectRatio_TextChanged" />
             </Grid>
         </GroupBox>
     </Grid>

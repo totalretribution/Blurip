@@ -150,6 +150,7 @@ namespace BluRip
             this.defaultAudio = orig.defaultAudio;
             this.defaultSubtitle = orig.defaultSubtitle;
             this.defaultSubtitleForced = orig.defaultSubtitleForced;
+            this.defaultForcedFlag = orig.defaultForcedFlag;
             this.lastProfile = orig.lastProfile;
             this.dtsHdCore = orig.dtsHdCore;
             this.untouchedVideo = orig.untouchedVideo;
@@ -356,6 +357,7 @@ namespace BluRip
         public bool defaultAudio = true;
         public bool defaultSubtitle = true;
         public bool defaultSubtitleForced = true;
+        public bool defaultForcedFlag = true;
         public int lastProfile = 0;
         public bool deleteAfterEncode = false;
         public bool dtsHdCore = true;        

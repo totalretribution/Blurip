@@ -24,6 +24,9 @@ using System.Xml.Serialization;
 
 namespace BluRip
 {
+    [XmlInclude(typeof(AdvancedOptions))]
+    [XmlInclude(typeof(AdvancedVideoOptions))]
+    [XmlInclude(typeof(AdvancedAudioOptions))]
     [XmlInclude(typeof(ExtraFileInfo))]
     [XmlInclude(typeof(VideoFileInfo))]
     [XmlInclude(typeof(SubtitleFileInfo))]
@@ -328,8 +331,8 @@ namespace BluRip
 
             this.disableAutocrop = ((AdvancedVideoOptions)orig).disableAutocrop;
             this.manualResize = ((AdvancedVideoOptions)orig).manualResize;
-            this.sizeX = ((AdvancedVideoOptions)orig).sizeX;
-            this.sizeY = ((AdvancedVideoOptions)orig).sizeY;
+            this.resizeX = ((AdvancedVideoOptions)orig).resizeX;
+            this.resizeY = ((AdvancedVideoOptions)orig).resizeY;
             this.manualBorders = ((AdvancedVideoOptions)orig).manualBorders;
             this.borderBottom = ((AdvancedVideoOptions)orig).borderBottom;
             this.borderLeft = ((AdvancedVideoOptions)orig).borderLeft;
@@ -342,7 +345,7 @@ namespace BluRip
             this.cropTop = ((AdvancedVideoOptions)orig).cropTop;
             this.manualInputRes = ((AdvancedVideoOptions)orig).manualInputRes;
             this.inputResX = ((AdvancedVideoOptions)orig).inputResX;
-            this.inputresY = ((AdvancedVideoOptions)orig).inputresY;
+            this.inputResY = ((AdvancedVideoOptions)orig).inputResY;
             this.noMkvDemux = ((AdvancedVideoOptions)orig).noMkvDemux;
             this.videoExtension = ((AdvancedVideoOptions)orig).videoExtension;
             this.manualAspectRatio = ((AdvancedVideoOptions)orig).manualAspectRatio;
@@ -356,8 +359,8 @@ namespace BluRip
 
         public bool disableAutocrop = false;
         public bool manualResize = false;
-        public int sizeX = 0;
-        public int sizeY = 0;
+        public int resizeX = 0;
+        public int resizeY = 0;
         public bool manualBorders = false;
         public int borderLeft = 0;
         public int borderRight = 0;
@@ -370,7 +373,7 @@ namespace BluRip
         public int cropBottom = 0;
         public bool manualInputRes = false;
         public int inputResX = 1920;
-        public int inputresY = 1080;
+        public int inputResY = 1080;
         public bool noMkvDemux = false;
         public string videoExtension = "";
         public bool manualAspectRatio = false;

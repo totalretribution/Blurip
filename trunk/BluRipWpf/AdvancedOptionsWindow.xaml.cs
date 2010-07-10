@@ -43,6 +43,10 @@ namespace BluRip
                 checkBoxDefaultAudioTrack.IsChecked = settings.defaultAudio;
                 checkBoxDefaultSubtitleTrack.IsChecked = settings.defaultSubtitle;
                 checkBoxDefaultSubtitleForced.IsChecked = settings.defaultSubtitleForced;
+                checkBoxForcedSubtitleFlag.IsChecked = settings.defaultForcedFlag;
+
+                checkBoxDefaultSubtitleForced_Checked(null, null);
+                checkBoxDefaultSubtitleTrack_Checked(null, null);
 
                 comboBoxProcessPriority.Items.Clear();
                 foreach (string s in Enum.GetNames(typeof(ProcessPriorityClass)))
@@ -286,6 +290,15 @@ namespace BluRip
             try
             {
                 settings.defaultSubtitle = (bool)checkBoxDefaultSubtitleTrack.IsChecked;
+                if (settings.defaultSubtitle)
+                {
+                    checkBoxDefaultSubtitleForced.IsEnabled = true;
+                }
+                else
+                {
+                    checkBoxDefaultSubtitleForced.IsChecked = false;
+                    checkBoxDefaultSubtitleForced.IsEnabled = false;
+                }                
             }
             catch (Exception)
             {
@@ -297,6 +310,15 @@ namespace BluRip
             try
             {
                 settings.defaultSubtitleForced = (bool)checkBoxDefaultSubtitleForced.IsChecked;
+                if (settings.defaultSubtitleForced)
+                {
+                    checkBoxForcedSubtitleFlag.IsEnabled = true;
+                }
+                else
+                {
+                    checkBoxForcedSubtitleFlag.IsChecked = false;
+                    checkBoxForcedSubtitleFlag.IsEnabled = false;
+                }
             }
             catch (Exception)
             {
@@ -561,6 +583,17 @@ namespace BluRip
                 {
                     settings.downmixAc3Index = comboBoxAC3Bitrate.SelectedIndex;
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxForcedSubtitleFLag_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.defaultForcedFlag = (bool)checkBoxForcedSubtitleFlag.IsEnabled;
             }
             catch (Exception)
             {

@@ -267,7 +267,8 @@
     <system:String x:Key="CheckBoxIncludeSubtitles">Select subtitles</system:String>
     <system:String x:Key="CheckBoxDefaultAudioTrack">Set first audio track with first prefered language as default track</system:String>
     <system:String x:Key="CheckBoxDefaultSubtitleTrack">Set first subtitle track with first prefered language as default track</system:String>
-    <system:String x:Key="CheckBoxDefaultSubtitleForced">Use forced subtitle track if available</system:String>
+    <system:String x:Key="CheckBoxDefaultSubtitleForced">Set first forced sub track as default (if available)</system:String>
+    <system:String x:Key="CheckBoxForcedSubtitleFlag">Set mkvmerge forced flag for first forced sub track</system:String>
     <system:String x:Key="LabelPreferredAudioLanguages">Preferred audio languages</system:String>
     <system:String x:Key="LabelPreferredAudioLanguagesDesc">Double click to edit</system:String>
     <system:String x:Key="ButtonPreferredAudioLanguagesUp">Move up</system:String>
