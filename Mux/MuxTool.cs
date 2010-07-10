@@ -29,6 +29,7 @@ namespace BluRip
     {
         private UserSettings settings = null;
         private TitleInfo titleInfo = null;
+        private AdvancedVideoOptions avo = null;
 
         public MuxTool(UserSettings settings, TitleInfo titleInfo)
             : base()
@@ -53,10 +54,18 @@ namespace BluRip
                     }
                     else if (si.streamType == StreamType.Video)
                     {
+                        if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions))
+                        {
+                            avo = new AdvancedVideoOptions(si.advancedOptions);
+                        }
+                        if (avo != null && avo.manualAspectRatio)
+                        {
+                            this.Parameter += "--aspect-ratio 0:" + avo.aspectRatio + " ";
+                        }
                         if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                         {
                             this.Parameter += "\"" + ((VideoFileInfo)si.extraFileInfo).encodedFile + "\" ";
-                        }
+                        }                        
                     }
                 }
                 // audio
@@ -89,7 +98,7 @@ namespace BluRip
                             this.Parameter += "\"" + aao.additionalFilename + "\" ";
                         }
                     }
-                }
+                }                
 
                 List<int> subsCount = new List<int>();
                 List<int> forcedSubsCount = new List<int>();
@@ -226,6 +235,10 @@ namespace BluRip
                                                         if (sfi.forcedIdx != "")
                                                         {
                                                             this.Parameter += "--default-track 0 ";
+                                                            if (settings.defaultForcedFlag)
+                                                            {
+                                                                this.Parameter += "--forced-track 0 ";
+                                                            }
                                                             defaultSet = true;
                                                         }
                                                     }
@@ -234,6 +247,10 @@ namespace BluRip
                                                         if (sfi.forcedSup != "")
                                                         {
                                                             this.Parameter += "--default-track 0 ";
+                                                            if (settings.defaultForcedFlag)
+                                                            {
+                                                                this.Parameter += "--forced-track 0 ";
+                                                            }
                                                             defaultSet = true;
                                                         }
                                                     }

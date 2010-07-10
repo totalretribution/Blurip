@@ -220,8 +220,8 @@ namespace BluRip
                         cropInfo.borderBottom = avo.borderBottom;
                         cropInfo.borderTop = avo.borderTop;
                         cropInfo.resize = avo.manualResize;
-                        cropInfo.resizeX = avo.sizeX;
-                        cropInfo.resizeY = avo.sizeY;
+                        cropInfo.resizeX = avo.resizeX;
+                        cropInfo.resizeY = avo.resizeY;
                         cropInfo.error = false;
                         if (avo.manualCrop)
                         {

@@ -46,6 +46,7 @@
                     <Button Content="{DynamicResource ButtonPreferredSubLanguagesDown}" Height="23" HorizontalAlignment="Left" Margin="550,181,0,0" Name="buttonPreferredSubLanguagesDown" VerticalAlignment="Top" Width="111" Click="buttonPreferredSubLanguagesDown_Click" />
                     <Button Content="{DynamicResource ButtonPreferredSubLanguagesDel}" Height="23" HorizontalAlignment="Left" Margin="550,210,0,0" Name="buttonPreferredSubLanguagesDel" VerticalAlignment="Top" Width="111" Click="buttonPreferredSubLanguagesDel_Click" />
                     <Button Content="{DynamicResource ButtonPreferredSubLanguagesAdd}" Height="23" HorizontalAlignment="Left" Margin="550,0,0,32" Name="buttonPreferredSubLanguagesAdd" VerticalAlignment="Bottom" Width="111" Click="buttonPreferredSubLanguagesAdd_Click" />
+                    <CheckBox Content="{DynamicResource CheckBoxForcedSubtitleFlag}" Height="16" HorizontalAlignment="Left" Margin="324,72,0,0" Name="checkBoxForcedSubtitleFlag" VerticalAlignment="Top" Checked="checkBoxForcedSubtitleFLag_Checked" />
                 </Grid>
             </TabItem>
             <TabItem Header="Video" Name="tabItemVideo">

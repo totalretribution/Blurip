@@ -56,8 +56,8 @@ namespace BluRip
                 textBoxCropRight.Text = ((AdvancedVideoOptions)ao).cropRight.ToString();
                 textBoxCropTop.Text = ((AdvancedVideoOptions)ao).cropTop.ToString();
 
-                textBoxSizeX.Text = ((AdvancedVideoOptions)ao).sizeX.ToString();
-                textBoxSizeY.Text = ((AdvancedVideoOptions)ao).sizeY.ToString();
+                textBoxSizeX.Text = ((AdvancedVideoOptions)ao).resizeX.ToString();
+                textBoxSizeY.Text = ((AdvancedVideoOptions)ao).resizeY.ToString();
 
                 textBoxBorderBottom.Text = ((AdvancedVideoOptions)ao).borderBottom.ToString();
                 textBoxBorderLeft.Text = ((AdvancedVideoOptions)ao).borderLeft.ToString();
@@ -66,7 +66,7 @@ namespace BluRip
 
                 checkBoxManualInputRes.Checked = ((AdvancedVideoOptions)ao).manualInputRes;
                 textBoxInputResX.Text = ((AdvancedVideoOptions)ao).inputResX.ToString();
-                textBoxInputResY.Text = ((AdvancedVideoOptions)ao).inputresY.ToString();
+                textBoxInputResY.Text = ((AdvancedVideoOptions)ao).inputResY.ToString();
 
                 checkBoxnoMkvDemux.Checked = ((AdvancedVideoOptions)ao).noMkvDemux;
                 textBoxVideoExtension.Text = ((AdvancedVideoOptions)ao).videoExtension;
@@ -261,7 +261,7 @@ namespace BluRip
         {
             try
             {
-                ((AdvancedVideoOptions)ao).sizeX = Convert.ToInt32(textBoxSizeX.Text);
+                ((AdvancedVideoOptions)ao).resizeX = Convert.ToInt32(textBoxSizeX.Text);
             }
             catch (Exception)
             {
@@ -272,7 +272,7 @@ namespace BluRip
         {
             try
             {
-                ((AdvancedVideoOptions)ao).sizeY = Convert.ToInt32(textBoxSizeY.Text);
+                ((AdvancedVideoOptions)ao).resizeY = Convert.ToInt32(textBoxSizeY.Text);
             }
             catch (Exception)
             {
@@ -321,7 +321,7 @@ namespace BluRip
         {
             try
             {
-                ((AdvancedVideoOptions)ao).inputresY = Convert.ToInt32(textBoxInputResY.Text);
+                ((AdvancedVideoOptions)ao).inputResY = Convert.ToInt32(textBoxInputResY.Text);
             }
             catch (Exception)
             {

@@ -33,7 +33,36 @@ namespace BluRip
                 textBoxFrameCount.Text = avo.frames;
                 checkBoxManualFramerate_Checked(null, null);
 
+                checkBoxManualInputResolution.IsChecked = avo.manualInputRes;
+                textBoxInputResX.Text = avo.inputResX.ToString();
+                textBoxInputResY.Text = avo.inputResY.ToString();
+                checkBoxManualInputResolution_Checked(null, null);
 
+                checkBoxManualAspectRatio.IsChecked = avo.manualAspectRatio;
+                textBoxAspectRatio.Text = avo.aspectRatio;
+                checkBoxManualAspectRatio_Checked(null, null);
+
+                checkBoxDisableAutocrop.IsChecked = avo.disableAutocrop;
+                checkBoxDisableAutocrop_Checked(null, null);
+
+                checkBoxManualCrop.IsChecked = avo.manualCrop;
+                textBoxCropBottom.Text = avo.cropBottom.ToString();
+                textBoxCropLeft.Text = avo.cropLeft.ToString();
+                textBoxCropRight.Text = avo.cropRight.ToString();
+                textBoxCropTop.Text = avo.cropTop.ToString();
+                checkBoxManualCrop_Checked(null, null);
+
+                checkBoxManualBorders.IsChecked = avo.manualBorders;
+                textBoxBorderBottom.Text = avo.borderBottom.ToString();
+                textBoxBorderLeft.Text = avo.borderLeft.ToString();
+                textBoxBorderRight.Text = avo.borderRight.ToString();
+                textBoxBorderTop.Text = avo.borderTop.ToString();
+                checkBoxManualBorders_Checked(null, null);
+
+                checkBoxManualResize.IsChecked = avo.manualResize;
+                textBoxResizeX.Text = avo.resizeX.ToString();
+                textBoxResizeY.Text = avo.resizeY.ToString();
+                checkBoxManualResize_Checked(null, null);
             }
             catch (Exception ex)
             {
@@ -111,6 +140,263 @@ namespace BluRip
                 {
                     textBoxFramerate.Text = (string)comboBoxFramerate.SelectedItem;
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxManualInputResolution_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.manualInputRes = (bool)checkBoxManualInputResolution.IsChecked;
+                if (avo.manualInputRes)
+                {
+                    groupBoxInputResolution.IsEnabled = true;
+                }
+                else
+                {
+                    groupBoxInputResolution.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxInputResX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.inputResX = Convert.ToInt32(textBoxInputResX.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxInputResY_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.inputResY = Convert.ToInt32(textBoxInputResY.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxManualAspectRatio_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.manualAspectRatio = (bool)checkBoxManualAspectRatio.IsChecked;
+                if (avo.manualAspectRatio)
+                {
+                    groupBoxAspectRatio.IsEnabled = true;
+                }
+                else
+                {
+                    groupBoxAspectRatio.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxAspectRatio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.aspectRatio = textBoxAspectRatio.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDisableAutocrop_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.disableAutocrop = (bool)checkBoxDisableAutocrop.IsChecked;
+                if (avo.disableAutocrop)
+                {
+                    groupBoxAutocrop.IsEnabled = true;
+                }
+                else
+                {
+                    groupBoxAutocrop.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxManualCrop_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.manualCrop = (bool)checkBoxManualCrop.IsChecked;
+                if (avo.manualCrop)
+                {
+                    groupBoxManualCrop.IsEnabled = true;
+                }
+                else
+                {
+                    groupBoxManualCrop.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxCropTop_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.cropTop = Convert.ToInt32(textBoxCropTop.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxCropBottom_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.cropBottom = Convert.ToInt32(textBoxCropBottom.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxCropLeft_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.cropLeft = Convert.ToInt32(textBoxCropLeft.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxCropRight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.cropRight = Convert.ToInt32(textBoxCropRight.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxManualBorders_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.manualBorders = (bool)checkBoxManualBorders.IsChecked;
+                if (avo.manualBorders)
+                {
+                    groupBoxManualBorders.IsEnabled = true;
+                }
+                else
+                {
+                    groupBoxManualBorders.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxBorderTop_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.borderTop = Convert.ToInt32(textBoxBorderTop.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxBorderBottom_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.borderBottom = Convert.ToInt32(textBoxBorderBottom.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxBorderLeft_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.borderLeft = Convert.ToInt32(textBoxBorderLeft.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxBorderRight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.borderRight = Convert.ToInt32(textBoxBorderRight.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxManualResize_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.manualResize = (bool)checkBoxManualResize.IsChecked;
+                if (avo.manualResize)
+                {
+                    groupBoxManualResize.IsEnabled = true;
+                }
+                else
+                {
+                    groupBoxManualResize.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxResizeX_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.resizeX = Convert.ToInt32(textBoxResizeX.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxResizeY_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                avo.resizeY = Convert.ToInt32(textBoxResizeY.Text);
             }
             catch (Exception)
             {

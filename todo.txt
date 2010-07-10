@@ -1,0 +1,19 @@
+- german tranlation
+
+- skin selection + classic skin
+
+- resize method selection (in advanced video options, too)
+
+- link window
+
+- about window
+
+- option to set extra path for encoded video
+
+- option to crop and addborders to get 1080 res
+
+- process step selection (for queue/normal start)
+
+- option to set forced flag for first forced subs track
+
+- edit option demuxed stream list (for 2-pass profile: show/update bitrate)
