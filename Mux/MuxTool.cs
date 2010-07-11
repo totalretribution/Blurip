@@ -211,16 +211,15 @@ namespace BluRip
 
                             if (mux)
                             {
+                                string st = "";
+                                st = getShortSubLanguage(si.language);
+                                if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
                                 if (settings.preferredSubtitleLanguages.Count > 0 && settings.preferredSubtitleLanguages[0].language == si.language)
                                 {
                                     if (!defaultSet)
                                     {
                                         if (settings.defaultSubtitle)
                                         {
-                                            string st = "";
-                                            st = getShortSubLanguage(si.language);
-                                            if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
-
                                             if (!settings.defaultSubtitleForced)
                                             {
                                                 this.Parameter += "--default-track 0 ";
@@ -433,6 +432,7 @@ namespace BluRip
                                 bool copy = false;
                                 bool pgs = false;
                                 bool untouched = false;
+                                bool subidx = false;
 
                                 if (settings.copyUntouchedSubs)
                                 {
@@ -442,13 +442,19 @@ namespace BluRip
                                         untouched = true;
                                     }
                                 }
-                                else if (settings.copySubs == 1)
+
+                                if (settings.copySubs == 1)
                                 {
                                     copy = true;
+                                    subidx = true;
                                 }
                                 else if (settings.copySubs == 2)
                                 {
-                                    if (sfi.normalIdx != "") copy = true;
+                                    if (sfi.normalIdx != "")
+                                    {
+                                        copy = true;
+                                        subidx = true;
+                                    }
                                 }
                                 else if (settings.copySubs == 3)
                                 {
@@ -464,6 +470,7 @@ namespace BluRip
                                             if (subsCount[lang] == 0)
                                             {
                                                 copy = true;
+                                                subidx = true;
                                                 subsCount[lang]++;
                                             }
                                         }
@@ -472,6 +479,7 @@ namespace BluRip
                                             if (forcedSubsCount[lang] == 0)
                                             {
                                                 copy = true;
+                                                subidx = true;
                                                 forcedSubsCount[lang]++;
                                             }
                                         }
@@ -533,7 +541,7 @@ namespace BluRip
                                                 if (File.Exists(si.filename)) File.Copy(si.filename, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sup", true);
                                             }
                                         }
-                                        else if (!pgs)
+                                        if (!pgs && subidx)
                                         {
                                             if (sfi.normalIdx != "")
                                             {
