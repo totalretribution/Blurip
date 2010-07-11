@@ -34,5 +34,54 @@ namespace BluRip
         {
             DialogResult = true;
         }
+
+        private string germanForumLink = "http://forum.gleitz.info/showthread.php?t=41747";
+        private string englishForumLink = "http://forum.doom9.org/showthread.php?t=152294";
+        private string homeLink = "http://code.google.com/p/blurip/";
+        private string emailLink = "mailto:hawk.ac@gmx.net";
+
+        private void labelGermanForum_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(germanForumLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void labelEnglishForum_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(englishForumLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void labelEmail_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(emailLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void labelHome_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(homeLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

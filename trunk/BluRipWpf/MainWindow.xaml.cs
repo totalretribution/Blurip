@@ -996,6 +996,8 @@ namespace BluRip
                     }
                     else
                     {
+                        if (!DoIndex()) return false;
+                        if (!DoSubtitle()) return false;
                         if (!DoMux()) return false;
                     }
                 }
@@ -1294,14 +1296,6 @@ namespace BluRip
             try
             {
                 settings.copyUntouchedSubs = checkBoxCopyUntouchedSubs.IsChecked.Value;
-                if (settings.copyUntouchedSubs)
-                {
-                    comboBoxCopySubtitles.IsEnabled = false;
-                }
-                else
-                {
-                    comboBoxCopySubtitles.IsEnabled = true;
-                }
             }
             catch (Exception)
             {

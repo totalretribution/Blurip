@@ -354,6 +354,33 @@
     <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
 
+    <!-- link Window -->
+    <system:String x:Key="CaptionLinkWindow">Links to needed and usefull tools</system:String>
+    <system:String x:Key="LabelAvisynthLink">Link to AviSynth</system:String>
+    <system:String x:Key="LabelHaaliLink">Link to Haali splitter</system:String>
+    <system:String x:Key="LabelEac3toLink">Link to eac3to</system:String>
+    <system:String x:Key="LabelX264Link">Link to x264</system:String>
+    <system:String x:Key="LabelX264InfoLink">Link to x264 settings info</system:String>
+    <system:String x:Key="LabelBDSup2subLink">Link to BDSup2sub</system:String>
+    <system:String x:Key="LabelFfmpegsrcLink">Link to Ffmpgesrc</system:String>
+    <system:String x:Key="LabelJavaLink">Link to java</system:String>
+    <system:String x:Key="LabelMkvtoolnixLink">Link to mkvtoolnix</system:String>
+    <system:String x:Key="LabelFiltertweakerLink">Link to Windows 7 filter tweaker</system:String>
+    <system:String x:Key="LabelAnydvdLink">Link to AnyDvd HD</system:String>
+    <system:String x:Key="LabelSurcodeLink">Link to surcode DTS encoder</system:String>
+    <system:String x:Key="LabelDgdecnvLink">Link to DGDecNV</system:String>
+    <system:String x:Key="LabelAvs2yuvLink">Link to avs2yuv</system:String>
+    <system:String x:Key="LabelNeededTools">Needed tools</system:String>
+    <system:String x:Key="LabelUsefullTools">Usefull tools</system:String>
+
+    <!-- About Window -->
+    <system:String x:Key="CaptionAboutWindow">About BluRip</system:String>
+    <system:String x:Key="LabelBluRip">BluRip © __hawk__ 2009-2010</system:String>
+    <system:String x:Key="LabelGermanForum">Link to german support forum</system:String>
+    <system:String x:Key="LabelEnglishForum">Link to english support forum</system:String>
+    <system:String x:Key="LabelHomeLink">Project homepage</system:String>
+    <system:String x:Key="LabelEmail">Send email</system:String>
+
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>
     <system:String x:Key="ErrorException">Exception:</system:String>

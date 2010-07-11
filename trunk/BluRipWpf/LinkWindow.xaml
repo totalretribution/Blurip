@@ -1,9 +1,24 @@
 ﻿<Window x:Class="BluRip.LinkWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LinkWindow" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico">
+        Title="{DynamicResource CaptionLinkWindow}" Height="326" Width="649" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico">
     <Grid Cursor="Hand">
         <Button Content="{DynamicResource ButtonOk}" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" Width="75" Height="23" VerticalAlignment="Bottom" IsDefault="True" Click="buttonOk_Click" />
-        <Label Content="Label" HorizontalAlignment="Left" Margin="30,32,0,0" Name="label1" VerticalAlignment="Top" Foreground="Blue" FontWeight="Bold" />
+        <Label Content="{DynamicResource LabelAvisynthLink}" HorizontalAlignment="Left" Margin="12,38,0,0" Name="labelAvisynth" VerticalAlignment="Top" Foreground="Blue" FontWeight="Bold" MouseLeftButtonDown="labelAvisynth_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelHaaliLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="12,64,0,0" Name="labelHaali" VerticalAlignment="Top" MouseLeftButtonDown="labelHaali_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelEac3toLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="12,90,0,0" Name="labelEac3to" VerticalAlignment="Top" MouseLeftButtonDown="labelEac3to_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelBDSup2subLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="12,116,0,0" Name="labelBdsup2sub" VerticalAlignment="Top" MouseLeftButtonDown="labelBdsup2sub_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelX264Link}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="12,142,0,0" Name="labelX264" VerticalAlignment="Top" MouseLeftButtonDown="labelX264_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelAnydvdLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="12,168,0,0" Name="labelAnydvd" VerticalAlignment="Top" MouseLeftButtonDown="labelAnydvd_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelFfmpegsrcLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,142,0,0" Name="labelFfmepgsrc" VerticalAlignment="Top" MouseLeftButtonDown="labelFfmepgsrc_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelJavaLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="12,194,0,0" Name="labelJava" VerticalAlignment="Top" MouseLeftButtonDown="labelJava_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelMkvtoolnixLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="12,220,0,0" Name="labelMkvtoolnix" VerticalAlignment="Top" MouseLeftButtonDown="labelMkvtoolnix_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelNeededTools}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelNeededTools" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelUsefullTools}" HorizontalAlignment="Left" Margin="290,12,0,0" Name="labelUsefullTools" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelFiltertweakerLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,38,0,0" Name="labelFilterTweaker" VerticalAlignment="Top" MouseLeftButtonDown="labelFilterTweaker_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelSurcodeLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,64,0,0" Name="labelSurcode" VerticalAlignment="Top" MouseLeftButtonDown="labelSurcode_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelDgdecnvLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,90,0,0" Name="labelDgdecnv" VerticalAlignment="Top" MouseLeftButtonDown="labelDgdecnv_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelAvs2yuvLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,116,0,0" Name="labelAvs2yuv" VerticalAlignment="Top" MouseLeftButtonDown="labelAvs2yuv_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelX264InfoLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,168,0,0" Name="labelX264Info" Height="20" VerticalAlignment="Top" MouseLeftButtonDown="labelX264Info_MouseLeftButtonDown" />
     </Grid>
 </Window>
