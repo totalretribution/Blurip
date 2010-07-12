@@ -130,6 +130,15 @@ namespace BluRip
                     if (!silent) Global.ErrorMsg(Global.Res("ErrorWorkingDirectory"));
                     return false;
                 }
+                if (settings.encodedMovieDir != "")
+                {
+                    if (!Directory.Exists(settings.encodedMovieDir))
+                    {
+                        logWindow.MessageDemux(Global.Res("ErrorEncodedMovieDirectory"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorEncodedMovieDirectory"));
+                        return false;
+                    }
+                }
                 if (demuxedStreamList.streams.Count == 0)
                 {
                     logWindow.MessageSubtitle(Global.Res("ErrorNoDemuxedStreams"));

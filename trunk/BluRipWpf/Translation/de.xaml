@@ -4,108 +4,108 @@
                     xmlns:col="clr-namespace:System.Collections;assembly=mscorlib">
 
     <!-- Menu -->
-    <system:String x:Key="MenuFile">File</system:String>
-    <system:String x:Key="MenuFileOpen">Open</system:String>
-    <system:String x:Key="MenuFileSave">Save</system:String>
-    <system:String x:Key="MenuFileExit">Exit</system:String>
-    <system:String x:Key="MenuView">View</system:String>
-    <system:String x:Key="MenuViewLog">Log window</system:String>
-    <system:String x:Key="MenuViewDemuxedStreams">Demuxed streams window</system:String>
-    <system:String x:Key="MenuViewQueue">Queue window</system:String>
-    <system:String x:Key="MenuViewReset">Reset settings</system:String>
-    <system:String x:Key="MenuViewSnap">Snap to main window</system:String>
+    <system:String x:Key="MenuFile">Datei</system:String>
+    <system:String x:Key="MenuFileOpen">Öffnen</system:String>
+    <system:String x:Key="MenuFileSave">Speichern</system:String>
+    <system:String x:Key="MenuFileExit">Beenden</system:String>
+    <system:String x:Key="MenuView">Ansicht</system:String>
+    <system:String x:Key="MenuViewLog">Log Fenster</system:String>
+    <system:String x:Key="MenuViewDemuxedStreams">Demuxed streams Fenster</system:String>
+    <system:String x:Key="MenuViewQueue">Queue Fenster</system:String>
+    <system:String x:Key="MenuViewReset">Einstellungen zurücksetzen</system:String>
+    <system:String x:Key="MenuViewSnap">An Hauptfenster andocken</system:String>
     <system:String x:Key="MenuViewSkin">Skin</system:String>
-    <system:String x:Key="MenuViewSkinBlu">Blu skin</system:String>
-    <system:String x:Key="MenuViewSkinClassic">Classic skin</system:String>
-    <system:String x:Key="MenuViewExpertMode">Show advanced options</system:String>
-    <system:String x:Key="MenuLanguage">Language</system:String>
+    <system:String x:Key="MenuViewSkinBlu">Blu Skin</system:String>
+    <system:String x:Key="MenuViewSkinClassic">Classic Skin</system:String>
+    <system:String x:Key="MenuViewExpertMode">Expertenmodus</system:String>
+    <system:String x:Key="MenuLanguage">Sprache</system:String>
     <system:String x:Key="MenuLanguageEnglish">English</system:String>
     <system:String x:Key="MenuLanguageGerman">Deutsch</system:String>
-    <system:String x:Key="MenuSettings">Settings</system:String>
-    <system:String x:Key="MenuSettingsExternalTools">External tools</system:String>
-    <system:String x:Key="MenuSettingsEncodingProfiles">Edit encoding profiles</system:String>
-    <system:String x:Key="MenuSettingsAvisynthProfiles">Edit AviSynth profiles</system:String>
-    <system:String x:Key="MenuSettingsAdvancedOptions">Advanced options</system:String>
-    <system:String x:Key="MenuHelp">Help</system:String>
-    <system:String x:Key="MenuHelpLinks">Usefull links</system:String>
-    <system:String x:Key="MenuHelpAbout">About</system:String>
+    <system:String x:Key="MenuSettings">Einstellungen</system:String>
+    <system:String x:Key="MenuSettingsExternalTools">Externe Programme</system:String>
+    <system:String x:Key="MenuSettingsEncodingProfiles">Bearbeite Encoding Profile</system:String>
+    <system:String x:Key="MenuSettingsAvisynthProfiles">Bearbeite AviSynth Profile</system:String>
+    <system:String x:Key="MenuSettingsAdvancedOptions">Erweiterte Einstellungen</system:String>
+    <system:String x:Key="MenuHelp">Hilfe</system:String>
+    <system:String x:Key="MenuHelpLinks">Nützliche Links</system:String>
+    <system:String x:Key="MenuHelpAbout">Über</system:String>
 
     <!-- Tab Input -->
-    <system:String x:Key="TabInput">Input</system:String>
-    <system:String x:Key="LabelBluerayPath">Path to BluRay drive/folder:</system:String>
+    <system:String x:Key="TabInput">Eingabe</system:String>
+    <system:String x:Key="LabelBluerayPath">Pfad zu BluRay Laufwerk/Verzeichnis:</system:String>
     <system:String x:Key="ButtonBluerayPath">...</system:String>
-    <system:String x:Key="ButtonBluerayPathTooltip">Set path to BluRay drive or folder containing ripped BluRay structure</system:String>
-    <system:String x:Key="ButtonGetStreamInfo">Get stream infos</system:String>
-    <system:String x:Key="ButtonOpenM2ts">Open *.m2ts file(s)</system:String>
-    <system:String x:Key="ButtonResetStreams">Reset stream selection</system:String>
-    <system:String x:Key="LabelStreamDesc">Double click to select/deselect - right click for advanced options</system:String>
-    <system:String x:Key="LabelTitleDesc">Title selection</system:String>
-    <system:String x:Key="LabelStreamListDesc">Available streams</system:String>    
-    <system:String x:Key="ButtonAbort">Abort</system:String>
-    <system:String x:Key="ContextMenuEditAdvancedOptions">Edit advanced options</system:String>
-    <system:String x:Key="ContextMenuDelAdvancedOptions">Delete advanced options</system:String>
+    <system:String x:Key="ButtonBluerayPathTooltip">Setzt den Pfad zum BluRay Laufwerk oder dem Verzeichnis, das die gerippte BluRay-Struktur enthält</system:String>
+    <system:String x:Key="ButtonGetStreamInfo">Hole Stream Infos</system:String>
+    <system:String x:Key="ButtonOpenM2ts">Öffne *.m2ts Datei(n)</system:String>
+    <system:String x:Key="ButtonResetStreams">Setze Streamauswahl zurück</system:String>
+    <system:String x:Key="LabelStreamDesc">Doppelklick zum aus-/abwählen - Rechtsklick für erweiterte Einstellungen</system:String>
+    <system:String x:Key="LabelTitleDesc">Titel Auswahl</system:String>
+    <system:String x:Key="LabelStreamListDesc">Verfügbare Streams</system:String>        
+    <system:String x:Key="ButtonAbort">Abbrechen</system:String>
+    <system:String x:Key="ContextMenuEditAdvancedOptions">Bearbeite erweiterte Einstellungen</system:String>
+    <system:String x:Key="ContextMenuDelAdvancedOptions">Lösche erweiterte Einstellungen</system:String>
 
     <!-- Tab Output -->
-    <system:String x:Key="TabOutput">Output</system:String>
-    <system:String x:Key="LabelWorkingDirectory">Working directory</system:String>
+    <system:String x:Key="TabOutput">Ausgabe</system:String>
+    <system:String x:Key="LabelWorkingDirectory">Arbeitsverzeichnis</system:String>
     <system:String x:Key="ButtonWorkingDirectory">...</system:String>
-    <system:String x:Key="LabelFilePrefix">File prefix</system:String>
-    <system:String x:Key="LabelTargetDirectory">Target directory</system:String>
+    <system:String x:Key="LabelFilePrefix">Datei Präfix</system:String>
+    <system:String x:Key="LabelTargetDirectory">Zielverzeichnis</system:String>
     <system:String x:Key="ButtonTargetDirectory">...</system:String>
-    <system:String x:Key="LabelTargetFilename">Target filename (without .mkv)</system:String>
-    <system:String x:Key="LabelMovieTitle">Movie title</system:String>
-    <system:String x:Key="LabelEncodedMovieDir">Optional path for encoded video:</system:String>
+    <system:String x:Key="LabelTargetFilename">Zieldateiname (ohne .mkv)</system:String>
+    <system:String x:Key="LabelMovieTitle">Filmtitel</system:String>
+    <system:String x:Key="LabelEncodedMovieDir">Optionaler Pfad für encodiertes Video:</system:String>
     <system:String x:Key="ButtonEncodedMovieDir">...</system:String>
-
+    
     <!-- Tab Settings -->
-    <system:String x:Key="TabSettings">Settings</system:String>
-    <system:String x:Key="LabelEncodingProfile">Encoding profile</system:String>
-    <system:String x:Key="HeaderVideoSettings">Video settings</system:String>
-    <system:String x:Key="checkBoxUntouchedVideo">Use untouched video</system:String>
-    <system:String x:Key="HeaderAudioSettings">Audio settings</system:String>
-    <system:String x:Key="checkBoxUntouchedAudio">Use untouched audio</system:String>
-    <system:String x:Key="checkBoxConvertDTStoAc3">Convert DTS tracks to AC3</system:String>
-    <system:String x:Key="HeaderSubtitleSettings">Subtitle settings</system:String>
-    <system:String x:Key="LabelMuxSubtitle">Mux subtitles</system:String>
-    <system:String x:Key="LabelCopySubtitle">Copy subtitles</system:String>
+    <system:String x:Key="TabSettings">Einstellungen</system:String>
+    <system:String x:Key="LabelEncodingProfile">Encoding Profil</system:String>
+    <system:String x:Key="HeaderVideoSettings">Video Einstellungen</system:String>
+    <system:String x:Key="checkBoxUntouchedVideo">Benutze original Video</system:String>
+    <system:String x:Key="HeaderAudioSettings">Audio Einstellungen</system:String>
+    <system:String x:Key="checkBoxUntouchedAudio">Benutze original Audio</system:String>
+    <system:String x:Key="checkBoxConvertDTStoAc3">Konvertiere DTS Tracks nach AC3</system:String>
+    <system:String x:Key="HeaderSubtitleSettings">Untertitel Einstellungen</system:String>
+    <system:String x:Key="LabelMuxSubtitle">Muxe Untertitel</system:String>
+    <system:String x:Key="LabelCopySubtitle">Kopiere Untertitel</system:String>
     <col:ArrayList x:Key="comboBoxMuxSubtitle">
-        <system:String>Do not mux subtitles</system:String>
-        <system:String>Mux all subtitles (sub/idx)</system:String>
-        <system:String>Mux only forced subtitles (sub/idx)</system:String>
-        <system:String>Mux only first normal/forced subtitle (sub/idx)</system:String>
-        <system:String>Mux all subtitles (pgs)</system:String>
-        <system:String>Mux only forced subtitles (pgs)</system:String>
-        <system:String>Mux only first normal/forced subtitle (pgs)</system:String>
+        <system:String>Muxe keine Untertitel</system:String>
+        <system:String>Muxe alel Untertitel (sub/idx)</system:String>
+        <system:String>Muxe nur forced Untertitel (sub/idx)</system:String>
+        <system:String>Muxe nur den ersten normalen/forced Untertitel (sub/idx)</system:String>
+        <system:String>Muxe alle Untertitel (pgs)</system:String>
+        <system:String>Muxe nur forced Untertitel (pgs)</system:String>
+        <system:String>Muxe nur den ersten normalen/forced Untertitel (pgs)</system:String>
     </col:ArrayList>
     <col:ArrayList x:Key="comboBoxCopySubtitle">
-        <system:String>Do not copy subtitles</system:String>
-        <system:String>Copy all subtitles to 'Subs' folder (sub/idx)</system:String>
-        <system:String>Copy all but forced (sub/idx)</system:String>
-        <system:String>Copy only first normal/forced subtitles (sub/idx)</system:String>
-        <system:String>Copy all subtitles to 'Subs' folder (pgs)</system:String>
-        <system:String>Copy all but forced (pgs)</system:String>
-        <system:String>Copy only first normal/forced subtitles (pgs)</system:String>
+        <system:String>Kopiere keine Untertitel</system:String>
+        <system:String>Kopiere alle Untertitel ins 'Subs' Verzeichnis (sub/idx)</system:String>
+        <system:String>Kopiere alle außer forced (sub/idx)</system:String>
+        <system:String>Kopiere nur den ersten normalen/forced Untertitel (sub/idx)</system:String>
+        <system:String>Kopiere alle Untertitel ins 'Subs' Verzeichnis (pgs)</system:String>
+        <system:String>Kopiere alle außer forced (pgs)</system:String>
+        <system:String>Kopiere nur den ersten normalen/forced Untertitel (pgs)</system:String>
     </col:ArrayList>
-    <system:String x:Key="checkBoxMuxUntouchedSubs">Mux untouched subtitles (PGS)</system:String>
-    <system:String x:Key="checkBoxCopyUntouchedSubs">Copy untouched subtitles (PGS)</system:String>
-    <system:String x:Key="HeaderExpertSettings">Expert settings</system:String>
-    <system:String x:Key="LabelAvisynthProfile">Avisynth profile</system:String>
-    <system:String x:Key="LabelCropInput">AutoCrop input method</system:String>
-    <system:String x:Key="LabelEncodeInput">Encoding input method</system:String>
-    <system:String x:Key="checkBoxResize720p">Resize to 720p</system:String>
-    <system:String x:Key="checkBoxUseDTSCore">Use DTS core</system:String>
-    <system:String x:Key="checkBoxUse64bitX264">Use 64-bit x264</system:String>
-    <system:String x:Key="checkBoxMuxLowResSubs">Mux LowRes subs</system:String>    
+    <system:String x:Key="checkBoxMuxUntouchedSubs">Muxe original Untertitel (PGS)</system:String>
+    <system:String x:Key="checkBoxCopyUntouchedSubs">Kopiere original Untertitel (PGS)</system:String>
+    <system:String x:Key="HeaderExpertSettings">Experten Einstellungen</system:String>
+    <system:String x:Key="LabelAvisynthProfile">AviSynth Profil</system:String>
+    <system:String x:Key="LabelCropInput">AutoCrop Eingabe Methode</system:String>
+    <system:String x:Key="LabelEncodeInput">Encoding Eingabe Methode</system:String>
+    <system:String x:Key="checkBoxResize720p">Größe ändern auf 720p</system:String>
+    <system:String x:Key="checkBoxUseDTSCore">Benutze DTS core</system:String>
+    <system:String x:Key="checkBoxUse64bitX264">Benutze 64-bit x264</system:String>
+    <system:String x:Key="checkBoxMuxLowResSubs">Muxe LowRes Untertitel</system:String>    
     
     <!-- Tab Start -->
     <system:String x:Key="TabStart">Start</system:String>
     <system:String x:Key="ButtonStartStart">Start</system:String>
-    <system:String x:Key="ButtonStartQueue">Add to queue</system:String>
-    <system:String x:Key="ButtonStartDemux">Only demux</system:String>
-    <system:String x:Key="ButtonStartCrop">Only index and autocrop</system:String>
-    <system:String x:Key="ButtonStartSubtitle">Only subtitle processing</system:String>
-    <system:String x:Key="ButtonStartEncode">Only encode</system:String>
-    <system:String x:Key="ButtonStartMux">Only mux</system:String>
+    <system:String x:Key="ButtonStartQueue">Zur Queue hinzufügen</system:String>
+    <system:String x:Key="ButtonStartDemux">Nur demuxen</system:String>
+    <system:String x:Key="ButtonStartCrop">Nur Index erstellen und AutoCrop</system:String>
+    <system:String x:Key="ButtonStartSubtitle">Nur Untertitel Bearbeitung</system:String>
+    <system:String x:Key="ButtonStartEncode">Nur encode</system:String>
+    <system:String x:Key="ButtonStartMux">Nur muxen</system:String>
         
     
     <!-- General -->
@@ -407,7 +407,6 @@
     <system:String x:Key="ErrorUnknownTracks">Unknown tracks selected - please report log to developer</system:String>
     <system:String x:Key="ErrorNoTitle">No title selected</system:String>
     <system:String x:Key="ErrorWorkingDirectory">Working dir not set</system:String>
-    <system:String x:Key="ErrorEncodedMovieDirectory">Encoded movie directory not found</system:String>
     <system:String x:Key="ErrorMkvmergePath">Path to mkvmerge.exe not set or found.</system:String>
     <system:String x:Key="ErrorSubtitleFile">Subtitle file(s) not found</system:String>
     <system:String x:Key="ErrorChapterFile">Chapter file not found</system:String>

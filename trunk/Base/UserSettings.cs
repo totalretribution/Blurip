@@ -134,6 +134,7 @@ namespace BluRip
             this.preferDTS = orig.preferDTS;
             this.preferredAudioLanguages.Clear();
             this.workingDir = orig.workingDir;
+            this.encodedMovieDir = orig.encodedMovieDir;
             this.ffmsindexPath = orig.ffmsindexPath;
             this.x264Path = orig.x264Path;
             this.sup2subPath = orig.sup2subPath;
@@ -199,6 +200,7 @@ namespace BluRip
             this.bluripHeight = orig.bluripHeight;
             this.bluripWidth = orig.bluripWidth;
             this.language = orig.language;
+            this.skin = orig.skin;
             
             this.preferredAudioLanguages.Clear();
             this.preferredSubtitleLanguages.Clear();
@@ -340,6 +342,7 @@ namespace BluRip
         public List<LanguageInfo> preferredAudioLanguages = new List<LanguageInfo>();
         public List<LanguageInfo> preferredSubtitleLanguages = new List<LanguageInfo>();
         public string workingDir = "";
+        public string encodedMovieDir = "";
         public string ffmsindexPath = "";
         public string x264Path = "";
         public string sup2subPath = "";
@@ -414,5 +417,6 @@ namespace BluRip
         public double bluripWidth = 600;
 
         public string language = "en";
+        public string skin = "blu";
     }
 }
