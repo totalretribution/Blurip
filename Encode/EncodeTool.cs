@@ -89,8 +89,11 @@ namespace BluRip
                         // no mkv overhead used yet
                     }
                 }
+                
+                string outdir = settings.workingDir;
+                if (settings.encodedMovieDir != "") outdir = settings.encodedMovieDir;
 
-                string statsFile = settings.workingDir + "\\" + settings.filePrefix + "_stats";
+                string statsFile = outdir + "\\" + settings.filePrefix + "_stats";
 
                 if (!secondPass)
                 {
@@ -99,7 +102,7 @@ namespace BluRip
                         if (!settings.use64bit)
                         {
                             this.Path = settings.x264Path;
-                            this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
+                            this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" -o \"" + outdir +
                                     "\\" + settings.filePrefix + "_video.mkv\"";
                         }
                         else
@@ -107,7 +110,7 @@ namespace BluRip
                             this.Path = "cmd.exe";
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
                                 settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " " +
-                                " -o \"" + settings.workingDir + "\\" + 
+                                " -o \"" + outdir + "\\" + 
                                 settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
                         }
                     }
@@ -137,14 +140,14 @@ namespace BluRip
                         if (!settings.use64bit)
                         {
                             this.Path = settings.x264Path;
-                            this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" -o \"" + settings.workingDir +
+                            this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" -o \"" + outdir +
                                     "\\" + settings.filePrefix + "_video.mkv\"";
                         }
                         else
                         {
                             this.Path = "cmd.exe";
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + settings.workingDir + "\\" + 
+                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + outdir + "\\" + 
                                 settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
                         }
                     }
@@ -155,7 +158,7 @@ namespace BluRip
                             this.Path = settings.x264Path;
                             this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" " + "--stats \"" + statsFile + "\" " +
                                 "--pass 2 --bitrate " + bitrate.ToString() +
-                                " -o \"" + settings.workingDir +
+                                " -o \"" + outdir +
                                 "\\" + settings.filePrefix + "_video.mkv\"";
                         }
                         else
@@ -164,7 +167,7 @@ namespace BluRip
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
                                 settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " " + "--stats \"" + statsFile + "\" " +
                                 "--pass 2 --bitrate " + bitrate.ToString() +
-                                " -o \"" + settings.workingDir + "\\" +
+                                " -o \"" + outdir + "\\" +
                                 settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
                         }
                     }
@@ -348,9 +351,12 @@ namespace BluRip
         {
             try
             {
+                string outdir = settings.workingDir;
+                if (settings.encodedMovieDir != "") outdir = settings.encodedMovieDir;
+
                 if (secondPass || !settings.encodingSettings[profile].pass2)
                 {
-                    if (File.Exists(settings.workingDir + "\\" + settings.filePrefix + "_video.mkv"))
+                    if (File.Exists(outdir + "\\" + settings.filePrefix + "_video.mkv"))
                     {
                         foreach (StreamInfo si in titleInfo.streams)
                         {
@@ -358,7 +364,7 @@ namespace BluRip
                             {
                                 if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                                 {
-                                    ((VideoFileInfo)si.extraFileInfo).encodedFile = settings.workingDir + "\\" + settings.filePrefix + "_video.mkv";
+                                    ((VideoFileInfo)si.extraFileInfo).encodedFile = outdir + "\\" + settings.filePrefix + "_video.mkv";
                                     successfull = true;
                                     break;
                                 }
@@ -368,7 +374,7 @@ namespace BluRip
                 }
                 else
                 {
-                    if (File.Exists(settings.workingDir + "\\" + settings.filePrefix + "_stats"))
+                    if (File.Exists(outdir + "\\" + settings.filePrefix + "_stats"))
                     {
                         successfull = true;
                     }

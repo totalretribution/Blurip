@@ -71,8 +71,6 @@ namespace BluRip
                 ac3Bitrates.Add("192");
                 ac3Bitrates.Add("448");
                 ac3Bitrates.Add("640");
-
-                menuItemLanguageGerman.Visibility = System.Windows.Visibility.Collapsed;
             }
             catch (Exception ex)
             {
@@ -106,7 +104,7 @@ namespace BluRip
                 demuxedStreamsWindow = new DemuxedStreamsWindow(this);
                 demuxedStreamsWindow.Owner = this;
 
-                UpdateFromSettings();
+                UpdateFromSettings(true);
 
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
@@ -222,7 +220,7 @@ namespace BluRip
             }
         }
 
-        private void UpdateFromSettings()
+        private void UpdateFromSettings(bool updateDicts)
         {
             try
             {
@@ -232,6 +230,7 @@ namespace BluRip
                 textBoxTargetDirectory.Text = settings.targetFolder;
                 textBoxTargetFilename.Text = settings.targetFilename;
                 textBoxMovieTitle.Text = settings.movieTitle;
+                textBoxEncodedMovieDir.Text = settings.encodedMovieDir;
 
                 this.Left = settings.bluripX;
                 this.Top = settings.bluripY;
@@ -270,29 +269,51 @@ namespace BluRip
                 UpdateEncodingProfiles();
                 UpdateMuxSettings();
 
-                if (settings.cropInput > -1 && settings.cropInput < 3) comboBoxCropInput.SelectedIndex = settings.cropInput;
-                else
+                if (updateDicts)
                 {
-                    comboBoxCropInput.SelectedIndex = 0;
-                }
+                    if (settings.cropInput > -1 && settings.cropInput < 3) comboBoxCropInput.SelectedIndex = settings.cropInput;
+                    else
+                    {
+                        comboBoxCropInput.SelectedIndex = 0;
+                    }
 
-                if (settings.encodeInput > -1 && settings.encodeInput < 3) comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
-                else
-                {
-                    comboBoxEncodeInput.SelectedIndex = 0;
-                }
+                    if (settings.encodeInput > -1 && settings.encodeInput < 3) comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
+                    else
+                    {
+                        comboBoxEncodeInput.SelectedIndex = 0;
+                    }
 
-                if (settings.language == "en")
-                {
-                    menuItemLanguageEnglish.IsChecked = true;
-                }
-                else if (settings.language == "de")
-                {
-                    menuItemLanguageGerman.IsChecked = true;
-                }
-                else
-                {
-                    menuItemLanguageEnglish.IsChecked = true;
+                    if (settings.language == "en")
+                    {
+                        menuItemLanguageEnglish.IsChecked = true;
+                        menuItemLanguageEnglish_Click(null, null);
+                    }
+                    else if (settings.language == "de")
+                    {
+                        menuItemLanguageGerman.IsChecked = true;
+                        menuItemLanguageGerman_Click(null, null);
+                    }
+                    else
+                    {
+                        menuItemLanguageEnglish.IsChecked = true;
+                        menuItemLanguageEnglish_Click(null, null);
+                    }
+
+                    if (settings.skin == "blu")
+                    {
+                        menuItemViewSkinBlu.IsChecked = true;
+                        menuItemViewSkinBlu_Click(null, null);
+                    }
+                    else if (settings.skin == "classic")
+                    {
+                        menuItemViewSkinClassic.IsChecked = true;
+                        menuItemViewSkinClassic_Click(null, null);
+                    }
+                    else
+                    {
+                        menuItemViewSkinBlu.IsChecked = true;
+                        menuItemViewSkinBlu_Click(null, null);
+                    }
                 }
 
                 checkBoxUntouchedAudio.IsChecked = settings.untouchedAudio;
@@ -759,6 +780,9 @@ namespace BluRip
                 buttonOnlyEncode.Visibility = System.Windows.Visibility.Visible;
                 buttonOnlyMux.Visibility = System.Windows.Visibility.Visible;
                 groupBoxExpertSettings.Visibility = System.Windows.Visibility.Visible;
+                labelEncodedMovieDir.Visibility = System.Windows.Visibility.Visible;
+                textBoxEncodedMovieDir.Visibility = System.Windows.Visibility.Visible;
+                buttonEncodedMovieDir.Visibility = System.Windows.Visibility.Visible;
             }
             catch (Exception)
             {
@@ -775,6 +799,9 @@ namespace BluRip
                 buttonOnlyEncode.Visibility = System.Windows.Visibility.Hidden;
                 buttonOnlyMux.Visibility = System.Windows.Visibility.Hidden;
                 groupBoxExpertSettings.Visibility = System.Windows.Visibility.Hidden;
+                labelEncodedMovieDir.Visibility = System.Windows.Visibility.Hidden;
+                textBoxEncodedMovieDir.Visibility = System.Windows.Visibility.Hidden;
+                buttonEncodedMovieDir.Visibility = System.Windows.Visibility.Hidden;
             }
             catch (Exception)
             {
@@ -832,6 +859,8 @@ namespace BluRip
                 {
                     menuItemLanguageGerman.IsChecked = false;
                     settings.language = "en";
+                    UpdateDictionary("Translation/en.xaml");
+                    UpdateFromSettings(false);
                 }
             }
             catch (Exception)
@@ -845,6 +874,8 @@ namespace BluRip
             {
                 menuItemLanguageEnglish.IsChecked = false;
                 settings.language = "de";
+                UpdateDictionary("Translation/de.xaml");
+                UpdateFromSettings(false);
             }
         }
 
@@ -1346,7 +1377,7 @@ namespace BluRip
                             m2tsList.Add(s);
                         }
 
-                        UpdateFromSettings();
+                        UpdateFromSettings(true);
                         demuxedStreamsWindow.UpdateDemuxedStreams();
                     }
                 }
@@ -1407,7 +1438,7 @@ namespace BluRip
                             m2tsList.Add(s);
                         }
 
-                        UpdateFromSettings();
+                        UpdateFromSettings(true);
                         demuxedStreamsWindow.UpdateDemuxedStreams();
 
                         StartAll();
@@ -1531,6 +1562,107 @@ namespace BluRip
             {
             }
         }
+
+        private void UpdateDictionary(ResourceDictionary rdTarget)
+        {
+            try
+            {
+                foreach (ResourceDictionary rdSrc in System.Windows.Application.Current.Resources.MergedDictionaries)
+                {
+                    foreach (object oSrc in rdSrc.Keys)
+                    {
+                        foreach (object oTarget in rdTarget.Keys)
+                        {
+                            if (oTarget.ToString() == oSrc.ToString())
+                            {
+                                rdSrc[oSrc] = rdTarget[oSrc];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateDictionary(string resdict)
+        {
+            try
+            {
+                ResourceDictionary rd = new ResourceDictionary();
+                rd.Source = new Uri("pack://application:,,,/" + resdict, UriKind.Absolute);
+                UpdateDictionary(rd);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemViewSkinBlu_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (menuItemViewSkinBlu.IsChecked)
+                {
+                    menuItemViewSkinClassic.IsChecked = false;
+                    settings.skin = "blu";
+                    UpdateDictionary("Style/style.xaml");
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void menuItemViewSkinClassic_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (menuItemViewSkinClassic.IsChecked)
+                {
+                    menuItemViewSkinBlu.IsChecked = false;
+                    settings.skin = "classic";
+                    UpdateDictionary("Style/classic.xaml");
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxWorkingDirectory_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.workingDir = textBoxWorkingDirectory.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxTargetDirectory_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.targetFolder = textBoxTargetDirectory.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxEncodedMovieDir_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.encodedMovieDir = textBoxEncodedMovieDir.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 
     public static class Global
@@ -1589,6 +1721,6 @@ namespace BluRip
             catch (Exception)
             {
             }
-        }
+        }        
     }
 }
