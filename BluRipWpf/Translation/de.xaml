@@ -10,7 +10,7 @@
     <system:String x:Key="MenuFileExit">Beenden</system:String>
     <system:String x:Key="MenuView">Ansicht</system:String>
     <system:String x:Key="MenuViewLog">Log Fenster</system:String>
-    <system:String x:Key="MenuViewDemuxedStreams">Demuxed streams Fenster</system:String>
+    <system:String x:Key="MenuViewDemuxedStreams">Demuxed Streams Fenster</system:String>
     <system:String x:Key="MenuViewQueue">Queue Fenster</system:String>
     <system:String x:Key="MenuViewReset">Einstellungen zurücksetzen</system:String>
     <system:String x:Key="MenuViewSnap">An Hauptfenster andocken</system:String>
@@ -110,151 +110,151 @@
     
     <!-- General -->
     <system:String x:Key="ButtonOk">Ok</system:String>
-    <system:String x:Key="ButtonCancel">Cancel</system:String>
-    <system:String x:Key="MessageExitHeader">Exit BluRip?</system:String>
-    <system:String x:Key="MessageExit">Do you really want to exit BluRip?</system:String>
-    <system:String x:Key="MessageAbortHeader">Abort all threads?</system:String>
-    <system:String x:Key="MessageAbort">Do you really want to abort all threads?</system:String>
-    <system:String x:Key="ProjectFileFilter">BluRip project (*.brp)|*.brp</system:String>
+    <system:String x:Key="ButtonCancel">Abbrechen</system:String>
+    <system:String x:Key="MessageExitHeader">BluRip beenden?</system:String>
+    <system:String x:Key="MessageExit">Wollen Sie BluRip wirklich beenden?</system:String>
+    <system:String x:Key="MessageAbortHeader">Alle Threads abbrechen?</system:String>
+    <system:String x:Key="MessageAbort">Wollen Sie wirklich alle Threads abbrechen?</system:String>
+    <system:String x:Key="ProjectFileFilter">BluRip Projekt (*.brp)|*.brp</system:String>
 
     <!-- ExternalTools Window -->
     <system:String x:Key="ButtonEac3toPath">...</system:String>
-    <system:String x:Key="LabelEac3toPath">Path to eac3to.exe:</system:String>    
+    <system:String x:Key="LabelEac3toPath">Pfad zu eac3to.exe:</system:String>    
     <system:String x:Key="ButtonBDSup2subPath">...</system:String>
-    <system:String x:Key="LabelBDSup2subPath">Path to BDSup2sub.jar:</system:String>    
+    <system:String x:Key="LabelBDSup2subPath">Pfad zu BDSup2sub.jar:</system:String>    
     <system:String x:Key="ButtonX264Path">...</system:String>
-    <system:String x:Key="LabelX264Path">Path to x264.exe:</system:String>
+    <system:String x:Key="LabelX264Path">Pfad zu x264.exe:</system:String>
     <system:String x:Key="ButtonJavaPath">...</system:String>
-    <system:String x:Key="LabelJavaPath">Path to java.exe:</system:String>
+    <system:String x:Key="LabelJavaPath">Pfad zu java.exe:</system:String>
     <system:String x:Key="ButtonMkvmergePath">...</system:String>
-    <system:String x:Key="LabelMkvmergePath">Path to mkvmerge.exe:</system:String>
+    <system:String x:Key="LabelMkvmergePath">Pfad zu mkvmerge.exe:</system:String>
     <system:String x:Key="ButtonFfmsindexPath">...</system:String>
-    <system:String x:Key="LabelFfmsindexPath">Path to ffmsindex.exe:</system:String>
+    <system:String x:Key="LabelFfmsindexPath">Pfad zu ffmsindex.exe:</system:String>
     <system:String x:Key="ButtonDgindexnvPath">...</system:String>
-    <system:String x:Key="LabelDgindexnvPath">Path to DGIndexNV.exe:</system:String>
+    <system:String x:Key="LabelDgindexnvPath">Pfad zu DGIndexNV.exe:</system:String>
     <system:String x:Key="ButtonX264x64Path">...</system:String>
-    <system:String x:Key="LabelX264x64Path">Path to 64-bit x264.exe:</system:String>
+    <system:String x:Key="LabelX264x64Path">Pfad zu 64-bit x264.exe:</system:String>
     <system:String x:Key="ButtonAvs2yuvPath">...</system:String>
-    <system:String x:Key="LabelAvs2yuvPath">Path to avs2yuv.exe:</system:String>
-    <system:String x:Key="HeaderExternalTools">External tools</system:String>
-    <system:String x:Key="HeaderFfmpegsrc">When using FFMpegSrc</system:String>
-    <system:String x:Key="HeaderDgdecnv">When using DGMultiDec</system:String>
-    <system:String x:Key="HeaderX264x64">When using 64-bit x264</system:String>
-    <system:String x:Key="CaptionExternalToolsWindow">Settings for external tools</system:String>
+    <system:String x:Key="LabelAvs2yuvPath">Pfad zu avs2yuv.exe:</system:String>
+    <system:String x:Key="HeaderExternalTools">Externe Programme</system:String>
+    <system:String x:Key="HeaderFfmpegsrc">Bei Benutzung von FFMpegSrc</system:String>
+    <system:String x:Key="HeaderDgdecnv">Bei Benutzung von DGMultiDec</system:String>
+    <system:String x:Key="HeaderX264x64">Bei Benutzung von 64-bit x264</system:String>
+    <system:String x:Key="CaptionExternalToolsWindow">Einstellungen für externe Programme</system:String>
 
     <!-- Log Window -->
-    <system:String x:Key="TabMainLog">Main log</system:String>
-    <system:String x:Key="TabDemuxLog">Demux log</system:String>
-    <system:String x:Key="TabCropLog">Crop/Index log</system:String>
-    <system:String x:Key="TabSubtitleLog">Subtitle log</system:String>
-    <system:String x:Key="TabEncodeLog">Encode log</system:String>
-    <system:String x:Key="TabMuxLog">Mux log</system:String>
+    <system:String x:Key="TabMainLog">Haupt Log</system:String>
+    <system:String x:Key="TabDemuxLog">Demux Log</system:String>
+    <system:String x:Key="TabCropLog">Crop/Index Log</system:String>
+    <system:String x:Key="TabSubtitleLog">Untertitel Log</system:String>
+    <system:String x:Key="TabEncodeLog">Encode Log</system:String>
+    <system:String x:Key="TabMuxLog">Mux Log</system:String>
     <system:String x:Key="CaptionLogWindow">Log</system:String>
-    <system:String x:Key="MenuLogClearAll">Clear all logs</system:String>
-    <system:String x:Key="MenuLogClear">Clear log</system:String>
-    <system:String x:Key="MenuLogSave">Save log</system:String>
-    <system:String x:Key="LogSaveFileFilter">Log file (*.txt)|*.txt</system:String>
+    <system:String x:Key="MenuLogClearAll">Lösche alle Logs</system:String>
+    <system:String x:Key="MenuLogClear">Lösche Log</system:String>
+    <system:String x:Key="MenuLogSave">Log speichern</system:String>
+    <system:String x:Key="LogSaveFileFilter">Log Datei (*.txt)|*.txt</system:String>
 
     <!-- Status bar -->
     <system:String x:Key="StatusBar">Status:</system:String>
-    <system:String x:Key="StatusBarReady">Ready.</system:String>
-    <system:String x:Key="StatusBarStreamInfo">Getting stream info...</system:String>
-    <system:String x:Key="StatusBarM2tsInfo">Getting *.m2ts stream info...</system:String>
-    <system:String x:Key="StatusBarDemux">Demuxing...</system:String>
-    <system:String x:Key="StatusBarSubtitle">Processing subtitles...</system:String>
-    <system:String x:Key="StatusBarSubtitleNormal">Processing sub/idx subtitles (normal) {0}/{1}</system:String>
-    <system:String x:Key="StatusBarSubtitleForced">Processing sub/idx subtitles (forced) {0}/{1}</system:String>
-    <system:String x:Key="StatusBarSubtitleNormalPgs">Processing pgs subtitles (normal) {0}/{1}</system:String>
-    <system:String x:Key="StatusBarSubtitleForcedPgs">Processing pgs subtitles (forced) {0}/{1}</system:String>
-    <system:String x:Key="StatusBarSubtitleLowresNormal">Processing lowres subtitles (normal) {0}/{1}</system:String>
-    <system:String x:Key="StatusBarSubtitleLowresForced">Processing lowres subtitles (forced) {0}/{1}</system:String>
-    <system:String x:Key="StatusBarCrop">Indexing and AutoCrop...</system:String>
+    <system:String x:Key="StatusBarReady">Bereit.</system:String>
+    <system:String x:Key="StatusBarStreamInfo">Hole Stream Info...</system:String>
+    <system:String x:Key="StatusBarM2tsInfo">Hole *.m2ts Stream Info...</system:String>
+    <system:String x:Key="StatusBarDemux">Demuxe...</system:String>
+    <system:String x:Key="StatusBarSubtitle">Bearbeite Untertitel...</system:String>
+    <system:String x:Key="StatusBarSubtitleNormal">Bearbeite sub/idx Untertitel (normal) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleForced">Bearbeite sub/idx Untertitel (forced) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleNormalPgs">Bearbeite pgs Untertitel (normal) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleForcedPgs">Bearbeite pgs Untertitel (forced) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleLowresNormal">Bearbeite lowres Untertitel (normal) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarSubtitleLowresForced">Bearbeite lowres Untertitel (forced) {0}/{1}</system:String>
+    <system:String x:Key="StatusBarCrop">Indexerstellung und AutoCrop...</system:String>
     <system:String x:Key="StatusBarEncode">Encoding {0}</system:String>
-    <system:String x:Key="StatusBarEncodeFirstPass">Encoding 1. pass {0}</system:String>
-    <system:String x:Key="StatusBarEncodeSecondPass">Encoding 2. pass {0}</system:String>
-    <system:String x:Key="StatusBarMux">Muxing...</system:String>
+    <system:String x:Key="StatusBarEncodeFirstPass">Encoding 1. Pass {0}</system:String>
+    <system:String x:Key="StatusBarEncodeSecondPass">Encoding 2. Pass {0}</system:String>
+    <system:String x:Key="StatusBarMux">Muxe...</system:String>
 
     <!-- FileList Window -->
-    <system:String x:Key="CaptionFileListWindow">Open *.m2ts file(s)</system:String>
-    <system:String x:Key="LabelFileList">File list:</system:String>
-    <system:String x:Key="ButtonFileListUp">Move up</system:String>
-    <system:String x:Key="ButtonFileListDown">Move down</system:String>
-    <system:String x:Key="ButtonFileListDelete">Delete</system:String>
-    <system:String x:Key="ButtonFileListAdd">Add</system:String>
+    <system:String x:Key="CaptionFileListWindow">Öffne *.m2ts Datei(n)</system:String>
+    <system:String x:Key="LabelFileList">Datei Liste:</system:String>
+    <system:String x:Key="ButtonFileListUp">Nach oben</system:String>
+    <system:String x:Key="ButtonFileListDown">Nach unten</system:String>
+    <system:String x:Key="ButtonFileListDelete">Löschen</system:String>
+    <system:String x:Key="ButtonFileListAdd">Hinzufügen</system:String>
 
     <!-- Queue Window -->
-    <system:String x:Key="CaptionQueueWindow">Project queue</system:String>
-    <system:String x:Key="LabelQueueList">Queue list</system:String>
-    <system:String x:Key="ButtonQueueUp">Move up</system:String>
-    <system:String x:Key="ButtonQueueDown">Move down</system:String>
-    <system:String x:Key="ButtonQueueDelete">Delete</system:String>
+    <system:String x:Key="CaptionQueueWindow">Projekt Queue</system:String>
+    <system:String x:Key="LabelQueueList">Queue Liste</system:String>
+    <system:String x:Key="ButtonQueueUp">Nach oben</system:String>
+    <system:String x:Key="ButtonQueueDown">Nach unten</system:String>
+    <system:String x:Key="ButtonQueueDelete">Löschen</system:String>
     <system:String x:Key="ButtonQueueStart">Start</system:String>
-    <system:String x:Key="CheckBoxQueueShutdown">Shutdown when finished</system:String>
+    <system:String x:Key="CheckBoxQueueShutdown">Herunterfahren wenn fertig</system:String>
 
     <!-- DemuxedStreams Window -->
-    <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed streams</system:String>
-    <system:String x:Key="LabelDemuxedStreamsList">Demuxed streams list:</system:String>
-    <system:String x:Key="ButtonLoadDemuxedStreams">Load existing *.streamInfo.xml</system:String>
+    <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed Streams</system:String>
+    <system:String x:Key="LabelDemuxedStreamsList">Demuxed Streams Liste:</system:String>
+    <system:String x:Key="ButtonLoadDemuxedStreams">Lade existierende *streamInfo.xml</system:String>
 
     <!-- EncodingProfiles Window -->
-    <system:String x:Key="CaptionEncodingProfilesWindow">Edit encoding profiles</system:String>
-    <system:String x:Key="LabelEncodingProfiles">Encoding profiles</system:String>
-    <system:String x:Key="LabelEncodingProfilesEdit">Double click to edit</system:String>
-    <system:String x:Key="ButtonProfileUp">Move up</system:String>
-    <system:String x:Key="ButtonProfileDown">Move down</system:String>
-    <system:String x:Key="ButtonProfileDelete">Delete</system:String>
-    <system:String x:Key="ButtonProfileAdd">Add</system:String>
+    <system:String x:Key="CaptionEncodingProfilesWindow">Bearbeite Encoding Profile</system:String>
+    <system:String x:Key="LabelEncodingProfiles">Encoding Profile</system:String>
+    <system:String x:Key="LabelEncodingProfilesEdit">Doppelklick zum editieren</system:String>
+    <system:String x:Key="ButtonProfileUp">Nach oben</system:String>
+    <system:String x:Key="ButtonProfileDown">Nach unten</system:String>
+    <system:String x:Key="ButtonProfileDelete">Löschen</system:String>
+    <system:String x:Key="ButtonProfileAdd">Hinzufügen</system:String>
 
     <!-- EncodingProfile Window -->
-    <system:String x:Key="CaptionEncodingProfileWindow">Edit encoding profile</system:String>
-    <system:String x:Key="LabelEncodingProfileDescription">Profile description</system:String>
+    <system:String x:Key="CaptionEncodingProfileWindow">Bearbeite Encoding Profil</system:String>
+    <system:String x:Key="LabelEncodingProfileDescription">Profilbeschreibung</system:String>
     <system:String x:Key="LabelEncodingProfileSettings">Parameter</system:String>
-    <system:String x:Key="CheckBoxEncodingProfile2pass">2-pass profile</system:String>
-    <system:String x:Key="LabelEncodingProfileSettings2">Parameter for second pass (without --pass --bitrate --stats)</system:String>
-    <system:String x:Key="LabelEncodingProfileSizeValue">Size value</system:String>
-    <system:String x:Key="LabelEncodingProfileSizeType">Size value type</system:String>
+    <system:String x:Key="CheckBoxEncodingProfile2pass">2-pass Profil</system:String>
+    <system:String x:Key="LabelEncodingProfileSettings2">Parameter für 2. pass (ohne --pass --bitrate --stats)</system:String>
+    <system:String x:Key="LabelEncodingProfileSizeValue">Wert</system:String>
+    <system:String x:Key="LabelEncodingProfileSizeType">Art</system:String>
     <col:ArrayList x:Key="comboBoxSizeType">
-        <system:String>Specify Bitrate [Kbit/s]</system:String>
-        <system:String>Specify target size [MB]</system:String>
+        <system:String>Bitrate angeben [Kbit/s]</system:String>
+        <system:String>Zielgröße angeben [MB]</system:String>
     </col:ArrayList>
-    <system:String x:Key="NewEncodingProfileDesc">New encoding profile</system:String>
+    <system:String x:Key="NewEncodingProfileDesc">Neues Encoding Profil</system:String>
     
     <!-- AvisynthProfiles Window -->
-    <system:String x:Key="CaptionAvisynthProfilesWindow">Edit AviSynth profiles</system:String>
-    <system:String x:Key="LabelAvisynthProfiles">AviSynth profiles</system:String>
-    <system:String x:Key="LabelAvisynthProfilesEdit">Double click to edit</system:String>
-    <system:String x:Key="ButtonAviProfileUp">Move up</system:String>
-    <system:String x:Key="ButtonAviProfileDown">Move down</system:String>
-    <system:String x:Key="ButtonAviProfileDelete">Delete</system:String>
-    <system:String x:Key="ButtonAviProfileAdd">Add</system:String>
+    <system:String x:Key="CaptionAvisynthProfilesWindow">Bearbeite AviSynth Profile</system:String>
+    <system:String x:Key="LabelAvisynthProfiles">AviSynth Profile</system:String>
+    <system:String x:Key="LabelAvisynthProfilesEdit">Doppelklick zum editieren</system:String>
+    <system:String x:Key="ButtonAviProfileUp">Nach oben</system:String>
+    <system:String x:Key="ButtonAviProfileDown">Nach unten</system:String>
+    <system:String x:Key="ButtonAviProfileDelete">Löschen</system:String>
+    <system:String x:Key="ButtonAviProfileAdd">Hinzufügen</system:String>
 
     <!-- AvisynthProfile Window -->
-    <system:String x:Key="CaptionAvisynthProfileWindow">Edit AviSynth profile</system:String>
-    <system:String x:Key="LabelAvisynthProfileDescription">Profile description</system:String>
-    <system:String x:Key="LabelAvisynthProfileCommands">Commands</system:String>
-    <system:String x:Key="NewAvisynthProfileDesc">New encoding profile</system:String>
+    <system:String x:Key="CaptionAvisynthProfileWindow">Bearbeite AviSynth Profil</system:String>
+    <system:String x:Key="LabelAvisynthProfileDescription">Profilbeschreibung</system:String>
+    <system:String x:Key="LabelAvisynthProfileCommands">Befehle</system:String>
+    <system:String x:Key="NewAvisynthProfileDesc">Neues AviSynth Profil</system:String>
 
     <!-- PreferredLanguage Window -->
-    <system:String x:Key="CaptionPreferredLanguageWindow">Edit preferred language</system:String>
-    <system:String x:Key="LabelPreferredLanguage">Language (in english)</system:String>
-    <system:String x:Key="LabelPreferredLanguageTranslation">Translation</system:String>
-    <system:String x:Key="LabelPreferredLanguageShort">Short language tag (ISO639-1 or ISO639-2)</system:String>
-    <system:String x:Key="LabelPreferredLanguageExample">Example: German - Deutsch - de</system:String>
+    <system:String x:Key="CaptionPreferredLanguageWindow">Bearbeite bevorzugte Sprache</system:String>
+    <system:String x:Key="LabelPreferredLanguage">Sprache (in englisch)</system:String>
+    <system:String x:Key="LabelPreferredLanguageTranslation">Übersetzung</system:String>
+    <system:String x:Key="LabelPreferredLanguageShort">Sprachkürzel (ISO639-1 or ISO639-2)</system:String>
+    <system:String x:Key="LabelPreferredLanguageExample">Beispiel: German - Deutsch - de</system:String>
     
     <!-- Shutdown Window -->
-    <system:String x:Key="CaptionShutdownWindow">Shutdown</system:String>
-    <system:String x:Key="LabelShutdownCounter">Seconds until automatic shutdown: {0}</system:String>
+    <system:String x:Key="CaptionShutdownWindow">Herunterfahren</system:String>
+    <system:String x:Key="LabelShutdownCounter">Sekunden bis zum automatischen Herunterfahren: {0}</system:String>
 
     <!-- AdvancedOptions Window -->
-    <system:String x:Key="CaptionAdvancedOptionsWindow">Edit advanced options</system:String>
-    <system:String x:Key="TabAdvancedGeneral">General settings</system:String>
-    <system:String x:Key="CheckBoxDeleteDemuxedFiles">Delete demuxed files when finished</system:String>
-    <system:String x:Key="CheckBoxAlwaysDeleteIndex">Always delete index files</system:String>
-    <system:String x:Key="TabAutoCrop">AutoCrop settings</system:String>
-    <system:String x:Key="LabelAutocropNrFrames">Number of frames to analyze</system:String>
-    <system:String x:Key="LabelAutocropBlackValue">Max row sum to count as black</system:String>
-    <system:String x:Key="LabelAutocropCropMethod">Crop calculation method</system:String>
-    <system:String x:Key="CheckBoxAutocropMinimize">Start AutoCrop window minimized</system:String>
+    <system:String x:Key="CaptionAdvancedOptionsWindow">Bearbeite erweiterte Optionen</system:String>
+    <system:String x:Key="TabAdvancedGeneral">Allgemeine Einstellungen</system:String>
+    <system:String x:Key="CheckBoxDeleteDemuxedFiles">Lösche demuxte Dateien wenn fertig</system:String>
+    <system:String x:Key="CheckBoxAlwaysDeleteIndex">Index Dateien immer löschen</system:String>
+    <system:String x:Key="TabAutoCrop">AutoCrop Einstellungen</system:String>
+    <system:String x:Key="LabelAutocropNrFrames">Anzahl der zu analysierenden Bilder</system:String>
+    <system:String x:Key="LabelAutocropBlackValue">Maximale Zeilensumme die als schwarz zählt</system:String>
+    <system:String x:Key="LabelAutocropCropMethod">Crop Berechnungsmethode</system:String>
+    <system:String x:Key="CheckBoxAutocropMinimize">Starte AutoCrop Fenster minimiert</system:String>
     <col:ArrayList x:Key="comboBoxCropMethod">
         <system:String>Undercrop - Height mod 8</system:String>
         <system:String>Undercrop - Height mod 16</system:String>

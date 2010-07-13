@@ -79,7 +79,7 @@
                         <TextBox Height="23" HorizontalAlignment="Left" Margin="6,197,0,0" Name="textBoxTargetFilename" VerticalAlignment="Top" Width="433" TextChanged="textBoxTargetFilename_TextChanged" />
                         <Label Content="{DynamicResource LabelMovieTitle}" HorizontalAlignment="Left" Margin="6,226,0,0" Name="labelMovieTitle" VerticalAlignment="Top" />
                         <TextBox Height="23" HorizontalAlignment="Left" Margin="6,252,0,0" Name="textBoxMovieTitle" VerticalAlignment="Top" Width="433" TextChanged="textBoxMovieTitle_TextChanged" />
-                        <Button Content="{DynamicResource ButtonWorkingDirectory}" Height="23" HorizontalAlignment="Right" Margin="0,31,238,0" Name="buttonWorkingDirectory" VerticalAlignment="Top" Width="75" Click="buttonWorkingDirectory_Click" />
+                        <Button Content="{DynamicResource ButtonWorkingDirectory}" Height="23" Margin="445,31,0,0" Name="buttonWorkingDirectory" VerticalAlignment="Top" Click="buttonWorkingDirectory_Click" HorizontalAlignment="Left" Width="75" />
                         <Button Content="{DynamicResource ButtonTargetDirectory}" Height="23" HorizontalAlignment="Left" Margin="445,141,0,0" Name="buttonTargetDirectory" VerticalAlignment="Top" Width="75" Click="buttonTargetDirectory_Click" />
                         <Label Content="{DynamicResource LabelEncodedMovieDir}" HorizontalAlignment="Left" Margin="6,281,0,0" Name="labelEncodedMovieDir" VerticalAlignment="Top" />
                         <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,307,0,0" Name="textBoxEncodedMovieDir" VerticalAlignment="Top" Width="433" TextChanged="textBoxEncodedMovieDir_TextChanged" />

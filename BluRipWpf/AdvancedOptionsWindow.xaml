@@ -6,7 +6,7 @@
         <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="11,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" />
         <Button Content="{DynamicResource ButtonCancel}" Height="23" Margin="92,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" IsCancel="True" HorizontalAlignment="Left" Width="75" />
         <TabControl HorizontalAlignment="Stretch" Margin="12,12,12,41" Name="tabControlSettings" VerticalAlignment="Stretch">
-            <TabItem Header="General" Name="tabItemGeneral">
+            <TabItem Header="{DynamicResource TabAdvancedGeneral}" Name="tabItemGeneral">
                 <Grid>
                     <CheckBox Content="{DynamicResource CheckBoxDeleteDemuxedFiles}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxDeleteDemuxedFiles" VerticalAlignment="Top" Checked="checkBoxDeleteDemuxedFiles_Checked" Unchecked="checkBoxDeleteDemuxedFiles_Checked" />
                     <CheckBox Content="{DynamicResource CheckBoxAlwaysDeleteIndex}" Height="16" HorizontalAlignment="Left" Margin="6,28,0,0" Name="checkBoxAlwaysDeleteIndex" VerticalAlignment="Top" Checked="checkBoxAlwaysDeleteIndex_Checked" Unchecked="checkBoxAlwaysDeleteIndex_Checked" />
@@ -49,7 +49,7 @@
                     <CheckBox Content="{DynamicResource CheckBoxForcedSubtitleFlag}" Height="16" HorizontalAlignment="Left" Margin="324,72,0,0" Name="checkBoxForcedSubtitleFlag" VerticalAlignment="Top" Checked="checkBoxForcedSubtitleFLag_Checked" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Video" Name="tabItemVideo">
+            <TabItem Header="{DynamicResource TabAdvancedVideo}" Name="tabItemVideo">
                 <Grid>
                     <Label Content="{DynamicResource LabelProcessPriority}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelProcessPriority" VerticalAlignment="Top" />
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxProcessPriority" VerticalAlignment="Top" Width="232" SelectionChanged="comboBoxProcessPriority_SelectionChanged" />
