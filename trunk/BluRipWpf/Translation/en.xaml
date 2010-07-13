@@ -232,7 +232,7 @@
     <system:String x:Key="CaptionAvisynthProfileWindow">Edit AviSynth profile</system:String>
     <system:String x:Key="LabelAvisynthProfileDescription">Profile description</system:String>
     <system:String x:Key="LabelAvisynthProfileCommands">Commands</system:String>
-    <system:String x:Key="NewAvisynthProfileDesc">New encoding profile</system:String>
+    <system:String x:Key="NewAvisynthProfileDesc">New AviSynth profile</system:String>
 
     <!-- PreferredLanguage Window -->
     <system:String x:Key="CaptionPreferredLanguageWindow">Edit preferred language</system:String>
