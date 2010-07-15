@@ -139,11 +139,20 @@
                     <Grid>
                         <Button Content="{DynamicResource ButtonStartStart}" Height="23" HorizontalAlignment="Left" Margin="6,6,0,0" Name="buttonStart" VerticalAlignment="Top" Width="170" Click="buttonStart_Click" />
                         <Button Content="{DynamicResource ButtonStartQueue}" Height="23" HorizontalAlignment="Left" Margin="6,35,0,0" Name="buttonQueue" VerticalAlignment="Top" Width="170" Click="buttonQueue_Click" />
-                        <Button Content="{DynamicResource ButtonStartDemux}" Height="23" HorizontalAlignment="Left" Margin="6,151,0,0" Name="buttonOnlyDemux" VerticalAlignment="Top" Width="238" Click="buttonOnlyDemux_Click" />
-                        <Button Content="{DynamicResource ButtonStartCrop}" Height="23" HorizontalAlignment="Left" Margin="6,180,0,0" Name="buttonOnlyCrop" VerticalAlignment="Top" Width="238" Click="buttonOnlyCrop_Click" />
-                        <Button Content="{DynamicResource ButtonStartSubtitle}" Height="23" HorizontalAlignment="Left" Margin="6,209,0,0" Name="buttonOnlySubtitle" VerticalAlignment="Top" Width="238" Click="buttonOnlySubtitle_Click" />
-                        <Button Content="{DynamicResource ButtonStartEncode}" Height="23" HorizontalAlignment="Left" Margin="6,238,0,0" Name="buttonOnlyEncode" VerticalAlignment="Top" Width="238" Click="buttonOnlyEncode_Click" />
-                        <Button Content="{DynamicResource ButtonStartMux}" Height="23" HorizontalAlignment="Left" Margin="6,267,0,0" Name="buttonOnlyMux" VerticalAlignment="Top" Width="238" Click="buttonOnlyMux_Click" />
+                        <Button Content="{DynamicResource ButtonStartDemux}" Height="23" HorizontalAlignment="Left" Margin="6,216,0,0" Name="buttonOnlyDemux" VerticalAlignment="Top" Width="238" Click="buttonOnlyDemux_Click" />
+                        <Button Content="{DynamicResource ButtonStartCrop}" Height="23" HorizontalAlignment="Left" Margin="6,245,0,0" Name="buttonOnlyCrop" VerticalAlignment="Top" Width="238" Click="buttonOnlyCrop_Click" />
+                        <Button Content="{DynamicResource ButtonStartSubtitle}" Height="23" HorizontalAlignment="Left" Margin="6,274,0,0" Name="buttonOnlySubtitle" VerticalAlignment="Top" Width="238" Click="buttonOnlySubtitle_Click" />
+                        <Button Content="{DynamicResource ButtonStartEncode}" Height="23" HorizontalAlignment="Left" Margin="6,303,0,0" Name="buttonOnlyEncode" VerticalAlignment="Top" Width="238" Click="buttonOnlyEncode_Click" />
+                        <Button Content="{DynamicResource ButtonStartMux}" Height="23" HorizontalAlignment="Left" Margin="6,332,0,0" Name="buttonOnlyMux" VerticalAlignment="Top" Width="238" Click="buttonOnlyMux_Click" />
+                        <GroupBox Header="{DynamicResource GroupBoxProcessStepSelection}" Height="141" HorizontalAlignment="Left" Margin="6,69,0,0" Name="groupBoxProcessStepSelection" VerticalAlignment="Top" Width="238">
+                            <Grid>
+                                <CheckBox Content="{DynamicResource CheckBoxDoDemux}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxDoDemux" VerticalAlignment="Top" Checked="checkBoxDoDemux_Checked" Unchecked="checkBoxDoDemux_Checked" />
+                                <CheckBox Content="{DynamicResource CheckBoxDoIndex}" Height="16" HorizontalAlignment="Left" Margin="6,28,0,0" Name="checkBoxDoIndex" VerticalAlignment="Top" Checked="checkBoxDoIndex_Checked" Unchecked="checkBoxDoIndex_Checked" />
+                                <CheckBox Content="{DynamicResource CheckBoxDoSubtitle}" Height="16" HorizontalAlignment="Left" Margin="6,50,0,0" Name="checkBoxDoSubtitle" VerticalAlignment="Top" Checked="checkBoxDoSubtitle_Checked" Unchecked="checkBoxDoSubtitle_Checked" />
+                                <CheckBox Content="{DynamicResource CheckBoxDoEncode}" Height="16" HorizontalAlignment="Left" Margin="6,72,0,0" Name="checkBoxDoEncode" VerticalAlignment="Top" Checked="checkBoxDoEncode_Checked" Unchecked="checkBoxDoEncode_Checked" />
+                                <CheckBox Content="{DynamicResource CheckBoxDoMux}" Height="16" HorizontalAlignment="Left" Margin="6,94,0,0" Name="checkBoxDoMux" VerticalAlignment="Top" Checked="checkBoxDoMux_Checked" Unchecked="checkBoxDoMux_Checked" />
+                            </Grid>
+                        </GroupBox>
                     </Grid>
                 </TabItem>
             </TabControl>

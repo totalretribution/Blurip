@@ -177,6 +177,11 @@ namespace BluRip
             this.muxUntouchedSubs = orig.muxUntouchedSubs;
             this.copyUntouchedSubs = orig.copyUntouchedSubs;
             this.deleteAfterEncode = orig.deleteAfterEncode;
+            this.doDemux = orig.doDemux;
+            this.doIndex = orig.doIndex;
+            this.doSubtitle = orig.doSubtitle;
+            this.doEncode = orig.doEncode;
+            this.doMux = orig.doMux;
 
             this.snap = orig.snap;
             this.expertMode = orig.expertMode;
@@ -387,6 +392,12 @@ namespace BluRip
         public bool deleteIndex = false;
         public bool muxUntouchedSubs = false;
         public bool copyUntouchedSubs = false;
+
+        public bool doDemux = true;
+        public bool doIndex = true;
+        public bool doSubtitle = true;
+        public bool doEncode = true;
+        public bool doMux = true;
 
         // window settings
 

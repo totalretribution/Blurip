@@ -269,6 +269,12 @@ namespace BluRip
                 UpdateEncodingProfiles();
                 UpdateMuxSettings();
 
+                checkBoxDoDemux.IsChecked = settings.doDemux;
+                checkBoxDoIndex.IsChecked = settings.doIndex;
+                checkBoxDoSubtitle.IsChecked = settings.doSubtitle;
+                checkBoxDoEncode.IsChecked = settings.doEncode;
+                checkBoxDoMux.IsChecked = settings.doMux;
+
                 if (updateDicts)
                 {
                     if (settings.cropInput > -1 && settings.cropInput < 3) comboBoxCropInput.SelectedIndex = settings.cropInput;
@@ -783,6 +789,7 @@ namespace BluRip
                 labelEncodedMovieDir.Visibility = System.Windows.Visibility.Visible;
                 textBoxEncodedMovieDir.Visibility = System.Windows.Visibility.Visible;
                 buttonEncodedMovieDir.Visibility = System.Windows.Visibility.Visible;
+                groupBoxProcessStepSelection.Visibility = System.Windows.Visibility.Visible;
             }
             catch (Exception)
             {
@@ -802,6 +809,7 @@ namespace BluRip
                 labelEncodedMovieDir.Visibility = System.Windows.Visibility.Hidden;
                 textBoxEncodedMovieDir.Visibility = System.Windows.Visibility.Hidden;
                 buttonEncodedMovieDir.Visibility = System.Windows.Visibility.Hidden;
+                groupBoxProcessStepSelection.Visibility = System.Windows.Visibility.Hidden;
             }
             catch (Exception)
             {
@@ -884,8 +892,11 @@ namespace BluRip
             try
             {
                 // check path/settings here, too
+                if (settings.doDemux)
+                {
+                    if (!checkEac3to()) return false;
+                }
 
-                if (!checkEac3to()) return false;
                 int supCount = 0;
                 if (comboBoxTitle.SelectedIndex > -1)
                 {
@@ -897,16 +908,32 @@ namespace BluRip
                         }
                     }
                 }
-                if (!checkIndex()) return false;
-                if (supCount > 0)
+
+                if (settings.doIndex)
                 {
-                    if (!checkBdsup2sub()) return false;
+                    if (!checkIndex()) return false;
                 }
-                if (!settings.untouchedVideo)
+
+                if (settings.doSubtitle)
                 {
-                    if (!checkX264()) return false;
+                    if (supCount > 0)
+                    {
+                        if (!checkBdsup2sub()) return false;
+                    }
                 }
-                if (!checkMkvmerge()) return false;
+
+                if (settings.doEncode)
+                {
+                    if (!settings.untouchedVideo)
+                    {
+                        if (!checkX264()) return false;
+                    }
+                }
+
+                if (settings.doMux)
+                {
+                    if (!checkMkvmerge()) return false;
+                }
                 return true;
             }
             catch (Exception)
@@ -1658,6 +1685,61 @@ namespace BluRip
             try
             {
                 settings.encodedMovieDir = textBoxEncodedMovieDir.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDoDemux_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.doDemux = (bool)checkBoxDoDemux.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDoIndex_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.doIndex = (bool)checkBoxDoIndex.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDoSubtitle_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.doSubtitle = (bool)checkBoxDoSubtitle.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDoEncode_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.doEncode = (bool)checkBoxDoEncode.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDoMux_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.doMux = (bool)checkBoxDoMux.IsChecked;
             }
             catch (Exception)
             {

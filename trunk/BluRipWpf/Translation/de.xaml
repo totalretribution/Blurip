@@ -106,7 +106,12 @@
     <system:String x:Key="ButtonStartSubtitle">Nur Untertitel Bearbeitung</system:String>
     <system:String x:Key="ButtonStartEncode">Nur encode</system:String>
     <system:String x:Key="ButtonStartMux">Nur muxen</system:String>
-        
+    <system:String x:Key="GroupBoxProcessStepSelection">Bearbeitungsschritte auswählen</system:String>
+    <system:String x:Key="CheckBoxDoDemux">Demuxen</system:String>
+    <system:String x:Key="CheckBoxDoIndex">Indexierung + AutoCrop</system:String>
+    <system:String x:Key="CheckBoxDoSubtitle">Untertitel Bearbeitung</system:String>
+    <system:String x:Key="CheckBoxDoEncode">Encode</system:String>
+    <system:String x:Key="CheckBoxDoMux">Muxen</system:String>
     
     <!-- General -->
     <system:String x:Key="ButtonOk">Ok</system:String>
@@ -256,53 +261,53 @@
     <system:String x:Key="LabelAutocropCropMethod">Crop Berechnungsmethode</system:String>
     <system:String x:Key="CheckBoxAutocropMinimize">Starte AutoCrop Fenster minimiert</system:String>
     <col:ArrayList x:Key="comboBoxCropMethod">
-        <system:String>Undercrop - Height mod 8</system:String>
-        <system:String>Undercrop - Height mod 16</system:String>
-        <system:String>Overcrop - Height mod 8</system:String>
-        <system:String>Overcrop - Height mod 16</system:String>
-        <system:String>Resize - Height mod 8</system:String>
-        <system:String>Resize - Height mod 16</system:String>
-        <system:String>AddBorder - Height mod 8</system:String>
-        <system:String>AddBorder - Height mod 16</system:String>
+        <system:String>Undercrop - Höhe mod 8</system:String>
+        <system:String>Undercrop - Höhe mod 16</system:String>
+        <system:String>Overcrop - Höhe mod 8</system:String>
+        <system:String>Overcrop - Höhe mod 16</system:String>
+        <system:String>Resize - Höhe mod 8</system:String>
+        <system:String>Resize - Höhe mod 16</system:String>
+        <system:String>AddBorder - Höhe mod 8</system:String>
+        <system:String>AddBorder - Höhe mod 16</system:String>
     </col:ArrayList>
-    <system:String x:Key="TabAdvancedStreamselection">Stream selection</system:String>
-    <system:String x:Key="CheckBoxUseAutoselect">Use automatic stream selection</system:String>
-    <system:String x:Key="CheckBoxIncludeChapters">Select chapters</system:String>
-    <system:String x:Key="CheckBoxPreferDTS">Prefer DTS tracks</system:String>
-    <system:String x:Key="CheckBoxIncludeSubtitles">Select subtitles</system:String>
-    <system:String x:Key="CheckBoxDefaultAudioTrack">Set first audio track with first prefered language as default track</system:String>
-    <system:String x:Key="CheckBoxDefaultSubtitleTrack">Set first subtitle track with first prefered language as default track</system:String>
-    <system:String x:Key="CheckBoxDefaultSubtitleForced">Set first forced sub track as default (if available)</system:String>
-    <system:String x:Key="CheckBoxForcedSubtitleFlag">Set mkvmerge forced flag for first forced sub track</system:String>
-    <system:String x:Key="LabelPreferredAudioLanguages">Preferred audio languages</system:String>
-    <system:String x:Key="LabelPreferredAudioLanguagesDesc">Double click to edit</system:String>
-    <system:String x:Key="ButtonPreferredAudioLanguagesUp">Move up</system:String>
-    <system:String x:Key="ButtonPreferredAudioLanguagesDown">Move down</system:String>
-    <system:String x:Key="ButtonPreferredAudioLanguagesDel">Delete</system:String>
-    <system:String x:Key="ButtonPreferredAudioLanguagesAdd">Add</system:String>
-    <system:String x:Key="LabelPreferredSubLanguages">Preferred subtitle languages</system:String>
-    <system:String x:Key="LabelPreferredSubLanguagesDesc">Double click to edit</system:String>
-    <system:String x:Key="ButtonPreferredSubLanguagesUp">Move up</system:String>
-    <system:String x:Key="ButtonPreferredSubLanguagesDown">Move down</system:String>
-    <system:String x:Key="ButtonPreferredSubLanguagesDel">Delete</system:String>
-    <system:String x:Key="ButtonPreferredSubLanguagesAdd">Add</system:String>
-    <system:String x:Key="NewLanguage">new language</system:String>
+    <system:String x:Key="TabAdvancedStreamselection">Streamauswahl</system:String>
+    <system:String x:Key="CheckBoxUseAutoselect">Benutze automatische Streamauswahl</system:String>
+    <system:String x:Key="CheckBoxIncludeChapters">Wähle Kapitel aus</system:String>
+    <system:String x:Key="CheckBoxPreferDTS">Bevorzuge DTS Tonspuren</system:String>
+    <system:String x:Key="CheckBoxIncludeSubtitles">Wähle Untertitel aus</system:String>
+    <system:String x:Key="CheckBoxDefaultAudioTrack">Setze erste Tonspur mit bevorzugter Sprache als standard Spur</system:String>
+    <system:String x:Key="CheckBoxDefaultSubtitleTrack">Setze ersten Untertitel mit erster bevorzugter Sprache als Standard</system:String>
+    <system:String x:Key="CheckBoxDefaultSubtitleForced">Setze ersten forced Untertitel als Standard (wenn vorhanden)</system:String>
+    <system:String x:Key="CheckBoxForcedSubtitleFlag">Setze mkvmerge forced Flag für ersten forced Untertitel</system:String>
+    <system:String x:Key="LabelPreferredAudioLanguages">Bevorzugte Ton Sprachen</system:String>
+    <system:String x:Key="LabelPreferredAudioLanguagesDesc">Doppelklick zum editieren</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesUp">Nach oben</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesDown">Nach unten</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesDel">Löschen</system:String>
+    <system:String x:Key="ButtonPreferredAudioLanguagesAdd">Hinzufügen</system:String>
+    <system:String x:Key="LabelPreferredSubLanguages">Bevorzugte Untertitel Sprachen</system:String>
+    <system:String x:Key="LabelPreferredSubLanguagesDesc">Doppelklick zum editieren</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesUp">Nach oben</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesDown">Nach unten</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesDel">Löschen</system:String>
+    <system:String x:Key="ButtonPreferredSubLanguagesAdd">Hinzufügen</system:String>
+    <system:String x:Key="NewLanguage">Neue Sprache</system:String>
     <system:String x:Key="TabAdvancedVideo">Video</system:String>
-    <system:String x:Key="LabelProcessPriority">x264 process priority</system:String>
+    <system:String x:Key="LabelProcessPriority">x264 Prozess Priorität</system:String>
     <system:String x:Key="TabAdvancedAudio">Audio</system:String>
-    <system:String x:Key="CheckBoxConvertDTSBitrate">Convert DTS bitrate</system:String>
-    <system:String x:Key="CheckBoxConvertAC3Bitrate">Convert AC3 bitrate</system:String>
+    <system:String x:Key="CheckBoxConvertDTSBitrate">Konvertiere DTS Bitrate</system:String>
+    <system:String x:Key="CheckBoxConvertAC3Bitrate">Konvertiere AC3 Bitrate</system:String>
 
     <!-- AdvancedAudioOptions Window -->
-    <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Edit advanced audio options</system:String>
-    <system:String x:Key="GroupBoxRequired">Required settings</system:String>
-    <system:String x:Key="GroupBoxOptional">Optional settings</system:String>
-    <system:String x:Key="LabelExtension">Audio extension (e.g. .ac3)</system:String>
-    <system:String x:Key="LabelChooseExtension">Choose from</system:String>
-    <system:String x:Key="LabelBitrate">Bitrate (e.g. 768)</system:String>
-    <system:String x:Key="LabelChooseBitrate">Choose from</system:String>
-    <system:String x:Key="LabelExtraParameter">Extra parameter (e.g. -core)</system:String>
-    <system:String x:Key="CheckBoxAddAc3Track">Add additional AC3 track</system:String>
+    <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Bearbeite erweiterte Audio Einstellungen</system:String>
+    <system:String x:Key="GroupBoxRequired">Notwendige Einstellungen</system:String>
+    <system:String x:Key="GroupBoxOptional">Optionale Einstellungen</system:String>
+    <system:String x:Key="LabelExtension">Audio Dateiendung (z.B. .ac3)</system:String>
+    <system:String x:Key="LabelChooseExtension">Wähle aus</system:String>
+    <system:String x:Key="LabelBitrate">Bitrate (z.B. 768)</system:String>
+    <system:String x:Key="LabelChooseBitrate">Wähle aus</system:String>
+    <system:String x:Key="LabelExtraParameter">Extra Parameter (z.B. -core)</system:String>
+    <system:String x:Key="CheckBoxAddAc3Track">Füge zusätzliche AC3 Tonspur hinzu</system:String>
     <col:ArrayList x:Key="comboBoxExtension">
         <system:String>.ac3</system:String>
         <system:String>.dts</system:String>
@@ -321,125 +326,125 @@
     </col:ArrayList>
 
     <!-- AdvancedVideoOptions Window -->
-    <system:String x:Key="CaptionAdvancedVideoOptionsWindow">Edit advanced video options</system:String>
-    <system:String x:Key="CheckBoxManualFramerate">Set framerate manually</system:String>
+    <system:String x:Key="CaptionAdvancedVideoOptionsWindow">Bearbeite erweiterte Video Einstellungen</system:String>
+    <system:String x:Key="CheckBoxManualFramerate">Setze Framerate manuell</system:String>
     <system:String x:Key="GroupBoxFramerate">Framerate</system:String>
     <system:String x:Key="LabelFramerate">Framerate</system:String>
-    <system:String x:Key="LabelChooseFramerate">Choose from</system:String>
-    <system:String x:Key="LabelLength">Length (in ms)</system:String>
-    <system:String x:Key="LabelFramecount">Frame count</system:String>
+    <system:String x:Key="LabelChooseFramerate">Wähle aus</system:String>
+    <system:String x:Key="LabelLength">Länge (in ms)</system:String>
+    <system:String x:Key="LabelFramecount">Frameanzahl</system:String>
     <col:ArrayList x:Key="comboBoxFramerate">
         <system:String>23.976</system:String>
         <system:String>25.0</system:String>
         <system:String>29.967</system:String>
     </col:ArrayList>
-    <system:String x:Key="CheckBoxManualInputResolution">Set input resolution manually</system:String>
-    <system:String x:Key="GroupBoxInputResolution">Input resolution</system:String>
-    <system:String x:Key="LabelInputResX">X (width)</system:String>
-    <system:String x:Key="LabelInputResY">Y (heigth)</system:String>
-    <system:String x:Key="CheckBoxDisableAutocrop">Disable AutoCrop</system:String>
-    <system:String x:Key="GroupBoxAutocrop">Manual crop settings</system:String>    
-    <system:String x:Key="CheckBoxManualCrop">Set crop values manually</system:String>
+    <system:String x:Key="CheckBoxManualInputResolution">Setze Eingangsauflösung manuell</system:String>
+    <system:String x:Key="GroupBoxInputResolution">Eingangsauflösung</system:String>
+    <system:String x:Key="LabelInputResX">X (Breite)</system:String>
+    <system:String x:Key="LabelInputResY">Y (Höhe)</system:String>
+    <system:String x:Key="CheckBoxDisableAutocrop">Deaktiviere AutoCrop</system:String>
+    <system:String x:Key="GroupBoxAutocrop">Manuelle Crop Einstellungen</system:String>    
+    <system:String x:Key="CheckBoxManualCrop">Setze Crop Werte manuell</system:String>
     <system:String x:Key="GroupBoxManualCrop">Crop</system:String>
-    <system:String x:Key="LabelCropTop">Top</system:String>
-    <system:String x:Key="LabelCropBottom">Bottom</system:String>
-    <system:String x:Key="LabelCropLeft">Left</system:String>
-    <system:String x:Key="LabelCropRight">Right</system:String>
-    <system:String x:Key="CheckBoxManualBorders">Set add borders values manually</system:String>
-    <system:String x:Key="GroupBoxManualBorders">Add borders</system:String>
-    <system:String x:Key="LabelBorderTop">Top</system:String>
-    <system:String x:Key="LabelBorderBottom">Bottom</system:String>
-    <system:String x:Key="LabelBorderLeft">Left</system:String>
-    <system:String x:Key="LabelBorderRight">Right</system:String>
-    <system:String x:Key="CheckBoxManualResize">Set resize values manually</system:String>
+    <system:String x:Key="LabelCropTop">Oben</system:String>
+    <system:String x:Key="LabelCropBottom">Unten</system:String>
+    <system:String x:Key="LabelCropLeft">Links</system:String>
+    <system:String x:Key="LabelCropRight">Rechts</system:String>
+    <system:String x:Key="CheckBoxManualBorders">Setze AddBorders Werte manuell</system:String>
+    <system:String x:Key="GroupBoxManualBorders">AddBborders</system:String>
+    <system:String x:Key="LabelBorderTop">Oben</system:String>
+    <system:String x:Key="LabelBorderBottom">Unten</system:String>
+    <system:String x:Key="LabelBorderLeft">Links</system:String>
+    <system:String x:Key="LabelBorderRight">Rechts</system:String>
+    <system:String x:Key="CheckBoxManualResize">Setze Resize Werte manuell</system:String>
     <system:String x:Key="GroupBoxManualResize">Resize</system:String>
-    <system:String x:Key="LabelResizeX">X (width)</system:String>
-    <system:String x:Key="LabelResizeY">Y (heigth)</system:String>
-    <system:String x:Key="CheckBoxManualAspectRatio">Set mkvmerge aspect ratio</system:String>
+    <system:String x:Key="LabelResizeX">X (Breite)</system:String>
+    <system:String x:Key="LabelResizeY">Y (Höhe)</system:String>
+    <system:String x:Key="CheckBoxManualAspectRatio">Setze mkvmerge aspect ratio</system:String>
     <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
 
     <!-- link Window -->
-    <system:String x:Key="CaptionLinkWindow">Links to needed and usefull tools</system:String>
-    <system:String x:Key="LabelAvisynthLink">Link to AviSynth</system:String>
-    <system:String x:Key="LabelHaaliLink">Link to Haali splitter</system:String>
-    <system:String x:Key="LabelEac3toLink">Link to eac3to</system:String>
-    <system:String x:Key="LabelX264Link">Link to x264</system:String>
-    <system:String x:Key="LabelX264InfoLink">Link to x264 settings info</system:String>
-    <system:String x:Key="LabelBDSup2subLink">Link to BDSup2sub</system:String>
-    <system:String x:Key="LabelFfmpegsrcLink">Link to Ffmpgesrc</system:String>
-    <system:String x:Key="LabelJavaLink">Link to java</system:String>
-    <system:String x:Key="LabelMkvtoolnixLink">Link to mkvtoolnix</system:String>
-    <system:String x:Key="LabelFiltertweakerLink">Link to Windows 7 filter tweaker</system:String>
-    <system:String x:Key="LabelAnydvdLink">Link to AnyDvd HD</system:String>
-    <system:String x:Key="LabelSurcodeLink">Link to surcode DTS encoder</system:String>
-    <system:String x:Key="LabelDgdecnvLink">Link to DGDecNV</system:String>
-    <system:String x:Key="LabelAvs2yuvLink">Link to avs2yuv</system:String>
-    <system:String x:Key="LabelNeededTools">Needed tools</system:String>
-    <system:String x:Key="LabelUsefullTools">Usefull tools</system:String>
+    <system:String x:Key="CaptionLinkWindow">Links zu notwendigen und nützlichen Programmen</system:String>
+    <system:String x:Key="LabelAvisynthLink">Link zu AviSynth</system:String>
+    <system:String x:Key="LabelHaaliLink">Link zu Haali splitter</system:String>
+    <system:String x:Key="LabelEac3toLink">Link zu eac3to</system:String>
+    <system:String x:Key="LabelX264Link">Link zu x264</system:String>
+    <system:String x:Key="LabelX264InfoLink">Link zu x264 settings info</system:String>
+    <system:String x:Key="LabelBDSup2subLink">Link zu BDSup2sub</system:String>
+    <system:String x:Key="LabelFfmpegsrcLink">Link zu Ffmpgesrc</system:String>
+    <system:String x:Key="LabelJavaLink">Link zu java</system:String>
+    <system:String x:Key="LabelMkvtoolnixLink">Link zu mkvtoolnix</system:String>
+    <system:String x:Key="LabelFiltertweakerLink">Link zu Windows 7 filter tweaker</system:String>
+    <system:String x:Key="LabelAnydvdLink">Link zu AnyDvd HD</system:String>
+    <system:String x:Key="LabelSurcodeLink">Link zu surcode DTS encoder</system:String>
+    <system:String x:Key="LabelDgdecnvLink">Link zu DGDecNV</system:String>
+    <system:String x:Key="LabelAvs2yuvLink">Link zu avs2yuv</system:String>
+    <system:String x:Key="LabelNeededTools">Notwendige Programme</system:String>
+    <system:String x:Key="LabelUsefullTools">Nützliche Programme</system:String>
 
     <!-- About Window -->
-    <system:String x:Key="CaptionAboutWindow">About BluRip</system:String>
+    <system:String x:Key="CaptionAboutWindow">Über BluRip</system:String>
     <system:String x:Key="LabelBluRip">BluRip © __hawk__ 2009-2010</system:String>
-    <system:String x:Key="LabelGermanForum">Link to german support forum</system:String>
-    <system:String x:Key="LabelEnglishForum">Link to english support forum</system:String>
-    <system:String x:Key="LabelHomeLink">Project homepage</system:String>
-    <system:String x:Key="LabelEmail">Send email</system:String>
+    <system:String x:Key="LabelGermanForum">Link zum deutschen Supportforum</system:String>
+    <system:String x:Key="LabelEnglishForum">Link zum englischen Supportforum</system:String>
+    <system:String x:Key="LabelHomeLink">Projekt Homepage</system:String>
+    <system:String x:Key="LabelEmail">Sende E-Mail</system:String>
 
     <!-- Error msg -->
-    <system:String x:Key="ErrorHeader">Error:</system:String>
-    <system:String x:Key="ErrorException">Exception:</system:String>
-    <system:String x:Key="ErrorEac3toPath">Path to eac3to.exe not set or found.</system:String>
-    <system:String x:Key="ErrorBlurayPath">Path to BluRay drive/folder not set or found.</system:String>
-    <system:String x:Key="ErrorNoDemuxedStreams">No demuxed streams available</system:String>
-    <system:String x:Key="ErrorFfmsindexPath">ffmsindex path not set</system:String>
-    <system:String x:Key="ErrorDgindexPath">DGIndexNv path not set</system:String>
-    <system:String x:Key="ErrorMediaInfo">Error getting MediaInfo:</system:String>
-    <system:String x:Key="ErrorFramerate">Error getting framerate</system:String>
-    <system:String x:Key="ErrorNoFramerate">Could not get framerate - please report log to developer</system:String>
-    <system:String x:Key="ErrorIndex">Error while indexing!</system:String>
-    <system:String x:Key="ErrorSetFramerate">Framerate not set - do index + autocrop first</system:String>
-    <system:String x:Key="ErrorSubtitle">Error processing subtitle</system:String>
-    <system:String x:Key="ErrorJavaPath">Path to java.exe not set or found.</system:String>
-    <system:String x:Key="ErrorBdsup2subPath">Path to BDSup2sub.jar not set or found.</system:String>
-    <system:String x:Key="ErrorNoVideo">No video stream or more then one selected</system:String>
-    <system:String x:Key="ErrorNoAudio">No audio streams selected</system:String>
-    <system:String x:Key="ErrorUnknownTracks">Unknown tracks selected - please report log to developer</system:String>
-    <system:String x:Key="ErrorNoTitle">No title selected</system:String>
-    <system:String x:Key="ErrorWorkingDirectory">Working dir not set</system:String>
-    <system:String x:Key="ErrorMkvmergePath">Path to mkvmerge.exe not set or found.</system:String>
-    <system:String x:Key="ErrorSubtitleFile">Subtitle file(s) not found</system:String>
-    <system:String x:Key="ErrorChapterFile">Chapter file not found</system:String>
-    <system:String x:Key="ErrorVideoFile">Video file not found</system:String>
-    <system:String x:Key="ErrorAudioFile">Audio file(s) not found</system:String>
-    <system:String x:Key="ErrorX264Path">Path to x264.exe not set or found.</system:String>
-    <system:String x:Key="ErrorX264x64Path">Path to 64-bit x264.exe not set or found.</system:String>
-    <system:String x:Key="ErrorAvs2yuvPath">Path to avs2yuv.exe not set or found.</system:String>
-    <system:String x:Key="ErrorEncodeAvsNotSet">Encode avs not set - do index + autocrop first</system:String>
-    <system:String x:Key="ErrorEncodingProfileNotSet">Encoding profile not set</system:String>
-    <system:String x:Key="ErrorEncodeFailed">Encode failed!</system:String>
-    <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) failed!</system:String>
+    <system:String x:Key="ErrorHeader">Fehler:</system:String>
+    <system:String x:Key="ErrorException">Ausnahmefehler:</system:String>
+    <system:String x:Key="ErrorEac3toPath">Pfad zu eac3to.exe nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorBlurayPath">Pfad zum BluRay Laufwerk/Verzeichnis nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorNoDemuxedStreams">Keine demuxten Streams verfügbar</system:String>
+    <system:String x:Key="ErrorFfmsindexPath">ffmsindex Pfad nicht gesetzt</system:String>
+    <system:String x:Key="ErrorDgindexPath">DGIndexNv Pfad nicht gesetzt</system:String>
+    <system:String x:Key="ErrorMediaInfo">Fehler beim Holen von MediaInfo:</system:String>
+    <system:String x:Key="ErrorFramerate">Fehler beim Holen der Framerate</system:String>
+    <system:String x:Key="ErrorNoFramerate">Konnte Framerate nicht feststellen - Bitte Log an Entwickler senden</system:String>
+    <system:String x:Key="ErrorIndex">Fehler bei der Indizierung!</system:String>
+    <system:String x:Key="ErrorSetFramerate">Framerate nicht gesetzt - Zuerst Indexierung + AutoCrop ausführen</system:String>
+    <system:String x:Key="ErrorSubtitle">Fehler bei der Untertitelbearbeitung</system:String>
+    <system:String x:Key="ErrorJavaPath">Pfad zu java.exe nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorBdsup2subPath">Pfad zu BDSup2sub.jar nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorNoVideo">Kein Videostream oder mehr als einer ausgewählt</system:String>
+    <system:String x:Key="ErrorNoAudio">Kein Audiostream ausgewählt</system:String>
+    <system:String x:Key="ErrorUnknownTracks">Unbekannte Streams ausgewählt - Bitte Log an Entwickler senden</system:String>
+    <system:String x:Key="ErrorNoTitle">Kein Titel ausgewählt</system:String>
+    <system:String x:Key="ErrorWorkingDirectory">Arbeitsverzeichnis nicht gesetzt</system:String>
+    <system:String x:Key="ErrorMkvmergePath">Pfad zu mkvmerge.exe nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorSubtitleFile">Untertitel Datei(n) nicht gefunden</system:String>
+    <system:String x:Key="ErrorChapterFile">Kapitel Datei nicht gefunden</system:String>
+    <system:String x:Key="ErrorVideoFile">Video Datei nicht gefunden</system:String>
+    <system:String x:Key="ErrorAudioFile">Audio Datei(n) nicht gefunden</system:String>
+    <system:String x:Key="ErrorX264Path">Pfad zu x264.exe nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorX264x64Path">Pfad zu 64-bit x264.exe nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorAvs2yuvPath">Pfad zu avs2yuv.exe nicht gesetzt oder gefunden.</system:String>
+    <system:String x:Key="ErrorEncodeAvsNotSet">Encode .avs nicht gesetzt - Zuerst Indexierung + AutoCrop ausführen</system:String>
+    <system:String x:Key="ErrorEncodingProfileNotSet">Encoding Profil nicht gesetzt</system:String>
+    <system:String x:Key="ErrorEncodeFailed">Encode fehlgeschlagen!</system:String>
+    <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) fehlgeschlagen!</system:String>
     
     
     <!-- Info msg -->
-    <system:String x:Key="InfoManualFps">Using manual fps - override MediaInfo value</system:String>
-    <system:String x:Key="InfoFps">Assume fps is {0}</system:String>
-    <system:String x:Key="InfoFrames">WARNING: frames or length not set - bitrate calculation not possible</system:String>
-    <system:String x:Key="InfoStartCrop">Starting AutoCrop...</system:String>
-    <system:String x:Key="InfoCropTop">Crop top: {0}</system:String>
-    <system:String x:Key="InfoCropBottom">Crop bottom: {0}</system:String>
-    <system:String x:Key="InfoBorderTop">Border top: {0}</system:String>
-    <system:String x:Key="InfoBorderBottom">Border bottom: {0}</system:String>
-    <system:String x:Key="InfoResize">Resize to: {0} x {1}</system:String>
-    <system:String x:Key="InfoNoResize">Did not add resize command</system:String>
-    <system:String x:Key="InfoNoBorder">Did not add AddBorders command</system:String>
-    <system:String x:Key="InfoAvsContent">Content of encode avs:</system:String>
-    <system:String x:Key="InfoNoSubtitles">No subtitles to process</system:String>
-    <system:String x:Key="InfoNoSubtitlesProcessing">No subtitles processing needed</system:String>
-    <system:String x:Key="InfoQueueStart">Starting to process job {0}/{1}</system:String>
-    <system:String x:Key="InfoQueueProjectStart">Processing project {0}</system:String>
-    <system:String x:Key="InfoQueueCancel">Queue canceled.</system:String>
-    <system:String x:Key="InfoQueueDone">Queue done.</system:String>
-    <system:String x:Key="InfoQueueTitle">Project:</system:String>
+    <system:String x:Key="InfoManualFps">Benutze manuelle Framerate - überschreibe MediaInfo Werte</system:String>
+    <system:String x:Key="InfoFps">Framerate ist vermutlich {0}</system:String>
+    <system:String x:Key="InfoFrames">WARNUNG: Frameanzahl oder Länge nicht gesetzt - Bitrate Berechnung nicht möglich</system:String>
+    <system:String x:Key="InfoStartCrop">Starte AutoCrop...</system:String>
+    <system:String x:Key="InfoCropTop">Crop oben: {0}</system:String>
+    <system:String x:Key="InfoCropBottom">Crop unten: {0}</system:String>
+    <system:String x:Key="InfoBorderTop">Border oben: {0}</system:String>
+    <system:String x:Key="InfoBorderBottom">Border unten: {0}</system:String>
+    <system:String x:Key="InfoResize">Ändere Größe auf: {0} x {1}</system:String>
+    <system:String x:Key="InfoNoResize">Kein resize Kommando hinzugefügt</system:String>
+    <system:String x:Key="InfoNoBorder">Kein AddBorders Kommando hinzugefügt</system:String>
+    <system:String x:Key="InfoAvsContent">Inhalt vom Encode .avs:</system:String>
+    <system:String x:Key="InfoNoSubtitles">Keine Untertitel zur Bearbeitung vorhanden</system:String>
+    <system:String x:Key="InfoNoSubtitlesProcessing">Keine Untertitelbearbeitung notwendig</system:String>
+    <system:String x:Key="InfoQueueStart">Starte Bearbeitung von Job {0}/{1}</system:String>
+    <system:String x:Key="InfoQueueProjectStart">Bearbeite Projekt {0}</system:String>
+    <system:String x:Key="InfoQueueCancel">Queue abgebrochen.</system:String>
+    <system:String x:Key="InfoQueueDone">Queue fertig.</system:String>
+    <system:String x:Key="InfoQueueTitle">Projekt:</system:String>
 
 </ResourceDictionary>
