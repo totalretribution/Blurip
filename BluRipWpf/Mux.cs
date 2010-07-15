@@ -29,6 +29,8 @@ namespace BluRip
         {
             try
             {
+                if (!settings.doMux) return true;
+
                 int videoStream = 0;
                 int audioStream = 0;
                 int chapterStream = 0;

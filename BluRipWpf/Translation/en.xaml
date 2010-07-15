@@ -106,8 +106,13 @@
     <system:String x:Key="ButtonStartSubtitle">Only subtitle processing</system:String>
     <system:String x:Key="ButtonStartEncode">Only encode</system:String>
     <system:String x:Key="ButtonStartMux">Only mux</system:String>
-        
-    
+    <system:String x:Key="GroupBoxProcessStepSelection">Select process steps</system:String>
+    <system:String x:Key="CheckBoxDoDemux">Demux</system:String>
+    <system:String x:Key="CheckBoxDoIndex">Index + autocrop</system:String>
+    <system:String x:Key="CheckBoxDoSubtitle">Subtitle processing</system:String>
+    <system:String x:Key="CheckBoxDoEncode">Encode</system:String>
+    <system:String x:Key="CheckBoxDoMux">Mux</system:String>
+
     <!-- General -->
     <system:String x:Key="ButtonOk">Ok</system:String>
     <system:String x:Key="ButtonCancel">Cancel</system:String>
