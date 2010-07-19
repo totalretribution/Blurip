@@ -189,7 +189,7 @@ namespace BluRip
                 et.Start();
                 et.WaitForExit();
 
-                if (!et.Successfull)
+                if (et == null || !et.Successfull)
                 {
                     logWindow.MessageEncode(Global.Res("ErrorEncodeFailed"));
                     return false;
@@ -202,7 +202,7 @@ namespace BluRip
                     et.OnLogMsg += new ExternalTool.LogEventHandler(EncodeMsg);
                     et.Start();
                     et.WaitForExit();
-                    if (!et.Successfull)
+                    if (et == null || !et.Successfull)
                     {
                         logWindow.MessageEncode(Global.Res("ErrorEncode2passFailed"));
                         return false;

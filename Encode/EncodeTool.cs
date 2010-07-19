@@ -110,8 +110,8 @@ namespace BluRip
                             this.Path = "cmd.exe";
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
                                 settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " " +
-                                " -o \"" + outdir + "\\" + 
-                                settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                                " -o \"" + outdir + "\\" +
+                                settings.filePrefix + "_video.mkv\"" + " --input-res " + vfi.resX + "x" + vfi.resY + "\" -";
                         }
                     }
                     else
@@ -129,7 +129,7 @@ namespace BluRip
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
                                 settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " " + "--stats \"" + statsFile + "\" " +
                                 "--pass 1 --bitrate " + bitrate.ToString() +
-                                " -o NUL" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                                " -o NUL" + " --input-res " + vfi.resX + "x" + vfi.resY + "\" -";
                         }
                     }
                 }
@@ -147,8 +147,8 @@ namespace BluRip
                         {
                             this.Path = "cmd.exe";
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + outdir + "\\" + 
-                                settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + outdir + "\\" +
+                                settings.filePrefix + "_video.mkv\"" + " --input-res " + vfi.resX + "x" + vfi.resY + "\" -";
                         }
                     }
                     else
@@ -168,7 +168,7 @@ namespace BluRip
                                 settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " " + "--stats \"" + statsFile + "\" " +
                                 "--pass 2 --bitrate " + bitrate.ToString() +
                                 " -o \"" + outdir + "\\" +
-                                settings.filePrefix + "_video.mkv\"" + " - " + vfi.resX + "x" + vfi.resY + "\"";
+                                settings.filePrefix + "_video.mkv\"" + " --input-res " + vfi.resX + "x" + vfi.resY + "\" -";
                         }
                     }
                 }

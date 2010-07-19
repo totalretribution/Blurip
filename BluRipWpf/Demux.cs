@@ -94,7 +94,8 @@ namespace BluRip
 
                 demuxedStreamsWindow.UpdateDemuxedStreams();
 
-                return dt.Successfull;
+                if (dt == null) return false;
+                else return dt.Successfull;
             }
             catch (Exception ex)
             {

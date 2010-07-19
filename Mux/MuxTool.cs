@@ -538,7 +538,7 @@ namespace BluRip
                                         {
                                             if (si.filename != "")
                                             {
-                                                if (File.Exists(si.filename)) File.Copy(si.filename, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sup", true);
+                                                if (File.Exists(si.filename)) File.Copy(si.filename, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_original_pgs.sup", true);
                                             }
                                         }
                                         if (!pgs && subidx)
@@ -558,11 +558,11 @@ namespace BluRip
                                         {
                                             if (sfi.normalSup != "")
                                             {
-                                                if (File.Exists(sfi.normalSup)) File.Copy(sfi.normalSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sup", true);
+                                                if (File.Exists(sfi.normalSup)) File.Copy(sfi.normalSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_pgs.sup", true);
                                             }
                                             else if (sfi.forcedSup != "")
                                             {
-                                                if (File.Exists(sfi.forcedSup)) File.Copy(sfi.forcedSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sup", true);
+                                                if (File.Exists(sfi.forcedSup)) File.Copy(sfi.forcedSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced_pgs.sup", true);
                                             }
                                         }
                                     }
