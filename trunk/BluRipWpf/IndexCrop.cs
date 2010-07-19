@@ -133,7 +133,7 @@ namespace BluRip
                             it.OnLogMsg += new ExternalTool.LogEventHandler(IndexMsg);
                             it.Start();
                             it.WaitForExit();
-                            if (!it.Successfull)
+                            if (it == null || !it.Successfull)
                             {
                                 logWindow.MessageCrop(Global.Res("ErrorIndex"));
                                 return false;

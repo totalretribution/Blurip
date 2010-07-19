@@ -149,7 +149,7 @@ namespace BluRip
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
                             st.WaitForExit();
-                            if (!st.Successfull) error = true;
+                            if (st == null || !st.Successfull) error = true;
 
                             UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleForced"), subtitle, subtitleCount));
                             st = new SubtitleTool(settings, fps, ref si, true, false, false);
@@ -157,7 +157,7 @@ namespace BluRip
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
                             st.WaitForExit();
-                            if (!st.Successfull) error = true;
+                            if (st == null || !st.Successfull) error = true;
                         }
                         if (sup)
                         {
@@ -167,7 +167,7 @@ namespace BluRip
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
                             st.WaitForExit();
-                            if (!st.Successfull) error = true;
+                            if (st == null || !st.Successfull) error = true;
 
                             UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleForcedPgs"), subtitle, subtitleCount));
                             st = new SubtitleTool(settings, fps, ref si, true, false, true);
@@ -175,7 +175,7 @@ namespace BluRip
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
                             st.WaitForExit();
-                            if (!st.Successfull) error = true;
+                            if (st == null || !st.Successfull) error = true;
                         }
 
                         if (settings.muxLowResSubs && (settings.muxSubs > 0 && settings.muxSubs <4))
@@ -187,7 +187,7 @@ namespace BluRip
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
                             st.WaitForExit();
-                            if (!st.Successfull) error = true;
+                            if (st == null || !st.Successfull) error = true;
 
                             UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleLowresForced"), subtitle, subtitleCount));
                             st = new SubtitleTool(settings, fps, ref si, true, true, false);
@@ -195,7 +195,7 @@ namespace BluRip
                             st.OnLogMsg += new ExternalTool.LogEventHandler(SubtitleMsg);
                             st.Start();
                             st.WaitForExit();
-                            if (!st.Successfull) error = true;
+                            if (st == null || !st.Successfull) error = true;
                         }
 
                         if (!error)

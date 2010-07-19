@@ -157,7 +157,8 @@ namespace BluRip
                 mt.OnLogMsg += new ExternalTool.LogEventHandler(MuxMsg);
                 mt.Start();
                 mt.WaitForExit();
-                return mt.Successfull;
+                if (mt == null) return false;
+                else return mt.Successfull;
             }
             catch (Exception ex)
             {

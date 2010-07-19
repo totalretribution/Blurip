@@ -282,42 +282,42 @@ namespace BluRip
 
                 if (settings.preferredAudioLanguages.Count == 0)
                 {
-                    settings.preferredAudioLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
+                    //settings.preferredAudioLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
                     settings.preferredAudioLanguages.Add(new LanguageInfo("English","Englisch","en"));
                 }
 
                 if (settings.preferredSubtitleLanguages.Count == 0)
                 {
-                    settings.preferredSubtitleLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
+                    //settings.preferredSubtitleLanguages.Add(new LanguageInfo("German", "Deutsch", "de"));
                     settings.preferredSubtitleLanguages.Add(new LanguageInfo("English", "Englisch", "en"));
                 }
 
                 if(settings.encodingSettings.Count == 0)
                 {
-                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 18/ref 5/no-fast-pskip/b-adapt 1", "--preset slow --tune film --crf 18.0 --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1"));
-                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 18/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0", "--preset slow --tune film --crf 18.0 --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0"));
+                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 18/ref 5/no-fast-pskip/b-adapt 1", "--preset slow --tune film --crf 18.0 --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1"));
+                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 18/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0", "--preset slow --tune film --crf 18.0 --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1 --aq-mode 0"));
 
-                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 19/ref 5/no-fast-pskip/b-adapt 1", "--preset slow --tune film --crf 19.0 --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1"));
-                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 19/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0", "--preset slow --tune film --crf 19.0 --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0"));
+                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 19/ref 5/no-fast-pskip/b-adapt 1", "--preset slow --tune film --crf 19.0 --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1"));
+                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 19/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0", "--preset slow --tune film --crf 19.0 --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1 --aq-mode 0"));
 
-                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 20/ref 5/no-fast-pskip/b-adapt 1", "--preset slow --tune film --crf 20.0 --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1"));
-                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 20/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0", "--preset slow --tune film --crf 20.0 --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0"));
+                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 20/ref 5/no-fast-pskip/b-adapt 1", "--preset slow --tune film --crf 20.0 --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1"));
+                    settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/crf 20/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0", "--preset slow --tune film --crf 20.0 --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1 --aq-mode 0"));
 
                     settings.encodingSettings.Add(new EncodingSettings("Slow/animation/lvl 4.1/crf 18/no-fast-pskip/b-adapt 1", "--preset slow --tune animation --crf 18.0 --level 4.1 --no-fast-pskip --b-adapt 1"));
                     settings.encodingSettings.Add(new EncodingSettings("Slow/animation/lvl 4.1/crf 19/no-fast-pskip/b-adapt 1", "--preset slow --tune animation --crf 19.0 --level 4.1 --no-fast-pskip --b-adapt 1"));
                     settings.encodingSettings.Add(new EncodingSettings("Slow/animation/lvl 4.1/crf 20/no-fast-pskip/b-adapt 1", "--preset slow --tune animation --crf 20.0 --level 4.1 --no-fast-pskip --b-adapt 1"));
 
                     settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/2-pass 8000kbps/ref 5/no-fast-pskip/b-adapt 1",
-                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1", "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1", true, 8000, SizeType.Bitrate));
+                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1", "--preset slow --tune film --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1", true, 8000, SizeType.Bitrate));
 
                     settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/2-pass 8000kbps/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0",
-                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0", "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0", true, 8000, SizeType.Bitrate));
+                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0", "--preset slow --tune film --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1 --aq-mode 0", true, 8000, SizeType.Bitrate));
 
                     settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/2-pass 10000MB/ref 5/no-fast-pskip/b-adapt 1",
-                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1", "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1", true, 10000, SizeType.Size));
+                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1", "--preset slow --tune film --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1", true, 10000, SizeType.Size));
 
                     settings.encodingSettings.Add(new EncodingSettings("Slow/film/lvl 4.1/2-pass 10000MB/ref 5/no-fast-pskip/b-adapt 1/aq-mode 0",
-                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0", "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0", true, 10000, SizeType.Size));
+                        "--preset slow --tune film --level 4.1 --ref 5 --no-fast-pskip --b-adapt 1 --aq-mode 0", "--preset slow --tune film --level 4.1 --ref 4 --no-fast-pskip --b-adapt 1 --aq-mode 0", true, 10000, SizeType.Size));
                 }
 
                 if (settings.avisynthSettings.Count == 0)

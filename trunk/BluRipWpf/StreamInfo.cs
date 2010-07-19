@@ -98,7 +98,7 @@ namespace BluRip
                 sit.OnLogMsg += new ExternalTool.LogEventHandler(DemuxMsg);
                 sit.Start();
                 sit.WaitForExit();
-                if (!sit.Successfull)
+                if (sit == null || !sit.Successfull)
                 {
                     titleList.Clear();
                 }
@@ -398,7 +398,7 @@ namespace BluRip
                 mit.OnLogMsg += new ExternalTool.LogEventHandler(DemuxMsg);
                 mit.Start();
                 mit.WaitForExit();
-                if (!mit.Successfull)
+                if (mit == null || !mit.Successfull)
                 {
                     titleList.Clear();
                 }
