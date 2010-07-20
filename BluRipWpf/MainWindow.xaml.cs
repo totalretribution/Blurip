@@ -1773,7 +1773,7 @@ namespace BluRip
             try
             {
                 string tmp = (string)App.Current.Resources[key];
-                if (tmp != "") return tmp;
+                if (tmp != "" && tmp != null) return tmp;
                 else return "Unknown resource";
             }
             catch (Exception)
@@ -1787,7 +1787,7 @@ namespace BluRip
             try
             {
                 string tmp = String.Format((string)App.Current.Resources[key], para);
-                if (tmp != "") return tmp;
+                if (tmp != "" && tmp != null) return tmp;
                 else return "Unknown resource";
             }
             catch (Exception)
