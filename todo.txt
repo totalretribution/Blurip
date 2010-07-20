@@ -1,4 +1,4 @@
-(25%) - german tranlation
+(Done) - german tranlation
 
 (Done) - skin selection + classic skin
 
@@ -12,7 +12,7 @@
 
 - option to crop and addborders to get 1080 res
 
-- process step selection (for queue/normal start)
+(Done) - process step selection (for queue/normal start)
 
 (Done) - option to set forced flag for first forced subs track
 

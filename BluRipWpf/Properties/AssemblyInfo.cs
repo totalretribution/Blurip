@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BluRip")]
 [assembly: AssemblyProduct("BluRip")]
-[assembly: AssemblyCopyright("Copyright © _hawk_ 2010")]
+[assembly: AssemblyCopyright("Copyright © _hawk_ 2009-2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
