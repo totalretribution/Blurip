@@ -157,7 +157,7 @@ namespace BluRip
             try
             {
                 EncodingSettings es = new EncodingSettings();
-                es.desc = Global.Res("NewProfileDesc");
+                es.desc = Global.Res("NewEncodingProfileDesc");
                 settings.encodingSettings.Add(es);
                 UpdateEncodingProfile();
                 listBoxEncodingProfiles.SelectedIndex = settings.encodingSettings.Count - 1;
