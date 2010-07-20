@@ -1,0 +1,126 @@
+v0.5.0 (2010/07/20)
+
+    - Complete GUI redesign
+    - Skin support
+    - Multilanguage support (english + german)
+    - Support for PGS subtitles
+    - Lots of minor bugfixes
+    - Optional path for encoded video
+    - Shutdown possible when not using queue
+    - Prevent standby when running
+    - Process step selection
+    - Preferred language selection for audio and subtitles
+    - Option to set forced flag in .mkv for first forced track
+    - Compatible with latest 64-bit x264 build
+    - Switched to .NET 4.0
+
+v0.4.9 (2010/06/24)
+
+    - Improved subtitle handling
+    - Improved index generation handling
+    - Fixed bitrate calculation
+    - Option to mux lowres subtitles (for popcorn players)
+    - Fixed PCM track handling
+    - Updated MediaInfo.dll
+
+v0.4.8
+
+    - Split almost all processing steps into seperate DLLs
+    - Support for 64 bit x264 using avs2yuv
+    - Improved subtitle processing (faster/split tracks that contain normal&forced subs into 2 seperate tracks)
+    - Added bitrate calculator for 2-pass profiles (not using any overhead calculation yet)
+    - Added a lot of new default profiles
+    - Advanced options for audio & video tracks (on stream selection tab)
+
+        - Set output format for each audio track
+        - Include additionally AC3 track
+        - Disable autocrop/set framerate/resolution manually
+
+    - Support for PCM tracks (AC3 by default)
+    - Only needs .NET 2.0
+
+v0.4.7
+
+    - Code rewrite to allow gui redesign later
+    - Fixed some bugs in stream selection
+    - Delete index files if "Delete demuxed files" is checked
+
+v0.4.6.1
+
+    - Removed check for CuvidServer.exe
+
+v0.4.6
+
+    - Show return codes of all external tools
+    - Do not select AC3 surround tracks if other tracks are available
+    - Use DGMultiSource instead of CuvidServer
+    - If "delete input files" is selected, index files are deleted
+    - Added LoadPlugin command to avs files
+    - Updated MediaInfo.dll
+    - Moved shutdown checkbox from tab control to mainform (to allow changes while queue is running)
+    - set chapter language correctly
+    - Set framerate based on string parsing if mediainfo fails
+
+v0.4.5
+
+    - DGDecNv support
+    - Option to use untouched audio
+    - Option to shutdown after queue
+    - Option to convert DTS to AC3
+    - More subtitle mux/copy options
+    - Recognize more Ac3 types
+
+v0.4.4
+
+    - Load/save projects
+    - Queue system
+    - Changed avs input source selection
+
+v0.4.3
+
+    - Option to save log to file (right click in log window)
+    - Option to start AutoCrop window minimized
+    - Show encoding progress in title/taskbar icon text
+    - Fix for empty profiles on first start
+    - Option to only mux forced subs into mkv
+    - Option to copy all subs to 'Subs' folder
+    - Option to copy all subs but forced to 'Subs' folder
+
+v0.4.2
+
+    - Added option to downsample AC3 & DTS tracks
+    - Added DTS Hi-Res to dts audio tracks
+    - Resized GUI (smaller)
+    - Added some file existence checks
+
+v0.4.1
+
+    - Added AviSynth profiles
+    - Support for muxing untouched video
+    - Support for 720p resizing
+
+v0.4.0
+
+    - Added support for 2-pass profiles
+    - Bugfix: Subtitles were not muxed
+    - Bugfix: Stream number for subtitles in Sub folder not incremented
+
+v0.3.9
+
+    - Added support for .m2ts files
+
+v0.3.8
+
+    - Option to use -core for DTS-HD tracks
+    - Quotes around all filenames
+
+v0.3.7
+
+    - Removed MediaInfoWrapper - used interface form MediaInfoDll
+    - Fixed typo for crop modes
+    - Log windows for each step
+    - Copy subtitles in same order as in streamlist
+
+v0.3.6
+
+    - First public release
