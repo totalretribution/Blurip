@@ -66,6 +66,18 @@ namespace BluRip
             {
                 InitializeComponent();
 
+                settingsPath = AppDomain.CurrentDomain.BaseDirectory + "\\settings.xml";
+
+                if (!File.Exists(settingsPath))
+                {
+                    UserSettings.SaveSettingsFile(settings, settingsPath);
+                    UserSettings.LoadSettingsFile(ref settings, settingsPath);
+                }
+                else
+                {
+                    UserSettings.LoadSettingsFile(ref settings, settingsPath);
+                }
+
                 videoTypes.Add("h264/AVC");
                 videoTypes.Add("VC-1");
                 videoTypes.Add("MPEG2");
@@ -90,10 +102,58 @@ namespace BluRip
                 ac3Bitrates.Add("192");
                 ac3Bitrates.Add("448");
                 ac3Bitrates.Add("640");
+
+                // load styles before window is shown
+                LoadSkin();
+                LoadLanguage();
             }
             catch (Exception ex)
             {
                 Global.ErrorMsg(ex);
+            }
+        }
+
+        private void LoadSkin()
+        {
+            try
+            {
+                if (settings.skin == "classic")
+                {
+                    UpdateDictionary("Style/classic.xaml");
+                }
+                else if(settings.skin == "blu")
+                {
+                    UpdateDictionary("Style/style.xaml");
+                }
+                else
+                {
+                    UpdateDictionary("Style/style.xaml");
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void LoadLanguage()
+        {
+            try
+            {
+                if (settings.language == "de")
+                {
+                    UpdateDictionary("Translation/de.xaml");
+                }
+                else if (settings.language == "en")
+                {
+                    UpdateDictionary("Translation/en.xaml");
+                }
+                else
+                {
+                    UpdateDictionary("Translation/en.xaml");
+                }
+            }
+            catch (Exception)
+            {
             }
         }
         
@@ -102,17 +162,7 @@ namespace BluRip
             try
             {
                 this.Title = title;
-                settingsPath = AppDomain.CurrentDomain.BaseDirectory + "\\settings.xml";
-
-                if (!File.Exists(settingsPath))
-                {
-                    UserSettings.SaveSettingsFile(settings, settingsPath);
-                    UserSettings.LoadSettingsFile(ref settings, settingsPath);
-                }
-                else
-                {
-                    UserSettings.LoadSettingsFile(ref settings, settingsPath);
-                }
+                
                                 
                 logWindow = new LogWindow(this);
                 logWindow.Owner = this;
@@ -187,13 +237,13 @@ namespace BluRip
             }
         }
 
-        private void windowMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SavePositiion()
         {
             try
             {
                 settings.snap = menuItemViewSnap.IsChecked;
                 settings.expertMode = menuItemViewExpertMode.IsChecked;
-                
+
                 settings.showDemuxedStream = menuItemViewDemuxedStreams.IsChecked;
                 settings.demuxedStreamsX = demuxedStreamsWindow.Left;
                 settings.demuxedStreamsY = demuxedStreamsWindow.Top;
@@ -216,6 +266,17 @@ namespace BluRip
                 settings.bluripY = this.Top;
                 settings.bluripHeight = this.Height;
                 settings.bluripWidth = this.Width;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void windowMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                SavePositiion();
 
                 UserSettings.SaveSettingsFile(settings, settingsPath);
                 if (!silent)
@@ -886,7 +947,8 @@ namespace BluRip
                 {
                     menuItemLanguageGerman.IsChecked = false;
                     settings.language = "en";
-                    UpdateDictionary("Translation/en.xaml");
+                    LoadLanguage();
+                    SavePositiion();
                     UpdateFromSettings(false);
                 }
             }
@@ -901,7 +963,8 @@ namespace BluRip
             {
                 menuItemLanguageEnglish.IsChecked = false;
                 settings.language = "de";
-                UpdateDictionary("Translation/de.xaml");
+                LoadLanguage();
+                SavePositiion();
                 UpdateFromSettings(false);
             }
         }
@@ -1653,7 +1716,7 @@ namespace BluRip
                 {
                     menuItemViewSkinClassic.IsChecked = false;
                     settings.skin = "blu";
-                    UpdateDictionary("Style/style.xaml");
+                    LoadSkin();
                 }
             }
             catch (Exception)
@@ -1668,8 +1731,8 @@ namespace BluRip
                 if (menuItemViewSkinClassic.IsChecked)
                 {
                     menuItemViewSkinBlu.IsChecked = false;
-                    settings.skin = "classic";
-                    UpdateDictionary("Style/classic.xaml");
+                    settings.skin = "classic"; 
+                    LoadSkin();
                 }
             }
             catch (Exception)
@@ -1759,6 +1822,39 @@ namespace BluRip
             try
             {
                 settings.doMux = (bool)checkBoxDoMux.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void UncheckDemuxedStreamsWindow()
+        {
+            try
+            {
+                menuItemViewDemuxedStreams.IsChecked = false;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void UncheckLogWindow()
+        {
+            try
+            {
+                menuItemViewLog.IsChecked = false;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void UncheckQueueWindow()
+        {
+            try
+            {
+                menuItemViewQueue.IsChecked = false;
             }
             catch (Exception)
             {

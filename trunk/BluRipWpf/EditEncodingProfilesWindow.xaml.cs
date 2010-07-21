@@ -158,10 +158,13 @@ namespace BluRip
             {
                 EncodingSettings es = new EncodingSettings();
                 es.desc = Global.Res("NewEncodingProfileDesc");
-                settings.encodingSettings.Add(es);
-                UpdateEncodingProfile();
-                listBoxEncodingProfiles.SelectedIndex = settings.encodingSettings.Count - 1;
-                listBoxEncodingProfiles_MouseDoubleClick(null, null);
+                EditEncodingProfileWindow eepw = new EditEncodingProfileWindow(es);
+                eepw.ShowDialog();
+                if (eepw.DialogResult == true)
+                {
+                    settings.encodingSettings.Add(es);
+                    UpdateEncodingProfile();
+                }
             }
             catch (Exception)
             {

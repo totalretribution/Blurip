@@ -462,10 +462,13 @@ namespace BluRip
             {
                 LanguageInfo li = new LanguageInfo();
                 li.language = Global.Res("NewLanguage");
-                settings.preferredAudioLanguages.Add(li);
-                UpdatePreferredAudio();
-                listBoxPreferredAudioLanguages.SelectedIndex = settings.preferredAudioLanguages.Count - 1;
-                listBoxPreferredAudioLanguages_MouseDoubleClick(null, null);
+                EditPreferredLanguageWindow eplw = new EditPreferredLanguageWindow(li);
+                eplw.ShowDialog();
+                if (eplw.DialogResult == true)
+                {
+                    settings.preferredAudioLanguages.Add(li);
+                    UpdatePreferredAudio();
+                }
             }
             catch (Exception)
             {
@@ -532,10 +535,13 @@ namespace BluRip
             {
                 LanguageInfo li = new LanguageInfo();
                 li.language = Global.Res("NewLanguage");
-                settings.preferredSubtitleLanguages.Add(li);
-                UpdatePreferredSub();
-                listBoxPreferredSubLanguages.SelectedIndex = settings.preferredSubtitleLanguages.Count - 1;
-                listBoxPreferredSubLanguages_MouseDoubleClick(null, null);
+                EditPreferredLanguageWindow eplw = new EditPreferredLanguageWindow(li);
+                eplw.ShowDialog();
+                if (eplw.DialogResult == true)
+                {
+                    settings.preferredSubtitleLanguages.Add(li);
+                    UpdatePreferredSub();
+                }
             }
             catch (Exception)
             {

@@ -74,6 +74,7 @@ namespace BluRip
             {
                 e.Cancel = true;
                 this.Hide();
+                mainWindow.UncheckDemuxedStreamsWindow();
             }
             catch (Exception)
             {
