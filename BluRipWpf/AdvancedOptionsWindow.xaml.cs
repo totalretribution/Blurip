@@ -50,7 +50,10 @@ namespace BluRip
                 textBoxNrFrames.Text = settings.nrFrames.ToString();
                 textBoxRowSum.Text = settings.blackValue.ToString();
                 checkBoxMinimizeAutocrop.IsChecked = settings.minimizeAutocrop;
-                comboBoxCropMethod.SelectedIndex = settings.cropMode;
+                if (settings.cropMode > -1 && settings.cropMode < comboBoxCropMethod.Items.Count)
+                {
+                    comboBoxCropMethod.SelectedIndex = settings.cropMode;
+                }
 
                 checkBoxDeleteDemuxedFiles.IsChecked = settings.deleteAfterEncode;
                 checkBoxAlwaysDeleteIndex.IsChecked = settings.deleteIndex;
@@ -208,7 +211,7 @@ namespace BluRip
             {
                 if (comboBoxCropMethod.SelectedIndex > -1)
                 {
-                    settings.cropInput = comboBoxCropMethod.SelectedIndex;
+                    settings.cropMode = comboBoxCropMethod.SelectedIndex;
                 }
             }
             catch (Exception)
