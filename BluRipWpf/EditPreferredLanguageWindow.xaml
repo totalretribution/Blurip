@@ -1,16 +1,16 @@
 ﻿<Window x:Class="BluRip.EditPreferredLanguageWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{StaticResource CaptionPreferredLanguageWindow}" Height="282" Width="394" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico">
+        Title="{StaticResource CaptionPreferredLanguageWindow}" Height="282" Width="394" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico" Loaded="Window_Loaded">
     <Grid>
         <Label Content="{DynamicResource LabelPreferredLanguage}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelLanguage" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,38,0,0" Name="textBoxLanguage" VerticalAlignment="Top" Width="348" TextChanged="textBoxLanguage_TextChanged" />
-        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" />
-        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,38,0,0" Name="textBoxLanguage" VerticalAlignment="Top" Width="348" TextChanged="textBoxLanguage_TextChanged" TabIndex="0" />
+        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" TabIndex="3" />
+        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" TabIndex="4" />
         <Label Content="{DynamicResource LabelPreferredLanguageTranslation}" HorizontalAlignment="Left" Margin="12,67,0,0" Name="labelTranslation" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,93,0,0" Name="textBoxTranslation" VerticalAlignment="Top" Width="348" TextChanged="textBoxTranslation_TextChanged" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,93,0,0" Name="textBoxTranslation" VerticalAlignment="Top" Width="348" TextChanged="textBoxTranslation_TextChanged" TabIndex="1" />
         <Label Content="{DynamicResource LabelPreferredLanguageShort}" HorizontalAlignment="Left" Margin="12,122,0,0" Name="labelLanguageShort" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="textBoxLanguageShort" VerticalAlignment="Top" Width="348" TextChanged="textBoxLanguageShort_TextChanged" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="textBoxLanguageShort" VerticalAlignment="Top" Width="348" TextChanged="textBoxLanguageShort_TextChanged" TabIndex="2" />
         <Label Content="{DynamicResource LabelPreferredLanguageExample}" HorizontalAlignment="Left" Margin="12,177,0,0" Name="labelExample" VerticalAlignment="Top" />
     </Grid>
 </Window>

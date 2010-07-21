@@ -241,7 +241,7 @@
 
     <!-- PreferredLanguage Window -->
     <system:String x:Key="CaptionPreferredLanguageWindow">Edit preferred language</system:String>
-    <system:String x:Key="LabelPreferredLanguage">Language (in english)</system:String>
+    <system:String x:Key="LabelPreferredLanguage">Language (in English)</system:String>
     <system:String x:Key="LabelPreferredLanguageTranslation">Translation</system:String>
     <system:String x:Key="LabelPreferredLanguageShort">Short language tag (ISO639-1 or ISO639-2)</system:String>
     <system:String x:Key="LabelPreferredLanguageExample">Example: German - Deutsch - de</system:String>

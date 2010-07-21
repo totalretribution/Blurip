@@ -60,6 +60,7 @@ namespace BluRip
             {
                 e.Cancel = true;
                 this.Hide();
+                mainWindow.UncheckLogWindow();
             }
             catch (Exception)
             {

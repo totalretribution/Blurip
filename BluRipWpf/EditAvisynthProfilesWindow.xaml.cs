@@ -104,10 +104,13 @@ namespace BluRip
             {
                 AvisynthSettings avs = new AvisynthSettings();
                 avs.desc = Global.Res("NewAvisynthProfileDesc");
-                settings.avisynthSettings.Add(avs);
-                UpdateAvisynthProfiles();
-                listBoxAvisynthProfiles.SelectedIndex = settings.avisynthSettings.Count - 1;
-                listBoxAvisynthProfiles_MouseDoubleClick(null, null);
+                EditAvisynthProfileWindow eapw = new EditAvisynthProfileWindow(avs);
+                eapw.ShowDialog();
+                if (eapw.DialogResult == true)
+                {
+                    settings.avisynthSettings.Add(avs);
+                    UpdateAvisynthProfiles();
+                }
             }
             catch (Exception)
             {

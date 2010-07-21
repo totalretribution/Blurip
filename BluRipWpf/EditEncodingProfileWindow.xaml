@@ -1,20 +1,20 @@
 ﻿<Window x:Class="BluRip.EditEncodingProfileWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionEncodingProfileWindow}" Height="337" Width="641" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico">
+        Title="{DynamicResource CaptionEncodingProfileWindow}" Height="337" Width="641" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico" Loaded="Window_Loaded">
     <Grid>
         <Label Content="{DynamicResource LabelEncodingProfileDescription}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelDescription" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,38,0,0" Name="textBoxDescription" VerticalAlignment="Top" Width="595" TextChanged="textBoxDescription_TextChanged" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,38,0,0" Name="textBoxDescription" VerticalAlignment="Top" Width="595" TextChanged="textBoxDescription_TextChanged" TabIndex="0" />
         <Label Content="{DynamicResource LabelEncodingProfileSettings}" HorizontalAlignment="Left" Margin="12,67,0,0" Name="labelSettings" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,93,0,0" Name="textBoxSettings" VerticalAlignment="Top" Width="595" TextChanged="textBoxSettings_TextChanged" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,93,0,0" Name="textBoxSettings" VerticalAlignment="Top" Width="595" TextChanged="textBoxSettings_TextChanged" TabIndex="1" />
         <Label Content="{DynamicResource LabelEncodingProfileSettings2}" HorizontalAlignment="Left" Margin="12,144,0,0" Name="labelSettings2" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,170,0,0" Name="textBoxSettings2" VerticalAlignment="Top" Width="595" TextChanged="textBoxSettings2_TextChanged" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,170,0,0" Name="textBoxSettings2" VerticalAlignment="Top" Width="595" TextChanged="textBoxSettings2_TextChanged" TabIndex="3" />
         <Label Content="{DynamicResource LabelEncodingProfileSizeValue}" HorizontalAlignment="Left" Margin="12,199,0,0" Name="labelSizeValue" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,225,0,0" Name="textBoxSizeValue" VerticalAlignment="Top" Width="340" TextChanged="textBoxSizeValue_TextChanged" />
-        <CheckBox Content="{DynamicResource CheckBoxEncodingProfile2pass}" Height="16" HorizontalAlignment="Left" Margin="12,122,0,0" Name="checkBox2pass" VerticalAlignment="Top" Checked="checkBox2pass_Checked" Unchecked="checkBox2pass_Checked" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,225,0,0" Name="textBoxSizeValue" VerticalAlignment="Top" Width="340" TextChanged="textBoxSizeValue_TextChanged" TabIndex="4" />
+        <CheckBox Content="{DynamicResource CheckBoxEncodingProfile2pass}" Height="16" HorizontalAlignment="Left" Margin="12,122,0,0" Name="checkBox2pass" VerticalAlignment="Top" Checked="checkBox2pass_Checked" Unchecked="checkBox2pass_Checked" TabIndex="2" />
         <Label Content="{DynamicResource LabelEncodingProfileSizeType}" HorizontalAlignment="Left" Margin="358,199,0,0" Name="labelSizeType" VerticalAlignment="Top" />
-        <ComboBox Height="23" HorizontalAlignment="Left" Margin="358,225,0,0" Name="comboBoxSizeType" VerticalAlignment="Top" Width="249" ItemsSource="{DynamicResource comboBoxSizeType}" SelectionChanged="comboBoxSizeType_SelectionChanged" />
-        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="14,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" />
-        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="95,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="358,225,0,0" Name="comboBoxSizeType" VerticalAlignment="Top" Width="249" ItemsSource="{DynamicResource comboBoxSizeType}" SelectionChanged="comboBoxSizeType_SelectionChanged" TabIndex="5" />
+        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="14,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" TabIndex="6" />
+        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="95,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" TabIndex="7" />
     </Grid>
 </Window>

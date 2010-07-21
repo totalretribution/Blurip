@@ -98,5 +98,17 @@ namespace BluRip
             {
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                textBoxLanguage.Focus();
+                textBoxLanguage.SelectAll();
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }
