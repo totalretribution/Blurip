@@ -70,7 +70,7 @@
     <system:String x:Key="LabelCopySubtitle">Kopiere Untertitel</system:String>
     <col:ArrayList x:Key="comboBoxMuxSubtitle">
         <system:String>Muxe keine Untertitel</system:String>
-        <system:String>Muxe alel Untertitel (sub/idx)</system:String>
+        <system:String>Muxe alle Untertitel (sub/idx)</system:String>
         <system:String>Muxe nur forced Untertitel (sub/idx)</system:String>
         <system:String>Muxe nur den ersten normalen/forced Untertitel (sub/idx)</system:String>
         <system:String>Muxe alle Untertitel (pgs)</system:String>
