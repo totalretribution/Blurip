@@ -51,7 +51,7 @@ namespace BluRip
         private List<string> ac3Bitrates = new List<string>();
         private List<string> dtsBitrates = new List<string>();
 
-        public string title = "BluRip v0.5.0 © _hawk_";
+        public string title = @"BluRip v0.5.1 © _hawk_ 2009-2010";
 
         private LogWindow logWindow = null;
         private DemuxedStreamsWindow demuxedStreamsWindow = null;
@@ -973,10 +973,62 @@ namespace BluRip
         {
             try
             {
-                // check path/settings here, too
-                if (settings.doDemux)
+                // check path/settings here, too                
+
+                bool checkWorkDir = false;
+                bool emptyStream = true;
+
+                if (demuxedStreamList.streams.Count > 0)
                 {
+                    emptyStream = false;
+                }
+
+                if (settings.doDemux && emptyStream)
+                {
+                    checkWorkDir = true;
                     if (!checkEac3to()) return false;
+                    if (comboBoxTitle.SelectedIndex == -1)
+                    {
+                        logWindow.MessageDemux(Global.Res("ErrorNoTitle"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorNoTitle"));
+                        return false;
+                    }
+                    int videoCount = 0;
+                    int audioCount = 0;
+                    int unknown = 0;
+                    foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                    {
+                        if (si.streamType == StreamType.Audio && si.selected)
+                        {
+                            audioCount++;
+                        }
+                        if (si.streamType == StreamType.Video && si.selected)
+                        {
+                            videoCount++;
+                        }
+                        if (si.streamType == StreamType.Unknown && si.selected)
+                        {
+                            unknown++;
+                        }
+                    }
+                    if (audioCount < 1)
+                    {
+                        logWindow.MessageDemux(Global.Res("ErrorNoAudio"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorNoAudio"));
+                        return false;
+                    }
+                    if (videoCount != 1)
+                    {
+                        logWindow.MessageDemux(Global.Res("ErrorNoVideo"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorNoVideo"));
+                        return false;
+                    }
+                    if (unknown > 0)
+                    {
+                        logWindow.MessageDemux(Global.Res("ErrorUnknownTracks"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorUnknownTracks"));
+                        return false;
+                    }
                 }
 
                 int supCount = 0;
@@ -993,11 +1045,13 @@ namespace BluRip
 
                 if (settings.doIndex)
                 {
+                    checkWorkDir = true;
                     if (!checkIndex()) return false;
                 }
 
                 if (settings.doSubtitle)
                 {
+                    checkWorkDir = true;
                     if (supCount > 0)
                     {
                         if (!checkBdsup2sub()) return false;
@@ -1006,14 +1060,40 @@ namespace BluRip
 
                 if (settings.doEncode)
                 {
+                    checkWorkDir = true;
                     if (!settings.untouchedVideo)
                     {
                         if (!checkX264()) return false;
+                    }
+                    if (settings.encodedMovieDir != "")
+                    {
+                        if (!Directory.Exists(settings.encodedMovieDir))
+                        {
+                            logWindow.MessageDemux(Global.Res("ErrorEncodedMovieDirectory"));
+                            if (!silent) Global.ErrorMsg(Global.Res("ErrorEncodedMovieDirectory"));
+                            return false;
+                        }
+                    }
+                }
+
+                if (checkWorkDir)
+                {
+                    if (!Directory.Exists(settings.workingDir))
+                    {
+                        logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorWorkingDirectory"));
+                        return false;
                     }
                 }
 
                 if (settings.doMux)
                 {
+                    if (!Directory.Exists(settings.targetFolder))
+                    {
+                        logWindow.MessageDemux(Global.Res("ErrorTargetDirectory"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorTargetDirectory"));
+                        return false;
+                    }
                     if (!checkMkvmerge()) return false;
                 }
                 return true;
@@ -1245,7 +1325,7 @@ namespace BluRip
         {
             try
             {
-                AboutWindow aw = new AboutWindow();
+                AboutWindow aw = new AboutWindow(this);
                 aw.ShowDialog();
             }
             catch (Exception)

@@ -86,6 +86,12 @@ namespace BluRip
                         subtitleStream++;
                     }
                 }
+                if (!Directory.Exists(settings.targetFolder))
+                {
+                    logWindow.MessageDemux(Global.Res("ErrorTargetDirectory"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorTargetDirectory"));
+                    return false;
+                }
                 if (videoStream == 0)
                 {
                     if (!silent) Global.ErrorMsg(Global.Res("ErrorVideoFile"));

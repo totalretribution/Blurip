@@ -255,6 +255,7 @@
     <system:String x:Key="TabAdvancedGeneral">General settings</system:String>
     <system:String x:Key="CheckBoxDeleteDemuxedFiles">Delete demuxed files when finished</system:String>
     <system:String x:Key="CheckBoxAlwaysDeleteIndex">Always delete index files</system:String>
+    <system:String x:Key="CheckBoxDisableHeaderCompression">Disable mkvmerge header compression</system:String>
     <system:String x:Key="TabAutoCrop">AutoCrop settings</system:String>
     <system:String x:Key="LabelAutocropNrFrames">Number of frames to analyze</system:String>
     <system:String x:Key="LabelAutocropBlackValue">Max row sum to count as black</system:String>
@@ -412,6 +413,7 @@
     <system:String x:Key="ErrorUnknownTracks">Unknown tracks selected - please report log to developer</system:String>
     <system:String x:Key="ErrorNoTitle">No title selected</system:String>
     <system:String x:Key="ErrorWorkingDirectory">Working dir not set</system:String>
+    <system:String x:Key="ErrorTargetDirectory">Target dir not set</system:String>
     <system:String x:Key="ErrorEncodedMovieDirectory">Encoded movie directory not found</system:String>
     <system:String x:Key="ErrorMkvmergePath">Path to mkvmerge.exe not set or found.</system:String>
     <system:String x:Key="ErrorSubtitleFile">Subtitle file(s) not found</system:String>
