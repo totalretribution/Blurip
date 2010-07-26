@@ -183,6 +183,8 @@ namespace BluRip
             this.doEncode = orig.doEncode;
             this.doMux = orig.doMux;
 
+            this.disableHeaderCompression = orig.disableHeaderCompression;
+
             this.snap = orig.snap;
             this.expertMode = orig.expertMode;
             this.showLog = orig.showLog;
@@ -398,6 +400,8 @@ namespace BluRip
         public bool doSubtitle = true;
         public bool doEncode = true;
         public bool doMux = true;
+
+        public bool disableHeaderCompression = false;
 
         // window settings
 

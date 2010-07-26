@@ -30,6 +30,7 @@ namespace BluRip
         private UserSettings settings = null;
         private TitleInfo titleInfo = null;
         private AdvancedVideoOptions avo = null;
+        private string headerCompression = "--compression 0:none ";
 
         public MuxTool(UserSettings settings, TitleInfo titleInfo)
             : base()
@@ -77,6 +78,12 @@ namespace BluRip
                         string st = "";
                         st = getShortAudioLanguage(si.language);
                         if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
+                        
+                        if (settings.disableHeaderCompression)
+                        {
+                            this.Parameter += headerCompression;
+                        }
+
                         if (settings.preferredAudioLanguages.Count > 0 && settings.preferredAudioLanguages[0].language == si.language)
                         {
                             if (!defaultSet)
@@ -95,6 +102,10 @@ namespace BluRip
                         {
                             AdvancedAudioOptions aao = (AdvancedAudioOptions)si.advancedOptions;
                             if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
+                            if (settings.disableHeaderCompression)
+                            {
+                                this.Parameter += headerCompression;
+                            }
                             this.Parameter += "\"" + aao.additionalFilename + "\" ";
                         }
                     }
@@ -214,6 +225,10 @@ namespace BluRip
                                 string st = "";
                                 st = getShortSubLanguage(si.language);
                                 if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
+                                if (settings.disableHeaderCompression)
+                                {
+                                    this.Parameter += headerCompression;
+                                }
                                 if (settings.preferredSubtitleLanguages.Count > 0 && settings.preferredSubtitleLanguages[0].language == si.language)
                                 {
                                     if (!defaultSet)

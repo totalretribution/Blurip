@@ -241,7 +241,7 @@
 
     <!-- PreferredLanguage Window -->
     <system:String x:Key="CaptionPreferredLanguageWindow">Bearbeite bevorzugte Sprache</system:String>
-    <system:String x:Key="LabelPreferredLanguage">Sprache (in englisch)</system:String>
+    <system:String x:Key="LabelPreferredLanguage">Sprache (in Englisch)</system:String>
     <system:String x:Key="LabelPreferredLanguageTranslation">Übersetzung</system:String>
     <system:String x:Key="LabelPreferredLanguageShort">Sprachkürzel (ISO639-1 or ISO639-2)</system:String>
     <system:String x:Key="LabelPreferredLanguageExample">Beispiel: German - Deutsch - de</system:String>
@@ -255,6 +255,7 @@
     <system:String x:Key="TabAdvancedGeneral">Allgemeine Einstellungen</system:String>
     <system:String x:Key="CheckBoxDeleteDemuxedFiles">Lösche demuxte Dateien wenn fertig</system:String>
     <system:String x:Key="CheckBoxAlwaysDeleteIndex">Index Dateien immer löschen</system:String>
+    <system:String x:Key="CheckBoxDisableHeaderCompression">Mkvmerge header compression abschalten</system:String>
     <system:String x:Key="TabAutoCrop">AutoCrop Einstellungen</system:String>
     <system:String x:Key="LabelAutocropNrFrames">Anzahl der zu analysierenden Bilder</system:String>
     <system:String x:Key="LabelAutocropBlackValue">Maximale Zeilensumme die als schwarz zählt</system:String>
@@ -412,6 +413,7 @@
     <system:String x:Key="ErrorUnknownTracks">Unbekannte Streams ausgewählt - Bitte Log an Entwickler senden</system:String>
     <system:String x:Key="ErrorNoTitle">Kein Titel ausgewählt</system:String>
     <system:String x:Key="ErrorWorkingDirectory">Arbeitsverzeichnis nicht gesetzt</system:String>
+    <system:String x:Key="ErrorTargetDirectory">Zielverzeichnis nicht gesetzt</system:String>
     <system:String x:Key="ErrorMkvmergePath">Pfad zu mkvmerge.exe nicht gesetzt oder gefunden.</system:String>
     <system:String x:Key="ErrorSubtitleFile">Untertitel Datei(n) nicht gefunden</system:String>
     <system:String x:Key="ErrorChapterFile">Kapitel Datei nicht gefunden</system:String>

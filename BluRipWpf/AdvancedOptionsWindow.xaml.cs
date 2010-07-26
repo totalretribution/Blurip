@@ -57,6 +57,7 @@ namespace BluRip
 
                 checkBoxDeleteDemuxedFiles.IsChecked = settings.deleteAfterEncode;
                 checkBoxAlwaysDeleteIndex.IsChecked = settings.deleteIndex;
+                checkBoxDisableHeaderCompression.IsChecked = settings.disableHeaderCompression;
 
                 checkBoxUseAutoSelect.IsChecked = settings.useAutoSelect;
                 checkBoxIncludeChapters.IsChecked = settings.includeChapter;
@@ -469,6 +470,7 @@ namespace BluRip
                 eplw.ShowDialog();
                 if (eplw.DialogResult == true)
                 {
+                    li = new LanguageInfo(eplw.languageInfo);
                     settings.preferredAudioLanguages.Add(li);
                     UpdatePreferredAudio();
                 }
@@ -542,6 +544,7 @@ namespace BluRip
                 eplw.ShowDialog();
                 if (eplw.DialogResult == true)
                 {
+                    li = new LanguageInfo(eplw.languageInfo);
                     settings.preferredSubtitleLanguages.Add(li);
                     UpdatePreferredSub();
                 }
@@ -622,6 +625,17 @@ namespace BluRip
             try
             {
                 settings.defaultForcedFlag = (bool)checkBoxForcedSubtitleFlag.IsEnabled;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDisableHeaderCompression_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.disableHeaderCompression = (bool)checkBoxDisableHeaderCompression.IsChecked;
             }
             catch (Exception)
             {

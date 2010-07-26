@@ -158,6 +158,9 @@ namespace BluRip
                 {
                     if (demuxedStreamList.streams[i].streamType == StreamType.Subtitle)
                     {
+                        if (demuxedStreamList.streams[i].extraFileInfo != null && demuxedStreamList.streams[i].extraFileInfo.GetType() == typeof(SubtitleFileInfo) &&
+                            ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).isSecond) continue;
+
                         subtitle++;
                         StreamInfo si = demuxedStreamList.streams[i];
                         if (sub)
@@ -232,6 +235,7 @@ namespace BluRip
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSup = "";
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedIdxLowRes = "";
                                         ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).forcedSubLowRes = "";
+                                        ((SubtitleFileInfo)demuxedStreamList.streams[i].extraFileInfo).isSecond = false;
                                     }
                                     si2.desc += " (only forced)"; ;
                                     if (si2.extraFileInfo != null && si2.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
@@ -243,8 +247,33 @@ namespace BluRip
                                         ((SubtitleFileInfo)si2.extraFileInfo).normalSubLowRes = "";
                                         ((SubtitleFileInfo)si2.extraFileInfo).isSecond = true;
                                     }
-                                    demuxedStreamList.streams.Insert(i + 1, si2);
-                                    i++;
+                                    bool add = true;
+                                    if (demuxedStreamList.streams.Count > i + 1)
+                                    {
+                                        if (demuxedStreamList.streams[i + 1].extraFileInfo != null && demuxedStreamList.streams[i + 1].extraFileInfo.GetType() == typeof(SubtitleFileInfo))
+                                        {
+                                            SubtitleFileInfo stfi = (SubtitleFileInfo)demuxedStreamList.streams[i + 1].extraFileInfo;
+                                            if (stfi.normalIdx == ((SubtitleFileInfo)si2.extraFileInfo).normalIdx &&
+                                                stfi.normalSub == ((SubtitleFileInfo)si2.extraFileInfo).normalSub &&
+                                                stfi.normalSup == ((SubtitleFileInfo)si2.extraFileInfo).normalSup &&
+                                                stfi.normalIdxLowRes == ((SubtitleFileInfo)si2.extraFileInfo).normalIdxLowRes &&
+                                                stfi.normalSubLowRes == ((SubtitleFileInfo)si2.extraFileInfo).normalSubLowRes &&
+                                                stfi.forcedIdx == ((SubtitleFileInfo)si2.extraFileInfo).forcedIdx &&
+                                                stfi.forcedSub == ((SubtitleFileInfo)si2.extraFileInfo).forcedSub &&
+                                                stfi.forcedSup == ((SubtitleFileInfo)si2.extraFileInfo).forcedSup &&
+                                                stfi.forcedIdxLowRes == ((SubtitleFileInfo)si2.extraFileInfo).forcedIdxLowRes &&
+                                                stfi.forcedSubLowRes == ((SubtitleFileInfo)si2.extraFileInfo).forcedSubLowRes &&
+                                                demuxedStreamList.streams[i + 1].filename == si2.filename)
+                                            {
+                                                add = false;
+                                            }
+                                        }
+                                    }
+                                    if (add)
+                                    {
+                                        demuxedStreamList.streams.Insert(i + 1, si2);
+                                        i++;
+                                    }
                                 }
                             }
                         }

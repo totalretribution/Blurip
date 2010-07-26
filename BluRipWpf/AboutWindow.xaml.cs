@@ -37,11 +37,15 @@ namespace BluRip
     /// </summary>
     public partial class AboutWindow : Window
     {
-        public AboutWindow()
+        private MainWindow mainWindow = null;
+
+        public AboutWindow(MainWindow mainWindow)
         {
             try
             {
                 InitializeComponent();
+                textBlockInfo.Text = mainWindow.title;
+                this.mainWindow = mainWindow;
             }
             catch (Exception ex)
             {
