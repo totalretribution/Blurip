@@ -185,6 +185,7 @@ namespace BluRip
 
             this.disableHeaderCompression = orig.disableHeaderCompression;
             this.resizeMethod = orig.resizeMethod;
+            this.manualCrop = orig.manualCrop;
 
             this.snap = orig.snap;
             this.expertMode = orig.expertMode;
@@ -404,6 +405,7 @@ namespace BluRip
 
         public bool disableHeaderCompression = false;
         public int resizeMethod = 4;
+        public bool manualCrop = false;
         // window settings
 
         public bool snap = false;        

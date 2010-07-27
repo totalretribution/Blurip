@@ -232,6 +232,12 @@ namespace BluRip
                         ac.NrFrames = settings.nrFrames;
                         ac.BlackValue = settings.blackValue;
                         ac.ShowDialog();
+
+                        if (cropInfo.error)
+                        {
+                            logWindow.MessageCrop(Global.Res("ErrorException") + " " + cropInfo.errorStr);
+                            return false;
+                        }
                     }
                     else
                     {
