@@ -276,6 +276,7 @@
         <system:String>AddBorder - Höhe mod 16</system:String>
     </col:ArrayList>
     <system:String x:Key="LabelResizeMethod">Resize Methode</system:String>
+    <system:String x:Key="CheckBoxManualAutoCrop">Manuelles cropping (AutoCrop Fenster nicht autom. schließen)</system:String>
     <system:String x:Key="TabAdvancedStreamselection">Streamauswahl</system:String>
     <system:String x:Key="CheckBoxUseAutoselect">Benutze automatische Streamauswahl</system:String>
     <system:String x:Key="CheckBoxIncludeChapters">Wähle Kapitel aus</system:String>

@@ -29,6 +29,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace BluRip
 {
@@ -155,6 +156,22 @@ namespace BluRip
             try
             {
                 si.addInfo = textBoxAddInfo.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonFilename_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "*.*|*.*";
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    textBoxFilename.Text = ofd.FileName;
+                }
             }
             catch (Exception)
             {

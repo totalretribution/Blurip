@@ -54,6 +54,7 @@ namespace BluRip
                 {
                     comboBoxCropMethod.SelectedIndex = settings.cropMode;
                 }
+                checkBoxManualCrop.IsChecked = settings.manualCrop;
 
                 checkBoxDeleteDemuxedFiles.IsChecked = settings.deleteAfterEncode;
                 checkBoxAlwaysDeleteIndex.IsChecked = settings.deleteIndex;
@@ -651,6 +652,17 @@ namespace BluRip
             try
             {
                 if (comboBoxResizeMethod.SelectedIndex > -1) settings.resizeMethod = comboBoxResizeMethod.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxManualCrop_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.manualCrop = (bool)checkBoxManualCrop.IsChecked;
             }
             catch (Exception)
             {

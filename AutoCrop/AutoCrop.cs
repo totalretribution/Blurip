@@ -37,6 +37,7 @@ namespace BluRip
         private CropInfo cropInfo = null;
 
         private int maxFrames = 0;
+        private int curFrame = 0;
 
         private object drawLock = new object();
                 
@@ -62,13 +63,16 @@ namespace BluRip
                     System.Drawing.Size s = new Size(asc.VideoWidth, asc.VideoHeight);
                     this.ClientSize = s;                    
                     maxFrames = asc.num_frames;
+                    
                     // remove last ~10 minutes
                     if (maxFrames > 30000)
                     {
                         maxFrames -= 15000;
                     }
+                    numericUpDownFrame.Maximum = maxFrames;
                     int step = 0;
                     step = maxFrames / nrFrames;
+                    curFrame = step;
                     Monitor.Enter(drawLock);
                     bitmap = ReadFrameBitmap(asc, step);
                     bitmapCopy = new Bitmap(bitmap);
@@ -154,6 +158,7 @@ namespace BluRip
         private int nrFrames = 10;
         private bool drawOrig = false;
         private int rowSum = 0;
+        private bool drawRowSum = true;
 
         public int NrFrames
         {
@@ -191,102 +196,43 @@ namespace BluRip
             else
             {
                 string tmp = "";
-                tmp = "AutoCrop frame: " + progress.ToString() + "/" + nrFrames.ToString() + " - frame crop values: ";
-                tmp += tmpTop.ToString() + "/" + tmpBottom.ToString() + " - global crop values: ";
-                tmp += cropTop.ToString() + "/" + cropBottom.ToString();
+                if (!drawRowSum)
+                {
+                    tmp = "Manual crop: - crop top/bottom: ";
+                    tmp += cropTop.ToString() + "/" + cropBottom.ToString();
+                    tmp += " addborder top/bottom: ";
+                    if (cropInfo.border)
+                    {
+                        tmp += cropInfo.borderTop.ToString() + "/" + cropInfo.borderBottom.ToString();
+                    }
+                    else
+                    {
+                        tmp += "no borders";
+                    }
+                    tmp += " resize: ";
+                    if (cropInfo.resize)
+                    {
+                         tmp += cropInfo.resizeX.ToString() + "/" + cropInfo.resizeY.ToString();
+                    }
+                    else
+                    {
+                        tmp += "no resize";
+                    }
+                }
+                else
+                {
+                    tmp = "AutoCrop frame: " + progress.ToString() + "/" + nrFrames.ToString() + " - frame crop values: ";
+                    tmp += tmpTop.ToString() + "/" + tmpBottom.ToString() + " - global crop values: ";
+                    tmp += cropTop.ToString() + "/" + cropBottom.ToString();
+                }
                 this.Text = tmp;
             }
         }
 
-        public void DoCrop()
+        private void CalcCrop()
         {
             try
             {
-                cropInfo.cropBottom = int.MaxValue;
-                cropInfo.cropTop = int.MaxValue;
-
-                int step = 0;
-                step = maxFrames / nrFrames;
-                int progress = 0;
-
-                for (int frame = step; frame <= maxFrames; frame += step)
-                {
-                    int tmpTop = 0;
-                    int tmpBottom = 0;
-                    progress++;
-
-                    Monitor.Enter(drawLock);
-                    bitmap.Dispose();
-                    bitmapCopy.Dispose();
-
-                    bitmap = ReadFrameBitmap(asc, frame);
-                    bitmapCopy = new Bitmap(bitmap);
-                    Monitor.Exit(drawLock);
-
-                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
-                    else this.Refresh();
-
-                    for (int row = 0; row < bitmapCopy.Height; row++)
-                    {
-                        rowSum = RowSum(bitmap, row);
-                        if (rowSum < blackValue)
-                        {   
-                            FillRow(bitmapCopy, row);
-                            tmpTop++;
-                            if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
-                            else this.Refresh();
-                        }
-                        else
-                        {                            
-                            break;
-                        }
-                        UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
-                    }
-                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
-                    else this.Refresh();
-                    Thread.Sleep(1000);
-                    for (int row = bitmapCopy.Height - 1; row >= 0; row--)
-                    {
-                        rowSum = RowSum(bitmap, row);
-                        if (rowSum < blackValue)
-                        {
-                            FillRow(bitmapCopy, row);
-                            tmpBottom++;
-                            if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
-                            else this.Refresh();
-                        }
-                        else
-                        {
-                            break;
-                        }
-                        UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
-                    }
-                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
-                    else this.Refresh();
-                    cropInfo.cropBottom = Math.Min(cropInfo.cropBottom, tmpBottom);
-                    cropInfo.cropTop = Math.Min(cropInfo.cropTop, tmpTop);
-
-                    UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
-                    
-                    for (int i = 0; i < 5; i++)
-                    {
-                        Monitor.Enter(drawLock);
-                        drawOrig = true;
-                        Monitor.Exit(drawLock);
-                        this.Invalidate();
-                        Thread.Sleep(500);
-                        Monitor.Enter(drawLock);
-                        drawOrig = false;
-                        Monitor.Exit(drawLock);
-                        this.Invalidate();
-                        Thread.Sleep(500);
-                    }
-                    if (tmpTop == 0 && tmpBottom == 0)
-                    {
-                        break;
-                    }
-                }
-
                 bool mod8ok = false;
 
                 // 1080p mode
@@ -792,9 +738,135 @@ namespace BluRip
                         }
                     }
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void DoCrop()
+        {
+            try
+            {
+                cropInfo.cropBottom = int.MaxValue;
+                cropInfo.cropTop = int.MaxValue;
+
+                int step = 0;
+                step = maxFrames / nrFrames;
+                int progress = 0;
+
+                for (int frame = step; frame <= maxFrames; frame += step)
+                {
+                    curFrame = frame;
+                    int tmpTop = 0;
+                    int tmpBottom = 0;
+                    progress++;
+
+                    Monitor.Enter(drawLock);
+                    bitmap.Dispose();
+                    bitmapCopy.Dispose();
+
+                    bitmap = ReadFrameBitmap(asc, frame);
+                    bitmapCopy = new Bitmap(bitmap);
+                    Monitor.Exit(drawLock);
+
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                    else this.Refresh();
+
+                    for (int row = 0; row < bitmapCopy.Height; row++)
+                    {
+                        rowSum = RowSum(bitmap, row);
+                        if (rowSum < blackValue)
+                        {   
+                            FillRow(bitmapCopy, row);
+                            tmpTop++;
+                            if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                            else this.Refresh();
+                        }
+                        else
+                        {                            
+                            break;
+                        }
+                        UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+                    }
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                    else this.Refresh();
+                    Thread.Sleep(1000);
+                    for (int row = bitmapCopy.Height - 1; row >= 0; row--)
+                    {
+                        rowSum = RowSum(bitmap, row);
+                        if (rowSum < blackValue)
+                        {
+                            FillRow(bitmapCopy, row);
+                            tmpBottom++;
+                            if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                            else this.Refresh();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+                    }
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
+                    else this.Refresh();
+                    cropInfo.cropBottom = Math.Min(cropInfo.cropBottom, tmpBottom);
+                    cropInfo.cropTop = Math.Min(cropInfo.cropTop, tmpTop);
+
+                    UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+                    
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Monitor.Enter(drawLock);
+                        drawOrig = true;
+                        Monitor.Exit(drawLock);
+                        this.Invalidate();
+                        Thread.Sleep(500);
+                        Monitor.Enter(drawLock);
+                        drawOrig = false;
+                        Monitor.Exit(drawLock);
+                        this.Invalidate();
+                        Thread.Sleep(500);
+                    }
+                    if (tmpTop == 0 && tmpBottom == 0)
+                    {
+                        break;
+                    }
+                }
+
                 
-                if(this.InvokeRequired) this.Invoke(new MethodInvoker(this.Close));
-                else this.Close();
+
+                if (settings.manualCrop)
+                {                    
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(SetVisible));
+                    else SetVisible();
+                }
+                else
+                {
+                    CalcCrop();
+                    if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Close));
+                    else this.Close();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public void SetVisible()
+        {
+            try
+            {
+                panelManualCrop.Visible = true;
+                this.Refresh();
+                drawRowSum = false;                
+                numericUpDownCropTop.Value = cropInfo.cropTop;                
+                numericUpDownCropBottom.Value = cropInfo.cropBottom;                
+                numericUpDownFrame.Value = curFrame;
+                Monitor.Enter(drawLock);
+                drawOrig = false;
+                Monitor.Exit(drawLock);
+                FillImage();
             }
             catch (Exception)
             {
@@ -828,9 +900,12 @@ namespace BluRip
                     {
                         e.Graphics.DrawImage(bitmap, new Point(0, 0));
                     }
-                    Font font = new Font("Arial", 14.0f);
-                    e.Graphics.DrawString("Row sum: " + rowSum.ToString(), font, Brushes.LightGreen, new PointF(10, 40));
-                    font.Dispose();
+                    if (drawRowSum)
+                    {
+                        Font font = new Font("Arial", 14.0f);
+                        e.Graphics.DrawString("Row sum: " + rowSum.ToString(), font, Brushes.LightGreen, new PointF(10, 40));
+                        font.Dispose();
+                    }
                     Monitor.Exit(drawLock);
                 }
             }
@@ -844,6 +919,143 @@ namespace BluRip
             try
             {
                 StartAutoCrop();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void numericUpDownFrame_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Monitor.Enter(drawLock);
+                bitmap.Dispose();
+                bitmapCopy.Dispose();
+                bitmap = ReadFrameBitmap(asc, (int)numericUpDownFrame.Value);
+                bitmapCopy = new Bitmap(bitmap);
+                Monitor.Exit(drawLock);
+                FillImage();
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+                this.Refresh();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void FillImage()
+        {
+            try
+            {
+                Monitor.Enter(drawLock);
+                bitmapCopy.Dispose();
+                bitmapCopy = new Bitmap(bitmap);
+                Monitor.Exit(drawLock);
+                for (int i = 0; i < cropInfo.cropTop; i++)
+                {
+                    FillRow(bitmapCopy, i);
+                }
+                for (int i = asc.VideoHeight - 1; i > asc.VideoHeight - cropInfo.cropBottom; i--)
+                {
+                    FillRow(bitmapCopy, i);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void numericUpDownCropTop_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.cropTop = (int)numericUpDownCropTop.Value;
+                FillImage();
+                this.Refresh();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void numericUpDownCropBottom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.cropBottom = (int)numericUpDownCropBottom.Value;
+                FillImage();
+                this.Refresh();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonFlash_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Monitor.Enter(drawLock);
+                    drawOrig = true;
+                    Monitor.Exit(drawLock);
+                    this.Invalidate();
+                    this.Refresh();
+                    Thread.Sleep(500);
+                    Monitor.Enter(drawLock);
+                    drawOrig = false;
+                    Monitor.Exit(drawLock);
+                    this.Invalidate();
+                    this.Refresh();
+                    Thread.Sleep(500);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonCalc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CalcCrop();
+                numericUpDownCropBottom.Value = cropInfo.cropBottom;
+                numericUpDownCropTop.Value = cropInfo.cropTop;
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult = System.Windows.Forms.DialogResult.Abort;
+                cropInfo.error = true;
+                cropInfo.errorStr = "Aborted by user";
+                this.Close();
             }
             catch (Exception)
             {
