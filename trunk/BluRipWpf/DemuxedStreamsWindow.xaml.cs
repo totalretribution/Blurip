@@ -60,7 +60,7 @@ namespace BluRip
                 listBoxDemuxedStreams.Items.Clear();
                 foreach (StreamInfo si in mainWindow.DemuxedStreams.streams)
                 {
-                    listBoxDemuxedStreams.Items.Add(si.typeDesc + " - " + si.filename);
+                    listBoxDemuxedStreams.Items.Add(si.desc + " - " + si.filename);
                 }
             }
             catch (Exception)
@@ -106,6 +106,98 @@ namespace BluRip
             {
                 if(IsActive)
                     mainWindow.UpdateDiffDemuxedStreams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonUp_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxDemuxedStreams.SelectedIndex;
+                if (index > 0)
+                {
+                    StreamInfo si = mainWindow.DemuxedStreams.streams[index];
+                    mainWindow.DemuxedStreams.streams.RemoveAt(index);
+                    mainWindow.DemuxedStreams.streams.Insert(index - 1, si);
+                    UpdateDemuxedStreams();
+                    listBoxDemuxedStreams.SelectedIndex = index - 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDown_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxDemuxedStreams.SelectedIndex;
+                if (index > -1 && index < mainWindow.DemuxedStreams.streams.Count - 1)
+                {
+                    StreamInfo si = mainWindow.DemuxedStreams.streams[index];
+                    mainWindow.DemuxedStreams.streams.RemoveAt(index);
+                    mainWindow.DemuxedStreams.streams.Insert(index + 1, si);
+                    UpdateDemuxedStreams();
+                    listBoxDemuxedStreams.SelectedIndex = index + 1;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxDemuxedStreams.SelectedIndex;
+                if (index > -1)
+                {
+                    mainWindow.DemuxedStreams.streams.RemoveAt(index);
+                    UpdateDemuxedStreams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "*_streamInfo.xml|*.xml";
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    TitleInfo.SaveStreamInfoFile(mainWindow.DemuxedStreams, sfd.FileName);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void listBoxDemuxedStreams_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = listBoxDemuxedStreams.SelectedIndex;
+                if (index > -1)
+                {
+                    EditStreamInfoWindow esiw = new EditStreamInfoWindow(mainWindow.DemuxedStreams.streams[index]);
+                    esiw.ShowDialog();
+                    if (esiw.DialogResult == true)
+                    {
+                        mainWindow.DemuxedStreams.streams[index] = new StreamInfo(esiw.streamInfo);
+                        UpdateDemuxedStreams();
+                        listBoxDemuxedStreams.SelectedIndex = index;
+                    }
+                }
             }
             catch (Exception)
             {

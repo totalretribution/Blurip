@@ -184,6 +184,7 @@ namespace BluRip
             this.doMux = orig.doMux;
 
             this.disableHeaderCompression = orig.disableHeaderCompression;
+            this.resizeMethod = orig.resizeMethod;
 
             this.snap = orig.snap;
             this.expertMode = orig.expertMode;
@@ -402,7 +403,7 @@ namespace BluRip
         public bool doMux = true;
 
         public bool disableHeaderCompression = false;
-
+        public int resizeMethod = 4;
         // window settings
 
         public bool snap = false;        
@@ -418,7 +419,7 @@ namespace BluRip
         public double demuxedStreamsX = 100;
         public double demuxedStreamsY = 100;
         public double demuxedStreamsHeight = 300;
-        public double demuxedStreamsWidth = 400;
+        public double demuxedStreamsWidth = 550;
 
         public bool showQueue = false;
         public double queueX = 120;

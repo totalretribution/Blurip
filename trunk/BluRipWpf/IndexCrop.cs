@@ -304,7 +304,14 @@ namespace BluRip
                         }
                         if (cropInfo.resize)
                         {
-                            encode += "LanczosResize(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
+                            if (settings.resizeMethod > -1 && settings.resizeMethod < resizeMethods.Count)
+                            {
+                                encode += resizeMethods[settings.resizeMethod] + "(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
+                            }
+                            else
+                            {
+                                encode += "LanczosResize(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
+                            }
                         }
                         else
                         {

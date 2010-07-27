@@ -93,6 +93,9 @@
     <Compile Include="EditPreferredLanguageWindow.xaml.cs">
       <DependentUpon>EditPreferredLanguageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditStreamInfoWindow.xaml.cs">
+      <DependentUpon>EditStreamInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Encode.cs" />
     <Compile Include="ExternalToolsWindow.xaml.cs">
       <DependentUpon>ExternalToolsWindow.xaml</DependentUpon>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditPreferredLanguageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditStreamInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
