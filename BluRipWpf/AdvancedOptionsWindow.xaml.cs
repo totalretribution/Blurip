@@ -40,7 +40,7 @@ namespace BluRip
     {
         private UserSettings settings = null;
 
-        public AdvancedOptionsWindow(UserSettings settings, bool expert, List<string> dtsBitrates, List<string> ac3Bitrates)
+        public AdvancedOptionsWindow(UserSettings settings, bool expert, List<string> dtsBitrates, List<string> ac3Bitrates, List<string> resizeMethods)
         {            
             try
             {
@@ -97,6 +97,10 @@ namespace BluRip
 
                 if (settings.downmixDTSIndex > -1 && settings.downmixDTSIndex < dtsBitrates.Count) comboBoxDTSBitrate.SelectedIndex = settings.downmixDTSIndex;
                 if (settings.downmixAc3Index > -1 && settings.downmixAc3Index < ac3Bitrates.Count) comboBoxAC3Bitrate.SelectedIndex = settings.downmixAc3Index;
+
+                comboBoxResizeMethod.Items.Clear();
+                foreach (string s in resizeMethods) comboBoxResizeMethod.Items.Add(s);
+                if (settings.resizeMethod > -1 && settings.resizeMethod < 11) comboBoxResizeMethod.SelectedIndex = settings.resizeMethod;
 
                 comboBoxProcessPriority.SelectedItem = Enum.GetName(typeof(ProcessPriorityClass), settings.x264Priority);
 
@@ -636,6 +640,17 @@ namespace BluRip
             try
             {
                 settings.disableHeaderCompression = (bool)checkBoxDisableHeaderCompression.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxResizeMethod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (comboBoxResizeMethod.SelectedIndex > -1) settings.resizeMethod = comboBoxResizeMethod.SelectedIndex;
             }
             catch (Exception)
             {

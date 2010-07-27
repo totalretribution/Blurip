@@ -200,6 +200,10 @@
     <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed streams</system:String>
     <system:String x:Key="LabelDemuxedStreamsList">Demuxed streams list:</system:String>
     <system:String x:Key="ButtonLoadDemuxedStreams">Load existing *.streamInfo.xml</system:String>
+    <system:String x:Key="ButtonStreamUp">Move up</system:String>
+    <system:String x:Key="ButtonStreamDown">Move down</system:String>
+    <system:String x:Key="ButtonStreamDelete">Delete</system:String>
+    <system:String x:Key="ButtonStreamSave">Save</system:String>
 
     <!-- EncodingProfiles Window -->
     <system:String x:Key="CaptionEncodingProfilesWindow">Edit encoding profiles</system:String>
@@ -271,6 +275,7 @@
         <system:String>AddBorder - Height mod 8</system:String>
         <system:String>AddBorder - Height mod 16</system:String>
     </col:ArrayList>
+    <system:String x:Key="LabelResizeMethod">Resize method</system:String>
     <system:String x:Key="TabAdvancedStreamselection">Stream selection</system:String>
     <system:String x:Key="CheckBoxUseAutoselect">Use automatic stream selection</system:String>
     <system:String x:Key="CheckBoxIncludeChapters">Select chapters</system:String>
@@ -386,11 +391,22 @@
 
     <!-- About Window -->
     <system:String x:Key="CaptionAboutWindow">About BluRip</system:String>
-    <system:String x:Key="LabelBluRip">BluRip © __hawk__ 2009-2010</system:String>
     <system:String x:Key="LabelGermanForum">Link to german support forum</system:String>
     <system:String x:Key="LabelEnglishForum">Link to english support forum</system:String>
     <system:String x:Key="LabelHomeLink">Project homepage</system:String>
     <system:String x:Key="LabelEmail">Send email</system:String>
+
+    <!-- Edit StreamInfo Window -->
+    <system:String x:Key="CaptionEditStreamInfoWindow">Edit stream info</system:String>
+    <system:String x:Key="LabelStreamInfoNumber">Streamnumber</system:String>
+    <system:String x:Key="LabelStreamInfoDesc">Description</system:String>
+    <system:String x:Key="LabelStreamInfoTypeDesc">Type description</system:String>
+    <system:String x:Key="LabelStreamInfoLanguage">Language</system:String>
+    <system:String x:Key="LabelStreamInfoAddInfo">Additional info</system:String>
+    <system:String x:Key="LabelStreamInfoFilename">Filename</system:String>
+    <system:String x:Key="LabelStreamInfoStreamType">Stream type</system:String>
+    <system:String x:Key="ButtonStreamInfoFilename">...</system:String>
+    <system:String x:Key="CheckBoxStreamInfoSelected">Selected</system:String>
 
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>

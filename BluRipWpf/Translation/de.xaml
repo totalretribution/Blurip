@@ -200,6 +200,10 @@
     <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed Streams</system:String>
     <system:String x:Key="LabelDemuxedStreamsList">Demuxed Streams Liste:</system:String>
     <system:String x:Key="ButtonLoadDemuxedStreams">Lade existierende *streamInfo.xml</system:String>
+    <system:String x:Key="ButtonStreamUp">Nach oben</system:String>
+    <system:String x:Key="ButtonStreamDown">Nach unten</system:String>
+    <system:String x:Key="ButtonStreamDelete">Löschen</system:String>
+    <system:String x:Key="ButtonStreamSave">Speichern</system:String>
 
     <!-- EncodingProfiles Window -->
     <system:String x:Key="CaptionEncodingProfilesWindow">Bearbeite Encoding Profile</system:String>
@@ -271,6 +275,7 @@
         <system:String>AddBorder - Höhe mod 8</system:String>
         <system:String>AddBorder - Höhe mod 16</system:String>
     </col:ArrayList>
+    <system:String x:Key="LabelResizeMethod">Resize Methode</system:String>
     <system:String x:Key="TabAdvancedStreamselection">Streamauswahl</system:String>
     <system:String x:Key="CheckBoxUseAutoselect">Benutze automatische Streamauswahl</system:String>
     <system:String x:Key="CheckBoxIncludeChapters">Wähle Kapitel aus</system:String>
@@ -386,7 +391,6 @@
 
     <!-- About Window -->
     <system:String x:Key="CaptionAboutWindow">Über BluRip</system:String>
-    <system:String x:Key="LabelBluRip">BluRip © __hawk__ 2009-2010</system:String>
     <system:String x:Key="LabelGermanForum">Link zum deutschen Supportforum</system:String>
     <system:String x:Key="LabelEnglishForum">Link zum englischen Supportforum</system:String>
     <system:String x:Key="LabelHomeLink">Projekt Homepage</system:String>

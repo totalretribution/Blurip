@@ -22,6 +22,8 @@
                     <Label Content="{DynamicResource LabelAutocropCropMethod}" HorizontalAlignment="Left" Margin="6,116,0,0" Name="labelCropMethod" VerticalAlignment="Top" />
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,142,0,0" Name="comboBoxCropMethod" VerticalAlignment="Top" Width="234" ItemsSource="{DynamicResource comboBoxCropMethod}" SelectionChanged="comboBoxCropMethod_SelectionChanged" />
                     <CheckBox Content="{DynamicResource CheckBoxAutocropMinimize}" Height="16" HorizontalAlignment="Left" Margin="6,171,0,0" Name="checkBoxMinimizeAutocrop" VerticalAlignment="Top" Checked="checkBoxMinimizeAutocrop_Checked" Unchecked="checkBoxMinimizeAutocrop_Checked" />
+                    <Label Content="{DynamicResource LabelResizeMethod}" HorizontalAlignment="Left" Margin="6,193,0,0" Name="labelResizeMethod" VerticalAlignment="Top" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,219,0,0" Name="comboBoxResizeMethod" VerticalAlignment="Top" Width="234" SelectionChanged="comboBoxResizeMethod_SelectionChanged"></ComboBox>
                 </Grid>
             </TabItem>
             <TabItem Header="{DynamicResource TabAdvancedStreamselection}" Name="tabItemStreamSelection">

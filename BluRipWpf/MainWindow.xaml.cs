@@ -50,6 +50,7 @@ namespace BluRip
         private List<string> dtsAudioTypes = new List<string>();
         private List<string> ac3Bitrates = new List<string>();
         private List<string> dtsBitrates = new List<string>();
+        private List<string> resizeMethods = new List<string>();
 
         public string title = @"BluRip v0.5.1 © _hawk_ 2009-2010";
 
@@ -102,6 +103,18 @@ namespace BluRip
                 ac3Bitrates.Add("192");
                 ac3Bitrates.Add("448");
                 ac3Bitrates.Add("640");
+
+                resizeMethods.Add("BicubicResize");
+                resizeMethods.Add("BilinearResize");
+                resizeMethods.Add("BlackmanResize");
+                resizeMethods.Add("GaussResize");
+                resizeMethods.Add("LanczosResize");
+                resizeMethods.Add("Lanczos4Resize");
+                resizeMethods.Add("PointResize");
+                resizeMethods.Add("SincResize");
+                resizeMethods.Add("Spline16Resize");
+                resizeMethods.Add("Spline36Resize");
+                resizeMethods.Add("Spline64Resize");
 
                 // load styles before window is shown
                 LoadSkin();
@@ -1280,7 +1293,7 @@ namespace BluRip
                 bool expert = false;
                 if (menuItemViewExpertMode.IsChecked) expert = true;
 
-                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings, expert, dtsBitrates, ac3Bitrates);
+                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings, expert, dtsBitrates, ac3Bitrates, resizeMethods);
                 aow.ShowDialog();
                 if (aow.DialogResult == true)
                 {
