@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BluRip.EditStreamInfoWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionEditStreamInfoWindow}" Height="445" Width="689" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="{DynamicResource CaptionEditStreamInfoWindow}" Height="445" Width="726" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="button1_Click" />
         <Button Content="{DynamicResource ButtonCancel}" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" Width="75" Height="23" VerticalAlignment="Bottom" IsCancel="True" />
@@ -18,12 +18,14 @@
         <CheckBox Content="{DynamicResource CheckBoxStreamInfoSelected}" Height="16" HorizontalAlignment="Left" Margin="12,342,0,0" Name="checkBoxSelected" VerticalAlignment="Top" Checked="checkBoxSelected_Checked" Unchecked="checkBoxSelected_Checked" />
         <Label Content="{DynamicResource LabelStreamInfoStreamType}" HorizontalAlignment="Left" Margin="349,12,0,0" Name="labelStreamType" VerticalAlignment="Top" />
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="349,38,0,0" Name="comboBoxStreamType" VerticalAlignment="Top" Width="222" SelectionChanged="comboBoxStreamType_SelectionChanged" />
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="349,202,0,0" Name="buttonEditExtraInfo" VerticalAlignment="Top" Width="150" />
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="349,257,0,0" Name="buttonEditAdvancedOptions" VerticalAlignment="Top" Width="150" />
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="505,202,0,0" Name="buttonDelExtraInfo" VerticalAlignment="Top" Width="150" />
-        <Button Content="Button" Height="23" Margin="505,257,0,0" Name="buttonDelAdvancedOptions" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" />
+        <Button Content="{DynamicResource ButtonStreamInfoEditExtraFileInfo}" Height="23" HorizontalAlignment="Left" Margin="349,202,0,0" Name="buttonEditExtraInfo" VerticalAlignment="Top" Width="170" IsEnabled="False" />
+        <Button Content="{DynamicResource ButtonStreamInfoEditAdvancedOptions}" Height="23" HorizontalAlignment="Left" Margin="349,257,0,0" Name="buttonEditAdvancedOptions" VerticalAlignment="Top" Width="170" Click="buttonEditAdvancedOptions_Click" />
+        <Button Content="{DynamicResource ButtonStreamInfoResetExtraFileInfo}" Height="23" HorizontalAlignment="Left" Margin="525,202,0,0" Name="buttonDelExtraInfo" VerticalAlignment="Top" Width="170" Click="buttonDelExtraInfo_Click" />
+        <Button Content="{DynamicResource ButtonStreamInfoResetAdvancedOptions}" Height="23" Margin="525,257,0,0" Name="buttonDelAdvancedOptions" VerticalAlignment="Top" HorizontalAlignment="Left" Width="170" Click="buttonDelAdvancedOptions_Click" />
         <Button Content="{DynamicResource ButtonStreamInfoFilename}" Height="23" HorizontalAlignment="Left" Margin="349,311,0,0" Name="buttonFilename" VerticalAlignment="Top" Width="59" Click="buttonFilename_Click" />
         <Label Content="{DynamicResource LabelStreamInfoAddInfo}" HorizontalAlignment="Left" Margin="12,122,0,0" Name="labelAddInfo" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="textBoxAddInfo" VerticalAlignment="Top" Width="331" TextChanged="textBoxAddInfo_TextChanged" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="349,177,0,0" Name="labelExtraFileInfo" VerticalAlignment="Top" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="349,232,0,0" Name="labelAdvancedOptions" VerticalAlignment="Top" />
     </Grid>
 </Window>

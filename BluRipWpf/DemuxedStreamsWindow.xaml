@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{DynamicResource CaptionDemuxedStreamsWindow}" Height="300" Width="550" Closing="Window_Closing" ResizeMode="CanResizeWithGrip" LocationChanged="Window_LocationChanged" ShowInTaskbar="False" MinHeight="400" MinWidth="550" Icon="/BluRip;component/blurip.ico">
     <Grid>
-        <ListBox HorizontalAlignment="Stretch" Margin="12,46,114,41" Name="listBoxDemuxedStreams" VerticalAlignment="Stretch" MouseDoubleClick="listBoxDemuxedStreams_MouseDoubleClick" />
+        <ListBox HorizontalAlignment="Stretch" Margin="12,46,114,67" Name="listBoxDemuxedStreams" VerticalAlignment="Stretch" MouseDoubleClick="listBoxDemuxedStreams_MouseDoubleClick" />
         <Label Content="{DynamicResource LabelDemuxedStreamsList}" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelDemuxedStreamsList" VerticalAlignment="Top" />
         <Button Content="{DynamicResource ButtonLoadDemuxedStreams}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonLoadDemuxedStreams" VerticalAlignment="Bottom" Width="257" Click="buttonLoadDemuxedStreams_Click" />
         <Button Content="{DynamicResource ButtonStreamUp}" Height="23" Margin="0,46,12,0" Name="buttonUp" VerticalAlignment="Top" HorizontalAlignment="Right" Width="96" Click="buttonUp_Click" />
         <Button Content="{DynamicResource ButtonStreamDown}" Height="23" Margin="0,75,12,0" Name="buttonDown" VerticalAlignment="Top" HorizontalAlignment="Right" Width="96" Click="buttonDown_Click" />
         <Button Content="{DynamicResource ButtonStreamDelete}" Height="23" HorizontalAlignment="Right" Margin="0,104,12,0" Name="buttonDelete" VerticalAlignment="Top" Width="96" Click="buttonDelete_Click" />
         <Button Content="{DynamicResource ButtonStreamSave}" HorizontalAlignment="Left" Margin="275,0,0,12" Name="buttonSave" Width="139" Height="23" VerticalAlignment="Bottom" Click="buttonSave_Click" />
+        <Label Content="{DynamicResource LabelStreamInfoEdit}" HorizontalAlignment="Left" Margin="12,0,0,41" Name="labelDesc" VerticalAlignment="Bottom" />
     </Grid>
 </Window>

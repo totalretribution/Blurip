@@ -195,6 +195,7 @@
     <system:String x:Key="ButtonQueueDelete">Delete</system:String>
     <system:String x:Key="ButtonQueueStart">Start</system:String>
     <system:String x:Key="CheckBoxQueueShutdown">Shutdown when finished</system:String>
+    <system:String x:Key="LabelStreamInfoEdit">Double click to edit</system:String>
 
     <!-- DemuxedStreams Window -->
     <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed streams</system:String>
@@ -258,8 +259,7 @@
     <system:String x:Key="CaptionAdvancedOptionsWindow">Edit advanced options</system:String>
     <system:String x:Key="TabAdvancedGeneral">General settings</system:String>
     <system:String x:Key="CheckBoxDeleteDemuxedFiles">Delete demuxed files when finished</system:String>
-    <system:String x:Key="CheckBoxAlwaysDeleteIndex">Always delete index files</system:String>
-    <system:String x:Key="CheckBoxDisableHeaderCompression">Disable mkvmerge header compression</system:String>
+    <system:String x:Key="CheckBoxAlwaysDeleteIndex">Always delete index files</system:String>    
     <system:String x:Key="TabAutoCrop">AutoCrop settings</system:String>
     <system:String x:Key="LabelAutocropNrFrames">Number of frames to analyze</system:String>
     <system:String x:Key="LabelAutocropBlackValue">Max row sum to count as black</system:String>
@@ -276,7 +276,7 @@
         <system:String>AddBorder - Height mod 16</system:String>
     </col:ArrayList>
     <system:String x:Key="LabelResizeMethod">Resize method</system:String>
-    <system:String x:Key="CheckBoxManualAutoCrop">Manual crop (don't close AutoCrop window automatically)</system:String>
+    <system:String x:Key="CheckBoxManualAutoCrop">Edit AutoCrop values by hand (don't close AutoCrop window automatically)</system:String>
     <system:String x:Key="TabAdvancedStreamselection">Stream selection</system:String>
     <system:String x:Key="CheckBoxUseAutoselect">Use automatic stream selection</system:String>
     <system:String x:Key="CheckBoxIncludeChapters">Select chapters</system:String>
@@ -300,10 +300,11 @@
     <system:String x:Key="ButtonPreferredSubLanguagesAdd">Add</system:String>
     <system:String x:Key="NewLanguage">new language</system:String>
     <system:String x:Key="TabAdvancedVideo">Video</system:String>
-    <system:String x:Key="LabelProcessPriority">x264 process priority</system:String>
+    <system:String x:Key="LabelProcessPriority">x264 process priority</system:String>    
     <system:String x:Key="TabAdvancedAudio">Audio</system:String>
     <system:String x:Key="CheckBoxConvertDTSBitrate">Convert DTS bitrate</system:String>
     <system:String x:Key="CheckBoxConvertAC3Bitrate">Convert AC3 bitrate</system:String>
+    <system:String x:Key="CheckBoxDisableHeaderCompression">Disable mkvmerge header compression for audio tracks</system:String>
 
     <!-- AdvancedAudioOptions Window -->
     <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Edit advanced audio options</system:String>
@@ -408,6 +409,14 @@
     <system:String x:Key="LabelStreamInfoStreamType">Stream type</system:String>
     <system:String x:Key="ButtonStreamInfoFilename">...</system:String>
     <system:String x:Key="CheckBoxStreamInfoSelected">Selected</system:String>
+    <system:String x:Key="ButtonStreamInfoEditExtraFileInfo">Edit advanced file info</system:String>
+    <system:String x:Key="ButtonStreamInfoResetExtraFileInfo">Reset advanced file info</system:String>
+    <system:String x:Key="ButtonStreamInfoEditAdvancedOptions">Edit advanced options</system:String>
+    <system:String x:Key="ButtonStreamInfoResetAdvancedOptions">Delete advanced options</system:String>
+    <system:String x:Key="LabelStreamInfoExtraFileInfo">Extra file info status: {0}</system:String>    
+    <system:String x:Key="LabelStreamInfoAdvancedOptions">Advanced options status: {0}</system:String>
+    <system:String x:Key="MsgEmptyOptions">Empty</system:String>
+    <system:String x:Key="MsgFilledOptions">Filled</system:String>
 
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Error:</system:String>

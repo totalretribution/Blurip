@@ -227,7 +227,7 @@ namespace BluRip
                                 if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
                                 if (settings.disableHeaderCompression)
                                 {
-                                    this.Parameter += headerCompression;
+                                    //this.Parameter += headerCompression;
                                 }
                                 if (settings.preferredSubtitleLanguages.Count > 0 && settings.preferredSubtitleLanguages[0].language == si.language)
                                 {
