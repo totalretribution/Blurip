@@ -210,6 +210,7 @@ namespace BluRip
 
                 if (et == null || !et.Successfull)
                 {
+                    vfi.encodedFile = "";
                     logWindow.MessageEncode(Global.Res("ErrorEncodeFailed"));
                     return false;
                 }
@@ -223,6 +224,7 @@ namespace BluRip
                     et.WaitForExit();
                     if (et == null || !et.Successfull)
                     {
+                        vfi.encodedFile = "";
                         logWindow.MessageEncode(Global.Res("ErrorEncode2passFailed"));
                         return false;
                     }

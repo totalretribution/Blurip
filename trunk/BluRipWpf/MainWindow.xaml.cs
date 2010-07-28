@@ -1156,9 +1156,13 @@ namespace BluRip
                 {
                     if (si.streamType == StreamType.Video)
                     {
-                        if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                        if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                         {
-                            if (((VideoFileInfo)si.extraFileInfo).encodedFile != "") return true;
+                            if (((VideoFileInfo)si.extraFileInfo).encodedFile != "")
+                            {
+                                if (File.Exists(((VideoFileInfo)si.extraFileInfo).encodedFile)) return true;
+                                else return false;
+                            }
                         }
                         else return false;
                     }

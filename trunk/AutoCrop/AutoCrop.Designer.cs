@@ -37,19 +37,33 @@
             this.labelFrame = new System.Windows.Forms.Label();
             this.buttonCalc = new System.Windows.Forms.Button();
             this.panelManualCrop = new System.Windows.Forms.Panel();
-            this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonOk = new System.Windows.Forms.Button();
+            this.numericUpDownBorderTop = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownBorderBottom = new System.Windows.Forms.NumericUpDown();
+            this.labelBorderTop = new System.Windows.Forms.Label();
+            this.labelBorderBottom = new System.Windows.Forms.Label();
+            this.checkBoxAddBorders = new System.Windows.Forms.CheckBox();
+            this.checkBoxResize = new System.Windows.Forms.CheckBox();
+            this.labelResizeY = new System.Windows.Forms.Label();
+            this.labelResizeX = new System.Windows.Forms.Label();
+            this.numericUpDownResizeY = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownResizeX = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCropTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCropBottom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFrame)).BeginInit();
             this.panelManualCrop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBorderTop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBorderBottom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownResizeY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownResizeX)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonFlash
             // 
-            this.buttonFlash.Location = new System.Drawing.Point(129, 3);
+            this.buttonFlash.Location = new System.Drawing.Point(270, 61);
             this.buttonFlash.Name = "buttonFlash";
-            this.buttonFlash.Size = new System.Drawing.Size(120, 23);
+            this.buttonFlash.Size = new System.Drawing.Size(75, 23);
             this.buttonFlash.TabIndex = 2;
             this.buttonFlash.Text = "Flash";
             this.buttonFlash.UseVisualStyleBackColor = true;
@@ -64,7 +78,7 @@
             0,
             0});
             this.numericUpDownCropTop.Name = "numericUpDownCropTop";
-            this.numericUpDownCropTop.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownCropTop.Size = new System.Drawing.Size(77, 20);
             this.numericUpDownCropTop.TabIndex = 3;
             this.numericUpDownCropTop.ValueChanged += new System.EventHandler(this.numericUpDownCropTop_ValueChanged);
             // 
@@ -77,7 +91,7 @@
             0,
             0});
             this.numericUpDownCropBottom.Name = "numericUpDownCropBottom";
-            this.numericUpDownCropBottom.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownCropBottom.Size = new System.Drawing.Size(77, 20);
             this.numericUpDownCropBottom.TabIndex = 4;
             this.numericUpDownCropBottom.ValueChanged += new System.EventHandler(this.numericUpDownCropBottom_ValueChanged);
             // 
@@ -103,7 +117,7 @@
             // 
             this.numericUpDownFrame.Location = new System.Drawing.Point(3, 94);
             this.numericUpDownFrame.Name = "numericUpDownFrame";
-            this.numericUpDownFrame.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownFrame.Size = new System.Drawing.Size(77, 20);
             this.numericUpDownFrame.TabIndex = 7;
             this.numericUpDownFrame.ValueChanged += new System.EventHandler(this.numericUpDownFrame_ValueChanged);
             // 
@@ -118,9 +132,9 @@
             // 
             // buttonCalc
             // 
-            this.buttonCalc.Location = new System.Drawing.Point(129, 29);
+            this.buttonCalc.Location = new System.Drawing.Point(270, 90);
             this.buttonCalc.Name = "buttonCalc";
-            this.buttonCalc.Size = new System.Drawing.Size(120, 23);
+            this.buttonCalc.Size = new System.Drawing.Size(75, 23);
             this.buttonCalc.TabIndex = 9;
             this.buttonCalc.Text = "Calc values";
             this.buttonCalc.UseVisualStyleBackColor = true;
@@ -128,25 +142,45 @@
             // 
             // panelManualCrop
             // 
+            this.panelManualCrop.Controls.Add(this.checkBoxResize);
+            this.panelManualCrop.Controls.Add(this.buttonCalc);
+            this.panelManualCrop.Controls.Add(this.buttonFlash);
+            this.panelManualCrop.Controls.Add(this.labelResizeY);
+            this.panelManualCrop.Controls.Add(this.labelResizeX);
+            this.panelManualCrop.Controls.Add(this.numericUpDownResizeY);
+            this.panelManualCrop.Controls.Add(this.numericUpDownResizeX);
+            this.panelManualCrop.Controls.Add(this.checkBoxAddBorders);
+            this.panelManualCrop.Controls.Add(this.labelBorderBottom);
+            this.panelManualCrop.Controls.Add(this.labelBorderTop);
+            this.panelManualCrop.Controls.Add(this.numericUpDownBorderBottom);
+            this.panelManualCrop.Controls.Add(this.numericUpDownBorderTop);
             this.panelManualCrop.Controls.Add(this.buttonCancel);
             this.panelManualCrop.Controls.Add(this.buttonOk);
             this.panelManualCrop.Controls.Add(this.labelCropTop);
-            this.panelManualCrop.Controls.Add(this.buttonCalc);
             this.panelManualCrop.Controls.Add(this.numericUpDownCropTop);
-            this.panelManualCrop.Controls.Add(this.buttonFlash);
             this.panelManualCrop.Controls.Add(this.labelFrame);
             this.panelManualCrop.Controls.Add(this.numericUpDownCropBottom);
             this.panelManualCrop.Controls.Add(this.numericUpDownFrame);
             this.panelManualCrop.Controls.Add(this.labelCropBottom);
             this.panelManualCrop.Location = new System.Drawing.Point(12, 12);
             this.panelManualCrop.Name = "panelManualCrop";
-            this.panelManualCrop.Size = new System.Drawing.Size(368, 121);
+            this.panelManualCrop.Size = new System.Drawing.Size(354, 121);
             this.panelManualCrop.TabIndex = 10;
             this.panelManualCrop.Visible = false;
             // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(270, 32);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 11;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(255, 3);
+            this.buttonOk.Location = new System.Drawing.Point(270, 3);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 10;
@@ -154,15 +188,115 @@
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
-            // buttonCancel
+            // numericUpDownBorderTop
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(255, 29);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 11;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.numericUpDownBorderTop.Location = new System.Drawing.Point(86, 16);
+            this.numericUpDownBorderTop.Maximum = new decimal(new int[] {
+            1080,
+            0,
+            0,
+            0});
+            this.numericUpDownBorderTop.Name = "numericUpDownBorderTop";
+            this.numericUpDownBorderTop.Size = new System.Drawing.Size(77, 20);
+            this.numericUpDownBorderTop.TabIndex = 11;
+            this.numericUpDownBorderTop.ValueChanged += new System.EventHandler(this.numericUpDownBorderTop_ValueChanged);
+            // 
+            // numericUpDownBorderBottom
+            // 
+            this.numericUpDownBorderBottom.Location = new System.Drawing.Point(86, 55);
+            this.numericUpDownBorderBottom.Maximum = new decimal(new int[] {
+            1080,
+            0,
+            0,
+            0});
+            this.numericUpDownBorderBottom.Name = "numericUpDownBorderBottom";
+            this.numericUpDownBorderBottom.Size = new System.Drawing.Size(77, 20);
+            this.numericUpDownBorderBottom.TabIndex = 12;
+            this.numericUpDownBorderBottom.ValueChanged += new System.EventHandler(this.numericUpDownBorderBottom_ValueChanged);
+            // 
+            // labelBorderTop
+            // 
+            this.labelBorderTop.AutoSize = true;
+            this.labelBorderTop.Location = new System.Drawing.Point(86, 0);
+            this.labelBorderTop.Name = "labelBorderTop";
+            this.labelBorderTop.Size = new System.Drawing.Size(78, 13);
+            this.labelBorderTop.TabIndex = 11;
+            this.labelBorderTop.Text = "AddBorder top:";
+            // 
+            // labelBorderBottom
+            // 
+            this.labelBorderBottom.AutoSize = true;
+            this.labelBorderBottom.Location = new System.Drawing.Point(86, 39);
+            this.labelBorderBottom.Name = "labelBorderBottom";
+            this.labelBorderBottom.Size = new System.Drawing.Size(95, 13);
+            this.labelBorderBottom.TabIndex = 13;
+            this.labelBorderBottom.Text = "AddBorder bottom:";
+            // 
+            // checkBoxAddBorders
+            // 
+            this.checkBoxAddBorders.AutoSize = true;
+            this.checkBoxAddBorders.Location = new System.Drawing.Point(89, 94);
+            this.checkBoxAddBorders.Name = "checkBoxAddBorders";
+            this.checkBoxAddBorders.Size = new System.Drawing.Size(81, 17);
+            this.checkBoxAddBorders.TabIndex = 11;
+            this.checkBoxAddBorders.Text = "AddBorders";
+            this.checkBoxAddBorders.UseVisualStyleBackColor = true;
+            this.checkBoxAddBorders.CheckedChanged += new System.EventHandler(this.checkBoxAddBorders_CheckedChanged);
+            // 
+            // checkBoxResize
+            // 
+            this.checkBoxResize.AutoSize = true;
+            this.checkBoxResize.Location = new System.Drawing.Point(190, 94);
+            this.checkBoxResize.Name = "checkBoxResize";
+            this.checkBoxResize.Size = new System.Drawing.Size(58, 17);
+            this.checkBoxResize.TabIndex = 16;
+            this.checkBoxResize.Text = "Resize";
+            this.checkBoxResize.UseVisualStyleBackColor = true;
+            this.checkBoxResize.CheckedChanged += new System.EventHandler(this.checkBoxResize_CheckedChanged);
+            // 
+            // labelResizeY
+            // 
+            this.labelResizeY.AutoSize = true;
+            this.labelResizeY.Location = new System.Drawing.Point(187, 39);
+            this.labelResizeY.Name = "labelResizeY";
+            this.labelResizeY.Size = new System.Drawing.Size(50, 13);
+            this.labelResizeY.TabIndex = 18;
+            this.labelResizeY.Text = "Resize y:";
+            // 
+            // labelResizeX
+            // 
+            this.labelResizeX.AutoSize = true;
+            this.labelResizeX.Location = new System.Drawing.Point(187, 0);
+            this.labelResizeX.Name = "labelResizeX";
+            this.labelResizeX.Size = new System.Drawing.Size(50, 13);
+            this.labelResizeX.TabIndex = 14;
+            this.labelResizeX.Text = "Resize x:";
+            // 
+            // numericUpDownResizeY
+            // 
+            this.numericUpDownResizeY.Location = new System.Drawing.Point(187, 55);
+            this.numericUpDownResizeY.Maximum = new decimal(new int[] {
+            1080,
+            0,
+            0,
+            0});
+            this.numericUpDownResizeY.Name = "numericUpDownResizeY";
+            this.numericUpDownResizeY.Size = new System.Drawing.Size(77, 20);
+            this.numericUpDownResizeY.TabIndex = 17;
+            this.numericUpDownResizeY.ValueChanged += new System.EventHandler(this.numericUpDownResizeY_ValueChanged);
+            // 
+            // numericUpDownResizeX
+            // 
+            this.numericUpDownResizeX.Location = new System.Drawing.Point(187, 16);
+            this.numericUpDownResizeX.Maximum = new decimal(new int[] {
+            1920,
+            0,
+            0,
+            0});
+            this.numericUpDownResizeX.Name = "numericUpDownResizeX";
+            this.numericUpDownResizeX.Size = new System.Drawing.Size(77, 20);
+            this.numericUpDownResizeX.TabIndex = 15;
+            this.numericUpDownResizeX.ValueChanged += new System.EventHandler(this.numericUpDownResizeX_ValueChanged);
             // 
             // AutoCrop
             // 
@@ -182,6 +316,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFrame)).EndInit();
             this.panelManualCrop.ResumeLayout(false);
             this.panelManualCrop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBorderTop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBorderBottom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownResizeY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownResizeX)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,6 +337,16 @@
         private System.Windows.Forms.Panel panelManualCrop;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOk;
+        private System.Windows.Forms.CheckBox checkBoxAddBorders;
+        private System.Windows.Forms.Label labelBorderBottom;
+        private System.Windows.Forms.Label labelBorderTop;
+        private System.Windows.Forms.NumericUpDown numericUpDownBorderBottom;
+        private System.Windows.Forms.NumericUpDown numericUpDownBorderTop;
+        private System.Windows.Forms.CheckBox checkBoxResize;
+        private System.Windows.Forms.Label labelResizeY;
+        private System.Windows.Forms.Label labelResizeX;
+        private System.Windows.Forms.NumericUpDown numericUpDownResizeY;
+        private System.Windows.Forms.NumericUpDown numericUpDownResizeX;
 
     }
 }

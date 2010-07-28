@@ -477,6 +477,7 @@ namespace BluRip
                         }
                     }
                     cropInfo.resizeX = asc.VideoWidth;
+                    cropInfo.resizeY = asc.VideoHeight;
                 }
                 else
                 {
@@ -861,7 +862,13 @@ namespace BluRip
                 this.Refresh();
                 drawRowSum = false;                
                 numericUpDownCropTop.Value = cropInfo.cropTop;                
-                numericUpDownCropBottom.Value = cropInfo.cropBottom;                
+                numericUpDownCropBottom.Value = cropInfo.cropBottom;
+                numericUpDownBorderTop.Value = cropInfo.borderTop;
+                numericUpDownBorderBottom.Value = cropInfo.borderBottom;
+                checkBoxAddBorders.Checked = cropInfo.border;
+                numericUpDownResizeX.Value = cropInfo.resizeX;
+                numericUpDownResizeY.Value = cropInfo.resizeY;
+                checkBoxResize.Checked = cropInfo.resize;
                 numericUpDownFrame.Value = curFrame;
                 Monitor.Enter(drawLock);
                 drawOrig = false;
@@ -959,7 +966,7 @@ namespace BluRip
                 {
                     FillRow(bitmapCopy, i);
                 }
-                for (int i = asc.VideoHeight - 1; i > asc.VideoHeight - cropInfo.cropBottom; i--)
+                for (int i = asc.VideoHeight - 1; i > asc.VideoHeight - cropInfo.cropBottom - 1; i--)
                 {
                     FillRow(bitmapCopy, i);
                 }
@@ -1025,8 +1032,14 @@ namespace BluRip
             try
             {
                 CalcCrop();
-                numericUpDownCropBottom.Value = cropInfo.cropBottom;
                 numericUpDownCropTop.Value = cropInfo.cropTop;
+                numericUpDownCropBottom.Value = cropInfo.cropBottom;
+                numericUpDownBorderTop.Value = cropInfo.borderTop;
+                numericUpDownBorderBottom.Value = cropInfo.borderBottom;
+                checkBoxAddBorders.Checked = cropInfo.border;
+                numericUpDownResizeX.Value = cropInfo.resizeX;
+                numericUpDownResizeY.Value = cropInfo.resizeY;
+                checkBoxResize.Checked = cropInfo.resize;
                 int tmpTop = 0;
                 int tmpBottom = 0;
                 int progress = 0;
@@ -1056,6 +1069,96 @@ namespace BluRip
                 cropInfo.error = true;
                 cropInfo.errorStr = "Aborted by user";
                 this.Close();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void numericUpDownBorderTop_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.borderTop = (int)numericUpDownBorderTop.Value;
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void numericUpDownBorderBottom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.borderBottom = (int)numericUpDownBorderBottom.Value;
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxAddBorders_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.border = checkBoxAddBorders.Checked;
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void numericUpDownResizeX_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.resizeX = (int)numericUpDownResizeX.Value;
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void numericUpDownResizeY_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.resizeY = (int)numericUpDownResizeY.Value;
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxResize_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cropInfo.resize = checkBoxResize.Checked;
+                int tmpTop = 0;
+                int tmpBottom = 0;
+                int progress = 0;
+                UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
             }
             catch (Exception)
             {

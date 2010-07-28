@@ -122,7 +122,7 @@
                                 <CheckBox Content="{DynamicResource checkBoxCopyUntouchedSubs}" Height="16" HorizontalAlignment="Left" Margin="336,61,0,0" Name="checkBoxCopyUntouchedSubs" VerticalAlignment="Top" Checked="checkBoxCopyUntouchedSubs_Checked" Unchecked="checkBoxCopyUntouchedSubs_Checked" TabIndex="8" />
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="{DynamicResource HeaderExpertSettings}" Height="111" Margin="6,329,36,0" Name="groupBoxExpertSettings" VerticalAlignment="Top" Width="716">
+                        <GroupBox Header="{DynamicResource HeaderExpertSettings}" Height="111" Margin="6,329,0,0" Name="groupBoxExpertSettings" VerticalAlignment="Top" Width="716" HorizontalAlignment="Left">
                             <Grid>
                                 <Label Content="{DynamicResource LabelAvisynthProfile}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelAvisynthProfile" VerticalAlignment="Top" />
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxAvisynthProfile" VerticalAlignment="Top" Width="166" SelectionChanged="comboBoxAvisynthProfile_SelectionChanged" TabIndex="9" />

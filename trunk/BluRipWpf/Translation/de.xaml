@@ -195,6 +195,7 @@
     <system:String x:Key="ButtonQueueDelete">Löschen</system:String>
     <system:String x:Key="ButtonQueueStart">Start</system:String>
     <system:String x:Key="CheckBoxQueueShutdown">Herunterfahren wenn fertig</system:String>
+    <system:String x:Key="LabelStreamInfoEdit">Doppelklick zum editieren</system:String>
 
     <!-- DemuxedStreams Window -->
     <system:String x:Key="CaptionDemuxedStreamsWindow">Demuxed Streams</system:String>
@@ -258,8 +259,7 @@
     <system:String x:Key="CaptionAdvancedOptionsWindow">Bearbeite erweiterte Optionen</system:String>
     <system:String x:Key="TabAdvancedGeneral">Allgemeine Einstellungen</system:String>
     <system:String x:Key="CheckBoxDeleteDemuxedFiles">Lösche demuxte Dateien wenn fertig</system:String>
-    <system:String x:Key="CheckBoxAlwaysDeleteIndex">Index Dateien immer löschen</system:String>
-    <system:String x:Key="CheckBoxDisableHeaderCompression">Mkvmerge header compression abschalten</system:String>
+    <system:String x:Key="CheckBoxAlwaysDeleteIndex">Index Dateien immer löschen</system:String>    
     <system:String x:Key="TabAutoCrop">AutoCrop Einstellungen</system:String>
     <system:String x:Key="LabelAutocropNrFrames">Anzahl der zu analysierenden Bilder</system:String>
     <system:String x:Key="LabelAutocropBlackValue">Maximale Zeilensumme die als schwarz zählt</system:String>
@@ -276,7 +276,7 @@
         <system:String>AddBorder - Höhe mod 16</system:String>
     </col:ArrayList>
     <system:String x:Key="LabelResizeMethod">Resize Methode</system:String>
-    <system:String x:Key="CheckBoxManualAutoCrop">Manuelles cropping (AutoCrop Fenster nicht autom. schließen)</system:String>
+    <system:String x:Key="CheckBoxManualAutoCrop">Editiere AutoCrop Werte von Hand (AutoCrop Fenster nicht autom. schließen)</system:String>
     <system:String x:Key="TabAdvancedStreamselection">Streamauswahl</system:String>
     <system:String x:Key="CheckBoxUseAutoselect">Benutze automatische Streamauswahl</system:String>
     <system:String x:Key="CheckBoxIncludeChapters">Wähle Kapitel aus</system:String>
@@ -300,10 +300,11 @@
     <system:String x:Key="ButtonPreferredSubLanguagesAdd">Hinzufügen</system:String>
     <system:String x:Key="NewLanguage">Neue Sprache</system:String>
     <system:String x:Key="TabAdvancedVideo">Video</system:String>
-    <system:String x:Key="LabelProcessPriority">x264 Prozess Priorität</system:String>
+    <system:String x:Key="LabelProcessPriority">x264 Prozess Priorität</system:String>    
     <system:String x:Key="TabAdvancedAudio">Audio</system:String>
     <system:String x:Key="CheckBoxConvertDTSBitrate">Konvertiere DTS Bitrate</system:String>
     <system:String x:Key="CheckBoxConvertAC3Bitrate">Konvertiere AC3 Bitrate</system:String>
+    <system:String x:Key="CheckBoxDisableHeaderCompression">Mkvmerge header compression für Audiotracks abschalten</system:String>
 
     <!-- AdvancedAudioOptions Window -->
     <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Bearbeite erweiterte Audio Einstellungen</system:String>
@@ -397,6 +398,26 @@
     <system:String x:Key="LabelHomeLink">Projekt Homepage</system:String>
     <system:String x:Key="LabelEmail">Sende E-Mail</system:String>
 
+    <!-- Edit StreamInfo Window -->
+    <system:String x:Key="CaptionEditStreamInfoWindow">Bearbeite Stream Info</system:String>
+    <system:String x:Key="LabelStreamInfoNumber">Streamnummer</system:String>
+    <system:String x:Key="LabelStreamInfoDesc">Beschreibung</system:String>
+    <system:String x:Key="LabelStreamInfoTypeDesc">Typ Beschreibung</system:String>
+    <system:String x:Key="LabelStreamInfoLanguage">Sprache</system:String>
+    <system:String x:Key="LabelStreamInfoAddInfo">Zusätzliche Info</system:String>
+    <system:String x:Key="LabelStreamInfoFilename">Dateiname</system:String>
+    <system:String x:Key="LabelStreamInfoStreamType">Streamtyp</system:String>
+    <system:String x:Key="ButtonStreamInfoFilename">...</system:String>
+    <system:String x:Key="CheckBoxStreamInfoSelected">Ausgewählt</system:String>
+    <system:String x:Key="ButtonStreamInfoEditExtraFileInfo">Bearbeite erweit. Dateiinfo</system:String>
+    <system:String x:Key="ButtonStreamInfoResetExtraFileInfo">Lösche erweit. Dateiinfo</system:String>
+    <system:String x:Key="ButtonStreamInfoEditAdvancedOptions">Bearbeite erweit. Einstellungen</system:String>
+    <system:String x:Key="ButtonStreamInfoResetAdvancedOptions">Lösche erweit. Einstellungen</system:String>
+    <system:String x:Key="LabelStreamInfoExtraFileInfo">Erweit. Dateiinfo Status: {0}</system:String>
+    <system:String x:Key="LabelStreamInfoAdvancedOptions">Erweit. Optionen Status: {0}</system:String>
+    <system:String x:Key="MsgEmptyOptions">Leer</system:String>
+    <system:String x:Key="MsgFilledOptions">Gefüllt</system:String>
+    
     <!-- Error msg -->
     <system:String x:Key="ErrorHeader">Fehler:</system:String>
     <system:String x:Key="ErrorException">Ausnahmefehler:</system:String>

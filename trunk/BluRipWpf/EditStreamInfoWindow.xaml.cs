@@ -140,11 +140,63 @@ namespace BluRip
             }
         }
 
+        private void UpdateStatusInfo()
+        {
+            try
+            {
+                if (si.extraFileInfo == null || si.extraFileInfo.GetType() == typeof(ExtraFileInfo))
+                {
+                    labelExtraFileInfo.Content = Global.ResFormat("LabelStreamInfoExtraFileInfo", Global.Res("MsgEmptyOptions"));
+                }
+                else
+                {
+                    bool ok = false;
+                    if (si.streamType == StreamType.Video && si.extraFileInfo.GetType() == typeof(VideoFileInfo)) ok = true;
+                    if(si.streamType == StreamType.Subtitle && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo)) ok = true;
+
+                    if (ok)
+                    {
+                        labelExtraFileInfo.Content = Global.ResFormat("LabelStreamInfoExtraFileInfo", Global.Res("MsgFilledOptions"));
+                    }
+                    else
+                    {
+                        si.extraFileInfo = new ExtraFileInfo();
+                        labelExtraFileInfo.Content = Global.ResFormat("LabelStreamInfoExtraFileInfo", Global.Res("MsgEmptyOptions"));
+                    }
+                }
+
+                if (si.advancedOptions == null || si.advancedOptions.GetType() == typeof(AdvancedOptions))
+                {
+                    labelAdvancedOptions.Content = Global.ResFormat("LabelStreamInfoAdvancedOptions", Global.Res("MsgEmptyOptions"));
+                }
+                else
+                {
+                    bool ok = false;
+                    if (si.streamType == StreamType.Video && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions)) ok = true;
+                    if (si.streamType == StreamType.Audio && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions)) ok = true;
+
+                    if (ok)
+                    {
+                        labelAdvancedOptions.Content = Global.ResFormat("LabelStreamInfoAdvancedOptions", Global.Res("MsgFilledOptions"));
+                    }
+                    else
+                    {
+                        si.advancedOptions = new AdvancedOptions();
+                        labelAdvancedOptions.Content = Global.ResFormat("LabelStreamInfoAdvancedOptions", Global.Res("MsgEmptyOptions"));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private void comboBoxStreamType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 si.streamType = (StreamType)comboBoxStreamType.SelectedItem;
+                UpdateStatusInfo();
             }
             catch (Exception)
             {
@@ -171,6 +223,64 @@ namespace BluRip
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     textBoxFilename.Text = ofd.FileName;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDelExtraInfo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                si.extraFileInfo = new ExtraFileInfo();
+                UpdateStatusInfo();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDelAdvancedOptions_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                si.advancedOptions = new AdvancedOptions();
+                UpdateStatusInfo();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonEditAdvancedOptions_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (si.streamType == StreamType.Audio)
+                {
+                    AdvancedAudioOptions aao = new AdvancedAudioOptions();
+                    if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions)) aao = new AdvancedAudioOptions(si.advancedOptions);
+                    AdvancedAudioOptionsWindow aaow = new AdvancedAudioOptionsWindow(aao);                    
+                    aaow.ShowDialog();
+                    if (aaow.DialogResult == true)
+                    {
+                        si.advancedOptions = new AdvancedOptions(aao);
+                        UpdateStatusInfo();
+                    }
+                }
+                else if (si.streamType == StreamType.Video)
+                {
+                    AdvancedVideoOptions avo = new AdvancedVideoOptions();                    
+                    if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions)) avo = new AdvancedVideoOptions(si.advancedOptions);
+                    AdvancedVideoOptionsWindow avow = new AdvancedVideoOptionsWindow(avo);
+                    avow.ShowDialog();
+                    if (avow.DialogResult == true)
+                    {
+                        si.advancedOptions = new AdvancedVideoOptions(avo);
+                        UpdateStatusInfo();
+                    }
                 }
             }
             catch (Exception)
