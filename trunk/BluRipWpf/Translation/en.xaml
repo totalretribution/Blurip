@@ -204,6 +204,7 @@
     <system:String x:Key="ButtonStreamUp">Move up</system:String>
     <system:String x:Key="ButtonStreamDown">Move down</system:String>
     <system:String x:Key="ButtonStreamDelete">Delete</system:String>
+    <system:String x:Key="ButtonStreamAdd">Add</system:String>
     <system:String x:Key="ButtonStreamSave">Save</system:String>
 
     <!-- EncodingProfiles Window -->

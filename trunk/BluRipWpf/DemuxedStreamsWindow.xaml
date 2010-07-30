@@ -11,5 +11,6 @@
         <Button Content="{DynamicResource ButtonStreamDelete}" Height="23" HorizontalAlignment="Right" Margin="0,104,12,0" Name="buttonDelete" VerticalAlignment="Top" Width="96" Click="buttonDelete_Click" />
         <Button Content="{DynamicResource ButtonStreamSave}" HorizontalAlignment="Left" Margin="275,0,0,12" Name="buttonSave" Width="139" Height="23" VerticalAlignment="Bottom" Click="buttonSave_Click" />
         <Label Content="{DynamicResource LabelStreamInfoEdit}" HorizontalAlignment="Left" Margin="12,0,0,41" Name="labelDesc" VerticalAlignment="Bottom" />
+        <Button Content="{DynamicResource ButtonStreamAdd}" Height="23" HorizontalAlignment="Right" Margin="0,271,12,0" Name="buttonAdd" VerticalAlignment="Top" Width="96" Click="buttonAdd_Click" />
     </Grid>
 </Window>

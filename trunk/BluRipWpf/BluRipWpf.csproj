@@ -96,6 +96,12 @@
     <Compile Include="EditStreamInfoWindow.xaml.cs">
       <DependentUpon>EditStreamInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditSubtitleFileInfoWindow.xaml.cs">
+      <DependentUpon>EditSubtitleFileInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditVideoFileInfoWindow.xaml.cs">
+      <DependentUpon>EditVideoFileInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Encode.cs" />
     <Compile Include="ExternalToolsWindow.xaml.cs">
       <DependentUpon>ExternalToolsWindow.xaml</DependentUpon>
@@ -158,6 +164,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditStreamInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditSubtitleFileInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditVideoFileInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
