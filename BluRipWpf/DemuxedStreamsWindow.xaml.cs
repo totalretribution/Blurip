@@ -203,5 +203,23 @@ namespace BluRip
             {
             }
         }
+
+        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StreamInfo si = new StreamInfo();
+                EditStreamInfoWindow esiw = new EditStreamInfoWindow(si);
+                esiw.ShowDialog();
+                if (esiw.DialogResult == true)
+                {
+                    mainWindow.DemuxedStreams.streams.Add(esiw.streamInfo);
+                    UpdateDemuxedStreams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

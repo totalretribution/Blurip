@@ -266,7 +266,7 @@ namespace BluRip
                     aaow.ShowDialog();
                     if (aaow.DialogResult == true)
                     {
-                        si.advancedOptions = new AdvancedOptions(aao);
+                        si.advancedOptions = new AdvancedAudioOptions(aaow.advancedAudioOptions);
                         UpdateStatusInfo();
                     }
                 }
@@ -278,7 +278,41 @@ namespace BluRip
                     avow.ShowDialog();
                     if (avow.DialogResult == true)
                     {
-                        si.advancedOptions = new AdvancedVideoOptions(avo);
+                        si.advancedOptions = new AdvancedVideoOptions(avow.advancedVideoOptions);
+                        UpdateStatusInfo();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonEditExtraInfo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (si.streamType == StreamType.Video)
+                {
+                    VideoFileInfo vfi = new VideoFileInfo();
+                    if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo)) vfi = new VideoFileInfo(si.extraFileInfo);
+                    EditVideoFileInfoWindow evfiw = new EditVideoFileInfoWindow(vfi);
+                    evfiw.ShowDialog();
+                    if (evfiw.DialogResult == true)
+                    {
+                        si.extraFileInfo = new VideoFileInfo(evfiw.videoFileInfo);
+                        UpdateStatusInfo();
+                    }
+                }
+                else if (si.streamType == StreamType.Subtitle)
+                {
+                    SubtitleFileInfo sfi = new SubtitleFileInfo();
+                    if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo)) sfi = new SubtitleFileInfo(si.extraFileInfo);
+                    EditSubtitleFileInfoWindow esfiw = new EditSubtitleFileInfoWindow(sfi);
+                    esfiw.ShowDialog();
+                    if (esfiw.DialogResult == true)
+                    {
+                        si.extraFileInfo = new SubtitleFileInfo(esfiw.subtitleFileInfo);
                         UpdateStatusInfo();
                     }
                 }

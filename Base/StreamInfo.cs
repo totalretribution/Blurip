@@ -177,6 +177,8 @@ namespace BluRip
 
                 this.normalIdxLowRes = ((SubtitleFileInfo)orig).normalIdxLowRes;
                 this.normalSubLowRes = ((SubtitleFileInfo)orig).normalSubLowRes;
+
+                this.isSecond = ((SubtitleFileInfo)orig).isSecond;
             }
             catch (Exception)
             {

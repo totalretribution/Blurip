@@ -21,3 +21,5 @@
 - Progress bar (0-100%) for mux & encode
 
 - Wizard to adjust settings
+
+- Show bitrate/size if 2-pass profile selected in main window

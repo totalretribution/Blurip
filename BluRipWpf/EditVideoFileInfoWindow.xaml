@@ -1,0 +1,25 @@
+﻿<Window x:Class="BluRip.EditVideoFileInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EditVideoFileInfoWindow" Height="370" Width="365" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" />
+        <Button Content="{DynamicResource ButtonCancel}" Height="23" Margin="93,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" IsCancel="True" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelFps" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,38,0,0" Name="textBoxFps" VerticalAlignment="Top" Width="140" TextChanged="textBoxFps_TextChanged" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="12,67,0,0" Name="labeLength" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,93,0,0" Name="textBoxLength" VerticalAlignment="Top" Width="140" TextChanged="textBoxLength_TextChanged" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="12,122,0,0" Name="labelFrames" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="textBoxFrames" VerticalAlignment="Top" Width="140" TextChanged="textBoxFrames_TextChanged" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="12,177,0,0" Name="labelEncodeAvs" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,203,0,0" Name="textBoxEncodeAvs" VerticalAlignment="Top" Width="240" TextChanged="textBoxEncodeAvs_TextChanged" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="158,12,0,0" Name="labelResX" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="158,38,0,0" Name="textBoxResX" VerticalAlignment="Top" Width="140" TextChanged="textBoxResX_TextChanged" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="158,67,0,0" Name="labelResY" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="158,93,0,0" Name="textBoxResY" VerticalAlignment="Top" Width="140" TextChanged="textBoxResY_TextChanged" />
+        <Label Content="Label" HorizontalAlignment="Left" Margin="12,232,0,0" Name="labelEncodedFile" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,258,0,0" Name="textBoxEncodedFile" VerticalAlignment="Top" Width="240" TextChanged="textBoxEncodedFile_TextChanged" />
+        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="257,202,0,0" Name="buttonEncodeAvs" VerticalAlignment="Top" Width="75" Click="buttonEncodeAvs_Click" />
+        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="257,257,0,0" Name="buttonEncodedFile" VerticalAlignment="Top" Width="75" Click="buttonEncodedFile_Click" />
+    </Grid>
+</Window>
