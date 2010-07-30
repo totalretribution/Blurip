@@ -1,3 +1,12 @@
+v0.5.1
+
+    - Some minor GUI fixes (don't reset position on language change etc)
+    - Option to disable mkvmerge header compression (for audio tracks)
+    - Resize method selection
+    - Edit functions for demuxed stream list
+    - Option to edit AutoCrop values (crop, addborders, resize) by hand
+    - Lots of minor bugfixes
+
 v0.5.0 (2010/07/20)
 
     - Complete GUI redesign

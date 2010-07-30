@@ -2,7 +2,7 @@
 
 (Done) - skin selection + classic skin
 
-- resize method selection (in advanced video options, too)
+(50%)  - resize method selection (in advanced video options, too)
 
 (Done) - link window
 
@@ -16,4 +16,8 @@
 
 (Done) - option to set forced flag for first forced subs track
 
-- edit option demuxed stream list (for 2-pass profile: show/update bitrate)
+(75%)  - edit option demuxed stream list (for 2-pass profile: show/update bitrate)
+
+- Progress bar (0-100%) for mux & encode
+
+- Wizard to adjust settings
