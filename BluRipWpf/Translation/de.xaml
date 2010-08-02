@@ -267,7 +267,22 @@
     <system:String x:Key="LabelVfiEncodedFile">Encoded file</system:String>
     <system:String x:Key="ButtonVfiEncodedFile">...</system:String>
     <system:String x:Key="ButtonVfiEncodeAvs">...</system:String>
-    
+
+    <!-- EditSubtitleFileInfo Window -->
+    <system:String x:Key="CaptionEditSubtitleFileInfoWindow">Edit extra subtitle file info</system:String>
+    <system:String x:Key="LabelSfiForcedIdx">Forced .idx</system:String>
+    <system:String x:Key="LabelSfiForcedSub">Forced .sub</system:String>
+    <system:String x:Key="LabelSfiForcedSup">Forced .sup</system:String>
+    <system:String x:Key="LabelSfiNormalIdx">Normal .idx</system:String>
+    <system:String x:Key="LabelSfiNormalSub">Normal .sub</system:String>
+    <system:String x:Key="LabelSfiNormalSup">Normal .sup</system:String>
+    <system:String x:Key="LabelSfiForcedIdxLowRes">Forced .idx (Lowres)</system:String>
+    <system:String x:Key="LabelSfiForecedSubLowRes">Forced .sub (Lowres)</system:String>
+    <system:String x:Key="LabelSfiNormalIdxLowRes">Normal .idx (Lowres)</system:String>
+    <system:String x:Key="LabelSfiNormalSubLowRes">Normal .sub (Lowres)</system:String>
+    <system:String x:Key="ButtonSfiOpen">...</system:String>
+    <system:String x:Key="CheckBoxSfiIsSecond">Is second (Forced part)</system:String>
+
     <!-- AdvancedOptions Window -->
     <system:String x:Key="CaptionAdvancedOptionsWindow">Bearbeite erweiterte Optionen</system:String>
     <system:String x:Key="TabAdvancedGeneral">Allgemeine Einstellungen</system:String>
