@@ -224,7 +224,7 @@ namespace BluRip
                             return false;
                         }
 
-                        if (settings.minimizeAutocrop)
+                        if (settings.minimizeAutocrop && !settings.manualCrop)
                         {
                             ac.WindowState = FormWindowState.Minimized;
                         }

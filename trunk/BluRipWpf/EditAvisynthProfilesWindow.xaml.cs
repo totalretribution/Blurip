@@ -90,6 +90,8 @@ namespace BluRip
                     if (eapw.DialogResult == true)
                     {
                         settings.avisynthSettings[index] = new AvisynthSettings(eapw.avisynthSettings);
+                        UpdateAvisynthProfiles();
+                        listBoxAvisynthProfiles.SelectedIndex = index;
                     }
                 }
             }
