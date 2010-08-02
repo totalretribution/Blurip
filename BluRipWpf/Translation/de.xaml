@@ -256,6 +256,18 @@
     <system:String x:Key="CaptionShutdownWindow">Herunterfahren</system:String>
     <system:String x:Key="LabelShutdownCounter">Sekunden bis zum automatischen Herunterfahren: {0}</system:String>
 
+    <!-- EditVideoFileInfo Window -->
+    <system:String x:Key="CaptionEditVideoFileInfoWindow">Edit extra video file info</system:String>
+    <system:String x:Key="LabelVfiFps">Framerate</system:String>
+    <system:String x:Key="LabelVfiLength">Length (ms)</system:String>
+    <system:String x:Key="LabelVfiFrames">Frames</system:String>
+    <system:String x:Key="LabelVfiResX">Output resolution x</system:String>
+    <system:String x:Key="LabelVfiResY">Output resolution y</system:String>
+    <system:String x:Key="LabelVfiEncodeAvs">AVS file for encode</system:String>
+    <system:String x:Key="LabelVfiEncodedFile">Encoded file</system:String>
+    <system:String x:Key="ButtonVfiEncodedFile">...</system:String>
+    <system:String x:Key="ButtonVfiEncodeAvs">...</system:String>
+    
     <!-- AdvancedOptions Window -->
     <system:String x:Key="CaptionAdvancedOptionsWindow">Bearbeite erweiterte Optionen</system:String>
     <system:String x:Key="TabAdvancedGeneral">Allgemeine Einstellungen</system:String>
