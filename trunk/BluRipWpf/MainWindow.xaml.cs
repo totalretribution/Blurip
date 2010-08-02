@@ -250,7 +250,7 @@ namespace BluRip
             }
         }
 
-        private void SavePositiion()
+        private void SavePosition()
         {
             try
             {
@@ -289,7 +289,7 @@ namespace BluRip
         {
             try
             {
-                SavePositiion();
+                SavePosition();
 
                 UserSettings.SaveSettingsFile(settings, settingsPath);
                 if (!silent)
@@ -961,7 +961,7 @@ namespace BluRip
                     menuItemLanguageGerman.IsChecked = false;
                     settings.language = "en";
                     LoadLanguage();
-                    SavePositiion();
+                    SavePosition();
                     UpdateFromSettings(false);
                 }
             }
@@ -977,7 +977,7 @@ namespace BluRip
                 menuItemLanguageEnglish.IsChecked = false;
                 settings.language = "de";
                 LoadLanguage();
-                SavePositiion();
+                SavePosition();
                 UpdateFromSettings(false);
             }
         }
@@ -1603,6 +1603,7 @@ namespace BluRip
         {
             try
             {
+                SavePosition();
                 Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
                 projectQueue.Add(project);
                 queueWindow.UpdateQueue();
