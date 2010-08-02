@@ -267,7 +267,11 @@
     <system:String x:Key="LabelVfiEncodedFile">Encoded file</system:String>
     <system:String x:Key="ButtonVfiEncodedFile">...</system:String>
     <system:String x:Key="ButtonVfiEncodeAvs">...</system:String>
-    
+
+    <!-- EditSubtitleFileInfo Window -->
+    <system:String x:Key="CaptionEditSubtitleFileInfoWindow">Edit extra video file info</system:String>
+    <system:String x:Key="LabelSfi">Framerate</system:String>
+
     <!-- AdvancedOptions Window -->
     <system:String x:Key="CaptionAdvancedOptionsWindow">Edit advanced options</system:String>
     <system:String x:Key="TabAdvancedGeneral">General settings</system:String>

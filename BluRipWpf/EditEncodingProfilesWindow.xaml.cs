@@ -90,6 +90,8 @@ namespace BluRip
                     if (eepw.DialogResult == true)
                     {
                         settings.encodingSettings[index] = new EncodingSettings(eepw.encodingSettings);
+                        UpdateEncodingProfile();
+                        listBoxEncodingProfiles.SelectedIndex = index;
                     }
                 }
             }
