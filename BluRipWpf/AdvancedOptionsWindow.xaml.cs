@@ -58,7 +58,8 @@ namespace BluRip
 
                 checkBoxDeleteDemuxedFiles.IsChecked = settings.deleteAfterEncode;
                 checkBoxAlwaysDeleteIndex.IsChecked = settings.deleteIndex;
-                checkBoxDisableHeaderCompression.IsChecked = settings.disableHeaderCompression;
+                checkBoxDisableAudioHeaderCompression.IsChecked = settings.disableAudioHeaderCompression;
+                checkBoxDisableVideoHeaderCompression.IsChecked = settings.disableVideoHeaderCompression;
 
                 checkBoxUseAutoSelect.IsChecked = settings.useAutoSelect;
                 checkBoxIncludeChapters.IsChecked = settings.includeChapter;
@@ -640,7 +641,7 @@ namespace BluRip
         {
             try
             {
-                settings.disableHeaderCompression = (bool)checkBoxDisableHeaderCompression.IsChecked;
+                settings.disableAudioHeaderCompression = (bool)checkBoxDisableAudioHeaderCompression.IsChecked;
             }
             catch (Exception)
             {
@@ -663,6 +664,17 @@ namespace BluRip
             try
             {
                 settings.manualCrop = (bool)checkBoxManualCrop.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDisableVideoHeaderCompression_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.disableVideoHeaderCompression = (bool)checkBoxDisableVideoHeaderCompression.IsChecked;
             }
             catch (Exception)
             {

@@ -30,7 +30,7 @@ namespace BluRip
         private UserSettings settings = null;
         private TitleInfo titleInfo = null;
         private AdvancedVideoOptions avo = null;
-        private string headerCompression = "--compression 0:none ";
+        private string headerCompression = "--compression -1:none ";
 
         public MuxTool(UserSettings settings, TitleInfo titleInfo)
             : base()
@@ -55,6 +55,10 @@ namespace BluRip
                     }
                     else if (si.streamType == StreamType.Video)
                     {
+                        if (settings.disableVideoHeaderCompression)
+                        {
+                            this.Parameter += headerCompression;
+                        }
                         if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions))
                         {
                             avo = new AdvancedVideoOptions(si.advancedOptions);
@@ -79,7 +83,7 @@ namespace BluRip
                         st = getShortAudioLanguage(si.language);
                         if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
                         
-                        if (settings.disableHeaderCompression)
+                        if (settings.disableAudioHeaderCompression)
                         {
                             this.Parameter += headerCompression;
                         }
@@ -102,7 +106,7 @@ namespace BluRip
                         {
                             AdvancedAudioOptions aao = (AdvancedAudioOptions)si.advancedOptions;
                             if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
-                            if (settings.disableHeaderCompression)
+                            if (settings.disableAudioHeaderCompression)
                             {
                                 this.Parameter += headerCompression;
                             }
@@ -225,7 +229,7 @@ namespace BluRip
                                 string st = "";
                                 st = getShortSubLanguage(si.language);
                                 if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
-                                if (settings.disableHeaderCompression)
+                                if (settings.disableAudioHeaderCompression)
                                 {
                                     //this.Parameter += headerCompression;
                                 }
