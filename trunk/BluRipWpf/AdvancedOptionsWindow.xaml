@@ -32,9 +32,6 @@
                     <CheckBox Content="{DynamicResource CheckBoxIncludeChapters}" Height="16" HorizontalAlignment="Left" Margin="6,28,0,0" Name="checkBoxIncludeChapters" VerticalAlignment="Top" Checked="checkBoxIncludeChapters_Checked" Unchecked="checkBoxIncludeChapters_Checked" />
                     <CheckBox Content="{DynamicResource CheckBoxPreferDTS}" Height="16" HorizontalAlignment="Left" Margin="6,50,0,0" Name="checkBoxPreferDTS" VerticalAlignment="Top" Checked="checkBoxPreferDTS_Checked" Unchecked="checkBoxPreferDTS_Checked" />
                     <CheckBox Content="{DynamicResource CheckBoxIncludeSubtitles}" Height="16" HorizontalAlignment="Left" Margin="6,72,0,0" Name="checkBoxIncludeSubtitles" VerticalAlignment="Top" Checked="checkBoxIncludeSubtitles_Checked" Unchecked="checkBoxIncludeSubtitles_Checked" />
-                    <CheckBox Content="{DynamicResource CheckBoxDefaultAudioTrack}" Height="16" HorizontalAlignment="Left" Margin="324,6,0,0" Name="checkBoxDefaultAudioTrack" VerticalAlignment="Top" Checked="checkBoxDefaultAudioTrack_Checked" Unchecked="checkBoxDefaultAudioTrack_Checked" />
-                    <CheckBox Content="{DynamicResource CheckBoxDefaultSubtitleTrack}" Height="16" HorizontalAlignment="Left" Margin="324,28,0,0" Name="checkBoxDefaultSubtitleTrack" VerticalAlignment="Top" Checked="checkBoxDefaultSubtitleTrack_Checked" Unchecked="checkBoxDefaultSubtitleTrack_Checked" />
-                    <CheckBox Content="{DynamicResource CheckBoxDefaultSubtitleForced}" Height="16" HorizontalAlignment="Left" Margin="324,50,0,0" Name="checkBoxDefaultSubtitleForced" VerticalAlignment="Top" Checked="checkBoxDefaultSubtitleForced_Checked" Unchecked="checkBoxDefaultSubtitleForced_Checked" />
                     <ListBox HorizontalAlignment="Left" Margin="6,152,0,32" Name="listBoxPreferredAudioLanguages" Width="182" MouseDoubleClick="listBoxPreferredAudioLanguages_MouseDoubleClick" />
                     <Label Content="{DynamicResource LabelPreferredAudioLanguages}" HorizontalAlignment="Left" Margin="6,126,0,0" Name="labelPreferredAudioLanguages" VerticalAlignment="Top" />
                     <Label Content="{DynamicResource LabelPreferredAudioLanguagesDesc}" HorizontalAlignment="Left" Margin="6,0,0,6" Name="labelPreferredAudioLanguagesClick" Height="20" VerticalAlignment="Bottom" />
@@ -49,7 +46,6 @@
                     <Button Content="{DynamicResource ButtonPreferredSubLanguagesDown}" Height="23" HorizontalAlignment="Left" Margin="550,181,0,0" Name="buttonPreferredSubLanguagesDown" VerticalAlignment="Top" Width="111" Click="buttonPreferredSubLanguagesDown_Click" />
                     <Button Content="{DynamicResource ButtonPreferredSubLanguagesDel}" Height="23" HorizontalAlignment="Left" Margin="550,210,0,0" Name="buttonPreferredSubLanguagesDel" VerticalAlignment="Top" Width="111" Click="buttonPreferredSubLanguagesDel_Click" />
                     <Button Content="{DynamicResource ButtonPreferredSubLanguagesAdd}" Height="23" HorizontalAlignment="Left" Margin="550,0,0,32" Name="buttonPreferredSubLanguagesAdd" VerticalAlignment="Bottom" Width="111" Click="buttonPreferredSubLanguagesAdd_Click" />
-                    <CheckBox Content="{DynamicResource CheckBoxForcedSubtitleFlag}" Height="16" HorizontalAlignment="Left" Margin="324,72,0,0" Name="checkBoxForcedSubtitleFlag" VerticalAlignment="Top" Checked="checkBoxForcedSubtitleFLag_Checked" />
                 </Grid>
             </TabItem>
             <TabItem Header="{DynamicResource TabAdvancedVideo}" Name="tabItemVideo">
@@ -64,7 +60,16 @@
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,28,0,0" Name="comboBoxDTSBitrate" VerticalAlignment="Top" Width="191" SelectionChanged="comboBoxDTSBitrate_SelectionChanged" />
                     <CheckBox Content="{DynamicResource CheckBoxConvertAC3Bitrate}" HorizontalAlignment="Left" Margin="6,57,0,0" Name="checkBoxConvertAC3Bitrate" Height="16" VerticalAlignment="Top" Checked="checkBoxConvertAC3Bitrate_Checked" Unchecked="checkBoxConvertAC3Bitrate_Checked" />
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,79,0,0" Name="comboBoxAC3Bitrate" VerticalAlignment="Top" Width="191" SelectionChanged="comboBoxAC3Bitrate_SelectionChanged" />
-                    <CheckBox Content="{DynamicResource CheckBoxDisableHeaderCompression}" Height="16" HorizontalAlignment="Left" Margin="6,108,0,0" Name="checkBoxDisableHeaderCompression" VerticalAlignment="Top" Checked="checkBoxDisableHeaderCompression_Checked" Unchecked="checkBoxDisableHeaderCompression_Checked" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="{DynamicResource TabAdvancedMux}" Name="tabItemMux">
+                <Grid>
+                    <CheckBox Content="{DynamicResource CheckBoxDefaultAudioTrack}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxDefaultAudioTrack" VerticalAlignment="Top" Checked="checkBoxDefaultAudioTrack_Checked" Unchecked="checkBoxDefaultAudioTrack_Checked" />
+                    <CheckBox Content="{DynamicResource CheckBoxDefaultSubtitleTrack}" Height="16" HorizontalAlignment="Left" Margin="6,28,0,0" Name="checkBoxDefaultSubtitleTrack" VerticalAlignment="Top" Checked="checkBoxDefaultSubtitleTrack_Checked" Unchecked="checkBoxDefaultSubtitleTrack_Checked" />
+                    <CheckBox Content="{DynamicResource CheckBoxDefaultSubtitleForced}" Height="16" HorizontalAlignment="Left" Margin="6,50,0,0" Name="checkBoxDefaultSubtitleForced" VerticalAlignment="Top" Checked="checkBoxDefaultSubtitleForced_Checked" Unchecked="checkBoxDefaultSubtitleForced_Checked" />
+                    <CheckBox Content="{DynamicResource CheckBoxForcedSubtitleFlag}" Height="16" HorizontalAlignment="Left" Margin="6,72,0,0" Name="checkBoxForcedSubtitleFlag" VerticalAlignment="Top" Checked="checkBoxForcedSubtitleFLag_Checked" />
+                    <CheckBox Content="{DynamicResource CheckBoxDisableAudioHeaderCompression}" Height="16" HorizontalAlignment="Left" Margin="6,94,0,0" Name="checkBoxDisableAudioHeaderCompression" VerticalAlignment="Top" Checked="checkBoxDisableHeaderCompression_Checked" Unchecked="checkBoxDisableHeaderCompression_Checked" />
+                    <CheckBox Content="{DynamicResource CheckBoxDisableVideoHeaderCompression}" Height="16" HorizontalAlignment="Left" Margin="6,116,0,0" Name="checkBoxDisableVideoHeaderCompression" VerticalAlignment="Top" Checked="checkBoxDisableVideoHeaderCompression_Checked" Unchecked="checkBoxDisableVideoHeaderCompression_Checked" />
                 </Grid>
             </TabItem>
         </TabControl>

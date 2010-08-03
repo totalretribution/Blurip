@@ -183,7 +183,8 @@ namespace BluRip
             this.doEncode = orig.doEncode;
             this.doMux = orig.doMux;
 
-            this.disableHeaderCompression = orig.disableHeaderCompression;
+            this.disableAudioHeaderCompression = orig.disableAudioHeaderCompression;
+            this.disableVideoHeaderCompression = orig.disableVideoHeaderCompression;
             this.resizeMethod = orig.resizeMethod;
             this.manualCrop = orig.manualCrop;
 
@@ -403,7 +404,8 @@ namespace BluRip
         public bool doEncode = true;
         public bool doMux = true;
 
-        public bool disableHeaderCompression = false;
+        public bool disableAudioHeaderCompression = false;
+        public bool disableVideoHeaderCompression = false;
         public int resizeMethod = 4;
         public bool manualCrop = false;
         // window settings

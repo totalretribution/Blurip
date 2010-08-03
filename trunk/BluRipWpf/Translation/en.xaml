@@ -328,11 +328,13 @@
     <system:String x:Key="ButtonPreferredSubLanguagesAdd">Add</system:String>
     <system:String x:Key="NewLanguage">new language</system:String>
     <system:String x:Key="TabAdvancedVideo">Video</system:String>
-    <system:String x:Key="LabelProcessPriority">x264 process priority</system:String>    
+    <system:String x:Key="LabelProcessPriority">x264 process priority</system:String>
+    <system:String x:Key="CheckBoxDisableVideoHeaderCompression">Disable mkvmerge header compression for video track</system:String>
     <system:String x:Key="TabAdvancedAudio">Audio</system:String>
     <system:String x:Key="CheckBoxConvertDTSBitrate">Convert DTS bitrate</system:String>
     <system:String x:Key="CheckBoxConvertAC3Bitrate">Convert AC3 bitrate</system:String>
-    <system:String x:Key="CheckBoxDisableHeaderCompression">Disable mkvmerge header compression for audio tracks</system:String>
+    <system:String x:Key="CheckBoxDisableAudioHeaderCompression">Disable mkvmerge header compression for audio tracks</system:String>
+    <system:String x:Key="TabAdvancedMux">Mux</system:String>
 
     <!-- AdvancedAudioOptions Window -->
     <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Edit advanced audio options</system:String>
