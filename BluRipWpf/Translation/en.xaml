@@ -259,7 +259,7 @@
     <!-- EditVideoFileInfo Window -->
     <system:String x:Key="CaptionEditVideoFileInfoWindow">Edit extra video file info</system:String>
     <system:String x:Key="LabelVfiFps">Framerate</system:String>
-    <system:String x:Key="LabelVfiLength">Length (ms)</system:String>
+    <system:String x:Key="LabelVfiLength">Length (in ms)</system:String>
     <system:String x:Key="LabelVfiFrames">Frames</system:String>
     <system:String x:Key="LabelVfiResX">Output resolution x</system:String>
     <system:String x:Key="LabelVfiResY">Output resolution y</system:String>
@@ -281,7 +281,7 @@
     <system:String x:Key="LabelSfiNormalIdxLowRes">Normal .idx (Lowres)</system:String>
     <system:String x:Key="LabelSfiNormalSubLowRes">Normal .sub (Lowres)</system:String>
     <system:String x:Key="ButtonSfiOpen">...</system:String>
-    <system:String x:Key="CheckBoxSfiIsSecond">Is second (Forced part)</system:String>
+    <system:String x:Key="CheckBoxSfiIsSecond">Is second (Splitted sub - forced part)</system:String>
 
     <!-- AdvancedOptions Window -->
     <system:String x:Key="CaptionAdvancedOptionsWindow">Edit advanced options</system:String>
@@ -398,6 +398,7 @@
     <system:String x:Key="GroupBoxManualResize">Resize</system:String>
     <system:String x:Key="LabelResizeX">X (width)</system:String>
     <system:String x:Key="LabelResizeY">Y (heigth)</system:String>
+    <system:String x:Key="LabelAvoResizeMethod">Resize method</system:String>
     <system:String x:Key="CheckBoxManualAspectRatio">Set mkvmerge aspect ratio</system:String>
     <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
@@ -505,5 +506,7 @@
     <system:String x:Key="InfoQueueCancel">Queue canceled.</system:String>
     <system:String x:Key="InfoQueueDone">Queue done.</system:String>
     <system:String x:Key="InfoQueueTitle">Project:</system:String>
+    <system:String x:Key="InfoExpectedBitrate">Expected bitrate: {0} kbit/s</system:String>
+    <system:String x:Key="InfoExpectedSize">Expected size: {0} MB</system:String>
 
 </ResourceDictionary>

@@ -105,6 +105,7 @@
                                     <ComboBoxItem Content="FFVideoSource" />
                                     <ComboBoxItem Content="DGMultiSource" />
                                 </ComboBox>
+                                <Label Content="Label" HorizontalAlignment="Left" Margin="383,87,0,0" Name="labelBitrate" VerticalAlignment="Top" Visibility="Hidden" />
                             </Grid>
                         </GroupBox>
                         <GroupBox Header="{DynamicResource HeaderAudioSettings}" Height="50" HorizontalAlignment="Left" Margin="6,161,0,0" Name="groupBoxAudioSettings" VerticalAlignment="Top" Width="716">

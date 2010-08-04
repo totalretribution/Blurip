@@ -62,6 +62,7 @@ namespace BluRip
                 {
                     listBoxDemuxedStreams.Items.Add(si.desc + " - " + si.filename);
                 }
+                mainWindow.UpdateBitrate();
             }
             catch (Exception)
             {

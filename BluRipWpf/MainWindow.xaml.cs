@@ -44,14 +44,6 @@ namespace BluRip
     {
         private UserSettings settings = new UserSettings();
         private string settingsPath = "";
-
-        private List<string> videoTypes = new List<string>();
-        private List<string> ac3AudioTypes = new List<string>();
-        private List<string> dtsAudioTypes = new List<string>();
-        private List<string> ac3Bitrates = new List<string>();
-        private List<string> dtsBitrates = new List<string>();
-        private List<string> resizeMethods = new List<string>();
-
         public string title = @"BluRip v0.5.1 © _hawk_ 2009-2010";
 
         private LogWindow logWindow = null;
@@ -78,44 +70,7 @@ namespace BluRip
                 {
                     UserSettings.LoadSettingsFile(ref settings, settingsPath);
                 }
-
-                videoTypes.Add("h264/AVC");
-                videoTypes.Add("VC-1");
-                videoTypes.Add("MPEG2");
-
-                ac3AudioTypes.Add("TrueHD/AC3");
-                ac3AudioTypes.Add("AC3");
-                ac3AudioTypes.Add("AC3 Surround");
-                ac3AudioTypes.Add("AC3 EX");
-                ac3AudioTypes.Add("E-AC3");
-                ac3AudioTypes.Add("RAW/PCM"); // convert to ac3 by default
-
-                dtsAudioTypes.Add("DTS");
-                dtsAudioTypes.Add("DTS Master Audio");
-                dtsAudioTypes.Add("DTS Express");
-                dtsAudioTypes.Add("DTS Hi-Res");
-                dtsAudioTypes.Add("DTS ES"); // have to check if needed
-                dtsAudioTypes.Add("DTS-ES");
-
-                dtsBitrates.Add("768");
-                dtsBitrates.Add("1536");
-
-                ac3Bitrates.Add("192");
-                ac3Bitrates.Add("448");
-                ac3Bitrates.Add("640");
-
-                resizeMethods.Add("BicubicResize");
-                resizeMethods.Add("BilinearResize");
-                resizeMethods.Add("BlackmanResize");
-                resizeMethods.Add("GaussResize");
-                resizeMethods.Add("LanczosResize");
-                resizeMethods.Add("Lanczos4Resize");
-                resizeMethods.Add("PointResize");
-                resizeMethods.Add("SincResize");
-                resizeMethods.Add("Spline16Resize");
-                resizeMethods.Add("Spline36Resize");
-                resizeMethods.Add("Spline64Resize");
-
+                                                
                 // load styles before window is shown
                 LoadSkin();
                 LoadLanguage();
@@ -946,6 +901,7 @@ namespace BluRip
             try
             {
                 if (comboBoxEncodingProfile.SelectedIndex > -1) settings.lastProfile = comboBoxEncodingProfile.SelectedIndex;
+                UpdateBitrate();
             }
             catch (Exception)
             {
@@ -1283,6 +1239,7 @@ namespace BluRip
                 {
                     settings = new UserSettings(epw.UserSettings);
                     UpdateEncodingProfiles();
+                    UpdateBitrate();
                 }
             }
             catch (Exception)
@@ -1297,7 +1254,7 @@ namespace BluRip
                 bool expert = false;
                 if (menuItemViewExpertMode.IsChecked) expert = true;
 
-                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings, expert, dtsBitrates, ac3Bitrates, resizeMethods);
+                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings, expert);
                 aow.ShowDialog();
                 if (aow.DialogResult == true)
                 {
@@ -1357,6 +1314,7 @@ namespace BluRip
                 if (comboBoxMuxSubtitles.SelectedIndex > -1)
                 {
                     settings.muxSubs = comboBoxMuxSubtitles.SelectedIndex;
+                    UpdateBitrate();
                 }
             }
             catch (Exception)
@@ -1522,6 +1480,7 @@ namespace BluRip
                 {
                     comboBoxMuxSubtitles.IsEnabled = true;
                 }
+                UpdateBitrate();
             }
             catch (Exception)
             {
@@ -1958,10 +1917,119 @@ namespace BluRip
             {
             }
         }
+
+        public void UpdateBitrate()
+        {
+            try
+            {
+                if (settings.lastProfile > -1 && settings.lastProfile < settings.encodingSettings.Count)
+                {
+                    EncodingSettings es = settings.encodingSettings[settings.lastProfile];
+
+                    VideoFileInfo vfi = null;
+                    if (demuxedStreamList.streams.Count > 0)
+                    {
+                        foreach (StreamInfo si in demuxedStreamList.streams)
+                        {
+                            if (si.streamType == StreamType.Video && si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                            {
+                                vfi = new VideoFileInfo(si.extraFileInfo);
+                                break;
+                            }
+                        }
+                    }
+                    if (es.pass2 && vfi != null)
+                    {
+                        EncodeTool etTmp = new EncodeTool(settings, demuxedStreamList, settings.lastProfile, false, vfi);
+                        double size = etTmp.Get2passSizeValue();
+                        if (size == 0)
+                        {
+                            labelBitrate.Visibility = System.Windows.Visibility.Hidden;
+                        }
+                        else
+                        {
+                            labelBitrate.Visibility = System.Windows.Visibility.Visible;
+                            if (es.sizeType == SizeType.Size)
+                            {
+                                labelBitrate.Content = Global.ResFormat("InfoExpectedBitrate", size);
+                            }
+                            else if (es.sizeType == SizeType.Bitrate)
+                            {
+                                labelBitrate.Content = Global.ResFormat("InfoExpectedSize", (size / 1024 / 1024).ToString("f2"));
+                            }
+                        }                        
+                    }
+                    else
+                    {
+                        labelBitrate.Visibility = System.Windows.Visibility.Hidden;
+                    }
+                }
+                else
+                {
+                    labelBitrate.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 
     public static class Global
     {
+        public static List<string> videoTypes = new List<string>();
+        public static List<string> ac3AudioTypes = new List<string>();
+        public static List<string> dtsAudioTypes = new List<string>();
+        public static List<string> ac3Bitrates = new List<string>();
+        public static List<string> dtsBitrates = new List<string>();
+        public static List<string> resizeMethods = new List<string>();
+
+        static Global()
+        {
+            try
+            {
+                videoTypes.Add("h264/AVC");
+                videoTypes.Add("VC-1");
+                videoTypes.Add("MPEG2");
+
+                ac3AudioTypes.Add("TrueHD/AC3");
+                ac3AudioTypes.Add("AC3");
+                ac3AudioTypes.Add("AC3 Surround");
+                ac3AudioTypes.Add("AC3 EX");
+                ac3AudioTypes.Add("E-AC3");
+                ac3AudioTypes.Add("RAW/PCM"); // convert to ac3 by default
+
+                dtsAudioTypes.Add("DTS");
+                dtsAudioTypes.Add("DTS Master Audio");
+                dtsAudioTypes.Add("DTS Express");
+                dtsAudioTypes.Add("DTS Hi-Res");
+                dtsAudioTypes.Add("DTS ES"); // have to check if needed
+                dtsAudioTypes.Add("DTS-ES");
+
+                dtsBitrates.Add("768");
+                dtsBitrates.Add("1536");
+
+                ac3Bitrates.Add("192");
+                ac3Bitrates.Add("448");
+                ac3Bitrates.Add("640");
+
+                resizeMethods.Add("BicubicResize");
+                resizeMethods.Add("BilinearResize");
+                resizeMethods.Add("BlackmanResize");
+                resizeMethods.Add("GaussResize");
+                resizeMethods.Add("LanczosResize");
+                resizeMethods.Add("Lanczos4Resize");
+                resizeMethods.Add("PointResize");
+                resizeMethods.Add("SincResize");
+                resizeMethods.Add("Spline16Resize");
+                resizeMethods.Add("Spline36Resize");
+                resizeMethods.Add("Spline64Resize");
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         public static string Res(string key)
         {
             try
