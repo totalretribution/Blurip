@@ -335,6 +335,7 @@ namespace BluRip
             this.manualResize = ((AdvancedVideoOptions)orig).manualResize;
             this.resizeX = ((AdvancedVideoOptions)orig).resizeX;
             this.resizeY = ((AdvancedVideoOptions)orig).resizeY;
+            this.resizeMethod = ((AdvancedVideoOptions)orig).resizeMethod;
             this.manualBorders = ((AdvancedVideoOptions)orig).manualBorders;
             this.borderBottom = ((AdvancedVideoOptions)orig).borderBottom;
             this.borderLeft = ((AdvancedVideoOptions)orig).borderLeft;
@@ -363,6 +364,7 @@ namespace BluRip
         public bool manualResize = false;
         public int resizeX = 0;
         public int resizeY = 0;
+        public int resizeMethod = 4;
         public bool manualBorders = false;
         public int borderLeft = 0;
         public int borderRight = 0;

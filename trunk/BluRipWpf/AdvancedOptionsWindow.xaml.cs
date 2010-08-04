@@ -40,7 +40,7 @@ namespace BluRip
     {
         private UserSettings settings = null;
 
-        public AdvancedOptionsWindow(UserSettings settings, bool expert, List<string> dtsBitrates, List<string> ac3Bitrates, List<string> resizeMethods)
+        public AdvancedOptionsWindow(UserSettings settings, bool expert)
         {            
             try
             {
@@ -80,13 +80,13 @@ namespace BluRip
                 }
 
                 comboBoxDTSBitrate.Items.Clear();
-                foreach (string s in dtsBitrates)
+                foreach (string s in Global.dtsBitrates)
                 {
                     comboBoxDTSBitrate.Items.Add(s);
                 }
 
                 comboBoxAC3Bitrate.Items.Clear();
-                foreach (string s in ac3Bitrates)
+                foreach (string s in Global.ac3Bitrates)
                 {
                     comboBoxAC3Bitrate.Items.Add(s);
                 }
@@ -97,12 +97,12 @@ namespace BluRip
                 checkBoxConvertAC3Bitrate_Checked(null, null);
                 checkBoxConvertDTSBitrate_Checked(null, null);
 
-                if (settings.downmixDTSIndex > -1 && settings.downmixDTSIndex < dtsBitrates.Count) comboBoxDTSBitrate.SelectedIndex = settings.downmixDTSIndex;
-                if (settings.downmixAc3Index > -1 && settings.downmixAc3Index < ac3Bitrates.Count) comboBoxAC3Bitrate.SelectedIndex = settings.downmixAc3Index;
+                if (settings.downmixDTSIndex > -1 && settings.downmixDTSIndex < Global.dtsBitrates.Count) comboBoxDTSBitrate.SelectedIndex = settings.downmixDTSIndex;
+                if (settings.downmixAc3Index > -1 && settings.downmixAc3Index < Global.ac3Bitrates.Count) comboBoxAC3Bitrate.SelectedIndex = settings.downmixAc3Index;
 
                 comboBoxResizeMethod.Items.Clear();
-                foreach (string s in resizeMethods) comboBoxResizeMethod.Items.Add(s);
-                if (settings.resizeMethod > -1 && settings.resizeMethod < 11) comboBoxResizeMethod.SelectedIndex = settings.resizeMethod;
+                foreach (string s in Global.resizeMethods) comboBoxResizeMethod.Items.Add(s);
+                if (settings.resizeMethod > -1 && settings.resizeMethod < Global.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = settings.resizeMethod;
 
                 comboBoxProcessPriority.SelectedItem = Enum.GetName(typeof(ProcessPriorityClass), settings.x264Priority);
 

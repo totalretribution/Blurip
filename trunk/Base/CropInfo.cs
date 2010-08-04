@@ -34,6 +34,7 @@ namespace BluRip
             this.borderBottom = orig.borderBottom;
             this.resizeX = orig.resizeX;
             this.resizeY = orig.resizeY;
+            this.resizeMethod = orig.resizeMethod;
             this.borderTop = orig.borderTop;
             this.cropBottom = orig.cropBottom;
             this.errorStr = orig.errorStr;
@@ -46,6 +47,7 @@ namespace BluRip
         public int cropBottom = 0;
         public int resizeY = 0;
         public int resizeX = 0;
+        public int resizeMethod = 4;
         public int borderTop = 0;
         public int borderBottom = 0;
         public string errorStr = "";

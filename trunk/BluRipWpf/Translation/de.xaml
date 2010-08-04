@@ -257,19 +257,19 @@
     <system:String x:Key="LabelShutdownCounter">Sekunden bis zum automatischen Herunterfahren: {0}</system:String>
 
     <!-- EditVideoFileInfo Window -->
-    <system:String x:Key="CaptionEditVideoFileInfoWindow">Edit extra video file info</system:String>
+    <system:String x:Key="CaptionEditVideoFileInfoWindow">Bearbeite extra Video Dateiinfo</system:String>
     <system:String x:Key="LabelVfiFps">Framerate</system:String>
-    <system:String x:Key="LabelVfiLength">Length (ms)</system:String>
+    <system:String x:Key="LabelVfiLength">Länge (in ms)</system:String>
     <system:String x:Key="LabelVfiFrames">Frames</system:String>
-    <system:String x:Key="LabelVfiResX">Output resolution x</system:String>
-    <system:String x:Key="LabelVfiResY">Output resolution y</system:String>
-    <system:String x:Key="LabelVfiEncodeAvs">AVS file for encode</system:String>
-    <system:String x:Key="LabelVfiEncodedFile">Encoded file</system:String>
+    <system:String x:Key="LabelVfiResX">Ausgabeauflösung x</system:String>
+    <system:String x:Key="LabelVfiResY">Ausgabeauflösung y</system:String>
+    <system:String x:Key="LabelVfiEncodeAvs">AVS Datei für encode</system:String>
+    <system:String x:Key="LabelVfiEncodedFile">Encoded Datei</system:String>
     <system:String x:Key="ButtonVfiEncodedFile">...</system:String>
     <system:String x:Key="ButtonVfiEncodeAvs">...</system:String>
 
     <!-- EditSubtitleFileInfo Window -->
-    <system:String x:Key="CaptionEditSubtitleFileInfoWindow">Edit extra subtitle file info</system:String>
+    <system:String x:Key="CaptionEditSubtitleFileInfoWindow">Bearbeite extra Untertitel Dateiinfo</system:String>
     <system:String x:Key="LabelSfiForcedIdx">Forced .idx</system:String>
     <system:String x:Key="LabelSfiForcedSub">Forced .sub</system:String>
     <system:String x:Key="LabelSfiForcedSup">Forced .sup</system:String>
@@ -281,7 +281,7 @@
     <system:String x:Key="LabelSfiNormalIdxLowRes">Normal .idx (Lowres)</system:String>
     <system:String x:Key="LabelSfiNormalSubLowRes">Normal .sub (Lowres)</system:String>
     <system:String x:Key="ButtonSfiOpen">...</system:String>
-    <system:String x:Key="CheckBoxSfiIsSecond">Is second (Forced part)</system:String>
+    <system:String x:Key="CheckBoxSfiIsSecond">Zweiter Teil (Aufgeteilter Untertitel - Forced Teil)</system:String>
 
     <!-- AdvancedOptions Window -->
     <system:String x:Key="CaptionAdvancedOptionsWindow">Bearbeite erweiterte Optionen</system:String>
@@ -398,6 +398,7 @@
     <system:String x:Key="GroupBoxManualResize">Resize</system:String>
     <system:String x:Key="LabelResizeX">X (Breite)</system:String>
     <system:String x:Key="LabelResizeY">Y (Höhe)</system:String>
+    <system:String x:Key="LabelAvoResizeMethod">Resize Methode</system:String>
     <system:String x:Key="CheckBoxManualAspectRatio">Setze mkvmerge aspect ratio</system:String>
     <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
@@ -504,5 +505,7 @@
     <system:String x:Key="InfoQueueCancel">Queue abgebrochen.</system:String>
     <system:String x:Key="InfoQueueDone">Queue fertig.</system:String>
     <system:String x:Key="InfoQueueTitle">Projekt:</system:String>
+    <system:String x:Key="InfoExpectedBitrate">Erwartete Bitrate: {0} kbit/s</system:String>
+    <system:String x:Key="InfoExpectedSize">Erwartete Größe: {0} MB</system:String>
 
 </ResourceDictionary>

@@ -81,6 +81,11 @@ namespace BluRip
                 checkBoxManualResize.IsChecked = avo.manualResize;
                 textBoxResizeX.Text = avo.resizeX.ToString();
                 textBoxResizeY.Text = avo.resizeY.ToString();
+
+                comboBoxResizeMethod.Items.Clear();
+                foreach (string s in Global.resizeMethods) comboBoxResizeMethod.Items.Add(s);
+                if (avo.resizeMethod > -1 && avo.resizeMethod < Global.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = avo.resizeMethod;
+
                 checkBoxManualResize_Checked(null, null);
             }
             catch (Exception ex)
@@ -416,6 +421,17 @@ namespace BluRip
             try
             {
                 avo.resizeY = Convert.ToInt32(textBoxResizeY.Text);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxResizeMethod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                avo.resizeMethod = comboBoxResizeMethod.SelectedIndex;
             }
             catch (Exception)
             {

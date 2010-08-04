@@ -41,7 +41,7 @@ namespace BluRip
                 this.titleInfo = titleInfo;
                 this.Path = settings.mkvmergePath;
                 this.Parameter += "--title \"" + settings.movieTitle + "\" -o \"" + settings.targetFolder + "\\" + settings.targetFilename + ".mkv\" ";
-
+                int trackId = 0;
                 // video + chapter
                 foreach (StreamInfo si in titleInfo.streams)
                 {
@@ -55,6 +55,7 @@ namespace BluRip
                     }
                     else if (si.streamType == StreamType.Video)
                     {
+                        trackId++;
                         if (settings.disableVideoHeaderCompression)
                         {
                             this.Parameter += headerCompression;
@@ -79,6 +80,7 @@ namespace BluRip
                 {
                     if (si.streamType == StreamType.Audio)
                     {
+                        trackId++;
                         string st = "";
                         st = getShortAudioLanguage(si.language);
                         if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
@@ -87,6 +89,10 @@ namespace BluRip
                         {
                             this.Parameter += headerCompression;
                         }
+                        if (!settings.defaultSubtitle)
+                        {
+                            this.Parameter += "--default-track 0:no ";
+                        }
 
                         if (settings.preferredAudioLanguages.Count > 0 && settings.preferredAudioLanguages[0].language == si.language)
                         {
@@ -94,7 +100,7 @@ namespace BluRip
                             {
                                 if (settings.defaultAudio)
                                 {
-                                    this.Parameter += "--default-track 0 ";
+                                    this.Parameter += "--default-track 0:yes ";
                                 }
                                 defaultSet = true;
                             }
@@ -104,6 +110,7 @@ namespace BluRip
                         // add additional ac3 track
                         if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
                         {
+                            trackId++;
                             AdvancedAudioOptions aao = (AdvancedAudioOptions)si.advancedOptions;
                             if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
                             if (settings.disableAudioHeaderCompression)
@@ -226,13 +233,11 @@ namespace BluRip
 
                             if (mux)
                             {
+                                trackId++;
                                 string st = "";
                                 st = getShortSubLanguage(si.language);
                                 if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
-                                if (settings.disableAudioHeaderCompression)
-                                {
-                                    //this.Parameter += headerCompression;
-                                }
+                                
                                 if (settings.preferredSubtitleLanguages.Count > 0 && settings.preferredSubtitleLanguages[0].language == si.language)
                                 {
                                     if (!defaultSet)
@@ -241,7 +246,7 @@ namespace BluRip
                                         {
                                             if (!settings.defaultSubtitleForced)
                                             {
-                                                this.Parameter += "--default-track 0 ";
+                                                this.Parameter += "--default-track 0:yes ";
                                                 defaultSet = true;
                                             }
                                             else
@@ -279,7 +284,7 @@ namespace BluRip
                                 }
                                 if (!settings.defaultSubtitle)
                                 {
-                                    this.Parameter += "--default-track 0:0 ";
+                                    this.Parameter += "--default-track 0:no ";
                                 }
                                 if (untouched)
                                 {

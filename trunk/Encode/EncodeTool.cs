@@ -232,75 +232,252 @@ namespace BluRip
                             SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
                             long normalSize = 0;
                             long forcedSize = 0;
-                            if (sfi.normalIdx != "" && sfi.normalSub != "")
+                            long normalSizeSup = 0;
+                            long forcedSizeSup = 0;
+                            long normalSizeLowres = 0;
+                            long forcedSizeLowres = 0;
+
+                            if (settings.muxUntouchedSubs)
                             {
-                                try
+                                if (!sfi.isSecond)
                                 {
-                                    FileInfo fi = new FileInfo(sfi.normalIdx);
-                                    normalSize += fi.Length;
-                                    fi = new FileInfo(sfi.normalSub);
-                                    normalSize += fi.Length;
-                                }
-                                catch (Exception)
-                                {
-                                }
-                            }
-                            if (sfi.forcedIdx != "" && sfi.forcedSub != "")
-                            {
-                                try
-                                {
-                                    FileInfo fi = new FileInfo(sfi.forcedIdx);
-                                    forcedSize += fi.Length;
-                                    fi = new FileInfo(sfi.forcedSub);
-                                    forcedSize += fi.Length;
-                                }
-                                catch (Exception)
-                                {
-                                }
-                            }
-                            // mux all subs
-                            if (settings.muxSubs == 1)
-                            {
-                                totalSize += normalSize;
-                                totalSize += forcedSize;
-                            }
-                            // mux only forced
-                            else if (settings.muxSubs == 2)
-                            {
-                                totalSize += forcedSize;
-                            }
-                            // only first normal/forced sub
-                            else if (settings.muxSubs == 3)
-                            {
-                                int lang = -1;
-                                for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
-                                {
-                                    if (settings.preferredAudioLanguages[i].language == si.language) lang = i;
-                                }
-                                if (lang > -1)
-                                {
-                                    if (sfi.normalIdx != "")
+                                    if (si.filename != "")
                                     {
-                                        if (subsCount[lang] == 0)
-                                        {                                            
-                                            subsCount[lang]++;
-                                            totalSize += normalSize;
-                                        }
-                                    }
-                                    else if (sfi.forcedIdx != "")
-                                    {
-                                        if (forcedSubsCount[lang] == 0)
-                                        {                                            
-                                            forcedSubsCount[lang]++;
-                                            totalSize += forcedSize;
-                                        }
+                                        FileInfo fi = new FileInfo(si.filename);
+                                        totalSize += fi.Length;
                                     }
                                 }
                             }
+                            else
+                            {
+                                if (sfi.normalIdx != "" && sfi.normalSub != "")
+                                {
+                                    try
+                                    {
+                                        FileInfo fi = new FileInfo(sfi.normalIdx);
+                                        normalSize += fi.Length;
+                                        fi = new FileInfo(sfi.normalSub);
+                                        normalSize += fi.Length;
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                                if (sfi.forcedIdx != "" && sfi.forcedSub != "")
+                                {
+                                    try
+                                    {
+                                        FileInfo fi = new FileInfo(sfi.forcedIdx);
+                                        forcedSize += fi.Length;
+                                        fi = new FileInfo(sfi.forcedSub);
+                                        forcedSize += fi.Length;
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                                if (sfi.normalSup != "")
+                                {
+                                    try
+                                    {
+                                        FileInfo fi = new FileInfo(sfi.normalSup);
+                                        normalSizeSup += fi.Length;
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                                if (sfi.forcedSup != "")
+                                {
+                                    try
+                                    {
+                                        FileInfo fi = new FileInfo(sfi.forcedSup);
+                                        forcedSizeSup += fi.Length;
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                                if (sfi.normalIdxLowRes != "" && sfi.normalSubLowRes != "")
+                                {
+                                    try
+                                    {
+                                        FileInfo fi = new FileInfo(sfi.normalIdxLowRes);
+                                        normalSizeLowres += fi.Length;
+                                        fi = new FileInfo(sfi.normalSubLowRes);
+                                        normalSizeLowres += fi.Length;
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                                if (sfi.forcedIdxLowRes != "" && sfi.forcedSubLowRes != "")
+                                {
+                                    try
+                                    {
+                                        FileInfo fi = new FileInfo(sfi.forcedIdxLowRes);
+                                        forcedSizeLowres += fi.Length;
+                                        fi = new FileInfo(sfi.forcedSubLowRes);
+                                        forcedSizeLowres += fi.Length;
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                                // mux all subs
+                                if (settings.muxSubs == 1)
+                                {
+                                    if (!settings.muxLowResSubs)
+                                    {
+                                        totalSize += normalSize;
+                                        totalSize += forcedSize;
+                                    }
+                                    else
+                                    {
+                                        totalSize += normalSizeLowres;
+                                        totalSize += forcedSizeLowres;
+                                    }
+                                }
+                                // mux only forced
+                                else if (settings.muxSubs == 2)
+                                {
+                                    if (!settings.muxLowResSubs)
+                                    {
+                                        totalSize += forcedSize;
+                                    }
+                                    else
+                                    {
+                                        totalSize += forcedSizeLowres;
+                                    }
+                                }
+                                // only first normal/forced sub
+                                else if (settings.muxSubs == 3)
+                                {
+                                    int lang = -1;
+                                    for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
+                                    {
+                                        if (settings.preferredAudioLanguages[i].language == si.language) lang = i;
+                                    }
+                                    if (lang > -1)
+                                    {
+                                        if (!settings.muxLowResSubs)
+                                        {
+                                            if (sfi.normalIdx != "")
+                                            {
+                                                if (subsCount[lang] == 0)
+                                                {
+                                                    subsCount[lang]++;
+                                                    totalSize += normalSize;
+                                                }
+                                            }
+                                            else if (sfi.forcedIdx != "")
+                                            {
+                                                if (forcedSubsCount[lang] == 0)
+                                                {
+                                                    forcedSubsCount[lang]++;
+                                                    totalSize += forcedSize;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (sfi.normalIdxLowRes != "")
+                                            {
+                                                if (subsCount[lang] == 0)
+                                                {
+                                                    subsCount[lang]++;
+                                                    totalSize += normalSizeLowres;
+                                                }
+                                            }
+                                            else if (sfi.forcedIdxLowRes != "")
+                                            {
+                                                if (forcedSubsCount[lang] == 0)
+                                                {
+                                                    forcedSubsCount[lang]++;
+                                                    totalSize += forcedSizeLowres;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (settings.muxSubs == 4)
+                                {
+                                    totalSize += normalSizeSup;
+                                    totalSize += forcedSizeSup;
+                                }
+                                else if (settings.muxSubs == 5)
+                                {
+                                    totalSize += forcedSizeSup;
+                                }
+                                else if (settings.muxSubs == 6)
+                                {
+                                    int lang = -1;
+                                    for (int i = 0; i < settings.preferredAudioLanguages.Count; i++)
+                                    {
+                                        if (settings.preferredAudioLanguages[i].language == si.language) lang = i;
+                                    }
+                                    if (lang > -1)
+                                    {
+                                        if (sfi.normalSup != "")
+                                        {
+                                            if (subsCount[lang] == 0)
+                                            {
+                                                subsCount[lang]++;
+                                                totalSize += normalSizeSup;
+                                            }
+                                        }
+                                        else if (sfi.forcedSup != "")
+                                        {
+                                            if (forcedSubsCount[lang] == 0)
+                                            {
+                                                forcedSubsCount[lang]++;
+                                                totalSize += forcedSizeSup;
+                                            }
+                                        }
+                                    }
+                                }
+                            }                            
                         }
                     }
                 }
                 return totalSize;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public double Get2passSizeValue()
+        {
+            try
+            {
+                double tmp = 0;
+                if (settings.encodingSettings[profile].pass2)
+                {
+                    int lengthTmp = 0;
+                    try
+                    {
+                        lengthTmp = Convert.ToInt32(vfi.length);
+                        lengthTmp = (int)(lengthTmp / 1000);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    long totalSize = GetSize();
+
+                    if (settings.encodingSettings[profile].sizeType == SizeType.Bitrate)
+                    {
+                        tmp = (long)(settings.encodingSettings[profile].sizeValue * lengthTmp / 8 * 1024 + totalSize);
+                    }
+                    else if (settings.encodingSettings[profile].sizeType == SizeType.Size)
+                    {                        
+                        long targetSize = Convert.ToInt64(settings.encodingSettings[profile].sizeValue * 1024.0 * 1024.0);
+                        tmp = (long)((targetSize - totalSize) / 1024 / length); //kbyte/s
+                        tmp *= 8; //kbit/s
+                    }
+                }
+                return tmp;
             }
             catch (Exception)
             {

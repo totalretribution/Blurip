@@ -238,6 +238,7 @@ namespace BluRip
                             logWindow.MessageCrop(Global.Res("ErrorException") + " " + cropInfo.errorStr);
                             return false;
                         }
+                        cropInfo.resizeMethod = settings.resizeMethod;
                     }
                     else
                     {
@@ -247,6 +248,7 @@ namespace BluRip
                         cropInfo.resize = avo.manualResize;
                         cropInfo.resizeX = avo.resizeX;
                         cropInfo.resizeY = avo.resizeY;
+                        cropInfo.resizeMethod = avo.resizeMethod;
                         cropInfo.error = false;
                         if (avo.manualCrop)
                         {
@@ -310,9 +312,9 @@ namespace BluRip
                         }
                         if (cropInfo.resize)
                         {
-                            if (settings.resizeMethod > -1 && settings.resizeMethod < resizeMethods.Count)
+                            if (cropInfo.resizeMethod > -1 && cropInfo.resizeMethod < Global.resizeMethods.Count)
                             {
-                                encode += resizeMethods[settings.resizeMethod] + "(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
+                                encode += Global.resizeMethods[cropInfo.resizeMethod] + "(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
                             }
                             else
                             {
