@@ -8,43 +8,43 @@
         <GroupBox Header="{DynamicResource HeaderFfmpegsrc}" Height="91" HorizontalAlignment="Left" Margin="467,12,0,0" Name="groupBoxFfmpegsrc" VerticalAlignment="Top" Width="449">
             <Grid>
                 <Label Content="{DynamicResource LabelFfmsindexPath}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelFfmsindexPath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="6,38,0,0" Name="textBoxFfmsindexPath" VerticalAlignment="Top" Width="344" TabIndex="10" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,38,0,0" Name="textBoxFfmsindexPath" VerticalAlignment="Top" Width="344" TabIndex="10" TextChanged="textBoxFfmsindexPath_TextChanged" />
                 <Button Content="{DynamicResource ButtonFfmsindexPath}" Height="23" HorizontalAlignment="Right" Margin="0,37,6,0" Name="buttonFfmsindexPath" VerticalAlignment="Top" Width="75" Click="buttonFfmsindexPath_Click" TabIndex="11" />
             </Grid>
         </GroupBox>
         <GroupBox Header="{DynamicResource HeaderDgdecnv}" Height="91" HorizontalAlignment="Left" Margin="467,109,0,0" Name="groupBoxDgdecnv" VerticalAlignment="Top" Width="449">
             <Grid>
                 <Label Content="{DynamicResource LabelDgindexnvPath}" HorizontalAlignment="Left" Margin="6,9,0,0" Name="labelDgindexnvPath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="6,41,0,0" Name="textBoxDgindexnvPath" VerticalAlignment="Top" Width="344" TabIndex="12" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,41,0,0" Name="textBoxDgindexnvPath" VerticalAlignment="Top" Width="344" TabIndex="12" TextChanged="textBoxDgindexnvPath_TextChanged" />
                 <Button Content="{DynamicResource ButtonDgindexnvPath}" Height="23" HorizontalAlignment="Left" Margin="356,40,0,0" Name="buttonDgindexnvPath" VerticalAlignment="Top" Width="75" Click="buttonDgindexnvPath_Click" TabIndex="13" />
             </Grid>
         </GroupBox>
         <GroupBox Header="{DynamicResource HeaderX264x64}" Height="155" HorizontalAlignment="Left" Margin="467,210,0,0" Name="groupBoxX264x64" VerticalAlignment="Top" Width="449">
             <Grid>
                 <Label Content="{DynamicResource LabelX264x64Path}" HorizontalAlignment="Left" Margin="8,6,0,0" Name="labelX264x64Path" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="8,38,0,0" Name="textBoxX264x64Path" VerticalAlignment="Top" Width="342" TabIndex="14" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,38,0,0" Name="textBoxX264x64Path" VerticalAlignment="Top" Width="342" TabIndex="14" TextChanged="textBoxX264x64Path_TextChanged" />
                 <Button Content="{DynamicResource ButtonX264x64Path}" Height="23" HorizontalAlignment="Left" Margin="356,38,0,0" Name="buttonX264x64Path" VerticalAlignment="Top" Width="75" Click="buttonX264x64Path_Click" TabIndex="15" />
                 <Label Content="{DynamicResource LabelAvs2yuvPath}" HorizontalAlignment="Left" Margin="6,67,0,0" Name="labelAvs2yuvPath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="6,99,0,0" Name="textBoxAvs2yuvPath" VerticalAlignment="Top" Width="344" TabIndex="16" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,99,0,0" Name="textBoxAvs2yuvPath" VerticalAlignment="Top" Width="344" TabIndex="16" TextChanged="textBoxAvs2yuvPath_TextChanged" />
                 <Button Content="{DynamicResource ButtonAvs2yuvPath}" Height="23" HorizontalAlignment="Left" Margin="356,98,0,0" Name="buttonAvs2yuvPath" VerticalAlignment="Top" Width="75" Click="buttonAvs2yuvPath_Click" TabIndex="17" />
             </Grid>
         </GroupBox>
         <GroupBox Header="{DynamicResource HeaderExternalTools}" Height="353" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBoxExternalTools" VerticalAlignment="Top" Width="449">
             <Grid>
                 <Label Content="{DynamicResource LabelEac3toPath}" HorizontalAlignment="Left" Name="labelEac3toPath" VerticalAlignment="Top" Margin="6,6,0,0" />
-                <TextBox HorizontalAlignment="Left" Margin="8,38,0,0" Name="textBoxEac3toPath" VerticalAlignment="Top" Width="342" Height="23" IsReadOnly="True" TabIndex="0" />
+                <TextBox HorizontalAlignment="Left" Margin="8,38,0,0" Name="textBoxEac3toPath" VerticalAlignment="Top" Width="342" Height="23" IsReadOnly="False" TabIndex="0" TextChanged="textBoxEac3toPath_TextChanged" />
                 <Button Content="{DynamicResource ButtonEac3toPath}" Height="23" HorizontalAlignment="Left" Margin="356,37,0,0" Name="buttonEac3toPath" VerticalAlignment="Top" Width="75" Click="buttonEac3toPath_Click" TabIndex="1" />
                 <Label Content="{DynamicResource LabelBDSup2subPath}" HorizontalAlignment="Left" Margin="8,67,0,0" Name="labelBDSup2subPath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="8,99,0,0" Name="textBoxBDSup2subPath" VerticalAlignment="Top" Width="342" TabIndex="2" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,99,0,0" Name="textBoxBDSup2subPath" VerticalAlignment="Top" Width="342" TabIndex="2" TextChanged="textBoxBDSup2subPath_TextChanged" />
                 <Button Content="{DynamicResource ButtonBDSup2subPath}" Height="23" HorizontalAlignment="Left" Margin="356,98,0,0" Name="buttonBDSup2subPath" VerticalAlignment="Top" Width="75" Click="buttonBDSup2subPath_Click" TabIndex="3" />
                 <Label Content="{DynamicResource LabelX264Path}" HorizontalAlignment="Left" Margin="6,128,0,0" Name="labelX264Path" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="6,160,0,0" Name="textBoxX264Path" VerticalAlignment="Top" Width="344" TabIndex="4" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,160,0,0" Name="textBoxX264Path" VerticalAlignment="Top" Width="344" TabIndex="4" TextChanged="textBoxX264Path_TextChanged" />
                 <Button Content="{DynamicResource ButtonX264Path}" Height="23" HorizontalAlignment="Left" Margin="356,160,0,0" Name="buttonX264Path" VerticalAlignment="Top" Width="75" Click="buttonX264Path_Click" TabIndex="5" />
                 <Label Content="{DynamicResource LabelJavaPath}" HorizontalAlignment="Left" Margin="6,189,0,0" Name="labelJavaPath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="8,221,0,0" Name="textBoxJavaPath" VerticalAlignment="Top" Width="342" TabIndex="6" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,221,0,0" Name="textBoxJavaPath" VerticalAlignment="Top" Width="342" TabIndex="6" TextChanged="textBoxJavaPath_TextChanged" />
                 <Button Content="{DynamicResource ButtonJavaPath}" Height="23" HorizontalAlignment="Left" Margin="356,221,0,0" Name="buttonJavaPath" VerticalAlignment="Top" Width="75" Click="buttonJavaPath_Click" TabIndex="7" />
                 <Label Content="{DynamicResource LabelMkvmergePath}" HorizontalAlignment="Left" Margin="8,250,0,0" Name="labelMkvmergePath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="8,282,0,0" Name="textBoxMkvmergePath" VerticalAlignment="Top" Width="342" TabIndex="8" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,282,0,0" Name="textBoxMkvmergePath" VerticalAlignment="Top" Width="342" TabIndex="8" TextChanged="textBoxMkvmergePath_TextChanged" />
                 <Button Content="{DynamicResource ButtonMkvmergePath}" Height="23" HorizontalAlignment="Left" Margin="356,282,0,0" Name="buttonMkvmergePath" VerticalAlignment="Top" Width="75" Click="buttonMkvmergePath_Click" TabIndex="9" />
             </Grid>
         </GroupBox>

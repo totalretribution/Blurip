@@ -431,7 +431,7 @@ namespace BluRip
                 {
                     return true;
                 }
-                else if (settings.cropInput == 1 || settings.encodeInput == 1)
+                if (settings.cropInput == 1 || settings.encodeInput == 1)
                 {
                     if (!File.Exists(settings.ffmsindexPath))
                     {
@@ -440,7 +440,7 @@ namespace BluRip
                         return false;
                     }
                 }
-                else if (settings.cropInput == 2 || settings.encodeInput == 2)
+                if (settings.cropInput == 2 || settings.encodeInput == 2)
                 {
                     if (!File.Exists(settings.dgindexnvPath))
                     {
