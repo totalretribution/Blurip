@@ -111,6 +111,7 @@ namespace BluRip
                 dt.Start();
                 dt.WaitForExit();
 
+                TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
                 demuxedStreamsWindow.UpdateDemuxedStreams();
 
                 if (dt == null) return false;

@@ -69,6 +69,24 @@ namespace BluRip
                         return false;
                     }
                 }
+                if (settings.encodeInput == 1)
+                {
+                    if (!File.Exists(settings.ffmsindexPath))
+                    {
+                        logWindow.MessageMain(Global.Res("ErrorFfmsindexPath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorFfmsindexPath"));
+                        return false;
+                    }
+                }
+                if (settings.encodeInput == 2)
+                {
+                    if (!File.Exists(settings.dgindexnvPath))
+                    {
+                        logWindow.MessageMain(Global.Res("ErrorDgindexPath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorDgindexPath"));
+                        return false;
+                    }
+                }
                 return true;
             }
             catch (Exception)
@@ -229,8 +247,7 @@ namespace BluRip
                         return false;
                     }
                 }
-
-                TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
+                
                 return true;
             }
             catch (Exception ex)
@@ -240,6 +257,7 @@ namespace BluRip
             }
             finally
             {
+                TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
                 EnableControls();
 
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));

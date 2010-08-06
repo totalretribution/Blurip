@@ -207,5 +207,104 @@ namespace BluRip
                 settings.avs2yuvPath = ofd.FileName;
             }
         }
+
+        private void textBoxEac3toPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.eac3toPath = textBoxEac3toPath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxBDSup2subPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.sup2subPath = textBoxBDSup2subPath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxX264Path_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.x264Path = textBoxX264Path.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxJavaPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.javaPath = textBoxJavaPath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxMkvmergePath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.mkvmergePath = textBoxMkvmergePath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxFfmsindexPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.ffmsindexPath = textBoxFfmsindexPath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxDgindexnvPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.dgindexnvPath = textBoxDgindexnvPath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxX264x64Path_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.x264x64Path = textBoxX264x64Path.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxAvs2yuvPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                settings.avs2yuvPath = textBoxAvs2yuvPath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }
