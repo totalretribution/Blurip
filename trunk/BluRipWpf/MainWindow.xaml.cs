@@ -1166,14 +1166,29 @@ namespace BluRip
 
                 if (demuxedStreamList.streams.Count == 0)
                 {
-                    if (!DoDemux()) return false;
-                    if (!DoIndex()) return false;
-                    if (!DoSubtitle()) return false;
+                    if (settings.doDemux)
+                    {
+                        if (!DoDemux()) return false;
+                    }
+                    if (settings.doIndex)
+                    {
+                        if (!DoIndex()) return false;
+                    }
+                    if (settings.doSubtitle)
+                    {
+                        if (!DoSubtitle()) return false;
+                    }
                     if (!settings.untouchedVideo)
                     {
-                        if (!DoEncode()) return false;
+                        if (settings.doEncode)
+                        {
+                            if (!DoEncode()) return false;
+                        }
                     }
-                    if (!DoMux()) return false;
+                    if (settings.doMux)
+                    {
+                        if (!DoMux()) return false;
+                    }
                 }
                 else
                 {
@@ -1181,17 +1196,38 @@ namespace BluRip
                     {
                         if (!hasAvsValue() || !hasFpsValue())
                         {
-                            if (!DoIndex()) return false;
+                            if (settings.doIndex)
+                            {
+                                if (!DoIndex()) return false;
+                            }
                         }
-                        if (!DoSubtitle()) return false;
-                        if (!DoEncode()) return false;
-                        if (!DoMux()) return false;
+                        if (settings.doSubtitle)
+                        {
+                            if (!DoSubtitle()) return false;
+                        }
+                        if (settings.doEncode)
+                        {
+                            if (!DoEncode()) return false;
+                        }
+                        if (settings.doMux)
+                        {
+                            if (!DoMux()) return false;
+                        }
                     }
                     else
                     {
-                        if (!DoIndex()) return false;
-                        if (!DoSubtitle()) return false;
-                        if (!DoMux()) return false;
+                        if (settings.doIndex)
+                        {
+                            if (!DoIndex()) return false;
+                        }
+                        if (settings.doSubtitle)
+                        {
+                            if (!DoSubtitle()) return false;
+                        }
+                        if (settings.doMux)
+                        {
+                            if (!DoMux()) return false;
+                        }
                     }
                 }
                 return true;

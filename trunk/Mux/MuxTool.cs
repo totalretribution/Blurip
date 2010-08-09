@@ -110,14 +110,18 @@ namespace BluRip
                         // add additional ac3 track
                         if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
                         {
-                            trackId++;
                             AdvancedAudioOptions aao = (AdvancedAudioOptions)si.advancedOptions;
-                            if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
-                            if (settings.disableAudioHeaderCompression)
+                            if (aao.additionalAc3Track && File.Exists(aao.additionalFilename))
                             {
-                                this.Parameter += headerCompression;
+                                trackId++;
+
+                                if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
+                                if (settings.disableAudioHeaderCompression)
+                                {
+                                    this.Parameter += headerCompression;
+                                }
+                                this.Parameter += "\"" + aao.additionalFilename + "\" ";
                             }
-                            this.Parameter += "\"" + aao.additionalFilename + "\" ";
                         }
                     }
                 }                

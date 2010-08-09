@@ -43,8 +43,6 @@ namespace BluRip
         {
             try
             {
-                if (!settings.doDemux) return true;
-
                 if (!Directory.Exists(settings.workingDir))
                 {
                     logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
