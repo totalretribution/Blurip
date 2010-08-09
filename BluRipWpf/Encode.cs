@@ -161,8 +161,6 @@ namespace BluRip
         {
             try
             {
-                if (!settings.doEncode) return true;
-
                 if (!Directory.Exists(settings.workingDir))
                 {
                     logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));

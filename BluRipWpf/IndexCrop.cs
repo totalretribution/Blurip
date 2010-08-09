@@ -396,8 +396,6 @@ namespace BluRip
         {
             try
             {
-                if (!settings.doIndex) return true;
-
                 if (demuxedStreamList.streams.Count == 0)
                 {
                     logWindow.MessageMain(Global.Res("ErrorNoDemuxedStreams"));
