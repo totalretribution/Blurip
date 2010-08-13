@@ -1,4 +1,4 @@
-v0.5.1
+v0.5.1 (2010/08/13)
 
     - Some minor GUI fixes (don't reset position on language change etc)
     - Option to disable mkvmerge header compression (for audio + video tracks)
