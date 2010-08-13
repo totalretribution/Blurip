@@ -115,11 +115,7 @@ namespace BluRip
             {
                 StartInfo();
                 sb.Remove(0, sb.Length);
-                if (!File.Exists(Path))
-                {
-                    Info("File not found: " + Path);
-                    return;
-                }
+                
                 pc = new Process();
                 pc.StartInfo.FileName = Path;
                 pc.StartInfo.Arguments = Parameter;
