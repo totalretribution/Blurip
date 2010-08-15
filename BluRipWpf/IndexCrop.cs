@@ -207,11 +207,11 @@ namespace BluRip
                             string output = System.IO.Path.ChangeExtension(filename, "dgi");
                             string data = "";
                             string dlldir = System.IO.Path.GetDirectoryName(settings.dgindexnvPath);
-                            if (File.Exists(dlldir + "\\DGMultiDecodeNV.dll"))
+                            if (File.Exists(dlldir + "\\DGDecodeNV.dll"))
                             {
-                                data = "LoadPlugin(\"" + dlldir + "\\DGMultiDecodeNV.dll" + "\")\r\n";
+                                data = "LoadPlugin(\"" + dlldir + "\\DGDecodeNV.dll" + "\")\r\n";
                             }
-                            data += "DGMultiSource(\"" + output + "\")";
+                            data += "DGSource(\"" + output + "\")";
                             File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
                         }
                         logWindow.MessageCrop(Global.Res("InfoStartCrop"));
@@ -293,11 +293,11 @@ namespace BluRip
                     {
                         string output = System.IO.Path.ChangeExtension(filename, "dgi");
                         string dlldir = System.IO.Path.GetDirectoryName(settings.dgindexnvPath);
-                        if (File.Exists(dlldir + "\\DGMultiDecodeNV.dll"))
+                        if (File.Exists(dlldir + "\\DGDecodeNV.dll"))
                         {
-                            encode += "LoadPlugin(\"" + dlldir + "\\DGMultiDecodeNV.dll" + "\")\r\n";
+                            encode += "LoadPlugin(\"" + dlldir + "\\DGDecodeNV.dll" + "\")\r\n";
                         }
-                        encode += "DGMultiSource(\"" + output + "\")\r\n";
+                        encode += "DGSource(\"" + output + "\")\r\n";
                     }
                     if (cropInfo.cropTop != 0 || cropInfo.cropBottom != 0)
                     {
