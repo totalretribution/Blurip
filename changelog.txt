@@ -1,4 +1,4 @@
-v0.5.1 (2010/08/13)
+v0.5.1 (2010/08/16)
 
     - Some minor GUI fixes (don't reset position on language change etc)
     - Option to disable mkvmerge header compression (for audio + video tracks)
@@ -7,6 +7,7 @@ v0.5.1 (2010/08/13)
     - Option to edit AutoCrop values (crop, addborders, resize) by hand
     - Lots of minor bugfixes
     - Show expected size/bitrate in mainwindow when 2-pass profile selected
+    - Compatible with latest DGDecNV
 
 v0.5.0 (2010/07/20)
 
