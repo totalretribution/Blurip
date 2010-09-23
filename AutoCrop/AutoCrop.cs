@@ -250,7 +250,7 @@ namespace BluRip
                         if (cropInfo.cropTop % 2 == 0 && cropInfo.cropBottom % 2 == 0 &&
                         (asc.VideoHeight - cropInfo.cropBottom - cropInfo.cropTop) % 8 == 0)
                         {
-                            mod8ok = false;
+                            mod8ok = true;
                         }
 
                         // undercrop % 8
@@ -274,11 +274,13 @@ namespace BluRip
                                     {
                                         cropInfo.cropTop -= 2;
                                         tmp++;
+                                        if (cropInfo.cropTop < 0) cropInfo.cropTop = 0;
                                     }
                                     else
                                     {
                                         cropInfo.cropBottom -= 2;
                                         tmp = 0;
+                                        if (cropInfo.cropBottom < 0) cropInfo.cropBottom = 0;
                                     }
                                 }
                                 cropInfo.resize = false;
@@ -298,11 +300,13 @@ namespace BluRip
                                 {
                                     cropInfo.cropTop -= 2;
                                     tmp++;
+                                    if (cropInfo.cropTop < 0) cropInfo.cropTop = 0;
                                 }
                                 else
                                 {
                                     cropInfo.cropBottom -= 2;
                                     tmp = 0;
+                                    if (cropInfo.cropBottom < 0) cropInfo.cropBottom = 0;
                                 }
                             }
                             cropInfo.resize = false;
@@ -494,7 +498,7 @@ namespace BluRip
                         if (cropInfo.cropTop % 2 == 0 && cropInfo.cropBottom % 2 == 0 &&
                         (asc.VideoHeight - cropInfo.cropBottom - cropInfo.cropTop) / 3 * 2 % 8 == 0)
                         {
-                            mod8ok = false;
+                            mod8ok = true;
                         }
 
                         // undercrop % 8
@@ -519,11 +523,13 @@ namespace BluRip
                                     {
                                         cropInfo.cropTop -= 2;
                                         tmp++;
+                                        if (cropInfo.cropTop < 0) cropInfo.cropTop = 0;
                                     }
                                     else
                                     {
                                         cropInfo.cropBottom -= 2;
                                         tmp = 0;
+                                        if (cropInfo.cropBottom < 0) cropInfo.cropBottom = 0;
                                     }
                                 }
                                 cropInfo.resizeX = asc.VideoWidth / 3 * 2;
@@ -545,11 +551,13 @@ namespace BluRip
                                 {
                                     cropInfo.cropTop -= 2;
                                     tmp++;
+                                    if (cropInfo.cropTop < 0) cropInfo.cropTop = 0;
                                 }
                                 else
                                 {
                                     cropInfo.cropBottom -= 2;
                                     tmp = 0;
+                                    if (cropInfo.cropBottom < 0) cropInfo.cropBottom = 0;
                                 }
                             }
                             cropInfo.resizeX = asc.VideoWidth / 3 * 2;
