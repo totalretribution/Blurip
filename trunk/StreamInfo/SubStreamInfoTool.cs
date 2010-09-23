@@ -152,6 +152,10 @@ namespace BluRip
                                 {
                                     sr.language = tmpInfo[1].Trim();
                                 }
+                                else
+                                {
+                                    sr.language = "undef";
+                                }
                             }
                             else if (dtsAudioTypes.Contains(tmpInfo[0]))
                             {
@@ -160,6 +164,10 @@ namespace BluRip
                                 {
                                     sr.language = tmpInfo[1].Trim();
                                 }
+                                else
+                                {
+                                    sr.language = "undef";
+                                }
                             }
                             else if (tmpInfo[0] == "Subtitle (PGS)")
                             {
@@ -167,6 +175,10 @@ namespace BluRip
                                 if (tmpInfo.Length > 1)
                                 {
                                     sr.language = tmpInfo[1].Trim();
+                                }
+                                else
+                                {
+                                    sr.language = "undef";
                                 }
                             }
                             else

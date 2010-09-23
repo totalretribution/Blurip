@@ -449,6 +449,9 @@ namespace BluRip
                         Info("Exception: " + ex.Message);
                     }
                     int sub = 1;
+                    int undefCount = 0;
+                    int undefForcedCount = 0;
+
                     foreach (StreamInfo si in titleInfo.streams)
                     {
                         if (si.streamType == StreamType.Subtitle)
@@ -512,6 +515,27 @@ namespace BluRip
                                             }
                                         }
                                     }
+                                    if (si.language == "undef")
+                                    {
+                                        if (sfi.normalIdx != "")
+                                        {
+                                            if (undefCount == 0)
+                                            {
+                                                copy = true;
+                                                subidx = true;
+                                                undefCount++;
+                                            }
+                                        }
+                                        else if (sfi.forcedIdx != "")
+                                        {
+                                            if (undefForcedCount == 0)
+                                            {
+                                                copy = true;
+                                                subidx = true;
+                                                undefForcedCount++;
+                                            }
+                                        }
+                                    }
                                 }
                                 else if (settings.copySubs == 4)
                                 {
@@ -551,6 +575,27 @@ namespace BluRip
                                                 copy = true;
                                                 pgs = true;
                                                 forcedSubsCount[lang]++;
+                                            }
+                                        }
+                                    }
+                                    if (si.language == "undef")
+                                    {
+                                        if (sfi.normalSub != "")
+                                        {
+                                            if (undefCount == 0)
+                                            {
+                                                copy = true;
+                                                pgs = true;
+                                                undefCount++;
+                                            }
+                                        }
+                                        else if (sfi.forcedSup != "")
+                                        {
+                                            if (undefForcedCount == 0)
+                                            {
+                                                copy = true;
+                                                pgs = true;
+                                                undefForcedCount++;
                                             }
                                         }
                                     }
