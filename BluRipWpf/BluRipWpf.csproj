@@ -288,6 +288,10 @@
       <Project>{D1E28C6A-5ABB-4226-B3DE-940875301EA5}</Project>
       <Name>SubtitleWpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Windows7.DesktopIntegration\Windows7.DesktopIntegration.csproj">
+      <Project>{E3F064A7-ECEF-46B8-83BD-299E4E8BDF82}</Project>
+      <Name>Windows7.DesktopIntegration</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="blurip.ico" />
