@@ -32,6 +32,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
+using Windows7.DesktopIntegration.WindowsForms;
+using Windows7.DesktopIntegration;
 
 namespace BluRip
 {
@@ -144,6 +146,20 @@ namespace BluRip
                         {
                             UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncode", text));
                         }
+                        double percent = 0.0;
+                        double add = 0.0;
+                        if (secondPass) add = 100.0;
+                        try
+                        {
+                            percent = Convert.ToDouble(substr.Replace(".",","));
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        if (percent > 0.0)
+                        {
+                            UpdateStatusBar(percent + add);
+                        }
                     }
                 }
                 else
@@ -154,6 +170,49 @@ namespace BluRip
             else
             {
                 logWindow.MessageEncode(text);
+                string[] tmp = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if(tmp.Length > 2 && tmp[1].ToUpper() == "FRAMES:")
+                {
+                    int frame = 0;
+                    int maxFrames = 0;
+                    maxFrames = GetMaxFrames();
+                    try
+                    {
+                        frame = Convert.ToInt32(tmp[0]);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    if (frame > 0 && maxFrames > 0)
+                    {
+                        double add = 0;
+                        if (secondPass) add = maxFrames;
+                        UpdateStatusBar(frame + add);
+                    }
+                }
+            }
+        }
+
+        private int GetMaxFrames()
+        {
+            try
+            {
+                foreach (StreamInfo si in demuxedStreamList.streams)
+                {
+                    if (si.streamType == StreamType.Video)
+                    {
+                        if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                        {
+                            VideoFileInfo vfi = (VideoFileInfo)si.extraFileInfo;
+                            return Convert.ToInt32(vfi.frames);
+                        }
+                    }
+                }
+                return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
 
@@ -218,6 +277,35 @@ namespace BluRip
                 lastMsg = "";
                 secondPass = false;
 
+                if (settings.use64bit && GetMaxFrames() > 0)
+                {
+                    if (!settings.encodingSettings[profile].pass2)
+                    {
+                        maxProgressValue = GetMaxFrames();
+                    }
+                    else
+                    {
+                        maxProgressValue = 2 * GetMaxFrames();
+                    }
+                    progressBarMain.IsIndeterminate = false;
+                    progressBarMain.Maximum = 100;
+                    progressBarMain.Minimum = 0;
+                }
+                else if (!settings.use64bit)
+                {
+                    if (!settings.encodingSettings[profile].pass2)
+                    {
+                        maxProgressValue = 100;
+                    }
+                    else
+                    {
+                        maxProgressValue = 200;
+                    }
+                    progressBarMain.IsIndeterminate = false;
+                    progressBarMain.Maximum = 100;
+                    progressBarMain.Minimum = 0;
+                }
+
                 et = new EncodeTool(settings, demuxedStreamList, profile, false, vfi);
                 et.OnInfoMsg += new ExternalTool.InfoEventHandler(EncodeMsg);
                 et.OnLogMsg += new ExternalTool.LogEventHandler(EncodeMsg);
@@ -255,6 +343,12 @@ namespace BluRip
             }
             finally
             {
+                progressBarMain.IsIndeterminate = true;
+                if (isWindows7)
+                {
+                    WPFExtensions.SetTaskbarProgressState(this, Windows7Taskbar.ThumbnailProgressState.NoProgress);
+                }
+
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
                 EnableControls();
 

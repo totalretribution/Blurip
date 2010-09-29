@@ -32,6 +32,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Windows.Forms;
+using Windows7.DesktopIntegration.WindowsForms;
+using Windows7.DesktopIntegration;
 
 namespace BluRip
 {
@@ -41,7 +43,30 @@ namespace BluRip
 
         private void MuxMsg(object sender, ExternalTool.MsgEventArgs e)
         {
-            logWindow.MessageMux(e.Message.Replace("\b", "").Trim());
+            try
+            {
+                logWindow.MessageMux(e.Message.Replace("\b", "").Trim());
+                string[] tmp = e.Message.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (tmp.Length == 2 && tmp[1].Contains("%"))
+                {
+                    int percent = 0;
+                    try
+                    {
+                        percent = Convert.ToInt32(tmp[1].Replace("%", " "));
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    if (percent > 0)
+                    {
+                        UpdateStatusBar(percent);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            
         }
 
         private bool DoMux()
@@ -172,6 +197,11 @@ namespace BluRip
                     }
                 }
 
+                progressBarMain.IsIndeterminate = false;
+                progressBarMain.Maximum = 100;
+                progressBarMain.Minimum = 0;
+                maxProgressValue = 100;
+
                 DisableControls();
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarMux"));
 
@@ -190,6 +220,12 @@ namespace BluRip
             }
             finally
             {
+                progressBarMain.IsIndeterminate = true;
+                if (isWindows7)
+                {
+                    WPFExtensions.SetTaskbarProgressState(this, Windows7Taskbar.ThumbnailProgressState.NoProgress);
+                }
+
                 EnableControls();
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
