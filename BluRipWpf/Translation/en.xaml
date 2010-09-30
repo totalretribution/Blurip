@@ -261,15 +261,19 @@
     <system:String x:Key="LabelVfiFps">Framerate</system:String>
     <system:String x:Key="LabelVfiLength">Length (in ms)</system:String>
     <system:String x:Key="LabelVfiFrames">Frames</system:String>
-    <system:String x:Key="LabelVfiResX">Output resolution x</system:String>
-    <system:String x:Key="LabelVfiResY">Output resolution y</system:String>
     <system:String x:Key="LabelVfiEncodeAvs">AVS file for encode</system:String>
     <system:String x:Key="LabelVfiEncodedFile">Encoded file</system:String>
     <system:String x:Key="ButtonVfiEncodedFile">...</system:String>
     <system:String x:Key="ButtonVfiEncodeAvs">...</system:String>
+    <system:String x:Key="LabelCropInfo">CropInfo status: {0}</system:String>
+    <system:String x:Key="ButtonEditCropInfo">Edit cropinfo</system:String>
+    <system:String x:Key="ButtonResetCropInfo">Reset cropinfo</system:String>
 
     <!-- EditSubtitleFileInfo Window -->
     <system:String x:Key="CaptionEditSubtitleFileInfoWindow">Edit extra subtitle file info</system:String>
+    <system:String x:Key="GroupBoxSubIdx">Sub/idx subtitle</system:String>
+    <system:String x:Key="GroupBoxSup">Sup (.pgs) subtitle</system:String>
+    <system:String x:Key="GroupBoxSubIdxLowRes">Lowres sub/idx subtitle</system:String>
     <system:String x:Key="LabelSfiForcedIdx">Forced .idx</system:String>
     <system:String x:Key="LabelSfiForcedSub">Forced .sub</system:String>
     <system:String x:Key="LabelSfiForcedSup">Forced .sup</system:String>
@@ -444,7 +448,7 @@
     <system:String x:Key="ButtonStreamInfoResetExtraFileInfo">Reset advanced file info</system:String>
     <system:String x:Key="ButtonStreamInfoEditAdvancedOptions">Edit advanced options</system:String>
     <system:String x:Key="ButtonStreamInfoResetAdvancedOptions">Delete advanced options</system:String>
-    <system:String x:Key="LabelStreamInfoExtraFileInfo">Extra file info status: {0}</system:String>    
+    <system:String x:Key="LabelStreamInfoExtraFileInfo">Extra file info status: {0}</system:String>
     <system:String x:Key="LabelStreamInfoAdvancedOptions">Advanced options status: {0}</system:String>
     <system:String x:Key="MsgEmptyOptions">Empty</system:String>
     <system:String x:Key="MsgFilledOptions">Filled</system:String>
@@ -480,7 +484,7 @@
     <system:String x:Key="ErrorX264Path">Path to x264.exe not set or found.</system:String>
     <system:String x:Key="ErrorX264x64Path">Path to 64-bit x264.exe not set or found.</system:String>
     <system:String x:Key="ErrorAvs2yuvPath">Path to avs2yuv.exe not set or found.</system:String>
-    <system:String x:Key="ErrorEncodeAvsNotSet">Encode avs not set - do index + autocrop first</system:String>
+    <system:String x:Key="ErrorCropInfoNotSet">CropInfo not set - do index + autocrop first</system:String>
     <system:String x:Key="ErrorEncodingProfileNotSet">Encoding profile not set</system:String>
     <system:String x:Key="ErrorEncodeFailed">Encode failed!</system:String>
     <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) failed!</system:String>
