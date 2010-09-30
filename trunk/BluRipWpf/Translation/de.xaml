@@ -261,15 +261,19 @@
     <system:String x:Key="LabelVfiFps">Framerate</system:String>
     <system:String x:Key="LabelVfiLength">Länge (in ms)</system:String>
     <system:String x:Key="LabelVfiFrames">Frames</system:String>
-    <system:String x:Key="LabelVfiResX">Ausgabeauflösung x</system:String>
-    <system:String x:Key="LabelVfiResY">Ausgabeauflösung y</system:String>
     <system:String x:Key="LabelVfiEncodeAvs">AVS Datei für encode</system:String>
     <system:String x:Key="LabelVfiEncodedFile">Encoded Datei</system:String>
     <system:String x:Key="ButtonVfiEncodedFile">...</system:String>
     <system:String x:Key="ButtonVfiEncodeAvs">...</system:String>
+    <system:String x:Key="LabelCropInfo">CropInfo status: {0}</system:String>
+    <system:String x:Key="ButtonEditCropInfo">Bearbeite CropInfo</system:String>
+    <system:String x:Key="ButtonResetCropInfo">Lösche CropInfo</system:String>
 
     <!-- EditSubtitleFileInfo Window -->
     <system:String x:Key="CaptionEditSubtitleFileInfoWindow">Bearbeite extra Untertitel Dateiinfo</system:String>
+    <system:String x:Key="GroupBoxSubIdx">Sub/idx Untertitel</system:String>
+    <system:String x:Key="GroupBoxSup">Sup (.pgs) Untertitel</system:String>
+    <system:String x:Key="GroupBoxSubIdxLowRes">Lowres sub/idx Untertitel</system:String>
     <system:String x:Key="LabelSfiForcedIdx">Forced .idx</system:String>
     <system:String x:Key="LabelSfiForcedSub">Forced .sub</system:String>
     <system:String x:Key="LabelSfiForcedSup">Forced .sup</system:String>
@@ -479,7 +483,7 @@
     <system:String x:Key="ErrorX264Path">Pfad zu x264.exe nicht gesetzt oder gefunden.</system:String>
     <system:String x:Key="ErrorX264x64Path">Pfad zu 64-bit x264.exe nicht gesetzt oder gefunden.</system:String>
     <system:String x:Key="ErrorAvs2yuvPath">Pfad zu avs2yuv.exe nicht gesetzt oder gefunden.</system:String>
-    <system:String x:Key="ErrorEncodeAvsNotSet">Encode .avs nicht gesetzt - Zuerst Indexierung + AutoCrop ausführen</system:String>
+    <system:String x:Key="ErrorCropInfoNotSet">CropInfo nicht gesetzt - Zuerst Indexierung + AutoCrop ausführen</system:String>
     <system:String x:Key="ErrorEncodingProfileNotSet">Encoding Profil nicht gesetzt</system:String>
     <system:String x:Key="ErrorEncodeFailed">Encode fehlgeschlagen!</system:String>
     <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) fehlgeschlagen!</system:String>

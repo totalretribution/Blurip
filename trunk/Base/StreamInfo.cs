@@ -137,10 +137,19 @@ namespace BluRip
                 this.encodeAvs = ((VideoFileInfo)orig).encodeAvs;
                 this.encodedFile = ((VideoFileInfo)orig).encodedFile;
                 this.fps = ((VideoFileInfo)orig).fps;
-                this.resX = ((VideoFileInfo)orig).resX;
-                this.resY = ((VideoFileInfo)orig).resY;
+                //this.resX = ((VideoFileInfo)orig).resX;
+                //this.resY = ((VideoFileInfo)orig).resY;
                 this.length = ((VideoFileInfo)orig).length;
                 this.frames = ((VideoFileInfo)orig).frames;
+
+                if (((VideoFileInfo)orig).cropInfo == null)
+                {
+                    this.cropInfo = null;
+                }
+                else
+                {
+                    this.cropInfo = new CropInfo(((VideoFileInfo)orig).cropInfo);
+                }
             }
             catch (Exception)
             {
@@ -150,10 +159,12 @@ namespace BluRip
         public string encodeAvs = "";
         public string fps = "";
         public string encodedFile = "";
-        public string resX = "";
-        public string resY = "";
+        //public string resX = "";
+        //public string resY = "";
         public string length = "";
         public string frames = "";
+
+        public CropInfo cropInfo = null;
     }
 
     public class SubtitleFileInfo : ExtraFileInfo

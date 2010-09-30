@@ -57,8 +57,26 @@ namespace BluRip
                 textBoxFps.Text = vfi.fps;
                 textBoxFrames.Text = vfi.frames;
                 textBoxLength.Text = vfi.length;
-                textBoxResX.Text = vfi.resX;
-                textBoxResY.Text = vfi.resY;
+
+                UpdateStatusInfo();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void UpdateStatusInfo()
+        {
+            try
+            {
+                if (vfi.cropInfo == null || vfi.cropInfo.GetType() != typeof(CropInfo))
+                {
+                    labelCropInfo.Content = Global.ResFormat("LabelCropInfo", Global.Res("MsgEmptyOptions"));
+                }
+                else
+                {
+                    labelCropInfo.Content = Global.ResFormat("LabelCropInfo", Global.Res("MsgFilledOptions"));
+                }
             }
             catch (Exception)
             {
@@ -101,29 +119,7 @@ namespace BluRip
             catch (Exception)
             {
             }
-        }
-
-        private void textBoxResX_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                vfi.resX = textBoxResX.Text;
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void textBoxResY_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                vfi.resY = textBoxResY.Text;
-            }
-            catch (Exception)
-            {
-            }
-        }
+        }        
 
         private void textBoxEncodeAvs_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -173,6 +169,18 @@ namespace BluRip
                 {
                     textBoxEncodedFile.Text = ofd.FileName;
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDelCropInfo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                vfi.cropInfo = null;
+                UpdateStatusInfo();
             }
             catch (Exception)
             {

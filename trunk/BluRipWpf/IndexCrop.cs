@@ -274,79 +274,6 @@ namespace BluRip
                     {
                         logWindow.MessageCrop(Global.ResFormat("InfoResize", cropInfo.resizeX, cropInfo.resizeY));
                     }
-
-                    string encode = "";
-                    if (settings.encodeInput == 0)
-                    {
-                        encode = "DirectShowSource(\"" + filename + "\")\r\n";
-                    }
-                    else if (settings.encodeInput == 1)
-                    {
-                        string dlldir = System.IO.Path.GetDirectoryName(settings.ffmsindexPath);
-                        if (File.Exists(dlldir + "\\ffms2.dll"))
-                        {
-                            encode += "LoadPlugin(\"" + dlldir + "\\ffms2.dll" + "\")\r\n";
-                        }
-                        encode += "FFVideoSource(\"" + filename + "\")\r\n";
-                    }
-                    else if (settings.encodeInput == 2)
-                    {
-                        string output = System.IO.Path.ChangeExtension(filename, "dgi");
-                        string dlldir = System.IO.Path.GetDirectoryName(settings.dgindexnvPath);
-                        if (File.Exists(dlldir + "\\DGDecodeNV.dll"))
-                        {
-                            encode += "LoadPlugin(\"" + dlldir + "\\DGDecodeNV.dll" + "\")\r\n";
-                        }
-                        encode += "DGSource(\"" + output + "\")\r\n";
-                    }
-                    if (cropInfo.cropTop != 0 || cropInfo.cropBottom != 0)
-                    {
-                        encode += "Crop(0," + cropInfo.cropTop.ToString() + ",-0,-" + cropInfo.cropBottom.ToString() + ")\r\n";
-                        if (cropInfo.border)
-                        {
-                            encode += "AddBorders(0," + cropInfo.borderTop + ",0," + cropInfo.borderBottom + ")\r\n";
-                        }
-                        else
-                        {
-                            logWindow.MessageCrop(Global.Res("InfoNoBorder"));
-                        }
-                        if (cropInfo.resize)
-                        {
-                            if (cropInfo.resizeMethod > -1 && cropInfo.resizeMethod < Global.resizeMethods.Count)
-                            {
-                                encode += Global.resizeMethods[cropInfo.resizeMethod] + "(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
-                            }
-                            else
-                            {
-                                encode += "LanczosResize(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
-                            }
-                        }
-                        else
-                        {
-                            logWindow.MessageCrop(Global.Res("InfoNoResize"));
-                        }
-                    }
-                    
-                    int index = settings.lastAvisynthProfile;
-                    if (index > -1 && index < settings.avisynthSettings.Count)
-                    {
-                        string[] tmp = settings.avisynthSettings[index].commands.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                        foreach (string s in tmp)
-                        {
-                            encode += s.Trim() + "\r\n";
-                        }
-                    }
-
-                    File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_encode.avs", encode);
-
-                    logWindow.MessageCrop("");
-                    logWindow.MessageCrop(Global.Res("InfoAvsContent"));
-                    logWindow.MessageCrop("");
-                    string[] tmpstr2 = encode.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string s in tmpstr2)
-                    {
-                        logWindow.MessageCrop(s);
-                    }
                 }
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
@@ -356,25 +283,12 @@ namespace BluRip
                         {
                             si.extraFileInfo = new VideoFileInfo();
                         }
-                        if (!settings.untouchedVideo)
-                        {
-                            ((VideoFileInfo)si.extraFileInfo).encodeAvs = settings.workingDir + "\\" + settings.filePrefix + "_encode.avs";
-                        }
+                        
                         ((VideoFileInfo)si.extraFileInfo).fps = fps;
                         ((VideoFileInfo)si.extraFileInfo).length = length;
                         ((VideoFileInfo)si.extraFileInfo).frames = frames;
-                        if (cropInfo.resize)
-                        {
-                            ((VideoFileInfo)si.extraFileInfo).resX = cropInfo.resizeX.ToString();
-                            ((VideoFileInfo)si.extraFileInfo).resY = cropInfo.resizeY.ToString();
-                        }
-                        else
-                        {
-                            int tmp = cropInfo.cropBottom + cropInfo.cropTop;
-                            int y = Convert.ToInt32(resY) - tmp;
-                            ((VideoFileInfo)si.extraFileInfo).resX = resX;
-                            ((VideoFileInfo)si.extraFileInfo).resY = y.ToString();
-                        }
+
+                        ((VideoFileInfo)si.extraFileInfo).cropInfo = new CropInfo(cropInfo);
                     }
                 }
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");

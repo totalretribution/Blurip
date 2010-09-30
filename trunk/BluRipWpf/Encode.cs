@@ -243,11 +243,13 @@ namespace BluRip
                 }
 
                 VideoFileInfo vfi = null;
+                StreamInfo vsi = null;
 
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
                     if (si.streamType == StreamType.Video)
                     {
+                        vsi = si;
                         if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                         {
                             vfi = (VideoFileInfo)si.extraFileInfo;
@@ -256,11 +258,113 @@ namespace BluRip
                     }
                 }
 
+                if (vfi == null || vfi.cropInfo == null)
+                {
+                    logWindow.MessageEncode(Global.Res("ErrorCropInfoNotSet"));
+                    if (!silent) Global.ErrorMsg(Global.Res("ErrorCropInfoNotSet"));
+                    return false;
+                }
+                else
+                {   
+                    vfi.encodeAvs = settings.workingDir + "\\" + settings.filePrefix + "_encode.avs";
+                    
+                    string filename = vsi.filename;
+
+                    CropInfo cropInfo = vfi.cropInfo;
+
+                    logWindow.MessageEncode("");
+                    logWindow.MessageEncode(Global.ResFormat("InfoCropTop", cropInfo.cropTop));
+                    logWindow.MessageEncode(Global.ResFormat("InfoCropBottom", cropInfo.cropBottom));
+                    if (cropInfo.border)
+                    {
+                        logWindow.MessageEncode(Global.ResFormat("InfoBorderTop", cropInfo.borderTop));
+                        logWindow.MessageEncode(Global.ResFormat("InfoBorderBottom", cropInfo.borderBottom));
+                    }
+                    if (cropInfo.resize)
+                    {
+                        logWindow.MessageEncode(Global.ResFormat("InfoResize", cropInfo.resizeX, cropInfo.resizeY));
+                    }
+
+                    string encode = "";
+                    if (settings.encodeInput == 0)
+                    {
+                        encode = "DirectShowSource(\"" + filename + "\")\r\n";
+                    }
+                    else if (settings.encodeInput == 1)
+                    {
+                        string dlldir = System.IO.Path.GetDirectoryName(settings.ffmsindexPath);
+                        if (File.Exists(dlldir + "\\ffms2.dll"))
+                        {
+                            encode += "LoadPlugin(\"" + dlldir + "\\ffms2.dll" + "\")\r\n";
+                        }
+                        encode += "FFVideoSource(\"" + filename + "\")\r\n";
+                    }
+                    else if (settings.encodeInput == 2)
+                    {
+                        string output = System.IO.Path.ChangeExtension(filename, "dgi");
+                        string dlldir = System.IO.Path.GetDirectoryName(settings.dgindexnvPath);
+                        if (File.Exists(dlldir + "\\DGDecodeNV.dll"))
+                        {
+                            encode += "LoadPlugin(\"" + dlldir + "\\DGDecodeNV.dll" + "\")\r\n";
+                        }
+                        encode += "DGSource(\"" + output + "\")\r\n";
+                    }
+                    if (cropInfo.cropTop != 0 || cropInfo.cropBottom != 0)
+                    {
+                        encode += "Crop(0," + cropInfo.cropTop.ToString() + ",-0,-" + cropInfo.cropBottom.ToString() + ")\r\n";
+                        if (cropInfo.border)
+                        {
+                            encode += "AddBorders(0," + cropInfo.borderTop + ",0," + cropInfo.borderBottom + ")\r\n";
+                        }
+                        else
+                        {
+                            logWindow.MessageEncode(Global.Res("InfoNoBorder"));
+                        }
+                        if (cropInfo.resize)
+                        {
+                            if (cropInfo.resizeMethod > -1 && cropInfo.resizeMethod < Global.resizeMethods.Count)
+                            {
+                                encode += Global.resizeMethods[cropInfo.resizeMethod] + "(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
+                            }
+                            else
+                            {
+                                encode += "LanczosResize(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
+                            }
+                        }
+                        else
+                        {
+                            logWindow.MessageEncode(Global.Res("InfoNoResize"));
+                        }
+                    }
+
+                    int index = settings.lastAvisynthProfile;
+                    if (index > -1 && index < settings.avisynthSettings.Count)
+                    {
+                        string[] tmp = settings.avisynthSettings[index].commands.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string s in tmp)
+                        {
+                            encode += s.Trim() + "\r\n";
+                        }
+                    }
+
+                    File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_encode.avs", encode);
+
+                    logWindow.MessageEncode("");
+                    logWindow.MessageEncode(Global.Res("InfoAvsContent"));
+                    logWindow.MessageEncode("");
+                    string[] tmpstr2 = encode.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string s in tmpstr2)
+                    {
+                        logWindow.MessageEncode(s);
+                    }
+                }
+
+
                 if (vfi == null || vfi.encodeAvs == "")
                 {
                     logWindow.MessageEncode(Global.Res("ErrorEncodeAvsNotSet"));
                     if (!silent) Global.ErrorMsg(Global.Res("ErrorEncodeAvsNotSet"));
-                    return false;
+                    //return false;
                 }
 
                 int profile = settings.lastProfile;
