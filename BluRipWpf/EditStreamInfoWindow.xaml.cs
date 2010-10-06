@@ -174,6 +174,7 @@ namespace BluRip
                     bool ok = false;
                     if (si.streamType == StreamType.Video && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions)) ok = true;
                     if (si.streamType == StreamType.Audio && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions)) ok = true;
+                    if (si.streamType == StreamType.Subtitle && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions)) ok = true;
 
                     if (ok)
                     {
@@ -279,6 +280,18 @@ namespace BluRip
                     if (avow.DialogResult == true)
                     {
                         si.advancedOptions = new AdvancedVideoOptions(avow.advancedVideoOptions);
+                        UpdateStatusInfo();
+                    }
+                }
+                else if (si.streamType == StreamType.Subtitle)
+                {
+                    AdvancedSubtitleOptions aso = new AdvancedSubtitleOptions();
+                    if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions)) aso = new AdvancedSubtitleOptions(si.advancedOptions);
+                    AdvancedSubtitleOptionsWindow avow = new AdvancedSubtitleOptionsWindow(aso);
+                    avow.ShowDialog();
+                    if (avow.DialogResult == true)
+                    {
+                        si.advancedOptions = new AdvancedSubtitleOptions(avow.advancedSubtitleOptions);
                         UpdateStatusInfo();
                     }
                 }

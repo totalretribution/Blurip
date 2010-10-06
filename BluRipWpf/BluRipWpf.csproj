@@ -71,6 +71,9 @@
     <Compile Include="AdvancedOptionsWindow.xaml.cs">
       <DependentUpon>AdvancedOptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdvancedSubtitleOptionsWindow.xaml.cs">
+      <DependentUpon>AdvancedSubtitleOptionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdvancedVideoOptionsWindow.xaml.cs">
       <DependentUpon>AdvancedVideoOptionsWindow.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,9 @@
     </Compile>
     <Compile Include="EditAvisynthProfileWindow.xaml.cs">
       <DependentUpon>EditAvisynthProfileWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditCropInfoWindow.xaml.cs">
+      <DependentUpon>EditCropInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditEncodingProfilesWindow.xaml.cs">
       <DependentUpon>EditEncodingProfilesWindow.xaml</DependentUpon>
@@ -135,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdvancedSubtitleOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdvancedVideoOptionsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditAvisynthProfileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditCropInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

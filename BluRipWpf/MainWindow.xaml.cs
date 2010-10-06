@@ -47,7 +47,7 @@ namespace BluRip
     {
         private UserSettings settings = new UserSettings();
         private string settingsPath = "";
-        public string title = @"BluRip v0.5.1 © _hawk_ 2009-2010";
+        public string title = @"BluRip v0.5.2 © _hawk_ 2009-2010";
 
         private LogWindow logWindow = null;
         private DemuxedStreamsWindow demuxedStreamsWindow = null;
@@ -1746,6 +1746,28 @@ namespace BluRip
                             int index = listBoxStreams.SelectedIndex;
                             titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions =
                                 new AdvancedVideoOptions(avow.advancedVideoOptions);
+                            UpdateStreamList();
+                            listBoxStreams.SelectedIndex = index;
+                        }
+                    }
+                    else if (si.streamType == StreamType.Subtitle)
+                    {
+                        AdvancedSubtitleOptions aso = null;
+                        if (si.advancedOptions.GetType() != typeof(AdvancedSubtitleOptions))
+                        {
+                            aso = new AdvancedSubtitleOptions();
+                        }
+                        else
+                        {
+                            aso = new AdvancedSubtitleOptions(si.advancedOptions);
+                        }
+                        AdvancedSubtitleOptionsWindow asow = new AdvancedSubtitleOptionsWindow(aso);
+                        asow.ShowDialog();
+                        if (asow.DialogResult == true)
+                        {
+                            int index = listBoxStreams.SelectedIndex;
+                            titleList[comboBoxTitle.SelectedIndex].streams[index].advancedOptions =
+                                new AdvancedSubtitleOptions(asow.advancedSubtitleOptions);
                             UpdateStreamList();
                             listBoxStreams.SelectedIndex = index;
                         }
