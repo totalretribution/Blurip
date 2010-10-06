@@ -331,6 +331,22 @@ namespace BluRip
         public string additionalFilename = "";
     }
 
+    public class AdvancedSubtitleOptions : AdvancedOptions
+    {
+        public AdvancedSubtitleOptions() { }
+
+        public AdvancedSubtitleOptions(AdvancedOptions orig)
+        {
+            this.isForced = ((AdvancedSubtitleOptions)orig).isForced;
+            this.vobSub = ((AdvancedSubtitleOptions)orig).vobSub;
+            this.vobSubOnlyForced = ((AdvancedSubtitleOptions)orig).vobSubOnlyForced;
+        }
+
+        public bool isForced = false;
+        public bool vobSub = false;
+        public bool vobSubOnlyForced = false;
+    }
+
     public class AdvancedVideoOptions : AdvancedOptions
     {
         public AdvancedVideoOptions() { }

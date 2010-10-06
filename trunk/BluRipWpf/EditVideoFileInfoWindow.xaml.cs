@@ -186,5 +186,31 @@ namespace BluRip
             {
             }
         }
+
+        private void buttonEditCropInfo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CropInfo cropInfo = null;
+                if (vfi.cropInfo != null && vfi.cropInfo.GetType() == typeof(CropInfo))
+                {
+                    cropInfo = new CropInfo(vfi.cropInfo);
+                }
+                else
+                {
+                    cropInfo = new CropInfo();
+                }
+                EditCropInfoWindow eciw = new EditCropInfoWindow(cropInfo);
+                eciw.ShowDialog();
+                if (eciw.DialogResult == true)
+                {
+                    vfi.cropInfo = new CropInfo(eciw.cropInfo);
+                }
+                UpdateStatusInfo();
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

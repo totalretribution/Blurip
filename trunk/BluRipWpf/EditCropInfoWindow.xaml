@@ -1,0 +1,25 @@
+﻿<Window x:Class="BluRip.EditCropInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{DynamicResource CaptionEditCropInfoWindow}" Height="359" Width="297" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" IsDefault="True" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" Click="buttonOk_Click" />
+        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" IsCancel="True" Margin="93,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" />
+        <Label Content="{DynamicResource LabelCICropTop}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelCropTop" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,38,0,0" Name="textBoxCropTop" VerticalAlignment="Top" Width="120" TextChanged="textBoxCropTop_TextChanged" />
+        <Label Content="{DynamicResource LabelCIResizeX}" HorizontalAlignment="Left" Margin="12,67,0,0" Name="labelResizeX" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,93,0,0" Name="textBoxResizeX" VerticalAlignment="Top" Width="120" TextChanged="textBoxResizeX_TextChanged" />
+        <Label Content="{DynamicResource LabelCIBorderTop}" HorizontalAlignment="Left" Margin="12,122,0,0" Name="labelBorderTop" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="textBoxBorderTop" VerticalAlignment="Top" Width="120" TextChanged="textBoxBorderTop_TextChanged" />
+        <Label Content="{DynamicResource LabelCIResizeMethod}" HorizontalAlignment="Left" Margin="12,177,0,0" Name="labelResizeMethod" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelCICropBottom}" HorizontalAlignment="Left" Margin="138,12,0,0" Name="labelCropBottom" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="138,38,0,0" Name="textBoxCropBottom" VerticalAlignment="Top" Width="120" TextChanged="textBoxCropBottom_TextChanged" />
+        <Label Content="{DynamicResource LabelCIResizeY}" HorizontalAlignment="Left" Margin="138,67,0,0" Name="labelResizeY" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="138,93,0,0" Name="textBoxResizeY" VerticalAlignment="Top" Width="120" TextChanged="textBoxResizeY_TextChanged" />
+        <Label Content="{DynamicResource LabelCIBorderBottom}" HorizontalAlignment="Left" Margin="138,122,0,0" Name="labelBorderBottom" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="138,148,0,0" Name="textBoxBorderBottom" VerticalAlignment="Top" Width="120" TextChanged="textBoxBorderBottom_TextChanged" />
+        <CheckBox Content="{DynamicResource CheckBoxCIResize}" Height="16" HorizontalAlignment="Left" Margin="12,232,0,0" Name="checkBoxResize" VerticalAlignment="Top" Checked="checkBoxResize_Checked" Unchecked="checkBoxResize_Checked" />
+        <CheckBox Content="{DynamicResource CheckBoxCIAddBorders}" Height="16" HorizontalAlignment="Left" Margin="12,254,0,0" Name="checkBoxAddBorders" VerticalAlignment="Top" Checked="checkBoxAddBorders_Checked" Unchecked="checkBoxAddBorders_Checked" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,203,0,0" Name="comboBoxResizeMethod" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxResizeMethod_SelectionChanged" />
+    </Grid>
+</Window>

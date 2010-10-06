@@ -269,6 +269,18 @@
     <system:String x:Key="ButtonEditCropInfo">Bearbeite CropInfo</system:String>
     <system:String x:Key="ButtonResetCropInfo">Lösche CropInfo</system:String>
 
+    <!-- EditCropInfo Window -->
+    <system:String x:Key="CaptionEditCropInfoWindow">Bearbeite CropInfo</system:String>
+    <system:String x:Key="LabelCICropTop">Crop oben</system:String>
+    <system:String x:Key="LabelCICropBottom">Crop unten</system:String>
+    <system:String x:Key="LabelCIResizeX">Resize x</system:String>
+    <system:String x:Key="LabelCIResizeY">Resize y</system:String>
+    <system:String x:Key="LabelCIBorderTop">AddBorder oben</system:String>
+    <system:String x:Key="LabelCIBorderBottom">AddBorder unten</system:String>
+    <system:String x:Key="LabelCIResizeMethod">Resize Methode</system:String>
+    <system:String x:Key="CheckBoxCIResize">Resize</system:String>
+    <system:String x:Key="CheckBoxCIAddBorders">AddBorders</system:String>
+
     <!-- EditSubtitleFileInfo Window -->
     <system:String x:Key="CaptionEditSubtitleFileInfoWindow">Bearbeite extra Untertitel Dateiinfo</system:String>
     <system:String x:Key="GroupBoxSubIdx">Sub/idx Untertitel</system:String>
@@ -407,6 +419,12 @@
     <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
 
+    <!-- AdvancedSubtitleOptions Window -->
+    <system:String x:Key="CaptionAdvancedSubtitleOptionsWindow">Bearbeite erweiterte Untertiteloptionen</system:String>
+    <system:String x:Key="CheckBoxIsForced">Ist forced Track</system:String>
+    <system:String x:Key="CheckBoxVobSub">Untertitel mit VobSub einbrennen</system:String>
+    <system:String x:Key="CheckBoxVobSubOnlyForced">Nur forced Untertitel für VobSub benutzen</system:String>
+    
     <!-- link Window -->
     <system:String x:Key="CaptionLinkWindow">Links zu notwendigen und nützlichen Programmen</system:String>
     <system:String x:Key="LabelAvisynthLink">Link zu AviSynth</system:String>
