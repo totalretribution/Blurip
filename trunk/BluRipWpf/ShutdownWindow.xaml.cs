@@ -40,6 +40,7 @@ namespace BluRip
     {
         private DispatcherTimer timer;
         private int countdown = 120;
+        private string msgTextResource = "";
 
         public ShutdownWindow()
         {            
@@ -58,11 +59,38 @@ namespace BluRip
             }
         }
 
+        public ShutdownWindow(string captionResource, string msgTextResource, int countdown)
+        {
+            try
+            {
+                InitializeComponent();
+                this.msgTextResource = msgTextResource;
+                this.countdown = countdown;
+                this.Title = Global.Res(captionResource);
+                labelShutdownCounter.Content = Global.ResFormat(msgTextResource, countdown);
+                timer = new DispatcherTimer();
+                timer.Interval = new TimeSpan(0, 0, 1);
+                timer.Tick += new EventHandler(TimerTick);
+                timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Global.ErrorMsg(ex);
+            }
+        }
+
         private void TimerTick(object sender, EventArgs e)
         {
             try
             {
-                labelShutdownCounter.Content = Global.ResFormat("LabelShutdownCounter", countdown);
+                if (msgTextResource == "")
+                {
+                    labelShutdownCounter.Content = Global.ResFormat("LabelShutdownCounter", countdown);
+                }
+                else
+                {
+                    labelShutdownCounter.Content = Global.ResFormat(msgTextResource, countdown);
+                }
                 countdown--;
                 if (countdown == 0)
                 {

@@ -146,6 +146,8 @@
     <system:String x:Key="HeaderDgdecnv">When using DGMultiDec</system:String>
     <system:String x:Key="HeaderX264x64">When using 64-bit x264</system:String>
     <system:String x:Key="CaptionExternalToolsWindow">Settings for external tools</system:String>
+    <system:String x:Key="ButtonVobsubPath">...</system:String>
+    <system:String x:Key="LabelVobsubPath">Path to vobsup.dll:</system:String>
 
     <!-- Log Window -->
     <system:String x:Key="TabMainLog">Main log</system:String>
@@ -255,6 +257,8 @@
     <!-- Shutdown Window -->
     <system:String x:Key="CaptionShutdownWindow">Shutdown</system:String>
     <system:String x:Key="LabelShutdownCounter">Seconds until automatic shutdown: {0}</system:String>
+    <system:String x:Key="CaptionShutdownWindowQueue">OK to start now Cancel to abort queue</system:String>
+    <system:String x:Key="LabelShutdownCounterQueue">Next job will start in: {0}</system:String>
 
     <!-- EditVideoFileInfo Window -->
     <system:String x:Key="CaptionEditVideoFileInfoWindow">Edit extra video file info</system:String>
@@ -506,6 +510,7 @@
     <system:String x:Key="ErrorEncodingProfileNotSet">Encoding profile not set</system:String>
     <system:String x:Key="ErrorEncodeFailed">Encode failed!</system:String>
     <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) failed!</system:String>
+    <system:String x:Key="ErrorVobsubPath">Path to vobsub.dll not set or found.</system:String>
     
     
     <!-- Info msg -->

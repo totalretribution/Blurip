@@ -1,10 +1,10 @@
 ﻿<Window x:Class="BluRip.ShutdownWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionShutdownWindow}" Height="119" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico">
+        Title="{DynamicResource CaptionShutdownWindow}" Height="119" Width="412" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico">
     <Grid>
         <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" Click="buttonOk_Click" IsDefault="True" />
-        <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Right" Margin="0,0,110,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="buttonCancel_Click" />
+        <Button Content="{DynamicResource ButtonCancel}" Height="23" Margin="93,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" IsCancel="True" Click="buttonCancel_Click" HorizontalAlignment="Left" Width="75" />
         <Label Content="{DynamicResource LabelShutdownCounter}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelShutdownCounter" VerticalAlignment="Top" />
     </Grid>
 </Window>
