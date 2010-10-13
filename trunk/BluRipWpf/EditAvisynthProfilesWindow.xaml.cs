@@ -110,7 +110,7 @@ namespace BluRip
                 eapw.ShowDialog();
                 if (eapw.DialogResult == true)
                 {
-                    settings.avisynthSettings.Add(avs);
+                    settings.avisynthSettings.Add(eapw.avisynthSettings);
                     UpdateAvisynthProfiles();
                 }
             }
