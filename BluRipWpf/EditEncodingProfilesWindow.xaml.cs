@@ -164,7 +164,7 @@ namespace BluRip
                 eepw.ShowDialog();
                 if (eepw.DialogResult == true)
                 {
-                    settings.encodingSettings.Add(es);
+                    settings.encodingSettings.Add(eepw.encodingSettings);
                     UpdateEncodingProfile();
                 }
             }
