@@ -56,6 +56,7 @@ namespace BluRip
                 textBoxDgindexnvPath.Text = settings.dgindexnvPath;
                 textBoxX264x64Path.Text = settings.x264x64Path;
                 textBoxAvs2yuvPath.Text = settings.avs2yuvPath;
+                textBoxVobsubPath.Text = settings.vobsubPath;
             }
             catch (Exception ex)
             {
@@ -301,6 +302,17 @@ namespace BluRip
             try
             {
                 settings.avs2yuvPath = textBoxAvs2yuvPath.Text;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonVobsubPath_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.vobsubPath = textBoxVobsubPath.Text;
             }
             catch (Exception)
             {

@@ -86,8 +86,8 @@ namespace BluRip
                 }
 
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarSubtitle"));
-                
 
+                bool vobsub = false;
                 int subtitleCount = 0;
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
@@ -95,6 +95,13 @@ namespace BluRip
                     {
                         subtitleCount++;
                         if (si.extraFileInfo == null || si.extraFileInfo.GetType() != typeof(SubtitleFileInfo)) si.extraFileInfo = new SubtitleFileInfo();
+                        if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions))
+                        {
+                            if (((AdvancedSubtitleOptions)si.advancedOptions).vobSub)
+                            {
+                                vobsub = true;
+                            }
+                        }
                     }
                 }
 
@@ -105,23 +112,23 @@ namespace BluRip
                 }
 
                 // do not mux and copy subs
-                if (settings.muxSubs == 0 && settings.copySubs == 0)
+                if (settings.muxSubs == 0 && settings.copySubs == 0 && !vobsub)
                 {
                     logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
                 }
                 // only untouched subs
-                else if (settings.muxUntouchedSubs && settings.copyUntouchedSubs)
+                else if (settings.muxUntouchedSubs && settings.copyUntouchedSubs && !vobsub)
                 {
                     logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
                 }
-                else if (settings.muxUntouchedSubs && settings.copySubs == 0)
+                else if (settings.muxUntouchedSubs && settings.copySubs == 0 && !vobsub)
                 {
                     logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
                 }
-                else if (settings.muxSubs == 0 && settings.copyUntouchedSubs)
+                else if (settings.muxSubs == 0 && settings.copyUntouchedSubs && !vobsub)
                 {
                     logWindow.MessageSubtitle(Global.Res("InfoNoSubtitlesProcessing"));
                     return true;
@@ -148,6 +155,12 @@ namespace BluRip
                 else if (settings.copySubs >= 4)
                 {
                     sup = true;
+                }
+
+                // hardcode subs? enable sub/idx processing
+                if (vobsub)
+                {
+                    sub = true;
                 }
 
                 bool error = false;
@@ -198,7 +211,7 @@ namespace BluRip
                             if (st == null || !st.Successfull) error = true;
                         }
 
-                        if (settings.muxLowResSubs && (settings.muxSubs > 0 && settings.muxSubs <4))
+                        if (settings.muxLowResSubs && (settings.muxSubs > 0 && settings.muxSubs <4) && !vobsub)
                         {
                             UpdateStatus(Global.Res("StatusBar") + " " + String.Format(Global.Res("StatusBarSubtitleLowresNormal"), subtitle, subtitleCount));
                             si = demuxedStreamList.streams[i];
@@ -223,7 +236,7 @@ namespace BluRip
                             if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                             {
                                 SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
-                                if ((sfi.forcedIdx != "" && sfi.normalIdx != "") || (sfi.forcedSup != "" && sfi.normalSup != ""))
+                                if (((sfi.forcedIdx != "" && sfi.normalIdx != "") || (sfi.forcedSup != "" && sfi.normalSup != "")) && !vobsub)
                                 {
                                     StreamInfo si2 = new StreamInfo(demuxedStreamList.streams[i]);
                                     if (demuxedStreamList.streams[i].extraFileInfo != null && demuxedStreamList.streams[i].extraFileInfo.GetType() == typeof(SubtitleFileInfo))
@@ -271,6 +284,29 @@ namespace BluRip
                                     {
                                         demuxedStreamList.streams.Insert(i + 1, si2);
                                         i++;
+                                    }
+                                }
+                                // treat track as forced track even if it doesn't contain forced subs
+                                else if ((sfi.normalIdx != "" || sfi.normalSup != "") && !vobsub)
+                                {
+                                    if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions))
+                                    {
+                                        if (((AdvancedSubtitleOptions)si.advancedOptions).isForced)
+                                        {
+                                            sfi.forcedIdx = sfi.normalIdx;
+                                            sfi.forcedSub = sfi.normalSub;
+                                            sfi.forcedSup = sfi.normalSup;
+
+                                            sfi.forcedIdxLowRes = sfi.normalIdxLowRes;
+                                            sfi.forcedSubLowRes = sfi.normalSubLowRes;
+
+                                            sfi.normalIdx = "";
+                                            sfi.normalSub = "";
+                                            sfi.normalSup = "";
+
+                                            sfi.normalIdxLowRes = "";
+                                            sfi.normalSubLowRes = "";
+                                        }
                                     }
                                 }
                             }

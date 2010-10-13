@@ -146,6 +146,8 @@
     <system:String x:Key="HeaderDgdecnv">Bei Benutzung von DGMultiDec</system:String>
     <system:String x:Key="HeaderX264x64">Bei Benutzung von 64-bit x264</system:String>
     <system:String x:Key="CaptionExternalToolsWindow">Einstellungen für externe Programme</system:String>
+    <system:String x:Key="ButtonVobsubPath">...</system:String>
+    <system:String x:Key="LabelVobsubPath">Pfad zu vobsup.dll:</system:String>
 
     <!-- Log Window -->
     <system:String x:Key="TabMainLog">Haupt Log</system:String>
@@ -255,6 +257,8 @@
     <!-- Shutdown Window -->
     <system:String x:Key="CaptionShutdownWindow">Herunterfahren</system:String>
     <system:String x:Key="LabelShutdownCounter">Sekunden bis zum automatischen Herunterfahren: {0}</system:String>
+    <system:String x:Key="CaptionShutdownWindowQueue">OK um jetzt zu starten Abbrechen um Queue zu beenden</system:String>
+    <system:String x:Key="LabelShutdownCounterQueue">Nächster Job startet in: {0}</system:String>
 
     <!-- EditVideoFileInfo Window -->
     <system:String x:Key="CaptionEditVideoFileInfoWindow">Bearbeite extra Video Dateiinfo</system:String>
@@ -505,7 +509,7 @@
     <system:String x:Key="ErrorEncodingProfileNotSet">Encoding Profil nicht gesetzt</system:String>
     <system:String x:Key="ErrorEncodeFailed">Encode fehlgeschlagen!</system:String>
     <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) fehlgeschlagen!</system:String>
-    
+    <system:String x:Key="ErrorVobsubPath">Pfad zu vobsub.dll nicht gesetzt oder gefunden.</system:String>
     
     <!-- Info msg -->
     <system:String x:Key="InfoManualFps">Benutze manuelle Framerate - überschreibe MediaInfo Werte</system:String>

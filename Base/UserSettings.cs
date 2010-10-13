@@ -182,6 +182,7 @@ namespace BluRip
             this.doSubtitle = orig.doSubtitle;
             this.doEncode = orig.doEncode;
             this.doMux = orig.doMux;
+            this.vobsubPath = orig.vobsubPath;
 
             this.disableAudioHeaderCompression = orig.disableAudioHeaderCompression;
             this.disableVideoHeaderCompression = orig.disableVideoHeaderCompression;
@@ -397,6 +398,7 @@ namespace BluRip
         public bool deleteIndex = false;
         public bool muxUntouchedSubs = false;
         public bool copyUntouchedSubs = false;
+        public string vobsubPath = "";
 
         public bool doDemux = true;
         public bool doIndex = true;

@@ -1659,7 +1659,14 @@ namespace BluRip
                         logWindow.MessageMain(Global.Res("InfoQueueCancel"));
                     }
                     logWindow.MessageMain(Global.Res("InfoQueueDone"));
-                }                
+
+                    if (projectQueue.IndexOf(project) != projectQueue.Count - 1)
+                    {
+                        ShutdownWindow sw = new ShutdownWindow("CaptionShutdownWindowQueue", "LabelShutdownCounterQueue", 20);
+                        sw.ShowDialog();
+                        if (sw.DialogResult == false) break;
+                    }
+                }
 
                 if (queueWindow.checkBoxQueueShutdown.IsChecked == true)
                 {
@@ -1989,7 +1996,7 @@ namespace BluRip
         {
             try
             {
-                if (settings.lastProfile > -1 && settings.lastProfile < settings.encodingSettings.Count)
+                if (settings.lastProfile > -1 && settings.lastProfile < settings.encodingSettings.Count && !settings.untouchedVideo)
                 {
                     EncodingSettings es = settings.encodingSettings[settings.lastProfile];
 
