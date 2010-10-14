@@ -29,6 +29,85 @@ using System.Windows.Forms;
 
 namespace BluRip
 {
+    public class PluginSettingsBase
+    {
+        public static bool SaveSettingsFile(PluginSettingsBase settings, Type type, string filename)
+        {
+            MemoryStream ms = null;
+            FileStream fs = null;
+            XmlSerializer xs = null;
+            try
+            {
+                ms = new MemoryStream();
+                fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+
+                xs = new XmlSerializer(type);
+                xs.Serialize(ms, settings);
+                ms.Seek(0, SeekOrigin.Begin);
+                fs.Write(ms.ToArray(), 0, (int)ms.Length);
+                ms.Close();
+                fs.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                if (ms != null) ms.Close();
+                if (fs != null) fs.Close();
+            }
+        }
+
+        public static bool LoadSettingsFile(ref PluginSettingsBase settings, Type type, string filename)
+        {
+            MemoryStream ms = null;
+            try
+            {
+                if (!File.Exists(filename)) return false;
+                byte[] data = File.ReadAllBytes(filename);
+                XmlSerializer xs = new XmlSerializer(type);
+                ms = new MemoryStream(data);
+                ms.Seek(0, SeekOrigin.Begin);
+                settings = (PluginSettingsBase)xs.Deserialize(ms);
+                ms.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                if (ms != null) ms.Close();
+            }
+        }
+
+        public PluginSettingsBase()
+        {
+            try
+            {
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public PluginSettingsBase(PluginSettingsBase orig)
+        {
+            try
+            {
+                this.activated = orig.activated;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        bool activated = false;
+    }
+
     public enum PluginType
     {
         BeforeDemux,
@@ -46,18 +125,37 @@ namespace BluRip
 
     public abstract class PluginBase
     {
-        protected UserSettings settings = null;
-        protected List<Project> projectList = null;
-        protected TitleInfo demuxedStreamList = null;
-        protected TitleInfo streamList = null;
+        protected Project _project = null;
 
-        public PluginBase()
+        public PluginBase(Project project)
         {
+            try
+            {
+                this._project = new Project(project);
+            }
+            catch (Exception)
+            {
+            }
         }
+
+        public Project project
+        {
+            get { return _project; }
+        }
+
+        // plugin name
+        public abstract string GetName();
+
+        // plugin description
+        public abstract string GetDescription();
 
         public virtual PluginType getPluginType()
         {
             return PluginType.None;
         }
+
+        PluginSettingsBase settings = null;
+
+        public abstract Type GetSettingsType();
     }
 }

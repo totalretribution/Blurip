@@ -293,7 +293,30 @@ namespace BluRip
                                         demuxedStreamList.streams.Insert(i + 1, si2);
                                         i++;
                                     }
-                                }                              
+                                }
+                                // treat track as forced track even if it doesn't contain forced subs
+                                else if (sfi.normalIdx != "" || sfi.normalSup != "")
+                                {
+                                    if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions))
+                                    {
+                                        if (((AdvancedSubtitleOptions)si.advancedOptions).isForced)
+                                        {
+                                            sfi.forcedIdx = sfi.normalIdx;
+                                            sfi.forcedSub = sfi.normalSub;
+                                            sfi.forcedSup = sfi.normalSup;
+
+                                            sfi.forcedIdxLowRes = sfi.normalIdxLowRes;
+                                            sfi.forcedSubLowRes = sfi.normalSubLowRes;
+
+                                            sfi.normalIdx = "";
+                                            sfi.normalSub = "";
+                                            sfi.normalSup = "";
+
+                                            sfi.normalIdxLowRes = "";
+                                            sfi.normalSubLowRes = "";
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
