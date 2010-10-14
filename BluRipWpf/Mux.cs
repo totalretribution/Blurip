@@ -202,6 +202,8 @@ namespace BluRip
                 progressBarMain.Minimum = 0;
                 maxProgressValue = 100;
 
+                UpdateStatusBar(0);
+
                 DisableControls();
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarMux"));
 

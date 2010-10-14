@@ -37,6 +37,7 @@ using System.Runtime.InteropServices;
 using Windows7.DesktopIntegration;
 using Windows7.DesktopIntegration.WindowsForms;
 using System.Windows.Interop;
+using System.Diagnostics;
 
 namespace BluRip
 {
@@ -529,6 +530,11 @@ namespace BluRip
                 {
                     et.Stop();
                     et = null;
+                    if (settings.use64bit)
+                    {
+                        // maybe check for more then one process later to make sure not to kill the wrong one
+                        KillProcess(System.IO.Path.GetFileNameWithoutExtension(settings.x264x64Path));
+                    }
                 }
                 if (mt != null)
                 {
@@ -540,6 +546,26 @@ namespace BluRip
             {
             }
         }
+        
+        public bool KillProcess(string name)
+        {
+            try
+            {
+                foreach (Process p in Process.GetProcesses())
+                {
+                    if (p.ProcessName == name)
+                    {
+                        p.Kill();
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        } 
 
         private void menuItemViewReset_Click(object sender, RoutedEventArgs e)
         {
