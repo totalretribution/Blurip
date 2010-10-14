@@ -27,9 +27,11 @@ namespace BluRip
     [XmlInclude(typeof(AdvancedOptions))]
     [XmlInclude(typeof(AdvancedVideoOptions))]
     [XmlInclude(typeof(AdvancedAudioOptions))]
+    [XmlInclude(typeof(AdvancedSubtitleOptions))]
     [XmlInclude(typeof(ExtraFileInfo))]
     [XmlInclude(typeof(VideoFileInfo))]
     [XmlInclude(typeof(SubtitleFileInfo))]
+    [XmlInclude(typeof(CropInfo))]
     public class TitleInfo
     {
         public TitleInfo() { }
@@ -338,13 +340,13 @@ namespace BluRip
         public AdvancedSubtitleOptions(AdvancedOptions orig)
         {
             this.isForced = ((AdvancedSubtitleOptions)orig).isForced;
-            this.vobSub = ((AdvancedSubtitleOptions)orig).vobSub;
-            this.vobSubOnlyForced = ((AdvancedSubtitleOptions)orig).vobSubOnlyForced;
+            this.supTitle = ((AdvancedSubtitleOptions)orig).supTitle;
+            this.supTitleOnlyForced = ((AdvancedSubtitleOptions)orig).supTitleOnlyForced;
         }
 
         public bool isForced = false;
-        public bool vobSub = false;
-        public bool vobSubOnlyForced = false;
+        public bool supTitle = false;
+        public bool supTitleOnlyForced = false;
     }
 
     public class AdvancedVideoOptions : AdvancedOptions

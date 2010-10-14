@@ -51,6 +51,7 @@ namespace BluRip
         private string dgdecnvLink = "http://neuron2.net/dgdecnv/dgdecnv.html";
         private string x264InfoLink = "http://mewiki.project357.com/wiki/X264_Settings";
         private string avs2yuvLink = "http://akuvian.org/src/avisynth/avs2yuv/";
+        private string suptitleLink = "http://www.zachsaw.co.cc/?pg=suptitle_pgs_avisynth_plugin";
 
         public LinkWindow()
         {
