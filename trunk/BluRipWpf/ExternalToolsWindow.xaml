@@ -46,9 +46,9 @@
                 <Label Content="{DynamicResource LabelMkvmergePath}" HorizontalAlignment="Left" Margin="8,250,0,0" Name="labelMkvmergePath" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,282,0,0" Name="textBoxMkvmergePath" VerticalAlignment="Top" Width="342" TabIndex="8" TextChanged="textBoxMkvmergePath_TextChanged" />
                 <Button Content="{DynamicResource ButtonMkvmergePath}" Height="23" HorizontalAlignment="Left" Margin="356,282,0,0" Name="buttonMkvmergePath" VerticalAlignment="Top" Width="75" Click="buttonMkvmergePath_Click" TabIndex="9" />
-                <Label Content="{DynamicResource LabelVobsubPath}" HorizontalAlignment="Left" Margin="8,310,0,0" Name="labelVobsubPath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,342,0,0" Name="textBoxVobsubPath" TabIndex="8" VerticalAlignment="Top" Width="342" />
-                <Button Content="{DynamicResource ButtonVobsubPath}" Height="23" HorizontalAlignment="Left" Margin="356,342,0,0" Name="buttonVobsubPath" TabIndex="9" VerticalAlignment="Top" Width="75" Click="buttonVobsubPath_Click" />
+                <Label Content="{DynamicResource LabelSuptitlePath}" HorizontalAlignment="Left" Margin="8,310,0,0" Name="labelSuptitlePath" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,342,0,0" Name="textBoxSuptitlePath" TabIndex="8" VerticalAlignment="Top" Width="342" TextChanged="textBoxSuptitlePath_TextChanged" />
+                <Button Content="{DynamicResource ButtonSuptitlePath}" Height="23" HorizontalAlignment="Left" Margin="356,342,0,0" Name="buttonSuptitlePath" TabIndex="9" VerticalAlignment="Top" Width="75" Click="buttonSuptitlePath_Click" />
             </Grid>
         </GroupBox>
     </Grid>

@@ -33,8 +33,8 @@ namespace BluRip
                 this.aso = new AdvancedSubtitleOptions(aso);
 
                 checkBoxIsForced.IsChecked = aso.isForced;
-                checkBoxVobSub.IsChecked = aso.vobSub;
-                checkBoxVobSubOnlyForced.IsChecked = aso.vobSubOnlyForced;
+                checkBoxSupTitle.IsChecked = aso.supTitle;
+                checkBoxSupTitleOnlyForced.IsChecked = aso.supTitleOnlyForced;
             }
             catch (Exception)
             {
@@ -57,22 +57,22 @@ namespace BluRip
             }
         }
 
-        private void checkBoxVobSub_Checked(object sender, RoutedEventArgs e)
+        private void checkBoxSubTitle_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
-                aso.vobSub = (bool)checkBoxVobSub.IsChecked;
+                aso.supTitle = (bool)checkBoxSupTitle.IsChecked;
             }
             catch (Exception)
             {
             }
         }
 
-        private void checkBoxVobSubOnlyForced_Checked(object sender, RoutedEventArgs e)
+        private void checkBoxSupTitleOnlyForced_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
-                aso.vobSubOnlyForced = (bool)checkBoxVobSubOnlyForced.IsChecked;
+                aso.supTitleOnlyForced = (bool)checkBoxSupTitleOnlyForced.IsChecked;
             }
             catch (Exception)
             {

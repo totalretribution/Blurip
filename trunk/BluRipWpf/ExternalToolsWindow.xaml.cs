@@ -56,7 +56,7 @@ namespace BluRip
                 textBoxDgindexnvPath.Text = settings.dgindexnvPath;
                 textBoxX264x64Path.Text = settings.x264x64Path;
                 textBoxAvs2yuvPath.Text = settings.avs2yuvPath;
-                textBoxVobsubPath.Text = settings.vobsubPath;
+                textBoxSuptitlePath.Text = settings.suptitlePath;
             }
             catch (Exception ex)
             {
@@ -308,11 +308,23 @@ namespace BluRip
             }
         }
 
-        private void buttonVobsubPath_Click(object sender, RoutedEventArgs e)
+        private void buttonSuptitlePath_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "suptitle.dll|suptitle.dll";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxSuptitlePath.Text = ofd.FileName;
+                settings.suptitlePath = ofd.FileName;
+            }
+            
+        }
+
+        private void textBoxSuptitlePath_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-                settings.vobsubPath = textBoxVobsubPath.Text;
+                settings.suptitlePath = textBoxSuptitlePath.Text;
             }
             catch (Exception)
             {

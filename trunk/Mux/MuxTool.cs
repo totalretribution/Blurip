@@ -134,7 +134,27 @@ namespace BluRip
                     forcedSubsCount.Add(0);
                 }
 
-                if (settings.muxSubs > 0 || settings.muxUntouchedSubs)
+                // hardcode subs? do not mux subtitles even if selected
+                bool suptitle = false;
+
+                foreach (StreamInfo si in titleInfo.streams)
+                {
+                    if (si.streamType == StreamType.Subtitle)
+                    {
+                        if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions))
+                        {
+                            if (((AdvancedSubtitleOptions)si.advancedOptions).supTitle)
+                            {
+                                if (!suptitle)
+                                {
+                                    suptitle = true;                                    
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if ((settings.muxSubs > 0 || settings.muxUntouchedSubs) && !suptitle)
                 {
                     // subtitle
                     defaultSet = false;

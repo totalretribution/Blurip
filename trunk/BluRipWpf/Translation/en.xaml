@@ -146,8 +146,8 @@
     <system:String x:Key="HeaderDgdecnv">When using DGMultiDec</system:String>
     <system:String x:Key="HeaderX264x64">When using 64-bit x264</system:String>
     <system:String x:Key="CaptionExternalToolsWindow">Settings for external tools</system:String>
-    <system:String x:Key="ButtonVobsubPath">...</system:String>
-    <system:String x:Key="LabelVobsubPath">Path to vobsup.dll:</system:String>
+    <system:String x:Key="ButtonSuptitlePath">...</system:String>
+    <system:String x:Key="LabelSuptitlePath">Path to suptitle.dll:</system:String>
 
     <!-- Log Window -->
     <system:String x:Key="TabMainLog">Main log</system:String>
@@ -426,8 +426,8 @@
     <!-- AdvancedSubtitleOptions Window -->
     <system:String x:Key="CaptionAdvancedSubtitleOptionsWindow">Edit advanced subtitle options</system:String>
     <system:String x:Key="CheckBoxIsForced">Is forced track</system:String>
-    <system:String x:Key="CheckBoxVobSub">Hardcode track with VobSub</system:String>
-    <system:String x:Key="CheckBoxVobSubOnlyForced">Use only forced captions for VobSub</system:String>
+    <system:String x:Key="CheckBoxSupTitle">Hardcode track with SupTitle</system:String>
+    <system:String x:Key="CheckBoxSupTitleOnlyForced">Use only forced captions for SupTitle</system:String>
     
     <!-- link Window -->
     <system:String x:Key="CaptionLinkWindow">Links to needed and usefull tools</system:String>
@@ -447,6 +447,7 @@
     <system:String x:Key="LabelAvs2yuvLink">Link to avs2yuv</system:String>
     <system:String x:Key="LabelNeededTools">Needed tools</system:String>
     <system:String x:Key="LabelUsefullTools">Usefull tools</system:String>
+    <system:String x:Key="LabelSubTitleInfoLink">Link to subtitle dll</system:String>
 
     <!-- About Window -->
     <system:String x:Key="CaptionAboutWindow">About BluRip</system:String>
@@ -510,7 +511,7 @@
     <system:String x:Key="ErrorEncodingProfileNotSet">Encoding profile not set</system:String>
     <system:String x:Key="ErrorEncodeFailed">Encode failed!</system:String>
     <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) failed!</system:String>
-    <system:String x:Key="ErrorVobsubPath">Path to vobsub.dll not set or found.</system:String>
+    <system:String x:Key="ErrorSuptitlePath">Path to suptitle.dll not set or found.</system:String>
     
     
     <!-- Info msg -->

@@ -20,5 +20,6 @@
         <Label Content="{DynamicResource LabelDgdecnvLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,90,0,0" Name="labelDgdecnv" VerticalAlignment="Top" MouseLeftButtonDown="labelDgdecnv_MouseLeftButtonDown" />
         <Label Content="{DynamicResource LabelAvs2yuvLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,116,0,0" Name="labelAvs2yuv" VerticalAlignment="Top" MouseLeftButtonDown="labelAvs2yuv_MouseLeftButtonDown" />
         <Label Content="{DynamicResource LabelX264InfoLink}" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Left" Margin="290,168,0,0" Name="labelX264Info" Height="20" VerticalAlignment="Top" MouseLeftButtonDown="labelX264Info_MouseLeftButtonDown" />
+        <Label Content="{DynamicResource LabelSubTitleInfoLink}" FontWeight="Bold" Foreground="Blue" Height="20" HorizontalAlignment="Left" Margin="290,194,0,0" Name="labelSubTitleInfoLink" VerticalAlignment="Top" />
     </Grid>
 </Window>

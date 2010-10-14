@@ -90,8 +90,7 @@ namespace BluRip
                     }
                 }
 
-                bool vobsub = false;
-                bool vobsubForced = false;
+                bool suptitle = false;
                 SubtitleFileInfo sfi = null;
 
                 foreach (StreamInfo si in demuxedStreamList.streams)
@@ -100,13 +99,11 @@ namespace BluRip
                     {
                         if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions))
                         {
-                            if (((AdvancedSubtitleOptions)si.advancedOptions).vobSub)
+                            if (((AdvancedSubtitleOptions)si.advancedOptions).supTitle)
                             {
-                                // take first vobsob track
-                                if (!vobsub)
+                                if (!suptitle)
                                 {
-                                    vobsub = true;
-                                    vobsubForced = ((AdvancedSubtitleOptions)si.advancedOptions).vobSubOnlyForced;
+                                    suptitle = true;
                                     if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                                     {
                                         sfi = (SubtitleFileInfo)si.extraFileInfo;
@@ -117,12 +114,12 @@ namespace BluRip
                     }
                 }
 
-                if (vobsub && sfi != null && (File.Exists(sfi.forcedIdx) || File.Exists(sfi.normalIdx)))
+                if (suptitle && sfi != null && (File.Exists(sfi.forcedIdx) || File.Exists(sfi.normalIdx)))
                 {
-                    if (!File.Exists(settings.vobsubPath))
+                    if (!File.Exists(settings.suptitlePath))
                     {
-                        logWindow.MessageMain(Global.Res("ErrorVobsubPath"));
-                        if (!silent) Global.ErrorMsg(Global.Res("ErrorVobsubPath"));
+                        logWindow.MessageMain(Global.Res("ErrorSuptitlePath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorSuptitlePath"));
                         return false;
                     }
                 }
@@ -282,9 +279,9 @@ namespace BluRip
 
                 VideoFileInfo vfi = null;
                 StreamInfo vsi = null;
-                bool vobsub = false;
-                bool vobsubForced = false;
-                SubtitleFileInfo sfi = null;
+                bool suptitle = false;
+                bool suptitleForced = false;                
+                StreamInfo ssi = null;
 
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
@@ -294,24 +291,20 @@ namespace BluRip
                         if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                         {
                             vfi = (VideoFileInfo)si.extraFileInfo;
-                            break;
                         }
                     }
                     else if (si.streamType == StreamType.Subtitle)
                     {
                         if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions))
                         {
-                            if (((AdvancedSubtitleOptions)si.advancedOptions).vobSub)
+                            if (((AdvancedSubtitleOptions)si.advancedOptions).supTitle)
                             {
-                                // take first vobsob track
-                                if (!vobsub)
+                                // take first hardcode track
+                                if (!suptitle)
                                 {
-                                    vobsub = true;
-                                    vobsubForced = ((AdvancedSubtitleOptions)si.advancedOptions).vobSubOnlyForced;
-                                    if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
-                                    {
-                                        sfi = (SubtitleFileInfo)si.extraFileInfo;
-                                    }
+                                    suptitle = true;
+                                    suptitleForced = ((AdvancedSubtitleOptions)si.advancedOptions).supTitleOnlyForced;
+                                    ssi = si;
                                 }
                             }
                         }
@@ -346,11 +339,11 @@ namespace BluRip
                     }
 
                     string encode = "";
-                    if (vobsub)
+                    if (suptitle)
                     {
-                        if (File.Exists(settings.vobsubPath))
+                        if (File.Exists(settings.suptitlePath))
                         {
-                            encode += "LoadPlugin(\"" + settings.vobsubPath + "\")\r\n";
+                            encode += "LoadPlugin(\"" + settings.suptitlePath + "\")\r\n";
                         }
                     }
                     if (settings.encodeInput == 0)
@@ -388,24 +381,26 @@ namespace BluRip
                     {
                         logWindow.MessageEncode(Global.Res("InfoNoBorder"));
                     }
-                    if (vobsub && sfi != null)
+                    if (suptitle && ssi != null)
                     {
-                        if (!vobsubForced)
+                        if (!suptitleForced)
                         {
-                            if (File.Exists(sfi.normalIdx) && File.Exists(sfi.normalSub))
+                            if (File.Exists(ssi.filename))
                             {
-                                encode += "VobSub(\"" + sfi.normalIdx + "\"\r\n";
+                                string forced = "false";
+                                encode += "SupTitle(\"" + ssi.filename + "\", forcedOnly=" + 
+                                    forced + ", swapCbCr=false, relocate=true, relocOffset=\"0," +
+                                cropInfo.cropTop.ToString() + ",0," + cropInfo.cropBottom.ToString() +  "\")\r\n";
                             }
                         }
                         else
                         {
-                            if (File.Exists(sfi.forcedIdx) && File.Exists(sfi.forcedSub))
+                            if (File.Exists(ssi.filename))
                             {
-                                encode += "VobSub(\"" + sfi.forcedIdx + "\"\r\n";
-                            }
-                            else if (File.Exists(sfi.normalIdx) && File.Exists(sfi.normalSub))
-                            {
-                                encode += "VobSub(\"" + sfi.normalIdx + "\"\r\n";
+                                string forced = "true";
+                                encode += "SupTitle(\"" + ssi.filename + "\", forcedOnly=" +
+                                    forced + ", swapCbCr=false, relocate=true, relocOffset=\"0," +
+                                cropInfo.cropTop.ToString() + ",0," + cropInfo.cropBottom.ToString() + "\")\r\n";
                             }
                         }
                     }
