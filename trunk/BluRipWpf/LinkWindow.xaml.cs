@@ -223,5 +223,16 @@ namespace BluRip
             {
             }
         }
+
+        private void labelSubTitleInfoLink_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(suptitleLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

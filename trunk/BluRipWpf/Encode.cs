@@ -91,7 +91,6 @@ namespace BluRip
                 }
 
                 bool suptitle = false;
-                SubtitleFileInfo sfi = null;
 
                 foreach (StreamInfo si in demuxedStreamList.streams)
                 {
@@ -104,9 +103,25 @@ namespace BluRip
                                 if (!suptitle)
                                 {
                                     suptitle = true;
-                                    if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (comboBoxTitle.SelectedIndex > -1 && comboBoxTitle.SelectedIndex < titleList.Count)
+                {
+                    foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
+                    {
+                        if (si.streamType == StreamType.Subtitle)
+                        {
+                            if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions))
+                            {
+                                if (((AdvancedSubtitleOptions)si.advancedOptions).supTitle)
+                                {
+                                    if (!suptitle)
                                     {
-                                        sfi = (SubtitleFileInfo)si.extraFileInfo;
+                                        suptitle = true;
                                     }
                                 }
                             }
@@ -114,7 +129,7 @@ namespace BluRip
                     }
                 }
 
-                if (suptitle && sfi != null && (File.Exists(sfi.forcedIdx) || File.Exists(sfi.normalIdx)))
+                if (suptitle)
                 {
                     if (!File.Exists(settings.suptitlePath))
                     {
@@ -165,22 +180,8 @@ namespace BluRip
                     if (substr != lastMsg)
                     {
                         lastMsg = substr;
-                        logWindow.MessageEncode(text);
-                        if (index > -1 && settings.encodingSettings[index].pass2)
-                        {
-                            if (!secondPass)
-                            {
-                                UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeFirstPass", text));
-                            }
-                            else
-                            {
-                                UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeSecondPass", text));
-                            }
-                        }
-                        else
-                        {
-                            UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncode", text));
-                        }
+                        
+                        
                         double percent = 0.0;
                         double add = 0.0;
                         if (secondPass) add = 100.0;
@@ -195,6 +196,25 @@ namespace BluRip
                         {
                             UpdateStatusBar(percent + add);
                         }
+                        if (percent % 1.0 == 0)
+                        {
+                            if (index > -1 && settings.encodingSettings[index].pass2)
+                            {
+                                if (!secondPass)
+                                {
+                                    UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeFirstPass", text));
+                                }
+                                else
+                                {
+                                    UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeSecondPass", text));
+                                }
+                            }
+                            else
+                            {
+                                UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncode", text));
+                            }
+                            logWindow.MessageEncode(text);
+                        }
                     }
                 }
                 else
@@ -203,10 +223,9 @@ namespace BluRip
                 }
             }
             else
-            {
-                logWindow.MessageEncode(text);
+            {                
                 string[] tmp = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                if(tmp.Length > 2 && tmp[1].ToUpper() == "FRAMES:")
+                if (tmp.Length > 2 && tmp[1].ToUpper() == "FRAMES:")
                 {
                     int frame = 0;
                     int maxFrames = 0;
@@ -223,7 +242,32 @@ namespace BluRip
                         double add = 0;
                         if (secondPass) add = maxFrames;
                         UpdateStatusBar(frame + add);
+                        if (frame % 100 == 0)
+                        {
+                            float f = (float)((double)frame / (double)maxFrames);
+                            logWindow.MessageEncode(text);
+                            int index = settings.lastProfile;
+                            if (index > -1 && settings.encodingSettings[index].pass2)
+                            {
+                                if (!secondPass)
+                                {
+                                    UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeFirstPass", f.ToString("p1")));
+                                }
+                                else
+                                {
+                                    UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncodeSecondPass", f.ToString("p1")));
+                                }
+                            }
+                            else
+                            {
+                                UpdateStatus(Global.Res("StatusBar") + " " + Global.ResFormat("StatusBarEncode", f.ToString("p1")));
+                            }
+                        }
                     }
+                }
+                else
+                {
+                    logWindow.MessageEncode(text);
                 }
             }
         }
@@ -492,6 +536,8 @@ namespace BluRip
                     progressBarMain.Maximum = 100;
                     progressBarMain.Minimum = 0;
                 }
+
+                UpdateStatusBar(0);
 
                 et = new EncodeTool(settings, demuxedStreamList, profile, false, vfi);
                 et.OnInfoMsg += new ExternalTool.InfoEventHandler(EncodeMsg);
