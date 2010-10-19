@@ -73,6 +73,8 @@ namespace BluRip
         {
             try
             {
+                DoPlugin(PluginType.BeforeMux);
+
                 int videoStream = 0;
                 int audioStream = 0;
                 int chapterStream = 0;
@@ -212,6 +214,9 @@ namespace BluRip
                 mt.OnLogMsg += new ExternalTool.LogEventHandler(MuxMsg);
                 mt.Start();
                 mt.WaitForExit();
+
+                DoPlugin(PluginType.AfterMux);
+
                 if (mt == null) return false;
                 else return mt.Successfull;
             }

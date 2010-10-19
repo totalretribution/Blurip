@@ -105,7 +105,7 @@ namespace BluRip
             }
         }
 
-        bool activated = false;
+        public bool activated = false;
     }
 
     public enum PluginType
@@ -126,12 +126,24 @@ namespace BluRip
     public abstract class PluginBase
     {
         protected Project _project = null;
+        protected static string _startPath = "";
 
-        public PluginBase(Project project)
+        public PluginBase()
         {
             try
             {
-                this._project = new Project(project);
+                LoadSettings();
+            }
+            catch (Exception)
+            {
+            }
+        }        
+
+        static PluginBase()
+        {
+            try
+            {
+                _startPath = Application.StartupPath;
             }
             catch (Exception)
             {
@@ -149,13 +161,84 @@ namespace BluRip
         // plugin description
         public abstract string GetDescription();
 
+        // plugin version
+        public abstract string GetVersion();
+
         public virtual PluginType getPluginType()
         {
             return PluginType.None;
         }
 
-        PluginSettingsBase settings = null;
+        protected PluginSettingsBase settings = null;
 
         public abstract Type GetSettingsType();
+
+        public abstract PluginSettingsBase GetNewSettings();
+
+        public virtual PluginSettingsBase Settings
+        {
+            get { return settings; }
+            set { settings = value; }
+        }
+
+        public virtual void LoadSettings()
+        {
+            try
+            {
+                if (File.Exists(SettingsFile))
+                {
+                    if (!PluginSettingsBase.LoadSettingsFile(ref settings, GetSettingsType(), SettingsFile))
+                    {
+                        settings = GetNewSettings();
+                        PluginSettingsBase.SaveSettingsFile(settings, GetSettingsType(), SettingsFile);
+                    }
+                }
+                else
+                {
+                    settings = GetNewSettings();
+                    PluginSettingsBase.SaveSettingsFile(settings, GetSettingsType(), SettingsFile);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public virtual void SaveSettings()
+        {
+            try
+            {
+                PluginSettingsBase.SaveSettingsFile(settings, GetSettingsType(), SettingsFile);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        // file name for settings
+        protected abstract string FileName
+        { get; }
+
+        // complete Path for settings file
+        public string SettingsFile
+        {
+            get { return _startPath + "\\" + FileName; }
+        }
+
+        public virtual void Init(Project project)
+        {
+            try
+            {
+                this._project = new Project(project);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public abstract bool EditSettings();
+
+        public abstract void Process();
+
     }
 }

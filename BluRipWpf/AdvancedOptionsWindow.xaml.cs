@@ -39,13 +39,15 @@ namespace BluRip
     public partial class AdvancedOptionsWindow : Window
     {
         private UserSettings settings = null;
+        private List<PluginBase> pluginList = null;
 
-        public AdvancedOptionsWindow(UserSettings settings, bool expert)
+        public AdvancedOptionsWindow(UserSettings settings, bool expert, List<PluginBase> pluginList)
         {            
             try
             {
                 InitializeComponent();
                 this.settings = new UserSettings(settings);
+                this.pluginList = pluginList;
 
                 textBoxNrFrames.Text = settings.nrFrames.ToString();
                 textBoxRowSum.Text = settings.blackValue.ToString();
@@ -117,6 +119,24 @@ namespace BluRip
                 {
                     DisableExpert();
                 }
+
+                listBoxPlugIns.Items.Clear();
+                foreach (PluginBase plugin in pluginList)
+                {
+                    string name = "";
+                    if (plugin.Settings.activated)
+                    {
+                        name = "[ " + Global.Res("InfoActivated") + " ] ";
+                    }
+                    else
+                    {
+                        name = "[ " + Global.Res("InfoDeactivated") + " ] ";
+                    }
+                    name += plugin.GetName() + " " + plugin.GetVersion();
+                    name += " (" + plugin.GetDescription() + ")";
+                    listBoxPlugIns.Items.Add(name);
+                }
+
             }
             catch (Exception ex)
             {

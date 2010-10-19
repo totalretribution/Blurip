@@ -47,6 +47,8 @@ namespace BluRip
         {
             try
             {
+                DoPlugin(PluginType.BeforeEncode);
+
                 if (settings.use64bit)
                 {
                     if (!File.Exists(settings.x264x64Path))
@@ -138,6 +140,8 @@ namespace BluRip
                         return false;
                     }
                 }
+
+                DoPlugin(PluginType.AfterEncode);
 
                 return true;
             }

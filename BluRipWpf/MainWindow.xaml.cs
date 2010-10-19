@@ -38,6 +38,7 @@ using Windows7.DesktopIntegration;
 using Windows7.DesktopIntegration.WindowsForms;
 using System.Windows.Interop;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace BluRip
 {
@@ -84,10 +85,93 @@ namespace BluRip
                 {
                     isWindows7 = true;
                 }
+
+                InitPlugins();
             }
             catch (Exception ex)
             {
                 Global.ErrorMsg(ex);
+            }
+        }
+
+        private List<PluginBase> pluginList = new List<PluginBase>();
+
+        private void InitPlugins()
+        {
+            try
+            {
+                string startdir = AppDomain.CurrentDomain.BaseDirectory;
+                string[] dllFileNames = Directory.GetFiles(startdir, "Plugin*.dll");
+                foreach (string dllName in dllFileNames)
+                {
+                    Assembly dll = null;
+                    try
+                    {
+                        dll = Assembly.LoadFile(dllName);
+                    }
+                    catch (Exception) { }
+                    if (dll != null)
+                    {
+                        try
+                        {
+                            foreach (Type type in dll.GetTypes())
+                            {
+                                if (!type.IsAbstract)
+                                {
+                                    if (type.IsSubclassOf(typeof(PluginBase)))
+                                    {
+                                        PluginBase plugin = (PluginBase)Activator.CreateInstance(type);
+                                        pluginList.Add(plugin);
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void DoPlugin(PluginType pluginType)
+        {
+            try
+            {
+                foreach (PluginBase plugin in pluginList)
+                {
+                    if (plugin.Settings.activated && plugin.getPluginType() == pluginType)
+                    {
+                        Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
+                        plugin.Init(project);
+                        plugin.Process();
+
+                        settings = new UserSettings(plugin.project.settings);
+                        titleList.Clear();
+                        foreach (TitleInfo ti in plugin.project.titleList)
+                        {
+                            titleList.Add(new TitleInfo(ti));
+                        }
+                        UpdateTitleList();
+                        comboBoxTitle.SelectedIndex = plugin.project.titleIndex;
+                        demuxedStreamList = new TitleInfo(plugin.project.demuxedStreamList);
+
+                        m2tsList.Clear();
+                        foreach (string s in plugin.project.m2tsList)
+                        {
+                            m2tsList.Add(s);
+                        }
+
+                        UpdateFromSettings(true);
+                        demuxedStreamsWindow.UpdateDemuxedStreams();
+                    }
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -1325,7 +1409,7 @@ namespace BluRip
                 bool expert = false;
                 if (menuItemViewExpertMode.IsChecked) expert = true;
 
-                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings, expert);
+                AdvancedOptionsWindow aow = new AdvancedOptionsWindow(settings, expert, pluginList);
                 aow.ShowDialog();
                 if (aow.DialogResult == true)
                 {

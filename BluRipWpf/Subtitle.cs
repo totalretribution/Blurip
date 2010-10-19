@@ -52,6 +52,8 @@ namespace BluRip
         {
             try
             {
+                DoPlugin(PluginType.BeforeSubtitle);
+
                 if (!Directory.Exists(settings.workingDir))
                 {
                     logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
@@ -328,6 +330,8 @@ namespace BluRip
                     logWindow.MessageSubtitle(Global.Res("ErrorSubtitle"));
                     return false;
                 }
+
+                DoPlugin(PluginType.AfterSubtitle);
 
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
                 demuxedStreamsWindow.UpdateDemuxedStreams();
