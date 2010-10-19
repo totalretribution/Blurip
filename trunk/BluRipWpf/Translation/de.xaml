@@ -355,6 +355,10 @@
     <system:String x:Key="CheckBoxConvertAC3Bitrate">Konvertiere AC3 Bitrate</system:String>
     <system:String x:Key="CheckBoxDisableAudioHeaderCompression">Mkvmerge header compression für Audiotracks abschalten</system:String>
     <system:String x:Key="TabAdvancedMux">Mux</system:String>
+    <system:String x:Key="TabPlugins">Plugins</system:String>
+    <system:String x:Key="LabelPluginList">Liste der verfügbaren Plugins</system:String>
+    <system:String x:Key="LabelEditPlugin">Doppelklick zum editieren</system:String>
+    <system:String x:Key="LabelPluginNote">Hinweis: Plugin Einstellungen sind global</system:String>
 
     <!-- AdvancedAudioOptions Window -->
     <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Bearbeite erweiterte Audio Einstellungen</system:String>
@@ -534,5 +538,7 @@
     <system:String x:Key="InfoQueueTitle">Projekt:</system:String>
     <system:String x:Key="InfoExpectedBitrate">Erwartete Bitrate: {0} kbit/s</system:String>
     <system:String x:Key="InfoExpectedSize">Erwartete Größe: {0} MB</system:String>
-
+    <system:String x:Key="InfoActivated">Aktiviert</system:String>
+    <system:String x:Key="InfoDeactivated">Deaktiviert</system:String>
+    
 </ResourceDictionary>

@@ -72,6 +72,14 @@
                     <CheckBox Content="{DynamicResource CheckBoxDisableVideoHeaderCompression}" Height="16" HorizontalAlignment="Left" Margin="6,116,0,0" Name="checkBoxDisableVideoHeaderCompression" VerticalAlignment="Top" Checked="checkBoxDisableVideoHeaderCompression_Checked" Unchecked="checkBoxDisableVideoHeaderCompression_Checked" />
                 </Grid>
             </TabItem>
+            <TabItem Header="{DynamicResource TabPlugins}" Name="tabItemPlugins">
+                <Grid>
+                    <ListBox Height="171" Margin="6,32,6,0" Name="listBoxPlugIns" VerticalAlignment="Top" />
+                    <Label Content="{DynamicResource LabelPluginList}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelPluginList" VerticalAlignment="Top" />
+                    <Label Content="{DynamicResource LabelEditPlugin}" HorizontalAlignment="Left" Margin="6,209,0,0" Name="labelEditPlugin" VerticalAlignment="Top" />
+                    <Label Content="{DynamicResource LabelPluginNote}" HorizontalAlignment="Left" Margin="6,0,0,6" Name="labelPluginNote" VerticalAlignment="Bottom" />
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

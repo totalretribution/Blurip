@@ -49,6 +49,8 @@ namespace BluRip
         {
             try
             {
+                DoPlugin(PluginType.BeforeAutoCrop);
+
                 string filename = "";
                 AdvancedVideoOptions avo = null;
                 foreach (StreamInfo si in demuxedStreamList.streams)
@@ -291,6 +293,9 @@ namespace BluRip
                         ((VideoFileInfo)si.extraFileInfo).cropInfo = new CropInfo(cropInfo);
                     }
                 }
+
+                DoPlugin(PluginType.AfterAutoCrop);
+
                 TitleInfo.SaveStreamInfoFile(demuxedStreamList, settings.workingDir + "\\" + settings.filePrefix + "_streamInfo.xml");
                 demuxedStreamsWindow.UpdateDemuxedStreams();
                 return true;
