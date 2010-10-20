@@ -221,9 +221,9 @@
     <!-- EncodingProfile Window -->
     <system:String x:Key="CaptionEncodingProfileWindow">Edit encoding profile</system:String>
     <system:String x:Key="LabelEncodingProfileDescription">Profile description</system:String>
-    <system:String x:Key="LabelEncodingProfileSettings">Parameter</system:String>
+    <system:String x:Key="LabelEncodingProfileSettings">Additional parameter</system:String>
     <system:String x:Key="CheckBoxEncodingProfile2pass">2-pass profile</system:String>
-    <system:String x:Key="LabelEncodingProfileSettings2">Parameter for second pass (without --pass --bitrate --stats)</system:String>
+    <system:String x:Key="LabelEncodingProfileSettings2">Additional parameter (2. pass)</system:String>
     <system:String x:Key="LabelEncodingProfileSizeValue">Size value</system:String>
     <system:String x:Key="LabelEncodingProfileSizeType">Size value type</system:String>
     <col:ArrayList x:Key="comboBoxSizeType">

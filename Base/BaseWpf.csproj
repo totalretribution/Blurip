@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="CropInfo.cs" />
     <Compile Include="ExternalTool.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="PluginBase.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

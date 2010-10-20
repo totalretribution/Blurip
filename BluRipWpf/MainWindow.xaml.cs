@@ -204,14 +204,17 @@ namespace BluRip
                 if (settings.language == "de")
                 {
                     UpdateDictionary("Translation/de.xaml");
+                    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de");
                 }
                 else if (settings.language == "en")
                 {
                     UpdateDictionary("Translation/en.xaml");
+                    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
                 }
                 else
                 {
                     UpdateDictionary("Translation/en.xaml");
+                    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
                 }
             }
             catch (Exception)
@@ -2188,59 +2191,6 @@ namespace BluRip
 
     public static class Global
     {
-        public static List<string> videoTypes = new List<string>();
-        public static List<string> ac3AudioTypes = new List<string>();
-        public static List<string> dtsAudioTypes = new List<string>();
-        public static List<string> ac3Bitrates = new List<string>();
-        public static List<string> dtsBitrates = new List<string>();
-        public static List<string> resizeMethods = new List<string>();
-
-        static Global()
-        {
-            try
-            {
-                videoTypes.Add("h264/AVC");
-                videoTypes.Add("VC-1");
-                videoTypes.Add("MPEG2");
-
-                ac3AudioTypes.Add("TrueHD/AC3");
-                ac3AudioTypes.Add("AC3");
-                ac3AudioTypes.Add("AC3 Surround");
-                ac3AudioTypes.Add("AC3 EX");
-                ac3AudioTypes.Add("E-AC3");
-                ac3AudioTypes.Add("RAW/PCM"); // convert to ac3 by default
-
-                dtsAudioTypes.Add("DTS");
-                dtsAudioTypes.Add("DTS Master Audio");
-                dtsAudioTypes.Add("DTS Express");
-                dtsAudioTypes.Add("DTS Hi-Res");
-                dtsAudioTypes.Add("DTS ES"); // have to check if needed
-                dtsAudioTypes.Add("DTS-ES");
-
-                dtsBitrates.Add("768");
-                dtsBitrates.Add("1536");
-
-                ac3Bitrates.Add("192");
-                ac3Bitrates.Add("448");
-                ac3Bitrates.Add("640");
-
-                resizeMethods.Add("BicubicResize");
-                resizeMethods.Add("BilinearResize");
-                resizeMethods.Add("BlackmanResize");
-                resizeMethods.Add("GaussResize");
-                resizeMethods.Add("LanczosResize");
-                resizeMethods.Add("Lanczos4Resize");
-                resizeMethods.Add("PointResize");
-                resizeMethods.Add("SincResize");
-                resizeMethods.Add("Spline16Resize");
-                resizeMethods.Add("Spline36Resize");
-                resizeMethods.Add("Spline64Resize");
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         public static string Res(string key)
         {
             try

@@ -83,8 +83,8 @@ namespace BluRip
                 textBoxResizeY.Text = avo.resizeY.ToString();
 
                 comboBoxResizeMethod.Items.Clear();
-                foreach (string s in Global.resizeMethods) comboBoxResizeMethod.Items.Add(s);
-                if (avo.resizeMethod > -1 && avo.resizeMethod < Global.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = avo.resizeMethod;
+                foreach (string s in GlobalVars.resizeMethods) comboBoxResizeMethod.Items.Add(s);
+                if (avo.resizeMethod > -1 && avo.resizeMethod < GlobalVars.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = avo.resizeMethod;
 
                 checkBoxManualResize_Checked(null, null);
             }

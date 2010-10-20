@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace BluRip
 {
@@ -65,6 +66,20 @@ namespace BluRip
             this.pass2 = orig.pass2;
             this.sizeValue = orig.sizeValue;
             this.sizeType = orig.sizeType;
+
+            this.crf = orig.crf;
+            this.profile = orig.profile;
+            this.preset = orig.preset;
+            this.tune = orig.tune;
+            this.level = orig.level;
+            this.refvalue = orig.refvalue;
+            this.bframes = orig.bframes;
+            this.badapt = orig.badapt;
+            this.aqmode = orig.aqmode;
+            this.nofastpskip = orig.nofastpskip;
+            this.fastdecode = orig.fastdecode;
+            this.zerolatency = orig.zerolatency;
+            this.slowfirstpass = orig.slowfirstpass;
         }
 
         public EncodingSettings(string desc, string parameter)
@@ -97,6 +112,108 @@ namespace BluRip
         public string settings2 = "";
         public double sizeValue = 0;
         public SizeType sizeType = SizeType.Bitrate;
+
+        public double crf = 18.0;
+        public int profile = 2;
+        public int preset = 7;
+        public int tune = 1;
+        public int level = 12;
+        public int refvalue = 0;
+        public int bframes = 16;
+        public int badapt = 2;
+        public int aqmode = 2;
+        public bool nofastpskip = true;
+        public bool fastdecode = false;
+        public bool zerolatency = false;
+        public bool slowfirstpass = false;
+
+        [XmlIgnore]
+        public string GetParam
+        {
+            get
+            {
+                string tmp = "";
+                if (profile > 0 && profile < GlobalVars.profile.Count) tmp += "--profile " + GlobalVars.profile[profile] + " ";
+                if (preset > 0 && preset < GlobalVars.preset.Count) tmp += "--preset " + GlobalVars.preset[preset] + " ";
+                List<string> tunePara = new List<string>();
+                if (tune > 0 && tune < GlobalVars.tune.Count) tunePara.Add(GlobalVars.tune[tune]);
+                if(fastdecode) tunePara.Add("fastdecode");
+                if(zerolatency) tunePara.Add("zerolatency");
+                if(tunePara.Count > 0)
+                {
+                    string tmp2 = "";
+                    for(int i=0; i < tunePara.Count; i++)
+                    {
+                        tmp2 += tunePara[i];
+                        if( i < tunePara.Count - 1) tmp2 += ",";
+                    }
+                    tmp += "--tune " + tmp2 + " ";
+                }                
+                if (level > 0 && level < GlobalVars.level.Count) tmp += "--level " + GlobalVars.level[level] + " ";
+                if (aqmode > 0 && aqmode < GlobalVars.aqmode.Count) tmp += "--aq-mode " + GlobalVars.aqmode[aqmode] + " ";
+                if (badapt > 0 && badapt < GlobalVars.badapt.Count) tmp += "--b-adapt " + GlobalVars.badapt[badapt] + " ";
+                if (!pass2)
+                {
+                    tmp += "--crf " + crf.ToString("f2", CultureInfo.InvariantCulture.NumberFormat) + " ";
+                }
+                if (bframes > 0) tmp += "--bframes " + bframes.ToString() + " ";
+                if (refvalue > 0) tmp += "--ref " + refvalue.ToString() + " ";
+                if (tmp.Length > 0 && tmp[tmp.Length - 1] != ' ') tmp += " ";
+                if (nofastpskip) tmp += "--no-fast-pskip ";
+                if (pass2)
+                {
+                    if (slowfirstpass) tmp += "--slow-firstpass ";
+                    tmp += "--pass 1 --bitrate {0} --stats {1} ";
+                }
+
+                tmp += settings;
+                return tmp;
+            }
+        }
+
+        [XmlIgnore]
+        public string GetSecondParam
+        {
+            get
+            {
+                if (!pass2) return "";
+                string tmp = "";
+                if (profile > 0 && profile < GlobalVars.profile.Count) tmp += "--profile " + GlobalVars.profile[profile] + " ";
+                if (preset > 0 && preset < GlobalVars.preset.Count) tmp += "--preset " + GlobalVars.preset[preset] + " ";
+                List<string> tunePara = new List<string>();
+                if (tune > 0 && tune < GlobalVars.tune.Count) tunePara.Add(GlobalVars.tune[tune]);
+                if (fastdecode) tunePara.Add("fastdecode");
+                if (zerolatency) tunePara.Add("zerolatency");
+                if (tunePara.Count > 0)
+                {
+                    string tmp2 = "";
+                    for (int i = 0; i < tunePara.Count; i++)
+                    {
+                        tmp2 += tunePara[i];
+                        if (i < tunePara.Count - 1) tmp2 += ",";
+                    }
+                    tmp += "--tune " + tmp2 + " ";
+                }
+                if (level > 0 && level < GlobalVars.level.Count) tmp += "--level " + GlobalVars.level[level] + " ";
+                if (aqmode > 0 && aqmode < GlobalVars.aqmode.Count) tmp += "--aq-mode " + GlobalVars.aqmode[aqmode] + " ";
+                //if (badapt > 0 && badapt < GlobalVars.badapt.Count) tmp += "--b-adapt " + GlobalVars.badapt[badapt] + " ";
+                if (!pass2)
+                {
+                    tmp += "--crf " + crf.ToString("f2") + " ";
+                }
+                if (bframes > 0) tmp += "--bframes " + bframes.ToString() + " ";
+                if (refvalue > 0) tmp += "--ref " + refvalue.ToString() + " ";
+                if (tmp.Length > 0 && tmp[tmp.Length - 1] != ' ') tmp += " ";
+                if (nofastpskip) tmp += "--no-fast-pskip ";
+                if (pass2)
+                {
+                    tmp += "--pass 2 --bitrate {0} --stats {1} ";
+                }
+
+                tmp += settings2;
+                return tmp;
+            }
+        }
     }
 
     public class AvisynthSettings

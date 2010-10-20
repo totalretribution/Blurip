@@ -99,10 +99,10 @@ namespace BluRip
                 
                 string dtsBitrate = "1536";
                 string ac3Bitrate = "640";
-                if(settings.downmixDTSIndex >= 0 && settings.downmixDTSIndex < Global.dtsBitrates.Count) dtsBitrate = Global.dtsBitrates[settings.downmixDTSIndex];
-                if(settings.downmixAc3Index >= 0 && settings.downmixAc3Index < Global.ac3Bitrates.Count) ac3Bitrate = Global.ac3Bitrates[settings.downmixAc3Index];
+                if (settings.downmixDTSIndex >= 0 && settings.downmixDTSIndex < GlobalVars.dtsBitrates.Count) dtsBitrate = GlobalVars.dtsBitrates[settings.downmixDTSIndex];
+                if (settings.downmixAc3Index >= 0 && settings.downmixAc3Index < GlobalVars.ac3Bitrates.Count) ac3Bitrate = GlobalVars.ac3Bitrates[settings.downmixAc3Index];
 
-                dt = new DemuxTool(settings, m2tsList, Global.videoTypes, Global.ac3AudioTypes, Global.dtsAudioTypes,
+                dt = new DemuxTool(settings, m2tsList, GlobalVars.videoTypes, GlobalVars.ac3AudioTypes, GlobalVars.dtsAudioTypes,
                     titleList[comboBoxTitle.SelectedIndex], ref demuxedStreamList, ac3Bitrate, dtsBitrate);
 
                 dt.OnInfoMsg += new ExternalTool.InfoEventHandler(DemuxMsg);

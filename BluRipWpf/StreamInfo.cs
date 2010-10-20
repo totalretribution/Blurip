@@ -112,7 +112,7 @@ namespace BluRip
                 listBoxStreams.ItemsSource = null;
                 m2tsList.Clear();
 
-                sit = new StreamInfoTool(settings, ref titleList, settings.lastBluRayPath, Global.videoTypes, Global.ac3AudioTypes, Global.dtsAudioTypes);
+                sit = new StreamInfoTool(settings, ref titleList, settings.lastBluRayPath, GlobalVars.videoTypes, GlobalVars.ac3AudioTypes, GlobalVars.dtsAudioTypes);
                 sit.OnInfoMsg += new ExternalTool.InfoEventHandler(DemuxMsg);
                 sit.OnLogMsg += new ExternalTool.LogEventHandler(DemuxMsg);
                 sit.Start();
@@ -258,11 +258,11 @@ namespace BluRip
                             if (HasAudioLanguage(si.language))
                             {
                                 int index = AudioLanguageIndex(si.language);
-                                if (Global.dtsAudioTypes.Contains(si.typeDesc))
+                                if (GlobalVars.dtsAudioTypes.Contains(si.typeDesc))
                                 {
                                     maxdtsList[index]++;
                                 }
-                                if (Global.ac3AudioTypes.Contains(si.typeDesc))
+                                if (GlobalVars.ac3AudioTypes.Contains(si.typeDesc))
                                 {
                                     maxac3List[index]++;
                                 }
@@ -297,7 +297,7 @@ namespace BluRip
                                 int index = AudioLanguageIndex(si.language);
                                 if (settings.preferDTS)
                                 {
-                                    if (Global.dtsAudioTypes.Contains(si.typeDesc))
+                                    if (GlobalVars.dtsAudioTypes.Contains(si.typeDesc))
                                     {
                                         if (dtsList[index] == 0)
                                         {
@@ -305,7 +305,7 @@ namespace BluRip
                                             si.selected = true;
                                         }
                                     }
-                                    if (Global.ac3AudioTypes.Contains(si.typeDesc) && maxdtsList[index] == 0)
+                                    if (GlobalVars.ac3AudioTypes.Contains(si.typeDesc) && maxdtsList[index] == 0)
                                     {
                                         if (ac3List[index] == 0)
                                         {
@@ -316,7 +316,7 @@ namespace BluRip
                                 }
                                 else
                                 {
-                                    if (Global.ac3AudioTypes.Contains(si.typeDesc))
+                                    if (GlobalVars.ac3AudioTypes.Contains(si.typeDesc))
                                     {
                                         if (ac3List[index] == 0)
                                         {
@@ -330,7 +330,7 @@ namespace BluRip
                                             }
                                         }
                                     }
-                                    if (Global.dtsAudioTypes.Contains(si.typeDesc) && maxac3List[index] == 0)
+                                    if (GlobalVars.dtsAudioTypes.Contains(si.typeDesc) && maxac3List[index] == 0)
                                     {
                                         if (dtsList[index] == 0)
                                         {
@@ -412,7 +412,7 @@ namespace BluRip
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.ItemsSource = null;
 
-                mit = new M2tsInfoTool(settings, ref titleList, m2tsList, Global.videoTypes, Global.ac3AudioTypes, Global.dtsAudioTypes);
+                mit = new M2tsInfoTool(settings, ref titleList, m2tsList, GlobalVars.videoTypes, GlobalVars.ac3AudioTypes, GlobalVars.dtsAudioTypes);
                 mit.OnInfoMsg += new ExternalTool.InfoEventHandler(DemuxMsg);
                 mit.OnLogMsg += new ExternalTool.LogEventHandler(DemuxMsg);
                 mit.Start();

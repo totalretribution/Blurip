@@ -82,13 +82,13 @@ namespace BluRip
                 }
 
                 comboBoxDTSBitrate.Items.Clear();
-                foreach (string s in Global.dtsBitrates)
+                foreach (string s in GlobalVars.dtsBitrates)
                 {
                     comboBoxDTSBitrate.Items.Add(s);
                 }
 
                 comboBoxAC3Bitrate.Items.Clear();
-                foreach (string s in Global.ac3Bitrates)
+                foreach (string s in GlobalVars.ac3Bitrates)
                 {
                     comboBoxAC3Bitrate.Items.Add(s);
                 }
@@ -99,12 +99,12 @@ namespace BluRip
                 checkBoxConvertAC3Bitrate_Checked(null, null);
                 checkBoxConvertDTSBitrate_Checked(null, null);
 
-                if (settings.downmixDTSIndex > -1 && settings.downmixDTSIndex < Global.dtsBitrates.Count) comboBoxDTSBitrate.SelectedIndex = settings.downmixDTSIndex;
-                if (settings.downmixAc3Index > -1 && settings.downmixAc3Index < Global.ac3Bitrates.Count) comboBoxAC3Bitrate.SelectedIndex = settings.downmixAc3Index;
+                if (settings.downmixDTSIndex > -1 && settings.downmixDTSIndex < GlobalVars.dtsBitrates.Count) comboBoxDTSBitrate.SelectedIndex = settings.downmixDTSIndex;
+                if (settings.downmixAc3Index > -1 && settings.downmixAc3Index < GlobalVars.ac3Bitrates.Count) comboBoxAC3Bitrate.SelectedIndex = settings.downmixAc3Index;
 
                 comboBoxResizeMethod.Items.Clear();
-                foreach (string s in Global.resizeMethods) comboBoxResizeMethod.Items.Add(s);
-                if (settings.resizeMethod > -1 && settings.resizeMethod < Global.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = settings.resizeMethod;
+                foreach (string s in GlobalVars.resizeMethods) comboBoxResizeMethod.Items.Add(s);
+                if (settings.resizeMethod > -1 && settings.resizeMethod < GlobalVars.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = settings.resizeMethod;
 
                 comboBoxProcessPriority.SelectedItem = Enum.GetName(typeof(ProcessPriorityClass), settings.x264Priority);
 
@@ -120,6 +120,19 @@ namespace BluRip
                     DisableExpert();
                 }
 
+
+                UpdatePlugins();
+            }
+            catch (Exception ex)
+            {
+                Global.ErrorMsg(ex);
+            }
+        }
+
+        private void UpdatePlugins()
+        {
+            try
+            {
                 listBoxPlugIns.Items.Clear();
                 foreach (PluginBase plugin in pluginList)
                 {
@@ -136,11 +149,9 @@ namespace BluRip
                     name += " (" + plugin.GetDescription() + ")";
                     listBoxPlugIns.Items.Add(name);
                 }
-
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Global.ErrorMsg(ex);
             }
         }
 
@@ -695,6 +706,25 @@ namespace BluRip
             try
             {
                 settings.disableVideoHeaderCompression = (bool)checkBoxDisableVideoHeaderCompression.IsChecked;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void listBoxPlugIns_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int index = listBoxPlugIns.SelectedIndex;
+                if (index > -1 && index < pluginList.Count)
+                {
+                    if (pluginList[index].EditSettings())
+                    {
+                        pluginList[index].SaveSettings();
+                        UpdatePlugins();                        
+                    }
+                }
             }
             catch (Exception)
             {
