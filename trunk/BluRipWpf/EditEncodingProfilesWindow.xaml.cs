@@ -172,5 +172,37 @@ namespace BluRip
             {
             }
         }
+
+        private void buttonCopyInsert_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = listBoxEncodingProfiles.SelectedIndex;
+                if (index > -1)
+                {
+                    EncodingSettings es = new EncodingSettings(settings.encodingSettings[index]);
+                    es.desc = "Copy " + es.desc;
+                    settings.encodingSettings.Add(es);
+                    UpdateEncodingProfile();
+
+                    EditEncodingProfileWindow eepw = new EditEncodingProfileWindow(settings.encodingSettings[settings.encodingSettings.Count - 1]);
+                    eepw.ShowDialog();
+                    if (eepw.DialogResult == true)
+                    {
+                        settings.encodingSettings[settings.encodingSettings.Count - 1] = new EncodingSettings(eepw.encodingSettings);
+                        UpdateEncodingProfile();
+                        listBoxEncodingProfiles.SelectedIndex = settings.encodingSettings.Count - 1;
+                    }
+                    else
+                    {
+                        settings.encodingSettings.RemoveAt(settings.encodingSettings.Count - 1);
+                        UpdateEncodingProfile();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

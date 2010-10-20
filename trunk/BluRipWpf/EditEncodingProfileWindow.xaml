@@ -1,49 +1,50 @@
 ﻿<Window x:Class="BluRip.EditEncodingProfileWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionEncodingProfileWindow}" Height="728" Width="568" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico" Loaded="Window_Loaded" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+        Title="{DynamicResource CaptionEncodingProfileWindow}" Height="693" Width="815" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/BluRip;component/blurip.ico" Loaded="Window_Loaded" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
     <Grid>
         <Label Content="{DynamicResource LabelEncodingProfileDescription}" HorizontalAlignment="Left" Margin="12,12,0,0" Name="labelDescription" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="12,38,0,0" Name="textBoxDescription" VerticalAlignment="Top" Width="515" TextChanged="textBoxDescription_TextChanged" TabIndex="0" />
-        <Label Content="{DynamicResource LabelEncodingProfileSettings}" HorizontalAlignment="Left" Margin="12,228,0,0" Name="labelSettings" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,254,0,0" Name="textBoxSettings" VerticalAlignment="Top" Width="515" TextChanged="textBoxSettings_TextChanged" TabIndex="1" />
-        <CheckBox Content="{DynamicResource CheckBoxEncodingProfile2pass}" Height="16" HorizontalAlignment="Left" Margin="12,353,0,0" Name="checkBox2pass" VerticalAlignment="Top" Checked="checkBox2pass_Checked" Unchecked="checkBox2pass_Checked" TabIndex="2" />
+        <Label Content="{DynamicResource LabelEncodingProfileSettings}" HorizontalAlignment="Left" Margin="12,177,0,0" Name="labelSettings" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,203,0,0" Name="textBoxSettings" VerticalAlignment="Top" Width="769" TextChanged="textBoxSettings_TextChanged" TabIndex="1" />
+        <CheckBox Content="{DynamicResource CheckBoxEncodingProfile2pass}" Height="16" HorizontalAlignment="Left" Margin="12,302,0,0" Name="checkBox2pass" VerticalAlignment="Top" Checked="checkBox2pass_Checked" Unchecked="checkBox2pass_Checked" TabIndex="2" />
         <Button Content="{DynamicResource ButtonOk}" Height="23" HorizontalAlignment="Left" Margin="14,0,0,12" Name="buttonOk" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="buttonOk_Click" TabIndex="6" />
         <Button Content="{DynamicResource ButtonCancel}" Height="23" HorizontalAlignment="Left" Margin="95,0,0,12" Name="buttonCancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" TabIndex="7" />
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,93,0,0" Name="comboBoxProfile" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxProfile_SelectionChanged" />
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="138,93,0,0" Name="comboBoxPreset" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxPreset_SelectionChanged" />
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="264,93,0,0" Name="comboBoxTune" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxTune_SelectionChanged" />
-        <ComboBox Height="23" HorizontalAlignment="Left" Margin="264,148,0,0" Name="comboBoxLevel" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxLevel_SelectionChanged" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="390,93,0,0" Name="comboBoxLevel" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxLevel_SelectionChanged" />
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,148,0,0" Name="comboBoxBadapt" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxBadapt_SelectionChanged" />
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="138,148,0,0" Name="comboBoxAqmode" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxAqmode_SelectionChanged" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,196,0,0" Name="textBoxCrf" VerticalAlignment="Top" Width="120" TextChanged="textBoxCrf_TextChanged" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="138,196,0,0" Name="textBoxBframes" VerticalAlignment="Top" Width="120" TextChanged="textBoxBframes_TextChanged" />
-        <CheckBox Content="--no-fast-pskip" Height="16" HorizontalAlignment="Left" Margin="390,115,0,0" Name="checkBoxNofastpskip" VerticalAlignment="Top" Checked="checkBoxNofastpskip_Checked" Unchecked="checkBoxNofastpskip_Checked" />
-        <CheckBox Content="fastdecode (tune)" Height="16" HorizontalAlignment="Left" Margin="390,71,0,0" Name="checkBoxFastdecode" VerticalAlignment="Top" Checked="checkBoxFastdecode_Checked" Unchecked="checkBoxFastdecode_Checked" />
-        <CheckBox Content="zerolatency (tune)" Height="16" HorizontalAlignment="Left" Margin="390,93,0,0" Name="checkBoxZerolatency" VerticalAlignment="Top" Checked="checkBoxZerolatency_Checked" Unchecked="checkBoxZerolatency_Checked" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="516,93,0,0" Name="textBoxCrf" VerticalAlignment="Top" Width="120" TextChanged="textBoxCrf_TextChanged" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="264,148,0,0" Name="textBoxBframes" VerticalAlignment="Top" Width="120" TextChanged="textBoxBframes_TextChanged" />
+        <CheckBox Content="--no-fast-pskip" Height="16" HorizontalAlignment="Left" Margin="642,115,0,0" Name="checkBoxNofastpskip" VerticalAlignment="Top" Checked="checkBoxNofastpskip_Checked" Unchecked="checkBoxNofastpskip_Checked" />
+        <CheckBox Content="fastdecode (tune)" Height="16" HorizontalAlignment="Left" Margin="642,93,0,0" Name="checkBoxFastdecode" VerticalAlignment="Top" Checked="checkBoxFastdecode_Checked" Unchecked="checkBoxFastdecode_Checked" />
+        <CheckBox Content="zerolatency (tune)" Height="16" HorizontalAlignment="Left" Margin="642,71,0,0" Name="checkBoxZerolatency" VerticalAlignment="Top" Checked="checkBoxZerolatency_Checked" Unchecked="checkBoxZerolatency_Checked" />
         <Label Content="--profile" HorizontalAlignment="Left" Margin="12,67,0,0" Name="labelProfile" VerticalAlignment="Top" />
         <Label Content="--b-adapt" HorizontalAlignment="Left" Margin="12,122,0,0" Name="labelBadapt" VerticalAlignment="Top" />
         <Label Content="--preset" HorizontalAlignment="Left" Margin="138,67,0,0" Name="labelPreset" VerticalAlignment="Top" />
         <Label Content="--aq-mode" HorizontalAlignment="Left" Margin="138,122,0,0" Name="labelAmode" VerticalAlignment="Top" />
         <Label Content="--tune" HorizontalAlignment="Left" Margin="264,67,0,0" Name="labelTune" VerticalAlignment="Top" />
-        <Label Content="--level" HorizontalAlignment="Left" Margin="264,122,0,0" Name="labelLevel" VerticalAlignment="Top" />
-        <Label Content="--crf" HorizontalAlignment="Left" Margin="12,173,0,0" Name="labelCrf" VerticalAlignment="Top" />
-        <Label Content="--b-frames" HorizontalAlignment="Left" Margin="138,173,0,0" Name="labelBframes" VerticalAlignment="Top" />
-        <GroupBox Header="2. pass" Height="211" HorizontalAlignment="Left" Margin="14,375,0,0" Name="groupBox2pass" VerticalAlignment="Top" Width="528">
+        <Label Content="--level" HorizontalAlignment="Left" Margin="390,67,0,0" Name="labelLevel" VerticalAlignment="Top" />
+        <Label Content="--crf" HorizontalAlignment="Left" Margin="516,67,0,0" Name="labelCrf" VerticalAlignment="Top" />
+        <Label Content="--b-frames" HorizontalAlignment="Left" Margin="264,122,0,0" Name="labelBframes" VerticalAlignment="Top" />
+        <GroupBox Header="2. pass" Height="211" HorizontalAlignment="Left" Margin="14,324,0,0" Name="groupBox2pass" VerticalAlignment="Top" Width="767">
             <Grid>
                 <Label Content="{DynamicResource LabelEncodingProfileSizeValue}" HorizontalAlignment="Left" Margin="6,9,0,0" Name="labelSizeValue" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="6,35,0,0" Name="textBoxSizeValue" VerticalAlignment="Top" Width="120" TextChanged="textBoxSizeValue_TextChanged" TabIndex="4" />
                 <Label Content="{DynamicResource LabelEncodingProfileSizeType}" HorizontalAlignment="Left" Margin="132,9,0,0" Name="labelSizeType" VerticalAlignment="Top" />
                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="132,35,0,0" Name="comboBoxSizeType" VerticalAlignment="Top" Width="234" ItemsSource="{DynamicResource comboBoxSizeType}" SelectionChanged="comboBoxSizeType_SelectionChanged" TabIndex="5" />
                 <Label Content="{DynamicResource LabelEncodingProfileSettings2}" HorizontalAlignment="Left" Margin="6,64,0,0" Name="labelSettings2" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,88,0,0" Name="textBoxSettings2" VerticalAlignment="Top" Width="503" TextChanged="textBoxSettings2_TextChanged" TabIndex="3" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="6,88,0,0" Name="textBoxSettings2" VerticalAlignment="Top" Width="743" TextChanged="textBoxSettings2_TextChanged" TabIndex="3" />
                 <CheckBox Content="Slowfirstpass" Height="16" HorizontalAlignment="Left" Margin="374,35,0,0" Name="checkBoxSlowfirstpass" VerticalAlignment="Top" Checked="checkBoxSlowfirstpass_Checked" Unchecked="checkBoxSlowfirstpass_Checked" />
-                <TextBlock Height="64" HorizontalAlignment="Left" Margin="6,117,0,0" Name="textBlockSecondParam" Text="TextBlock" VerticalAlignment="Top" Width="501" TextWrapping="Wrap" />
+                <TextBlock Height="64" HorizontalAlignment="Left" Margin="6,117,0,0" Name="textBlockSecondParam" Text="TextBlock" VerticalAlignment="Top" Width="743" TextWrapping="Wrap" />
             </Grid>
         </GroupBox>
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="264,196,0,0" Name="textBoxRef" VerticalAlignment="Top" Width="120" TextChanged="textBoxRef_TextChanged" />
-        <Label Content="--ref" HorizontalAlignment="Left" Margin="264,173,0,0" Name="labelRef" VerticalAlignment="Top" />
-        <TextBlock Height="64" HorizontalAlignment="Left" Margin="12,283,0,0" Name="textBlockParam" Text="TextBlock" VerticalAlignment="Top" Width="515" TextWrapping="Wrap" />
-        <TextBlock Height="56" HorizontalAlignment="Left" Margin="14,592,0,0" Name="textBlockNote" Text="For 2D animation use aq-mode=0/tune animation - for CGI use tune film" VerticalAlignment="Top" Width="522" TextWrapping="Wrap" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="390,148,0,0" Name="textBoxRef" VerticalAlignment="Top" Width="120" TextChanged="textBoxRef_TextChanged" />
+        <Label Content="--ref" HorizontalAlignment="Left" Margin="390,122,0,0" Name="labelRef" VerticalAlignment="Top" />
+        <TextBlock Height="64" HorizontalAlignment="Left" Margin="12,232,0,0" Name="textBlockParam" Text="TextBlock" VerticalAlignment="Top" Width="769" TextWrapping="Wrap" />
+        <TextBlock Height="72" HorizontalAlignment="Left" Margin="14,541,0,0" Name="textBlockNote" Text="For 2D animation/anime/cartoon disable aq-mode (=0) - for 3D/CGI and all other use tune film" VerticalAlignment="Top" Width="767" TextWrapping="Wrap" />
+        <Button Content="Show x264 help" Height="23" HorizontalAlignment="Left" Margin="642,12,0,0" Name="buttonX264Help" VerticalAlignment="Top" Width="139" />
     </Grid>
 </Window>
