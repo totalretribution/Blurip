@@ -253,12 +253,7 @@ namespace BluRip
                 int index = comboBoxBadapt.SelectedIndex;
                 if (index > -1 && index < GlobalVars.badapt.Count)
                 {
-                    es.badapt = index;
-                    if (index == 2)
-                    {
-                        if (es.bframes == 0) es.bframes = 16;
-                        textBoxBframes.Text = es.bframes.ToString();
-                    }
+                    es.badapt = index;                    
                     UpdateParams();
                 }
             }

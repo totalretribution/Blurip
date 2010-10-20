@@ -12,5 +12,6 @@
         <Button Content="{DynamicResource ButtonProfileDelete}" Height="23" HorizontalAlignment="Right" Margin="0,96,12,0" Name="buttonProfileDelete" VerticalAlignment="Top" Width="96" Click="buttonProfileDelete_Click" />
         <Button Content="{DynamicResource ButtonProfileAdd}" Height="23" HorizontalAlignment="Right" Margin="0,0,12,68" Name="buttonProfileAdd" VerticalAlignment="Bottom" Width="96" Click="buttonProfileAdd_Click" />
         <Label Content="{DynamicResource LabelEncodingProfilesEdit}" HorizontalAlignment="Left" Margin="12,0,0,41" Name="labelEncodingProfilesEdit" VerticalAlignment="Bottom" />
+        <Button Content="Copy &amp; insert" Height="23" Margin="0,125,12,0" Name="buttonCopyInsert" VerticalAlignment="Top" HorizontalAlignment="Right" Width="96" Click="buttonCopyInsert_Click" />
     </Grid>
 </Window>

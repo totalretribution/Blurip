@@ -309,6 +309,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="blurip.ico" />
+    <EmbeddedResource Include="fullhelp.txt" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

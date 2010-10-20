@@ -54,6 +54,20 @@ namespace BluRip
         Size // specify target size
     }
 
+    /*
+    The number of reference frames
+    ***1080P Normal movie + Animation***
+    ref= 4 (max. resolution = 1920x1088) < 3 ref = not good enough for AHD
+    ref= 5 (max. resolution = 1920x864) < 3 ref = not good enough for AHD
+    ref= 6 (max. resolution = 1920x720) < 3 ref = not good enough for AHD
+
+    ***720p Normal movie + Animation***
+    ref= 09 (max. resolution = 1280x720) < 5 ref = not good enough for AHD
+    ref= 10 (max. resolution = 1280x648) < 5 ref = not good enough for AHD
+    ref= 11 (max. resolution = 1280x588) < 5 ref = not good enough for AHD
+    ref= 12 (max. resolution = 1280x540) < 5 ref = not good enough for AHD
+     */
+
     public class EncodingSettings
     {
         public EncodingSettings() { }
@@ -114,14 +128,14 @@ namespace BluRip
         public SizeType sizeType = SizeType.Bitrate;
 
         public double crf = 18.0;
-        public int profile = 2;
+        public int profile = 3;
         public int preset = 7;
         public int tune = 1;
         public int level = 12;
-        public int refvalue = 0;
-        public int bframes = 16;
-        public int badapt = 2;
-        public int aqmode = 2;
+        public int refvalue = 4; // default maximum for 1080p
+        public int bframes = 0;
+        public int badapt = 0;
+        public int aqmode = 0;
         public bool nofastpskip = true;
         public bool fastdecode = false;
         public bool zerolatency = false;
