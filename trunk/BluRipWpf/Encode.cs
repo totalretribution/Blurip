@@ -454,9 +454,9 @@ namespace BluRip
                     }
                     if (cropInfo.resize)
                     {
-                        if (cropInfo.resizeMethod > -1 && cropInfo.resizeMethod < Global.resizeMethods.Count)
+                        if (cropInfo.resizeMethod > -1 && cropInfo.resizeMethod < GlobalVars.resizeMethods.Count)
                         {
-                            encode += Global.resizeMethods[cropInfo.resizeMethod] + "(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
+                            encode += GlobalVars.resizeMethods[cropInfo.resizeMethod] + "(" + cropInfo.resizeX.ToString() + "," + cropInfo.resizeY.ToString() + ")\r\n";
                         }
                         else
                         {

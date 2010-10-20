@@ -57,8 +57,8 @@ namespace BluRip
                 checkBoxResize.IsChecked = _cropInfo.resize;
 
                 comboBoxResizeMethod.Items.Clear();
-                foreach (string s in Global.resizeMethods) comboBoxResizeMethod.Items.Add(s);
-                if (_cropInfo.resizeMethod > -1 && _cropInfo.resizeMethod < Global.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = _cropInfo.resizeMethod;
+                foreach (string s in GlobalVars.resizeMethods) comboBoxResizeMethod.Items.Add(s);
+                if (_cropInfo.resizeMethod > -1 && _cropInfo.resizeMethod < GlobalVars.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = _cropInfo.resizeMethod;
             }
             catch (Exception ex)
             {
@@ -147,7 +147,7 @@ namespace BluRip
         {
             try
             {
-                if (comboBoxResizeMethod.SelectedIndex > -1 && comboBoxResizeMethod.SelectedIndex < Global.resizeMethods.Count)
+                if (comboBoxResizeMethod.SelectedIndex > -1 && comboBoxResizeMethod.SelectedIndex < GlobalVars.resizeMethods.Count)
                 {
                     _cropInfo.resizeMethod = comboBoxResizeMethod.SelectedIndex;
                 }

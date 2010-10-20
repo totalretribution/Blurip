@@ -51,12 +51,49 @@ namespace BluRip
                 textBoxSizeValue.Text = es.sizeValue.ToString();
                 comboBoxSizeType.SelectedIndex = (int)es.sizeType;
                 checkBox2pass.IsChecked = es.pass2;
+                
+                comboBoxProfile.ItemsSource = GlobalVars.profile;
+                comboBoxPreset.ItemsSource = GlobalVars.preset;
+                comboBoxTune.ItemsSource = GlobalVars.tune;
+                comboBoxLevel.ItemsSource = GlobalVars.level;
+                comboBoxAqmode.ItemsSource = GlobalVars.aqmode;
+                comboBoxBadapt.ItemsSource = GlobalVars.badapt;
+
+                textBoxCrf.Text = es.crf.ToString("f1");
+                textBoxBframes.Text = es.bframes.ToString();
+                textBoxRef.Text = es.refvalue.ToString();
+
+                checkBoxFastdecode.IsChecked = es.fastdecode;
+                checkBoxNofastpskip.IsChecked = es.nofastpskip;
+                checkBoxZerolatency.IsChecked = es.zerolatency;
+                checkBoxSlowfirstpass.IsChecked = es.slowfirstpass;
+
+                if (es.profile > -1 && es.profile < GlobalVars.profile.Count) comboBoxProfile.SelectedIndex = es.profile;
+                if (es.preset > -1 && es.preset < GlobalVars.preset.Count) comboBoxPreset.SelectedIndex = es.preset;
+                if (es.tune > -1 && es.tune < GlobalVars.tune.Count) comboBoxTune.SelectedIndex = es.tune;
+                if (es.level > -1 && es.level < GlobalVars.level.Count) comboBoxLevel.SelectedIndex = es.level;
+                if (es.aqmode > -1 && es.aqmode < GlobalVars.aqmode.Count) comboBoxAqmode.SelectedIndex = es.aqmode;
+                if (es.badapt > -1 && es.badapt < GlobalVars.badapt.Count) comboBoxBadapt.SelectedIndex = es.badapt;
 
                 checkBox2pass_Checked(null, null);
+
+                UpdateParams();
             }
             catch (Exception ex)
             {
                 Global.ErrorMsg(ex);
+            }
+        }
+
+        private void UpdateParams()
+        {
+            try
+            {
+                textBlockParam.Text = "Parameter: " + es.GetParam;
+                textBlockSecondParam.Text = "Parameter: " + es.GetSecondParam;
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -72,16 +109,13 @@ namespace BluRip
                 es.pass2 = (bool)checkBox2pass.IsChecked;
                 if (es.pass2)
                 {
-                    textBoxSettings2.IsEnabled = true;
-                    textBoxSizeValue.IsEnabled = true;
-                    comboBoxSizeType.IsEnabled = true;
+                    groupBox2pass.IsEnabled = true;
                 }
                 else
                 {
-                    textBoxSettings2.IsEnabled = false;
-                    textBoxSizeValue.IsEnabled = false;
-                    comboBoxSizeType.IsEnabled = false;
+                    groupBox2pass.IsEnabled = false;
                 }
+                UpdateParams();
             }
             catch (Exception)
             {
@@ -104,6 +138,7 @@ namespace BluRip
             try
             {
                 es.settings = textBoxSettings.Text;
+                UpdateParams();
             }
             catch (Exception)
             {
@@ -115,6 +150,7 @@ namespace BluRip
             try
             {
                 es.settings2 = textBoxSettings2.Text;
+                UpdateParams();
             }
             catch (Exception)
             {
@@ -126,6 +162,7 @@ namespace BluRip
             try
             {
                 es.sizeValue = Convert.ToDouble(textBoxSizeValue.Text);
+                UpdateParams();
             }
             catch (Exception)
             {
@@ -142,6 +179,7 @@ namespace BluRip
             try
             {
                 es.sizeType = (SizeType)Enum.ToObject(typeof(SizeType), comboBoxSizeType.SelectedIndex);
+                UpdateParams();
             }
             catch (Exception)
             {
@@ -154,6 +192,191 @@ namespace BluRip
             {
                 textBoxDescription.Focus();
                 textBoxDescription.SelectAll();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxProfile_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                int index = comboBoxProfile.SelectedIndex;
+                if (index > -1 && index < GlobalVars.profile.Count)
+                {
+                    es.profile = index;
+                    UpdateParams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxPreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                int index = comboBoxPreset.SelectedIndex;
+                if (index > -1 && index < GlobalVars.preset.Count)
+                {
+                    es.preset = index;
+                    UpdateParams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxTune_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                int index = comboBoxTune.SelectedIndex;
+                if (index > -1 && index < GlobalVars.tune.Count)
+                {
+                    es.tune = index;
+                    UpdateParams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxBadapt_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                int index = comboBoxBadapt.SelectedIndex;
+                if (index > -1 && index < GlobalVars.badapt.Count)
+                {
+                    es.badapt = index;
+                    if (index == 2)
+                    {
+                        if (es.bframes == 0) es.bframes = 16;
+                        textBoxBframes.Text = es.bframes.ToString();
+                    }
+                    UpdateParams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxAqmode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                int index = comboBoxAqmode.SelectedIndex;
+                if (index > -1 && index < GlobalVars.aqmode.Count)
+                {
+                    es.aqmode = index;
+                    UpdateParams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBoxLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                int index = comboBoxLevel.SelectedIndex;
+                if (index > -1 && index < GlobalVars.level.Count)
+                {
+                    es.level = index;
+                    UpdateParams();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxCrf_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                es.crf = Convert.ToDouble(textBoxCrf.Text);
+                UpdateParams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxBframes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                es.bframes = Convert.ToInt32(textBoxBframes.Text);
+                UpdateParams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void textBoxRef_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                es.refvalue = Convert.ToInt32(textBoxRef.Text);
+                UpdateParams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxNofastpskip_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                es.nofastpskip = (bool)checkBoxNofastpskip.IsChecked;
+                UpdateParams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxFastdecode_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                es.fastdecode = (bool)checkBoxFastdecode.IsChecked;
+                UpdateParams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxZerolatency_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                es.zerolatency = (bool)checkBoxZerolatency.IsChecked;
+                UpdateParams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxSlowfirstpass_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                es.slowfirstpass = (bool)checkBoxSlowfirstpass.IsChecked;
+                UpdateParams();
             }
             catch (Exception)
             {
