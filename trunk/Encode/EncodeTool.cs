@@ -102,14 +102,14 @@ namespace BluRip
                         if (!settings.use64bit)
                         {
                             this.Path = settings.x264Path;
-                            this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" -o \"" + outdir +
+                            this.Parameter = settings.encodingSettings[profile].GetParam + " \"" + vfi.encodeAvs + "\" -o \"" + outdir +
                                     "\\" + settings.filePrefix + "_video.mkv\"";
                         }
                         else
                         {
                             this.Path = "cmd.exe";
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " " +
+                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].GetParam + " --fps " + vfi.fps + " " +
                                 " -o \"" + outdir + "\\" +
                                 settings.filePrefix + "_video.mkv\"" + " --input-res " + vfi.cropInfo.resizeX + "x" + vfi.cropInfo.resizeY + "\" -";
                         }
@@ -119,57 +119,31 @@ namespace BluRip
                         if (!settings.use64bit)
                         {
                             this.Path = settings.x264Path;
-                            this.Parameter = settings.encodingSettings[profile].settings + " \"" + vfi.encodeAvs + "\" " + "--stats \"" + statsFile + "\" " +
-                                "--pass 1 --bitrate " + bitrate.ToString() +
-                                " -o NUL";
+                            this.Parameter = string.Format(settings.encodingSettings[profile].GetParam, bitrate, statsFile) + " \"" + vfi.encodeAvs + "\" -o NUL";
                         }
                         else
                         {
                             this.Path = "cmd.exe";
                             this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings + " --fps " + vfi.fps + " " + "--stats \"" + statsFile + "\" " +
-                                "--pass 1 --bitrate " + bitrate.ToString() +
+                                settings.x264x64Path + "\" " + string.Format(settings.encodingSettings[profile].GetParam, bitrate, statsFile) + " --fps " + vfi.fps +
                                 " -o NUL" + " --input-res " + vfi.cropInfo.resizeX + "x" + vfi.cropInfo.resizeY + "\" -";
                         }
                     }
                 }
                 else
                 {
-                    if (!settings.encodingSettings[profile].pass2)
+                    if (!settings.use64bit)
                     {
-                        if (!settings.use64bit)
-                        {
-                            this.Path = settings.x264Path;
-                            this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" -o \"" + outdir +
-                                    "\\" + settings.filePrefix + "_video.mkv\"";
-                        }
-                        else
-                        {
-                            this.Path = "cmd.exe";
-                            this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " -o \"" + outdir + "\\" +
-                                settings.filePrefix + "_video.mkv\"" + " --input-res " + vfi.cropInfo.resizeX + "x" + vfi.cropInfo.resizeY + "\" -";
-                        }
+                        this.Path = settings.x264Path;
+                        this.Parameter = string.Format(settings.encodingSettings[profile].GetSecondParam, bitrate, statsFile) + " \"" + vfi.encodeAvs + "\" -o \"" + outdir +
+                            "\\" + settings.filePrefix + "_video.mkv\"";
                     }
                     else
                     {
-                        if (!settings.use64bit)
-                        {
-                            this.Path = settings.x264Path;
-                            this.Parameter = settings.encodingSettings[profile].settings2 + " \"" + vfi.encodeAvs + "\" " + "--stats \"" + statsFile + "\" " +
-                                "--pass 2 --bitrate " + bitrate.ToString() +
-                                " -o \"" + outdir +
-                                "\\" + settings.filePrefix + "_video.mkv\"";
-                        }
-                        else
-                        {
-                            this.Path = "cmd.exe";
-                            this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
-                                settings.x264x64Path + "\" " + settings.encodingSettings[profile].settings2 + " --fps " + vfi.fps + " " + "--stats \"" + statsFile + "\" " +
-                                "--pass 2 --bitrate " + bitrate.ToString() +
-                                " -o \"" + outdir + "\\" +
-                                settings.filePrefix + "_video.mkv\"" + " --input-res " + vfi.cropInfo.resizeX + "x" + vfi.cropInfo.resizeY + "\" -";
-                        }
+                        this.Path = "cmd.exe";
+                        this.Parameter = "/c \"\"" + settings.avs2yuvPath + "\" -raw \"" + vfi.encodeAvs + "\" -o - | \"" +
+                            settings.x264x64Path + "\" " + string.Format(settings.encodingSettings[profile].GetSecondParam, bitrate, statsFile) + " --fps " + vfi.fps + " -o \"" + outdir + "\\" +
+                            settings.filePrefix + "_video.mkv\"" + " --input-res " + vfi.cropInfo.resizeX + "x" + vfi.cropInfo.resizeY + "\" -";
                     }
                 }
             }

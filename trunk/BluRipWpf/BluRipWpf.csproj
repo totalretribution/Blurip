@@ -116,6 +116,9 @@
       <DependentUpon>FileListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IndexCrop.cs" />
+    <Compile Include="InfoWindow.xaml.cs">
+      <DependentUpon>InfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LinkWindow.xaml.cs">
       <DependentUpon>LinkWindow.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExternalToolsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,6 +317,7 @@
   <ItemGroup>
     <Resource Include="blurip.ico" />
     <EmbeddedResource Include="fullhelp.txt" />
+    <EmbeddedResource Include="dxva.txt" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

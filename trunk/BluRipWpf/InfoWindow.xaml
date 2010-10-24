@@ -1,0 +1,9 @@
+﻿<Window x:Class="BluRip.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{DynamicResource CaptionInfoWindow}" Height="731" Width="787" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button Content="{DynamicResource ButtonOk}" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" Width="75" Height="23" VerticalAlignment="Bottom" IsDefault="True" Click="buttonOk_Click" />
+        <RichTextBox Name="richTextBoxInfo" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,41" />
+    </Grid>
+</Window>
