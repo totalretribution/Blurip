@@ -1,0 +1,17 @@
+DXVA restriction is High Profile, Level 4.1.
+
+- Maximum bitrate of 50000 kbit
+
+The number of reference frames
+***1080P Normal movie + Animation***
+ref= 4 (max. resolution = 1920x1088) < 3 ref = not good enough for AHD
+ref= 5 (max. resolution = 1920x864) < 3 ref = not good enough for AHD
+ref= 6 (max. resolution = 1920x720) < 3 ref = not good enough for AHD
+
+***720p Normal movie + Animation***
+ref= 09 (max. resolution = 1280x720) < 5 ref = not good enough for AHD
+ref= 10 (max. resolution = 1280x648) < 5 ref = not good enough for AHD
+ref= 11 (max. resolution = 1280x588) < 5 ref = not good enough for AHD
+ref= 12 (max. resolution = 1280x540) < 5 ref = not good enough for AHD
+
+http://forum.doom9.org/showthread.php?t=150878

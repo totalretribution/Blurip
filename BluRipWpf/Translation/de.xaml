@@ -217,7 +217,8 @@
     <system:String x:Key="ButtonProfileDown">Nach unten</system:String>
     <system:String x:Key="ButtonProfileDelete">Löschen</system:String>
     <system:String x:Key="ButtonProfileAdd">Hinzufügen</system:String>
-
+    <system:String x:Key="ButtonProfileCopyInsert">Kopieren + einfügen</system:String>
+    
     <!-- EncodingProfile Window -->
     <system:String x:Key="CaptionEncodingProfileWindow">Bearbeite Encoding Profil</system:String>
     <system:String x:Key="LabelEncodingProfileDescription">Profilbeschreibung</system:String>
@@ -231,6 +232,10 @@
         <system:String>Zielgröße angeben [MB]</system:String>
     </col:ArrayList>
     <system:String x:Key="NewEncodingProfileDesc">Neues Encoding Profil</system:String>
+    <system:String x:Key="ButtonX264Help">Zeige x264 Hilfe</system:String>
+    <system:String x:Key="ButtonDxvaRestrictions">Zeige DXVA Einschränkungen</system:String>
+    <system:String x:Key="TextBlockNote">Für 2D Animation/Cartoon/Anime setze aq-mod auf 0 und benutze 'tune film' - für alles andere inklusive Cgi/3d Animation benutze 'tune film'</system:String>
+    <system:String x:Key="MsgX264Parameter">X264 Kommandozeile: {0}</system:String>
     
     <!-- AvisynthProfiles Window -->
     <system:String x:Key="CaptionAvisynthProfilesWindow">Bearbeite AviSynth Profile</system:String>
@@ -460,6 +465,9 @@
     <system:String x:Key="LabelHomeLink">Projekt Homepage</system:String>
     <system:String x:Key="LabelEmail">Sende E-Mail</system:String>
 
+    <!-- Info Window -->
+    <system:String x:Key="CaptionInfoWindow">Info</system:String>
+    
     <!-- Edit StreamInfo Window -->
     <system:String x:Key="CaptionEditStreamInfoWindow">Bearbeite Stream Info</system:String>
     <system:String x:Key="LabelStreamInfoNumber">Streamnummer</system:String>

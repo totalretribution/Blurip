@@ -23,7 +23,11 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <Style TargetType="{x:Type Paragraph}">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+    
     <Style TargetType="{x:Type Label}">
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Padding" Value="2"/>

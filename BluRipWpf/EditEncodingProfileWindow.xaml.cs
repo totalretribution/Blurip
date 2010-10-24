@@ -89,8 +89,8 @@ namespace BluRip
         {
             try
             {
-                textBlockParam.Text = "Parameter: " + es.GetParam;
-                textBlockSecondParam.Text = "Parameter: " + es.GetSecondParam;
+                textBlockParam.Text = Global.ResFormat("MsgX264Parameter", es.GetParam);
+                textBlockSecondParam.Text = Global.ResFormat("MsgX264Parameter", es.GetSecondParam);
             }
             catch (Exception)
             {
@@ -372,6 +372,30 @@ namespace BluRip
             {
                 es.slowfirstpass = (bool)checkBoxSlowfirstpass.IsChecked;
                 UpdateParams();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonX264Help_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InfoWindow iw = new InfoWindow("fullhelp.txt");
+                iw.ShowDialog();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonDxvaRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                InfoWindow iw = new InfoWindow("dxva.txt");
+                iw.ShowDialog();
             }
             catch (Exception)
             {
