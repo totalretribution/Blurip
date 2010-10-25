@@ -128,7 +128,7 @@
     <system:String x:Key="ButtonBDSup2subPath">...</system:String>
     <system:String x:Key="LabelBDSup2subPath">Path to BDSup2sub.jar:</system:String>    
     <system:String x:Key="ButtonX264Path">...</system:String>
-    <system:String x:Key="LabelX264Path">Path to x264.exe:</system:String>
+    <system:String x:Key="LabelX264Path">Path to 32-bit x264.exe:</system:String>
     <system:String x:Key="ButtonJavaPath">...</system:String>
     <system:String x:Key="LabelJavaPath">Path to java.exe:</system:String>
     <system:String x:Key="ButtonMkvmergePath">...</system:String>
@@ -236,6 +236,19 @@
     <system:String x:Key="ButtonDxvaRestrictions">Show DXVA restrictions</system:String>
     <system:String x:Key="TextBlockNote">For 2D animation/cartoon/anime set aq-mod to 0 and use 'tune film' - for all other including cgi/3d animation use 'tune film'</system:String>
     <system:String x:Key="MsgX264Parameter">X264 command line: {0}</system:String>
+    <system:String x:Key="LabelEncodingProfileProfile">--profile</system:String>
+    <system:String x:Key="LabelEncodingProfilePreset">--preset</system:String>
+    <system:String x:Key="LabelEncodingProfileTune">--tune</system:String>
+    <system:String x:Key="LabelEncodingProfileLevel">--level</system:String>
+    <system:String x:Key="LabelEncodingProfileCrf">--crf</system:String>
+    <system:String x:Key="LabelEncodingProfileBadapt">--b-adapt</system:String>
+    <system:String x:Key="LabelEncodingProfileAqmode">--aq-mode</system:String>
+    <system:String x:Key="LabelEncodingProfileBframes">--b-frames</system:String>
+    <system:String x:Key="LabelEncodingProfileRef">--ref</system:String>
+    <system:String x:Key="CheckBoxEncodingProfileZerolatency">zerolatency (tune)</system:String>
+    <system:String x:Key="CheckBoxEncodingProfileFastdecode">fastdecode (tune)</system:String>
+    <system:String x:Key="CheckBoxEncodingProfileNofastpskip">--no-fast-pskip</system:String>
+    <system:String x:Key="CheckBoxEncodingProfileSlowfirstpass">--slow-firstpass</system:String>
     
     <!-- AvisynthProfiles Window -->
     <system:String x:Key="CaptionAvisynthProfilesWindow">Edit AviSynth profiles</system:String>
