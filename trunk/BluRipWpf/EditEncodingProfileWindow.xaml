@@ -18,17 +18,17 @@
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="138,148,0,0" Name="comboBoxAqmode" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxAqmode_SelectionChanged" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="516,93,0,0" Name="textBoxCrf" VerticalAlignment="Top" Width="120" TextChanged="textBoxCrf_TextChanged" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="264,148,0,0" Name="textBoxBframes" VerticalAlignment="Top" Width="120" TextChanged="textBoxBframes_TextChanged" />
-        <CheckBox Content="--no-fast-pskip" Height="16" HorizontalAlignment="Left" Margin="642,115,0,0" Name="checkBoxNofastpskip" VerticalAlignment="Top" Checked="checkBoxNofastpskip_Checked" Unchecked="checkBoxNofastpskip_Checked" />
-        <CheckBox Content="fastdecode (tune)" Height="16" HorizontalAlignment="Left" Margin="642,93,0,0" Name="checkBoxFastdecode" VerticalAlignment="Top" Checked="checkBoxFastdecode_Checked" Unchecked="checkBoxFastdecode_Checked" />
-        <CheckBox Content="zerolatency (tune)" Height="16" HorizontalAlignment="Left" Margin="642,71,0,0" Name="checkBoxZerolatency" VerticalAlignment="Top" Checked="checkBoxZerolatency_Checked" Unchecked="checkBoxZerolatency_Checked" />
-        <Label Content="--profile" HorizontalAlignment="Left" Margin="12,67,0,0" Name="labelProfile" VerticalAlignment="Top" />
-        <Label Content="--b-adapt" HorizontalAlignment="Left" Margin="12,122,0,0" Name="labelBadapt" VerticalAlignment="Top" />
-        <Label Content="--preset" HorizontalAlignment="Left" Margin="138,67,0,0" Name="labelPreset" VerticalAlignment="Top" />
-        <Label Content="--aq-mode" HorizontalAlignment="Left" Margin="138,122,0,0" Name="labelAmode" VerticalAlignment="Top" />
-        <Label Content="--tune" HorizontalAlignment="Left" Margin="264,67,0,0" Name="labelTune" VerticalAlignment="Top" />
-        <Label Content="--level" HorizontalAlignment="Left" Margin="390,67,0,0" Name="labelLevel" VerticalAlignment="Top" />
-        <Label Content="--crf" HorizontalAlignment="Left" Margin="516,67,0,0" Name="labelCrf" VerticalAlignment="Top" />
-        <Label Content="--b-frames" HorizontalAlignment="Left" Margin="264,122,0,0" Name="labelBframes" VerticalAlignment="Top" />
+        <CheckBox Content="{DynamicResource CheckBoxEncodingProfileNofastpskip}" Height="16" HorizontalAlignment="Left" Margin="642,115,0,0" Name="checkBoxNofastpskip" VerticalAlignment="Top" Checked="checkBoxNofastpskip_Checked" Unchecked="checkBoxNofastpskip_Checked" />
+        <CheckBox Content="{DynamicResource CheckBoxEncodingProfileFastdecode}" Height="16" HorizontalAlignment="Left" Margin="642,93,0,0" Name="checkBoxFastdecode" VerticalAlignment="Top" Checked="checkBoxFastdecode_Checked" Unchecked="checkBoxFastdecode_Checked" />
+        <CheckBox Content="{DynamicResource CheckBoxEncodingProfileZerolatency}" Height="16" HorizontalAlignment="Left" Margin="642,71,0,0" Name="checkBoxZerolatency" VerticalAlignment="Top" Checked="checkBoxZerolatency_Checked" Unchecked="checkBoxZerolatency_Checked" />
+        <Label Content="{DynamicResource LabelEncodingProfileProfile}" HorizontalAlignment="Left" Margin="12,67,0,0" Name="labelProfile" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfileBadapt}" HorizontalAlignment="Left" Margin="12,122,0,0" Name="labelBadapt" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfilePreset}" HorizontalAlignment="Left" Margin="138,67,0,0" Name="labelPreset" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfileAqmode}" HorizontalAlignment="Left" Margin="138,122,0,0" Name="labelAqmode" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfileTune}" HorizontalAlignment="Left" Margin="264,67,0,0" Name="labelTune" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfileLevel}" HorizontalAlignment="Left" Margin="390,67,0,0" Name="labelLevel" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfileCrf}" HorizontalAlignment="Left" Margin="516,67,0,0" Name="labelCrf" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfileBframes}" HorizontalAlignment="Left" Margin="264,122,0,0" Name="labelBframes" VerticalAlignment="Top" />
         <GroupBox Header="2. pass" Height="211" Margin="12,302,14,0" Name="groupBox2pass" VerticalAlignment="Top">
             <Grid>
                 <Label Content="{DynamicResource LabelEncodingProfileSizeValue}" HorizontalAlignment="Left" Margin="6,9,0,0" Name="labelSizeValue" VerticalAlignment="Top" />
@@ -41,11 +41,11 @@
             </Grid>
         </GroupBox>
         <TextBox Height="23" HorizontalAlignment="Left" Margin="390,148,0,0" Name="textBoxRef" VerticalAlignment="Top" Width="120" TextChanged="textBoxRef_TextChanged" />
-        <Label Content="--ref" HorizontalAlignment="Left" Margin="390,122,0,0" Name="labelRef" VerticalAlignment="Top" />
+        <Label Content="{DynamicResource LabelEncodingProfileRef}" HorizontalAlignment="Left" Margin="390,122,0,0" Name="labelRef" VerticalAlignment="Top" />
         <TextBlock Height="64" HorizontalAlignment="Left" Margin="12,232,0,0" Name="textBlockParam" Text="TextBlock" VerticalAlignment="Top" Width="769" TextWrapping="Wrap" />
         <TextBlock Height="72" HorizontalAlignment="Left" Margin="14,519,0,0" Name="textBlockNote" Text="{DynamicResource TextBlockNote}" VerticalAlignment="Top" Width="767" TextWrapping="Wrap" />
         <Button Content="{DynamicResource ButtonX264Help}" HorizontalAlignment="Right" Margin="0,0,12,12" Name="buttonX264Help" Width="139" Click="buttonX264Help_Click" Height="23" VerticalAlignment="Bottom" />
-        <CheckBox Content="--slow-firstpass" Height="16" Margin="642,159,0,0" Name="checkBoxSlowfirstpass" VerticalAlignment="Top" Checked="checkBoxSlowfirstpass_Checked" Unchecked="checkBoxSlowfirstpass_Checked" HorizontalAlignment="Left" Width="110" />
+        <CheckBox Content="{DynamicResource CheckBoxEncodingProfileSlowfirstpass}" Height="16" Margin="642,159,0,0" Name="checkBoxSlowfirstpass" VerticalAlignment="Top" Checked="checkBoxSlowfirstpass_Checked" Unchecked="checkBoxSlowfirstpass_Checked" HorizontalAlignment="Left" Width="110" />
         <Button Content="{DynamicResource ButtonDxvaRestrictions}" Height="23" HorizontalAlignment="Right" Margin="0,0,157,12" Name="buttonDxvaRestriction" VerticalAlignment="Bottom" Width="181" Click="buttonDxvaRestriction_Click" />
     </Grid>
 </Window>
