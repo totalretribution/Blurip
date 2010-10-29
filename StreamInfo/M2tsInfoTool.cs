@@ -137,8 +137,10 @@ namespace BluRip
                         {
                             if (!Regex.IsMatch(tmp[i + 1], "^[0-9.*].*:"))
                             {
-                                sr.addInfo = tmp[i + 1];
-
+                                if (!tmp[i + 1].StartsWith("v0"))
+                                {
+                                    sr.addInfo = tmp[i + 1];
+                                }
                             }
                         }
 

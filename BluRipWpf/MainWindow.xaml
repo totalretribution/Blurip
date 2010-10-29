@@ -65,6 +65,7 @@
                         <Label Content="{DynamicResource LabelStreamListDesc}" HorizontalAlignment="Left" Margin="6,116,0,0" Name="labelStreamListDesc" VerticalAlignment="Top" />
                         <Label Content="{DynamicResource LabelTitleDesc}" HorizontalAlignment="Left" Margin="6,61,0,0" Name="labelTitleDesc" VerticalAlignment="Top" />
                         <Button Content="{DynamicResource ButtonResetStreams}" Height="23" Margin="0,87,6,0" Name="buttonResetStreams" VerticalAlignment="Top" HorizontalAlignment="Right" Width="192" Click="buttonResetStreams_Click" />
+                        <Button Content="{DynamicResource ButtonVideoPreview}" Height="23" HorizontalAlignment="Right" Margin="0,116,6,0" Name="buttonVideoPreview" VerticalAlignment="Top" Width="192" Click="buttonVideoPreview_Click" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabOutput}" Name="tabItemOutput">

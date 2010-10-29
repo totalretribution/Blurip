@@ -217,6 +217,7 @@ namespace BluRip
         {
             try
             {
+                if (comboBoxTitle.SelectedIndex == -1) return;
                 int maxLength = 0;
                 int selectionCount = 0;
                 foreach (StreamInfo si in titleList[comboBoxTitle.SelectedIndex].streams)
@@ -343,7 +344,8 @@ namespace BluRip
                         }
                         if (si.streamType == StreamType.Video)
                         {
-                            if (si.desc.Contains("1080") && videoCount == 0)
+                            // only autoselect first video stream (3d discs!)
+                            if (si.desc.Contains("1080") && videoCount < 1)
                             {
                                 si.selected = true;
                                 videoCount++;

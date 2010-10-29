@@ -119,6 +119,13 @@ namespace BluRip
                         }
                         else if (si.streamType == StreamType.Audio)
                         {
+                            string channel = "";
+                            if (si.desc.Contains("7.1 channels")) channel = "71";
+                            else if (si.desc.Contains("5.1 channels")) channel = "51";
+                            else if (si.desc.Contains("3.2 channels")) channel = "32";
+                            else if (si.desc.Contains("2.0 channels")) channel = "20";
+                            else if (si.desc.Contains("1.0 channels")) channel = "10";
+
                             if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
                             {
                                 Parameter += "audio_custom_" + si.language + ((AdvancedAudioOptions)si.advancedOptions).extension + "\" ";
@@ -143,22 +150,22 @@ namespace BluRip
                             {
                                 if (settings.untouchedAudio && si.typeDesc == "TrueHD/AC3")
                                 {
-                                    Parameter += "audio_thd_" + si.language + ".thd\" ";
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_thd_" + si.language + ".thd";
+                                    Parameter += "audio_thd_" + channel + "_" + si.language + ".thd\" ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_thd_" + channel + "_" + si.language + ".thd";
                                 }
                                 else if (settings.untouchedAudio && si.typeDesc == "E-AC3")
                                 {
-                                    Parameter += "audio_eac3_" + si.language + ".eac3\" ";
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_eac3_" + si.language + ".eac3";
+                                    Parameter += "audio_eac3_" + channel + "_" + si.language + ".eac3\" ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_eac3_" + channel + "_" + si.language + ".eac3";
                                 }
                                 else if (settings.untouchedAudio && si.typeDesc == "RAW/PCM")
                                 {
-                                    Parameter += "audio_pcm_wav_" + si.language + ".wav\" -blu-ray ";
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_pcm_wav_" + si.language + ".wav";
+                                    Parameter += "audio_pcm_wav_" + channel + "_" + si.language + ".wav\" -blu-ray ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_pcm_wav_" + channel + "_" + si.language + ".wav";
                                 }
                                 else
                                 {
-                                    Parameter += "audio_ac3_" + si.language + ".ac3\" ";
+                                    Parameter += "audio_ac3_" + channel + "_" + si.language + ".ac3\" ";
                                     if (settings.downmixAc3)
                                     {
                                         Parameter += "-" + ac3Bitrate + " ";
@@ -168,28 +175,28 @@ namespace BluRip
                                     {
                                         Parameter += "-blu-ray ";
                                     }
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + si.language + ".ac3";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + channel + "_" + si.language + ".ac3";
                                 }
                             }
                             else if (dtsAudioTypes.Contains(si.typeDesc))
                             {
                                 if (settings.untouchedAudio && (si.typeDesc == "DTS Master Audio" || si.typeDesc == "DTS Hi-Res"))
                                 {
-                                    Parameter += "audio_dtsHD_" + si.language + ".dtshd\" ";
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dtsHD_" + si.language + ".dtshd";
+                                    Parameter += "audio_dtsHD_" + channel + "_" + si.language + ".dtshd\" ";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dtsHD_" + channel + "_" + si.language + ".dtshd";
                                 }
                                 else if (settings.convertDtsToAc3)
                                 {
-                                    Parameter += "audio_ac3_" + si.language + ".ac3\" ";
+                                    Parameter += "audio_ac3_" + channel + "_" + si.language + ".ac3\" ";
                                     if (settings.downmixAc3)
                                     {
                                         Parameter += "-" + ac3Bitrate + " ";
                                     }
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + si.language + ".ac3";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_ac3_" + channel + "_" + si.language + ".ac3";
                                 }
                                 else
                                 {
-                                    Parameter += "audio_dts_" + si.language + ".dts\" ";
+                                    Parameter += "audio_dts_" + channel + "_" + si.language + ".dts\" ";
                                     if (si.addInfo.Contains("core") && settings.dtsHdCore)
                                     {
                                         Parameter += "-core ";
@@ -198,7 +205,7 @@ namespace BluRip
                                     {
                                         Parameter += "-" + dtsBitrate + " ";
                                     }
-                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dts_" + si.language + ".dts";
+                                    si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dts_" + channel + "_" + si.language + ".dts";
                                 }
                             }
                         }
@@ -206,8 +213,12 @@ namespace BluRip
                         {
                             if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions) && ((AdvancedVideoOptions)si.advancedOptions).noMkvDemux)
                             {
-                                Parameter += "video" + ((AdvancedVideoOptions)si.advancedOptions).videoExtension + "\" ";
-                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video" + ((AdvancedVideoOptions)si.advancedOptions).videoExtension;
+                                string ext = "";
+                                if (si.desc.Contains("h264/AVC")) ext = "h264";
+                                else if (si.desc.Contains("VC-1")) ext = "vc1";
+                                else if (si.desc.Contains("MPEG2")) ext = "mpeg2";
+                                Parameter += "video." + ext + "\" ";
+                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video." + ext;
                             }
                             else
                             {

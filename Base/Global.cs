@@ -54,6 +54,7 @@ namespace BluRip
                 videoTypes.Add("h264/AVC");
                 videoTypes.Add("VC-1");
                 videoTypes.Add("MPEG2");
+                videoTypes.Add("h264/AVC  (left eye)");
 
                 ac3AudioTypes.Add("TrueHD/AC3");
                 ac3AudioTypes.Add("AC3");

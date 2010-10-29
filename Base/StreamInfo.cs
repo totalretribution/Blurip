@@ -45,10 +45,16 @@ namespace BluRip
             {
                 this.streams.Add(new StreamInfo(si));
             }
+            files.Clear();
+            foreach (string s in orig.files)
+            {
+                this.files.Add(s);
+            }
         }
 
         public string desc = "";
         public string streamNumber = "";
+        public List<string> files = new List<string>();
 
         public List<StreamInfo> streams = new List<StreamInfo>();
 
@@ -379,7 +385,6 @@ namespace BluRip
             this.inputResX = ((AdvancedVideoOptions)orig).inputResX;
             this.inputResY = ((AdvancedVideoOptions)orig).inputResY;
             this.noMkvDemux = ((AdvancedVideoOptions)orig).noMkvDemux;
-            this.videoExtension = ((AdvancedVideoOptions)orig).videoExtension;
             this.manualAspectRatio = ((AdvancedVideoOptions)orig).manualAspectRatio;
             this.aspectRatio = ((AdvancedVideoOptions)orig).aspectRatio;
         }
@@ -408,7 +413,6 @@ namespace BluRip
         public int inputResX = 1920;
         public int inputResY = 1080;
         public bool noMkvDemux = false;
-        public string videoExtension = "";
         public bool manualAspectRatio = false;
         public string aspectRatio = "";
     }

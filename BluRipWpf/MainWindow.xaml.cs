@@ -59,6 +59,12 @@ namespace BluRip
         private List<Project> projectQueue = new List<Project>();
         private bool isWindows7 = false;
 
+        public UserSettings Settings
+        {
+            get { return settings; }
+            set { settings = value; }
+        }
+
         public MainWindow()
         {            
             try
@@ -2181,6 +2187,33 @@ namespace BluRip
                 else
                 {
                     progressBarMain.Dispatcher.Invoke(new UpdateStatusDelegate(UpdateStatusBar), new object[] { value });
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonVideoPreview_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (m2tsList.Count > 0)
+                {
+                    VideoForm vf = new VideoForm(m2tsList[0]);
+                    vf.ShowDialog();
+                }
+                else
+                {
+                    int index = comboBoxTitle.SelectedIndex;
+                    if (index > -1)
+                    {
+                        if (titleList[index].files.Count > 0)
+                        {
+                            VideoForm vf = new VideoForm(titleList[index].files[0]);
+                            vf.ShowDialog();
+                        }
+                    }
                 }
             }
             catch (Exception)

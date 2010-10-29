@@ -87,6 +87,8 @@ namespace BluRip
                 if (avo.resizeMethod > -1 && avo.resizeMethod < GlobalVars.resizeMethods.Count) comboBoxResizeMethod.SelectedIndex = avo.resizeMethod;
 
                 checkBoxManualResize_Checked(null, null);
+
+                checkBoxNoMkvDemux.IsChecked = avo.noMkvDemux;
             }
             catch (Exception ex)
             {
@@ -432,6 +434,17 @@ namespace BluRip
             try
             {
                 avo.resizeMethod = comboBoxResizeMethod.SelectedIndex;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxNoMkvDemux_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                avo.noMkvDemux = (bool)checkBoxNoMkvDemux.IsChecked;
             }
             catch (Exception)
             {
