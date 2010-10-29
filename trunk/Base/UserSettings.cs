@@ -53,21 +53,7 @@ namespace BluRip
         Bitrate, // specify bitrate
         Size // specify target size
     }
-
-    /*
-    The number of reference frames
-    ***1080P Normal movie + Animation***
-    ref= 4 (max. resolution = 1920x1088) < 3 ref = not good enough for AHD
-    ref= 5 (max. resolution = 1920x864) < 3 ref = not good enough for AHD
-    ref= 6 (max. resolution = 1920x720) < 3 ref = not good enough for AHD
-
-    ***720p Normal movie + Animation***
-    ref= 09 (max. resolution = 1280x720) < 5 ref = not good enough for AHD
-    ref= 10 (max. resolution = 1280x648) < 5 ref = not good enough for AHD
-    ref= 11 (max. resolution = 1280x588) < 5 ref = not good enough for AHD
-    ref= 12 (max. resolution = 1280x540) < 5 ref = not good enough for AHD
-     */
-
+        
     public class EncodingSettings
     {
         public EncodingSettings() { }
@@ -338,6 +324,7 @@ namespace BluRip
             this.doEncode = orig.doEncode;
             this.doMux = orig.doMux;
             this.suptitlePath = orig.suptitlePath;
+            this.autoScroll = orig.autoScroll;
 
             this.disableAudioHeaderCompression = orig.disableAudioHeaderCompression;
             this.disableVideoHeaderCompression = orig.disableVideoHeaderCompression;
@@ -549,6 +536,7 @@ namespace BluRip
         public bool doSubtitle = true;
         public bool doEncode = true;
         public bool doMux = true;
+        public bool autoScroll = true;
 
         public bool disableAudioHeaderCompression = false;
         public bool disableVideoHeaderCompression = false;

@@ -76,5 +76,6 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
+        <CheckBox Content="{DynamicResource CheckBoxNoMkvDemux}" Height="16" HorizontalAlignment="Left" Margin="289,214,0,0" Name="checkBoxNoMkvDemux" VerticalAlignment="Top" Checked="checkBoxNoMkvDemux_Checked" Unchecked="checkBoxNoMkvDemux_Checked" />
     </Grid>
 </Window>

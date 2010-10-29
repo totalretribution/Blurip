@@ -96,10 +96,38 @@ namespace BluRip
                 }
                 for (int i = 0; i < tmp.Length; i++)
                 {
+                    List<string> files = new List<string>();
+                    if (tmp[i].Contains(".m2ts"))
+                    {
+                        string[] tmp2 = tmp[i].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        for (int i2 = 0; i2 < tmp2.Length; i2++)
+                        {
+                            tmp2[i2] = tmp2[i2].Trim();
+                        }                        
+                        for (int file = 0; file < tmp2.Length; file++)
+                        {
+                            if (tmp2[file].Contains(".m2ts"))
+                            {
+                                if (File.Exists(settings.lastBluRayPath + "\\" + tmp2[file]))
+                                {
+                                    files.Add(settings.lastBluRayPath + "\\" + tmp2[file]);
+                                }
+                                else if (File.Exists(settings.lastBluRayPath + "\\stream\\" + tmp2[file]))
+                                {
+                                    files.Add(settings.lastBluRayPath + "\\stream\\" + tmp2[file]);
+                                }
+                                else if (File.Exists(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]))
+                                {
+                                    files.Add(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]);
+                                }
+                            }
+                        }
+                        int count = files.Count;
+                    }
                     if (Regex.IsMatch(tmp[i], "^[0-9.*].*\\)"))
                     {
                         string[] tmp2 = tmp[i].Split(new char[] { ')' }, StringSplitOptions.RemoveEmptyEntries);
-                        SubStreamInfoTool ssit = new SubStreamInfoTool(settings, ref result, titlePath, tmp2[0], videoTypes, ac3AudioTypes, dtsAudioTypes);
+                        SubStreamInfoTool ssit = new SubStreamInfoTool(settings, ref result, titlePath, tmp2[0], videoTypes, ac3AudioTypes, dtsAudioTypes, files);
                         ssit.OnInfoMsg += new InfoEventHandler(InfoMsg);
                         ssit.OnLogMsg += new LogEventHandler(LogMsg);
                         ssit.Start();

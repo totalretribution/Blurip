@@ -44,7 +44,8 @@
     <system:String x:Key="ButtonAbort">Abbrechen</system:String>
     <system:String x:Key="ContextMenuEditAdvancedOptions">Bearbeite erweiterte Einstellungen</system:String>
     <system:String x:Key="ContextMenuDelAdvancedOptions">Lösche erweiterte Einstellungen</system:String>
-
+    <system:String x:Key="ButtonVideoPreview">Videovorschau</system:String>
+    
     <!-- Tab Output -->
     <system:String x:Key="TabOutput">Ausgabe</system:String>
     <system:String x:Key="LabelWorkingDirectory">Arbeitsverzeichnis</system:String>
@@ -161,6 +162,7 @@
     <system:String x:Key="MenuLogClear">Lösche Log</system:String>
     <system:String x:Key="MenuLogSave">Log speichern</system:String>
     <system:String x:Key="LogSaveFileFilter">Log Datei (*.txt)|*.txt</system:String>
+    <system:String x:Key="CheckBoxAutoScroll">AutoScroll</system:String>
 
     <!-- Status bar -->
     <system:String x:Key="StatusBar">Status:</system:String>
@@ -444,6 +446,7 @@
     <system:String x:Key="CheckBoxManualAspectRatio">Setze mkvmerge aspect ratio</system:String>
     <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
+    <system:String x:Key="CheckBoxNoMkvDemux">Video nicht nach .mkv demuxen</system:String>
 
     <!-- AdvancedSubtitleOptions Window -->
     <system:String x:Key="CaptionAdvancedSubtitleOptionsWindow">Bearbeite erweiterte Untertiteloptionen</system:String>

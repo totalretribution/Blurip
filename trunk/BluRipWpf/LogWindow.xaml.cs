@@ -44,9 +44,10 @@ namespace BluRip
         public LogWindow(MainWindow mainWindow)
         {            
             try
-            {
+            {                
                 InitializeComponent();
                 this.mainWindow = mainWindow;
+                checkBoxAutoscroll.IsChecked = mainWindow.Settings.autoScroll;
             }
             catch (Exception ex)
             {
@@ -79,7 +80,7 @@ namespace BluRip
                 if (richTextBoxMainLog.Dispatcher.CheckAccess())
                 {
                     richTextBoxMainLog.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\r");
-                    richTextBoxMainLog.ScrollToEnd();
+                    if(checkBoxAutoscroll.IsChecked == true) richTextBoxMainLog.ScrollToEnd();
                 }
                 else
                 {
@@ -98,7 +99,7 @@ namespace BluRip
                 if (richTextBoxDemuxLog.Dispatcher.CheckAccess())
                 {
                     richTextBoxDemuxLog.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\r");
-                    richTextBoxDemuxLog.ScrollToEnd();
+                    if (checkBoxAutoscroll.IsChecked == true) richTextBoxDemuxLog.ScrollToEnd();
                     MessageMain(msg);
                 }
                 else
@@ -119,7 +120,7 @@ namespace BluRip
                 if (richTextBoxCropLog.Dispatcher.CheckAccess())
                 {
                     richTextBoxCropLog.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\r");
-                    richTextBoxCropLog.ScrollToEnd();
+                    if (checkBoxAutoscroll.IsChecked == true) richTextBoxCropLog.ScrollToEnd();
                     MessageMain(msg);
                 }
                 else
@@ -140,7 +141,7 @@ namespace BluRip
                 if (richTextBoxSubtitleLog.Dispatcher.CheckAccess())
                 {
                     richTextBoxSubtitleLog.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\r");
-                    richTextBoxSubtitleLog.ScrollToEnd();
+                    if (checkBoxAutoscroll.IsChecked == true) richTextBoxSubtitleLog.ScrollToEnd();
                     MessageMain(msg);
                 }
                 else
@@ -161,7 +162,7 @@ namespace BluRip
                 if (richTextBoxEncodeLog.Dispatcher.CheckAccess())
                 {
                     richTextBoxEncodeLog.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\r");
-                    richTextBoxEncodeLog.ScrollToEnd();
+                    if (checkBoxAutoscroll.IsChecked == true) richTextBoxEncodeLog.ScrollToEnd();
                     MessageMain(msg);
                 }
                 else
@@ -182,7 +183,7 @@ namespace BluRip
                 if (richTextBoxMuxLog.Dispatcher.CheckAccess())
                 {
                     richTextBoxMuxLog.AppendText("[" + DateTime.Now.ToString() + "] " + msg + "\r");
-                    richTextBoxMuxLog.ScrollToEnd();
+                    if (checkBoxAutoscroll.IsChecked == true) richTextBoxMuxLog.ScrollToEnd();
                     MessageMain(msg);
                 }
                 else
@@ -351,6 +352,20 @@ namespace BluRip
                 string tmp = "";
                 foreach (string s in lines) tmp += s.Trim() + "\r\n";
                 System.IO.File.WriteAllText(filename, tmp);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxAutoscroll_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (mainWindow != null)
+                {
+                    mainWindow.Settings.autoScroll = (bool)checkBoxAutoscroll.IsChecked;
+                }
             }
             catch (Exception)
             {
