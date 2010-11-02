@@ -217,11 +217,17 @@ namespace BluRip
                     UpdateDictionary("Translation/en.xaml");
                     System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
                 }
+                else if (settings.language == "fr")
+                {
+                    UpdateDictionary("Translation/fr.xaml");
+                    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("fr");
+                }
                 else
                 {
                     UpdateDictionary("Translation/en.xaml");
                     System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
                 }
+                UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
             }
             catch (Exception)
             {
@@ -1043,6 +1049,7 @@ namespace BluRip
                 if (menuItemLanguageEnglish.IsChecked)
                 {
                     menuItemLanguageGerman.IsChecked = false;
+                    menuItemLanguageFrench.IsChecked = false;
                     settings.language = "en";
                     LoadLanguage();
                     SavePosition();
@@ -1059,7 +1066,21 @@ namespace BluRip
             if (menuItemLanguageGerman.IsChecked)
             {
                 menuItemLanguageEnglish.IsChecked = false;
+                menuItemLanguageFrench.IsChecked = false;
                 settings.language = "de";
+                LoadLanguage();
+                SavePosition();
+                UpdateFromSettings(false);
+            }
+        }
+
+        private void menuItemLanguageFrench_Click(object sender, RoutedEventArgs e)
+        {
+            if (menuItemLanguageFrench.IsChecked)
+            {
+                menuItemLanguageEnglish.IsChecked = false;
+                menuItemLanguageGerman.IsChecked = false;
+                settings.language = "fr";
                 LoadLanguage();
                 SavePosition();
                 UpdateFromSettings(false);

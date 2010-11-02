@@ -747,6 +747,14 @@ namespace BluRip
                         }
                     }
                 }
+                if (!cropInfo.resize)
+                {
+                    cropInfo.resizeY -= (cropInfo.cropTop + cropInfo.cropBottom);
+                    if (cropInfo.border)
+                    {
+                        cropInfo.resizeY += (cropInfo.borderTop + cropInfo.cropBottom);
+                    }
+                }                
             }
             catch (Exception)
             {

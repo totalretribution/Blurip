@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BluRip.AdvancedVideoOptionsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{DynamicResource CaptionAdvancedVideoOptionsWindow}" Height="657" Width="611" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="{DynamicResource CaptionAdvancedVideoOptionsWindow}" Height="722" Width="611" Icon="/BluRip;component/blurip.ico" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Button Content="{DynamicResource ButtonOk}" HorizontalAlignment="Left" Margin="12,0,0,12" Name="buttonOk" Width="75" Height="23" VerticalAlignment="Bottom" IsDefault="True" Click="buttonOk_Click" />
         <Button Content="{DynamicResource ButtonCancel}" HorizontalAlignment="Left" Margin="93,0,0,12" Name="buttonCancel" Width="75" Height="23" VerticalAlignment="Bottom" IsCancel="True" />
@@ -77,5 +77,6 @@
             </Grid>
         </GroupBox>
         <CheckBox Content="{DynamicResource CheckBoxNoMkvDemux}" Height="16" HorizontalAlignment="Left" Margin="289,214,0,0" Name="checkBoxNoMkvDemux" VerticalAlignment="Top" Checked="checkBoxNoMkvDemux_Checked" Unchecked="checkBoxNoMkvDemux_Checked" />
+        <TextBox Height="56" HorizontalAlignment="Left" Margin="12,586,0,0" Name="textBoxNote" VerticalAlignment="Top" Width="565" Text="{DynamicResource TextBoxResolutionNote}" IsReadOnly="True" TextWrapping="Wrap" />
     </Grid>
 </Window>

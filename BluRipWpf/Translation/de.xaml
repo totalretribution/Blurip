@@ -21,6 +21,7 @@
     <system:String x:Key="MenuLanguage">Sprache</system:String>
     <system:String x:Key="MenuLanguageEnglish">English</system:String>
     <system:String x:Key="MenuLanguageGerman">Deutsch</system:String>
+    <system:String x:Key="MenuLanguageFrench">Französisch</system:String>
     <system:String x:Key="MenuSettings">Einstellungen</system:String>
     <system:String x:Key="MenuSettingsExternalTools">Externe Programme</system:String>
     <system:String x:Key="MenuSettingsEncodingProfiles">Bearbeite Encoding Profile</system:String>
@@ -236,7 +237,7 @@
     <system:String x:Key="NewEncodingProfileDesc">Neues Encoding Profil</system:String>
     <system:String x:Key="ButtonX264Help">Zeige x264 Hilfe</system:String>
     <system:String x:Key="ButtonDxvaRestrictions">Zeige DXVA Einschränkungen</system:String>
-    <system:String x:Key="TextBlockNote">Für 2D Animation/Cartoon/Anime setze aq-mod auf 0 und benutze 'tune film' - für alles andere inklusive Cgi/3d Animation benutze 'tune film'</system:String>
+    <system:String x:Key="TextBlockNote">Für 2D Animation/Cartoon/Anime setze aq-mod auf 0 und benutze 'tune animation' - für alles andere inklusive Cgi/3d Animation benutze 'tune film'</system:String>
     <system:String x:Key="MsgX264Parameter">X264 Kommandozeile: {0}</system:String>
     <system:String x:Key="LabelEncodingProfileProfile">--profile</system:String>
     <system:String x:Key="LabelEncodingProfilePreset">--preset</system:String>
@@ -317,7 +318,7 @@
     <system:String x:Key="LabelSfiNormalSub">Normal .sub</system:String>
     <system:String x:Key="LabelSfiNormalSup">Normal .sup</system:String>
     <system:String x:Key="LabelSfiForcedIdxLowRes">Forced .idx (Lowres)</system:String>
-    <system:String x:Key="LabelSfiForecedSubLowRes">Forced .sub (Lowres)</system:String>
+    <system:String x:Key="LabelSfiForcedSubLowRes">Forced .sub (Lowres)</system:String>
     <system:String x:Key="LabelSfiNormalIdxLowRes">Normal .idx (Lowres)</system:String>
     <system:String x:Key="LabelSfiNormalSubLowRes">Normal .sub (Lowres)</system:String>
     <system:String x:Key="ButtonSfiOpen">...</system:String>
@@ -447,6 +448,7 @@
     <system:String x:Key="GroupBoxAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="LabelAspectRatio">Aspect ratio</system:String>
     <system:String x:Key="CheckBoxNoMkvDemux">Video nicht nach .mkv demuxen</system:String>
+    <system:String x:Key="TextBoxResolutionNote">Wenn AutoCrop deaktiviert ist und 64-bit x264 benutzt wird, Resizewerte auf Ausgabeauflösung setzen - mit Crop und AddBorder Werten. (Beispiel: 1920x800 wenn Crop oben/unten = 140)</system:String>
 
     <!-- AdvancedSubtitleOptions Window -->
     <system:String x:Key="CaptionAdvancedSubtitleOptionsWindow">Bearbeite erweiterte Untertiteloptionen</system:String>
