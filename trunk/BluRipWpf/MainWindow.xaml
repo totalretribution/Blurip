@@ -35,6 +35,7 @@
             <MenuItem Header="{DynamicResource MenuLanguage}" Name="menuItemLanguage">
                 <MenuItem Header="{DynamicResource MenuLanguageEnglish}" Name="menuItemLanguageEnglish" IsCheckable="True" Click="menuItemLanguageEnglish_Click" />
                 <MenuItem Header="{DynamicResource MenuLanguageGerman}" Name="menuItemLanguageGerman" IsCheckable="True" Click="menuItemLanguageGerman_Click" />
+                <MenuItem Header="{DynamicResource MenuLanguageFrench}" Name="menuItemLanguageFrench" IsCheckable="True" Click="menuItemLanguageFrench_Click" />
             </MenuItem>
             <MenuItem Header="{DynamicResource MenuSettings}" Name="menuItemSettings">
                 <MenuItem Header="{DynamicResource MenuSettingsExternalTools}" Name="menuItemSettingsExternalTools" Click="menuItemSettingsExternalTools_Click" />

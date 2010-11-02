@@ -75,12 +75,12 @@ namespace BluRip
                     axVLCPlugin21.playlist.add(filename);
                     axVLCPlugin21.playlist.play();
                     int count = 0;
-                    while (!axVLCPlugin21.playlist.isPlaying && count < 40)
+                    while (!axVLCPlugin21.playlist.isPlaying && count < 100)
                     {
                         count++;
                         Thread.Sleep(50);
                     }
-                    if (count == 40)
+                    if (count == 100)
                     {
                         axVLCPlugin21.playlist.stop();
                         MessageBox.Show("There was an error while opening the file", "Error");

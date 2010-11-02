@@ -10,7 +10,7 @@
             <Grid>
                 <Label Content="{DynamicResource LabelSfiForcedIdxLowRes}" HorizontalAlignment="Left" Margin="6,6,0,0" Name="labelForcedIdxLowres" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="6,31,0,0" Name="textBoxForcedIdxLowres" VerticalAlignment="Top" Width="200" TextChanged="textBoxForcedIdxLowres_TextChanged" />
-                <Label Content="{DynamicResource LabelSfiForecedSubLowRes}" HorizontalAlignment="Left" Margin="6,61,0,0" Name="labelForcedSubLowres" VerticalAlignment="Top" />
+                <Label Content="{DynamicResource LabelSfiForcedSubLowRes}" HorizontalAlignment="Left" Margin="6,61,0,0" Name="labelForcedSubLowres" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="6,87,0,0" Name="textBoxForcedSubLowres" VerticalAlignment="Top" Width="200" TextChanged="textBoxForcedSubLowres_TextChanged" />
                 <Label Content="{DynamicResource LabelSfiNormalIdxLowRes}" HorizontalAlignment="Left" Margin="6,116,0,0" Name="labelNormalIdxLowres" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="6,142,0,0" Name="textBoxNormalIdxLowres" VerticalAlignment="Top" Width="200" TextChanged="textBoxNormalIdxLowres_TextChanged" />
