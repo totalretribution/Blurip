@@ -18,8 +18,14 @@
 
 (Done)  - edit option demuxed stream list
 
-- Progress bar (0-100%) for mux & encode
+(Done) Progress bar (0-100%) for mux & encode
 
 - Wizard to adjust settings
 
 (Done) - Show bitrate/size if 2-pass profile selected in main window
+
+- interlaced support
+
+- Load project into queue while running
+
+- Shutdown option in main window

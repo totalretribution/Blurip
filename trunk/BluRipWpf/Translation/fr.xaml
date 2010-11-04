@@ -454,8 +454,9 @@
 	<system:String x:Key="CheckBoxIsForced">Est une piste forcée</system:String>
 	<system:String x:Key="CheckBoxSupTitle">Encodé en dur dans la vidéo avec SupTitle</system:String>
 	<system:String x:Key="CheckBoxSupTitleOnlyForced">Encodé uniquement les sous-titres forcés avec SupTitle</system:String>
+    <system:String x:Key="TextBoxResolutionNote">If AutoCrop is disabled and 64-bit x264 is used, set resize values to the resulting output resolution including crop/addborder values. (Example: 1920x800 if crop top/bottom = 140)</system:String>
 
-	<!-- link Window -->
+    <!-- link Window -->
 	<system:String x:Key="CaptionLinkWindow">Liens vers les outils</system:String>
 	<system:String x:Key="LabelAvisynthLink">Lien vers AviSynth</system:String>
 	<system:String x:Key="LabelHaaliLink">Lien vers Haali splitter</system:String>
@@ -474,6 +475,7 @@
 	<system:String x:Key="LabelNeededTools">Outils nécessaires</system:String>
 	<system:String x:Key="LabelUsefullTools">Outils utiles</system:String>
 	<system:String x:Key="LabelSubTitleInfoLink">Lien vers la dll subtitle</system:String>
+    <system:String x:Key="LabelVlcInfoLink">Lien vers VLC</system:String>
 
 	<!-- About Window -->
 	<system:String x:Key="CaptionAboutWindow">A propos de BluRip</system:String>
