@@ -1,3 +1,16 @@
+v0.5.2
+
+    - French translation
+    - Video preview with vlc plugin (needs installed vlc + activeX plugin)
+    - Progress bar for encode/mux with Windows 7 taskbar support
+    - Always recreate .avs on encode
+    - New encoding profiles
+    - Option to edit CropInfo
+    - Hardcode subs with SupTitle.dll
+    - Support for 3D blurays
+    - New plugin system
+    - Lots of fixes & minor enhancements
+
 v0.5.1 (2010/08/16)
 
     - Some minor GUI fixes (don't reset position on language change etc)

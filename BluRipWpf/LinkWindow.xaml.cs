@@ -52,6 +52,7 @@ namespace BluRip
         private string x264InfoLink = "http://mewiki.project357.com/wiki/X264_Settings";
         private string avs2yuvLink = "http://akuvian.org/src/avisynth/avs2yuv/";
         private string suptitleLink = "http://www.zachsaw.co.cc/?pg=suptitle_pgs_avisynth_plugin";
+        private string vlcLink = "http://www.videolan.org";
 
         public LinkWindow()
         {
@@ -229,6 +230,17 @@ namespace BluRip
             try
             {
                 System.Diagnostics.Process.Start(suptitleLink);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void labelVlcInfoLink_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(vlcLink);
             }
             catch (Exception)
             {

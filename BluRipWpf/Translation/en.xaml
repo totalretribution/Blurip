@@ -381,7 +381,6 @@
     <system:String x:Key="LabelEditPlugin">Double click to edit</system:String>
     <system:String x:Key="LabelPluginNote">Note: Plugin settings are global</system:String>
     
-    
     <!-- AdvancedAudioOptions Window -->
     <system:String x:Key="CaptionAdvancedAudioOptionsWindow">Edit advanced audio options</system:String>
     <system:String x:Key="GroupBoxRequired">Required settings</system:String>
@@ -476,6 +475,7 @@
     <system:String x:Key="LabelNeededTools">Needed tools</system:String>
     <system:String x:Key="LabelUsefullTools">Usefull tools</system:String>
     <system:String x:Key="LabelSubTitleInfoLink">Link to subtitle dll</system:String>
+    <system:String x:Key="LabelVlcInfoLink">Link to VLC</system:String>
 
     <!-- About Window -->
     <system:String x:Key="CaptionAboutWindow">About BluRip</system:String>
@@ -543,7 +543,6 @@
     <system:String x:Key="ErrorEncodeFailed">Encode failed!</system:String>
     <system:String x:Key="ErrorEncode2passFailed">Encode (2. pass) failed!</system:String>
     <system:String x:Key="ErrorSuptitlePath">Path to suptitle.dll not set or found.</system:String>
-    
     
     <!-- Info msg -->
     <system:String x:Key="InfoManualFps">Using manual fps - override MediaInfo value</system:String>

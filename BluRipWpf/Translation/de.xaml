@@ -475,6 +475,7 @@
     <system:String x:Key="LabelNeededTools">Notwendige Programme</system:String>
     <system:String x:Key="LabelUsefullTools">Nützliche Programme</system:String>
     <system:String x:Key="LabelSubTitleInfoLink">Link zur subtitle dll</system:String>
+    <system:String x:Key="LabelVlcInfoLink">Link zu VLC</system:String>
     
     <!-- About Window -->
     <system:String x:Key="CaptionAboutWindow">Über BluRip</system:String>
@@ -528,6 +529,7 @@
     <system:String x:Key="ErrorNoTitle">Kein Titel ausgewählt</system:String>
     <system:String x:Key="ErrorWorkingDirectory">Arbeitsverzeichnis nicht gesetzt</system:String>
     <system:String x:Key="ErrorTargetDirectory">Zielverzeichnis nicht gesetzt</system:String>
+    <system:String x:Key="ErrorEncodedMovieDirectory">Encodiertes Video Verzeichnis nicht gefunden</system:String>
     <system:String x:Key="ErrorMkvmergePath">Pfad zu mkvmerge.exe nicht gesetzt oder gefunden.</system:String>
     <system:String x:Key="ErrorSubtitleFile">Untertitel Datei(n) nicht gefunden</system:String>
     <system:String x:Key="ErrorChapterFile">Kapitel Datei nicht gefunden</system:String>
