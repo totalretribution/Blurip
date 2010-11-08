@@ -17,7 +17,13 @@ namespace BluRip
 
         public VideoForm()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public VideoForm(string filename)

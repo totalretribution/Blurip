@@ -191,6 +191,7 @@
     <system:String x:Key="ButtonFileListDown">Nach unten</system:String>
     <system:String x:Key="ButtonFileListDelete">Löschen</system:String>
     <system:String x:Key="ButtonFileListAdd">Hinzufügen</system:String>
+    <system:String x:Key="FileFilter">M2ts Dateien</system:String>
 
     <!-- Queue Window -->
     <system:String x:Key="CaptionQueueWindow">Projekt Queue</system:String>
@@ -226,7 +227,7 @@
     <system:String x:Key="CaptionEncodingProfileWindow">Bearbeite Encoding Profil</system:String>
     <system:String x:Key="LabelEncodingProfileDescription">Profilbeschreibung</system:String>
     <system:String x:Key="LabelEncodingProfileSettings">Zusätzliche Parameter</system:String>
-    <system:String x:Key="CheckBoxEncodingProfile2pass">2-pass Profil</system:String>
+    <system:String x:Key="CheckBoxEncodingProfile2pass">2-Pass Profil</system:String>
     <system:String x:Key="LabelEncodingProfileSettings2">Zusätzliche Parameter (2. Pass)</system:String>
     <system:String x:Key="LabelEncodingProfileSizeValue">Wert</system:String>
     <system:String x:Key="LabelEncodingProfileSizeType">Art</system:String>
@@ -252,6 +253,7 @@
     <system:String x:Key="CheckBoxEncodingProfileFastdecode">fastdecode (tune)</system:String>
     <system:String x:Key="CheckBoxEncodingProfileNofastpskip">--no-fast-pskip</system:String>
     <system:String x:Key="CheckBoxEncodingProfileSlowfirstpass">--slow-firstpass</system:String>
+    <system:String x:Key="GroupBox2pass">2. Pass</system:String>
 
     <!-- AvisynthProfiles Window -->
     <system:String x:Key="CaptionAvisynthProfilesWindow">Bearbeite AviSynth Profile</system:String>

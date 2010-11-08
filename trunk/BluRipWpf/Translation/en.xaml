@@ -191,6 +191,7 @@
     <system:String x:Key="ButtonFileListDown">Move down</system:String>
     <system:String x:Key="ButtonFileListDelete">Delete</system:String>
     <system:String x:Key="ButtonFileListAdd">Add</system:String>
+    <system:String x:Key="FileFilter">M2ts files</system:String>
 
     <!-- Queue Window -->
     <system:String x:Key="CaptionQueueWindow">Project queue</system:String>
@@ -252,6 +253,7 @@
     <system:String x:Key="CheckBoxEncodingProfileFastdecode">fastdecode (tune)</system:String>
     <system:String x:Key="CheckBoxEncodingProfileNofastpskip">--no-fast-pskip</system:String>
     <system:String x:Key="CheckBoxEncodingProfileSlowfirstpass">--slow-firstpass</system:String>
+    <system:String x:Key="GroupBox2pass">2. pass</system:String>
     
     <!-- AvisynthProfiles Window -->
     <system:String x:Key="CaptionAvisynthProfilesWindow">Edit AviSynth profiles</system:String>

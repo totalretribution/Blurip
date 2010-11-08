@@ -127,7 +127,7 @@ namespace BluRip
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "m2ts files|*.m2ts";
+                ofd.Filter = Global.Res("FileFilter") + "|*.m2ts";
                 ofd.Multiselect = true;
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
