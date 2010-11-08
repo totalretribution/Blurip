@@ -456,6 +456,11 @@ namespace BluRip
                         menuItemLanguageGerman.IsChecked = true;
                         menuItemLanguageGerman_Click(null, null);
                     }
+                    else if (settings.language == "fr")
+                    {
+                        menuItemLanguageFrench.IsChecked = true;
+                        menuItemLanguageFrench_Click(null, null);
+                    }
                     else
                     {
                         menuItemLanguageEnglish.IsChecked = true;
@@ -2235,6 +2240,23 @@ namespace BluRip
                             vf.ShowDialog();
                         }
                     }
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void buttonEncodedMovieDir_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    textBoxEncodedMovieDir.Text = fbd.SelectedPath;
+                    settings.encodedMovieDir = fbd.SelectedPath;
                 }
             }
             catch (Exception)

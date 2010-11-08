@@ -164,6 +164,9 @@ namespace BluRip
                         {                            
                             SubtitleFileInfo sfi = (SubtitleFileInfo)si.extraFileInfo;
 
+                            bool isForced = false;
+                            if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions) && ((AdvancedSubtitleOptions)si.advancedOptions).isForced) isForced = true;
+
                             bool mux = false;
                             bool pgs = false;
                             bool untouched = false;
@@ -418,7 +421,8 @@ namespace BluRip
                         if (si.extraFileInfo.GetType() == typeof(SubtitleFileInfo))
                         {
                             if (((SubtitleFileInfo)si.extraFileInfo).forcedIdx != "") return true;
-                            if (((SubtitleFileInfo)si.extraFileInfo).forcedSup != "") return true;                            
+                            if (((SubtitleFileInfo)si.extraFileInfo).forcedSup != "") return true;
+                            if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions) && ((AdvancedSubtitleOptions)si.advancedOptions).isForced) return true;
                         }
                     }
                 }

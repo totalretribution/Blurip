@@ -29,7 +29,7 @@
         <Label Content="{DynamicResource LabelEncodingProfileLevel}" HorizontalAlignment="Left" Margin="390,67,0,0" Name="labelLevel" VerticalAlignment="Top" />
         <Label Content="{DynamicResource LabelEncodingProfileCrf}" HorizontalAlignment="Left" Margin="516,67,0,0" Name="labelCrf" VerticalAlignment="Top" />
         <Label Content="{DynamicResource LabelEncodingProfileBframes}" HorizontalAlignment="Left" Margin="264,122,0,0" Name="labelBframes" VerticalAlignment="Top" />
-        <GroupBox Header="2. pass" Height="211" Margin="12,302,14,0" Name="groupBox2pass" VerticalAlignment="Top">
+        <GroupBox Header="{DynamicResource GroupBox2pass}" Height="211" Margin="12,302,14,0" Name="groupBox2pass" VerticalAlignment="Top">
             <Grid>
                 <Label Content="{DynamicResource LabelEncodingProfileSizeValue}" HorizontalAlignment="Left" Margin="6,9,0,0" Name="labelSizeValue" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="6,35,0,0" Name="textBoxSizeValue" VerticalAlignment="Top" Width="120" TextChanged="textBoxSizeValue_TextChanged" TabIndex="4" />
