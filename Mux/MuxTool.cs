@@ -322,7 +322,7 @@ namespace BluRip
                                 }
                                 else if (!settings.muxLowResSubs && !pgs)
                                 {
-                                    if (sfi.normalIdx != "")
+                                    if (sfi.normalIdx != "" && !isForced)
                                     {
                                         this.Parameter += "\"" + sfi.normalIdx + "\" ";
                                     }
@@ -331,10 +331,15 @@ namespace BluRip
                                         this.Parameter += " --track-name 0:Forced ";
                                         this.Parameter += "\"" + sfi.forcedIdx + "\" ";
                                     }
+                                    else if (sfi.normalIdx != "" && isForced)
+                                    {
+                                        this.Parameter += " --track-name 0:Forced ";
+                                        this.Parameter += "\"" + sfi.normalIdx + "\" ";
+                                    }
                                 }
                                 else if (!settings.muxLowResSubs && pgs)
                                 {
-                                    if (sfi.normalSup != "")
+                                    if (sfi.normalSup != "" && !isForced)
                                     {
                                         this.Parameter += "\"" + sfi.normalSup + "\" ";
                                     }
@@ -343,10 +348,15 @@ namespace BluRip
                                         this.Parameter += " --track-name 0:Forced ";
                                         this.Parameter += "\"" + sfi.forcedSup + "\" ";
                                     }
+                                    else if (sfi.normalSup != "")
+                                    {
+                                        this.Parameter += " --track-name 0:Forced ";
+                                        this.Parameter += "\"" + sfi.normalSup + "\" ";
+                                    }
                                 }
                                 else
                                 {
-                                    if (sfi.normalIdxLowRes != "")
+                                    if (sfi.normalIdxLowRes != "" && !isForced)
                                     {
                                         this.Parameter += "\"" + sfi.normalIdxLowRes + "\" ";
                                     }
@@ -354,6 +364,11 @@ namespace BluRip
                                     {
                                         this.Parameter += " --track-name 0:Forced ";
                                         this.Parameter += "\"" + sfi.forcedIdxLowRes + "\" ";
+                                    }
+                                    else if (sfi.normalIdxLowRes != "" && isForced)
+                                    {
+                                        this.Parameter += " --track-name 0:Forced ";
+                                        this.Parameter += "\"" + sfi.normalIdxLowRes + "\" ";
                                     }
                                 }
                             }
