@@ -191,7 +191,7 @@
 	<system:String x:Key="ButtonFileListDown">Descendre</system:String>
 	<system:String x:Key="ButtonFileListDelete">Effacer</system:String>
 	<system:String x:Key="ButtonFileListAdd">Ajouter</system:String>
-    <system:String x:Key="FileFilter">M2ts files</system:String>
+    <system:String x:Key="FileFilter">Fichiers m2ts</system:String>
 
     <!-- Queue Window -->
 	<system:String x:Key="CaptionQueueWindow">Tâches du projet</system:String>
