@@ -504,6 +504,9 @@ namespace BluRip
                                 bool untouched = false;
                                 bool subidx = false;
 
+                                bool isForced = false;
+                                if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedSubtitleOptions) && ((AdvancedSubtitleOptions)si.advancedOptions).isForced) isForced = true;
+
                                 if (settings.copyUntouchedSubs)
                                 {
                                     if (!sfi.isSecond)
@@ -655,7 +658,7 @@ namespace BluRip
                                         }
                                         if (!pgs && subidx)
                                         {
-                                            if (sfi.normalIdx != "")
+                                            if (sfi.normalIdx != "" && !isForced)
                                             {
                                                 if (File.Exists(sfi.normalIdx)) File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".idx", true);
                                                 if (File.Exists(sfi.normalSub)) File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + ".sub", true);
@@ -665,16 +668,25 @@ namespace BluRip
                                                 if (File.Exists(sfi.forcedIdx)) File.Copy(sfi.forcedIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx", true);
                                                 if (File.Exists(sfi.forcedSub)) File.Copy(sfi.forcedSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub", true);
                                             }
+                                            else if (sfi.normalIdx != "" && isForced)
+                                            {
+                                                if (File.Exists(sfi.normalIdx)) File.Copy(sfi.normalIdx, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.idx", true);
+                                                if (File.Exists(sfi.normalSub)) File.Copy(sfi.normalSub, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced.sub", true);
+                                            }
                                         }
                                         else if (pgs)
                                         {
-                                            if (sfi.normalSup != "")
+                                            if (sfi.normalSup != "" && !isForced)
                                             {
                                                 if (File.Exists(sfi.normalSup)) File.Copy(sfi.normalSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_pgs.sup", true);
                                             }
                                             else if (sfi.forcedSup != "")
                                             {
                                                 if (File.Exists(sfi.forcedSup)) File.Copy(sfi.forcedSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced_pgs.sup", true);
+                                            }
+                                            else if (sfi.normalSup != "" && isForced)
+                                            {
+                                                if (File.Exists(sfi.normalSup)) File.Copy(sfi.normalSup, target + "_" + sub.ToString("d2") + "_" + si.language.ToLower() + "_forced_pgs.sup", true);
                                             }
                                         }
                                     }
