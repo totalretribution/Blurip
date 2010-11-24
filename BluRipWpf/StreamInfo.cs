@@ -62,9 +62,10 @@ namespace BluRip
                 comboBoxTitle.Items.Clear();
                 listBoxStreams.ItemsSource = null;
 
-                foreach (TitleInfo ti in titleList)
+                for(int i=0; i < titleList.Count; i++)
+                //foreach (TitleInfo ti in titleList)
                 {
-                    comboBoxTitle.Items.Add(ti.desc);
+                    comboBoxTitle.Items.Add((i+1).ToString() + ") " + titleList[i].desc);
                 }
                 if (titleList.Count > 0)
                 {
