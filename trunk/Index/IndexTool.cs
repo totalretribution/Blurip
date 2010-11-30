@@ -48,7 +48,7 @@ namespace BluRip
 
                 if (indexType == IndexType.ffmsindex)
                 {
-                    if (settings.deleteIndex)
+                    if (settings.deleteIndex || isOlder(filename + ".ffindex", filename))
                     {
                         if (File.Exists(filename + ".ffindex"))
                         {
@@ -67,7 +67,7 @@ namespace BluRip
                 else if (indexType == IndexType.dgindex)
                 {
                     string output = System.IO.Path.ChangeExtension(filename, "dgi");
-                    if (settings.deleteIndex)
+                    if (settings.deleteIndex || isOlder(output, filename))
                     {
                         if (File.Exists(output))
                         {
@@ -86,6 +86,47 @@ namespace BluRip
             }
             catch (Exception)
             {
+            }
+        }
+
+        private bool isOlder(string indexFile, string videoFile)
+        {
+            try
+            {
+                DateTime indexInfo = new DateTime(0,0,0);
+                DateTime videoInfo = new DateTime(0,0,0);
+
+                if (File.Exists(indexFile))
+                {
+                    indexInfo = File.GetCreationTime(indexFile);
+                }
+                else
+                {
+                    return false;
+                }
+
+                if (File.Exists(videoFile))
+                {
+                    videoInfo = File.GetCreationTime(videoFile);
+                }
+                else
+                {
+                    return false;
+                }
+
+                TimeSpan ts = indexInfo - videoInfo;
+                if (ts.TotalSeconds > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
