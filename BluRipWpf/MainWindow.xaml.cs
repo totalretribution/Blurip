@@ -71,7 +71,22 @@ namespace BluRip
             {
                 InitializeComponent();
 
-                settingsPath = AppDomain.CurrentDomain.BaseDirectory + "\\settings.xml";
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\settings.xml"))
+                {
+                    settingsPath = AppDomain.CurrentDomain.BaseDirectory + "\\settings.xml";
+                }
+                else
+                {
+                    string appDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    if (!Directory.Exists(appDir + "\\BluRip"))
+                    {
+                        Directory.CreateDirectory(appDir + "\\BluRip");
+                    }
+                    settingsPath = appDir + "\\BluRip\\settings.xml";
+                }
+
+
+                
 
                 if (!File.Exists(settingsPath))
                 {
