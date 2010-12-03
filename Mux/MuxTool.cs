@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace BluRip
 {
@@ -401,7 +402,7 @@ namespace BluRip
                 {
                     if (li.language == language) return li.languageShort;
                 }
-                return "";
+                return LanguageTag(language);
             }
             catch (Exception)
             {
@@ -416,6 +417,26 @@ namespace BluRip
                 foreach (LanguageInfo li in settings.preferredSubtitleLanguages)
                 {
                     if (li.language == language) return li.languageShort;
+                }
+                return LanguageTag(language);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        private string LanguageTag(string language)
+        {
+            try
+            {
+                CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+                foreach (CultureInfo ci in cultures)
+                {
+                    if (ci.EnglishName == language)
+                    {
+                        return ci.TwoLetterISOLanguageName;
+                    }
                 }
                 return "";
             }
