@@ -49,10 +49,10 @@ namespace BluRip
                 this.onlyForced = onlyForced;
                 this.lowRes = lowRes;
                 this.pgs = pgs;
-
-                if (this.fps == "23.00") this.fps = "23";
+                                
                 if (this.fps == "24.00") this.fps = "24";
                 if (this.fps == "25.00") this.fps = "25";
+                if (this.fps == "50.00") this.fps = "50";
 
                 string format = ".sub";
                 if (pgs)
