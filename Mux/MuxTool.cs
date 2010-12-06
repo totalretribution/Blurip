@@ -418,7 +418,14 @@ namespace BluRip
                 {
                     if (li.language == language) return li.languageShort;
                 }
-                return LanguageTag(language);
+                if (language == "Modern Greek")
+                {
+                    return LanguageTag("Greek");
+                }
+                else
+                {
+                    return LanguageTag(language);
+                }
             }
             catch (Exception)
             {
