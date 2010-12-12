@@ -124,6 +124,33 @@ namespace BluRip
                                 this.Parameter += "\"" + aao.additionalFilename + "\" ";
                             }
                         }
+                        if (settings.addAc3ToAllDts)
+                        {
+                            // check if already added by advanced audiooptions
+                            bool ac3Added = false;
+                            if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions) && ((AdvancedAudioOptions)si.advancedOptions).additionalAc3Track)
+                            {
+                                ac3Added = true;
+                            }
+                            if (!ac3Added)
+                            {
+                                if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions))
+                                {
+                                    AdvancedAudioOptions aao = (AdvancedAudioOptions)si.advancedOptions;
+                                    if (File.Exists(aao.additionalFilename))
+                                    {
+                                        trackId++;
+
+                                        if (st != "") this.Parameter += "--language 0" + ":" + st + " ";
+                                        if (settings.disableAudioHeaderCompression)
+                                        {
+                                            this.Parameter += headerCompression;
+                                        }
+                                        this.Parameter += "\"" + aao.additionalFilename + "\" ";
+                                    }
+                                }
+                            }
+                        }
                     }
                 }                
 
@@ -402,7 +429,14 @@ namespace BluRip
                 {
                     if (li.language == language) return li.languageShort;
                 }
-                return LanguageTag(language);
+                if (language == "Modern Greek")
+                {
+                    return LanguageTag("Greek");
+                }
+                else
+                {
+                    return LanguageTag(language);
+                }
             }
             catch (Exception)
             {

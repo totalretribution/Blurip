@@ -429,6 +429,7 @@ namespace BluRip
 
                 menuItemViewSnap.IsChecked = settings.snap;
                 menuItemViewExpertMode.IsChecked = settings.expertMode;
+                checkBoxAddAc3ToAllDts.IsChecked = settings.addAc3ToAllDts;
 
                 UpdateDiff();
 
@@ -2273,6 +2274,17 @@ namespace BluRip
                     textBoxEncodedMovieDir.Text = fbd.SelectedPath;
                     settings.encodedMovieDir = fbd.SelectedPath;
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxAddAc3ToAllDts_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.addAc3ToAllDts = (bool)checkBoxAddAc3ToAllDts.IsChecked;
             }
             catch (Exception)
             {

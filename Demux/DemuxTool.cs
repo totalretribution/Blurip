@@ -207,6 +207,23 @@ namespace BluRip
                                     }
                                     si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_dts_" + channel + "_" + si.language + ".dts";
                                 }
+                                if (settings.addAc3ToAllDts)
+                                {
+                                    // check if already added by advanced audiooptions
+                                    bool ac3Added = false;
+                                    if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedAudioOptions) && ((AdvancedAudioOptions)si.advancedOptions).additionalAc3Track)
+                                    {
+                                        ac3Added = true;
+                                    }
+                                    if (!ac3Added)
+                                    {
+                                        Parameter += si.number.ToString() + ": \"" + settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_";
+                                        Parameter += "audio_additionalAc3_" + si.language + ".ac3\" ";
+                                        if (si.advancedOptions == null || si.advancedOptions.GetType() != typeof(AdvancedAudioOptions)) si.advancedOptions = new AdvancedAudioOptions();
+                                        ((AdvancedAudioOptions)si.advancedOptions).additionalFilename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_";
+                                        ((AdvancedAudioOptions)si.advancedOptions).additionalFilename += "audio_additionalAc3_" + si.language + ".ac3";
+                                    }
+                                }
                             }
                         }
                         else if (si.streamType == StreamType.Video)

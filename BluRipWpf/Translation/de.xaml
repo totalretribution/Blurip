@@ -66,6 +66,7 @@
     <system:String x:Key="checkBoxUntouchedVideo">Benutze original Video</system:String>
     <system:String x:Key="HeaderAudioSettings">Audio Einstellungen</system:String>
     <system:String x:Key="checkBoxUntouchedAudio">Benutze original Audio</system:String>
+    <system:String x:Key="checkBoxAddAc3ToAllDts">Füge zusätzlichen Ac3 Track für jeden DTS Track hinzu</system:String>
     <system:String x:Key="checkBoxConvertDTStoAc3">Konvertiere DTS Tracks nach AC3</system:String>
     <system:String x:Key="HeaderSubtitleSettings">Untertitel Einstellungen</system:String>
     <system:String x:Key="LabelMuxSubtitle">Muxe Untertitel</system:String>

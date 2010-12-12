@@ -187,7 +187,7 @@ namespace BluRip
                 if (pass2)
                 {
                     if (slowfirstpass) tmp += "--slow-firstpass ";
-                    tmp += "--pass 1 --bitrate {0} --stats {1} ";
+                    tmp += "--pass 1 --bitrate {0} --stats \"{1}\" ";
                 }
 
                 tmp += settings;
@@ -231,7 +231,7 @@ namespace BluRip
                 if (nofastpskip) tmp += "--no-fast-pskip ";
                 if (pass2)
                 {
-                    tmp += "--pass 2 --bitrate {0} --stats {1} ";
+                    tmp += "--pass 2 --bitrate {0} --stats \"{1}\" ";
                 }
 
                 tmp += settings2;
@@ -330,6 +330,7 @@ namespace BluRip
             this.disableVideoHeaderCompression = orig.disableVideoHeaderCompression;
             this.resizeMethod = orig.resizeMethod;
             this.manualCrop = orig.manualCrop;
+            this.addAc3ToAllDts = orig.addAc3ToAllDts;
 
             this.snap = orig.snap;
             this.expertMode = orig.expertMode;
@@ -542,6 +543,7 @@ namespace BluRip
         public bool disableVideoHeaderCompression = false;
         public int resizeMethod = 4;
         public bool manualCrop = false;
+        public bool addAc3ToAllDts = false;
         // window settings
 
         public bool snap = false;        
