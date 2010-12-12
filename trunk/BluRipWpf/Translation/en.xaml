@@ -66,6 +66,7 @@
     <system:String x:Key="checkBoxUntouchedVideo">Use untouched video</system:String>
     <system:String x:Key="HeaderAudioSettings">Audio settings</system:String>
     <system:String x:Key="checkBoxUntouchedAudio">Use untouched audio</system:String>
+    <system:String x:Key="checkBoxAddAc3ToAllDts">Add additional Ac3 track for all DTS tracks</system:String>
     <system:String x:Key="checkBoxConvertDTStoAc3">Convert DTS tracks to AC3</system:String>
     <system:String x:Key="HeaderSubtitleSettings">Subtitle settings</system:String>
     <system:String x:Key="LabelMuxSubtitle">Mux subtitles</system:String>

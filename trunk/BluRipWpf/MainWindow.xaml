@@ -113,6 +113,7 @@
                         <GroupBox Header="{DynamicResource HeaderAudioSettings}" Height="50" HorizontalAlignment="Left" Margin="6,161,0,0" Name="groupBoxAudioSettings" VerticalAlignment="Top" Width="716">
                             <Grid>
                                 <CheckBox Content="{DynamicResource checkBoxUntouchedAudio}" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="checkBoxUntouchedAudio" VerticalAlignment="Top" Checked="checkBoxUntouchedAudio_Checked" Unchecked="checkBoxUntouchedAudio_Checked" TabIndex="4" />
+                                <CheckBox Content="{DynamicResource checkBoxAddAc3ToAllDts}" Height="16" HorizontalAlignment="Left" Margin="336,5,0,0" Name="checkBoxAddAc3ToAllDts" TabIndex="4" VerticalAlignment="Top" Checked="checkBoxAddAc3ToAllDts_Checked" Unchecked="checkBoxAddAc3ToAllDts_Checked" />
                             </Grid>
                         </GroupBox>
                         <GroupBox Header="{DynamicResource HeaderSubtitleSettings}" Height="106" HorizontalAlignment="Left" Margin="6,217,0,0" Name="groupBoxSubtitleSettings" VerticalAlignment="Top" Width="716">
