@@ -93,8 +93,8 @@ namespace BluRip
         {
             try
             {
-                DateTime indexInfo = new DateTime(0,0,0);
-                DateTime videoInfo = new DateTime(0,0,0);
+                DateTime indexInfo = new DateTime(1900,1,1);
+                DateTime videoInfo = new DateTime(1900,1,1);
 
                 if (File.Exists(indexFile))
                 {
