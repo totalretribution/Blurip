@@ -66,7 +66,7 @@
 	<system:String x:Key="checkBoxUntouchedVideo">Garder la vidéo d'origine</system:String>
 	<system:String x:Key="HeaderAudioSettings">Configuration audio</system:String>
 	<system:String x:Key="checkBoxUntouchedAudio">Garder l'audio d'origine</system:String>
-    <system:String x:Key="checkBoxAddAc3ToAllDts">Add additional Ac3 track for all DTS tracks</system:String>
+    <system:String x:Key="checkBoxAddAc3ToAllDts">Ajouter une piste AC3 additionnelle pour toutes les pistes DTS</system:String>
 	<system:String x:Key="checkBoxConvertDTStoAc3">Convertir les pistes DTS en AC3</system:String>
     <system:String x:Key="HeaderSubtitleSettings">Configuration sous-titres</system:String>
 	<system:String x:Key="LabelMuxSubtitle">Muxage sous-titres</system:String>
@@ -491,7 +491,7 @@
 	<system:String x:Key="CaptionInfoWindow">Info</system:String>
 
 	<!-- Edit StreamInfo Window -->
-	<system:String x:Key="CaptionEditStreamInfoWindow">Edit stream info</system:String>
+    <system:String x:Key="CaptionEditStreamInfoWindow">Edition info flux</system:String>
 	<system:String x:Key="LabelStreamInfoNumber">Numéro flux</system:String>
 	<system:String x:Key="LabelStreamInfoDesc">Description</system:String>
 	<system:String x:Key="LabelStreamInfoTypeDesc">Type de description</system:String>
