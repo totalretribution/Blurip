@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoForm));
-            this.axVLCPlugin21 = new AxAXVLC.AxVLCPlugin2();
             this.trackBarPosition = new System.Windows.Forms.TrackBar();
             this.labelPosition = new System.Windows.Forms.Label();
             this.buttonStop = new System.Windows.Forms.Button();
@@ -39,21 +38,10 @@
             this.comboBoxSubs = new System.Windows.Forms.ComboBox();
             this.labelAudio = new System.Windows.Forms.Label();
             this.labelSubtitle = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.axVLCPlugin21)).BeginInit();
+            this.axVLCPlugin21 = new AxAXVLC.AxVLCPlugin2();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axVLCPlugin21)).BeginInit();
             this.SuspendLayout();
-            // 
-            // axVLCPlugin21
-            // 
-            this.axVLCPlugin21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.axVLCPlugin21.Enabled = true;
-            this.axVLCPlugin21.Location = new System.Drawing.Point(0, 0);
-            this.axVLCPlugin21.Name = "axVLCPlugin21";
-            this.axVLCPlugin21.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axVLCPlugin21.OcxState")));
-            this.axVLCPlugin21.Size = new System.Drawing.Size(1165, 656);
-            this.axVLCPlugin21.TabIndex = 0;
             // 
             // trackBarPosition
             // 
@@ -151,11 +139,24 @@
             this.labelSubtitle.TabIndex = 9;
             this.labelSubtitle.Text = "Subtitle track";
             // 
+            // axVLCPlugin21
+            // 
+            this.axVLCPlugin21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.axVLCPlugin21.Enabled = true;
+            this.axVLCPlugin21.Location = new System.Drawing.Point(12, 12);
+            this.axVLCPlugin21.Name = "axVLCPlugin21";
+            this.axVLCPlugin21.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axVLCPlugin21.OcxState")));
+            this.axVLCPlugin21.Size = new System.Drawing.Size(1142, 635);
+            this.axVLCPlugin21.TabIndex = 10;
+            // 
             // VideoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1166, 748);
+            this.Controls.Add(this.axVLCPlugin21);
             this.Controls.Add(this.labelSubtitle);
             this.Controls.Add(this.labelAudio);
             this.Controls.Add(this.comboBoxSubs);
@@ -165,14 +166,13 @@
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.labelPosition);
             this.Controls.Add(this.trackBarPosition);
-            this.Controls.Add(this.axVLCPlugin21);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VideoForm";
             this.Text = "Video preview";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VideoForm_FormClosing);
             this.Shown += new System.EventHandler(this.VideoForm_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.axVLCPlugin21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axVLCPlugin21)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,8 +190,5 @@
         private System.Windows.Forms.ComboBox comboBoxSubs;
         private System.Windows.Forms.Label labelAudio;
         private System.Windows.Forms.Label labelSubtitle;
-
-
-
     }
 }

@@ -94,7 +94,14 @@ namespace BluRip
                 {
                     tmp[i] = tmp[i].Trim();
                 }
-                for (int i = 0; i < tmp.Length; i++)
+                List<string> tmpList = new List<string>();
+                foreach (string s in tmp)
+                {
+                    if (s != "") tmpList.Add(s);
+                }
+                tmp = tmpList.ToArray();
+                
+                for (int i = 0; i < tmp.Length - 1; i++)
                 {
                     List<string> files = new List<string>();
                     if (tmp[i].Contains(".m2ts"))
@@ -103,22 +110,98 @@ namespace BluRip
                         for (int i2 = 0; i2 < tmp2.Length; i2++)
                         {
                             tmp2[i2] = tmp2[i2].Trim();
+                        }
+                        for (int file = 0; file < tmp2.Length; file++)
+                        {
+                            if (tmp2[file].Contains(".m2ts"))
+                            {
+                                if (!tmp2[file].Contains("["))
+                                {
+                                    if (File.Exists(settings.lastBluRayPath + "\\" + tmp2[file]))
+                                    {
+                                        files.Add(settings.lastBluRayPath + "\\" + tmp2[file]);
+                                    }
+                                    else if (File.Exists(settings.lastBluRayPath + "\\stream\\" + tmp2[file]))
+                                    {
+                                        files.Add(settings.lastBluRayPath + "\\stream\\" + tmp2[file]);
+                                    }
+                                    else if (File.Exists(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]))
+                                    {
+                                        files.Add(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (tmp[i + 1].Contains(".m2ts"))
+                    {
+                        string[] tmp2 = tmp[i + 1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        for (int i2 = 0; i2 < tmp2.Length; i2++)
+                        {
+                            tmp2[i2] = tmp2[i2].Trim();
                         }                        
                         for (int file = 0; file < tmp2.Length; file++)
                         {
                             if (tmp2[file].Contains(".m2ts"))
                             {
-                                if (File.Exists(settings.lastBluRayPath + "\\" + tmp2[file]))
+                                if (!tmp2[file].Contains("["))
                                 {
-                                    files.Add(settings.lastBluRayPath + "\\" + tmp2[file]);
+                                    if (File.Exists(settings.lastBluRayPath + "\\" + tmp2[file]))
+                                    {
+                                        files.Add(settings.lastBluRayPath + "\\" + tmp2[file]);
+                                    }
+                                    else if (File.Exists(settings.lastBluRayPath + "\\stream\\" + tmp2[file]))
+                                    {
+                                        files.Add(settings.lastBluRayPath + "\\stream\\" + tmp2[file]);
+                                    }
+                                    else if (File.Exists(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]))
+                                    {
+                                        files.Add(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]);
+                                    }
                                 }
-                                else if (File.Exists(settings.lastBluRayPath + "\\stream\\" + tmp2[file]))
+                                else
                                 {
-                                    files.Add(settings.lastBluRayPath + "\\stream\\" + tmp2[file]);
-                                }
-                                else if (File.Exists(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]))
-                                {
-                                    files.Add(settings.lastBluRayPath + "\\bdmv\\stream\\" + tmp2[file]);
+                                    int start = tmp2[file].IndexOf('[');
+                                    int end = tmp2[file].IndexOf(']');
+                                    if (start >= 0 && end < tmp2[file].Length && end > start)
+                                    {
+                                        string substr = tmp2[file].Substring(start + 1, end - start - 1);
+                                        string[] videofiles = substr.Split(new char[] { '+' }, StringSplitOptions.RemoveEmptyEntries);
+                                        for (int a = 0; a < videofiles.Length; a++)
+                                        {
+                                            if (videofiles[a].Length == 1)
+                                            {
+                                                videofiles[a] = "0000" + videofiles[a];
+                                            }
+                                            else if (videofiles[a].Length == 2)
+                                            {
+                                                videofiles[a] = "000" + videofiles[a];
+                                            }
+                                            else if (videofiles[a].Length == 3)
+                                            {
+                                                videofiles[a] = "00" + videofiles[a];
+                                            }
+                                            else if (videofiles[a].Length == 4)
+                                            {
+                                                videofiles[a] = "0" + videofiles[a];
+                                            }
+                                        }
+                                        foreach (string s in videofiles)
+                                        {
+                                            if (File.Exists(settings.lastBluRayPath + "\\" + s + ".m2ts"))
+                                            {
+                                                files.Add(settings.lastBluRayPath + "\\" + s + ".m2ts");
+                                            }
+                                            else if (File.Exists(settings.lastBluRayPath + "\\stream\\" + s + ".m2ts"))
+                                            {
+                                                files.Add(settings.lastBluRayPath + "\\stream\\" + s + ".m2ts");
+                                            }
+                                            else if (File.Exists(settings.lastBluRayPath + "\\bdmv\\stream\\" + s + ".m2ts"))
+                                            {
+                                                files.Add(settings.lastBluRayPath + "\\bdmv\\stream\\" + s + ".m2ts");
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

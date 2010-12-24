@@ -81,12 +81,12 @@ namespace BluRip
                     axVLCPlugin21.playlist.add(filename);
                     axVLCPlugin21.playlist.play();
                     int count = 0;
-                    while (!axVLCPlugin21.playlist.isPlaying && count < 100)
+                    while (!axVLCPlugin21.playlist.isPlaying && count < 20 * 10)
                     {
                         count++;
                         Thread.Sleep(50);
                     }
-                    if (count == 100)
+                    if (count == 20 * 10)
                     {
                         axVLCPlugin21.playlist.stop();
                         MessageBox.Show("There was an error while opening the file", "Error");
@@ -124,8 +124,9 @@ namespace BluRip
         {
             try
             {
+                axVLCPlugin21.playlist.togglePause();
                 axVLCPlugin21.playlist.stop();
-                axVLCPlugin21.MediaPlayerTimeChanged -= new AxAXVLC.DVLCEvents_MediaPlayerTimeChangedEventHandler(OnTimeChanged);                
+                //axVLCPlugin21.MediaPlayerTimeChanged -= new AxAXVLC.DVLCEvents_MediaPlayerTimeChangedEventHandler(OnTimeChanged);                
             }
             catch (Exception)
             {
