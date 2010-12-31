@@ -1,7 +1,7 @@
-v0.5.2
+v0.5.2 (2010/12/31)
 
     - French translation
-    - Video preview with vlc plugin (needs installed vlc + activeX plugin)
+    - Video preview with vlc plugin (needs installed vlc >= 1.1.5 + activeX plugin)
     - Progress bar for encode/mux with Windows 7 taskbar support
     - Always recreate .avs on encode
     - New encoding profiles
@@ -9,6 +9,10 @@ v0.5.2
     - Hardcode subs with SupTitle.dll
     - Support for 3D blurays
     - New plugin system
+    - Changed default 'settings.xml' location (AppData\Roaming\BluRip)
+    - Get language tags for tracks with no prefered language
+    - Always delete index files if older then video
+    - Option to add additional AC3 track for all DTS tracks
     - Lots of fixes & minor enhancements
 
 v0.5.1 (2010/08/16)
