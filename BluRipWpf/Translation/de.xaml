@@ -150,7 +150,7 @@
     <system:String x:Key="HeaderX264x64">Bei Benutzung von 64-bit x264</system:String>
     <system:String x:Key="CaptionExternalToolsWindow">Einstellungen für externe Programme</system:String>
     <system:String x:Key="ButtonSuptitlePath">...</system:String>
-    <system:String x:Key="LabelSuptitlePath">Pfad zu vobsup.dll:</system:String>
+    <system:String x:Key="LabelSuptitlePath">Pfad zu suptitle.dll:</system:String>
 
     <!-- Log Window -->
     <system:String x:Key="TabMainLog">Haupt Log</system:String>

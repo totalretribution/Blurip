@@ -336,7 +336,7 @@ namespace BluRip
                     if (si.streamType == StreamType.Video)
                     {
                         vsi = si;
-                        if (si.extraFileInfo.GetType() == typeof(VideoFileInfo))
+                        if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo))
                         {
                             vfi = (VideoFileInfo)si.extraFileInfo;
                         }
