@@ -86,6 +86,10 @@
                         <Label Content="{DynamicResource LabelEncodedMovieDir}" HorizontalAlignment="Left" Margin="6,281,0,0" Name="labelEncodedMovieDir" VerticalAlignment="Top" />
                         <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,307,0,0" Name="textBoxEncodedMovieDir" VerticalAlignment="Top" Width="433" TextChanged="textBoxEncodedMovieDir_TextChanged" TabIndex="7" />
                         <Button Content="{DynamicResource ButtonEncodedMovieDir}" Height="23" HorizontalAlignment="Left" Margin="445,306,0,0" Name="buttonEncodedMovieDir" VerticalAlignment="Top" Width="75" TabIndex="8" Click="buttonEncodedMovieDir_Click" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="6,362,0,0" Name="textBoxAddToIndex" VerticalAlignment="Top" Width="165" />
+                        <Label Content="{DynamicResource LabelAddToIndex}" HorizontalAlignment="Left" Margin="6,336,0,0" Name="labelAddToIndex" VerticalAlignment="Top" />
+                        <Label Content="{DynamicResource LabelCookieDesc}" HorizontalAlignment="Left" Margin="175,336,0,0" Name="labelCookieDesc" VerticalAlignment="Top" />
+                        <TextBox Height="68" HorizontalAlignment="Left" Margin="175,362,0,0" Name="textBoxCookieDesc" VerticalAlignment="Top" Width="345" Text="{DynamicResource CookieDesc}" TextWrapping="Wrap" IsReadOnly="True" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="{DynamicResource TabSettings}" Name="tabItemSettings">

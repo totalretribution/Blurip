@@ -370,6 +370,7 @@ namespace BluRip
             {
                 if (comboBoxTitle.SelectedIndex > -1)
                 {
+                    demuxedStreamList.streams.Clear();
                     listBoxStreams.ItemsSource = null;
                     UpdateStreamList();
                 }
