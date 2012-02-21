@@ -62,6 +62,7 @@ namespace BluRip
                 checkBoxAlwaysDeleteIndex.IsChecked = settings.deleteIndex;
                 checkBoxDisableAudioHeaderCompression.IsChecked = settings.disableAudioHeaderCompression;
                 checkBoxDisableVideoHeaderCompression.IsChecked = settings.disableVideoHeaderCompression;
+                checkBoxDisableSubtitleHeaderCompression.IsChecked = settings.disableSubtitleHeaderCompression;
 
                 checkBoxUseAutoSelect.IsChecked = settings.useAutoSelect;
                 checkBoxIncludeChapters.IsChecked = settings.includeChapter;
@@ -725,6 +726,17 @@ namespace BluRip
                         UpdatePlugins();                        
                     }
                 }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDisableSubtitleHeaderCompression_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.disableSubtitleHeaderCompression = (bool)checkBoxDisableSubtitleHeaderCompression.IsChecked;
             }
             catch (Exception)
             {

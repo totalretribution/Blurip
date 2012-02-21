@@ -58,7 +58,10 @@
     <system:String x:Key="LabelMovieTitle">Movie title</system:String>
     <system:String x:Key="LabelEncodedMovieDir">Optional path for encoded video:</system:String>
     <system:String x:Key="ButtonEncodedMovieDir">...</system:String>
-
+    <system:String x:Key="LabelAddToIndex">Add to playlist index:</system:String>
+    <system:String x:Key="LabelCookieDesc">Available Cookies:</system:String>
+    <system:String x:Key="CookieDesc" xml:space="preserve">$index$ - Index of selected titlelist&#x0d;&#x0a;Example for target filename: series.abc.s01e$index$&#x0d;&#x0a;Final file: series.abc.s01e09.mkv</system:String>
+    
     <!-- Tab Settings -->
     <system:String x:Key="TabSettings">Settings</system:String>
     <system:String x:Key="LabelEncodingProfile">Encoding profile</system:String>
@@ -378,6 +381,7 @@
     <system:String x:Key="CheckBoxConvertDTSBitrate">Convert DTS bitrate</system:String>
     <system:String x:Key="CheckBoxConvertAC3Bitrate">Convert AC3 bitrate</system:String>
     <system:String x:Key="CheckBoxDisableAudioHeaderCompression">Disable mkvmerge header compression for audio tracks</system:String>
+    <system:String x:Key="CheckBoxDisableSubtitleHeaderCompression">Disable mkvmerge header compression for subtitle tracks</system:String>
     <system:String x:Key="TabAdvancedMux">Mux</system:String>
     <system:String x:Key="TabPlugins">Plugins</system:String>
     <system:String x:Key="LabelPluginList">List of available plugins</system:String>

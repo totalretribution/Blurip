@@ -328,6 +328,7 @@ namespace BluRip
 
             this.disableAudioHeaderCompression = orig.disableAudioHeaderCompression;
             this.disableVideoHeaderCompression = orig.disableVideoHeaderCompression;
+            this.disableSubtitleHeaderCompression = orig.disableSubtitleHeaderCompression;
             this.resizeMethod = orig.resizeMethod;
             this.manualCrop = orig.manualCrop;
             this.addAc3ToAllDts = orig.addAc3ToAllDts;
@@ -541,6 +542,7 @@ namespace BluRip
 
         public bool disableAudioHeaderCompression = false;
         public bool disableVideoHeaderCompression = false;
+        public bool disableSubtitleHeaderCompression = false;
         public int resizeMethod = 4;
         public bool manualCrop = false;
         public bool addAc3ToAllDts = false;
