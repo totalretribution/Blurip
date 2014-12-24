@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluRipWpf", "BluRipWpf\BluRipWpf.csproj", "{00148CCF-AF32-487D-9B3C-F63B72A458F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseWpf", "Base\BaseWpf.csproj", "{B1E7E40A-0C26-48A1-A368-E8E37E7714C5}"

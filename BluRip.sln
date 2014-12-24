@@ -1,9 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluRip", "BluRip\BluRip.csproj", "{36A23319-6B61-4846-A885-DDCBBB37449C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AvisynthWrapper", "AvisynthWrapper\AvisynthWrapper.vcproj", "{8F5B27DE-DFB9-4063-936F-7441BA5216FD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AvisynthWrapper", "AvisynthWrapper\AvisynthWrapper.vcxproj", "{8F5B27DE-DFB9-4063-936F-7441BA5216FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base", "Base\Base.csproj", "{B1E7E40A-0C26-48A1-A368-E8E37E7714C5}"
 EndProject
