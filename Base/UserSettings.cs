@@ -325,6 +325,8 @@ namespace BluRip
             this.doMux = orig.doMux;
             this.suptitlePath = orig.suptitlePath;
             this.autoScroll = orig.autoScroll;
+            this.mvcsourcePath = orig.mvcsourcePath;
+            this.lsmashPath = orig.lsmashPath;
 
             this.disableAudioHeaderCompression = orig.disableAudioHeaderCompression;
             this.disableVideoHeaderCompression = orig.disableVideoHeaderCompression;
@@ -532,6 +534,8 @@ namespace BluRip
         public bool muxUntouchedSubs = false;
         public bool copyUntouchedSubs = false;
         public string suptitlePath = "";
+        public string mvcsourcePath = "";
+        public string lsmashPath = "";
 
         public bool doDemux = true;
         public bool doIndex = true;

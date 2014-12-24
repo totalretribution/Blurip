@@ -227,8 +227,12 @@ namespace BluRip
                             }
                         }
                         else if (si.streamType == StreamType.Video)
-                        {
-                            if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions) && ((AdvancedVideoOptions)si.advancedOptions).noMkvDemux)
+                        {                           
+                            if (si.desc.Contains("h264/AVC") && settings.encodeInput == 4) {    //demux to raw h264 if stream is h264 and MVCSource is selected
+                                Parameter += "video." + "h264" + "\" ";
+                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video." + "h264";
+                            }
+                            else if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions) && ((AdvancedVideoOptions)si.advancedOptions).noMkvDemux)
                             {
                                 string ext = "";
                                 if (si.desc.Contains("h264/AVC")) ext = "h264";
@@ -398,7 +402,33 @@ namespace BluRip
                            } catch {}
                        }
 
-                   } 
+                   } else if (tmp[i].IndexOf("Video track") != -1)
+                    {
+                        try
+                        {
+                            int startPos = tmp[i].IndexOf("Video track") + 11;
+                            int endPos = tmp[i].IndexOf("contains", startPos);
+                            int videoNumber = Convert.ToInt32(tmp[i].Substring(startPos, endPos - startPos).Trim());
+                            startPos = tmp[i].IndexOf("contains") + 8;
+                            endPos = tmp[i].IndexOf("frames", startPos);
+                            string videoFrames = tmp[i].Substring(startPos, endPos - startPos).Trim();
+
+                            foreach (StreamInfo si in demuxedStreamList.streams)
+                            {
+                                if (si.number == videoNumber)
+                                {
+                                    if (si.streamType == StreamType.Video)
+                                    {
+                                        VideoFileInfo sfi = new VideoFileInfo();
+                                        if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(VideoFileInfo)) sfi = new VideoFileInfo(si.extraFileInfo);
+                                        sfi.frames = videoFrames;
+                                        si.extraFileInfo = new VideoFileInfo(sfi);
+                                    }
+                                }
+                            }
+                        }
+                        catch { }
+                    }
                 }
 
                 successfull = true;

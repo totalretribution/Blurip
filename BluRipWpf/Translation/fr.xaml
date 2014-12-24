@@ -151,8 +151,12 @@
 	<system:String x:Key="CaptionExternalToolsWindow">Configuration outils externes</system:String>
 	<system:String x:Key="ButtonSuptitlePath">...</system:String>
 	<system:String x:Key="LabelSuptitlePath">Chemin vers suptitle.dll:</system:String>
+    <system:String x:Key="HeaderMVCSource">Quand MVCSource est utilisé</system:String>
+    <system:String x:Key="LabelMVCSource">Chemin vers MVCSource.dll:</system:String>
+    <system:String x:Key="HeaderLSMASHSource">Quand LSMASHSource est utilisé</system:String>
+    <system:String x:Key="LabelLSMASHSource">Chemin vers LSMASHSource.dll:</system:String>
 
-	<!-- Log Window -->
+    <!-- Log Window -->
 	<system:String x:Key="TabMainLog">Journal principal</system:String>
 	<system:String x:Key="TabDemuxLog">Journal démuxage</system:String>
 	<system:String x:Key="TabCropLog">Journal découpage/indexage</system:String>

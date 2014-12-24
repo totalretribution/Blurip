@@ -56,6 +56,8 @@ namespace BluRip
                 textBoxX264x64Path.Text = settings.x264x64Path;
                 textBoxAvs2yuvPath.Text = settings.avs2yuvPath;
                 textBoxSuptitlePath.Text = settings.suptitlePath;
+                textBoxMVCSourcePath.Text = settings.mvcsourcePath;
+                textBoxLSMASHPath.Text = settings.lsmashPath;
             }
             catch (Exception ex)
             {
@@ -300,6 +302,38 @@ namespace BluRip
             catch (Exception)
             {
             }
+        }
+
+        private void textBoxMVCSourcePath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            settings.mvcsourcePath = textBoxMVCSourcePath.Text;
+        }
+
+        private void buttonMVCSourcePath_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "MVCSource.dll|MVCSource.dll";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxMVCSourcePath.Text = ofd.FileName;
+                settings.mvcsourcePath = ofd.FileName;
+            }
+        }
+
+        private void buttonLSMASHPath_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "LSMASHSource.dll|LSMASHSource.dll";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxLSMASHPath.Text = ofd.FileName;
+                settings.lsmashPath = ofd.FileName;
+            }
+        }
+
+        private void textBoxLSMASHPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            settings.lsmashPath = textBoxLSMASHPath.Text;
         }
     }
 }

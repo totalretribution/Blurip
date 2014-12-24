@@ -154,7 +154,11 @@
     <system:String x:Key="CaptionExternalToolsWindow">Einstellungen für externe Programme</system:String>
     <system:String x:Key="ButtonSuptitlePath">...</system:String>
     <system:String x:Key="LabelSuptitlePath">Pfad zu suptitle.dll:</system:String>
-
+    <system:String x:Key="HeaderMVCSource">Bei Benutzung von MVCSource</system:String>
+    <system:String x:Key="LabelMVCSource">Pfad zu MVCSource.dll:</system:String>
+    <system:String x:Key="HeaderLSMASHSource">Bei Benutzung von LSMASHSource</system:String>
+    <system:String x:Key="LabelLSMASHSource">Pfad zu LSMASHSource.dll:</system:String>
+    
     <!-- Log Window -->
     <system:String x:Key="TabMainLog">Haupt Log</system:String>
     <system:String x:Key="TabDemuxLog">Demux Log</system:String>
