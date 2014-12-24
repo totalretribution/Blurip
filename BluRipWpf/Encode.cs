@@ -47,8 +47,6 @@ namespace BluRip
         {
             try
             {
-                DoPlugin(PluginType.BeforeEncode);
-
                 if (settings.use64bit)
                 {
                     if (!File.Exists(settings.x264x64Path))
@@ -140,9 +138,6 @@ namespace BluRip
                         return false;
                     }
                 }
-
-                DoPlugin(PluginType.AfterEncode);
-
                 return true;
             }
             catch (Exception)
@@ -303,6 +298,7 @@ namespace BluRip
         {
             try
             {
+                DoPlugin(PluginType.BeforeEncode);
                 if (!Directory.Exists(settings.workingDir))
                 {
                     logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
@@ -590,6 +586,7 @@ namespace BluRip
                 EnableControls();
 
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
+                DoPlugin(PluginType.AfterEncode);
             }
         }
     }

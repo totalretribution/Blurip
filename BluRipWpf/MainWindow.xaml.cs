@@ -1413,11 +1413,13 @@ namespace BluRip
             catch (Exception ex)
             {
                 logWindow.MessageMain(Global.Res("ErrorException") + " " + ex.Message);
+                DoPlugin(PluginType.ErrorEncode);
                 return false;
             }
             finally
             {
                 logWindow.SaveMainLog(settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");
+                DoPlugin(PluginType.FinishedAll);
             }
         }
 
