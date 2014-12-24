@@ -363,6 +363,44 @@ namespace BluRip
                 foreach (StreamInfo si in tmpList.streams) demuxedStreamList.streams.Add(si);
                 demuxedStreamList.desc = tmpList.desc;
 
+                string res = Output;
+                res = res.Replace("\b", "");
+                res = res.Replace("\r", "");
+                string[] tmp = res.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    tmp[i] = tmp[i].Trim();
+                }
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    if (tmp[i].IndexOf("Subtitle track") != -1)
+                    {
+                       if (tmp[i].IndexOf("forced captions") != -1)
+                       {
+                           try
+                           {
+                               int startPos = tmp[i].IndexOf("Subtitle track") + 14;
+                               int endPos = tmp[i].IndexOf("contains", startPos);
+                               int subtitleNumber = Convert.ToInt32(tmp[i].Substring(startPos, endPos - startPos).Trim());
+                               foreach (StreamInfo si in demuxedStreamList.streams)
+                               {
+                                   if (si.number == subtitleNumber)
+                                   {
+                                       if (si.streamType == StreamType.Subtitle)
+                                       {
+                                           SubtitleFileInfo sfi = new SubtitleFileInfo();
+                                           if (si.extraFileInfo != null && si.extraFileInfo.GetType() == typeof(SubtitleFileInfo)) sfi = new SubtitleFileInfo(si.extraFileInfo);
+                                           sfi.containsForced = true;
+                                           si.extraFileInfo = new SubtitleFileInfo(sfi);
+                                       }
+                                   }
+                               }
+                           } catch {}
+                       }
+
+                   } 
+                }
+
                 successfull = true;
             }
             catch (Exception)
