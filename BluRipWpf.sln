@@ -31,6 +31,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vistabridgelibrary", "vista
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginAutoRef", "PluginAutoRef\PluginAutoRef.csproj", "{73DC5D05-1AC7-4651-AB12-37E859A79FC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginPushover", "PluginPushover\PluginPushover.csproj", "{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B1E7E40A-0C26-48A1-A368-E8E37E7714C5} = {B1E7E40A-0C26-48A1-A368-E8E37E7714C5}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -243,6 +248,20 @@ Global
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|Win32.ActiveCfg = Release|Any CPU
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|x64.ActiveCfg = Release|Any CPU
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Release|x64.ActiveCfg = Release|Any CPU
+		{F20E9523-0326-45A0-A0E0-CDA3E69FB15C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
