@@ -120,6 +120,7 @@ namespace BluRip
         AfterEncode,
         BeforeMux,
         AfterMux,
+        All,
         None
     }
 
@@ -127,6 +128,7 @@ namespace BluRip
     {
         protected Project _project = null;
         protected static string _startPath = "";
+        public PluginType _requestType = PluginType.None;
 
         public PluginBase()
         {
@@ -153,6 +155,11 @@ namespace BluRip
         public Project project
         {
             get { return _project; }
+        }
+
+        public PluginType requestPluginType
+        {
+            get { return _requestType; }
         }
 
         // plugin name
@@ -230,6 +237,18 @@ namespace BluRip
             try
             {
                 this._project = new Project(project);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public virtual void Init(Project project, PluginType requestType)
+        {
+            try
+            {
+                this._project = new Project(project);
+                this._requestType = requestType;
             }
             catch (Exception)
             {

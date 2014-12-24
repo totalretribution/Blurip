@@ -164,10 +164,18 @@ namespace BluRip
             {
                 foreach (PluginBase plugin in pluginList)
                 {
-                    if (plugin.Settings.activated && plugin.getPluginType() == pluginType)
+                    //if (plugin.Settings.activated && plugin.getPluginType() == pluginType)
+                    if (plugin.Settings.activated && (plugin.getPluginType() == pluginType || plugin.getPluginType() == PluginType.All))
                     {
                         Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
-                        plugin.Init(project);
+                        if (plugin.getPluginType() == PluginType.All)
+                        {
+                            plugin.Init(project, pluginType);
+                        } 
+                        else
+                        {
+                            plugin.Init(project);
+                        }
                         plugin.Process();
 
                         settings = new UserSettings(plugin.project.settings);
