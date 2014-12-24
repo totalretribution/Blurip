@@ -40,9 +40,7 @@
                 <Label Content="{DynamicResource LabelX264Path}" HorizontalAlignment="Left" Margin="6,128,0,0" Name="labelX264Path" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,160,0,0" Name="textBoxX264Path" VerticalAlignment="Top" Width="344" TabIndex="4" TextChanged="textBoxX264Path_TextChanged" />
                 <Button Content="{DynamicResource ButtonX264Path}" Height="23" HorizontalAlignment="Left" Margin="356,160,0,0" Name="buttonX264Path" VerticalAlignment="Top" Width="75" Click="buttonX264Path_Click" TabIndex="5" />
-                <Label Content="{DynamicResource LabelJavaPath}" HorizontalAlignment="Left" Margin="6,189,0,0" Name="labelJavaPath" VerticalAlignment="Top" />
-                <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,221,0,0" Name="textBoxJavaPath" VerticalAlignment="Top" Width="342" TabIndex="6" TextChanged="textBoxJavaPath_TextChanged" />
-                <Button Content="{DynamicResource ButtonJavaPath}" Height="23" HorizontalAlignment="Left" Margin="356,221,0,0" Name="buttonJavaPath" VerticalAlignment="Top" Width="75" Click="buttonJavaPath_Click" TabIndex="7" />
+                
                 <Label Content="{DynamicResource LabelMkvmergePath}" HorizontalAlignment="Left" Margin="8,250,0,0" Name="labelMkvmergePath" VerticalAlignment="Top" />
                 <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="False" Margin="8,282,0,0" Name="textBoxMkvmergePath" VerticalAlignment="Top" Width="342" TabIndex="8" TextChanged="textBoxMkvmergePath_TextChanged" />
                 <Button Content="{DynamicResource ButtonMkvmergePath}" Height="23" HorizontalAlignment="Left" Margin="356,282,0,0" Name="buttonMkvmergePath" VerticalAlignment="Top" Width="75" Click="buttonMkvmergePath_Click" TabIndex="9" />

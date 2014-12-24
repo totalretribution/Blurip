@@ -49,7 +49,6 @@ namespace BluRip
                 
                 textBoxEac3toPath.Text = settings.eac3toPath;
                 textBoxBDSup2subPath.Text = settings.sup2subPath;
-                textBoxJavaPath.Text = settings.javaPath;
                 textBoxX264Path.Text = settings.x264Path;
                 textBoxMkvmergePath.Text = settings.mkvmergePath;
                 textBoxFfmsindexPath.Text = settings.ffmsindexPath;
@@ -102,7 +101,7 @@ namespace BluRip
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "BDSup2Sub.jar|BDSup2Sub.jar";
+                ofd.Filter = "bdsup2sub++|*.exe";
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     textBoxBDSup2subPath.Text = ofd.FileName;
@@ -124,23 +123,6 @@ namespace BluRip
                 {
                     textBoxX264Path.Text = ofd.FileName;
                     settings.x264Path = ofd.FileName;
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void buttonJavaPath_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "java.exe|java.exe";
-                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    textBoxJavaPath.Text = ofd.FileName;
-                    settings.javaPath = ofd.FileName;
                 }
             }
             catch (Exception)
@@ -236,17 +218,6 @@ namespace BluRip
             try
             {
                 settings.x264Path = textBoxX264Path.Text;
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void textBoxJavaPath_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                settings.javaPath = textBoxJavaPath.Text;
             }
             catch (Exception)
             {

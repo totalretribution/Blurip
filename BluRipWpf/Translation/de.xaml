@@ -132,7 +132,7 @@
     <system:String x:Key="ButtonEac3toPath">...</system:String>
     <system:String x:Key="LabelEac3toPath">Pfad zu eac3to.exe:</system:String>    
     <system:String x:Key="ButtonBDSup2subPath">...</system:String>
-    <system:String x:Key="LabelBDSup2subPath">Pfad zu BDSup2sub.jar:</system:String>    
+    <system:String x:Key="LabelBDSup2subPath">Pfad zu bdsup2sub++:</system:String>    
     <system:String x:Key="ButtonX264Path">...</system:String>
     <system:String x:Key="LabelX264Path">Pfad zu 32-bit x264.exe:</system:String>
     <system:String x:Key="ButtonJavaPath">...</system:String>

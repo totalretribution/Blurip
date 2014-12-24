@@ -413,12 +413,6 @@ namespace BluRip
                 }
                 if (sub || sup)
                 {
-                    if (!File.Exists(settings.javaPath))
-                    {
-                        logWindow.MessageMain(Global.Res("ErrorJavaPath"));
-                        if (!silent) Global.ErrorMsg(Global.Res("ErrorJavaPath"));
-                        return false;
-                    }
                     if (!File.Exists(settings.sup2subPath))
                     {
                         logWindow.MessageMain(Global.Res("ErrorBdsup2subPath"));
