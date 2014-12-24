@@ -448,6 +448,8 @@ namespace BluRip
             try
             {
                 FolderBrowserDialog fbd = new FolderBrowserDialog();
+                fbd.RootFolder = Environment.SpecialFolder.MyComputer;
+                fbd.SelectedPath = textBoxBlurayPath.Text;
                 if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     textBoxBlurayPath.Text = fbd.SelectedPath;
