@@ -120,6 +120,8 @@ namespace BluRip
         AfterEncode,
         BeforeMux,
         AfterMux,
+        ErrorEncode,
+        FinishedAll,
         All,
         None
     }

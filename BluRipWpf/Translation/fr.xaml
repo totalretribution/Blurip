@@ -129,7 +129,7 @@
 	<system:String x:Key="ButtonEac3toPath">...</system:String>
 	<system:String x:Key="LabelEac3toPath">Chemin vers eac3to.exe:</system:String>
 	<system:String x:Key="ButtonBDSup2subPath">...</system:String>
-	<system:String x:Key="LabelBDSup2subPath">Chemin vers BDSup2sub.jar:</system:String>
+        <system:String x:Key="LabelBDSup2subPath">Chemin vers bdsup2sub++:</system:String>
 	<system:String x:Key="ButtonX264Path">...</system:String>
 	<system:String x:Key="LabelX264Path">Chemin vers x264.exe (32bit):</system:String>
 	<system:String x:Key="ButtonJavaPath">...</system:String>
@@ -151,8 +151,12 @@
 	<system:String x:Key="CaptionExternalToolsWindow">Configuration outils externes</system:String>
 	<system:String x:Key="ButtonSuptitlePath">...</system:String>
 	<system:String x:Key="LabelSuptitlePath">Chemin vers suptitle.dll:</system:String>
+    <system:String x:Key="HeaderMVCSource">Quand MVCSource est utilisé</system:String>
+    <system:String x:Key="LabelMVCSource">Chemin vers MVCSource.dll:</system:String>
+    <system:String x:Key="HeaderLSMASHSource">Quand LSMASHSource est utilisé</system:String>
+    <system:String x:Key="LabelLSMASHSource">Chemin vers LSMASHSource.dll:</system:String>
 
-	<!-- Log Window -->
+    <!-- Log Window -->
 	<system:String x:Key="TabMainLog">Journal principal</system:String>
 	<system:String x:Key="TabDemuxLog">Journal démuxage</system:String>
 	<system:String x:Key="TabCropLog">Journal découpage/indexage</system:String>

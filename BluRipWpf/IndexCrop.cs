@@ -216,6 +216,17 @@ namespace BluRip
                             data += "DGSource(\"" + output + "\")";
                             File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
                         }
+                        else if (settings.cropInput == 3)
+                        {
+                            string data = "";
+                            string dlldir = System.IO.Path.GetDirectoryName(settings.lsmashPath);
+                            if (File.Exists(dlldir + "\\LSMASHSource.dll"))
+                            {
+                                data = "LoadPlugin(\"" + dlldir + "\\LSMASHSource.dll" + "\")\r\n";
+                            }
+                            data += "LWLibavVideoSource(\"" + filename + "\")";
+                            File.WriteAllText(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", data);
+                        }
                         logWindow.MessageCrop(Global.Res("InfoStartCrop"));
 
                         AutoCrop ac = new AutoCrop(settings.workingDir + "\\" + settings.filePrefix + "_cropTemp.avs", settings, ref cropInfo);
@@ -288,8 +299,10 @@ namespace BluRip
                         
                         ((VideoFileInfo)si.extraFileInfo).fps = fps;
                         ((VideoFileInfo)si.extraFileInfo).length = length;
-                        ((VideoFileInfo)si.extraFileInfo).frames = frames;
-
+                        if (frames != "")
+                        {
+                            ((VideoFileInfo)si.extraFileInfo).frames = frames;
+                        }
                         ((VideoFileInfo)si.extraFileInfo).cropInfo = new CropInfo(cropInfo);
                     }
                 }

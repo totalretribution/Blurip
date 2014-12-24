@@ -100,16 +100,19 @@
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,32,0,0" Name="comboBoxEncodingProfile" VerticalAlignment="Top" Width="470" SelectionChanged="comboBoxEncodingProfile_SelectionChanged" TabIndex="0" />
                                 <CheckBox Content="{DynamicResource checkBoxUntouchedVideo}" Height="16" HorizontalAlignment="Left" Margin="509,39,0,0" Name="checkBoxUntouchedVideo" VerticalAlignment="Top" Checked="checkBoxUntouchedVideo_Checked" Unchecked="checkBoxUntouchedVideo_Checked" TabIndex="1" />
                                 <Label Content="{DynamicResource LabelCropInput}" HorizontalAlignment="Left" Margin="6,61,0,0" Name="labelCropInput" VerticalAlignment="Top" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,87,0,0" Name="comboBoxCropInput" VerticalAlignment="Top" Width="150" SelectionChanged="comboBoxCropInput_SelectionChanged" TabIndex="2">
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="6,87,0,0" Name="comboBoxCropInput" VerticalAlignment="Top" Width="150" SelectionChanged="comboBoxCropInput_SelectionChanged" TabIndex="3">
                                     <ComboBoxItem Content="DirectShowSource" />
                                     <ComboBoxItem Content="FFVideoSource" />
                                     <ComboBoxItem Content="DGMultiSource" />
+                                    <ComboBoxItem Content="LWLibav" />
                                 </ComboBox>
                                 <Label Content="{DynamicResource LabelEncodeInput}" HorizontalAlignment="Left" Margin="196,61,0,0" Name="labelEncodeInput" VerticalAlignment="Top" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="196,87,0,0" Name="comboBoxEncodeInput" VerticalAlignment="Top" Width="154" SelectionChanged="comboBoxEncodeInput_SelectionChanged" TabIndex="3">
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="196,87,0,0" Name="comboBoxEncodeInput" VerticalAlignment="Top" Width="154" SelectionChanged="comboBoxEncodeInput_SelectionChanged" TabIndex="5">
                                     <ComboBoxItem Content="DirectShowSource" />
                                     <ComboBoxItem Content="FFVideoSource" />
                                     <ComboBoxItem Content="DGMultiSource" />
+                                    <ComboBoxItem Content="LWLibav" />
+                                    <ComboBoxItem Content="MVCSource" />
                                 </ComboBox>
                                 <Label Content="Label" HorizontalAlignment="Left" Margin="383,87,0,0" Name="labelBitrate" VerticalAlignment="Top" Visibility="Hidden" />
                             </Grid>

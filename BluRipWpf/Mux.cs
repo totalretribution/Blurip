@@ -93,6 +93,11 @@ namespace BluRip
                                     videoStream++;
                                 }
                             }
+                            else if (File.Exists(settings.workingDir + "\\" + settings.filePrefix + "_video.mkv"))
+                                {
+                                    ((VideoFileInfo)si.extraFileInfo).encodedFile = settings.workingDir + "\\" + settings.filePrefix + "_video.mkv";
+                                    videoStream++;
+                                }
                         }
                     }
                     else if (si.streamType == StreamType.Audio)

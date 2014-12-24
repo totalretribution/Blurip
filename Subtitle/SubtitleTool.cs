@@ -43,16 +43,16 @@ namespace BluRip
             {
                 this.settings = settings;
                 this.fps = fps;
-                this.Path = settings.javaPath;
+                this.Path = settings.sup2subPath;
                 this.si = new StreamInfo();
                 this.si = si;
                 this.onlyForced = onlyForced;
                 this.lowRes = lowRes;
                 this.pgs = pgs;
                                 
-                if (this.fps == "24.000") this.fps = "24";
-                if (this.fps == "25.000") this.fps = "25";
-                if (this.fps == "50.000") this.fps = "50";
+                if (this.fps == "24.000") this.fps = "24p";
+                if (this.fps == "25.000") this.fps = "25p";
+                if (this.fps == "50.000") this.fps = "50p";
 
                 string format = ".sub";
                 if (pgs)
@@ -99,32 +99,30 @@ namespace BluRip
                     }
                 }
 
-                this.Parameter = "-jar \"" + settings.sup2subPath + "\" \"" +
-                            si.filename + "\" \"" + output + "\" /fps:" + this.fps;
-
                 if (!onlyForced)
                 {
                 }
                 else
                 {
-                    this.Parameter += " /forced";
+                    this.Parameter += " --forced-only";
                 }
 
                 if (!lowRes)
                 {
                     if (!settings.resize720p)
                     {
-                        this.Parameter += " /res:1080";
+                        this.Parameter += " --resolution 1080";
                     }
                     else
                     {
-                        this.Parameter += " /res:720";
+                        this.Parameter += " --resolution 720";
                     }
                 }
                 else
                 {
-                    this.Parameter += " /res:576";
+                    this.Parameter += " --resolution 576";
                 }
+                this.Parameter += " --fps-source " + this.fps + " -o \"" + output + "\" \"" + si.filename + "\"";
             }
             catch (Exception)
             {

@@ -198,6 +198,7 @@ namespace BluRip
                 this.normalSubLowRes = ((SubtitleFileInfo)orig).normalSubLowRes;
 
                 this.isSecond = ((SubtitleFileInfo)orig).isSecond;
+                this.containsForced = ((SubtitleFileInfo)orig).containsForced;
             }
             catch (Exception)
             {
@@ -219,6 +220,7 @@ namespace BluRip
         public string forcedIdxLowRes = "";
 
         public bool isSecond = false;
+        public bool containsForced = false;
     }
 
     public class StreamInfo

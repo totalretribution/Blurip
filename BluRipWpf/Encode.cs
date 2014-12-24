@@ -47,8 +47,6 @@ namespace BluRip
         {
             try
             {
-                DoPlugin(PluginType.BeforeEncode);
-
                 if (settings.use64bit)
                 {
                     if (!File.Exists(settings.x264x64Path))
@@ -91,7 +89,15 @@ namespace BluRip
                         return false;
                     }
                 }
-
+                if (settings.encodeInput == 3)
+                {
+                    if (!File.Exists(settings.mvcsourcePath))
+                    {
+                        logWindow.MessageMain(Global.Res("ErrorMVCSourcePath"));
+                        if (!silent) Global.ErrorMsg(Global.Res("ErrorMVCSourcePath"));
+                        return false;
+                    }
+                }
                 bool suptitle = false;
 
                 foreach (StreamInfo si in demuxedStreamList.streams)
@@ -140,9 +146,6 @@ namespace BluRip
                         return false;
                     }
                 }
-
-                DoPlugin(PluginType.AfterEncode);
-
                 return true;
             }
             catch (Exception)
@@ -303,6 +306,7 @@ namespace BluRip
         {
             try
             {
+                DoPlugin(PluginType.BeforeEncode);
                 if (!Directory.Exists(settings.workingDir))
                 {
                     logWindow.MessageDemux(Global.Res("ErrorWorkingDirectory"));
@@ -416,6 +420,24 @@ namespace BluRip
                             encode += "LoadPlugin(\"" + dlldir + "\\DGDecodeNV.dll" + "\")\r\n";
                         }
                         encode += "DGSource(\"" + output + "\")\r\n";
+                    }
+                    else if (settings.encodeInput == 3)
+                    {
+                        string dlldir = System.IO.Path.GetDirectoryName(settings.lsmashPath);
+                        if (File.Exists(dlldir + "\\LSMASHSource.dll"))
+                        {
+                            encode += "LoadPlugin(\"" + dlldir + "\\LSMASHSource.dll" + "\")\r\n";
+                        }
+                        encode += "LWLibavVideoSource(\"" + filename + "\")\r\n";
+                    }
+                    else if (settings.encodeInput == 4)
+                    {
+                        string dlldir = System.IO.Path.GetDirectoryName(settings.mvcsourcePath);
+                        if (File.Exists(dlldir + "\\MVCsource.dll"))
+                        {
+                            encode += "LoadPlugin(\"" + dlldir + "\\MVCsource.dll" + "\")\r\n";
+                        }
+                        encode += "MVCsource(\"" + filename + "\",\"\"," + vfi.frames + ",0)\r\n";
                     }
                     if (cropInfo.cropTop != 0 || cropInfo.cropBottom != 0)
                     {
@@ -590,6 +612,7 @@ namespace BluRip
                 EnableControls();
 
                 UpdateStatus(Global.Res("StatusBar") + " " + Global.Res("StatusBarReady"));
+                DoPlugin(PluginType.AfterEncode);
             }
         }
     }

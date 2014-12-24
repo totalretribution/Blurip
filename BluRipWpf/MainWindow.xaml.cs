@@ -164,8 +164,7 @@ namespace BluRip
             {
                 foreach (PluginBase plugin in pluginList)
                 {
-                    //if (plugin.Settings.activated && plugin.getPluginType() == pluginType)
-                    if (plugin.Settings.activated && (plugin.getPluginType() == pluginType || plugin.getPluginType() == PluginType.All))
+                    if (plugin.Settings.activated && (plugin.getPluginType() == pluginType || plugin.getPluginType() == PluginType.All) )
                     {
                         Project project = new Project(settings, demuxedStreamList, titleList, comboBoxTitle.SelectedIndex, m2tsList);
                         if (plugin.getPluginType() == PluginType.All)
@@ -458,13 +457,13 @@ namespace BluRip
 
                 if (updateDicts)
                 {
-                    if (settings.cropInput > -1 && settings.cropInput < 3) comboBoxCropInput.SelectedIndex = settings.cropInput;
+                    if (settings.cropInput > -1 && settings.cropInput < 4) comboBoxCropInput.SelectedIndex = settings.cropInput;
                     else
                     {
                         comboBoxCropInput.SelectedIndex = 0;
                     }
 
-                    if (settings.encodeInput > -1 && settings.encodeInput < 3) comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
+                    if (settings.encodeInput > -1 && settings.encodeInput < 5) comboBoxEncodeInput.SelectedIndex = settings.encodeInput;
                     else
                     {
                         comboBoxEncodeInput.SelectedIndex = 0;
@@ -1413,11 +1412,13 @@ namespace BluRip
             catch (Exception ex)
             {
                 logWindow.MessageMain(Global.Res("ErrorException") + " " + ex.Message);
+                DoPlugin(PluginType.ErrorEncode);
                 return false;
             }
             finally
             {
                 logWindow.SaveMainLog(settings.workingDir + "\\" + settings.targetFilename + "_completeLog.txt");
+                DoPlugin(PluginType.FinishedAll);
             }
         }
 
@@ -1571,6 +1572,18 @@ namespace BluRip
                 if (comboBoxEncodeInput.SelectedIndex > -1)
                 {
                     settings.encodeInput = comboBoxEncodeInput.SelectedIndex;
+                }
+                if (comboBoxEncodeInput.SelectedIndex == 1)
+                {
+                    comboBoxCropInput.SelectedIndex = 1;
+                }
+                else if (comboBoxEncodeInput.SelectedIndex == 2)
+                {
+                    comboBoxCropInput.SelectedIndex = 2;
+                }
+                else if (comboBoxEncodeInput.SelectedIndex == 3)
+                {
+                    comboBoxCropInput.SelectedIndex = 3;
                 }
             }
             catch (Exception)
