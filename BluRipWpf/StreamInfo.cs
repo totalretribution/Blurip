@@ -65,7 +65,7 @@ namespace BluRip
                 for(int i=0; i < titleList.Count; i++)
                 //foreach (TitleInfo ti in titleList)
                 {
-                    comboBoxTitle.Items.Add((i+1).ToString() + ") " + titleList[i].desc);
+                    comboBoxTitle.Items.Add((i + 1).ToString() + ") " + titleList[i].desc + " (" + titleList[i].playlist + ")");
                 }
                 if (titleList.Count > 0)
                 {

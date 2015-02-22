@@ -34,8 +34,9 @@ namespace BluRip
         private List<string> dtsAudioTypes = null;
         private List<string> files = null;
         private string streamNumber = "";
+        private string playlist = "";
 
-        public SubStreamInfoTool(UserSettings settings, ref List<TitleInfo> result, string path, string streamNumber, List<string> videoTypes, List<string> ac3AudioTypes, List<string> dtsAudioTypes, List<string> files)
+        public SubStreamInfoTool(UserSettings settings, ref List<TitleInfo> result, string path, string streamNumber, List<string> videoTypes, List<string> ac3AudioTypes, List<string> dtsAudioTypes, List<string> files, string playlist)
             : base()
         {
             try
@@ -49,6 +50,7 @@ namespace BluRip
                 this.dtsAudioTypes = dtsAudioTypes;
                 this.streamNumber = streamNumber + ")";
                 this.files = files;
+                this.playlist = playlist;
             }
             catch (Exception)
             {
@@ -94,6 +96,7 @@ namespace BluRip
                 }
 
                 TitleInfo ti = new TitleInfo();
+                ti.playlist = playlist;
                 if (files != null)
                 {
                     ti.files.Clear();

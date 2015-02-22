@@ -40,6 +40,7 @@ namespace BluRip
         {
             this.desc = orig.desc;
             this.streamNumber = orig.streamNumber;
+            this.playlist = orig.playlist;
             this.streams.Clear();
             foreach (StreamInfo si in orig.streams)
             {
@@ -54,6 +55,7 @@ namespace BluRip
 
         public string desc = "";
         public string streamNumber = "";
+        public string playlist = "";
         public List<string> files = new List<string>();
 
         public List<StreamInfo> streams = new List<StreamInfo>();

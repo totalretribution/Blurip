@@ -103,6 +103,29 @@ namespace BluRip
                 
                 for (int i = 0; i < tmp.Length - 1; i++)
                 {
+                    string playlist = "";
+                    if (tmp[i].Contains(".mpls"))
+                    {
+                        string[] tmp2 = tmp[i].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        for (int i2 = 0; i2 < tmp2.Length; i2++)
+                        {
+                            tmp2[i2] = tmp2[i2].Trim();
+                        }
+                        for (int file = 0; file < tmp2.Length; file++)
+                        {
+                            if (tmp2[file].Contains(".mpls"))
+                            {
+                                int start = tmp2[file].IndexOf(')');
+                                int end = tmp2[file].IndexOf(".mpls");
+                                if (start >= 0 && end < tmp2[file].Length && end > start)
+                                {
+                                    playlist = tmp2[file].Substring(start + 1, end + 5 - start - 1);
+                                    playlist = playlist.Trim();
+                                }
+                            }
+                        }
+                    }
+
                     List<string> files = new List<string>();
                     if (tmp[i].Contains(".m2ts"))
                     {
@@ -210,7 +233,7 @@ namespace BluRip
                     if (Regex.IsMatch(tmp[i], "^[0-9.*].*\\)"))
                     {
                         string[] tmp2 = tmp[i].Split(new char[] { ')' }, StringSplitOptions.RemoveEmptyEntries);
-                        SubStreamInfoTool ssit = new SubStreamInfoTool(settings, ref result, titlePath, tmp2[0], videoTypes, ac3AudioTypes, dtsAudioTypes, files);
+                        SubStreamInfoTool ssit = new SubStreamInfoTool(settings, ref result, titlePath, tmp2[0], videoTypes, ac3AudioTypes, dtsAudioTypes, files, playlist);
                         ssit.OnInfoMsg += new InfoEventHandler(InfoMsg);
                         ssit.OnLogMsg += new LogEventHandler(LogMsg);
                         ssit.Start();
