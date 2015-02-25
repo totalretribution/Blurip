@@ -227,10 +227,16 @@ namespace BluRip
                             }
                         }
                         else if (si.streamType == StreamType.Video)
-                        {                           
-                            if (si.desc.Contains("h264/AVC") && settings.encodeInput == 4) {    //demux to raw h264 if stream is h264 and MVCSource is selected
+                        {
+                            if (si.desc.Contains("h264/AVC") && settings.encodeInput == 4)     //demux to raw h264 if stream is h264 and MVCSource is selected
+                            {
                                 Parameter += "video." + "h264" + "\" ";
                                 si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video." + "h264";
+                            }
+                            else if (si.desc.Contains("VC-1") && settings.encodeInput == 4)    //demux to raw vc1 if stream is h264 and MVCSource is selected
+                            {
+                                Parameter += "video." + "vc1" + "\" ";
+                                si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_video." + "vc1";
                             }
                             else if (si.advancedOptions != null && si.advancedOptions.GetType() == typeof(AdvancedVideoOptions) && ((AdvancedVideoOptions)si.advancedOptions).noMkvDemux)
                             {
