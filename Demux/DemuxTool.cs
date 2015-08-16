@@ -148,7 +148,7 @@ namespace BluRip
                             }
                             else if (ac3AudioTypes.Contains(si.typeDesc))
                             {
-                                if (settings.untouchedAudio && si.typeDesc == "TrueHD/AC3")
+                                if (settings.untouchedAudio && (si.typeDesc == "TrueHD/AC3" || si.typeDesc == "TrueHD/AC3 (Atmos)"))
                                 {
                                     Parameter += "audio_thd_" + channel + "_" + si.language + ".thd\" ";
                                     si.filename = settings.workingDir + "\\" + prefix + "_" + si.number.ToString("d3") + "_audio_thd_" + channel + "_" + si.language + ".thd";
