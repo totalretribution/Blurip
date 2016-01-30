@@ -808,7 +808,8 @@ namespace BluRip
                     }
                     if (this.InvokeRequired) this.Invoke(new MethodInvoker(this.Refresh));
                     else this.Refresh();
-                    Thread.Sleep(1000);
+                    //Thread.Sleep(1000);
+                    Thread.Sleep(100);
                     for (int row = bitmapCopy.Height - 1; row >= 0; row--)
                     {
                         rowSum = RowSum(bitmap, row);
@@ -832,7 +833,8 @@ namespace BluRip
 
                     UpdateStatusText(tmpTop, tmpBottom, cropInfo.cropTop, cropInfo.cropBottom, progress);
                     
-                    for (int i = 0; i < 5; i++)
+                    //for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         Monitor.Enter(drawLock);
                         drawOrig = true;
