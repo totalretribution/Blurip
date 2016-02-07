@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vistabridgelibrary", "vista
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginAutoRef", "PluginAutoRef\PluginAutoRef.csproj", "{73DC5D05-1AC7-4651-AB12-37E859A79FC9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -243,6 +245,16 @@ Global
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|Win32.ActiveCfg = Release|Any CPU
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|x64.ActiveCfg = Release|Any CPU
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Debug|Any CPU.ActiveCfg = Debug
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Debug|Win32.ActiveCfg = Debug
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Debug|x64.ActiveCfg = Debug
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Debug|x86.ActiveCfg = Debug
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Release|Any CPU.ActiveCfg = Release
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Release|Mixed Platforms.ActiveCfg = Release
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Release|Win32.ActiveCfg = Release
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Release|x64.ActiveCfg = Release
+		{CB7A7414-D6DD-4BEC-9864-16EB3A131EC4}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
