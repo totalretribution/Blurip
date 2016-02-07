@@ -41,7 +41,7 @@ namespace BluRip
 
                 if (titleNode != null) _discname = titleNode.InnerText;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _discname = "";
             }
