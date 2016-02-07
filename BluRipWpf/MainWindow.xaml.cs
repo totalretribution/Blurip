@@ -49,7 +49,7 @@ namespace BluRip
     {
         private UserSettings settings = new UserSettings();
         private string settingsPath = "";
-        public string title = @"BluRip v0.5.2";
+        public string title = @"BluRip v0.5.3";
 
         private LogWindow logWindow = null;
         private DemuxedStreamsWindow demuxedStreamsWindow = null;
