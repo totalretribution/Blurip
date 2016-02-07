@@ -50,12 +50,12 @@ namespace BluRip
                 }
                 else
                 {
-                    labelPosition.Text = "Current position: " + e.time.ToString() + " ms - total length: " + axVLCPlugin21.input.Length.ToString("f0") + " ms - position: " + axVLCPlugin21.input.Position.ToString("f2"); ;
+                    labelPosition.Text = "Current position: " + e.time.ToString() + " ms - total length: " + axVLCPlugin21.input.length.ToString("f0") + " ms - position: " + axVLCPlugin21.input.position.ToString("f2"); ;
                     
-                    if (axVLCPlugin21.input.Length > 0)
+                    if (axVLCPlugin21.input.length > 0)
                     {
                         trackBarPosition.Maximum = 100;
-                        trackBarPosition.Value = (int)(axVLCPlugin21.input.Position * 100.0);
+                        trackBarPosition.Value = (int)(axVLCPlugin21.input.position * 100.0);
                     }
                     update = true;
                 }
@@ -139,7 +139,7 @@ namespace BluRip
             {
                 if (!update)
                 {
-                    axVLCPlugin21.input.Position = trackBarPosition.Value / 100.0;
+                    axVLCPlugin21.input.position = trackBarPosition.Value / 100.0;
                 }
                 else
                 {
