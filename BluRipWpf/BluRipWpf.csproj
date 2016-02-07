@@ -77,6 +77,7 @@
     <Compile Include="AdvancedVideoOptionsWindow.xaml.cs">
       <DependentUpon>AdvancedVideoOptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BRMetaData.cs" />
     <Compile Include="Demux.cs" />
     <Compile Include="DemuxedStreamsWindow.xaml.cs">
       <DependentUpon>DemuxedStreamsWindow.xaml</DependentUpon>

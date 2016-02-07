@@ -127,6 +127,16 @@ namespace BluRip
 
                 demuxedStreamList = new TitleInfo();
                 demuxedStreamsWindow.UpdateDemuxedStreams();
+
+                if (settings.retrieveDiscMetaData)
+                {
+                    BRMetaData metaInfo = new BRMetaData(settings.lastBluRayPath);
+                    if (metaInfo.discname != "")
+                    {
+                        textBoxMovieTitle.Text = metaInfo.discname;
+                        textBoxTargetFilename.Text = metaInfo.discname;
+                    }
+                }
             }
             catch (Exception ex)
             {

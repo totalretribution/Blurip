@@ -315,6 +315,7 @@ namespace BluRip
             this.use64bit = orig.use64bit;
             this.muxLowResSubs = orig.muxLowResSubs;
             this.deleteIndex = orig.deleteIndex;
+            this.retrieveDiscMetaData = orig.retrieveDiscMetaData;
             this.muxUntouchedSubs = orig.muxUntouchedSubs;
             this.copyUntouchedSubs = orig.copyUntouchedSubs;
             this.deleteAfterEncode = orig.deleteAfterEncode;
@@ -531,6 +532,7 @@ namespace BluRip
         public bool use64bit = false;
         public bool muxLowResSubs = false;
         public bool deleteIndex = false;
+        public bool retrieveDiscMetaData = false;
         public bool muxUntouchedSubs = false;
         public bool copyUntouchedSubs = false;
         public string suptitlePath = "";
