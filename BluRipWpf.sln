@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluRipWpf", "BluRipWpf\BluRipWpf.csproj", "{00148CCF-AF32-487D-9B3C-F63B72A458F7}"
 EndProject
@@ -30,8 +30,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vistabridgelibrary", "vistabridgelibrary\vistabridgelibrary.csproj", "{CE304F35-FABF-4A24-AC48-5710670A82BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginAutoRef", "PluginAutoRef\PluginAutoRef.csproj", "{73DC5D05-1AC7-4651-AB12-37E859A79FC9}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{AA2BDB76-CE07-4CE7-9041-8E116952C029}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,16 +243,6 @@ Global
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|Win32.ActiveCfg = Release|Any CPU
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|x64.ActiveCfg = Release|Any CPU
 		{73DC5D05-1AC7-4651-AB12-37E859A79FC9}.Release|x86.ActiveCfg = Release|Any CPU
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Debug|Any CPU.ActiveCfg = Debug
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Debug|Win32.ActiveCfg = Debug
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Debug|x64.ActiveCfg = Debug
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Debug|x86.ActiveCfg = Debug
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Release|Any CPU.ActiveCfg = Release
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Release|Mixed Platforms.ActiveCfg = Release
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Release|Win32.ActiveCfg = Release
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Release|x64.ActiveCfg = Release
-		{AA2BDB76-CE07-4CE7-9041-8E116952C029}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
