@@ -134,7 +134,8 @@ namespace BluRip
                     if (metaInfo.discname != "")
                     {
                         textBoxMovieTitle.Text = metaInfo.discname;
-                        textBoxTargetFilename.Text = metaInfo.discname;
+                        char[] invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
+                        textBoxTargetFilename.Text = new string(metaInfo.discname.Where(ch => !invalidFileNameChars.Contains(ch)).ToArray());
                     }
                 }
             }
