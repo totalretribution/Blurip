@@ -60,7 +60,11 @@ namespace BluRip
 
                 checkBoxDeleteDemuxedFiles.IsChecked = settings.deleteAfterEncode;
                 checkBoxAlwaysDeleteIndex.IsChecked = settings.deleteIndex;
+
                 checkBoxRetrieveDiscMetaData.IsChecked = settings.retrieveDiscMetaData;
+                checkBoxDiscMetaDataRemoveTM.IsChecked = settings.stripBluripFromMetaData;
+                if ((bool)checkBoxRetrieveDiscMetaData.IsChecked) { checkBoxDiscMetaDataRemoveTM.IsEnabled = true; }
+
                 checkBoxDisableAudioHeaderCompression.IsChecked = settings.disableAudioHeaderCompression;
                 checkBoxDisableVideoHeaderCompression.IsChecked = settings.disableVideoHeaderCompression;
                 checkBoxDisableSubtitleHeaderCompression.IsChecked = settings.disableSubtitleHeaderCompression;
@@ -750,6 +754,25 @@ namespace BluRip
             try
             {
                 settings.retrieveDiscMetaData = (bool)checkBoxRetrieveDiscMetaData.IsChecked;
+                if ((bool)checkBoxRetrieveDiscMetaData.IsChecked)
+                {
+                    checkBoxDiscMetaDataRemoveTM.IsEnabled = true;
+                }
+                else
+                {
+                    checkBoxDiscMetaDataRemoveTM.IsEnabled = false;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void checkBoxDiscMetaDataRemoveTM_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                settings.stripBluripFromMetaData = (bool)checkBoxDiscMetaDataRemoveTM.IsChecked;
             }
             catch (Exception)
             {

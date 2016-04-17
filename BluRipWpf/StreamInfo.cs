@@ -131,11 +131,13 @@ namespace BluRip
                 if (settings.retrieveDiscMetaData)
                 {
                     BRMetaData metaInfo = new BRMetaData(settings.lastBluRayPath);
-                    if (metaInfo.discname != "")
-                    {
-                        textBoxMovieTitle.Text = metaInfo.discname;
+                    string discname = metaInfo.discname;
+                    if (discname != "")
+                    {                      
+                        if (settings.stripBluripFromMetaData) { discname = discname.Replace(" - Blu-ray™", ""); }
+                        textBoxMovieTitle.Text = discname;
                         char[] invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
-                        textBoxTargetFilename.Text = new string(metaInfo.discname.Where(ch => !invalidFileNameChars.Contains(ch)).ToArray());
+                        textBoxTargetFilename.Text = new string(discname.Where(ch => !invalidFileNameChars.Contains(ch)).ToArray());
                     }
                 }
             }

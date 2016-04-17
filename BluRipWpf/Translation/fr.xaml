@@ -337,6 +337,7 @@
 	<system:String x:Key="CheckBoxDeleteDemuxedFiles">Effacer les fichiers démuxés à la fin de l'opération</system:String>
 	<system:String x:Key="CheckBoxAlwaysDeleteIndex">Toujours effacer les fichiers d'index</system:String>
     <system:String x:Key="CheckBoxRetrieveDiscMetaData">Retrieve Data From BluRay Meta Folder</system:String>
+    <system:String x:Key="checkBoxDiscMetaDataRemoveTM">Remove "- Blu-ray™" from Meta Disc Name</system:String>
     <system:String x:Key="TabAutoCrop">Configuration découpage</system:String>
 	<system:String x:Key="LabelAutocropNrFrames">Nombre d'image à analyser</system:String>
 	<system:String x:Key="LabelAutocropBlackValue">Nombre maxi de lignes à compter pour les bandes noires</system:String>
